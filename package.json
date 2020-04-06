@@ -47,6 +47,7 @@
     }
   },
   "dependencies": {
+    "@tensorflow/tfjs": "^1.7.2",
     "electron-squirrel-startup": "^1.0.0",
     "readdirp": "^3.4.0"
   },

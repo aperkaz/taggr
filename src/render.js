@@ -1,5 +1,4 @@
 const { remote } = require("electron");
-
 const { recursivelyFindImages, constructImageMap } = require("./utils");
 
 const { dialog } = remote;
