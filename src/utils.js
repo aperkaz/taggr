@@ -62,6 +62,6 @@ function classifyImage(imagePath) {}
 
 module.exports = {
   generateMD5FileHash,
-  recursivelyFindImages: recursivelyFindImages,
+  recursivelyFindImages,
   constructImageMap,
 };

@@ -5,7 +5,7 @@ const {
   constructImageMap,
 } = require("../src/utils");
 
-const imagePath = "/home/alain/src/privatus/test/testImage.jpg";
+const imagePath = "/home/alain/src/privatus/test/testPicture.jpg";
 const testDir = "/home/alain/src/privatus/test";
 
 describe("utils.js", function () {
@@ -27,7 +27,7 @@ describe("utils.js", function () {
 
     expect(imageMap).to.deep.equal({
       "68d26b9ddf35a8b08d49dbee7ce37305": {
-        path: "/home/alain/src/privatus/test/testImage.jpg",
+        path: imagePath,
         tags: [],
       },
     });
