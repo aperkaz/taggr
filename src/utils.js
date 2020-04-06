@@ -15,13 +15,13 @@ function generateMD5FileHash(filePath) {
 }
 
 /**
- * Recursively find all the picture paths inside a given folder
+ * Recursively find all the image paths inside a given folder
  *
  * @param {String} folderPath
- * @returns {Array} array of picture paths
+ * @returns {Array} array of image paths
  */
-async function recursivelyFindPictures(folderPath) {
-  const picturePathList = [];
+async function recursivelyFindImages(folderPath) {
+  const imagePathList = [];
 
   var settings = {
     // Filter files with js and json extension
@@ -32,34 +32,36 @@ async function recursivelyFindPictures(folderPath) {
 
   for await (const entry of readdirp(folderPath, settings)) {
     const { path } = entry;
-    picturePathList.push(`${folderPath}/${path}`);
+    imagePathList.push(`${folderPath}/${path}`);
   }
 
-  return picturePathList;
+  return imagePathList;
 }
 
 /**
- * Populate picture map given an array of paths
+ * Populate an image map given an array of paths
  *
- * @param {Array} picturePathList
- * @returns {Object} map {picture1Hash: {path: picture1path, tags: []},...}
+ * @param {Array} imagePathList
+ * @returns {Object} map {image1Hash: {path: image1path, tags: []},...}
  */
-function constructPictureMap(picturePathList) {
-  const pictureMap = {};
+function constructImageMap(imagePathList) {
+  const imageMap = {};
 
-  picturePathList.forEach((picturePath) => {
-    console.log("analyzing pic: ", picturePath);
-    const generatedHash = generateMD5FileHash(picturePath);
+  imagePathList.forEach((imagePath) => {
+    console.log("analyzing pic: ", imagePath);
+    const generatedHash = generateMD5FileHash(imagePath);
     console.log(generatedHash);
-    console.log(".");
-    pictureMap[generatedHash] = { path: picturePath, tags: [] };
+    console.log("----");
+    imageMap[generatedHash] = { path: imagePath, tags: [] };
   });
 
-  return pictureMap;
+  return imageMap;
 }
+
+function classifyImage(imagePath) {}
 
 module.exports = {
   generateMD5FileHash,
-  recursivelyFindPictures,
-  constructPictureMap,
+  recursivelyFindImages: recursivelyFindImages,
+  constructImageMap,
 };

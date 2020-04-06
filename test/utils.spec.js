@@ -1,33 +1,33 @@
 const { expect } = require("chai");
 const {
   generateMD5FileHash,
-  recursivelyFindPictures,
-  constructPictureMap,
+  recursivelyFindImages,
+  constructImageMap,
 } = require("../src/utils");
 
-const picturePath = "/home/alain/src/privatus/test/testPicture.jpg";
+const imagePath = "/home/alain/src/privatus/test/testImage.jpg";
 const testDir = "/home/alain/src/privatus/test";
 
 describe("utils.js", function () {
   it("generateMD5FileHash()", () => {
-    const hash = generateMD5FileHash(picturePath);
+    const hash = generateMD5FileHash(imagePath);
 
     // md5 hash of file -> 68d26b9ddf35a8b08d49dbee7ce37305
     expect(hash).to.equal("68d26b9ddf35a8b08d49dbee7ce37305");
   });
 
-  it("recursivelyFindPictures()", async () => {
-    const picturePathArray = await recursivelyFindPictures(testDir);
+  it("recursivelyFindImages()", async () => {
+    const imagePathArray = await recursivelyFindImages(testDir);
 
-    expect(picturePathArray.length).to.equal(1);
+    expect(imagePathArray.length).to.equal(1);
   });
 
-  it("constructPictureMap()", () => {
-    const pictureMap = constructPictureMap([picturePath]);
+  it("constructImageMap()", () => {
+    const imageMap = constructImageMap([imagePath]);
 
-    expect(pictureMap).to.deep.equal({
+    expect(imageMap).to.deep.equal({
       "68d26b9ddf35a8b08d49dbee7ce37305": {
-        path: "/home/alain/src/privatus/test/testPicture.jpg",
+        path: "/home/alain/src/privatus/test/testImage.jpg",
         tags: [],
       },
     });

@@ -1,51 +1,51 @@
 const { remote } = require("electron");
 
-const { recursivelyFindPictures, constructPictureMap } = require("./utils");
+const { recursivelyFindImages, constructImageMap } = require("./utils");
 
 const { dialog } = remote;
 
 // Global state
 let rootFolderPath = "";
-let picturePaths = [];
-let pictureMap = {};
+let imagePaths = [];
+let imageMap = {};
 
 // Buttons
-const selectPictureFolderPathBtn = document.getElementById(
-  "selectPictureFolderBtn"
+const selectImageFolderPathBtn = document.getElementById(
+  "selectImageFolderBtn"
 );
 
-selectPictureFolderPathBtn.onclick = async () => {
-  await selectPictureFolderPath();
+selectImageFolderPathBtn.onclick = async () => {
+  await selectImageFolderPath();
   renderLoop();
 };
 
 // UI
-const currentPictureFolderPath = document.getElementById(
-  "currentPictureFolderPath"
+const currentImageFolderPath = document.getElementById(
+  "currentImageFolderPath"
 );
-const picturesList = document.getElementById("picturesList");
+const imagesList = document.getElementById("imagesList");
 
 // Render loop, update UI based on state changes
 function renderLoop() {
-  currentPictureFolderPath.innerHTML = rootFolderPath;
+  currentImageFolderPath.innerHTML = rootFolderPath;
 
-  picturesList.innerHTML = null;
-  picturePaths.map((picture) => {
+  imagesList.innerHTML = null;
+  imagePaths.map((image) => {
     const li = document.createElement("li");
-    li.appendChild(document.createTextNode(picture));
-    picturesList.appendChild(li);
+    li.appendChild(document.createTextNode(image));
+    imagesList.appendChild(li);
   });
 }
 
 // Load photo folder path
-async function selectPictureFolderPath() {
+async function selectImageFolderPath() {
   const { filePaths } = await dialog.showOpenDialog({
     properties: ["openDirectory"],
   });
 
   if (filePaths) {
     rootFolderPath = filePaths[0];
-    picturePaths = await recursivelyFindPictures(rootFolderPath);
-    pictureMap = await constructPictureMap(picturePaths);
+    imagePaths = await recursivelyFindImages(rootFolderPath);
+    imageMap = await constructImageMap(imagePaths);
   }
 }
