@@ -47,8 +47,12 @@
     }
   },
   "dependencies": {
-    "@tensorflow/tfjs": "^1.7.2",
+    "@tensorflow-models/mobilenet": "^0.2.2",
+    "@tensorflow/tfjs": "^0.13.0",
+    "@tensorflow/tfjs-node": "^0.1.21",
     "electron-squirrel-startup": "^1.0.0",
+    "jpeg-js": "^0.3.7",
+    "node-fetch": "^2.6.0",
     "readdirp": "^3.4.0"
   },
   "devDependencies": {

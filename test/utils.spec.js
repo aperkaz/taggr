@@ -3,6 +3,7 @@ const {
   generateMD5FileHash,
   recursivelyFindImages,
   constructImageMap,
+  classifyImage,
 } = require("../src/utils");
 
 const imagePath = "/home/alain/src/privatus/test/testPicture.jpg";

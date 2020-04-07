@@ -1,7 +1,7 @@
 const fs = require("fs");
 const crypto = require("crypto");
 const readdirp = require("readdirp");
-// const mobilenet = require("tensorflow-models/mobilenet");
+const { classifyImage } = require("./imageRecognition");
 
 /**
  * Generate md5 hash from file
@@ -60,25 +60,23 @@ function constructImageMap(imagePathList) {
 }
 
 /**
- *  Extract tags for a given image
+ * Populate an image map given an array of paths
  *
- * @param {String} imagePath
- * @returns {Array} image tags
+ * @param {Array} imagePathList
+ * @returns {Object} map {image1Hash: {path: image1path, tags: []},...}
  */
-async function classifyImage(imagePath) {
-  // TODONOW: implement image classification
-  //   const net = await mobilenet.load();
-  //   console.log("Successfully loaded model");
-  //   // Make a prediction through the model on our image.
-  //   const imgEl = document.getElementById("img");
-  //   const result = await net.classify(imgEl);
-  //   console.log(result);
-  //   return result;
+async function constructImageTags(imageMap) {
+  for (var key of Object.keys(imageMap)) {
+    const imagePath = imageMap[key].path;
+    const tags = await classifyImage(imagePath);
+    imageMap[key].tags = tags;
+  }
+  return imageMap;
 }
 
 module.exports = {
   generateMD5FileHash,
   recursivelyFindImages,
   constructImageMap,
-  classifyImage,
+  constructImageTags,
 };
