@@ -49,10 +49,7 @@ function constructImageMap(imagePathList) {
   const imageMap = {};
 
   imagePathList.forEach((imagePath) => {
-    console.log("analyzing pic: ", imagePath);
     const generatedHash = generateMD5FileHash(imagePath);
-    console.log(generatedHash);
-    console.log("----");
     imageMap[generatedHash] = { path: imagePath, tags: [] };
   });
 

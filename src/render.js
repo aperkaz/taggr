@@ -18,9 +18,7 @@ const selectImageFolderPathBtn = document.getElementById(
 );
 
 selectImageFolderPathBtn.onclick = async () => {
-  // console.log("initial:", imageMap);
   imageMap = await selectImageFolderPath();
-  // console.log("later:", imageMap);
   renderLoop(imageMap);
 };
 
@@ -35,21 +33,14 @@ function renderLoop(imageMap) {
   currentImageFolderPath.innerHTML = rootFolderPath;
 
   imagesList.innerHTML = null;
-  // TODONOW: global state is not global?
-  console.log("render:", imageMap);
   Object.keys(imageMap).forEach((key) => {
     const imagePath = imageMap[key].path;
     const imageTags = imageMap[key].tags;
 
     const li = document.createElement("li");
-    li.appendChild(document.createTextNode(`${imagePath} ${imageTags}`));
+    li.appendChild(document.createTextNode(`${imagePath} : [${imageTags}]`));
     imagesList.appendChild(li);
   });
-  // imagePaths.map((image) => {
-  //   const li = document.createElement("li");
-  //   li.appendChild(document.createTextNode(image));
-  //   imagesList.appendChild(li);
-  // });
 }
 
 // Load photo folder path
@@ -62,7 +53,6 @@ async function selectImageFolderPath(imageMap) {
     rootFolderPath = filePaths[0];
     imagePaths = await recursivelyFindImages(rootFolderPath);
     imageMap = await constructImageMap(imagePaths);
-    console.log(imageMap);
     imageMap = await constructImageTags(imageMap);
   }
 

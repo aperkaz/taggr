@@ -1,7 +1,7 @@
 const { expect } = require("chai");
 const { classifyImage } = require("../src/imageRecognition");
 
-const imagePath = "/home/alain/src/privatus/test/testPicture.jpg";
+const imagePath = "/home/alain/src/privatus/test/images/beetle.jpg";
 
 describe("imageRecognition.js", function () {
   it.skip("classifyImage()", async () => {

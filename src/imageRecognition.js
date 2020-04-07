@@ -7,19 +7,19 @@ require("@tensorflow/tfjs-node");
 const fs = require("fs");
 const jpeg = require("jpeg-js");
 
+// TODO: load the model from the filesystem
+// https://github.com/bartosz-paternoga/MobileNet_tfjs-node_Serverless/tree/89a587bd25935d632e90af286abdbbcf658e5190
+// https://github.com/tensorflow/tfjs/blob/022376982ad26736abe92d587adb809b7f2482fb/tfjs-converter/demo/mobilenet/mobilenet.js
+// https://github.com/tensorflow/tfjs-examples/blob/master/mobilenet/index.js
+// https://github.com/tensorflow/tfjs/blob/26bccc44133ae14d98f3ac6f217a4ee8d51055f0/tfjs-node/src/image_test.ts
+
 const NUMBER_OF_CHANNELS = 3;
 
 let mn_model;
 
-// "@tensorflow-models/mobilenet": "^2.0.4",
-// "@tensorflow/tfjs": "^1.7.2",
-// "@tensorflow/tfjs-node": "^1.7.2",
-
 const readImage = (path) => {
-  console.time("readImage");
   const buf = fs.readFileSync(path);
   const pixels = jpeg.decode(buf, true);
-  console.timeEnd("readImage");
   return pixels;
 };
 
@@ -38,21 +38,17 @@ const imageByteArray = (image, numChannels) => {
 };
 
 const imageToInput = (image, numChannels) => {
-  console.time("imageToInput");
   const values = imageByteArray(image, numChannels);
   const outShape = [image.height, image.width, numChannels];
   const input = tf.tensor3d(values, outShape, "int32");
 
-  console.timeEnd("imageToInput");
   return input;
 };
 
 const loadModel = async () => {
-  console.time("loadModel");
   const mn = new mobilenet.MobileNet(1, 1);
   mn.path = `https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_1.0_224/model.json`;
   await mn.load();
-  console.timeEnd("loadModel");
   return mn;
 };
 
@@ -64,7 +60,6 @@ async function classifyImage(path) {
     mn_model = await loadModel();
   }
 
-  console.time("classify");
   const rawPredictions = await mn_model.classify(input);
 
   // filter out predictions below threshold
@@ -76,15 +71,8 @@ async function classifyImage(path) {
   const predictions = [];
   filteredRawPredictions.forEach((rawPrediction) => {
     const tags = rawPrediction.className.split(", ");
-    console.log(tags);
     predictions.push(...tags);
   });
-
-  console.log("raw classification results:", rawPredictions);
-  console.log("classification results:", predictions);
-  console.timeEnd("classify");
-
-  console.log("--");
 
   // free memory from TF-internal libraries from input image
   input.dispose();
