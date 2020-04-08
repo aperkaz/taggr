@@ -1,4 +1,6 @@
 const { remote } = require("electron");
+const { observable, observe } = require("@nx-js/observer-util");
+
 const {
   recursivelyFindImages,
   constructImageMap,
@@ -9,22 +11,26 @@ const { loadModel } = require("./imageRecognition");
 
 const { dialog } = remote;
 
-// Global state
-let state = {
+// TODONOW: use reactive classes to declare UI parts, and trigger re-renders
+
+// Global state, reactive with https://github.com/nx-js/observer-util
+let state = observable({
+  appState: "OPEN", // ['OPEN', 'READY']
   rootFolderPath: null,
   imagePathsList: [],
   imageHashMap: {},
-};
+});
 
 // Buttons
+const testButton = document.getElementById("testButton");
+testButton.onclick = () => counter.num++;
+
 const selectImageFolderPathBtn = document.getElementById(
   "selectImageFolderBtn"
 );
 
 selectImageFolderPathBtn.onclick = async () => {
   state.rootFolderPath = await selectRootFolderPath();
-
-  renderLoop();
 
   state.imagePathsList = await recursivelyFindImages(state.rootFolderPath);
   console.log(state);
@@ -34,9 +40,6 @@ selectImageFolderPathBtn.onclick = async () => {
   console.log(state.imageHashMap);
   // TODO: blocks the UI. Move to separate task
   state.imageHashMap = await constructImageTags(state.imageHashMap);
-  console.log(state);
-
-  renderLoop();
 };
 
 // UI
@@ -46,7 +49,7 @@ const currentImageFolderPath = document.getElementById(
 const imagesList = document.getElementById("imagesList");
 
 // Render loop, update UI based on state changes
-function renderLoop() {
+const renderLoop = observe(() => {
   console.time("renderLoop");
 
   // update title
@@ -65,7 +68,7 @@ function renderLoop() {
   });
 
   console.timeEnd("renderLoop");
-}
+});
 
 /**
  * Open dialog to select root folder path
