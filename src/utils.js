@@ -23,6 +23,7 @@ function generateMD5FileHash(filePath) {
  */
 async function recursivelyFindImages(folderPath) {
   console.time("recursivelyFindImages");
+  if (!folderPath) return [];
 
   const imagePathList = [];
 
@@ -50,6 +51,8 @@ async function recursivelyFindImages(folderPath) {
  * @returns {Object} map {image1Hash: {path: image1path, tags: []},...}
  */
 function constructImageMap(imagePathList) {
+  if (!imagePathList) return {};
+
   console.time("constructImageMap");
   const imageMap = {};
 
@@ -68,13 +71,15 @@ function constructImageMap(imagePathList) {
  * @param {Array} imagePathList
  * @returns {Object} map {image1Hash: {path: image1path, tags: []},...}
  */
-async function constructImageTags(imageMap) {
+async function constructImageTags(imageHashMap) {
+  if (!imageHashMap || Object.keys(imageHashMap).length === 0) return {};
+
   console.time("constructImageTags");
 
-  for (var key of Object.keys(imageMap)) {
-    const imagePath = imageMap[key].path;
+  for (var key of Object.keys(imageHashMap)) {
+    const imagePath = imageHashMap[key].path;
     const tags = await classifyImage(imagePath);
-    imageMap[key].tags = tags;
+    imageHashMap[key].tags = tags;
   }
 
   // await Promise.all(
@@ -86,7 +91,7 @@ async function constructImageTags(imageMap) {
   // );
 
   console.timeEnd("constructImageTags");
-  return imageMap;
+  return imageHashMap;
 }
 
 module.exports = {

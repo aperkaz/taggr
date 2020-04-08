@@ -10,9 +10,11 @@ const { loadModel } = require("./imageRecognition");
 const { dialog } = remote;
 
 // Global state
-let rootFolderPath = "";
-let imagePaths = [];
-let imageMap = {};
+let state = {
+  rootFolderPath: null,
+  imagePathsList: [],
+  imageHashMap: {},
+};
 
 // Buttons
 const selectImageFolderPathBtn = document.getElementById(
@@ -20,8 +22,21 @@ const selectImageFolderPathBtn = document.getElementById(
 );
 
 selectImageFolderPathBtn.onclick = async () => {
-  imageMap = await selectImageFolderPath();
-  renderLoop(imageMap);
+  state.rootFolderPath = await selectRootFolderPath();
+
+  renderLoop();
+
+  state.imagePathsList = await recursivelyFindImages(state.rootFolderPath);
+  console.log(state);
+  state.imageHashMap = await constructImageMap(state.imagePathsList);
+  console.log(state);
+  console.log("///");
+  console.log(state.imageHashMap);
+  // TODO: blocks the UI. Move to separate task
+  state.imageHashMap = await constructImageTags(state.imageHashMap);
+  console.log(state);
+
+  renderLoop();
 };
 
 // UI
@@ -31,15 +46,18 @@ const currentImageFolderPath = document.getElementById(
 const imagesList = document.getElementById("imagesList");
 
 // Render loop, update UI based on state changes
-function renderLoop(imageMap) {
+function renderLoop() {
   console.time("renderLoop");
 
-  currentImageFolderPath.innerHTML = rootFolderPath;
+  // update title
+  currentImageFolderPath.innerHTML = state.rootFolderPath
+    ? state.rootFolderPath
+    : "";
 
   imagesList.innerHTML = null;
-  Object.keys(imageMap).forEach((key) => {
-    const imagePath = imageMap[key].path;
-    const imageTags = imageMap[key].tags;
+  Object.keys(state.imageHashMap).forEach((key) => {
+    const imagePath = state.imageHashMap[key].path;
+    const imageTags = state.imageHashMap[key].tags;
 
     const li = document.createElement("li");
     li.appendChild(document.createTextNode(`${imagePath} : [${imageTags}]`));
@@ -49,20 +67,30 @@ function renderLoop(imageMap) {
   console.timeEnd("renderLoop");
 }
 
-// Load photo folder path
-async function selectImageFolderPath(imageMap) {
+/**
+ * Open dialog to select root folder path
+ *
+ * @returns {String} root folder path | undefined
+ */
+async function selectRootFolderPath() {
+  let rootFolderPath = null;
+
   const { filePaths } = await dialog.showOpenDialog({
     properties: ["openDirectory"],
   });
 
   if (filePaths) {
     rootFolderPath = filePaths[0];
-    imagePaths = await recursivelyFindImages(rootFolderPath);
-    imageMap = await constructImageMap(imagePaths);
-    imageMap = await constructImageTags(imageMap);
   }
 
-  return imageMap;
+  return rootFolderPath;
 }
 
-loadModel();
+// load the required tensorflow.js models
+(async () => {
+  try {
+    await loadModel();
+  } catch (err) {
+    console.log(err);
+  }
+})();
