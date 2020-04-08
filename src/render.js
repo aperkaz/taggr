@@ -1,10 +1,12 @@
 const { remote } = require("electron");
 const { observable, observe } = require("@nx-js/observer-util");
+const path = require("path");
 
 const {
   recursivelyFindImages,
   constructImageMap,
   constructImageTags,
+  generateMD5Hash,
 } = require("./utils");
 
 const { loadModel } = require("./imageRecognition");
@@ -33,13 +35,19 @@ selectImageFolderPathBtn.onclick = async () => {
   state.rootFolderPath = await selectRootFolderPath();
 
   state.imagePathsList = await recursivelyFindImages(state.rootFolderPath);
-  console.log(state);
+  // console.log(state);
   state.imageHashMap = await constructImageMap(state.imagePathsList);
-  console.log(state);
-  console.log("///");
-  console.log(state.imageHashMap);
-  // TODO: blocks the UI. Move to separate task
-  state.imageHashMap = await constructImageTags(state.imageHashMap);
+  // console.log(state);
+  // console.log("///");
+  // console.log(state.imageHashMap);
+
+  // state.imageHashMap = await constructImageTags(state.imageHashMap);
+  for (var key of Object.keys(state.imageHashMap)) {
+    const imagePath = state.imageHashMap[key].path;
+    imageTaggingWorker.postMessage({
+      path: imagePath,
+    });
+  }
 };
 
 // UI
@@ -50,7 +58,7 @@ const imagesList = document.getElementById("imagesList");
 
 // Render loop, update UI based on state changes
 const renderLoop = observe(() => {
-  console.time("renderLoop");
+  // console.time("renderLoop");
 
   // update title
   currentImageFolderPath.innerHTML = state.rootFolderPath
@@ -66,8 +74,6 @@ const renderLoop = observe(() => {
     li.appendChild(document.createTextNode(`${imagePath} : [${imageTags}]`));
     imagesList.appendChild(li);
   });
-
-  console.timeEnd("renderLoop");
 });
 
 /**
@@ -89,11 +95,15 @@ async function selectRootFolderPath() {
   return rootFolderPath;
 }
 
-// load the required tensorflow.js models
-(async () => {
-  try {
-    await loadModel();
-  } catch (err) {
-    console.log(err);
-  }
-})();
+// web workers
+const imageTaggingWorker = new Worker(
+  path.resolve(__dirname, "workers/imageTaggingWorker.js")
+);
+
+imageTaggingWorker.onmessage = ({ data }) => {
+  const imagePath = data.path;
+  const imageTags = data.tags;
+  const imageHash = generateMD5Hash(imagePath);
+
+  state.imageHashMap[imageHash] = { path: imagePath, tags: imageTags };
+};

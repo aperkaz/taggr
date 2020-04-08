@@ -14,6 +14,7 @@ const createWindow = () => {
     height: 1200,
     webPreferences: {
       nodeIntegration: true,
+      nodeIntegrationInWorker: true,
     },
   });
 
@@ -53,5 +54,3 @@ app.on("activate", () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
-
-// TODO: move IO code to main process, to make it non blocking

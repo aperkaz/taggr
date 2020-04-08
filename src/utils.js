@@ -3,6 +3,16 @@ const crypto = require("crypto");
 const readdirp = require("readdirp");
 const { classifyImage } = require("./imageRecognition");
 
+// TODO: add tests
+/**
+ * Generate md5 hash string
+ *
+ * @param {String} input
+ */
+function generateMD5Hash(input) {
+  return crypto.createHash("md5").update(input).digest("hex");
+}
+
 /**
  * Generate md5 hash from file
  *
@@ -10,9 +20,7 @@ const { classifyImage } = require("./imageRecognition");
  */
 function generateMD5FileHash(filePath) {
   let file_buffer = fs.readFileSync(filePath);
-  let sum = crypto.createHash("md5");
-  sum.update(file_buffer);
-  return sum.digest("hex");
+  return crypto.createHash("md5").update(file_buffer).digest("hex");
 }
 
 /**
@@ -22,7 +30,7 @@ function generateMD5FileHash(filePath) {
  * @returns {Array} array of image paths
  */
 async function recursivelyFindImages(folderPath) {
-  console.time("recursivelyFindImages");
+  // console.time("recursivelyFindImages");
   if (!folderPath) return [];
 
   const imagePathList = [];
@@ -39,7 +47,7 @@ async function recursivelyFindImages(folderPath) {
     imagePathList.push(`${folderPath}/${path}`);
   }
 
-  console.timeEnd("recursivelyFindImages");
+  // console.timeEnd("recursivelyFindImages");
 
   return imagePathList;
 }
@@ -53,7 +61,7 @@ async function recursivelyFindImages(folderPath) {
 function constructImageMap(imagePathList) {
   if (!imagePathList) return {};
 
-  console.time("constructImageMap");
+  // console.time("constructImageMap");
   const imageMap = {};
 
   imagePathList.forEach((imagePath) => {
@@ -61,7 +69,7 @@ function constructImageMap(imagePathList) {
     imageMap[generatedHash] = { path: imagePath, tags: [] };
   });
 
-  console.timeEnd("constructImageMap");
+  // console.timeEnd("constructImageMap");
   return imageMap;
 }
 
@@ -74,12 +82,12 @@ function constructImageMap(imagePathList) {
 async function constructImageTags(imageHashMap) {
   if (!imageHashMap || Object.keys(imageHashMap).length === 0) return {};
 
-  console.time("constructImageTags");
+  // console.time("constructImageTags");
 
   for (var key of Object.keys(imageHashMap)) {
     const imagePath = imageHashMap[key].path;
     const tags = await classifyImage(imagePath);
-    imageHashMap[key].tags = tags;
+    imageMap[key].tags = tags;
   }
 
   // await Promise.all(
@@ -90,11 +98,12 @@ async function constructImageTags(imageHashMap) {
   //   })
   // );
 
-  console.timeEnd("constructImageTags");
+  // console.timeEnd("constructImageTags");
   return imageHashMap;
 }
 
 module.exports = {
+  generateMD5Hash,
   generateMD5FileHash,
   recursivelyFindImages,
   constructImageMap,

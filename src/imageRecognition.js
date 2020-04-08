@@ -14,6 +14,7 @@ const jpeg = require("jpeg-js");
 // https://github.com/tensorflow/tfjs/blob/26bccc44133ae14d98f3ac6f217a4ee8d51055f0/tfjs-node/src/image_test.ts
 
 const NUMBER_OF_CHANNELS = 3;
+const PROBABILITY_THRESHOLD = 0.3;
 
 let mn_model;
 
@@ -58,9 +59,14 @@ async function loadModel() {
   return mn;
 }
 
-async function classifyImage(path) {
+/**
+ * Generate image classification tags for a given imagea above a probability threshold
+ * @param {String} imagePath
+ * @returns {Array} tags
+ */
+async function classifyImage(imagePath) {
   console.time("classifyImage");
-  const image = readImage(path);
+  const image = readImage(imagePath);
   const input = imageToInput(image, NUMBER_OF_CHANNELS);
 
   await loadModel();
@@ -69,7 +75,7 @@ async function classifyImage(path) {
 
   // filter out predictions below threshold
   const filteredRawPredictions = rawPredictions.filter(
-    (rawPrediction) => rawPrediction.probability > 0.3
+    (rawPrediction) => rawPrediction.probability > PROBABILITY_THRESHOLD
   );
 
   // aggregate results
