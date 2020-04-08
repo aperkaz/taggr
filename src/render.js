@@ -5,6 +5,8 @@ const {
   constructImageTags,
 } = require("./utils");
 
+const { loadModel } = require("./imageRecognition");
+
 const { dialog } = remote;
 
 // Global state
@@ -30,6 +32,8 @@ const imagesList = document.getElementById("imagesList");
 
 // Render loop, update UI based on state changes
 function renderLoop(imageMap) {
+  console.time("renderLoop");
+
   currentImageFolderPath.innerHTML = rootFolderPath;
 
   imagesList.innerHTML = null;
@@ -41,6 +45,8 @@ function renderLoop(imageMap) {
     li.appendChild(document.createTextNode(`${imagePath} : [${imageTags}]`));
     imagesList.appendChild(li);
   });
+
+  console.timeEnd("renderLoop");
 }
 
 // Load photo folder path
@@ -58,3 +64,5 @@ async function selectImageFolderPath(imageMap) {
 
   return imageMap;
 }
+
+loadModel();

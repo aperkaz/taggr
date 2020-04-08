@@ -4,3 +4,145 @@ body {
   max-width: 38rem;
   padding: 2rem;
 }
+
+/*
+* By Jose Aguinaga
+* http://jjperezaguinaga.com
+*/
+@import url(https://fonts.googleapis.com/css?family=Pathway+Gothic+One);
+body {
+  background: -webkit-radial-gradient(center, ellipse cover, #ffffff 0%, #f2efd9 100%);
+}
+
+@keyframes rotate-right {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes rotate-left {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(-360deg);
+  }
+}
+@keyframes hover {
+  0% {
+    -webkit-transform: translateY(0%);
+  }
+  50% {
+    -webkit-transform: translateY(5%);
+  }
+  100% {
+    -webkit-transform: translateY(0%);
+  }
+}
+@keyframes pull {
+  0% {
+    -webkit-transform: scaleY(1);
+  }
+  40% {
+    -webkit-transform: scaleY(1.01);
+  }
+  60% {
+    -webkit-transform: scaleY(0.99);
+  }
+  80% {
+    -webkit-transform: scaleY(1.01);
+  }
+  100% {
+    -webkit-transform: scaleY(0.99);
+  }
+  80% {
+    -webkit-transform: scaleY(1.01);
+  }
+  100% {
+    -webkit-transform: scaleY(1);
+  }
+}
+#airplane2, #airplane1 {
+  transform: translate3d(0, 0, 0);
+  transform-origin: 200px 200px;
+  transform: translate3d(0, 0, 0);
+  animation: rotate-right 60s linear 0s infinite;
+}
+
+#countryObjects {
+  transform: translate3d(0, 0, 0);
+  transform-origin: 200px 200px;
+  transform: translate3d(0, 0, 0);
+  animation: rotate-right 240s linear 0s infinite;
+}
+
+#floatingGlobe {
+  transform: translate3d(0, 0, 0);
+  transform-origin: 200px 200px;
+  transform: translate3d(0, 0, 0);
+  animation: rotate-left 360s linear 0s infinite;
+}
+
+#globe {
+  transform: translate3d(0, 0, 0);
+  animation: hover 0s linear 0s infinite;
+}
+
+#windmill {
+  transform: translate3d(0, 0, 0);
+  transform-origin: 331px 201px;
+  transform: translate3d(0, 0, 0);
+  animation: rotate-right 2s linear 0s infinite;
+}
+
+#cloud1 {
+  transform: translate3d(0, 0, 0);
+  animation: hover 3s linear 1s infinite;
+}
+
+#cloud2 {
+  transform: translate3d(0, 0, 0);
+  animation: hover 3s linear 2s infinite;
+}
+
+#cloud3 {
+  transform: translate3d(0, 0, 0);
+  animation: hover 3s linear 3s infinite;
+}
+
+#circle1 {
+  transform: translate3d(0, 0, 0);
+  transform-origin: 200px 200px;
+  transform: translate3d(0, 0, 0);
+  animation: rotate-right 12s linear 0s infinite;
+}
+
+#circle2 {
+  transform: translate3d(0, 0, 0);
+  transform-origin: 200px 200px;
+  transform: translate3d(0, 0, 0);
+  animation: rotate-left 24s linear 0s infinite;
+}
+
+#circle3 {
+  transform: translate3d(0, 0, 0);
+  transform-origin: 200px 200px;
+  transform: translate3d(0, 0, 0);
+  animation: rotate-right 12s linear 0s infinite;
+}
+
+#circle4 {
+  transform: translate3d(0, 0, 0);
+  transform-origin: 200px 200px;
+  transform: translate3d(0, 0, 0);
+  animation: rotate-left 24s linear 0s infinite;
+}
+
+#circle5 {
+  transform: translate3d(0, 0, 0);
+  transform-origin: 200px 200px;
+  transform: translate3d(0, 0, 0);
+  animation: rotate-right 12s linear 0s infinite;
+}

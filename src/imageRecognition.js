@@ -45,20 +45,25 @@ const imageToInput = (image, numChannels) => {
   return input;
 };
 
-const loadModel = async () => {
+async function loadModel() {
+  if (mn_model) return;
+
+  console.log("loadModel()");
+  console.time("loadModel");
   const mn = new mobilenet.MobileNet(1, 1);
   mn.path = `https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_1.0_224/model.json`;
   await mn.load();
+  console.timeEnd("loadModel");
+  mn_model = mn;
   return mn;
-};
+}
 
 async function classifyImage(path) {
+  console.time("classifyImage");
   const image = readImage(path);
   const input = imageToInput(image, NUMBER_OF_CHANNELS);
 
-  if (!mn_model) {
-    mn_model = await loadModel();
-  }
+  await loadModel();
 
   const rawPredictions = await mn_model.classify(input);
 
@@ -77,9 +82,11 @@ async function classifyImage(path) {
   // free memory from TF-internal libraries from input image
   input.dispose();
 
+  console.timeEnd("classifyImage");
   return predictions;
 }
 
 module.exports = {
+  loadModel,
   classifyImage,
 };
