@@ -30,21 +30,15 @@ class IntroPage {
   onClickRootFolderButton = async () => {
     store.rootFolderPath = await this.selectRootFolderPath();
 
+    // TODONOW: move to a web worker, block the ui when big folders
     store.imagePathsList = await recursivelyFindImages(store.rootFolderPath);
-    // console.log(store);
-    // TODO: can be symplified, construct the hash map on the fly
-    store.imageHashMap = await constructImageMap(store.imagePathsList);
-    // console.log(store);
-    // console.log("///");
-    // console.log(store.imageHashMap);
 
-    // store.imageHashMap = await constructImageTags(store.imageHashMap);
-    for (var key of Object.keys(store.imageHashMap)) {
-      const imagePath = store.imageHashMap[key].path;
+    // get the tags per each available image
+    store.imagePathsList.forEach((imagePath) => {
       imageTaggingWorker.postMessage({
         path: imagePath,
       });
-    }
+    });
   };
 
   render = observe(() => {
@@ -54,6 +48,8 @@ class IntroPage {
       <button id="rootFolderButton">Pick root folder</button>
       <br/>
       <p id="currentImageFolderPath">${store.rootFolderPath}</p>
+      <ul id="imagesList">
+	    </ul>
       `;
 
     const rootFolderButton = document.getElementById("rootFolderButton");

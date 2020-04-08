@@ -4,7 +4,7 @@ function initializeImageTaggingWorker() {
   const path = require("path");
 
   let imageTaggingWorker = new Worker(
-    path.resolve(__dirname, "imageTaggingWorker.js")
+    path.resolve(__dirname, "imageTagging.js")
   );
 
   imageTaggingWorker.onmessage = ({ data }) => {

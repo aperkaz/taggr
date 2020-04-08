@@ -1,4 +1,4 @@
-const { loadModel, classifyImage } = require("./imageRecognitionHelper");
+const { loadModel, classifyImage } = require("./tfImageClassification");
 
 /**
  * send classfication tags for an image path
@@ -10,7 +10,8 @@ onmessage = async (e) => {
   if (!e.data || !e.data.path) return tags;
   const path = e.data.path;
 
-  tags = await classifyImage(path);
+  // tags = await classifyImage(path);
+  tags = ["cats", "dogs"];
 
   postMessage({ path, tags });
 };
