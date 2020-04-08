@@ -1,4 +1,4 @@
-const { loadModel, classifyImage } = require("../imageRecognition");
+const { loadModel, classifyImage } = require("./imageRecognitionHelper");
 
 /**
  * send classfication tags for an image path
@@ -6,7 +6,6 @@ const { loadModel, classifyImage } = require("../imageRecognition");
  * @returns {Object} { path: imagePath, tags: []}
  */
 onmessage = async (e) => {
-  // console.log("worker received message: ", e);
   let tags = [];
   if (!e.data || !e.data.path) return tags;
   const path = e.data.path;
@@ -16,7 +15,7 @@ onmessage = async (e) => {
   postMessage({ path, tags });
 };
 
-// load the required tensorflow.js models
+// load the required tensorflow.js models required by the worker
 (async () => {
   try {
     await loadModel();
