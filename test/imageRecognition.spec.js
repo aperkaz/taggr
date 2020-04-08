@@ -1,5 +1,5 @@
 const { expect } = require("chai");
-const { classifyImage } = require("../src/imageRecognition");
+const { classifyImage } = require("../src/workers/tfImageClassification");
 
 const imagePath = "/home/alain/src/privatus/test/images/beetle.jpg";
 
