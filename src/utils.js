@@ -3,7 +3,6 @@ const crypto = require("crypto");
 const readdirp = require("readdirp");
 // const { classifyImage } = require("./workers/imageRecognitionHelper");
 
-// TODO: add tests and cleanup existing functions
 /**
  * Generate md5 hash string
  *
@@ -73,30 +72,9 @@ function constructImageMap(imagePathList) {
   return imageMap;
 }
 
-/**
- * Populate an image map given an array of paths
- *
- * @param {Array} imagePathList
- * @returns {Object} map {image1Hash: {path: image1path, tags: []},...}
- */
-// async function constructImageTags(imageHashMap) {
-//   if (!imageHashMap || Object.keys(imageHashMap).length === 0) return {};
-
-//   // console.time("constructImageTags");
-
-//   for (var key of Object.keys(imageHashMap)) {
-//     const imagePath = imageHashMap[key].path;
-//     const tags = await classifyImage(imagePath);
-//     imageMap[key].tags = tags;
-//   }
-
-//   // console.timeEnd("constructImageTags");
-//   return imageHashMap;
-// }
-
 module.exports = {
   generateMD5Hash,
   generateMD5FileHash,
-  recursivelyFindImages,
   constructImageMap,
+  recursivelyFindImages,
 };

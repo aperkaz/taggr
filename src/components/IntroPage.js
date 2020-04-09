@@ -1,11 +1,15 @@
 const { dialog } = remote;
 const { observe } = require("@nx-js/observer-util");
+const { Queue, priorities } = require("@nx-js/queue-util");
 
-const { recursivelyFindImages, constructImageMap } = require("../utils");
+const { recursivelyFindImages } = require("../utils");
 
 class IntroPage {
-  constructor(imageTaggingWorker) {
-    this.imageTaggingWorker = imageTaggingWorker;
+  constructor(store) {
+    this.store = store;
+
+    // Setup prioritized queue for batching up observable reactions in render
+    this.scheduler = new Queue(priorities.LOW);
   }
 
   /**
@@ -29,20 +33,13 @@ class IntroPage {
 
   onClickRootFolderButton = async () => {
     store.rootFolderPath = await this.selectRootFolderPath();
-
-    // TODONOW: move to a web worker, block the ui when big folders
-    store.imagePathsList = await recursivelyFindImages(store.rootFolderPath);
-
-    // get the tags per each available image
-    store.imagePathsList.forEach((imagePath) => {
-      imageTaggingWorker.postMessage({
-        path: imagePath,
-      });
-    });
   };
 
-  render = observe(() => {
-    document.getElementById("app").innerHTML = `
+  scheduler = new Queue(priorities.LOW);
+
+  render = observe(
+    () => {
+      document.getElementById("app").innerHTML = `
       <h1>Welcome to Privatus!</h1>
       <br/>
       <button id="rootFolderButton">Pick root folder</button>
@@ -52,20 +49,24 @@ class IntroPage {
 	    </ul>
       `;
 
-    const rootFolderButton = document.getElementById("rootFolderButton");
-    rootFolderButton.onclick = this.onClickRootFolderButton;
+      const rootFolderButton = document.getElementById("rootFolderButton");
+      rootFolderButton.onclick = this.onClickRootFolderButton;
 
-    const imagesList = document.getElementById("imagesList");
-    imagesList.innerHTML = null;
-    Object.keys(store.imageHashMap).forEach((key) => {
-      const imagePath = store.imageHashMap[key].path;
-      const imageTags = store.imageHashMap[key].tags;
+      const imagesList = document.getElementById("imagesList");
+      imagesList.innerHTML = null;
+      Object.keys(store.imageHashMap).forEach((key) => {
+        const imagePath = store.imageHashMap[key].path;
+        const imageTags = store.imageHashMap[key].tags;
 
-      const li = document.createElement("li");
-      li.appendChild(document.createTextNode(`${imagePath} : [${imageTags}]`));
-      imagesList.appendChild(li);
-    });
-  });
+        const li = document.createElement("li");
+        li.appendChild(
+          document.createTextNode(`${imagePath} : [${imageTags}]`)
+        );
+        imagesList.appendChild(li);
+      });
+    },
+    { scheduler: this.scheduler }
+  );
 }
 
 module.exports = IntroPage;
