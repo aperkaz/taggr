@@ -1,11 +1,12 @@
 const { remote } = require("electron");
+const { observe } = require("@nx-js/observer-util");
 
 const IntroPage = require("./components/IntroPage");
 const MainPage = require("./components/MainPage");
 const store = require("./store");
 const { initializeWorkers } = require("./workers/index");
 
-// initialize workers
+// initialize web workers
 const workers = initializeWorkers(store);
 
 // itialize store
@@ -15,13 +16,15 @@ store.workers = workers;
 const IntroPageComponent = new IntroPage(store, workers);
 const MainPageComponent = new MainPage();
 
-// TODO: clean up state when previous appStas changes, make reactive with store -> obseve
-switch (store.appStatus) {
-  case "OPEN":
-    IntroPageComponent.render();
-    break;
-  case "READY":
-    MainPageComponent.render();
-    break;
-  default:
-}
+// reactive routing
+observe(() => {
+  switch (store.appStatus) {
+    case "OPEN":
+      IntroPageComponent.render();
+      break;
+    case "INITIALIZED":
+      MainPageComponent.render();
+      break;
+    default:
+  }
+});

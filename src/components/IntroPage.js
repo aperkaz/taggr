@@ -39,31 +39,29 @@ class IntroPage {
 
   render = observe(
     () => {
+      if (!document.getElementById("app")) return;
+
+      // online mock: https://codepen.io/aperkaz/pen/JjYjWwm
       document.getElementById("app").innerHTML = `
-      <h1>Welcome to Privatus!</h1>
-      <br/>
-      <button id="rootFolderButton">Pick root folder</button>
-      <br/>
-      <p id="currentImageFolderPath">${store.rootFolderPath}</p>
-      <ul id="imagesList">
-	    </ul>
+      <div class="intro-page-wrapper">
+        <main class="columns is-mobile is-vcentered is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1" style="margin-bottom: 80px">
+              Welcome to Privatus!
+            </h1>
+            <p>The next gen AI-powered <b>privacy-focused photo experience</b></p>
+            <br/>
+            <p>Rediscover your pictures while <b>keeping your privacy</b> 🛡️</p>
+            <br/>
+            <br/>
+            <button id="rootFolderButton" class="button is-active is-primary is-large">Select picture folder</button>
+          </div>
+        </main>
+    </div>
       `;
 
       const rootFolderButton = document.getElementById("rootFolderButton");
       rootFolderButton.onclick = this.onClickRootFolderButton;
-
-      const imagesList = document.getElementById("imagesList");
-      imagesList.innerHTML = null;
-      Object.keys(store.imageHashMap).forEach((key) => {
-        const imagePath = store.imageHashMap[key].path;
-        const imageTags = store.imageHashMap[key].tags;
-
-        const li = document.createElement("li");
-        li.appendChild(
-          document.createTextNode(`${imagePath} : [${imageTags}]`)
-        );
-        imagesList.appendChild(li);
-      });
     },
     { scheduler: this.scheduler }
   );

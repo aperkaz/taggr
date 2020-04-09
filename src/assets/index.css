@@ -1,17 +1,54 @@
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   margin: auto;
-  max-width: 38rem;
-  padding: 2rem;
+
+  height: 100vh;
+}
+
+
+#app {
+  min-height: 100vh;
+}
+
+/* Intro page CSS */
+.intro-page-wrapper {
+  min-height: 100vh;
+}
+
+.intro-page-wrapper:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: url(privacy.jpeg);
+  width: 100%;
+  height: 100%;
+  opacity: 0.3;
+  z-index: -1;
+}
+
+.intro-page-wrapper > main {
+  height: 100vh;
+}
+
+
+/* Main page CSS */
+#app > .image-container {
+  min-width: 400px;
+  min-height: 300px;
+  max-width: 400px;
+  max-height: 300px;
 }
 
 /*
+* TODO: remove after testing phase
 * By Jose Aguinaga
 * http://jjperezaguinaga.com
 */
 @import url(https://fonts.googleapis.com/css?family=Pathway+Gothic+One);
 body {
-  background: -webkit-radial-gradient(center, ellipse cover, #ffffff 0%, #f2efd9 100%);
+  /* background: -webkit-radial-gradient(center, ellipse cover, #ffffff 0%, #f2efd9 100%); */
 }
 
 @keyframes rotate-right {

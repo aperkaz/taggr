@@ -1,16 +1,24 @@
 const { observable, observe } = require("@nx-js/observer-util");
-const workers = require("./workers/index");
 
 // GLOBAL STATE, https://github.com/nx-js/observer-util
 let store = observable({
-  appStatus: "OPEN", // ['OPEN', 'READY']
-  rootFolderPath: "default",
+  appStatus: "OPEN", // ['OPEN', 'INITIALIZED']
+  rootFolderPath: null,
   imagePathsList: [],
   imageHashMap: {},
   workers: {},
 });
 
 // REACTIONS
+
+// rootFolderPath changes => modify app state
+observe(() => {
+  console.log("react to rootFolderPath: modify app state");
+  console.log(store.rootFolderPath);
+  if (store.rootFolderPath) {
+    store.appStatus = "INITIALIZED";
+  }
+});
 
 // rootFolderPath changes => recursively calculate all the image paths inside
 observe(() => {
