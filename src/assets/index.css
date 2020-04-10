@@ -1,18 +1,16 @@
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  margin: auto;
-
-  height: 100vh;
+  min-height: 100%;
 }
 
 
 #start-page, #dashboard-page {
-  min-height: 100vh;
+  height: 100vh;
 }
 
 /* Start page CSS */
 .start-page-wrapper {
-  min-height: 100vh;
+  height: 100%;
 }
 
 .start-page-wrapper:after {
@@ -33,16 +31,58 @@ body {
 }
 
 /* Dashboard page CSS */
+.dashboard-page-wrapper {
+  height: 100%;
+}
+
+.dashboard-page-wrapper > header > div {
+  margin: 1.5rem 1.5rem 0;
+}
+
+.dashboard-page-wrapper > header input {
+  text-align: center;
+}
+
+.dashboard-page-wrapper > main {
+  height: 100%;
+
+  padding: 0 0.75rem 1.5rem 1.5rem;
+  overflow-y: scroll;
+}
+
+.dashboard-page-wrapper #dashboard-page--pagination {
+  padding: 0 40px;
+}
+
+.dashboard-page-wrapper .image-container {
+  /* border-radius: 4px;
+
+  min-width: 100%;
+  max-width: 200px;
+
+  min-height: 25vh;
+  max-height: 25vh; */
+
+  margin: 2px;
+
+  min-width: calc(100% - 4px);
+  max-width: 200px;
+
+  min-height: calc(25vh - 4px);
+  max-height: 25vh;
+}
 
 
+
+/* 
 /*
 * TODO: remove after testing phase
 * By Jose Aguinaga
 * http://jjperezaguinaga.com
 */
+/*
 @import url(https://fonts.googleapis.com/css?family=Pathway+Gothic+One);
 body {
-  /* background: -webkit-radial-gradient(center, ellipse cover, #ffffff 0%, #f2efd9 100%); */
 }
 
 @keyframes rotate-right {
@@ -176,4 +216,4 @@ body {
   transform-origin: 200px 200px;
   transform: translate3d(0, 0, 0);
   animation: rotate-right 12s linear 0s infinite;
-}
+} */

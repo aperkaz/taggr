@@ -2,7 +2,7 @@ const { observable, observe } = require("@nx-js/observer-util");
 
 // GLOBAL STATE, https://github.com/nx-js/observer-util
 let store = observable({
-  appStatus: "START_PAGE", // ['START_PAGE', 'DASHBOARD_PAGE']
+  appStatus: "DASHBOARD_PAGE", // ['START_PAGE', 'DASHBOARD_PAGE']
   rootFolderPath: null,
   imagePathsList: [],
   imageHashMap: {},
