@@ -35,6 +35,17 @@ body {
   height: 100%;
 }
 
+.dashboard-page-wrapper > header {
+  height: 15vh;
+}
+
+.dashboard-page-wrapper > main {
+  height: 85vh;
+  padding: 20px;
+  /* TODO: make them rem relative, to scale well */
+  /* margin: 0 calc(40px - .5rem) calc(40px - .5rem); */
+}
+
 .dashboard-page-wrapper > header > div {
   margin: 1.5rem 1.5rem 0;
 }
@@ -43,33 +54,32 @@ body {
   text-align: center;
 }
 
-.dashboard-page-wrapper > main {
-  height: 100%;
-
-  padding: 0 0.75rem 1.5rem 1.5rem;
-  overflow-y: scroll;
-}
-
 .dashboard-page-wrapper #dashboard-page--pagination {
   padding: 0 40px;
 }
 
-.dashboard-page-wrapper .image-container {
-  /* border-radius: 4px;
+.dashboard-page-wrapper .grid{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(200px, 1fr));
+  grid-template-rows:repeat(3, minmax(200px, auto));
+  grid-gap: .5rem;
 
-  min-width: 100%;
-  max-width: 200px;
+  height: 100%;
+}
 
-  min-height: 25vh;
-  max-height: 25vh; */
+.dashboard-page-wrapper .grid > div {
 
-  margin: 2px;
+   /* margin: 2px; */
+  /* height: 100%; */
+  /* min-width: calc(100% - 4px); */
+   /* max-width: 1fr; */
 
-  min-width: calc(100% - 4px);
-  max-width: 200px;
+  /* min-height: calc(25vh - 4px); */
+  /* max-height: 1fr;   */
 
-  min-height: calc(25vh - 4px);
-  max-height: 25vh;
+  background: #EDE7F6;
+  /* padding: 3.5rem; */
+  /* border-radius: .35rem; */
 }
 
 

@@ -10,8 +10,8 @@
     "make": "electron-forge make",
     "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\"",
-    "test": "mocha",
-    "test:watch": "mocha --watch"
+    "unit": "mocha",
+    "unit:watch": "mocha --watch"
   },
   "keywords": [],
   "author": {
