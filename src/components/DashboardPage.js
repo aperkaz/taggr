@@ -1,7 +1,10 @@
 const { observe } = require("@nx-js/observer-util");
 const { Queue, priorities } = require("@nx-js/queue-util");
+const debounce = require("lodash.debounce");
 
 class DashboardPage {
+  inputValue;
+
   constructor(store) {
     this.store = store;
 
@@ -11,14 +14,44 @@ class DashboardPage {
 
   mount() {
     console.log("mount dashboardPage");
-    let bodyElement = document.getElementsByTagName("BODY")[0];
 
-    var dashboardPageElement = document.createElement("div");
-    dashboardPageElement.setAttribute("id", "dashboard-page");
+    // create hook-div if not pressent in page
+    if (!document.getElementById("dashboard-page")) {
+      let bodyElement = document.getElementsByTagName("BODY")[0];
 
-    bodyElement.appendChild(dashboardPageElement);
+      var dashboardPageElement = document.createElement("div");
+      dashboardPageElement.setAttribute("id", "dashboard-page");
 
-    this.render();
+      bodyElement.appendChild(dashboardPageElement);
+    }
+
+    // add static html inside hook-div
+    document.getElementById("dashboard-page").innerHTML = `
+      <div class="dashboard-page-wrapper">
+
+        <header class="columns is-multiline is-mobile is-vcentered is-centered">
+          <div class="column is-8 has-text-centered">
+            <input id="tag-search-input" class="input text is-info is-medium" type="text" placeholder="type tags, ex: dog, cat..."/>
+          </div>
+        </header>
+
+        <main>
+          <div id="image-grid" class="grid">
+          </div>
+        </main>
+      </div>`;
+
+    this.updateImages();
+
+    // add listeners
+    const tagSearchInputElement = document.getElementById("tag-search-input");
+
+    const inputHandler = (store) =>
+      debounce((e) => {
+        store.tagSearchValue = e.target.value;
+      }, 300);
+
+    tagSearchInputElement.addEventListener("input", inputHandler(this.store));
   }
 
   unmount() {
@@ -29,10 +62,13 @@ class DashboardPage {
     if (dashboardPageElement) bodyElement.removeChild(dashboardPageElement);
   }
 
-  renderImages() {
-    // filter images based on => tagSearchInputValue
-    const tagSearchValue = store.tagSearchValue;
-    const imageHashMap = this.store.imageHashMap;
+  updateImages = observe(() => {
+    const { tagSearchValue } = store;
+    const imageHashMap = store.imageHashMap;
+
+    console.log("updateImages()");
+
+    if (!document.getElementById("dashboard-page")) return;
 
     let results = {};
     // only filter when there is something to filter
@@ -57,44 +93,11 @@ class DashboardPage {
         imagesElement += `<div class="image-container" style="background-image: url(${imagePath}); background-repeat:no-repeat; background-position: center center; background-size: cover;"></div>`;
       });
 
-    return imagesElement;
-  }
+    if (imagesElement.length === 0)
+      imagesElement = "<div>sorry, no results</div>";
 
-  render = observe(
-    () => {
-      if (!document.getElementById("dashboard-page")) return;
-
-      console.log("DashboardPage render()");
-
-      document.getElementById("dashboard-page").innerHTML = `
-      <div class="dashboard-page-wrapper">
-
-        <header class="columns is-multiline is-mobile is-vcentered is-centered">
-          <div class="column is-8 has-text-centered">
-            <input id="tag-search-input" class="input text is-info is-medium" type="text" placeholder='${
-              store.tagSeachInputPlaceholder
-            }'/>
-          </div>
-        </header>
-
-        <main>
-          <div class="grid">
-          ${this.renderImages()}
-          </div>
-        </main>
-      </div>`;
-
-      // listeners in the HTML
-      const tagSearchInputElement = document.getElementById("tag-search-input");
-      tagSearchInputElement.oninput = () => {
-        store.tagSearchValue = document.getElementById(
-          "tag-search-input"
-        ).value;
-      };
-    },
-
-    { scheduler: this.scheduler }
-  );
+    document.getElementById("image-grid").innerHTML = imagesElement;
+  });
 }
 
 /*

@@ -14,7 +14,7 @@ const jpeg = require("jpeg-js");
 // https://github.com/tensorflow/tfjs/blob/26bccc44133ae14d98f3ac6f217a4ee8d51055f0/tfjs-node/src/image_test.ts
 
 const NUMBER_OF_CHANNELS = 3;
-const PROBABILITY_THRESHOLD = 0.3;
+const PROBABILITY_THRESHOLD = 0.1;
 
 let mn_model;
 
@@ -81,7 +81,9 @@ async function classifyImage(imagePath) {
   // aggregate results
   const predictions = [];
   filteredRawPredictions.forEach((rawPrediction) => {
-    const tags = rawPrediction.className.split(", ");
+    const tags = rawPrediction.className
+      .split(", ")
+      .map((name) => name.toLowerCase());
     predictions.push(...tags);
   });
 

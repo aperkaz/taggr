@@ -55,6 +55,7 @@
     "bull": "^3.13.0",
     "electron-squirrel-startup": "^1.0.0",
     "jpeg-js": "^0.3.7",
+    "lodash.debounce": "^4.0.8",
     "node-fetch": "^2.6.0",
     "readdirp": "^3.4.0"
   },

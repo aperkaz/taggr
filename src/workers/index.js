@@ -1,4 +1,4 @@
-function initializeWorkers(store) {
+function createWorkers(store) {
   const path = require("path");
 
   // initializations
@@ -20,7 +20,6 @@ function initializeWorkers(store) {
 
     console.log("imageTaggingWorker to update store");
 
-    console.log(store.imageHashMap);
     if (store.imageHashMap[imageHash]) {
       // update if existing
       store.imageHashMap[imageHash].tags = imageTags;
@@ -28,8 +27,6 @@ function initializeWorkers(store) {
       // initialize if non existing
       store.imageHashMap[imageHash] = { path: imagePath, tags: imageTags };
     }
-
-    console.log(store.imageHashMap);
   };
 
   recursiveImageFinderWorker.onmessage = ({ data }) => {
@@ -39,4 +36,4 @@ function initializeWorkers(store) {
   return { imageTaggingWorker, recursiveImageFinderWorker };
 }
 
-module.exports = { initializeWorkers };
+module.exports = { createWorkers };

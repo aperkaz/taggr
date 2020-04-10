@@ -1,60 +1,25 @@
 const { dialog } = remote;
-const { observe } = require("@nx-js/observer-util");
-const { Queue, priorities } = require("@nx-js/queue-util");
 
 class StartPage {
   constructor(store) {
     this.store = store;
-
-    // Setup prioritized queue for batching up observable reactions in render
-    this.scheduler = new Queue(priorities.LOW);
   }
 
   mount() {
     console.log("mount startPage");
-    let bodyElement = document.getElementsByTagName("BODY")[0];
 
-    var startPageElement = document.createElement("div");
-    startPageElement.setAttribute("id", "start-page");
+    // create hook-div if not pressent in page
+    if (!document.getElementById("start-page")) {
+      let bodyElement = document.getElementsByTagName("BODY")[0];
 
-    bodyElement.appendChild(startPageElement);
+      let startPageElement = document.createElement("div");
+      startPageElement.setAttribute("id", "start-page");
 
-    this.render();
-  }
-
-  unmount() {
-    console.log("unmount startPage");
-    let bodyElement = document.getElementsByTagName("BODY")[0];
-    const startPageElement = document.getElementById("start-page");
-
-    if (startPageElement) bodyElement.removeChild(startPageElement);
-  }
-
-  /**
-   * Open dialog to select root folder path
-   *
-   * @returns {String} root folder path | undefined
-   */
-  selectRootFolderPath = async () => {
-    let rootFolderPath = null;
-
-    const { filePaths } = await dialog.showOpenDialog({
-      properties: ["openDirectory"],
-    });
-
-    if (filePaths) {
-      rootFolderPath = filePaths[0];
+      bodyElement.appendChild(startPageElement);
     }
 
-    return rootFolderPath;
-  };
-
-  render = observe(
-    () => {
-      if (!document.getElementById("start-page")) return;
-
-      // online mock: https://codepen.io/aperkaz/pen/JjYjWwm
-      document.getElementById("start-page").innerHTML = `
+    // add static html inside hook-div
+    document.getElementById("start-page").innerHTML = `
       <div class="start-page-wrapper">
         <main class="columns is-mobile is-vcentered is-centered">
           <div class="column has-text-centered">
@@ -72,13 +37,33 @@ class StartPage {
       </div>
       `;
 
-      const rootFolderButton = document.getElementById("rootFolderButton");
-      rootFolderButton.onclick = async () => {
-        store.rootFolderPath = await this.selectRootFolderPath();
-      };
-    },
-    { scheduler: this.scheduler }
-  );
+    // add listeners
+    const rootFolderButton = document.getElementById("rootFolderButton");
+    rootFolderButton.onclick = async () => {
+      store.rootFolderPath = await this.selectRootFolderPath();
+    };
+  }
+
+  unmount() {
+    console.log("unmount startPage");
+    let bodyElement = document.getElementsByTagName("BODY")[0];
+    const startPageElement = document.getElementById("start-page");
+
+    if (startPageElement) bodyElement.removeChild(startPageElement);
+  }
+
+  /**
+   * Open dialog to select root folder path
+   *
+   * @returns {String} rootFolderPath | null
+   */
+  async selectRootFolderPath() {
+    const { filePaths } = await dialog.showOpenDialog({
+      properties: ["openDirectory"],
+    });
+
+    return filePaths ? filePaths[0] : null;
+  }
 }
 
 module.exports = StartPage;

@@ -3,17 +3,13 @@ const { observe } = require("@nx-js/observer-util");
 
 const StartPage = require("./components/StartPage");
 const DashboardPage = require("./components/DashboardPage");
-const store = require("./store");
-const { initializeWorkers } = require("./workers/index");
-
-// initialize web workers
-const workers = initializeWorkers(store);
+const createStore = require("./store");
 
 // itialize store
-store.workers = workers;
+let store = createStore();
 
-// initialize class components
-const StartPageComponent = new StartPage(store, workers);
+// initialize UI components
+const StartPageComponent = new StartPage(store);
 const DashboardPageComponent = new DashboardPage(store);
 
 // reactive routing
