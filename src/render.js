@@ -14,7 +14,7 @@ store.workers = workers;
 
 // initialize class components
 const StartPageComponent = new StartPage(store, workers);
-const DashboardPageComponent = new DashboardPage();
+const DashboardPageComponent = new DashboardPage(store);
 
 // reactive routing
 observe(() => {
@@ -22,12 +22,10 @@ observe(() => {
     case "START_PAGE":
       DashboardPageComponent.unmount();
       StartPageComponent.mount();
-      StartPageComponent.render();
       break;
     case "DASHBOARD_PAGE":
       StartPageComponent.unmount();
       DashboardPageComponent.mount();
-      DashboardPageComponent.render();
       break;
     default:
   }

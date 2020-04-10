@@ -1,11 +1,15 @@
 const { observable, observe } = require("@nx-js/observer-util");
 
+// TODO: initialize the workers as part of initializing the state
+
 // GLOBAL STATE, https://github.com/nx-js/observer-util
 let store = observable({
-  appStatus: "DASHBOARD_PAGE", // ['START_PAGE', 'DASHBOARD_PAGE']
+  appStatus: "START_PAGE", // ['START_PAGE', 'DASHBOARD_PAGE']
   rootFolderPath: null,
   imagePathsList: [],
   imageHashMap: {},
+  tagSeachInputPlaceholder: "type tags: dog, cat, car...",
+  tagSearchValue: "",
   workers: {},
 });
 
@@ -40,6 +44,10 @@ observe(() => {
       path: imagePath,
     });
   });
+});
+
+observe(() => {
+  console.log(store.tagSearchValue);
 });
 
 module.exports = store;

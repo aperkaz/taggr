@@ -11,7 +11,7 @@ onmessage = async (e) => {
   const path = e.data.path;
 
   // tags = await classifyImage(path);
-  tags = ["cats", "dogs"];
+  tags = ["cat", "dog"];
 
   postMessage({ path, tags });
 };

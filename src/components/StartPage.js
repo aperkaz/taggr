@@ -18,6 +18,8 @@ class StartPage {
     startPageElement.setAttribute("id", "start-page");
 
     bodyElement.appendChild(startPageElement);
+
+    this.render();
   }
 
   unmount() {
@@ -67,7 +69,7 @@ class StartPage {
             <button id="rootFolderButton" class="button is-active is-primary is-large">Select picture folder</button>
           </div>
         </main>
-    </div>
+      </div>
       `;
 
       const rootFolderButton = document.getElementById("rootFolderButton");

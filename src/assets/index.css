@@ -8,6 +8,8 @@ body {
   height: 100vh;
 }
 
+/* TODO: refactor css with nesting */
+
 /* Start page CSS */
 .start-page-wrapper {
   height: 100%;
@@ -39,13 +41,6 @@ body {
   height: 15vh;
 }
 
-.dashboard-page-wrapper > main {
-  height: 85vh;
-  padding: 20px;
-  /* TODO: make them rem relative, to scale well */
-  /* margin: 0 calc(40px - .5rem) calc(40px - .5rem); */
-}
-
 .dashboard-page-wrapper > header > div {
   margin: 1.5rem 1.5rem 0;
 }
@@ -54,11 +49,13 @@ body {
   text-align: center;
 }
 
-.dashboard-page-wrapper #dashboard-page--pagination {
-  padding: 0 40px;
+.dashboard-page-wrapper > main {
+  height: 85vh;
+  /* TODO: make them rem relative, to scale well */
+  padding: 20px;
 }
 
-.dashboard-page-wrapper .grid{
+.dashboard-page-wrapper > main > .grid{
   display: grid;
   grid-template-columns: repeat(3, minmax(200px, 1fr));
   grid-template-rows:repeat(3, minmax(200px, auto));
@@ -66,164 +63,3 @@ body {
 
   height: 100%;
 }
-
-.dashboard-page-wrapper .grid > div {
-
-   /* margin: 2px; */
-  /* height: 100%; */
-  /* min-width: calc(100% - 4px); */
-   /* max-width: 1fr; */
-
-  /* min-height: calc(25vh - 4px); */
-  /* max-height: 1fr;   */
-
-  background: #EDE7F6;
-  /* padding: 3.5rem; */
-  /* border-radius: .35rem; */
-}
-
-
-
-/* 
-/*
-* TODO: remove after testing phase
-* By Jose Aguinaga
-* http://jjperezaguinaga.com
-*/
-/*
-@import url(https://fonts.googleapis.com/css?family=Pathway+Gothic+One);
-body {
-}
-
-@keyframes rotate-right {
-  from {
-    -webkit-transform: rotate(0deg);
-  }
-  to {
-    -webkit-transform: rotate(360deg);
-  }
-}
-@keyframes rotate-left {
-  from {
-    -webkit-transform: rotate(0deg);
-  }
-  to {
-    -webkit-transform: rotate(-360deg);
-  }
-}
-@keyframes hover {
-  0% {
-    -webkit-transform: translateY(0%);
-  }
-  50% {
-    -webkit-transform: translateY(5%);
-  }
-  100% {
-    -webkit-transform: translateY(0%);
-  }
-}
-@keyframes pull {
-  0% {
-    -webkit-transform: scaleY(1);
-  }
-  40% {
-    -webkit-transform: scaleY(1.01);
-  }
-  60% {
-    -webkit-transform: scaleY(0.99);
-  }
-  80% {
-    -webkit-transform: scaleY(1.01);
-  }
-  100% {
-    -webkit-transform: scaleY(0.99);
-  }
-  80% {
-    -webkit-transform: scaleY(1.01);
-  }
-  100% {
-    -webkit-transform: scaleY(1);
-  }
-}
-#airplane2, #airplane1 {
-  transform: translate3d(0, 0, 0);
-  transform-origin: 200px 200px;
-  transform: translate3d(0, 0, 0);
-  animation: rotate-right 60s linear 0s infinite;
-}
-
-#countryObjects {
-  transform: translate3d(0, 0, 0);
-  transform-origin: 200px 200px;
-  transform: translate3d(0, 0, 0);
-  animation: rotate-right 240s linear 0s infinite;
-}
-
-#floatingGlobe {
-  transform: translate3d(0, 0, 0);
-  transform-origin: 200px 200px;
-  transform: translate3d(0, 0, 0);
-  animation: rotate-left 360s linear 0s infinite;
-}
-
-#globe {
-  transform: translate3d(0, 0, 0);
-  animation: hover 0s linear 0s infinite;
-}
-
-#windmill {
-  transform: translate3d(0, 0, 0);
-  transform-origin: 331px 201px;
-  transform: translate3d(0, 0, 0);
-  animation: rotate-right 2s linear 0s infinite;
-}
-
-#cloud1 {
-  transform: translate3d(0, 0, 0);
-  animation: hover 3s linear 1s infinite;
-}
-
-#cloud2 {
-  transform: translate3d(0, 0, 0);
-  animation: hover 3s linear 2s infinite;
-}
-
-#cloud3 {
-  transform: translate3d(0, 0, 0);
-  animation: hover 3s linear 3s infinite;
-}
-
-#circle1 {
-  transform: translate3d(0, 0, 0);
-  transform-origin: 200px 200px;
-  transform: translate3d(0, 0, 0);
-  animation: rotate-right 12s linear 0s infinite;
-}
-
-#circle2 {
-  transform: translate3d(0, 0, 0);
-  transform-origin: 200px 200px;
-  transform: translate3d(0, 0, 0);
-  animation: rotate-left 24s linear 0s infinite;
-}
-
-#circle3 {
-  transform: translate3d(0, 0, 0);
-  transform-origin: 200px 200px;
-  transform: translate3d(0, 0, 0);
-  animation: rotate-right 12s linear 0s infinite;
-}
-
-#circle4 {
-  transform: translate3d(0, 0, 0);
-  transform-origin: 200px 200px;
-  transform: translate3d(0, 0, 0);
-  animation: rotate-left 24s linear 0s infinite;
-}
-
-#circle5 {
-  transform: translate3d(0, 0, 0);
-  transform-origin: 200px 200px;
-  transform: translate3d(0, 0, 0);
-  animation: rotate-right 12s linear 0s infinite;
-} */
