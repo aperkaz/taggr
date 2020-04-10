@@ -2,7 +2,7 @@ const { observable, observe } = require("@nx-js/observer-util");
 
 // GLOBAL STATE, https://github.com/nx-js/observer-util
 let store = observable({
-  appStatus: "OPEN", // ['OPEN', 'INITIALIZED']
+  appStatus: "START_PAGE", // ['START_PAGE', 'DASHBOARD_PAGE']
   rootFolderPath: null,
   imagePathsList: [],
   imageHashMap: {},
@@ -11,12 +11,12 @@ let store = observable({
 
 // REACTIONS
 
-// rootFolderPath changes => modify app state
+// rootFolderPath changes and is defined => modify app state to DASHBOARD_PAGE
 observe(() => {
   console.log("react to rootFolderPath: modify app state");
   console.log(store.rootFolderPath);
   if (store.rootFolderPath) {
-    store.appStatus = "INITIALIZED";
+    store.appStatus = "DASHBOARD_PAGE";
   }
 });
 

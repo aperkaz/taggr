@@ -1,8 +1,8 @@
 const { remote } = require("electron");
 const { observe } = require("@nx-js/observer-util");
 
-const IntroPage = require("./components/IntroPage");
-const MainPage = require("./components/MainPage");
+const StartPage = require("./components/StartPage");
+const DashboardPage = require("./components/DashboardPage");
 const store = require("./store");
 const { initializeWorkers } = require("./workers/index");
 
@@ -13,17 +13,21 @@ const workers = initializeWorkers(store);
 store.workers = workers;
 
 // initialize class components
-const IntroPageComponent = new IntroPage(store, workers);
-const MainPageComponent = new MainPage();
+const StartPageComponent = new StartPage(store, workers);
+const DashboardPageComponent = new DashboardPage();
 
 // reactive routing
 observe(() => {
   switch (store.appStatus) {
-    case "OPEN":
-      IntroPageComponent.render();
+    case "START_PAGE":
+      DashboardPageComponent.unmount();
+      StartPageComponent.mount();
+      StartPageComponent.render();
       break;
-    case "INITIALIZED":
-      MainPageComponent.render();
+    case "DASHBOARD_PAGE":
+      StartPageComponent.unmount();
+      DashboardPageComponent.mount();
+      DashboardPageComponent.render();
       break;
     default:
   }

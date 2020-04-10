@@ -2,14 +2,30 @@ const { dialog } = remote;
 const { observe } = require("@nx-js/observer-util");
 const { Queue, priorities } = require("@nx-js/queue-util");
 
-const { recursivelyFindImages } = require("../utils");
-
-class IntroPage {
+class StartPage {
   constructor(store) {
     this.store = store;
 
     // Setup prioritized queue for batching up observable reactions in render
     this.scheduler = new Queue(priorities.LOW);
+  }
+
+  mount() {
+    console.log("mount startPage");
+    let bodyElement = document.getElementsByTagName("BODY")[0];
+
+    var startPageElement = document.createElement("div");
+    startPageElement.setAttribute("id", "start-page");
+
+    bodyElement.appendChild(startPageElement);
+  }
+
+  unmount() {
+    console.log("unmount startPage");
+    let bodyElement = document.getElementsByTagName("BODY")[0];
+    const startPageElement = document.getElementById("start-page");
+
+    if (startPageElement) bodyElement.removeChild(startPageElement);
   }
 
   /**
@@ -31,19 +47,13 @@ class IntroPage {
     return rootFolderPath;
   };
 
-  onClickRootFolderButton = async () => {
-    store.rootFolderPath = await this.selectRootFolderPath();
-  };
-
-  scheduler = new Queue(priorities.LOW);
-
   render = observe(
     () => {
-      if (!document.getElementById("app")) return;
+      if (!document.getElementById("start-page")) return;
 
       // online mock: https://codepen.io/aperkaz/pen/JjYjWwm
-      document.getElementById("app").innerHTML = `
-      <div class="intro-page-wrapper">
+      document.getElementById("start-page").innerHTML = `
+      <div class="start-page-wrapper">
         <main class="columns is-mobile is-vcentered is-centered">
           <div class="column has-text-centered">
             <h1 class="title is-1" style="margin-bottom: 80px">
@@ -51,7 +61,7 @@ class IntroPage {
             </h1>
             <p>The next gen AI-powered <b>privacy-focused photo experience</b></p>
             <br/>
-            <p>Rediscover your pictures while <b>keeping your privacy</b> 🛡️</p>
+            <p>Rediscover your photos while <b>keeping your privacy</b> 🛡️</p>
             <br/>
             <br/>
             <button id="rootFolderButton" class="button is-active is-primary is-large">Select picture folder</button>
@@ -61,10 +71,12 @@ class IntroPage {
       `;
 
       const rootFolderButton = document.getElementById("rootFolderButton");
-      rootFolderButton.onclick = this.onClickRootFolderButton;
+      rootFolderButton.onclick = async () => {
+        store.rootFolderPath = await this.selectRootFolderPath();
+      };
     },
     { scheduler: this.scheduler }
   );
 }
 
-module.exports = IntroPage;
+module.exports = StartPage;

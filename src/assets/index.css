@@ -6,16 +6,16 @@ body {
 }
 
 
-#app {
+#start-page, #dashboard-page {
   min-height: 100vh;
 }
 
-/* Intro page CSS */
-.intro-page-wrapper {
+/* Start page CSS */
+.start-page-wrapper {
   min-height: 100vh;
 }
 
-.intro-page-wrapper:after {
+.start-page-wrapper:after {
   content: "";
   display: block;
   position: absolute;
@@ -28,18 +28,12 @@ body {
   z-index: -1;
 }
 
-.intro-page-wrapper > main {
+.start-page-wrapper > main {
   height: 100vh;
 }
 
+/* Dashboard page CSS */
 
-/* Main page CSS */
-#app > .image-container {
-  min-width: 400px;
-  min-height: 300px;
-  max-width: 400px;
-  max-height: 300px;
-}
 
 /*
 * TODO: remove after testing phase
