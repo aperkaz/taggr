@@ -10,8 +10,4 @@ module.exports = {
   module: {
     rules,
   },
-  resolve: {
-    root: path.resolve("./src"),
-    extensions: ["", ".js"],
-  },
 };

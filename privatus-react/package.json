@@ -77,7 +77,8 @@
     "electron": "8.2.1",
     "node-loader": "^0.6.0",
     "react-hot-loader": "^4.12.20",
-    "style-loader": "^0.23.1"
+    "style-loader": "^0.23.1",
+    "worker-loader": "^2.0.0"
   },
   "dependencies": {
     "@risingstack/react-easy-state": "^6.2.1",

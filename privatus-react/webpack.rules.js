@@ -32,8 +32,13 @@ module.exports = [
    */
   // Config for react: https://github.com/electron-userland/electron-forge/issues/1537
   {
-    test: /\.(jsx?)$/,
+    test: /\.(js?)$/,
     exclude: /(node_modules|.webpack)/,
     use: "babel-loader",
+  },
+  // Worker loader: https://github.com/webpack-contrib/worker-loader
+  {
+    test: /\.worker\.js$/,
+    use: { loader: "worker-loader" },
   },
 ];

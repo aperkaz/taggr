@@ -36,27 +36,28 @@ autoEffect(() => {
   }
 });
 
-// // rootFolderPath changes => recursively calculate all the image paths inside
-// observe(() => {
-//   if (!state.workers || !state.workers.recursiveImageFinderWorker) return;
+// rootFolderPath changes => recursively calculate all the image paths inside
+autoEffect(() => {
+  if (!state.workers || !state.workers.recursiveImageFinderWorker) return;
 
-//   state.workers.recursiveImageFinderWorker.postMessage({
-//     path: state.rootFolderPath,
-//   });
-// });
+  state.workers.recursiveImageFinderWorker.postMessage({
+    path: state.rootFolderPath,
+  });
+});
 
-// // imagePathsList changes => recalculate tags for all images
-// observe(() => {
-//   if (!state.workers || !state.workers.imageTaggingWorker) return;
+// imagePathsList changes => recalculate tags for all images
+autoEffect(() => {
+  if (!state.workers || !state.workers.imageTaggingWorker) return;
 
-//   console.log("trigger imagePathList computation");
-//   // TODO: can be optimized, only calculating the tags for the non existing pictures
-//   state.imagePathsList.forEach((imagePath) => {
-//     state.workers.imageTaggingWorker.postMessage({
-//       path: imagePath,
-//     });
-//   });
-// });
+  console.log("trigger imagePathList computation");
+  console.log(state.imagePathsList);
+  // TODO: can be optimized, only calculating the tags for the non existing pictures
+  // state.imagePathsList.forEach((imagePath) => {
+  //   state.workers.imageTaggingWorker.postMessage({
+  //     path: imagePath,
+  //   });
+  // });
+});
 
 // // imageResults
 
