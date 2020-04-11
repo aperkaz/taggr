@@ -2,6 +2,8 @@ const fs = require("fs");
 import crypto from "crypto";
 const readdirp = require("readdirp");
 
+// TODONOW: fix imports
+
 /**
  * Generate md5 hash string
  *
@@ -71,9 +73,9 @@ function constructImageMap(imagePathList) {
   return imageMap;
 }
 
-module.exports = {
-  generateMD5Hash,
-  generateMD5FileHash,
-  constructImageMap,
-  recursivelyFindImages,
-};
+// module.exports = {
+//   generateMD5Hash,
+//   generateMD5FileHash,
+//   constructImageMap,
+//   recursivelyFindImages,
+// };

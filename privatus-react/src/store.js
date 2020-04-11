@@ -1,7 +1,5 @@
-// import { observable, observe } from "@nx-js/observer-util";
-import { createWorkers } from "./workers/index";
-
 import { store, autoEffect } from "@risingstack/react-easy-state";
+import { createWorkers } from "./workers/index";
 
 // GLOBAL STATE, https://github.com/nx-js/observer-util
 let state = store({
@@ -52,19 +50,14 @@ autoEffect(() => {
   console.log("trigger imagePathList computation");
   console.log(state.imagePathsList);
   // TODO: can be optimized, only calculating the tags for the non existing pictures
-  // state.imagePathsList.forEach((imagePath) => {
-  //   state.workers.imageTaggingWorker.postMessage({
-  //     path: imagePath,
-  //   });
-  // });
+  state.imagePathsList.forEach((imagePath) => {
+    state.workers.imageTaggingWorker.postMessage({
+      path: imagePath,
+    });
+  });
 });
 
-// // imageResults
-
-// observe(() => {
-//   console.log(state.tagSearchValue);
-//   console.log(state.imageHashMap);
-//   console.log("/");
-// });
-
-// module.exports = createStore;
+autoEffect(() => {
+  console.log(state.imageHashMap);
+  console.log("/");
+});

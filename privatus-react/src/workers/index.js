@@ -1,57 +1,35 @@
-// const path = require("path");
-// import TestWorkerScript from "./TestWorker";
-// import imageTaggingScript from "./imageTagging";
+import ImageTaggingWorker from "./imageTagging.worker";
 import RecursiveImageFinderWorker from "./recursiveImageFinder.worker";
 
+import { generateMD5Hash } from "../utils";
+
+// TODONOW: when bundled, the worker files can not be found
 export const createWorkers = (state) => {
-  // var myWorker = new Worker(TestWorkerScript);
-
-  // myWorker.onmessage = (m) => {
-  //   console.log("msg from worker: ", m.data);
-  // };
-  // myWorker.postMessage("im from main");
-
+  // initialize
   let recursiveImageFinderWorker = new RecursiveImageFinderWorker();
 
   recursiveImageFinderWorker.onmessage = ({ data }) => {
     state.imagePathsList = data.imagePathsList;
   };
 
-  return { recursiveImageFinderWorker };
-  // TODONOW: fix
-  // initializations
-  // console.log(path.resolve(__dirname));
+  // initialize
+  let imageTaggingWorker = new ImageTaggingWorker();
 
-  // let imageTaggingWorker = new Worker("imageTagging.js");
+  imageTaggingWorker.onmessage = ({ data }) => {
+    const imagePath = data.path;
+    const imageTags = data.tags;
+    const imageHash = generateMD5Hash(imagePath);
 
-  // let recursiveImageFinderWorker = new Worker(
-  //   path.resolve(__dirname, "recursiveImageFinder.js")
-  // );
+    console.log("imageTaggingWorker to update state");
 
-  // // callbacks
-  // imageTaggingWorker.onmessage = ({ data }) => {
-  //   const { generateMD5Hash } = require("../utils");
+    if (state.imageHashMap[imageHash]) {
+      // update if existing
+      state.imageHashMap[imageHash].tags = imageTags;
+    } else {
+      // initialize if non existing
+      state.imageHashMap[imageHash] = { path: imagePath, tags: imageTags };
+    }
+  };
 
-  //   const imagePath = data.path;
-  //   const imageTags = data.tags;
-  //   const imageHash = generateMD5Hash(imagePath);
-
-  //   console.log("imageTaggingWorker to update store");
-
-  //   if (store.imageHashMap[imageHash]) {
-  //     // update if existing
-  //     store.imageHashMap[imageHash].tags = imageTags;
-  //   } else {
-  //     // initialize if non existing
-  //     store.imageHashMap[imageHash] = { path: imagePath, tags: imageTags };
-  //   }
-  // };
-
-  // recursiveImageFinderWorker.onmessage = ({ data }) => {
-  //   store.imagePathsList = data.imagePathsList;
-  // };
-
-  // return { imageTaggingWorker, recursiveImageFinderWorker };
+  return { recursiveImageFinderWorker, imageTaggingWorker };
 };
-
-// module.exports = { createWorkers };

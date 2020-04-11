@@ -1,4 +1,5 @@
-const { loadModel, classifyImage } = require("./tfImageClassification");
+// TODONOW: add new visualization algorithms npmjs.com/package/opencv4nodejs
+// const { loadModel, classifyImage } = require("./tfImageClassification");
 
 /**
  * send classfication tags for an image path
@@ -13,13 +14,13 @@ onmessage = async (e) => {
   // tags = await classifyImage(path);
   tags = ["cat", "dog"];
 
-  postMessage({ path, tags });
+  self.postMessage({ path, tags });
 };
 
 // load the required tensorflow.js models required by the worker
 (async () => {
   try {
-    await loadModel();
+    // await loadModel();
   } catch (err) {
     console.log(err);
   }
