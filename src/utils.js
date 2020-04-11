@@ -1,14 +1,15 @@
 const fs = require("fs");
-const crypto = require("crypto");
+import crypto from "crypto";
 const readdirp = require("readdirp");
-// const { classifyImage } = require("./workers/imageRecognitionHelper");
+
+// TODONOW: fix imports
 
 /**
  * Generate md5 hash string
  *
  * @param {String} input
  */
-function generateMD5Hash(input) {
+export function generateMD5Hash(input) {
   return crypto.createHash("md5").update(input).digest("hex");
 }
 
@@ -72,9 +73,9 @@ function constructImageMap(imagePathList) {
   return imageMap;
 }
 
-module.exports = {
-  generateMD5Hash,
-  generateMD5FileHash,
-  constructImageMap,
-  recursivelyFindImages,
-};
+// module.exports = {
+//   generateMD5Hash,
+//   generateMD5FileHash,
+//   constructImageMap,
+//   recursivelyFindImages,
+// };
