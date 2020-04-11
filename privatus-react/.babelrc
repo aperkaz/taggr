@@ -1,0 +1,9 @@
+{
+    "presets": ["@babel/preset-react"],
+    "plugins": ["react-hot-loader/babel"],
+    "env": {
+      "development": {
+        "presets": [["@babel/preset-react", { "development": true }]]
+      }
+    }
+  }
