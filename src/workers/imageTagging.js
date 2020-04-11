@@ -10,8 +10,8 @@ onmessage = async (e) => {
   if (!e.data || !e.data.path) return tags;
   const path = e.data.path;
 
-  tags = await classifyImage(path);
-  // tags = ["cat", "dog"];
+  // tags = await classifyImage(path);
+  tags = ["cat", "dog"];
 
   postMessage({ path, tags });
 };

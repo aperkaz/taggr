@@ -1,57 +1,41 @@
-const { observe } = require("@nx-js/observer-util");
-const { Queue, priorities } = require("@nx-js/queue-util");
-const debounce = require("lodash.debounce");
+const TagSearchInput = require("./TagSearchInput");
+const ImageGallery = require("./ImageGallery");
 
 class DashboardPage {
-  inputValue;
-
   constructor(store) {
     this.store = store;
+    this.rootId = "dashboard-page";
 
-    // Setup prioritized queue for batching up observable reactions in render
-    this.scheduler = new Queue(priorities.LOW);
+    // child components
+    this.tagSearchInput = new TagSearchInput(this.store, "tag-search-input");
+    this.imageGallery = new ImageGallery(this.store, "image-gallery");
   }
 
   mount() {
     console.log("mount dashboardPage");
 
     // create hook-div if not pressent in page
-    if (!document.getElementById("dashboard-page")) {
+    if (!document.getElementById(this.rootId)) {
       let bodyElement = document.getElementsByTagName("BODY")[0];
 
       var dashboardPageElement = document.createElement("div");
-      dashboardPageElement.setAttribute("id", "dashboard-page");
+      dashboardPageElement.setAttribute("id", this.rootId);
 
       bodyElement.appendChild(dashboardPageElement);
     }
 
     // add static html inside hook-div
-    document.getElementById("dashboard-page").innerHTML = `
-      <div class="dashboard-page-wrapper">
-
-        <header class="columns is-multiline is-mobile is-vcentered is-centered">
-          <div class="column is-8 has-text-centered">
-            <input id="tag-search-input" class="input text is-info is-medium" type="text" placeholder="type tags, ex: dog, cat..."/>
-          </div>
-        </header>
-
-        <main>
-          <div id="image-grid" class="grid">
-          </div>
-        </main>
+    document.getElementById(this.rootId).innerHTML = `
+      <div class="${this.rootId}-wrapper">
+        <header id="tag-search-input" class="columns is-multiline is-mobile is-vcentered is-centered"></header>
+        <div id="image-gallery"></div>
       </div>`;
 
-    this.updateImages();
+    // initialize subcomponents
+    this.tagSearchInput.mount();
+    this.imageGallery.mount();
 
-    // add listeners
-    const tagSearchInputElement = document.getElementById("tag-search-input");
-
-    const inputHandler = (store) =>
-      debounce((e) => {
-        store.tagSearchValue = e.target.value;
-      }, 300);
-
-    tagSearchInputElement.addEventListener("input", inputHandler(this.store));
+    // this.updateImages();
   }
 
   unmount() {
@@ -61,43 +45,6 @@ class DashboardPage {
 
     if (dashboardPageElement) bodyElement.removeChild(dashboardPageElement);
   }
-
-  updateImages = observe(() => {
-    const { tagSearchValue } = store;
-    const imageHashMap = store.imageHashMap;
-
-    console.log("updateImages()");
-
-    if (!document.getElementById("dashboard-page")) return;
-
-    let results = {};
-    // only filter when there is something to filter
-    if (tagSearchValue) {
-      Object.keys(imageHashMap).forEach((key) => {
-        if (
-          imageHashMap[key].tags.filter((tag) => tag.includes(tagSearchValue))
-            .length > 0
-        ) {
-          results[key] = imageHashMap[key];
-        }
-      });
-    } else {
-      results = imageHashMap;
-    }
-
-    let imagesElement = ``;
-    Object.keys(results)
-      .slice(0, 9) // only display 9 results, to match the layout
-      .forEach((imageKey) => {
-        const imagePath = results[imageKey].path;
-        imagesElement += `<div class="image-container" style="background-image: url(${imagePath}); background-repeat:no-repeat; background-position: center center; background-size: cover;"></div>`;
-      });
-
-    if (imagesElement.length === 0)
-      imagesElement = "<div>sorry, no results</div>";
-
-    document.getElementById("image-grid").innerHTML = imagesElement;
-  });
 }
 
 /*

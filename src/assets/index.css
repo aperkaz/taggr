@@ -8,6 +8,22 @@ body {
   height: 100vh;
 }
 
+
+.path {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: dash 8s linear infinite;
+}
+
+@keyframes dash {
+  from {
+    stroke-dashoffset: 1000;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
 /* TODO: refactor css with nesting */
 
 /* Start page CSS */
