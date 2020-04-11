@@ -3,8 +3,9 @@
   "productName": "privatus",
   "version": "1.0.0",
   "description": "My Electron application description",
-  "main": "src/index.js",
+  "main": "public/electron.js",
   "scripts": {
+    "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
@@ -53,6 +54,7 @@
     "@tensorflow/tfjs": "^0.13.0",
     "@tensorflow/tfjs-node": "^0.1.21",
     "bull": "^3.13.0",
+    "electron-is-dev": "^1.2.0",
     "electron-squirrel-startup": "^1.0.0",
     "jpeg-js": "^0.3.7",
     "lodash.debounce": "^4.0.8",
