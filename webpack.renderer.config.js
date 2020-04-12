@@ -5,6 +5,12 @@ rules.push({
   use: [{ loader: "style-loader" }, { loader: "css-loader" }],
 });
 
+// Worker loader: https://github.com/webpack-contrib/worker-loader
+rules.push({
+  test: /\.worker\.js$/,
+  use: [{ loader: "worker-loader", options: { publicPath: " ../" } }],
+});
+
 module.exports = {
   // Put your normal webpack config below here
   module: {

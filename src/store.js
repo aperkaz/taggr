@@ -23,6 +23,8 @@ export const createStore = () => {
 
 export default state;
 
+// TODO: add actions (execute mutations and sideeffects),instead of reactions
+
 // REACTIONS
 
 // rootFolderPath changes and is defined => modify app state to DASHBOARD_PAGE
