@@ -3,7 +3,7 @@ import { createWorkers } from "./workers/index";
 
 // GLOBAL STATE, https://github.com/nx-js/observer-util
 let state = store({
-  appStatus: "START_PAGE", // ['START_PAGE', 'DASHBOARD_PAGE']
+  appStatus: "DASHBOARD_PAGE", // ['START_PAGE', 'DASHBOARD_PAGE']
   rootFolderPath: null,
   imagePathsList: [],
   imageHashMap: {}, // {imageHash: {tags: [], path: String}}

@@ -88,9 +88,10 @@
   },
   "dependencies": {
     "@risingstack/react-easy-state": "^6.2.1",
-    "electron-squirrel-startup": "^1.0.0",
     "electron-is-dev": "^1.2.0",
+    "electron-squirrel-startup": "^1.0.0",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "styled-components": "^5.1.0"
   }
 }
