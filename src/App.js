@@ -8,8 +8,8 @@ import "./index.css";
 createStore();
 
 const App = view(() => (
-  <div>
-    <h1>{state.appStatus === "START_PAGE" ? <StartPage /> : <MainPage />}</h1>
+  <div style={{ height: "100%" }}>
+    {state.appStatus === "START_PAGE" ? <StartPage /> : <MainPage />}
   </div>
 ));
 
