@@ -8,7 +8,15 @@ rules.push({
 // Worker loader: https://github.com/webpack-contrib/worker-loader
 rules.push({
   test: /\.worker\.js$/,
-  use: [{ loader: "worker-loader", options: { publicPath: " ../" } }],
+  use: [
+    {
+      loader: "worker-loader",
+      options: {
+        // fix loading issue when app is packaged
+        publicPath: " ../",
+      },
+    },
+  ],
 });
 
 module.exports = {

@@ -1,6 +1,7 @@
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   min-height: 100%;
+  background-color: pink;
 }
 
 
@@ -37,7 +38,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  background-image: url(privacy.jpeg);
+  /* background-image: url(privacy.jpeg); */
   width: 100%;
   height: 100%;
   opacity: 0.3;

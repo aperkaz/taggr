@@ -1,4 +1,4 @@
-// TODONOW: add new visualization algorithms npmjs.com/package/opencv4nodejs
+// TODO: add new visualization algorithms npmjs.com/package/opencv4nodejs
 // const { loadModel, classifyImage } = require("./tfImageClassification");
 
 /**

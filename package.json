@@ -1,15 +1,17 @@
 {
-  "name": "privatus-react",
-  "productName": "privatus-react",
-  "version": "1.0.0",
-  "description": "My Electron application description",
+  "name": "privatus",
+  "productName": "privatus",
+  "version": "0.0.1",
+  "description": "Privacy centric AI gallery",
   "main": ".webpack/main",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "echo \"No linting configured\""
+    "lint": "echo \"No linting configured\"",
+    "unit": "mocha",
+    "unit:watch": "mocha --watch"
   },
   "keywords": [],
   "author": {
@@ -73,8 +75,12 @@
     "@electron-forge/plugin-webpack": "^6.0.0-beta.50",
     "@marshallofsound/webpack-asset-relocator-loader": "^0.5.0",
     "babel-loader": "^8.1.0",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^3.5.2",
     "electron": "8.2.1",
+    "mocha": "^7.1.1",
     "node-loader": "^0.6.0",
     "react-hot-loader": "^4.12.20",
     "style-loader": "^0.23.1",
@@ -83,6 +89,7 @@
   "dependencies": {
     "@risingstack/react-easy-state": "^6.2.1",
     "electron-squirrel-startup": "^1.0.0",
+    "electron-is-dev": "^1.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   }

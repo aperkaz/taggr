@@ -14,7 +14,6 @@ self.onmessage = async (e) => {
     // Filter by directory
     directoryFilter: ["!.git", "!*modules"],
   };
-
   readdirp(settings)
     .on("data", (entry) => {
       const {

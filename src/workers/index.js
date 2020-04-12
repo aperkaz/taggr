@@ -1,16 +1,17 @@
-import ImageTaggingWorker from "./imageTagging.worker";
-import RecursiveImageFinderWorker from "./recursiveImageFinder.worker";
+import RecursiveImageFinderWorker from "./recursiveImageFinder.worker.js";
+import ImageTaggingWorker from "./imageTagging.worker.js";
 
 import { generateMD5Hash } from "../utils";
 
-// TODONOW: when bundled, the worker files can not be found
 export const createWorkers = (state) => {
-  // initialize
   let recursiveImageFinderWorker = new RecursiveImageFinderWorker();
 
   recursiveImageFinderWorker.onmessage = ({ data }) => {
+    console.log(data);
     state.imagePathsList = data.imagePathsList;
   };
+
+  // recursiveImageFinderWorker.postMessage({ path: "/home/alain/Downloads" });
 
   // initialize
   let imageTaggingWorker = new ImageTaggingWorker();
