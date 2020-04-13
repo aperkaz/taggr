@@ -9,6 +9,7 @@ import MainPage from "./components/MainPage.js";
 import state, { initializeWorkersWithStore, actions } from "./store";
 import { APP_STATUS } from "./constants";
 import "./index.css";
+import "typeface-roboto";
 
 initializeWorkersWithStore();
 

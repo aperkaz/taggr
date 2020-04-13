@@ -94,11 +94,15 @@
     "worker-loader": "^2.0.0"
   },
   "dependencies": {
+    "@material-ui/core": "^4.9.10",
+    "@material-ui/icons": "^4.9.1",
     "@risingstack/react-easy-state": "^6.2.1",
     "electron-is-dev": "^1.2.0",
     "electron-squirrel-startup": "^1.0.0",
+    "lodash.debounce": "^4.0.8",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "styled-components": "^5.1.0"
+    "styled-components": "^5.1.0",
+    "typeface-roboto": "0.0.75"
   }
 }
