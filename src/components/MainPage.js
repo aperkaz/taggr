@@ -9,7 +9,6 @@ const MainPage = () => (
   <Wrapper>
     <header
       id="tag-search-input"
-      //
       className="columns is-multiline is-mobile is-vcentered is-centered"
     >
       input
