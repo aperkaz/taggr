@@ -2,7 +2,7 @@ const { dialog } = window.require("electron").remote;
 
 import React from "react";
 import { view } from "@risingstack/react-easy-state";
-import state from "../store";
+import state from "store";
 
 const StartPage = view(() => (
   <div className="start-page-wrapper">

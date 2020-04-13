@@ -22,10 +22,10 @@ const createWindow = () => {
   console.log("loading add from: ", MAIN_WINDOW_WEBPACK_ENTRY);
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
+  // if (isDev) {
   // Open the DevTools.
-  if (isDev) {
-    mainWindow.webContents.openDevTools();
-  }
+  mainWindow.webContents.openDevTools();
+  // }
 
   // Remove menu
   mainWindow.removeMenu();

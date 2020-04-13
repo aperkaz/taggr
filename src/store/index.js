@@ -1,9 +1,9 @@
 import { store, autoEffect } from "@risingstack/react-easy-state";
-import { createWorkers } from "./workers/index";
+import { createWorkers } from "workers/index";
 
 // GLOBAL STATE, https://github.com/nx-js/observer-util
 let state = store({
-  appStatus: "DASHBOARD_PAGE", // ['START_PAGE', 'DASHBOARD_PAGE']
+  appStatus: "START_PAGE", // ['START_PAGE', 'DASHBOARD_PAGE']
   rootFolderPath: null,
   imagePathsList: [],
   imageHashMap: {}, // {imageHash: {tags: [], path: String}}
