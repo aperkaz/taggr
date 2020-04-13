@@ -1,4 +1,3 @@
-const path = require("path");
 const rules = require("./webpack.rules");
 
 rules.push({
@@ -24,12 +23,5 @@ module.exports = {
   // Put your normal webpack config below here
   module: {
     rules,
-  },
-  resolve: {
-    alias: {
-      components: path.resolve(__dirname, "src/components/"),
-      store: path.resolve(__dirname, "src/store/"),
-      workers: path.resolve(__dirname, "src/workers/"),
-    },
   },
 };

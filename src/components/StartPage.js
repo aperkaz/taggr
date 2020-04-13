@@ -2,7 +2,9 @@ const { dialog } = window.require("electron").remote;
 
 import React from "react";
 import { view } from "@risingstack/react-easy-state";
-import state from "store";
+
+import { actions } from "../store";
+import { APP_STATUS } from "../constants";
 
 const StartPage = view(() => (
   <div className="start-page-wrapper">
@@ -32,11 +34,6 @@ const StartPage = view(() => (
   </div>
 ));
 
-/**
- * Open dialog to select root folder path
- *
- * @returns {String} rootFolderPath | null
- */
 const selectRootFolderPath = async () => {
   const { filePaths } = await dialog.showOpenDialog({
     properties: ["openDirectory"],
@@ -44,8 +41,10 @@ const selectRootFolderPath = async () => {
 
   const rootFolderPath = filePaths ? filePaths[0] : null;
 
-  state.rootFolderPath = rootFolderPath;
-  //   state.appStatus = "DASHBOARD_PAGE";
+  if (rootFolderPath) {
+    actions.setRootFolderPath(rootFolderPath);
+    actions.setAppStatus(APP_STATUS.DASHBOARD_PAGE);
+  }
 };
 
 export default StartPage;
