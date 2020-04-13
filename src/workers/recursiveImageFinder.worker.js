@@ -16,11 +16,10 @@ self.onmessage = async (e) => {
   };
   readdirp(settings)
     .on("data", (entry) => {
-      const {
-        path,
-        stat: { size },
-      } = entry;
-      imagePathsList.push(`${folderPath}/${path}`);
+      const { path } = entry;
+
+      /* Issue loading local files, fixed with https://github.com/legend80s/gallery-electron */
+      imagePathsList.push(`file:///${folderPath}/${path}`);
     })
     .on("error", (error) => console.error("fatal error", error))
     .on("end", () => self.postMessage({ imagePathsList }));

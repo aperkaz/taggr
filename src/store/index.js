@@ -13,7 +13,7 @@ const initializeWorkersWithStore = () => {
 };
 
 let appStore = store({
-  appStatus: APP_STATUS.START_PAGE,
+  appStatus: APP_STATUS.DASHBOARD_PAGE,
   rootFolderPath: null,
   imagePathsList: [],
   imageHashMap: {}, // {imageHash: {tags: [], path: String}}

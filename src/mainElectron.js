@@ -15,6 +15,8 @@ const createWindow = () => {
     webPreferences: {
       nodeIntegration: true,
       nodeIntegrationInWorker: true,
+      // allows to load local files -> file:///
+      webSecurity: false,
     },
   });
 
