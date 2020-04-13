@@ -1,5 +1,5 @@
 const { app, BrowserWindow } = require("electron");
-const path = require("path");
+const isDev = require("electron-is-dev");
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -10,7 +10,7 @@ if (require("electron-squirrel-startup")) {
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 1980,
+    width: 900,
     height: 1080,
     webPreferences: {
       nodeIntegration: true,
@@ -19,15 +19,18 @@ const createWindow = () => {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, "index.html"));
+  console.log("loading add from: ", MAIN_WINDOW_WEBPACK_ENTRY);
+  mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
+  // if (isDev) {
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
+  // }
 
   // Remove menu
   mainWindow.removeMenu();
 
-  mainWindow.setPosition(1200, 0);
+  mainWindow.setPosition(1000, 0);
 };
 
 // This method will be called when Electron has finished
