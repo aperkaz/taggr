@@ -16,7 +16,7 @@ export const Image = () => (
   <div>
     <h2>In 200px x 200px container</h2>
     <div style={{ height: "200px", width: "200px" }}>
-      <ImageTileComp imageUrl="https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=660&q=80"></ImageTileComp>
+      <ImageTileComp imageUrl="https://images.unsplash.com/photo-1544627836-822bfe450209?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=7500&q=80"></ImageTileComp>
     </div>
   </div>
 );
