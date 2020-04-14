@@ -12,9 +12,18 @@ let workers = {};
 
 const initializeWorkersWithStore = () => {
   workers = createWorkers(actions);
+
+  workers.recursiveImageFinderWorker.onmessage = ({ data }) => {
+    actions.setImagePathsList(data.imagePathsList);
+    actions.triggerImageTagsCalculation(data.imagePathsList);
+  };
+
+  workers.imageTaggingWorker.onmessage = ({ data }) => {
+    actions.setImageTags(data.path, data.tags);
+  };
 };
 
-// TODO: separate pure UI and storage data structures
+// TODO: separate pure UI and storage data structuresnpm i opencv4nodejs
 export default store({
   appStatus: APP_STATUS.START_PAGE,
   rootFolderPath: null,

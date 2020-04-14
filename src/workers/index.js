@@ -10,16 +10,7 @@ import ImageTaggingWorker from "./imageTagging.worker.js";
 export const createWorkers = (actions) => {
   let recursiveImageFinderWorker = new RecursiveImageFinderWorker();
 
-  recursiveImageFinderWorker.onmessage = ({ data }) => {
-    actions.setImagePathsList(data.imagePathsList);
-    actions.triggerImageTagsCalculation(data.imagePathsList);
-  };
-
   let imageTaggingWorker = new ImageTaggingWorker();
-
-  imageTaggingWorker.onmessage = ({ data }) => {
-    actions.setImageTags(data.path, data.tags);
-  };
 
   return { recursiveImageFinderWorker, imageTaggingWorker };
 };
