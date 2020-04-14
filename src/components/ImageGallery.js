@@ -27,7 +27,7 @@ const ImageWrapper = styled.div`
 `;
 
 // TODO: virtualize list for performance https://github.com/developerdizzle/react-virtual-list
-const ImageGallery = ({ imageList }) => (
+const ImageGallery = ({ imageList = [] }) => (
   <Wrapper>
     {imageList.map((image) => (
       <ImageWrapper key={image.hash}>

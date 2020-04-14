@@ -1,4 +1,4 @@
-import store from "./index";
+import store, { workers } from "./index";
 import { generateMD5Hash } from "../utils";
 
 const logAction = (name, payload) => {
@@ -26,7 +26,7 @@ const triggerRecursiveImageFinding = (path) => {
   logAction("triggerRecursiveImageFinding", path);
 
   // trigger image finder task
-  store.workers.recursiveImageFinderWorker.postMessage({
+  workers.recursiveImageFinderWorker.postMessage({
     path,
   });
 };
@@ -61,7 +61,7 @@ const triggerImageTagsCalculation = (imagePathsList) => {
   logAction("triggerImageTagsCalculation", imagePathsList.length);
 
   imagePathsList.forEach((path) => {
-    store.workers.imageTaggingWorker.postMessage({
+    workers.imageTaggingWorker.postMessage({
       path,
     });
   });

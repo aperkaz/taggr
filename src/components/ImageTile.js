@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const LoadingWrapper = styled.div`
@@ -29,21 +29,21 @@ const Loading = () => <LoadingWrapper></LoadingWrapper>;
 
 const ImageTile = ({ imageUrl }) => {
   const [loaded, setLoaded] = useState(false);
-  const [loadedImageUrl, setLoadedImageUrl] = useState("");
 
   let bgImg = new Image();
   bgImg.src = imageUrl;
 
   bgImg.onload = function () {
     setLoaded(true);
-    setLoadedImageUrl(imageUrl);
   };
 
-  return loaded ? (
-    <Wrapper imageUrl={loadedImageUrl}></Wrapper>
-  ) : (
-    <Loading></Loading>
-  );
+  useEffect(() => {
+    return function cleanupImgOnLoad() {
+      bgImg.onload = null;
+    };
+  }, []);
+
+  return loaded ? <Wrapper imageUrl={imageUrl}></Wrapper> : <Loading></Loading>;
 };
 
 const Wrapper = styled.div`

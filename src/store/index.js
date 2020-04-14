@@ -1,27 +1,27 @@
 // GLOBAL STATE, https://github.com/nx-js/observer-util
 import { store } from "@risingstack/react-easy-state";
 import { createWorkers } from "../workers/index";
-import actions from "./actions";
 import { APP_STATUS } from "../constants";
+import actions from "./actions";
 
 /**
- * Initialize web workers with store
+ * Initialize web workers
  *
  */
+let workers = {};
+
 const initializeWorkersWithStore = () => {
-  appStore.workers = createWorkers(actions);
+  workers = createWorkers(actions);
 };
 
-let appStore = store({
+export default appStore = store({
   appStatus: APP_STATUS.DASHBOARD_PAGE,
   rootFolderPath: null,
   imagePathsList: [],
   imageHashMap: {}, // {imageHash: {tags: [], path: String}}
   tagMap: {},
   tagSearchValue: "",
-  imageResults: [], // array of filteres results
-  workers: {},
+  imageList: [], // array of filteres results
 });
 
-export { actions, initializeWorkersWithStore };
-export default appStore;
+export { actions, workers, initializeWorkersWithStore };

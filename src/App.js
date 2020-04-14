@@ -5,7 +5,7 @@ import React from "react";
 import { view } from "@risingstack/react-easy-state";
 
 import StartPage from "./components/StartPage.js";
-import MainPage from "./components/MainPage.js";
+import DashboardPage from "./components/DashboardPage";
 import state, { initializeWorkersWithStore, actions } from "./store";
 import { APP_STATUS } from "./constants";
 import "./index.css";
@@ -30,7 +30,7 @@ const App = view(() => (
     {state.appStatus === APP_STATUS.START_PAGE ? (
       <StartPage onSelectRootFolderPath={selectRootFolderPath} />
     ) : (
-      <MainPage />
+      <DashboardPage />
     )}
   </div>
 ));

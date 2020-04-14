@@ -14,7 +14,7 @@ export const SearchInput = () => (
 
 export const Image = () => (
   <div>
-    <h2>In 200px x 200px container</h2>
+    <h2>In 200px x 200px container (with load animation)</h2>
     <div style={{ height: "200px", width: "200px" }}>
       <ImageTileComp imageUrl="https://images.unsplash.com/photo-1544627836-822bfe450209?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=7500&q=80"></ImageTileComp>
     </div>

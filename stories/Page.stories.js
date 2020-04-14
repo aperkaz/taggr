@@ -1,8 +1,9 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
 import StartPageComp from "../src/components/StartPage";
-import MainPageComp from "../src/components/MainPage";
+import { DashboardPage as DashboardPageComp } from "../src/components/DashboardPage";
 import FullHeight from "./utils";
+import imageList from "./mocks/imageList";
 
 export default {
   title: "Pages",
@@ -17,8 +18,8 @@ export const StartPage = () => (
   </FullHeight>
 );
 
-export const MainPage = () => (
+export const DashboardPage = () => (
   <FullHeight>
-    <MainPageComp />
+    <DashboardPageComp imageList={imageList} />
   </FullHeight>
 );

@@ -5,6 +5,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Search from "@material-ui/icons/Search";
 import debounce from "lodash.debounce";
 
+// TODO: deprecated
 const SearchInput = view(({ onChange }) => (
   <TextField
     label="search by tags"
