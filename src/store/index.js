@@ -14,14 +14,28 @@ const initializeWorkersWithStore = () => {
   workers = createWorkers(actions);
 };
 
-export default appStore = store({
-  appStatus: APP_STATUS.DASHBOARD_PAGE,
+// TODO: separate pure UI and storage data structures
+export default store({
+  appStatus: APP_STATUS.START_PAGE,
   rootFolderPath: null,
   imagePathsList: [],
   imageHashMap: {}, // {imageHash: {tags: [], path: String}}
   tagMap: {},
   tagSearchValue: "",
-  imageList: [], // array of filteres results
+  imageList: [
+    {
+      hash: "13",
+      path:
+        "https://images.unsplash.com/photo-1578922746465-3a80a228f223?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=564&q=80",
+      tags: ["cat", "dog"],
+    },
+    {
+      hash: "14",
+      path:
+        "https://images.unsplash.com/photo-1582449632319-5247b79dd198?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1053&q=80",
+      tags: ["cat", "dog"],
+    },
+  ], // array of filteres results
 });
 
 export { actions, workers, initializeWorkersWithStore };

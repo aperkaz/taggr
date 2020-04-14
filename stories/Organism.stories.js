@@ -1,7 +1,7 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
-import ImageGalleryComp from "../src/components/ImageGallery";
-import DashboardHeaderComp from "../src/components/DashboardHeader";
+import ImageGalleryComp from "../src/components/DashboardImageGallery";
+import HeaderComp from "../src/components/DashboardHeader";
 import FullHeight from "./utils";
 import imageList from "./mocks/imageList";
 
@@ -16,8 +16,6 @@ export const ImageGallery = () => (
 
 export const DashboardHeader = () => (
   <FullHeight>
-    <DashboardHeaderComp
-      onInputChange={action("trigger search")}
-    ></DashboardHeaderComp>
+    <HeaderComp onInputChange={action("trigger search")}></HeaderComp>
   </FullHeight>
 );

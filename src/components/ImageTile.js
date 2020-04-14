@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const LoadingWrapper = styled.div`
+  display: ${(props) => (props.loaded ? "none" : "block")};
+
   @keyframes placeHolderShimmer {
     0% {
       background-position: 0 0;
@@ -25,9 +27,11 @@ const LoadingWrapper = styled.div`
   position: relative;
 `;
 
-const Loading = () => <LoadingWrapper></LoadingWrapper>;
+const Loading = ({ loaded }) => (
+  <LoadingWrapper loaded={loaded}></LoadingWrapper>
+);
 
-const ImageTile = ({ imageUrl }) => {
+const ImageTile = ({ imageUrl, onClick }) => {
   const [loaded, setLoaded] = useState(false);
 
   let bgImg = new Image();
@@ -43,10 +47,17 @@ const ImageTile = ({ imageUrl }) => {
     };
   }, []);
 
-  return loaded ? <Wrapper imageUrl={imageUrl}></Wrapper> : <Loading></Loading>;
+  return (
+    <React.Fragment>
+      <Wrapper imageUrl={imageUrl} loaded={loaded} onClick={onClick}></Wrapper>
+      <Loading loaded={loaded}></Loading>
+    </React.Fragment>
+  );
 };
 
 const Wrapper = styled.div`
+  display: ${(props) => (props.loaded ? "block" : "none")};
+
   height: 100%;
   width: 100%;
 

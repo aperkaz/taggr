@@ -7,12 +7,6 @@ require("@tensorflow/tfjs-node");
 const fs = require("fs");
 const jpeg = require("jpeg-js");
 
-// TODO: load the model from the filesystem
-// https://github.com/bartosz-paternoga/MobileNet_tfjs-node_Serverless/tree/89a587bd25935d632e90af286abdbbcf658e5190
-// https://github.com/tensorflow/tfjs/blob/022376982ad26736abe92d587adb809b7f2482fb/tfjs-converter/demo/mobilenet/mobilenet.js
-// https://github.com/tensorflow/tfjs-examples/blob/master/mobilenet/index.js
-// https://github.com/tensorflow/tfjs/blob/26bccc44133ae14d98f3ac6f217a4ee8d51055f0/tfjs-node/src/image_test.ts
-
 const NUMBER_OF_CHANNELS = 3;
 const PROBABILITY_THRESHOLD = 0.1;
 
