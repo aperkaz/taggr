@@ -1,7 +1,7 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
 import StartPageComp from "../src/components/StartPage";
-import { DashboardPage as DashboardPageComp } from "../src/components/DashboardPage";
+// import { DashboardPage as DashboardPageComp } from "../src/components/DashboardPage";
 import FullHeight from "./utils";
 import imageList from "./mocks/imageList";
 
@@ -18,8 +18,8 @@ export const StartPage = () => (
   </FullHeight>
 );
 
-export const DashboardPage = () => (
-  <FullHeight>
-    <DashboardPageComp imageList={imageList} />
-  </FullHeight>
-);
+// export const DashboardPage = () => (
+//   <FullHeight>
+//     <DashboardPageComp imageList={imageList} />
+//   </FullHeight>
+// );

@@ -1,94 +1,55 @@
-global.fetch = require("node-fetch");
+// const fetch = require("node-fetch");
+// global.fetch = fetch;
 
-const tf = require("@tensorflow/tfjs");
-const mobilenet = require("@tensorflow-models/mobilenet");
-require("@tensorflow/tfjs-node");
+// const tf = require("@tensorflow/tfjs");
+// require("@tensorflow/tfjs-node");
 
-const fs = require("fs");
-const jpeg = require("jpeg-js");
+// const mobilenet = require("@tensorflow-models/mobilenet");
 
-const NUMBER_OF_CHANNELS = 3;
-const PROBABILITY_THRESHOLD = 0.1;
+// const { Image, createCanvas } = require("canvas");
 
-let mn_model;
-
-const readImage = (path) => {
-  const buf = fs.readFileSync(path);
-  const pixels = jpeg.decode(buf, true);
-  return pixels;
-};
-
-const imageByteArray = (image, numChannels) => {
-  const pixels = image.data;
-  const numPixels = image.width * image.height;
-  const values = new Int32Array(numPixels * numChannels);
-
-  for (let i = 0; i < numPixels; i++) {
-    for (let channel = 0; channel < numChannels; ++channel) {
-      values[i * numChannels + channel] = pixels[i * 4 + channel];
-    }
-  }
-
-  return values;
-};
-
-const imageToInput = (image, numChannels) => {
-  const values = imageByteArray(image, numChannels);
-  const outShape = [image.height, image.width, numChannels];
-  const input = tf.tensor3d(values, outShape, "int32");
-
-  return input;
-};
-
-async function loadModel() {
-  if (mn_model) return;
-
-  console.log("loadModel()");
-  console.time("loadModel");
-  const mn = new mobilenet.MobileNet(1, 1);
-  mn.path = `https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_1.0_224/model.json`;
-  await mn.load();
-  console.timeEnd("loadModel");
-  mn_model = mn;
-  return mn;
+async function loadImage(buffer) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onerror = (err) => reject(err);
+    img.onload = () => resolve(img);
+    img.src = buffer;
+  });
 }
 
-/**
- * Generate image classification tags for a given imagea above a probability threshold
- * @param {String} imagePath
- * @returns {Array} tags
- */
-async function classifyImage(imagePath) {
-  console.time("classifyImage");
-  const image = readImage(imagePath);
-  const input = imageToInput(image, NUMBER_OF_CHANNELS);
+let net;
 
-  await loadModel();
+async function initialize() {
+  console.time("loadModel");
 
-  const rawPredictions = await mn_model.classify(input);
+  const MODEL_URL = "file://mobilenet/model.json";
 
-  // filter out predictions below threshold
-  const filteredRawPredictions = rawPredictions.filter(
-    (rawPrediction) => rawPrediction.probability > PROBABILITY_THRESHOLD
-  );
-
-  // aggregate results
-  const predictions = [];
-  filteredRawPredictions.forEach((rawPrediction) => {
-    const tags = rawPrediction.className
-      .split(", ")
-      .map((name) => name.toLowerCase());
-    predictions.push(...tags);
+  net = await mobilenet.load({
+    modelUrl: MODEL_URL,
+    version: 1,
+    alpha: 1,
+    // fix the default of [-1,1]
+    inputRange: [0, 1],
   });
 
-  // free memory from TF-internal libraries from input image
-  input.dispose();
+  console.timeEnd("loadModel");
+}
 
-  console.timeEnd("classifyImage");
+async function analizeObjects(imgPath) {
+  console.time("loadImage");
+  const img = await loadImage(imgPath);
+  console.timeEnd("loadImage");
+  const canvas = createCanvas(img.width, img.height);
+  canvas.getContext("2d").drawImage(img, 0, 0);
+
+  // Since the model is trained in 224 pixels, reduce the image size to speed up processing x10
+  const pixels = tf.browser.fromPixels(canvas);
+  const smallImg = tf.image.resizeBilinear(pixels, [224, 224]);
+
+  console.time("detect" + imgPath);
+  const predictions = await net.classify(smallImg);
+  console.timeEnd("detect" + imgPath);
   return predictions;
 }
 
-module.exports = {
-  loadModel,
-  classifyImage,
-};
+module.exports = { initialize, analizeObjects };

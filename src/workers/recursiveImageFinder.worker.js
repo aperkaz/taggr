@@ -19,7 +19,7 @@ self.onmessage = async (e) => {
       const { path } = entry;
 
       /* Issue loading local files, fixed with https://github.com/legend80s/gallery-electron */
-      imagePathsList.push(`file:///${folderPath}/${path}`);
+      imagePathsList.push(`file://${folderPath}/${path}`);
     })
     .on("error", (error) => console.error("fatal error", error))
     .on("end", () => self.postMessage({ imagePathsList }));

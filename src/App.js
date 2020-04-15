@@ -6,11 +6,8 @@ import { view } from "@risingstack/react-easy-state";
 
 import StartPage from "./components/StartPage.js";
 import DashboardPage from "./components/DashboardPage";
-import state, { initializeWorkersWithStore, actions } from "./store";
+import { UIStore, actions } from "./store";
 import { APP_STATUS } from "./constants";
-import "./index.css";
-
-initializeWorkersWithStore();
 
 const selectRootFolderPath = async () => {
   const { filePaths } = await dialog.showOpenDialog({
@@ -27,10 +24,10 @@ const selectRootFolderPath = async () => {
 
 const App = view(() => (
   <div style={{ height: "100%" }}>
-    {state.appStatus === APP_STATUS.START_PAGE ? (
+    {UIStore.appStatus === APP_STATUS.START_PAGE ? (
       <StartPage onSelectRootFolderPath={selectRootFolderPath} />
     ) : (
-      <DashboardPage />
+      <DashboardPage imageList={UIStore.filteredImageList} />
     )}
   </div>
 ));

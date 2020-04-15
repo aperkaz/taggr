@@ -1,4 +1,6 @@
 const { app, BrowserWindow } = require("electron");
+const path = require("path");
+const os = require("os");
 const isDev = require("electron-is-dev");
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -28,6 +30,15 @@ const createWindow = () => {
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
   // }
+
+  // Add react dev tools https://www.electronjs.org/docs/tutorial/devtools-extension
+  const reactExtension = BrowserWindow.addDevToolsExtension(
+    path.join(
+      os.homedir(),
+      "/.config/google-chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.6.0_0"
+    )
+  );
+  // BrowserWindow.removeDevToolsExtension(reactExtension);
 
   // Remove menu
   mainWindow.removeMenu();

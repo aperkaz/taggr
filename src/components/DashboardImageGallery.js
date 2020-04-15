@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from "prop-types";
+import { view } from "@risingstack/react-easy-state";
 // const { shell } = require("electron").remote; // deconstructing assignment
 import styled from "styled-components";
 import ImageTile from "./ImageTile";
@@ -28,7 +30,8 @@ const ImageWrapper = styled.div`
 `;
 
 // TODO: virtualize list for performance https://github.com/developerdizzle/react-virtual-list
-const DashboardImageGallery = ({ imageList = [] }) => {
+const DashboardImageGallery = ({ imageList }) => {
+  // constroller for menu
   const [anchorEl, setAnchorEl] = React.useState(null);
   let menuProps = {
     options: [{ text: "Open image", onClick: (path) => console.log("hi") }],
@@ -61,4 +64,18 @@ const DashboardImageGallery = ({ imageList = [] }) => {
   );
 };
 
-export default DashboardImageGallery;
+DashboardImageGallery.defaultProps = {
+  imageList: [],
+};
+
+DashboardImageGallery.propTypes = {
+  imageList: PropTypes.arrayOf(
+    PropTypes.shape({
+      hash: PropTypes.string,
+      tags: PropTypes.arrayOf(PropTypes.string),
+      path: PropTypes.string,
+    })
+  ),
+};
+
+export default view(DashboardImageGallery);

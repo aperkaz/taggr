@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -42,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const DashboardHeader = ({ onInputChange = () => null }) => {
+const DashboardHeader = ({ onInputChange }) => {
   const classes = useStyles();
 
   return (
@@ -63,7 +64,7 @@ const DashboardHeader = ({ onInputChange = () => null }) => {
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
-              onChange={onInputChange}
+              onChange={(e) => onInputChange(e.target.value)}
               inputProps={{ "aria-label": "search" }}
             />
           </div>
@@ -71,6 +72,14 @@ const DashboardHeader = ({ onInputChange = () => null }) => {
       </AppBar>
     </div>
   );
+};
+
+DashboardHeader.defaultProps = {
+  onInputChange: () => null,
+};
+
+DashboardHeader.propTypes = {
+  onInputChange: PropTypes.func,
 };
 
 export default DashboardHeader;
