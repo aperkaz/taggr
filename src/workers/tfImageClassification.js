@@ -2,7 +2,7 @@
 // global.fetch = fetch;
 
 // const tf = require("@tensorflow/tfjs");
-// require("@tensorflow/tfjs-node");
+// import tfjsnode from "@tensorflow/tfjs-node";
 
 // const mobilenet = require("@tensorflow-models/mobilenet");
 
@@ -39,7 +39,10 @@ async function analizeObjects(imgPath) {
   console.time("loadImage");
   const img = await loadImage(imgPath);
   console.timeEnd("loadImage");
-  const canvas = createCanvas(img.width, img.height);
+
+  const canvas = document.createElement("canvas");
+
+  // const canvas = createCanvas(img.width, img.height);
   canvas.getContext("2d").drawImage(img, 0, 0);
 
   // Since the model is trained in 224 pixels, reduce the image size to speed up processing x10
