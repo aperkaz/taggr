@@ -44,6 +44,28 @@ const createWindow = () => {
   mainWindow.removeMenu();
 
   mainWindow.setPosition(1000, 0);
+
+  // child process spawn
+  const fs = require("fs");
+  const child_process = require("child_process");
+  for (var i = 0; i < 1; i++) {
+    var worker_process = child_process.fork("src/child.js", [i]);
+    worker_process.on("message", (message) =>
+      console.log("from worker: ", message)
+    );
+    worker_process.on("close", function (code, signal) {
+      console.log(
+        "child process exited with code " + code + " signal: " + signal
+      );
+    });
+  }
+
+  var request = require("request");
+  request("http://localhost:8081", function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      console.log(body); // Print the google web page.
+    }
+  });
 };
 
 // This method will be called when Electron has finished
@@ -70,3 +92,4 @@ app.on("activate", () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
+app.on("");
