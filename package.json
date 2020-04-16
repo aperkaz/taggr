@@ -103,6 +103,7 @@
     "electron-is-dev": "^1.2.0",
     "electron-squirrel-startup": "^1.0.0",
     "jpeg-js": "^0.3.7",
+    "jpg-stream": "^1.1.2",
     "lodash.debounce": "^4.0.8",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",

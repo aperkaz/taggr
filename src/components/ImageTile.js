@@ -36,6 +36,7 @@ const ImageTile = ({ imageUrl, onClick }) => {
 
   let bgImg = new Image();
   bgImg.src = imageUrl;
+  console.log(imageUrl);
 
   bgImg.onload = function () {
     setLoaded(true);
@@ -64,7 +65,7 @@ const Wrapper = styled.div`
   border-radius: 4px;
 
   /* // TODO: check if still works */
-  background-image: url('file://${(props) => props.imageUrl}');
+  background-image: url('${(props) => props.imageUrl}');
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;

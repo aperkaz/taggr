@@ -3,6 +3,8 @@ import * as tf from "@tensorflow/tfjs";
 import store from "./index";
 import { generateMD5Hash } from "../../utils";
 
+const mobilenet = require("@tensorflow-models/mobilenet");
+
 /**
  * Set the root folder with images. Triggers image finding.
  *
@@ -71,7 +73,7 @@ export const triggerImageTagsCalculation = async (imagePathsList) => {
   };
 
   // trigger worker
-  imagePathsList.forEach((imagePath) => {
+  imagePathsList.forEach(async (imagePath) => {
     store.workers.imageTaggingWorker.postMessage({
       path: imagePath,
     });
