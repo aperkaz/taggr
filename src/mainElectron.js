@@ -32,12 +32,12 @@ const createWindow = () => {
   // }
 
   // Add react dev tools https://www.electronjs.org/docs/tutorial/devtools-extension
-  const reactExtension = BrowserWindow.addDevToolsExtension(
-    path.join(
-      os.homedir(),
-      "/.config/google-chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.6.0_0"
-    )
-  );
+  // const reactExtension = BrowserWindow.addDevToolsExtension(
+  //   path.join(
+  //     os.homedir(),
+  //     "/.config/google-chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.6.0_0"
+  //   )
+  // );
   // BrowserWindow.removeDevToolsExtension(reactExtension);
 
   // Remove menu

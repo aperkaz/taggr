@@ -22,7 +22,7 @@ const UIStore = store({
   filteredImageList: defaultValues,
 });
 
-autoEffect(() => console.log(UIStore.filteredImageList));
+// autoEffect(() => console.log(UIStore.filteredImageList));
 
 export default UIStore;
 
