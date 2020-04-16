@@ -70,36 +70,10 @@ export const triggerImageTagsCalculation = async (imagePathsList) => {
     setImageTags(data.path, data.tags);
   };
 
-  console.log("IMAGE PATH LIST");
-  console.log(imagePathsList);
-
   // trigger worker
   imagePathsList.forEach((imagePath) => {
-    // console.log(`START load: ${imagePath}`);
-    // const img = await loadImage(imagePath);
-    // console.log(`END load: ${imagePath}`);
-
-    // const IMAGE_TRAIN_SIZE = 224;
-    // const canvas = document.createElement("canvas");
-
-    // canvas.width = img.width;
-    // canvas.height = img.height;
-
-    // const ctx = canvas.getContext("2d");
-    // ctx.drawImage(img, canvas.width, canvas.height);
-    // const pixels = tf.browser.fromPixels(canvas);
-    // const smallImg = tf.image.resizeBilinear(pixels, [224, 224]);
-
-    // Since the model is trained in 224 pixels, reduce the image size to speed up processing x10
-    // const pixels = tf.browser.fromPixels(canvas);
-    // const smallImg = tf.image.resizeBilinear(pixels, [224, 224]);
-
-    // var imgData = ctx.getImageData(0, 0, img.width, img.height);
-    // console.log(imgData);
-
     store.workers.imageTaggingWorker.postMessage({
       path: imagePath,
-      // image: imgData,
     });
   });
 };

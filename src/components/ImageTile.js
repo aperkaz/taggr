@@ -63,7 +63,8 @@ const Wrapper = styled.div`
 
   border-radius: 4px;
 
-  background-image: url('${(props) => props.imageUrl}');
+  /* // TODO: check if still works */
+  background-image: url('file://${(props) => props.imageUrl}');
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;

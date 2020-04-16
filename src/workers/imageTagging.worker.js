@@ -1,19 +1,3 @@
-// if (typeof OffscreenCanvas !== "undefined") {
-//   self.document = {
-//     createElement: () => {
-//       return new OffscreenCanvas(640, 480);
-//     },
-//   };
-//   self.window = self;
-//   self.screen = {
-//     width: 640,
-//     height: 480,
-//   };
-//   self.HTMLVideoElement = function () {};
-//   self.HTMLImageElement = function () {};
-//   self.HTMLCanvasElement = OffscreenCanvas;
-// }
-
 const tf = require("@tensorflow/tfjs");
 
 const mobilenet = require("@tensorflow-models/mobilenet");
@@ -44,8 +28,10 @@ onmessage = async (e) => {
 };
 
 const readImage = (path) => {
+  console.time("readImage");
   const buf = fs.readFileSync(path);
   const pixels = jpeg.decode(buf, true);
+  console.timeEnd("readImage");
   return pixels;
 };
 
@@ -64,23 +50,26 @@ const imageByteArray = (image, numChannels) => {
 };
 
 const imageToInput = (image, numChannels) => {
+  console.time("imageToInput");
   const values = imageByteArray(image, numChannels);
   const outShape = [image.height, image.width, numChannels];
-  const input = tf.tensor3d(values, outShape, "int32");
+  const tensor3d = tf.tensor3d(values, outShape, "int32");
 
-  return input;
+  // resize to speed up classification
+  const resizedInput = tf.image.resizeBilinear(tensor3d, [224, 224]);
+
+  console.timeEnd("imageToInput");
+  return resizedInput;
 };
 
 async function classifyImage(imgPath) {
-  // console.time("detect" + imgPath);
-  const image = readImage(imgPath);
-  const input = imageToInput(image, NUMBER_OF_CHANNELS);
+  const uintArray = readImage(imgPath);
+  const tensor3d = imageToInput(uintArray, NUMBER_OF_CHANNELS);
 
-  // await loadModel();
-
-  const rawPredictions = await net.classify(input);
+  console.time("classify");
+  const rawPredictions = await net.classify(tensor3d);
+  console.timeEnd("classify");
   console.log(rawPredictions);
-  // console.timeEnd("detect" + imgPath);
   return rawPredictions;
 }
 
