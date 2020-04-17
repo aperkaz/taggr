@@ -10,8 +10,8 @@ onmessage = async (e) => {
   if (!e.data || !e.data.path) return tags;
   const path = e.data.path;
 
-  tags = await classifyImage(path);
-  // tags = ["cat", "dog"];
+  // tags = await classifyImage(path);
+  tags = ["cat", "dog"];
 
   postMessage({ path, tags });
 };
@@ -20,7 +20,7 @@ onmessage = async (e) => {
 (async () => {
   try {
     await loadModel();
-    // classifyImage("/home/alain/Desktop/a");
+    // console.log(await classifyImage("/home/alain/Desktop/a/0.jpg"));
   } catch (err) {
     console.log(err);
   }

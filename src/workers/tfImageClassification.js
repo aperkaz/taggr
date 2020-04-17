@@ -7,6 +7,9 @@ const tf = require("@tensorflow/tfjs-node");
 const fs = require("fs");
 const jpeg = require("jpeg-js");
 
+// TODONOW: consider using for image generation
+// const jimp = require("jimp");
+
 const NUMBER_OF_CHANNELS = 3;
 const PROBABILITY_THRESHOLD = 0.1;
 

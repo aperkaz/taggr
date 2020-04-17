@@ -42,6 +42,7 @@ const triggerRecursiveImageFinding = (path) => {
   });
 };
 
+// TODO: future: performance wise, make sure that using a queue approach is better https://github.com/OptimalBits/bull
 const triggerImageTagsCalculation = async (imagePathsList) => {
   console.log("triggerImageTagsCalculation", imagePathsList.length);
 
