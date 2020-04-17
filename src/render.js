@@ -36,11 +36,16 @@ const { html } = require("htm/react");
 
 class AppComponent extends Component {
   render() {
-    return html`<div href="">${appStore.appStatus} <${Counter} /></div>`;
+    return html`<div>${appStore.appStatus} <${Counter} /></div>`;
   }
 }
 
 const App = view(AppComponent);
+
+// styles
+const styles = {
+  color: "#f7df1e",
+};
 
 class CounterComponent extends Component {
   counter = store({ num: 0 });
@@ -50,7 +55,7 @@ class CounterComponent extends Component {
   };
 
   render() {
-    return html`<button onClick=${this.increment}>
+    return html`<button style="${styles}" onClick=${this.increment}>
       switch state ${this.counter.num}
     </button>`;
   }

@@ -1,6 +1,9 @@
 const TagSearchInput = require("./TagSearchInput");
 const ImageGallery = require("./ImageGallery");
 
+// TODO: material UI
+//https://github.com/developit/htm/issues/37
+
 class DashboardPage {
   constructor(store) {
     this.store = store;
