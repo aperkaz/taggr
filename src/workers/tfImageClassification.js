@@ -10,6 +10,8 @@ const jpeg = require("jpeg-js");
 const NUMBER_OF_CHANNELS = 3;
 const PROBABILITY_THRESHOLD = 0.1;
 
+const MODEL_URL = "file://src/models/mobilenet/model.json";
+
 let net;
 
 const readImage = (path) => {
@@ -51,7 +53,15 @@ async function loadModel() {
   if (net) return;
 
   console.time("loadModel");
-  net = await mobilenet.load();
+
+  net = await mobilenet.load({
+    modelUrl: MODEL_URL,
+    version: 1,
+    alpha: 1,
+    // fix the default of [-1,1]
+    inputRange: [0, 1],
+  });
+
   console.timeEnd("loadModel");
   return;
 }
