@@ -1,0 +1,8 @@
+const CONSTANTS = {
+  APP_STATUS: {
+    START_PAGE: "START_PAGE",
+    DASHBOARD_PAGE: "DASHBOARD_PAGE",
+  },
+};
+
+module.exports = CONSTANTS;
