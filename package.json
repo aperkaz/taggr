@@ -49,14 +49,18 @@
   "dependencies": {
     "@nx-js/observer-util": "^4.2.2",
     "@nx-js/queue-util": "^1.1.1",
+    "@risingstack/react-easy-state": "^6.2.3",
     "@tensorflow-models/mobilenet": "^0.2.2",
     "@tensorflow/tfjs": "^0.13.0",
     "@tensorflow/tfjs-node": "^0.1.21",
     "bull": "^3.13.0",
     "electron-squirrel-startup": "^1.0.0",
+    "htm": "^3.0.4",
     "jpeg-js": "^0.3.7",
     "lodash.debounce": "^4.0.8",
     "node-fetch": "^2.6.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "readdirp": "^3.4.0"
   },
   "devDependencies": {
