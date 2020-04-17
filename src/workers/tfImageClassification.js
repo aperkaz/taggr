@@ -1,19 +1,27 @@
 global.fetch = require("node-fetch");
 
-// const tf = require("@tensorflow/tfjs");
 const mobilenet = require("@tensorflow-models/mobilenet");
 const tf = require("@tensorflow/tfjs-node");
 
 const fs = require("fs");
 const jpeg = require("jpeg-js");
 
+const path = require("path");
+const url = require("url");
+
+const MODEL_URL = url.format({
+  pathname: path.join(__dirname, "../models/mobilenet/model.json"),
+  protocol: "file:",
+  slashes: true,
+});
+
+console.log(MODEL_URL);
+
 // TODONOW: consider using for image generation
 // const jimp = require("jimp");
 
 const NUMBER_OF_CHANNELS = 3;
 const PROBABILITY_THRESHOLD = 0.1;
-
-const MODEL_URL = "file://src/models/mobilenet/model.json";
 
 let net;
 
@@ -57,6 +65,7 @@ async function loadModel() {
 
   console.time("loadModel");
 
+  // TODO: issue: when packaging, make sure the model files are copied elsewhere https://github.com/electron-userland/electron-forge/issues/1592
   net = await mobilenet.load({
     modelUrl: MODEL_URL,
     version: 1,
