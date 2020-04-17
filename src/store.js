@@ -1,5 +1,5 @@
 const { observable, observe } = require("@nx-js/observer-util");
-const { createWorkers } = require("./workers/index");
+const createWorkers = require("./workers/index");
 
 // GLOBAL STATE, https://github.com/nx-js/observer-util
 let store = observable({

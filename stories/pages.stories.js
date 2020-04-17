@@ -7,14 +7,12 @@ export default {
   title: "Pages",
 };
 
-const selectRootFolderPath = () => console.log("select root path");
-
 export const StartPage = () => {
   const container = document.createElement("div");
 
   ReactDOM.render(
     html`<${StartPageComponent}
-      onSelectRootFolderPath=${selectRootFolderPath}
+      onSelectRootFolderPath=${() => console.log("select root path")}
     />`,
     container
   );

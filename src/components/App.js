@@ -18,6 +18,7 @@ const selectRootFolderPath = async () => {
   if (rootFolderPath) {
     actions.setRootFolderPath(rootFolderPath);
     actions.setAppStatus(CONSTANTS.APP_STATUS.DASHBOARD_PAGE);
+    actions.triggerRecursiveImageFinding(rootFolderPath);
   }
 };
 

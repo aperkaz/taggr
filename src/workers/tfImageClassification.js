@@ -1,26 +1,24 @@
 global.fetch = require("node-fetch");
 
-const tf = require("@tensorflow/tfjs");
+// const tf = require("@tensorflow/tfjs");
 const mobilenet = require("@tensorflow-models/mobilenet");
-require("@tensorflow/tfjs-node");
+const tf = require("@tensorflow/tfjs-node");
 
 const fs = require("fs");
 const jpeg = require("jpeg-js");
 
-// TODO: load the model from the filesystem
-// https://github.com/bartosz-paternoga/MobileNet_tfjs-node_Serverless/tree/89a587bd25935d632e90af286abdbbcf658e5190
-// https://github.com/tensorflow/tfjs/blob/022376982ad26736abe92d587adb809b7f2482fb/tfjs-converter/demo/mobilenet/mobilenet.js
-// https://github.com/tensorflow/tfjs-examples/blob/master/mobilenet/index.js
-// https://github.com/tensorflow/tfjs/blob/26bccc44133ae14d98f3ac6f217a4ee8d51055f0/tfjs-node/src/image_test.ts
-
 const NUMBER_OF_CHANNELS = 3;
 const PROBABILITY_THRESHOLD = 0.1;
 
-let mn_model;
+let net;
 
 const readImage = (path) => {
+  console.time("readImage");
   const buf = fs.readFileSync(path);
+  console.timeEnd("readImage");
+  console.time("decode");
   const pixels = jpeg.decode(buf, true);
+  console.timeEnd("decode");
   return pixels;
 };
 
@@ -39,24 +37,23 @@ const imageByteArray = (image, numChannels) => {
 };
 
 const imageToInput = (image, numChannels) => {
+  console.time("imageToInput");
   const values = imageByteArray(image, numChannels);
   const outShape = [image.height, image.width, numChannels];
   const input = tf.tensor3d(values, outShape, "int32");
+
+  console.timeEnd("imageToInput");
 
   return input;
 };
 
 async function loadModel() {
-  if (mn_model) return;
+  if (net) return;
 
-  console.log("loadModel()");
   console.time("loadModel");
-  const mn = new mobilenet.MobileNet(1, 1);
-  mn.path = `https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_1.0_224/model.json`;
-  await mn.load();
+  net = await mobilenet.load();
   console.timeEnd("loadModel");
-  mn_model = mn;
-  return mn;
+  return;
 }
 
 /**
@@ -65,13 +62,14 @@ async function loadModel() {
  * @returns {Array} tags
  */
 async function classifyImage(imagePath) {
-  console.time("classifyImage");
   const image = readImage(imagePath);
   const input = imageToInput(image, NUMBER_OF_CHANNELS);
 
   await loadModel();
 
-  const rawPredictions = await mn_model.classify(input);
+  console.time("classifyImage");
+  const rawPredictions = await net.classify(input);
+  console.timeEnd("classifyImage");
 
   // filter out predictions below threshold
   const filteredRawPredictions = rawPredictions.filter(
@@ -90,7 +88,6 @@ async function classifyImage(imagePath) {
   // free memory from TF-internal libraries from input image
   input.dispose();
 
-  console.timeEnd("classifyImage");
   return predictions;
 }
 
