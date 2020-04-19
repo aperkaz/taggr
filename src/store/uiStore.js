@@ -55,7 +55,27 @@ const triggerRecursiveImageFinding = (path) => {
   });
 };
 
-// TODO: future: performance wise, make sure that using a queue approach is better https://github.com/OptimalBits/bull
+const queueExecutor = async (imagePath) => {
+  console.log("EXECUTING: ", imagePath);
+  // console.time("loadImage");
+  let img = await loadImage(imagePath);
+  // console.timeEnd("loadImage");
+
+  let canvas = new OffscreenCanvas(img.width, img.height);
+  canvas.getContext("2d").drawImage(img, 0, 0);
+
+  let imageData = canvas
+    .getContext("2d")
+    .getImageData(0, 0, img.width, img.height);
+
+  workers.imageTaggingWorker.postMessage({
+    path: imagePath,
+    data: imageData,
+  });
+  canvas = null;
+  imageData = null;
+};
+
 const triggerImageTagsCalculation = async (imagePathsList) => {
   console.log("triggerImageTagsCalculation", imagePathsList.length);
 
@@ -64,28 +84,15 @@ const triggerImageTagsCalculation = async (imagePathsList) => {
     setImageTags(data.path, data.tags);
   };
 
+  const { Queue } = require("../utils");
+  const imageRenderingQueue = new Queue(queueExecutor);
+
+  imagePathsList.forEach(
+    async (imagePath) => await imageRenderingQueue.add(imagePath)
+  );
+
   // trigger worker
-  const queuedImagePathsList = imagePathsList.slice();
-
-  while (queuedImagePathsList.length > 0) {
-    const imagePath = queuedImagePathsList.pop();
-
-    console.time("loadImage");
-    let img = await loadImage(imagePath);
-    console.timeEnd("loadImage");
-
-    let canvas = new OffscreenCanvas(img.width, img.height);
-    canvas.getContext("2d").drawImage(img, 0, 0);
-
-    const imageData = canvas
-      .getContext("2d")
-      .getImageData(0, 0, img.width, img.height);
-
-    workers.imageTaggingWorker.postMessage({
-      path: imagePath,
-      data: imageData,
-    });
-  }
+  // const imagePath = queuedImagePathsList.pop();
 
   // imagePathsList.forEach(async (imagePath) => {
   //   console.time("loadImage");

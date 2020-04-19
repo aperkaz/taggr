@@ -15,10 +15,7 @@ const MODEL_URL = url.format({
   slashes: true,
 });
 
-// console.log(MODEL_URL);
-
-// const NUMBER_OF_CHANNELS = 3;
-// const PROBABILITY_THRESHOLD = 0.1;
+const PROBABILITY_THRESHOLD = 0.1;
 
 let net;
 
@@ -46,16 +43,14 @@ async function loadModel() {
  * @returns {Array} tags
  */
 async function classifyImage(data) {
-  console.time("transform");
+  // console.time("transform");
   const pixels = tf.browser.fromPixels(data);
   const smallImg = tf.image.resizeBilinear(pixels, [224, 224]);
-  console.timeEnd("transform");
+  // console.timeEnd("transform");
 
-  // await loadModel();
-
-  console.time("detect");
+  // console.time("detect");
   const rawPredictions = await net.classify(smallImg);
-  console.timeEnd("detect");
+  // console.timeEnd("detect");
 
   // filter out predictions below threshold
   const filteredRawPredictions = rawPredictions.filter(
@@ -75,9 +70,9 @@ async function classifyImage(data) {
   pixels.dispose();
   smallImg.dispose();
 
-  // console.log(predictions);
   return predictions;
 }
+
 module.exports = {
   classifyImage,
 };

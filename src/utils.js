@@ -22,59 +22,40 @@ function generateMD5FileHash(filePath) {
   return crypto.createHash("md5").update(file_buffer).digest("hex");
 }
 
-/**
- * Recursively find all the image paths inside a given folder
- *
- * @param {String} folderPath
- * @returns {Array} array of image paths
- */
-async function recursivelyFindImages(folderPath) {
-  // console.time("recursivelyFindImages");
-  if (!folderPath) return [];
-
-  const imagePathList = [];
-
-  var settings = {
-    // Filter files with js and json extension
-    fileFilter: ["*.png", "*.PNG", "*.jpg", "*.JPG", ".*.jpeg", "*.JPEG"],
-    // Filter by directory
-    directoryFilter: ["!.git", "!*modules"],
-  };
-
-  for await (const entry of readdirp(folderPath, settings)) {
-    const { path } = entry;
-    imagePathList.push(`${folderPath}/${path}`);
+class Queue {
+  constructor(executor) {
+    this.busy = false;
+    this.queue = [];
+    this.executor = executor;
   }
 
-  // console.timeEnd("recursivelyFindImages");
+  async add(task) {
+    if (this.busy) {
+      console.log("BUSY: task added");
+      this.queue.push(task);
+    } else {
+      this.busy = true;
+      await this.process(task);
+    }
+  }
 
-  return imagePathList;
-}
+  async process(task) {
+    console.log("------");
+    console.log("FREE: task executing");
+    console.time("execute");
+    await this.executor(task);
+    console.timeEnd("execute");
 
-/**
- * Populate an image map given an array of paths
- *
- * @param {Array} imagePathList
- * @returns {Object} map {image1Hash: {path: image1path, tags: []},...}
- */
-function constructImageMap(imagePathList) {
-  if (!imagePathList) return {};
-
-  // console.time("constructImageMap");
-  const imageMap = {};
-
-  imagePathList.forEach((imagePath) => {
-    const generatedHash = generateMD5FileHash(imagePath);
-    imageMap[generatedHash] = { path: imagePath, tags: [] };
-  });
-
-  // console.timeEnd("constructImageMap");
-  return imageMap;
+    if (this.queue.length > 0) {
+      await this.process(this.queue.pop());
+    } else {
+      this.busy = false;
+    }
+  }
 }
 
 module.exports = {
   generateMD5Hash,
   generateMD5FileHash,
-  constructImageMap,
-  recursivelyFindImages,
+  Queue,
 };

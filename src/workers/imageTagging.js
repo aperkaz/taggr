@@ -1,5 +1,6 @@
 const { classifyImage } = require("./tfImageClassification");
 
+// TODONOW: remove unused queue
 let queue = [];
 let busy = false;
 
@@ -24,7 +25,6 @@ async function processMessage(e) {
   const data = e.data.data;
 
   tags = await classifyImage(data);
-  // tags = ["cat", "dog"];
 
   postMessage({ path, tags });
 
