@@ -6,7 +6,7 @@ module.exports = {
       module: {
         rules: [
           {
-            test: /\.(js|mjs|jsx|ts|tsx)$/,
+            test: /\.(js)$/,
             include: /dist/, //Include dist folder as well to parse using babel loader in order to resolve exports not defined error
             loader: "babel-loader",
             options: {

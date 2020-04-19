@@ -1,8 +1,8 @@
 const { html } = require("htm/react");
 const ReactDOM = require("react-dom");
 
-const StartPageComponent = require("../src/components/StartPage");
-const DashboardPageComponent = require("../src/components/DashboardPage");
+const StartPageComponent = require("../src/components/pages/StartPage");
+const DashboardPageComponent = require("../src/components/pages/DashboardPage");
 
 const imageList = require("./mocks/imageList");
 

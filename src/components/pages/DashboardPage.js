@@ -5,8 +5,8 @@ const debounce = require("lodash.debounce");
 // TODONOW: add store connection, with another export
 // const { view } = require("@risingstack/react-easy-state");
 
-const Header = require("./Header");
-const Gallery = require("./Gallery");
+const Header = require("../organisms/Header");
+const Gallery = require("../organisms/Gallery");
 
 const styles = {
   wrapper: {

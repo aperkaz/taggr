@@ -2,9 +2,7 @@ const { html } = require("htm/react");
 const PropTypes = require("prop-types");
 const { makeStyles } = require("@material-ui/core/styles");
 
-const ImageTile = require("./ImageTile");
-
-// TODONOW: add relative size to parent and overflow-y: scroll.
+const ImageTile = require("../molecules/ImageTile");
 
 const useStyles = makeStyles(() => ({
   wrapper: {

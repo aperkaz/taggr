@@ -3,8 +3,8 @@ const { dialog } = require("electron").remote;
 const { html } = require("htm/react");
 const { view } = require("@risingstack/react-easy-state");
 
-const StartPage = require("./StartPage");
-const DashboardPage = require("./DashboardPage");
+const StartPage = require("./pages/StartPage");
+const DashboardPage = require("./pages/DashboardPage");
 const CONSTANTS = require("../constants");
 const { uiStore, actions } = require("../store/uiStore");
 

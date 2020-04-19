@@ -1,8 +1,8 @@
 const { html } = require("htm/react");
 const ReactDOM = require("react-dom");
 
-const HeaderComponent = require("../src/components/Header");
-const GalleryComponent = require("../src/components/Gallery");
+const HeaderComponent = require("../src/components/organisms/Header");
+const GalleryComponent = require("../src/components/organisms/Gallery");
 
 const imageList = require("./mocks/imageList");
 

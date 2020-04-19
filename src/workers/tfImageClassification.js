@@ -17,8 +17,7 @@ const MODEL_URL = url.format({
 
 console.log(MODEL_URL);
 
-// TODONOW: consider using for image generation
-// const jimp = require("jimp");
+// TODO: performance: consider using offscreen canvas: https://developers.google.com/web/updates/2018/08/offscreen-canvas
 
 const NUMBER_OF_CHANNELS = 3;
 const PROBABILITY_THRESHOLD = 0.1;
