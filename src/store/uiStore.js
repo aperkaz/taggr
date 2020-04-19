@@ -61,6 +61,7 @@ const triggerImageTagsCalculation = async (imagePathsList) => {
 
   // setup worker listener
   workers.imageTaggingWorker.onmessage = ({ data }) => {
+    console.log("hi bro", data);
     setImageTags(data.path, data.tags);
   };
 
@@ -127,5 +128,78 @@ const actions = {
   triggerImageTagsCalculation,
   setTagSearchValue,
 };
+
+// EXPERIMENT
+
+const imagePath = "/home/alain/Desktop/a/0.jpg";
+
+async function loadImage(buffer) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onerror = (err) => reject(err);
+    img.onload = () => resolve(img);
+    img.src = buffer;
+  });
+}
+
+const {
+  loadModel,
+  classifyImage,
+} = require("../workers/tfImageClassification");
+const tf = require("@tensorflow/tfjs-node");
+
+async function loadImage(path) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onerror = (err) => reject(err);
+    img.onload = () => resolve(img);
+    img.src = path;
+  });
+}
+
+(async () => {
+  try {
+    const net = await loadModel();
+    console.time("loadImage");
+    const img = await loadImage(imagePath);
+    console.timeEnd("loadImage");
+
+    // const canvas = document.createElement("canvas");
+    const canvas = new OffscreenCanvas(img.width, img.height);
+    // canvas.width = img.width;
+    // canvas.height = img.height;
+    canvas.getContext("2d").drawImage(img, 0, 0);
+    console.log(
+      canvas.getContext("2d").getImageData(0, 0, img.width, img.height)
+    );
+
+    // Since the model is trained in 224 pixels, reduce the image size to speed up processing x10
+    // const pixels = tf.browser.fromPixels(canvas);
+    // const smallImg = tf.image.resizeBilinear(pixels, [224, 224]);
+
+    // console.time("classify");
+    // console.log(await classifyImage(canvas, tf));
+    // console.timeEnd("classify");
+
+    const imageData = canvas
+      .getContext("2d")
+      .getImageData(0, 0, img.width, img.height);
+    var newImageData = [];
+    for (var i = 0, len = imageData.length; i < len; ++i)
+      newImageData[i] = imageData[i];
+
+    workers.imageTaggingWorker.postMessage({
+      data: imageData,
+      context: net,
+    });
+
+    workers.imageTaggingWorker.onmessage = ({ data }) => {
+      console.log("hi bro", data);
+      // setImageTags(data.path, data.tags);
+    };
+  } catch (err) {
+    console.log(err);
+  }
+})();
 
 module.exports = { uiStore, actions };

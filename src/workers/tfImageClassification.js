@@ -1,13 +1,32 @@
+if (typeof OffscreenCanvas !== "undefined") {
+  self.document = {
+    createElement: () => {
+      return new OffscreenCanvas(640, 480);
+    },
+  };
+  self.window = {
+    screen: {
+      width: 640,
+      height: 480,
+    },
+  };
+  // self.HTMLVideoElement = function () {};
+  // // self.HTMLImageElement = function () {};
+  // self.HTMLCanvasElement = OffscreenCanvas;
+}
+
 global.fetch = require("node-fetch");
 
 const mobilenet = require("@tensorflow-models/mobilenet");
-const tf = require("@tensorflow/tfjs-node");
+// const tf = require("@tensorflow/tfjs-node");
 
 const fs = require("fs");
 const jpeg = require("jpeg-js");
 
 const path = require("path");
 const url = require("url");
+
+// console.log("backend is %s", tf.getBackend());
 
 const MODEL_URL = url.format({
   pathname: path.join(__dirname, "../models/mobilenet/model.json"),
@@ -82,36 +101,20 @@ async function loadModel() {
  * @param {String} imagePath
  * @returns {Array} tags
  */
-async function classifyImage(imagePath) {
-  const image = readImage(imagePath);
-  const input = imageToInput(image, NUMBER_OF_CHANNELS);
+async function classifyImage(data, context) {
+  const tf = require("@tensorflow/tfjs-node");
+  console.log(data);
+  const pixels = tf.browser.fromPixels(data);
+  const smallImg = tf.image.resizeBilinear(pixels, [224, 224]);
 
   await loadModel();
 
-  console.time("classifyImage");
-  const rawPredictions = await net.classify(input);
-  console.timeEnd("classifyImage");
-
-  // filter out predictions below threshold
-  const filteredRawPredictions = rawPredictions.filter(
-    (rawPrediction) => rawPrediction.probability > PROBABILITY_THRESHOLD
-  );
-
-  // aggregate results
-  const predictions = [];
-  filteredRawPredictions.forEach((rawPrediction) => {
-    const tags = rawPrediction.className
-      .split(", ")
-      .map((name) => name.toLowerCase());
-    predictions.push(...tags);
-  });
-
-  // free memory from TF-internal libraries from input image
-  input.dispose();
-
+  console.time("detect");
+  const predictions = await net.classify(smallImg);
+  console.timeEnd("detect");
+  console.log(predictions);
   return predictions;
 }
-
 module.exports = {
   loadModel,
   classifyImage,

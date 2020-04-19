@@ -7,10 +7,10 @@ const { loadModel, classifyImage } = require("./tfImageClassification");
  */
 onmessage = async (e) => {
   let tags = [];
-  if (!e.data || !e.data.path) return tags;
+  // if (!e.data || !e.data.path) return tags;
   const path = e.data.path;
 
-  tags = await classifyImage(path);
+  tags = await classifyImage(e.data.data, e.data.context);
   // tags = ["cat", "dog"];
 
   postMessage({ path, tags });
@@ -19,8 +19,8 @@ onmessage = async (e) => {
 // load the required tensorflow.js models required by the worker
 (async () => {
   try {
-    await loadModel();
-    // console.log(await classifyImage("/home/alain/Desktop/a/0.jpg"));
+    // await loadModel();
+    // console.log(await classifyImage("home/alain/Desktop/a/0.jpg"));
   } catch (err) {
     console.log(err);
   }
