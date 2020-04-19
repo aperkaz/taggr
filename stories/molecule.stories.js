@@ -1,6 +1,5 @@
 const { html } = require("htm/react");
 const ReactDOM = require("react-dom");
-// require("../src/assets/index.css");
 
 const ImageTileComponent = require("../src/components/ImageTile");
 
