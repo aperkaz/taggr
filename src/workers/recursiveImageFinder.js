@@ -15,7 +15,7 @@ onmessage = async (e) => {
 
   for await (const entry of readdirp(folderPath, settings)) {
     const { path } = entry;
-    imagePathsList.push(`${folderPath}/${path}`);
+    imagePathsList.push(`file:///${folderPath}/${path}`);
   }
 
   postMessage({ imagePathsList });

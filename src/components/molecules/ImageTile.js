@@ -8,7 +8,7 @@ const styles = (imageUrl) => ({
   height: "100%",
   width: "100%",
   borderRadius: "4px",
-  backgroundImage: `url(${imageUrl})`,
+  backgroundImage: `url('${imageUrl}')`,
   backgroundRepeat: "no-repeat",
   backgroundPosition: "center center",
   backgroundSize: "cover",

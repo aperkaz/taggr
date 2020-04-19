@@ -4,7 +4,7 @@ const { html } = require("htm/react");
 const { view } = require("@risingstack/react-easy-state");
 
 const StartPage = require("./pages/StartPage");
-const DashboardPage = require("./pages/DashboardPage");
+const { withStore: DashboardPage } = require("./pages/DashboardPage");
 const CONSTANTS = require("../constants");
 const { uiStore, actions } = require("../store/uiStore");
 

@@ -1,12 +1,12 @@
 const { html } = require("htm/react");
 const PropTypes = require("prop-types");
+const { view } = require("@risingstack/react-easy-state");
 const debounce = require("lodash.debounce");
-
-// TODONOW: add store connection, with another export
-// const { view } = require("@risingstack/react-easy-state");
 
 const Header = require("../organisms/Header");
 const Gallery = require("../organisms/Gallery");
+
+const { uiStore, actions } = require("../../store/uiStore");
 
 const styles = {
   wrapper: {
@@ -23,7 +23,7 @@ const styles = {
 
 const DashboardPage = ({ onInputChange, filteredImageList }) =>
   html` <div key="dashboard" style=${styles.wrapper}>
-    <${Header} onInputChange="${debounce(onInputChange, 300)}" />
+    <${Header} onInputChange="${onInputChange}" />
     <div key="2" style=${styles.galleryWrapper}>
       <${Gallery} imageList="${filteredImageList}" />
     </div>
@@ -43,4 +43,14 @@ DashboardPage.propTypes = {
   ),
 };
 
-module.exports = DashboardPage;
+const DashboardPageContainer = view(
+  () => html`<${DashboardPage}
+    onInputChange="${debounce(actions.setTagSearchValue, 300)}"
+    filteredImageList="${uiStore.filteredImageList}"
+  />`
+);
+
+module.exports = {
+  vanilla: DashboardPage,
+  withStore: DashboardPageContainer,
+};
