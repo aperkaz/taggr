@@ -1,12 +1,23 @@
 const { store, autoEffect } = require("@risingstack/react-easy-state");
 
-const imageList = require("../../stories/mocks/imageList");
-
 const { generateMD5Hash } = require("../utils");
 const createWorkers = require("../workers/index");
 const CONSTANTS = require("../constants");
 
 let workers = createWorkers();
+
+const defaultImages = [
+  {
+    hash: "1",
+    path: "/home/alain/Downloads/test_pictures/foto_340.jpg",
+    tags: ["cat", "dog"],
+  },
+  {
+    hash: "3",
+    path: "/home/alain/Downloads/test_pictures/foto_341.jpg",
+    tags: ["cat", "dog"],
+  },
+];
 
 let uiStore = store({
   appStatus: CONSTANTS.APP_STATUS.START_PAGE, // ['START_PAGE', 'DASHBOARD_PAGE']
@@ -14,19 +25,7 @@ let uiStore = store({
   imagePathsList: [],
   imageHashMap: {}, // {imageHash: {tags: [], path: String}}
   tagSearchValue: "",
-  // filteredImageList: [], // array of filteres results
-  filteredImageList: [
-    {
-      hash: "1",
-      path: "file:///home/alain/Downloads/test_pictures/foto_340.jpg",
-      tags: ["cat", "dog"],
-    },
-    {
-      hash: "3",
-      path: "file:////home/alain/Downloads/test_pictures/foto_341.jpg",
-      tags: ["cat", "dog"],
-    },
-  ], // array of filteres results
+  filteredImageList: defaultImages, // array of filteres results
 });
 
 autoEffect(() => console.log("rootFolderPath: ", uiStore.rootFolderPath));
@@ -96,11 +95,10 @@ const setTagSearchValue = (searchValue) => {
 
   if (searchValue === "") {
     // TODONOW: calculate default values and store in variable, not mock
-    uiStore.filteredImageList = imageList;
+    uiStore.filteredImageList = defaultImages;
     return;
   }
 
-  // TODONOW: recalculate images to show, using AppStore
   const filteredImages = [];
   let found = 0; // only calculate the first 15 tag matches
 

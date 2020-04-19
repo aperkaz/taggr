@@ -8,7 +8,9 @@ const styles = (imageUrl) => ({
   height: "100%",
   width: "100%",
   borderRadius: "4px",
-  backgroundImage: `url('${imageUrl}')`,
+  // TODO: add url recognition
+  // backgroundImage: `url('${imageUrl}')`, // when in storybook
+  backgroundImage: `url('file:///${imageUrl}')`,
   backgroundRepeat: "no-repeat",
   backgroundPosition: "center center",
   backgroundSize: "cover",

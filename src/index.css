@@ -8,10 +8,10 @@ body {
   margin: 0;
 }
 
-/* TODO: adjust with storybook styles */
 #root{
   height: 100%;
 }
+
 .dashboard__tile--loading{
   height: 100%;
   width: 100%;
@@ -34,41 +34,3 @@ body {
       background-position: 5000px 0;
     }
   }
-
-
-  
-
-/* OLD STYLES */
-
-
-/* Dashboard page CSS */
-.dashboard-page-wrapper {
-  height: 100%;
-}
-
-.dashboard-page-wrapper > header {
-  height: 15vh;
-}
-
-.dashboard-page-wrapper > header > div {
-  margin: 1.5rem 1.5rem 0;
-}
-
-.dashboard-page-wrapper > header input {
-  text-align: center;
-}
-
-.dashboard-page-wrapper > main {
-  height: 85vh;
-  /* TODO: make them rem relative, to scale well */
-  padding: 20px;
-}
-
-.dashboard-page-wrapper > main > .grid{
-  display: grid;
-  grid-template-columns: repeat(3, minmax(200px, 1fr));
-  grid-template-rows:repeat(3, minmax(200px, auto));
-  grid-gap: .5rem;
-
-  height: 100%;
-}
