@@ -1,7 +1,8 @@
 const { Component } = require("react");
 const { html } = require("htm/react");
 
-const Loading = () => html`<div className="dashboard__tile--loading"></div>`;
+const Loading = () =>
+  html`<div key="loading" className="dashboard__tile--loading"></div>`;
 
 const styles = (imageUrl) => ({
   height: "100%",
@@ -14,7 +15,7 @@ const styles = (imageUrl) => ({
 });
 
 const ImageComponent = ({ imageUrl, onClick }) =>
-  html` <div style=${styles(imageUrl)}></div>`;
+  html` <div key="image" style=${styles(imageUrl)}></div>`;
 
 class ImageTile extends Component {
   constructor(props) {
@@ -26,7 +27,6 @@ class ImageTile extends Component {
 
   componentDidMount() {
     if (!this.props.imageUrl) return;
-    console.log("asdfs");
 
     this.bgImg = new Image();
     this.bgImg.src = this.props.imageUrl;
@@ -37,7 +37,6 @@ class ImageTile extends Component {
   }
 
   render() {
-    // this.state.loading;
     return html`
       ${this.state.loading
         ? html`<${Loading} />`

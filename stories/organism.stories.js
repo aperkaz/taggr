@@ -2,7 +2,9 @@ const { html } = require("htm/react");
 const ReactDOM = require("react-dom");
 
 const HeaderComponent = require("../src/components/Header");
-// const GalleryComponent = require("../src/components/Gallery");
+const GalleryComponent = require("../src/components/Gallery");
+
+const imageList = require("./mocks/imageList");
 
 export default {
   title: "Organisms",
@@ -24,12 +26,10 @@ export const Header = () => {
 export const Gallery = () => {
   const container = document.createElement("div");
 
-  // ReactDOM.render(
-  //   html`<${StartPageComponent}
-  //     onSelectRootFolderPath=${() => console.log("select root path")}
-  //   />`,
-  //   container
-  // );
+  ReactDOM.render(
+    html`<${GalleryComponent} imageList=${imageList} />`,
+    container
+  );
 
   return container;
 };
