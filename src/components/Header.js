@@ -8,7 +8,7 @@ const Typography = require("@material-ui/core/Typography").default;
 const InputBase = require("@material-ui/core/InputBase").default;
 const SearchIcon = require("@material-ui/icons/Search").default;
 
-// TODO: refactor styles to use material design makeStyles
+// TODO: refactor app styles: https://material-ui.com/styles/basics/
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -49,29 +49,31 @@ const Header = ({ onInputChange }) => {
   const classes = useStyles();
 
   return html`
-    <div className="${classes.grow}">
-      <${AppBar} position="static">
-        <${Toolbar}>
-          <${Typography} className="{classes.title}" variant="h6" noWrap>
-            🛡 Privatus
-          <//>
-          <div className="${classes.grow}" />
-          <div className="${classes.search}">
-            <div className="${classes.searchIcon}">
-              <${SearchIcon} />
+    <div>
+      <div key="header" className="${classes.grow}">
+        <${AppBar} position="static">
+          <${Toolbar}>
+            <${Typography} className="{classes.title}" variant="h6" noWrap>
+              🛡 Privatus
+            <//>
+            <div className="${classes.grow}" />
+            <div className="${classes.search}">
+              <div className="${classes.searchIcon}">
+                <${SearchIcon} />
+              </div>
+              <${InputBase}
+                placeholder="Search by tag"
+                classes=${{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                onChange=${(e) => onInputChange(e.target.value)}
+                inputProps="${{ "aria-label": "search" }}"
+              />
             </div>
-            <${InputBase}
-              placeholder="Search by tag"
-              classes=${{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              onChange=${(e) => onInputChange(e.target.value)}
-              inputProps="${{ "aria-label": "search" }}"
-            />
-          </div>
+          <//>
         <//>
-      <//>
+      </div>
     </div>
   `;
 };

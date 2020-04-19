@@ -3,6 +3,8 @@ const ReactDOM = require("react-dom");
 
 const ImageTileComponent = require("../src/components/ImageTile");
 
+// TODONOW: separate compoennts in molecules / organism / page, move stories there too
+
 export default {
   title: "Molecules",
 };

@@ -27,7 +27,12 @@ export const Gallery = () => {
   const container = document.createElement("div");
 
   ReactDOM.render(
-    html`<${GalleryComponent} imageList=${imageList} />`,
+    html` <div>
+      <div>Within 400px height container</div>
+      <div style=${{ height: "400px" }}>
+        <${GalleryComponent} imageList=${imageList} />
+      </div>
+    </div>`,
     container
   );
 

@@ -20,7 +20,7 @@ const StartPage = ({ onSelectRootFolderPath }) =>
 const styles = {
   wrapper: {
     backgroundColor: "pink",
-    height: "100vh",
+    height: "100%",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-around",

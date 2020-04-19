@@ -3,8 +3,9 @@ body {
   min-height: 100%;
 }
 
+/* TODO: adjust with storybook styles */
 #root{
-  min-height: 100vh;
+  height: 100%;
 }
 .dashboard__tile--loading{
   height: 100%;
