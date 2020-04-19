@@ -15,7 +15,7 @@ const styles = (imageUrl) => ({
 });
 
 const ImageComponent = ({ imageUrl, onClick }) =>
-  html` <div key="image" style=${styles(imageUrl)}></div>`;
+  html` <div key="imageComponent" style=${styles(imageUrl)}></div>`;
 
 class ImageTile extends Component {
   constructor(props) {
@@ -37,11 +37,9 @@ class ImageTile extends Component {
   }
 
   render() {
-    return html`
-      ${this.state.loading
-        ? html`<${Loading} />`
-        : html`<${ImageComponent} imageUrl=${this.props.imageUrl} />`}
-    `;
+    return this.state.loading
+      ? html`<${Loading} />`
+      : html`<${ImageComponent} imageUrl=${this.props.imageUrl} />`;
   }
 }
 

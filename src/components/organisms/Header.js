@@ -49,7 +49,7 @@ const Header = ({ onInputChange }) => {
   const classes = useStyles();
 
   return html`
-    <div>
+    <div key="header">
       <div key="header" className="${classes.grow}">
         <${AppBar} position="static">
           <${Toolbar}>

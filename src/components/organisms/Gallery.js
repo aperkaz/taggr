@@ -28,7 +28,7 @@ const useStyles = makeStyles(() => ({
 const Gallery = ({ imageList }) => {
   const classes = useStyles();
   return html`
-    <div className="${classes.wrapper}">
+    <div key="gallery" className="${classes.wrapper}">
       ${imageList.map(
         (image) => html`<div
           key="${image.hash}"

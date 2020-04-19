@@ -22,9 +22,9 @@ const styles = {
 };
 
 const DashboardPage = ({ onInputChange, filteredImageList }) =>
-  html` <div style=${styles.wrapper}>
+  html` <div key="dashboard" style=${styles.wrapper}>
     <${Header} onInputChange="${debounce(onInputChange, 300)}" />
-    <div style=${styles.galleryWrapper}>
+    <div key="2" style=${styles.galleryWrapper}>
       <${Gallery} imageList="${filteredImageList}" />
     </div>
   </div>`;

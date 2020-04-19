@@ -30,7 +30,7 @@ const App = () =>
   </div>`;
 
 const styles = {
-  minHeight: "100%",
+  height: "100%",
 };
 
 module.exports = view(App);

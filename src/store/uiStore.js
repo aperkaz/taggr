@@ -7,7 +7,7 @@ const CONSTANTS = require("../constants");
 let workers = createWorkers();
 
 let uiStore = store({
-  appStatus: CONSTANTS.APP_STATUS.START_PAGE, // ['START_PAGE', 'DASHBOARD_PAGE']
+  appStatus: CONSTANTS.APP_STATUS.DASHBOARD_PAGE, // ['START_PAGE', 'DASHBOARD_PAGE']
   rootFolderPath: "",
   imagePathsList: [],
   imageHashMap: {}, // {imageHash: {tags: [], path: String}}

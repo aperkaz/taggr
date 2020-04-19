@@ -1,5 +1,5 @@
 const { html } = require("htm/react");
-const ReactDOM = require("react-dom");
+const { renderElementInContainer } = require("./utils");
 
 const HeaderComponent = require("../src/components/organisms/Header");
 const GalleryComponent = require("../src/components/organisms/Gallery");
@@ -10,31 +10,19 @@ export default {
   title: "Organisms",
 };
 
-export const Header = () => {
-  const container = document.createElement("div");
-
-  ReactDOM.render(
+export const Header = () =>
+  renderElementInContainer(
     html`<${HeaderComponent}
       onInputChange=${(value) => console.log("input: ", value)}
-    />`,
-    container
+    />`
   );
 
-  return container;
-};
-
-export const Gallery = () => {
-  const container = document.createElement("div");
-
-  ReactDOM.render(
+export const Gallery = () =>
+  renderElementInContainer(
     html` <div>
       <div>Within 400px height container</div>
       <div style=${{ height: "400px" }}>
         <${GalleryComponent} imageList=${imageList} />
       </div>
-    </div>`,
-    container
+    </div>`
   );
-
-  return container;
-};
