@@ -1,4 +1,7 @@
-const { loadModel, classifyImage } = require("./tfImageClassification");
+const { classifyImage } = require("./tfImageClassification");
+
+let queue = [];
+let busy = false;
 
 /**
  * send classfication tags for an image path
@@ -6,22 +9,28 @@ const { loadModel, classifyImage } = require("./tfImageClassification");
  * @returns {Object} { path: imagePath, tags: []}
  */
 onmessage = async (e) => {
-  let tags = [];
-  // if (!e.data || !e.data.path) return tags;
-  const path = e.data.path;
+  if (busy) {
+    queue.push(e);
+  } else {
+    busy = true;
+    await processMessage(e);
+  }
+};
 
-  tags = await classifyImage(e.data.data, e.data.context);
+async function processMessage(e) {
+  let tags = [];
+  if (!e.data || !e.data.path) return tags;
+  const path = e.data.path;
+  const data = e.data.data;
+
+  tags = await classifyImage(data);
   // tags = ["cat", "dog"];
 
   postMessage({ path, tags });
-};
 
-// load the required tensorflow.js models required by the worker
-(async () => {
-  try {
-    // await loadModel();
-    // console.log(await classifyImage("home/alain/Desktop/a/0.jpg"));
-  } catch (err) {
-    console.log(err);
+  if (queue.length) {
+    await processMessage(queue.shift());
+  } else {
+    busy = false;
   }
-})();
+}
