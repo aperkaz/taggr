@@ -22,8 +22,8 @@ async function loadModel() {
 
   console.time("loadModel");
 
-  // TODO: issue: when packaging, make sure the model files are copied elsewhere https://github.com/electron-userland/electron-forge/issues/1592
-  if (true) {
+  // FIX: issue: when packaging, make sure the model files are copied elsewhere https://github.com/electron-userland/electron-forge/issues/1592
+  if (false) {
     net = await mobilenet.load();
   } else {
     net = await mobilenet.load({

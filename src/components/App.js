@@ -23,6 +23,11 @@ const selectRootFolderPath = async () => {
 
   if (rootFolderPath) {
     await triggerAction({
+      type: ACTIONS.SET_CURRENT_PAGE,
+      payload: CONSTANTS.PAGES.DASHBOARD_PAGE,
+    });
+
+    await triggerAction({
       type: ACTIONS.SET_ROOT_FOLDER_PATH,
       payload: rootFolderPath,
     });
@@ -30,11 +35,6 @@ const selectRootFolderPath = async () => {
     await triggerAction({
       type: ACTIONS.CALCULATE_IMAGE_PATHS_IN_ROOT,
       payload: rootFolderPath,
-    });
-
-    await triggerAction({
-      type: ACTIONS.SET_CURRENT_PAGE,
-      payload: CONSTANTS.PAGES.DASHBOARD_PAGE,
     });
   }
 };

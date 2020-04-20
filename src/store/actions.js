@@ -85,6 +85,13 @@ const processor = async ({ type, payload }, uiStore, appStore) => {
         payload: list,
       });
 
+      await new Promise((r) => setTimeout(r, 5000));
+
+      await triggerAction({
+        type: ACTIONS.SET_IMAGE_FILTER_TAG_SEARCH_VALUE,
+        payload: "",
+      });
+
       break;
 
     case ACTIONS.SET_IMAGE_PATHS_IN_MAP:
