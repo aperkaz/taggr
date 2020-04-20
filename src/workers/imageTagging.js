@@ -5,33 +5,28 @@ let busy = false;
 
 /**
  * send classfication tags for an image path
- * @param {Object} path image path
- * @returns {Object} { path: imagePath, tags: []}
+ * @param {Object} payload image path
+ * @returns {Promise<Object>} { path: imagePath, tags: []}
  */
-onmessage = async (e) => {
+onmessage = async ({ data }) => {
   if (busy) {
-    queue.push(e);
+    queue.push(data);
   } else {
     busy = true;
-    await processMessage(e);
+    await processMessage(data);
   }
 };
 
-async function processMessage(e) {
+async function processMessage({ path, imageData }) {
   let tags = [];
-  if (!e.data || !e.data.path) return tags;
-  let path = e.data.path;
-  let data = e.data.data;
 
-  tags = await classifyImage(data);
+  tags = await classifyImage(imageData);
   // tags = ["dogs"];
 
   postMessage({ path, tags });
 
-  // TODO: performance gain?
-  e = null;
   path = null;
-  data = null;
+  tags = null;
 
   if (queue.length) {
     await processMessage(queue.shift());

@@ -2,7 +2,6 @@ const { dialog } = require("electron").remote;
 const { html } = require("htm/react");
 const { view } = require("@risingstack/react-easy-state");
 
-// TODO: improvement: refactor store imports for cleaningess
 const {
   triggerAction,
   CONSTANTS,
@@ -21,17 +20,17 @@ const selectRootFolderPath = async () => {
   const rootFolderPath = filePaths ? filePaths[0] : null;
 
   if (rootFolderPath) {
-    triggerAction({
+    await triggerAction({
       type: ACTIONS.SET_ROOT_FOLDER_PATH,
       payload: rootFolderPath,
     });
 
-    triggerAction({
+    await triggerAction({
       type: ACTIONS.CALCULATE_IMAGE_PATHS_IN_ROOT,
       payload: rootFolderPath,
     });
 
-    triggerAction({
+    await triggerAction({
       type: ACTIONS.SET_CURRENT_PAGE,
       payload: CONSTANTS.PAGES.DASHBOARD_PAGE,
     });

@@ -26,10 +26,10 @@ const { generateMD5Hash } = require("./utils");
 
 // TODO: fix
 let workers = { recursiveImageFinderWorker: {} };
+// const setup = () => {
+workers = createWorkers();
+// };
 
-const setup = () => {
-  workers = createWorkers();
-};
 // ACTION PROCESSING
 
 /**
@@ -37,8 +37,8 @@ const setup = () => {
  *
  * @param {ActionType} action
  */
-const triggerAction = (action) => {
-  processor(action, uiStore, appStore);
+const triggerAction = async (action) => {
+  await processor(action, uiStore, appStore);
 };
 
 /**
@@ -48,8 +48,8 @@ const triggerAction = (action) => {
  * @param {uiStoreType} uiStore
  * @param {appStoreType} appStore
  */
-const processor = ({ type, payload }, uiStore, appStore) => {
-  //   console.log(`P: ${type} : ${payload}`);
+const processor = async ({ type, payload }, uiStore, appStore) => {
+  console.log(`P: ${type} : ${payload}`);
 
   switch (type) {
     case ACTIONS.SET_CURRENT_PAGE:
@@ -61,7 +61,6 @@ const processor = ({ type, payload }, uiStore, appStore) => {
       break;
 
     case ACTIONS.CALCULATE_IMAGE_PATHS_IN_ROOT:
-      console.log("CALCULATE_IMAGE_PATHS_IN_ROOT");
       // TODO: clean: use comlink to clean worker syntax
 
       // setup worker listener

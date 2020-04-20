@@ -37,12 +37,12 @@ async function loadModel() {
 
 /**
  * Generate image classification tags for a given image above a probability threshold
- * @param {String} imagePath
- * @returns {Array} tags
+ * @param {ImageData} imageData
+ * @returns {Promise<String[]>} tags
  */
-async function classifyImage(data) {
+async function classifyImage(imageData) {
   // console.time("transform");
-  const pixels = tf.browser.fromPixels(data);
+  const pixels = tf.browser.fromPixels(imageData);
   const smallImg = tf.image.resizeBilinear(pixels, [224, 224]);
   // console.timeEnd("transform");
 
@@ -67,7 +67,7 @@ async function classifyImage(data) {
   // free memory by cleaning TF-internals and variables
   pixels.dispose();
   smallImg.dispose();
-  data = null;
+  imageData = null;
   rawPredictions = null;
   filteredRawPredictions = null;
 
