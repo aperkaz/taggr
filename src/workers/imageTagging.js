@@ -1,6 +1,5 @@
 const { classifyImage } = require("./tfImageClassification");
 
-// TODONOW: remove unused queue
 let queue = [];
 let busy = false;
 
@@ -21,12 +20,18 @@ onmessage = async (e) => {
 async function processMessage(e) {
   let tags = [];
   if (!e.data || !e.data.path) return tags;
-  const path = e.data.path;
-  const data = e.data.data;
+  let path = e.data.path;
+  let data = e.data.data;
 
   tags = await classifyImage(data);
+  // tags = ["dogs"];
 
   postMessage({ path, tags });
+
+  // TODO: performance gain?
+  e = null;
+  path = null;
+  data = null;
 
   if (queue.length) {
     await processMessage(queue.shift());

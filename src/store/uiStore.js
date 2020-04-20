@@ -57,9 +57,9 @@ const triggerRecursiveImageFinding = (path) => {
 
 const queueExecutor = async (imagePath) => {
   console.log("EXECUTING: ", imagePath);
-  // console.time("loadImage");
+  console.time("loadImage");
   let img = await loadImage(imagePath);
-  // console.timeEnd("loadImage");
+  console.timeEnd("loadImage");
 
   let canvas = new OffscreenCanvas(img.width, img.height);
   canvas.getContext("2d").drawImage(img, 0, 0);
@@ -72,8 +72,14 @@ const queueExecutor = async (imagePath) => {
     path: imagePath,
     data: imageData,
   });
+
+  // clean up for garbage collector
+  img = null;
   canvas = null;
   imageData = null;
+
+  // set timeout to allow worker callback to be triggered: TODO: performance: consider returning all the calculations at once from the worker.
+  await new Promise((r) => setTimeout(r, 200));
 };
 
 const triggerImageTagsCalculation = async (imagePathsList) => {
@@ -90,30 +96,6 @@ const triggerImageTagsCalculation = async (imagePathsList) => {
   imagePathsList.forEach(
     async (imagePath) => await imageRenderingQueue.add(imagePath)
   );
-
-  // trigger worker
-  // const imagePath = queuedImagePathsList.pop();
-
-  // imagePathsList.forEach(async (imagePath) => {
-  //   console.time("loadImage");
-  //   let img = await loadImage(imagePath);
-  //   console.timeEnd("loadImage");
-
-  //   let canvas = new OffscreenCanvas(img.width, img.height);
-  //   canvas.getContext("2d").drawImage(img, 0, 0);
-
-  //   const imageData = canvas
-  //     .getContext("2d")
-  //     .getImageData(0, 0, img.width, img.height);
-
-  //   workers.imageTaggingWorker.postMessage({
-  //     path: imagePath,
-  //     data: imageData,
-  //   });
-
-  //   img = null;
-  //   canvas = null;
-  // });
 };
 
 const setImageTags = (imagePath, tags) => {

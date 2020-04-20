@@ -3,9 +3,6 @@ global.fetch = require("node-fetch");
 const mobilenet = require("@tensorflow-models/mobilenet");
 const tf = require("@tensorflow/tfjs-node");
 
-// const fs = require("fs");
-// const jpeg = require("jpeg-js");
-
 const path = require("path");
 const url = require("url");
 
@@ -15,7 +12,7 @@ const MODEL_URL = url.format({
   slashes: true,
 });
 
-const PROBABILITY_THRESHOLD = 0.1;
+const PROBABILITY_THRESHOLD = 0.5;
 
 let net;
 
@@ -38,7 +35,7 @@ async function loadModel() {
 }
 
 /**
- * Generate image classification tags for a given imagea above a probability threshold
+ * Generate image classification tags for a given image above a probability threshold
  * @param {String} imagePath
  * @returns {Array} tags
  */
@@ -49,11 +46,11 @@ async function classifyImage(data) {
   // console.timeEnd("transform");
 
   // console.time("detect");
-  const rawPredictions = await net.classify(smallImg);
+  let rawPredictions = await net.classify(smallImg);
   // console.timeEnd("detect");
 
   // filter out predictions below threshold
-  const filteredRawPredictions = rawPredictions.filter(
+  let filteredRawPredictions = rawPredictions.filter(
     (rawPrediction) => rawPrediction.probability > PROBABILITY_THRESHOLD
   );
 
@@ -69,6 +66,9 @@ async function classifyImage(data) {
   // free memory from TF-internal libraries from input image
   pixels.dispose();
   smallImg.dispose();
+  data = null;
+  rawPredictions = null;
+  filteredRawPredictions = null;
 
   return predictions;
 }
@@ -77,7 +77,7 @@ module.exports = {
   classifyImage,
 };
 
-// load the required tensorflow.js models required by the worker
+// load the required tensorflow.js models required by the worker on startup
 (async () => {
   try {
     await loadModel();

@@ -1,7 +1,5 @@
 const fs = require("fs");
 const crypto = require("crypto");
-const readdirp = require("readdirp");
-// const { classifyImage } = require("./workers/imageRecognitionHelper");
 
 /**
  * Generate md5 hash string
