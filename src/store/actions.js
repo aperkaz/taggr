@@ -24,6 +24,7 @@ let appStore = require("./appStore");
 const createWorkers = require("../workers/index");
 const { generateMD5Hash } = require("./utils");
 
+// TODO: fix
 let workers = { recursiveImageFinderWorker: {} };
 
 const setup = () => {

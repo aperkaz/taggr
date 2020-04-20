@@ -1,22 +1,6 @@
-onmessage = async (e) => {
-  console.log("recursiveImageFinderWorker received task");
-  const readdirp = require("readdirp");
-  let imagePathsList = [];
+const { findImagePathsInFolder } = require("../store/utils");
 
-  if (!e.data || !e.data.path) return [];
-  const folderPath = e.data.path;
-
-  var settings = {
-    // Filter files with js and json extension
-    fileFilter: ["*.png", "*.PNG", "*.jpg", "*.JPG", ".*.jpeg", "*.JPEG"],
-    // Filter by directory
-    directoryFilter: ["!.git", "!*modules", "!.cache", "!.*"],
-  };
-
-  for await (const entry of readdirp(folderPath, settings)) {
-    const { path } = entry;
-    imagePathsList.push(`${folderPath}/${path}`);
-  }
-
+onmessage = async ({ data: { path } }) => {
+  const imagePathsList = await findImagePathsInFolder(path);
   postMessage({ imagePathsList });
 };
