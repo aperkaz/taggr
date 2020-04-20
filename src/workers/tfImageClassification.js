@@ -1,13 +1,12 @@
 global.fetch = require("node-fetch");
 
-const mobilenet = require("@tensorflow-models/mobilenet");
 const tf = require("@tensorflow/tfjs-node");
 
 const path = require("path");
 const url = require("url");
 
 const MODEL_URL = url.format({
-  pathname: path.join(__dirname, "../models/mobilenet/model.json"),
+  pathname: path.join(__dirname, "./models/mobilenet/model.json"),
   protocol: "file:",
   slashes: true,
 });
@@ -17,6 +16,8 @@ const PROBABILITY_THRESHOLD = 0.5;
 let net;
 
 async function loadModel() {
+  const mobilenet = require("@tensorflow-models/mobilenet");
+
   if (net) return;
 
   console.time("loadModel");
@@ -63,7 +64,7 @@ async function classifyImage(data) {
     predictions.push(...tags);
   });
 
-  // free memory from TF-internal libraries from input image
+  // free memory by cleaning TF-internals and variables
   pixels.dispose();
   smallImg.dispose();
   data = null;

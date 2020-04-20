@@ -3,7 +3,7 @@
   "productName": "privatus",
   "version": "0.0.1",
   "description": "My Electron application description",
-  "main": "src/electronEntry.js",
+  "main": "src/entryMainProcess.js",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
@@ -11,7 +11,7 @@
     "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\"",
     "unit": "mocha",
-    "unit:watch": "mocha --watch",
+    "unit:watch": "mocha --watch --recursive './src/*/__tests__/*.spec.js'",
     "storybook": "start-storybook -p 6006 ",
     "build-storybook": "build-storybook"
   },

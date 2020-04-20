@@ -6,7 +6,7 @@ const debounce = require("lodash.debounce");
 const Header = require("../organisms/Header");
 const Gallery = require("../organisms/Gallery");
 
-const { uiStore, actions } = require("../../store/uiStore");
+const { uiStore, ACTIONS, triggerAction } = require("../../store/actions");
 
 const styles = {
   wrapper: {
@@ -45,7 +45,14 @@ DashboardPage.propTypes = {
 
 const DashboardPageContainer = view(
   () => html`<${DashboardPage}
-    onInputChange="${debounce(actions.setTagSearchValue, 300)}"
+    onInputChange="${debounce(
+      (payload) =>
+        triggerAction({
+          type: ACTIONS.SET_IMAGE_FILTER_TAG_SEARCH_VALUE,
+          payload,
+        }),
+      300
+    )}"
     filteredImageList="${uiStore.filteredImageList}"
   />`
 );

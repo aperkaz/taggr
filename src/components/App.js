@@ -1,12 +1,13 @@
 const { dialog } = require("electron").remote;
-
 const { html } = require("htm/react");
 const { view } = require("@risingstack/react-easy-state");
 
+// TODO: improvement: refactor store imports for cleaningess
+const { triggerAction, ACTIONS, uiStore } = require("../store/actions");
+const CONSTANTS = require("../store/constants");
+
 const StartPage = require("./pages/StartPage");
 const { withStore: DashboardPage } = require("./pages/DashboardPage");
-const CONSTANTS = require("../constants");
-const { uiStore, actions } = require("../store/uiStore");
 
 const selectRootFolderPath = async () => {
   const { filePaths } = await dialog.showOpenDialog({
@@ -16,15 +17,26 @@ const selectRootFolderPath = async () => {
   const rootFolderPath = filePaths ? filePaths[0] : null;
 
   if (rootFolderPath) {
-    actions.setRootFolderPath(rootFolderPath);
-    actions.setAppStatus(CONSTANTS.APP_STATUS.DASHBOARD_PAGE);
-    actions.triggerRecursiveImageFinding(rootFolderPath);
+    triggerAction({
+      type: ACTIONS.SET_ROOT_FOLDER_PATH,
+      payload: rootFolderPath,
+    });
+
+    triggerAction({
+      type: ACTIONS.CALCULATE_IMAGE_PATHS_IN_ROOT,
+      payload: rootFolderPath,
+    });
+
+    triggerAction({
+      type: ACTIONS.SET_CURRENT_PAGE,
+      payload: CONSTANTS.PAGES.DASHBOARD_PAGE,
+    });
   }
 };
 
 const App = () =>
   html`<div style=${styles}>
-    ${uiStore.appStatus === CONSTANTS.APP_STATUS.START_PAGE
+    ${uiStore.currentPage === CONSTANTS.PAGES.START_PAGE
       ? html`<${StartPage} onSelectRootFolderPath=${selectRootFolderPath} />`
       : html`<${DashboardPage} />`}
   </div>`;
