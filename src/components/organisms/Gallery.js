@@ -41,8 +41,8 @@ const Gallery = ({ imageList }) => {
   `;
 };
 
-// TODO: virtualize list for performance https://github.com/developerdizzle/react-virtual-list
-// TODO: image menu: https://github.com/aperkaz/privatus/blob/add-react/src/components/DashboardImageGallery.js
+// feature: virtualize list for performance https://github.com/developerdizzle/react-virtual-list
+// feature: image menu: https://github.com/aperkaz/privatus/blob/add-react/src/components/DashboardImageGallery.js
 
 Gallery.defaultProps = {
   imageList: [],

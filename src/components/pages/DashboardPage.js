@@ -1,12 +1,8 @@
 const { html } = require("htm/react");
 const PropTypes = require("prop-types");
-const { view } = require("@risingstack/react-easy-state");
-const debounce = require("lodash.debounce");
 
 const Header = require("../organisms/Header");
 const Gallery = require("../organisms/Gallery");
-
-const { uiStore, ACTIONS, triggerAction } = require("../../store/actions");
 
 const styles = {
   wrapper: {
@@ -43,21 +39,4 @@ DashboardPage.propTypes = {
   ),
 };
 
-const DashboardPageContainer = view(
-  () => html`<${DashboardPage}
-    onInputChange="${debounce(
-      (payload) =>
-        triggerAction({
-          type: ACTIONS.SET_IMAGE_FILTER_TAG_SEARCH_VALUE,
-          payload,
-        }),
-      300
-    )}"
-    filteredImageList="${uiStore.filteredImageList}"
-  />`
-);
-
-module.exports = {
-  vanilla: DashboardPage,
-  withStore: DashboardPageContainer,
-};
+module.exports = DashboardPage;

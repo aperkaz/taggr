@@ -62,15 +62,21 @@ describe("actions.js", () => {
       processor(action, uiStore, appStore);
 
       expect(appStore.imageHashMap).to.deep.equal({
-        "0335ced06ef24a0a8ca8c0b2eb1e0ee2": { path: "path/1", tags: null },
-        "13f345979fdcc05f67278da65c2cbe5c": { path: "path/2", tags: null },
+        "0335ced06ef24a0a8ca8c0b2eb1e0ee2": {
+          hash: "0335ced06ef24a0a8ca8c0b2eb1e0ee2",
+          path: "path/1",
+          tags: null,
+        },
+        "13f345979fdcc05f67278da65c2cbe5c": {
+          hash: "13f345979fdcc05f67278da65c2cbe5c",
+          path: "path/2",
+          tags: null,
+        },
       });
     });
 
     it("SET_IMAGE_TAGS_IN_MAP, payload: empty list", async () => {
-      before(() => {
-        appStore.imageHashMap = { hash1: { tags: null } };
-      });
+      appStore.imageHashMap = { hash1: { tags: null } };
 
       const action = {
         type: ACTIONS.SET_IMAGE_TAGS_IN_MAP,
@@ -83,6 +89,8 @@ describe("actions.js", () => {
     it("SET_IMAGE_TAGS_IN_MAP, payload: with full list", async () => {
       const imageHash = "hash1";
       const tags = ["dog", "cat"];
+
+      appStore.imageHashMap[imageHash] = {};
 
       const action = {
         type: ACTIONS.SET_IMAGE_TAGS_IN_MAP,

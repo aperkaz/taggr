@@ -82,9 +82,58 @@ class Queue {
   }
 }
 
+/**
+ * Load image using DOM Image element
+ *
+ * @param {String} path
+ * @returns {Promise<HTMLImageElement>} loaded image
+ */
+async function loadImage(path) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onerror = (err) => reject(err);
+    img.onload = () => resolve(img);
+    img.src = path;
+  });
+}
+
+/**
+ * Executor function that preprocesses image (extrac ImageData) and calculates the tags for an image(within worker)
+ *
+ *  @param {Worker} imageTaggingWorker
+ */
+const imageTaggingQueuExecutor = (imageTaggingWorker) => async (imagePath) => {
+  console.log("EXECUTING: ", imagePath);
+  console.time("loadImage");
+  let img = await loadImage(imagePath);
+  console.timeEnd("loadImage");
+
+  let canvas = new OffscreenCanvas(img.width, img.height);
+  canvas.getContext("2d").drawImage(img, 0, 0);
+
+  let imageData = canvas
+    .getContext("2d")
+    .getImageData(0, 0, img.width, img.height);
+
+  imageTaggingWorker.postMessage({
+    path: imagePath,
+    data: imageData,
+  });
+
+  // clean up for GC
+  img = null;
+  canvas = null;
+  imageData = null;
+
+  // set timeout to allow worker callback to be triggered
+  await new Promise((r) => setTimeout(r, 200));
+};
+
 module.exports = {
   generateMD5Hash,
   generateMD5FileHash,
   findImagePathsInFolder,
   Queue,
+  loadImage,
+  imageTaggingQueuExecutor,
 };

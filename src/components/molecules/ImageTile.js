@@ -1,20 +1,24 @@
 const { Component } = require("react");
 const { html } = require("htm/react");
+const PropTypes = require("prop-types");
 
 const Loading = () =>
   html`<div key="loading" className="dashboard__tile--loading"></div>`;
 
-const styles = (imageUrl) => ({
-  height: "100%",
-  width: "100%",
-  borderRadius: "4px",
-  // TODO: add url recognition
-  // backgroundImage: `url('${imageUrl}')`, // when in storybook
-  backgroundImage: `url('file:///${imageUrl}')`,
-  backgroundRepeat: "no-repeat",
-  backgroundPosition: "center center",
-  backgroundSize: "cover",
-});
+const styles = (imageUrl) => {
+  // prefix non-http images (local)
+  const url = imageUrl.startsWith("http") ? imageUrl : `file:///${imageUrl}`;
+
+  return {
+    height: "100%",
+    width: "100%",
+    borderRadius: "4px",
+    backgroundImage: `url('${url}')`,
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center center",
+    backgroundSize: "cover",
+  };
+};
 
 const ImageComponent = ({ imageUrl, onClick }) =>
   html` <div key="imageComponent" style=${styles(imageUrl)}></div>`;
@@ -45,7 +49,9 @@ class ImageTile extends Component {
   }
 }
 
-// TODO: add proptypes
+ImageTile.propTypes = {
+  imageUrl: PropTypes.string,
+};
 
 ImageTile.defaultProps = {
   imageUrl: "",

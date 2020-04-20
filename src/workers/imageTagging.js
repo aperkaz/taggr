@@ -20,11 +20,10 @@ async function processMessage({ data: { path, data } }) {
   let tags = [];
 
   tags = await classifyImage(data);
-  // tags = ["dogs"];
 
   postMessage({ path, tags });
 
-  // TODO: performance gain?
+  // cleanup for GC
   tags = [];
   path = null;
   data = null;

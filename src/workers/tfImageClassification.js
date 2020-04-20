@@ -23,13 +23,17 @@ async function loadModel() {
   console.time("loadModel");
 
   // TODO: issue: when packaging, make sure the model files are copied elsewhere https://github.com/electron-userland/electron-forge/issues/1592
-  net = await mobilenet.load({
-    modelUrl: MODEL_URL,
-    version: 1,
-    alpha: 1,
-    // fix the default of [-1,1]
-    inputRange: [0, 1],
-  });
+  if (true) {
+    net = await mobilenet.load();
+  } else {
+    net = await mobilenet.load({
+      modelUrl: MODEL_URL,
+      version: 1,
+      alpha: 1,
+      // fix the default of [-1,1]
+      inputRange: [0, 1],
+    });
+  }
 
   console.timeEnd("loadModel");
   return;

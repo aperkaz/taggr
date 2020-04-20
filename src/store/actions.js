@@ -2,7 +2,11 @@ const Comlink = require("comlink");
 let uiStore = require("./uiStore");
 let appStore = require("./appStore");
 const createWorkers = require("../workers/index");
-const { generateMD5Hash } = require("./utils");
+const {
+  generateMD5Hash,
+  loadImage,
+  imageTaggingQueuExecutor,
+} = require("./utils");
 
 const ACTIONS = {
   SET_CURRENT_PAGE: "SET_CURRENT_PAGE",
@@ -25,11 +29,14 @@ const CONSTANTS = {
   },
 };
 
-// TODO: fix. e2e fail as all is to be started at the same time. Load from App.js
-// let workers = { recursiveImageFinderWorker: {} };
-// const setup = () => {
-let workers = createWorkers();
-// };
+// @ts-ignore
+require("../types");
+
+let workers;
+
+const initializeStore = () => {
+  workers = createWorkers();
+};
 
 // ACTION PROCESSING
 
@@ -50,7 +57,7 @@ const triggerAction = async (action) => {
  * @param {appStoreType} appStore
  */
 const processor = async ({ type, payload }, uiStore, appStore) => {
-  console.log(`P: ${type} : ${JSON.stringify(payload)}`);
+  // console.log(`P: ${type} : ${JSON.stringify(payload)}`);
 
   switch (type) {
     case ACTIONS.SET_CURRENT_PAGE:
@@ -105,7 +112,9 @@ const processor = async ({ type, payload }, uiStore, appStore) => {
       };
 
       const { Queue } = require("./utils");
-      const imageRenderingQueue = new Queue(queueExecutor);
+      const imageRenderingQueue = new Queue(
+        imageTaggingQueuExecutor(workers.imageTaggingWorker)
+      );
 
       payload.forEach(
         async (imagePath) => await imageRenderingQueue.add(imagePath)
@@ -126,8 +135,6 @@ const processor = async ({ type, payload }, uiStore, appStore) => {
 
       const filteredImages = [];
       let found = 0; // only calculate the first 15 tag matches
-
-      console.log(appStore.imageHashMap);
 
       Object.keys(appStore.imageHashMap).some((key) => {
         const tags = appStore.imageHashMap[key].tags;
@@ -153,43 +160,6 @@ const processor = async ({ type, payload }, uiStore, appStore) => {
   }
 };
 
-// TODONOW: extract to utils
-async function loadImage(path) {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.onerror = (err) => reject(err);
-    img.onload = () => resolve(img);
-    img.src = path;
-  });
-}
-
-const queueExecutor = async (imagePath) => {
-  console.log("EXECUTING: ", imagePath);
-  console.time("loadImage");
-  let img = await loadImage(imagePath);
-  console.timeEnd("loadImage");
-
-  let canvas = new OffscreenCanvas(img.width, img.height);
-  canvas.getContext("2d").drawImage(img, 0, 0);
-
-  let imageData = canvas
-    .getContext("2d")
-    .getImageData(0, 0, img.width, img.height);
-
-  workers.imageTaggingWorker.postMessage({
-    path: imagePath,
-    data: imageData,
-  });
-
-  // clean up for garbage collector
-  img = null;
-  canvas = null;
-  imageData = null;
-
-  // set timeout to allow worker callback to be triggered: TODO: performance: consider returning all the calculations at once from the worker.
-  await new Promise((r) => setTimeout(r, 200));
-};
-
 module.exports = {
   triggerAction,
   processor,
@@ -197,4 +167,5 @@ module.exports = {
   CONSTANTS,
   uiStore,
   appStore,
+  initializeStore,
 };

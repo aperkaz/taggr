@@ -8,7 +8,6 @@ const Typography = require("@material-ui/core/Typography").default;
 const InputBase = require("@material-ui/core/InputBase").default;
 const SearchIcon = require("@material-ui/icons/Search").default;
 
-// TODO: refactor app styles: https://material-ui.com/styles/basics/
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
