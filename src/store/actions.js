@@ -103,6 +103,30 @@ const processor = ({ type, payload }, uiStore, appStore) => {
       };
       break;
 
+    case ACTIONS.SET_IMAGE_FILTER_TAG_SEARCH_VALUE:
+      const searchValue = payload;
+
+      uiStore.tagSearchValue = searchValue;
+
+      const filteredImages = [];
+      let found = 0; // only calculate the first 15 tag matches
+
+      Object.keys(appStore.imageHashMap).some((key) => {
+        const tags = appStore.imageHashMap[key].tags;
+
+        if (tags.filter((tag) => tag.includes(searchValue)).length > 0) {
+          filteredImages.push(appStore.imageHashMap[key]);
+
+          found++;
+        }
+        if (found > 15) {
+          return true;
+        }
+      });
+
+      uiStore.filteredImageList = filteredImages;
+      break;
+
     default:
       console.error(`${type} action has no reducer`);
   }

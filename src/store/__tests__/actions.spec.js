@@ -93,7 +93,7 @@ describe("actions.js", () => {
       expect(appStore.imageHashMap[imageHash].tags).to.equal(tags);
     });
 
-    // partial match for string in image tags
+    // partial match for image tag strings
     it("SET_IMAGE_FILTER_TAG_SEARCH_VALUE", () => {
       const searchValue = "cat";
 
@@ -110,7 +110,7 @@ describe("actions.js", () => {
       processor(action, uiStore, appStore);
 
       expect(uiStore.tagSearchValue).to.equal("cat");
-      expect(uiStore.filteredImageList.legth).to.equal(2);
+      expect(uiStore.filteredImageList.length).to.equal(2);
     });
   });
 });

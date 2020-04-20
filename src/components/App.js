@@ -3,8 +3,12 @@ const { html } = require("htm/react");
 const { view } = require("@risingstack/react-easy-state");
 
 // TODO: improvement: refactor store imports for cleaningess
-const { triggerAction, ACTIONS, uiStore } = require("../store/actions");
-const CONSTANTS = require("../store/constants");
+const {
+  triggerAction,
+  CONSTANTS,
+  ACTIONS,
+  uiStore,
+} = require("../store/actions");
 
 const StartPage = require("./pages/StartPage");
 const { withStore: DashboardPage } = require("./pages/DashboardPage");

@@ -3,6 +3,7 @@ const { classifyImage } = require("../src/workers/tfImageClassification");
 
 const imagePath = "/home/alain/src/privatus/test/images/beetle.jpg";
 
+// TODONOW: move to workers
 describe("imageRecognition.js", function () {
   it.skip("classifyImage()", async () => {
     const imageClassification = await classifyImage(imagePath);

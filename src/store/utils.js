@@ -29,7 +29,7 @@ class Queue {
 
   async add(task) {
     if (this.busy) {
-      console.log("BUSY: task added");
+      // console.log("BUSY: task added");
       this.queue.push(task);
     } else {
       this.busy = true;
@@ -38,11 +38,11 @@ class Queue {
   }
 
   async process(task) {
-    console.log("------");
-    console.log("FREE: task executing");
-    console.time("execute");
+    // console.log("------");
+    // console.log("FREE: task executing");
+    // console.time("execute");
     await this.executor(task);
-    console.timeEnd("execute");
+    // console.timeEnd("execute");
 
     if (this.queue.length > 0) {
       await this.process(this.queue.pop());

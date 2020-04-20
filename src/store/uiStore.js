@@ -67,54 +67,6 @@ let uiStore = store({
 //   );
 // };
 
-// const setImageTags = (imagePath, tags) => {
-//   console.log("setImageTags", `${imagePath}: ${tags}`);
-//   const imageHash = generateMD5Hash(imagePath);
-
-//   if (uiStore.imageHashMap[imageHash]) {
-//     // update if existing
-//     uiStore.imageHashMap[imageHash].tags = tags;
-//   } else {
-//     // initialize if non existing
-//     uiStore.imageHashMap[imageHash] = {
-//       hash: imageHash,
-//       path: imagePath,
-//       tags,
-//     };
-//   }
-// };
-
-// const setTagSearchValue = (searchValue) => {
-//   console.log("setTagSearchValue: ", searchValue);
-//   uiStore.tagSearchValue = searchValue;
-
-//   if (searchValue === "") {
-//     // TODONOW: calculate default values and store in variable, not mock
-//     uiStore.filteredImageList = defaultImages;
-//     return;
-//   }
-
-//   const filteredImages = [];
-//   let found = 0; // only calculate the first 15 tag matches
-
-//   Object.keys(uiStore.imageHashMap).some((key) => {
-//     const tags = uiStore.imageHashMap[key].tags;
-
-//     if (tags.filter((tag) => tag.includes(searchValue)).length > 0) {
-//       filteredImages.push(uiStore.imageHashMap[key]);
-
-//       found++;
-//     }
-//     if (found > 15) {
-//       return true;
-//     }
-//   });
-
-//   console.log(filteredImages.length);
-
-//   uiStore.filteredImageList = filteredImages;
-// };
-
 // // EXPERIMENT
 
 // const imagePath = "/home/alain/Desktop/a/0.jpg";
