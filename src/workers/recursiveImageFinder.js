@@ -10,7 +10,7 @@ onmessage = async (e) => {
     // Filter files with js and json extension
     fileFilter: ["*.png", "*.PNG", "*.jpg", "*.JPG", ".*.jpeg", "*.JPEG"],
     // Filter by directory
-    directoryFilter: ["!.git", "!*modules"],
+    directoryFilter: ["!.git", "!*modules", "!.cache", "!.*"],
   };
 
   for await (const entry of readdirp(folderPath, settings)) {
