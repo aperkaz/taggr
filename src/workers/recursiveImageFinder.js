@@ -1,6 +1,9 @@
+const Comlink = require("comlink");
 const { findImagePathsInFolder } = require("../store/utils");
 
-onmessage = async ({ data: { path } }) => {
-  const imagePathsList = await findImagePathsInFolder(path);
-  postMessage({ imagePathsList });
-};
+Comlink.expose({
+  async process(path) {
+    const imagePathsList = await findImagePathsInFolder(path);
+    return imagePathsList;
+  },
+});

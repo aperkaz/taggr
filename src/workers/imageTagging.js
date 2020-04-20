@@ -4,11 +4,10 @@ let queue = [];
 let busy = false;
 
 /**
- * send classfication tags for an image path
- * @param {Object} payload image path
- * @returns {Promise<Object>} { path: imagePath, tags: []}
+ * Calculate classfication tags for an image path
+ * @param {Object} data image path
  */
-onmessage = async ({ data }) => {
+onmessage = async (data) => {
   if (busy) {
     queue.push(data);
   } else {
@@ -17,16 +16,18 @@ onmessage = async ({ data }) => {
   }
 };
 
-async function processMessage({ path, imageData }) {
+async function processMessage({ data: { path, data } }) {
   let tags = [];
 
-  tags = await classifyImage(imageData);
+  tags = await classifyImage(data);
   // tags = ["dogs"];
 
   postMessage({ path, tags });
 
+  // TODO: performance gain?
+  tags = [];
   path = null;
-  tags = null;
+  data = null;
 
   if (queue.length) {
     await processMessage(queue.shift());
