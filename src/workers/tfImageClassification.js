@@ -22,10 +22,7 @@ async function loadModel() {
 
   console.time("loadModel");
 
-  // FIX: issue: when packaging, make sure the model files are copied elsewhere https://github.com/electron-userland/electron-forge/issues/1592
-  if (false) {
-    net = await mobilenet.load();
-  } else {
+  if (process.env.DEVELOPMENT_ENV) {
     net = await mobilenet.load({
       modelUrl: MODEL_URL,
       version: 1,
@@ -33,6 +30,9 @@ async function loadModel() {
       // fix the default of [-1,1]
       inputRange: [0, 1],
     });
+  } else {
+    // FIX: issue: when packaging, make sure the model files are copied elsewhere https://github.com/electron-userland/electron-forge/issues/1592
+    net = await mobilenet.load();
   }
 
   console.timeEnd("loadModel");
