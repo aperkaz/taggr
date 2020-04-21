@@ -1,16 +1,21 @@
 <style>
- html {
-        height: 100%;
-    }
+html {
+    height: 100%;
+}
 
-    body {
-      height: 100%;
-        margin: 0;
-    }
+body {
+  height: 100%;
+    margin: 0;
+}
 
-  #root{
-      height: 100%;
-    }
+/* Hide scrollbar in virtualized gallery */
+#virtualized-gallery-wrapper::-webkit-scrollbar {
+  width: .2em;
+}
+
+#root{
+  height: 100%;
+}
 
 
 .dashboard__tile--loading{

@@ -1,15 +1,17 @@
 const ReactDOM = require("react-dom");
 
+let container;
+
 const renderElementInContainer = (component) => {
-  const container = document.createElement("div");
-  container.style.height = "100%";
+  if (!container) {
+    container = document.createElement("div");
+    container.style.height = "100%";
+  } else {
+    // manually trigger unmount, to clean up listeners in component. Error shows, but it unmounts properly
+    ReactDOM.unmountComponentAtNode(container);
+  }
 
-  const inner = document.createElement("div");
-  inner.style.height = "100%";
-
-  container.appendChild(inner);
-
-  ReactDOM.render(component, inner);
+  ReactDOM.render(component, container);
 
   return container;
 };

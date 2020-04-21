@@ -3,6 +3,7 @@ const { renderElementInContainer } = require("./utils");
 
 const HeaderComponent = require("../src/components/organisms/Header");
 const GalleryComponent = require("../src/components/organisms/Gallery");
+const VirtualizedGalleryComponent = require("../src/components/organisms/VirtualizedGallery");
 
 const imageList = require("./mocks/imageList");
 
@@ -24,5 +25,12 @@ export const Gallery = () =>
       <div style=${{ height: "400px" }}>
         <${GalleryComponent} imageList=${imageList} />
       </div>
+    </div>`
+  );
+
+export const VirtualizedGallery = () =>
+  renderElementInContainer(
+    html` <div style=${{ height: "100%" }}>
+      <${VirtualizedGalleryComponent} imageList=${imageList} />
     </div>`
   );
