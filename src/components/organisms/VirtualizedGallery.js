@@ -7,6 +7,9 @@ const { FixedSizeGrid: Grid } = require("react-window");
 const ImageTile = require("../molecules/ImageTile");
 
 const GUTTER = 5;
+const ELEMENTS_PER_COLLUMN = 5;
+
+// TODONOW: fix issues when path is null in cell. Keeps being null after reflesh
 
 class VirtualizedGallery extends Component {
   constructor(props) {
@@ -69,7 +72,10 @@ class VirtualizedGallery extends Component {
     const gridWidth = width - GUTTER * 2;
 
     // min row height: 250
-    const rowHeight = gridHeight / 4 > 250 ? gridHeight / 4 : 250;
+    const rowHeight =
+      gridHeight / ELEMENTS_PER_COLLUMN > 250
+        ? gridHeight / ELEMENTS_PER_COLLUMN
+        : 250;
 
     return html`
       <div
@@ -79,10 +85,10 @@ class VirtualizedGallery extends Component {
       >
         <${Grid}
           className=${"Grid"}
-          columnCount=${4}
-          columnWidth=${gridWidth / 4}
+          columnCount=${ELEMENTS_PER_COLLUMN}
+          columnWidth=${gridWidth / ELEMENTS_PER_COLLUMN}
           height=${gridHeight}
-          rowCount=${imageList.length / 4}
+          rowCount=${imageList.length / ELEMENTS_PER_COLLUMN}
           rowHeight=${rowHeight}
           width=${gridWidth}
           itemData=${imageList}
@@ -101,14 +107,14 @@ const Cell = ({ columnIndex, rowIndex, style, data }) => {
   const width = style.width - GUTTER;
 
   // TODONOW: parametrize gallery elements
-  const index = rowIndex * 4 + columnIndex;
+  const index = rowIndex * ELEMENTS_PER_COLLUMN + columnIndex;
   // console.log(data);
   // console.log(index);
   return html`<div
     key=${columnIndex + ":" + rowIndex}
     style=${{ ...style, height, width }}
   >
-    <${ImageTile} imageUrl="${data[index].path}"><//>
+    <${ImageTile} imageUrl="${data[index] ? data[index].path : ""}"><//>
   </div>`;
 };
 

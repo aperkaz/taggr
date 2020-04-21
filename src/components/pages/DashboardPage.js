@@ -2,7 +2,8 @@ const { html } = require("htm/react");
 const PropTypes = require("prop-types");
 
 const Header = require("../organisms/Header");
-const Gallery = require("../organisms/Gallery");
+const Gallery = require("../organisms/VirtualizedGallery");
+// const Gallery = require("../organisms/Gallery");
 
 const styles = {
   wrapper: {

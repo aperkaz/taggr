@@ -141,20 +141,27 @@ const processor = async ({ type, payload }, uiStore, appStore) => {
       uiStore.tagSearchValue = searchValue;
 
       const filteredImages = [];
-      let found = 0; // only calculate the first 15 tag matches
+      let found = 0; // only calculate the first 100 tag matches
 
+      // TODO: refactor and clean up
       Object.keys(appStore.imageHashMap).some((key) => {
         const tags = appStore.imageHashMap[key].tags;
-
-        if (
-          tags &&
-          tags.filter((tag) => tag.includes(searchValue)).length > 0
-        ) {
+        if (searchValue === "") {
           filteredImages.push(appStore.imageHashMap[key]);
 
           found++;
+        } else {
+          if (
+            tags &&
+            tags.filter((tag) => tag.includes(searchValue)).length > 0
+          ) {
+            filteredImages.push(appStore.imageHashMap[key]);
+
+            found++;
+          }
         }
-        if (found > 15) {
+
+        if (found > 200) {
           return true;
         }
       });
