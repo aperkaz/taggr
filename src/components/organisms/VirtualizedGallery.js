@@ -71,6 +71,11 @@ class VirtualizedGallery extends Component {
     const gridHeight = height - GUTTER * 2;
     const gridWidth = width - GUTTER * 2;
 
+    const columnWidth = gridWidth / ELEMENTS_PER_COLLUMN;
+
+    const rowCount = Math.ceil(imageList.length / ELEMENTS_PER_COLLUMN);
+    console.log("rowCount:", rowCount);
+
     // min row height: 250
     const rowHeight =
       gridHeight / ELEMENTS_PER_COLLUMN > 250
@@ -86,9 +91,9 @@ class VirtualizedGallery extends Component {
         <${Grid}
           className=${"Grid"}
           columnCount=${ELEMENTS_PER_COLLUMN}
-          columnWidth=${gridWidth / ELEMENTS_PER_COLLUMN}
+          columnWidth=${columnWidth}
           height=${gridHeight}
-          rowCount=${imageList.length / ELEMENTS_PER_COLLUMN}
+          rowCount=${rowCount}
           rowHeight=${rowHeight}
           width=${gridWidth}
           itemData=${imageList}
@@ -101,7 +106,6 @@ class VirtualizedGallery extends Component {
   }
 }
 
-// TODONOW: access imageList by index, not 0
 const Cell = ({ columnIndex, rowIndex, style, data }) => {
   const height = style.height - GUTTER;
   const width = style.width - GUTTER;
@@ -114,7 +118,11 @@ const Cell = ({ columnIndex, rowIndex, style, data }) => {
     key=${columnIndex + ":" + rowIndex}
     style=${{ ...style, height, width }}
   >
-    <${ImageTile} imageUrl="${data[index] ? data[index].path : ""}"><//>
+    ${data[index]
+      ? html`<${ImageTile}
+          imageUrl="${data[index] ? data[index].path : ""}"
+        ><//>`
+      : ""}
   </div>`;
 };
 

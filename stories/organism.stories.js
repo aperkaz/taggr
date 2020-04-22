@@ -5,8 +5,6 @@ const HeaderComponent = require("../src/components/organisms/Header");
 const GalleryComponent = require("../src/components/organisms/Gallery");
 const VirtualizedGalleryComponent = require("../src/components/organisms/VirtualizedGallery");
 
-const imageList = require("./mocks/imageList");
-
 export default {
   title: "Organisms",
 };
@@ -18,8 +16,10 @@ export const Header = () =>
     />`
   );
 
-export const Gallery = () =>
-  renderElementInContainer(
+export const Gallery = () => {
+  const imageList = require("./mocks/imageList");
+
+  return renderElementInContainer(
     html` <div>
       <div>Within 400px height container</div>
       <div style=${{ height: "400px" }}>
@@ -27,10 +27,17 @@ export const Gallery = () =>
       </div>
     </div>`
   );
+};
 
-export const VirtualizedGallery = () =>
-  renderElementInContainer(
+export const VirtualizedGallery = () => {
+  let imageList = require("./mocks/imageList");
+
+  // imageList[imageList.length - 1] = { hash: "16", path: null, tags: [] };
+
+  console.log(imageList);
+  return renderElementInContainer(
     html` <div style=${{ height: "100%" }}>
       <${VirtualizedGalleryComponent} imageList=${imageList} />
     </div>`
   );
+};
