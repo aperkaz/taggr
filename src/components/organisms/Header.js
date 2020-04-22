@@ -5,6 +5,7 @@ const { fade, makeStyles } = require("@material-ui/core/styles");
 const AppBar = require("@material-ui/core/AppBar").default;
 const Toolbar = require("@material-ui/core/Toolbar").default;
 const Typography = require("@material-ui/core/Typography").default;
+const Button = require("@material-ui/core/Button").default;
 const InputBase = require("@material-ui/core/InputBase").default;
 const SearchIcon = require("@material-ui/icons/Search").default;
 
@@ -46,17 +47,29 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // TODONOW: add tag header, with most present tags
-const Header = ({ onInputChange }) => {
+// https://material-ui.com/components/chips/
+//  uiStore.uiStore.tagCountMap
+const Header = ({ onInputChange, onPressReset }) => {
   const classes = useStyles();
 
   return html`
     <div key="header">
       <div key="header" className="${classes.grow}">
         <${AppBar} position="static">
-          <${Toolbar}>
-            <${Typography} className="{classes.title}" variant="h6" noWrap>
+          <${Toolbar} variant="dense">
+            <${Typography} variant="h5" noWrap>
               Taggr
             <//>
+            <${Button}
+              variant="outlined"
+              style=${{
+                fontFamily: "Nunito",
+                color: "white",
+                marginLeft: "2rem",
+              }}
+              onClick=${onPressReset}
+              >Pick new folder<//
+            >
             <div className="${classes.grow}" />
             <div className="${classes.search}">
               <div className="${classes.searchIcon}">
@@ -81,10 +94,12 @@ const Header = ({ onInputChange }) => {
 
 Header.defaultProps = {
   onInputChange: () => null,
+  onPressReset: () => null,
 };
 
 Header.propTypes = {
   onInputChange: PropTypes.func,
+  onPressReset: PropTypes.func,
 };
 
 module.exports = Header;

@@ -18,6 +18,7 @@ const ACTIONS = {
 
   CALCULATE_IMAGE_TAGS: "CALCULATE_IMAGE_TAGS",
   SET_IMAGE_TAGS_IN_MAP: "SET_IMAGE_TAGS_IN_MAP",
+  SET_IMAGE_TAGS_IN_COUNTER: "SET_IMAGE_TAGS_IN_COUNTER", // to be displaied in header
 
   SET_IMAGE_FILTER_TAG_SEARCH_VALUE: "SET_IMAGE_FILTER",
 };
@@ -81,15 +82,13 @@ const processor = async ({ type, payload }, uiStore, appStore) => {
       });
 
       await triggerAction({
-        type: ACTIONS.CALCULATE_IMAGE_TAGS,
-        payload: list,
-      });
-
-      await new Promise((r) => setTimeout(r, 5000));
-
-      await triggerAction({
         type: ACTIONS.SET_IMAGE_FILTER_TAG_SEARCH_VALUE,
         payload: "",
+      });
+
+      await triggerAction({
+        type: ACTIONS.CALCULATE_IMAGE_TAGS,
+        payload: list,
       });
 
       break;
@@ -116,6 +115,13 @@ const processor = async ({ type, payload }, uiStore, appStore) => {
           type: ACTIONS.SET_IMAGE_TAGS_IN_MAP,
           payload: { imageHash: generateMD5Hash(data.path), tags: data.tags },
         });
+
+        await triggerAction({
+          type: ACTIONS.SET_IMAGE_TAGS_IN_COUNTER,
+          payload: { tags: data.tags },
+        });
+
+        console.log(uiStore.tagCountMap);
       };
 
       const { Queue } = require("./utils");
@@ -135,13 +141,22 @@ const processor = async ({ type, payload }, uiStore, appStore) => {
       appStore.imageHashMap[imageHash].tags = tags;
       break;
 
+    case ACTIONS.SET_IMAGE_TAGS_IN_COUNTER:
+      console.log("about to set tags: ", payload);
+      payload.tags.forEach((tag) => {
+        let count = uiStore.tagCountMap[tag] ? uiStore.tagCountMap[tag] : 0;
+        uiStore.tagCountMap[tag] = ++count;
+      });
+
+      break;
+
     case ACTIONS.SET_IMAGE_FILTER_TAG_SEARCH_VALUE:
       const searchValue = payload;
 
       uiStore.tagSearchValue = searchValue;
 
       const filteredImages = [];
-      let found = 0; // only calculate the first 100 tag matches
+      let found = 0; // only calculate the first 200 tag matches
 
       // TODO: refactor and clean up
       Object.keys(appStore.imageHashMap).some((key) => {

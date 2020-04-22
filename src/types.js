@@ -18,6 +18,7 @@
  * @property {string} currentPage Active page, used as router.
  * @property {string} tagSearchValue Value of tag search string.
  * @property {Object[]} filteredImageList Filtered images to display in dashboard.
+ * @property {Object} tagCountMap count of images per each tag.
  */
 
 /**

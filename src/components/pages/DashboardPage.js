@@ -18,9 +18,12 @@ const styles = {
   },
 };
 
-const DashboardPage = ({ onInputChange, filteredImageList }) =>
+const DashboardPage = ({ onInputChange, onPressReset, filteredImageList }) =>
   html` <div key="dashboard" style=${styles.wrapper}>
-    <${Header} onInputChange="${onInputChange}" />
+    <${Header}
+      onInputChange="${onInputChange}"
+      onPressReset="${onPressReset}"
+    />
     <div key="2" style=${styles.galleryWrapper}>
       <${Gallery} imageList="${filteredImageList}" />
     </div>

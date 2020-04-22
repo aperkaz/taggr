@@ -74,7 +74,6 @@ class VirtualizedGallery extends Component {
     const columnWidth = gridWidth / ELEMENTS_PER_COLLUMN;
 
     const rowCount = Math.ceil(imageList.length / ELEMENTS_PER_COLLUMN);
-    console.log("rowCount:", rowCount);
 
     // min row height: 250
     const rowHeight =

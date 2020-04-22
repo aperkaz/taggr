@@ -53,6 +53,11 @@ const App = () =>
               }),
             300
           )}"
+          onPressReset="${async () =>
+            await triggerAction({
+              type: ACTIONS.SET_CURRENT_PAGE,
+              payload: CONSTANTS.PAGES.START_PAGE,
+            })}"
         />`}
   </div>`;
 
