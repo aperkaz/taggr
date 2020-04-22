@@ -44,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// TODONOW: add tag header, with most present tags
 const Header = ({ onInputChange }) => {
   const classes = useStyles();
 
