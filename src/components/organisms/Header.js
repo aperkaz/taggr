@@ -8,6 +8,7 @@ const Typography = require("@material-ui/core/Typography").default;
 const InputBase = require("@material-ui/core/InputBase").default;
 const SearchIcon = require("@material-ui/icons/Search").default;
 
+// TODO: configure theme with typography and colors
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
