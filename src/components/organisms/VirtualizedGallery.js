@@ -132,6 +132,6 @@ VirtualizedGallery.propTypes = {
   ),
 };
 
-// feature: image menu: https://github.com/aperkaz/privatus/blob/add-react/src/components/DashboardImageGallery.js
+// feature: image menu: https://github.com/aperkaz/taggr/blob/add-react/src/components/DashboardImageGallery.js
 
 module.exports = VirtualizedGallery;

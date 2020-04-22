@@ -4,12 +4,12 @@ const StartPage = ({ onSelectRootFolderPath }) =>
   html`<div style=${styles.wrapper}>
     <div style=${styles.main}>
       <h1 className="title is-1" style=${{ marginBottom: "80px" }}>
-        Welcome to Privatus!
+        Welcome to taggr!
       </h1>
       <p>
-        The next gen AI-powered <b>privacy-focused photo experience</b>
+        Rediscover your memories while keeping your privacy
         <br />
-        Rediscover your photos while <b>keeping your privacy</b> 🛡️
+        Powered by Machine-Learning
       </p>
       <button onClick=${async () => await onSelectRootFolderPath()}>
         Select picture folder

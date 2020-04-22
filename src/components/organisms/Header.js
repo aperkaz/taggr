@@ -54,7 +54,7 @@ const Header = ({ onInputChange }) => {
         <${AppBar} position="static">
           <${Toolbar}>
             <${Typography} className="{classes.title}" variant="h6" noWrap>
-              🛡 Privatus
+              Taggr
             <//>
             <div className="${classes.grow}" />
             <div className="${classes.search}">

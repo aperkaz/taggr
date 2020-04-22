@@ -1,11 +1,11 @@
-# privatus
+# Taggr
 
-Privacy focused offiline first image gallery.
+Rediscover your memories while keeping your privacy.
 
 Build using electron.js, React, Storybook, TensorFlow and WebWorkers.
 
 ## Types
 
-JsDoc types are pressent. For support enable VSCode setting:
+JsDoc types are available. For support enable VSCode setting:
 
  ```"javascript.implicitProjectConfig.checkJs": true``` 

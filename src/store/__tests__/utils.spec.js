@@ -25,7 +25,7 @@ describe("utils.js", function () {
     const imagePathsList = await findImagePathsInFolder(testDir);
     expect(imagePathsList.length).to.equal(4);
     expect(imagePathsList[0]).to.equal(
-      "/home/alain/src/privatus/src/store/__tests__/images/bike.jpg"
+      "/home/alain/src/taggr/src/store/__tests__/images/bike.jpg"
     );
   });
 

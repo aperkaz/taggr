@@ -1,8 +1,8 @@
 {
-  "name": "privatus",
-  "productName": "privatus",
+  "name": "taggr",
+  "productName": "taggr",
   "version": "0.0.1",
-  "description": "My Electron application description",
+  "description": "Rediscover your memories while keeping your privacy",
   "main": "src/entryMainProcess.js",
   "scripts": {
     "start": "env DEVELOPMENT_ENV=true electron-forge start",
@@ -28,7 +28,7 @@
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "privatus"
+            "name": "taggr"
           }
         },
         {
