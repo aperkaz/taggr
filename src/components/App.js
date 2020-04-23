@@ -18,22 +18,22 @@ const selectRootFolderPath = async () => {
 
   const rootFolderPath = filePaths ? filePaths[0] : null;
 
-  if (rootFolderPath) {
-    await triggerAction({
-      type: ACTIONS.SET_CURRENT_PAGE,
-      payload: CONSTANTS.PAGES.DASHBOARD_PAGE,
-    });
+  if (!rootFolderPath) return;
 
-    await triggerAction({
-      type: ACTIONS.SET_ROOT_FOLDER_PATH,
-      payload: rootFolderPath,
-    });
+  await triggerAction({
+    type: ACTIONS.SET_CURRENT_PAGE,
+    payload: CONSTANTS.PAGES.DASHBOARD_PAGE,
+  });
 
-    await triggerAction({
-      type: ACTIONS.CALCULATE_IMAGE_PATHS_IN_ROOT,
-      payload: rootFolderPath,
-    });
-  }
+  await triggerAction({
+    type: ACTIONS.SET_ROOT_FOLDER_PATH,
+    payload: rootFolderPath,
+  });
+
+  await triggerAction({
+    type: ACTIONS.CALCULATE_IMAGE_PATHS_IN_ROOT,
+    payload: rootFolderPath,
+  });
 };
 
 // TODONOW: refactor to router

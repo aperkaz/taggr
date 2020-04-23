@@ -1,5 +1,3 @@
-const { withStore: processor } = require("./processor");
-
 // UI actions, that modify both store modules
 const ACTIONS = {
   SET_CURRENT_PAGE: "SET_CURRENT_PAGE",
@@ -16,12 +14,16 @@ const ACTIONS = {
   SET_IMAGE_FILTER_TAG_SEARCH_VALUE: "SET_IMAGE_FILTER",
 };
 
+// TODONOW: refactor actions, make them less granular
+
 /**
  * Trigger action in processor
  *
  * @param {ActionType} action
  */
 const triggerAction = async (action) => {
+  const { withStore: processor } = require("./processor");
+
   await processor(action);
 };
 
