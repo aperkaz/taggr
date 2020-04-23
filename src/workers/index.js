@@ -1,4 +1,9 @@
-const createWorkers = () => {
+let workers;
+
+// expose through getter
+const getWorkers = () => workers;
+
+const initializeWorkers = () => {
   const path = require("path");
 
   const recursiveImageFinderWorker = new Worker(
@@ -9,10 +14,12 @@ const createWorkers = () => {
     path.resolve(__dirname, "imageTagging.js")
   );
 
-  return {
+  workers = {
     recursiveImageFinderWorker,
     imageTaggingWorker,
   };
+
+  console.log("workers initialized", workers);
 };
 
-module.exports = createWorkers;
+module.exports = { initializeWorkers, getWorkers };

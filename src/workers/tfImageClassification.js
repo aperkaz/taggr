@@ -1,17 +1,18 @@
+// @ts-ignore-next-line
 global.fetch = require("node-fetch");
-
-const tf = require("@tensorflow/tfjs-node");
 
 const path = require("path");
 const url = require("url");
+
+const tf = require("@tensorflow/tfjs-node");
+
+const PROBABILITY_THRESHOLD = 0.5;
 
 const MODEL_URL = url.format({
   pathname: path.join(__dirname, "./models/mobilenet/model.json"),
   protocol: "file:",
   slashes: true,
 });
-
-const PROBABILITY_THRESHOLD = 0.5;
 
 let net;
 
@@ -27,8 +28,7 @@ async function loadModel() {
       modelUrl: MODEL_URL,
       version: 1,
       alpha: 1,
-      // fix the default of [-1,1]
-      inputRange: [0, 1],
+      inputRange: [0, 1], // fix the default of [-1,1]
     });
   } else {
     // FIX: issue: when packaging, make sure the model files are copied elsewhere https://github.com/electron-userland/electron-forge/issues/1592
@@ -50,9 +50,9 @@ async function classifyImage(imageData) {
   const smallImg = tf.image.resizeBilinear(pixels, [224, 224]);
   // console.timeEnd("transform");
 
-  // console.time("detect");
+  console.time("detect");
   let rawPredictions = await net.classify(smallImg);
-  // console.timeEnd("detect");
+  console.timeEnd("detect");
 
   // filter out predictions below threshold
   let filteredRawPredictions = rawPredictions.filter(
@@ -78,9 +78,7 @@ async function classifyImage(imageData) {
   return predictions;
 }
 
-module.exports = {
-  classifyImage,
-};
+module.exports = classifyImage;
 
 // load the required tensorflow.js models required by the worker on startup
 (async () => {

@@ -1,4 +1,4 @@
-const { store, autoEffect } = require("@risingstack/react-easy-state");
+const { store } = require("@risingstack/react-easy-state");
 
 /**
  * @type {uiStoreType} uiStore

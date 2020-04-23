@@ -62,7 +62,7 @@ const Header = ({ onInputChange, onPressReset, tagCountList }) => {
                 fontFamily: "Pacifico",
               }}
             >
-              Taggr
+              taggr
             <//>
             <div className="${classes.grow}" />
             <div className="${classes.search}">

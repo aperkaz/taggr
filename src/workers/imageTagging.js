@@ -1,4 +1,4 @@
-const { classifyImage } = require("./tfImageClassification");
+const classifyImage = require("./tfImageClassification");
 
 let queue = [];
 let busy = false;
@@ -21,6 +21,7 @@ async function processMessage({ data: { path, data } }) {
 
   tags = await classifyImage(data);
 
+  // @ts-ignore-next-line
   postMessage({ path, tags });
 
   // cleanup for GC

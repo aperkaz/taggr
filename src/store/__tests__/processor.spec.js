@@ -1,5 +1,6 @@
 const { expect } = require("chai");
-const { processor, ACTIONS } = require("../actions");
+const { ACTIONS } = require("../actions");
+const processor = require("../processor");
 
 describe("actions.js", () => {
   describe("Test action processing", () => {

@@ -1,5 +1,5 @@
 const Comlink = require("comlink");
-const { findImagePathsInFolder } = require("../store/utils");
+const { findImagePathsInFolder } = require("../utils");
 
 Comlink.expose({
   async process(path) {

@@ -3,16 +3,13 @@ const { html } = require("htm/react");
 const { view } = require("@risingstack/react-easy-state");
 const debounce = require("lodash.debounce");
 
-const {
-  triggerAction,
-  CONSTANTS,
-  ACTIONS,
-  uiStore,
-  initializeStore,
-} = require("../store/actions");
-
 const StartPage = require("./pages/StartPage");
 const DashboardPage = require("./pages/DashboardPage");
+
+const { triggerAction, ACTIONS } = require("../store/actions");
+const uiStore = require("../store/modules/uiStore");
+
+const CONSTANTS = require("../constants");
 
 const selectRootFolderPath = async () => {
   const { filePaths } = await dialog.showOpenDialog({
@@ -39,6 +36,7 @@ const selectRootFolderPath = async () => {
   }
 };
 
+// TODONOW: refactor to router
 const App = () =>
   html`<div style=${styles}>
     ${uiStore.currentPage === CONSTANTS.PAGES.START_PAGE
@@ -65,8 +63,5 @@ const App = () =>
 const styles = {
   height: "100%",
 };
-
-// setup web workers and stores
-initializeStore();
 
 module.exports = view(App);
