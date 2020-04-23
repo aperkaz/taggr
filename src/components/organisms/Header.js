@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(1),
     marginLeft: theme.spacing(3),
     width: "auto",
   },
@@ -57,19 +57,14 @@ const Header = ({ onInputChange, onPressReset }) => {
       <div key="header" className="${classes.grow}">
         <${AppBar} position="static">
           <${Toolbar} variant="dense">
-            <${Typography} variant="h5" noWrap>
+            <${Typography}
+              variant="h5"
+              style=${{
+                fontFamily: "Pacifico",
+              }}
+            >
               Taggr
             <//>
-            <${Button}
-              variant="outlined"
-              style=${{
-                fontFamily: "Nunito",
-                color: "white",
-                marginLeft: "2rem",
-              }}
-              onClick=${onPressReset}
-              >Pick new folder<//
-            >
             <div className="${classes.grow}" />
             <div className="${classes.search}">
               <div className="${classes.searchIcon}">
@@ -85,6 +80,15 @@ const Header = ({ onInputChange, onPressReset }) => {
                 inputProps="${{ "aria-label": "search" }}"
               />
             </div>
+            <${Button}
+              style=${{
+                fontFamily: "Nunito",
+                background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+                color: "white",
+              }}
+              onClick=${onPressReset}
+              >Reset<//
+            >
           <//>
         <//>
       </div>
