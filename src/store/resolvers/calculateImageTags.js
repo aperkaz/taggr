@@ -1,14 +1,12 @@
-// TODONOW: simplify this MF
-const calculateImageTags = (modules, payload) => {
-  console.log("TODO:");
-
+// TODONOW: move to helpers
+const calculateImageTags = (payload) => {
   const {
     generateMD5Hash,
     imageTaggingQueuExecutor,
     Queue,
   } = require("../../utils");
   const { getWorkers } = require("../../workers/index");
-  const workers = getWorkers;
+  const workers = getWorkers();
 
   // set worker callback
   workers.imageTaggingWorker.onmessage = async ({ data }) => {

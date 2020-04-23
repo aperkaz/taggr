@@ -83,6 +83,7 @@ class Queue {
 }
 
 /**
+ * TODONOW: remove
  * Load image using DOM Image element
  *
  * @param {String} path

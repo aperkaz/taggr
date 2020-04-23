@@ -21,7 +21,7 @@ async function loadModel() {
 
   if (net) return;
 
-  console.time("loadModel");
+  // console.time("loadModel");
 
   if (process.env.DEVELOPMENT_ENV) {
     net = await mobilenet.load({
@@ -35,7 +35,7 @@ async function loadModel() {
     net = await mobilenet.load();
   }
 
-  console.timeEnd("loadModel");
+  // console.timeEnd("loadModel");
   return;
 }
 
@@ -50,9 +50,9 @@ async function classifyImage(imageData) {
   const smallImg = tf.image.resizeBilinear(pixels, [224, 224]);
   // console.timeEnd("transform");
 
-  console.time("detect");
+  // console.time("detect");
   let rawPredictions = await net.classify(smallImg);
-  console.timeEnd("detect");
+  // console.timeEnd("detect");
 
   // filter out predictions below threshold
   let filteredRawPredictions = rawPredictions.filter(

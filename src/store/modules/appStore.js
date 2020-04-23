@@ -2,8 +2,8 @@
  * @type {appStoreType} appStore
  */
 let appStore = {
-  rootFolderPath: "",
-  imagePathsList: [],
+  projectRootFolderPath: "",
+  // imagePathsList: [],
   imageHashMap: {},
 };
 

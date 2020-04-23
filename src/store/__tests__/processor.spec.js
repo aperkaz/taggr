@@ -19,10 +19,10 @@ describe("actions.js", () => {
       };
     });
 
-    it("SET_CURRENT_PAGE", () => {
+    it("SET_UI_PAGE", () => {
       const newPage = "TEST_PAGE";
       const action = {
-        type: ACTIONS.SET_CURRENT_PAGE,
+        type: ACTIONS.SET_UI_PAGE,
         payload: newPage,
       };
       processor(action, uiStore, appStore);

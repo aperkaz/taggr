@@ -1,37 +1,13 @@
+const Comlink = require("comlink");
 const classifyImage = require("./tfImageClassification");
 
-let queue = [];
-let busy = false;
+Comlink.expose({
+  async process(imageData) {
+    console.log("image tagging worker triggered");
+    let tags = [];
 
-/**
- * Calculate classfication tags for an image path
- * @param {Object} data image path
- */
-onmessage = async (data) => {
-  if (busy) {
-    queue.push(data);
-  } else {
-    busy = true;
-    await processMessage(data);
-  }
-};
+    tags = await classifyImage(imageData);
 
-async function processMessage({ data: { path, data } }) {
-  let tags = [];
-
-  tags = await classifyImage(data);
-
-  // @ts-ignore-next-line
-  postMessage({ path, tags });
-
-  // cleanup for GC
-  tags = [];
-  path = null;
-  data = null;
-
-  if (queue.length) {
-    await processMessage(queue.shift());
-  } else {
-    busy = false;
-  }
-}
+    return tags;
+  },
+});

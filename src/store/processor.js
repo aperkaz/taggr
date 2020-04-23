@@ -3,15 +3,9 @@ const { ACTIONS } = require("./actions");
 // Resolvers are async functions with access to persistence, filesystem, webworkers... 
 let resolver = {};
 
-resolver[ACTIONS.SET_CURRENT_PAGE] = require("./resolvers/setCurrentPage");
-resolver[ACTIONS.SET_ROOT_FOLDER_PATH] = require("./resolvers/setRootFolderPath");
-resolver[ACTIONS.CALCULATE_IMAGE_PATHS_IN_ROOT] = require('./resolvers/calculateImagePathsInRoot');
-resolver[ACTIONS.SET_IMAGE_PATHS_IN_MAP] = require('./resolvers/setImagePathsInMap'); 
-resolver[ACTIONS.CALCULATE_IMAGE_TAGS] = require('./resolvers/calculateImageTags'); 
-resolver[ACTIONS.SET_IMAGE_TAGS_IN_MAP] = require('./resolvers/setImageTagsInMap'); 
-resolver[ACTIONS.SET_IMAGE_TAGS_IN_COUNTER] = require('./resolvers/setImageTagsInCounter'); 
-resolver[ACTIONS.SET_IMAGE_FILTER_TAG_SEARCH_VALUE] = require('./resolvers/setImageFilterTagSearchValue'); 
-
+resolver[ACTIONS.SET_UI_PAGE] = require("./resolvers/setUiPage");
+resolver[ACTIONS.CREATE_PROJECT]= async(m,p)=> await require('./resolvers/createProject')(m,p)
+resolver[ACTIONS.FILTER_RESULTS_BY_TAG]= require('./resolvers/filterResultsByTag')
 
 /**
  * Component interfacing between the UI and backend-processes, aka resolvers.

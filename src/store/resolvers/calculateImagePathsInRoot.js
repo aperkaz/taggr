@@ -1,4 +1,4 @@
-// TODONOW: add tests to resolvers
+// TODONOW: remove
 const calculateImagePathInRoot = async (modules, payload) => {
   const Comlink = require("comlink");
   const { getWorkers } = require("../../workers/index");

@@ -16,52 +16,58 @@ const selectRootFolderPath = async () => {
     properties: ["openDirectory"],
   });
 
-  const rootFolderPath = filePaths ? filePaths[0] : null;
+  const projectRootFolderPath = filePaths ? filePaths[0] : null;
 
-  if (!rootFolderPath) return;
+  if (!projectRootFolderPath) return;
 
   await triggerAction({
-    type: ACTIONS.SET_CURRENT_PAGE,
+    type: ACTIONS.SET_UI_PAGE,
     payload: CONSTANTS.PAGES.DASHBOARD_PAGE,
   });
 
   await triggerAction({
-    type: ACTIONS.SET_ROOT_FOLDER_PATH,
-    payload: rootFolderPath,
-  });
-
-  await triggerAction({
-    type: ACTIONS.CALCULATE_IMAGE_PATHS_IN_ROOT,
-    payload: rootFolderPath,
+    type: ACTIONS.CREATE_PROJECT,
+    payload: projectRootFolderPath,
   });
 };
 
-// TODONOW: refactor to router
+const renderRoute = (route) => {
+  switch (route) {
+    case CONSTANTS.PAGES.START_PAGE:
+      return html`<${StartPage}
+        onSelectRootFolderPath=${selectRootFolderPath}
+      />`;
+    case CONSTANTS.PAGES.DASHBOARD_PAGE:
+      return html`<${DashboardPage}
+        filteredImageList="${uiStore.filteredImageList}"
+        tagCountList="${uiStore.tagCountList}"
+        onInputChange="${debounce(
+          (payload) =>
+            triggerAction({
+              type: ACTIONS.FILTER_RESULTS_BY_TAG,
+              payload,
+            }),
+          300
+        )}"
+        onPressReset="${async () =>
+          await triggerAction({
+            type: ACTIONS.SET_UI_PAGE,
+            payload: CONSTANTS.PAGES.START_PAGE,
+          })}"
+      />`;
+      break;
+  }
+};
+
 const App = () =>
-  html`<div style=${styles}>
-    ${uiStore.currentPage === CONSTANTS.PAGES.START_PAGE
-      ? html`<${StartPage} onSelectRootFolderPath=${selectRootFolderPath} />`
-      : html`<${DashboardPage}
-          filteredImageList="${uiStore.filteredImageList}"
-          tagCountList="${uiStore.tagCountList}"
-          onInputChange="${debounce(
-            (payload) =>
-              triggerAction({
-                type: ACTIONS.SET_IMAGE_FILTER_TAG_SEARCH_VALUE,
-                payload,
-              }),
-            300
-          )}"
-          onPressReset="${async () =>
-            await triggerAction({
-              type: ACTIONS.SET_CURRENT_PAGE,
-              payload: CONSTANTS.PAGES.START_PAGE,
-            })}"
-        />`}
+  html`<div style=${styles.wrapper}>
+    ${renderRoute(uiStore.currentPage)}
   </div>`;
 
 const styles = {
-  height: "100%",
+  wrapper: {
+    height: "100%",
+  },
 };
 
 module.exports = view(App);
