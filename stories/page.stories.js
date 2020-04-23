@@ -22,5 +22,16 @@ export const DashboardPage = () =>
     html`<${DashboardPageComponent}
       filteredImageList=${imageList}
       onInputChange=${(value) => console.log("input: ", value)}
+      tagCountList="${[
+        { name: "dogs", count: 220 },
+        { name: "cats", count: 119 },
+        { name: "party", count: 50 },
+        { name: "suit", count: 21 },
+        { name: "beer", count: 13 },
+        { name: "pizza", count: 9 },
+        { name: "forest", count: 5 },
+        { name: "sea", count: 2 },
+        { name: "dolphin", count: 1 },
+      ]}"
     />`
   );

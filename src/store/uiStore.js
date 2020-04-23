@@ -8,6 +8,7 @@ let uiStore = store({
   tagSearchValue: "",
   filteredImageList: [],
   tagCountMap: {}, // { tag-name: count }
+  tagCountList: [], // ordered tagCount object list
 });
 
 module.exports = uiStore;

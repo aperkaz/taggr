@@ -13,6 +13,18 @@ export const Header = () =>
   renderElementInContainer(
     html`<${HeaderComponent}
       onInputChange=${(value) => console.log("input: ", value)}
+      onPressReset=${() => console.log("reset pressed")}
+      tagCountList=${[
+        { name: "dogs", count: 220 },
+        { name: "cats", count: 119 },
+        { name: "party", count: 50 },
+        { name: "suit", count: 21 },
+        { name: "beer", count: 13 },
+        { name: "pizza", count: 9 },
+        { name: "forest", count: 5 },
+        { name: "sea", count: 2 },
+        { name: "dolphin", count: 1 },
+      ]}
     />`
   );
 

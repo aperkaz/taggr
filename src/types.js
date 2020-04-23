@@ -19,6 +19,7 @@
  * @property {string} tagSearchValue Value of tag search string.
  * @property {Object[]} filteredImageList Filtered images to display in dashboard.
  * @property {Object} tagCountMap count of images per each tag.
+ * @property {Array[Object]} tagCountList ordered list of {tag-name, count} objects.
  */
 
 /**

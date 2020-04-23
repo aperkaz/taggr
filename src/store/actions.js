@@ -150,7 +150,27 @@ const processor = async ({ type, payload }, uiStore, appStore) => {
       payload.tags.forEach((tag) => {
         let count = uiStore.tagCountMap[tag] ? uiStore.tagCountMap[tag] : 0;
         uiStore.tagCountMap[tag] = ++count;
+
+        //check if tag is already present in results array
+        const isTagBeingCounted = uiStore.tagCountList.some(
+          (tagCount, index) => {
+            if (tagCount.name === tag) {
+              uiStore.tagCountList[index].count++;
+              return true;
+            }
+          }
+        );
+
+        if (!isTagBeingCounted) {
+          // if tag is not present in result array, add
+          uiStore.tagCountList.push({ name: tag, count: 1 });
+        }
       });
+
+      // Object.keys(uiStore.tagCountMap).forEach((tagName) => {
+
+      // const count = uiStore.tagCountMap[tagName];
+      // });
 
       break;
 

@@ -45,6 +45,7 @@ const App = () =>
       ? html`<${StartPage} onSelectRootFolderPath=${selectRootFolderPath} />`
       : html`<${DashboardPage}
           filteredImageList="${uiStore.filteredImageList}"
+          tagCountList="${uiStore.tagCountList}"
           onInputChange="${debounce(
             (payload) =>
               triggerAction({

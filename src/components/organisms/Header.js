@@ -9,6 +9,8 @@ const Button = require("@material-ui/core/Button").default;
 const InputBase = require("@material-ui/core/InputBase").default;
 const SearchIcon = require("@material-ui/icons/Search").default;
 
+const TagCountDisplay = require("../molecules/TagCountDisplay");
+
 // TODO: configure theme with typography and colors
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -46,10 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// TODONOW: add tag header, with most present tags
-// https://material-ui.com/components/chips/
-//  uiStore.uiStore.tagCountMap
-const Header = ({ onInputChange, onPressReset }) => {
+const Header = ({ onInputChange, onPressReset, tagCountList }) => {
   const classes = useStyles();
 
   return html`
@@ -91,6 +90,9 @@ const Header = ({ onInputChange, onPressReset }) => {
             >
           <//>
         <//>
+      </div>
+      <div style=${{ marginTop: "8px" }}>
+        <${TagCountDisplay} tagCountList=${tagCountList} />
       </div>
     </div>
   `;
