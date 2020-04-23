@@ -1,13 +1,13 @@
 const { store } = require("@risingstack/react-easy-state");
+// @ts-ignore
+require("../../types");
 
 /**
  * @type {uiStoreType} uiStore
  */
 let uiStore = store({
   currentPage: "START_PAGE",
-  tagSearchValue: "",
   filteredImageList: [],
-  tagCountMap: {}, // { tag-name: count }
   tagCountList: [], // ordered tagCount object list
 });
 

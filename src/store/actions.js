@@ -1,3 +1,6 @@
+// @ts-ignore
+require("../types");
+
 // UI actions, that modify both store modules
 const ACTIONS = {
   SET_UI_PAGE: "SET_UI_PAGE",
@@ -7,7 +10,6 @@ const ACTIONS = {
 
 /**
  * Trigger action in processor
- * // TODONOW: fix types
  * @param {ActionType} action
  */
 const triggerAction = async (action) => {

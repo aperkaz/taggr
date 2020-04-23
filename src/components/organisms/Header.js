@@ -11,7 +11,7 @@ const SearchIcon = require("@material-ui/icons/Search").default;
 
 const TagCountDisplay = require("../molecules/TagCountDisplay");
 
-// TODO: configure theme with typography and colors
+// TODO: style: configure theme with typography and colors
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -48,6 +48,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// TODONOW: rewrite tag count list with resolvers
+// TODONOW: fix windows bug
+// TODONOW: ship app MF
 const Header = ({ onInputChange, onPressReset, tagCountList }) => {
   const classes = useStyles();
 

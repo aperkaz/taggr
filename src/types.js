@@ -16,9 +16,7 @@
 /**
  * @typedef {Object} uiStoreType Reactive store of UI relevant data.
  * @property {string} currentPage Active page, used as router.
- * @property {string} tagSearchValue Value of tag search string.
  * @property {Object[]} filteredImageList Filtered images to display in dashboard.
- * @property {Object} tagCountMap count of images per each tag.
  * @property {Array[Object]} tagCountList ordered list of {tag-name, count} objects.
  */
 
@@ -27,8 +25,7 @@
  */
 /**
  * @typedef {Object} appStoreType Reactive store of UI relevant data.
- * @property {string} rootFolderPath Current root folder path (project).
- * @property {string[]} imagePathsList List of all image paths inside root folder.
+ * @property {string} projectRootFolderPath Current root folder path (project).
  * @property {Object} imageHashMap Map of image information, by image hash (from path).
  */
 const imageHashMap = { hash1: { path: "path1", tags: ["t1", "t2"] } };

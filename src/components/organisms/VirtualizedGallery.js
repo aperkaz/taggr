@@ -106,10 +106,8 @@ const Cell = ({ columnIndex, rowIndex, style, data }) => {
   const height = style.height - GUTTER;
   const width = style.width - GUTTER;
 
-  // TODONOW: parametrize gallery elements
+  // TODO: clean: parametrize gallery elements
   const index = rowIndex * ELEMENTS_PER_COLLUMN + columnIndex;
-  // console.log(data);
-  // console.log(index);
   return html`<div
     key=${columnIndex + ":" + rowIndex}
     style=${{ ...style, height, width }}

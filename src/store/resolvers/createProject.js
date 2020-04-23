@@ -4,7 +4,6 @@ const { generateMD5Hash } = require("../../utils");
 
 const createProject = async (modules, payload) => {
   const workers = getWorkers();
-  console.log(modules);
 
   // erase existing data (uiStore and appStore)
   modules.uiStore.tagSearchValue = "";
@@ -27,7 +26,6 @@ const createProject = async (modules, payload) => {
   // Worker: calculate tags for images
   const imageTaggingWorker = Comlink.wrap(workers.imageTaggingWorker);
 
-  // TODONOW: add guard, max 100000 cycles
   while (imagePathList.length > 0) {
     console.log("remaining: ", imagePathList.length);
 
@@ -41,8 +39,6 @@ const createProject = async (modules, payload) => {
     modules.appStore.imageHashMap[hash] = { path: imagePath, tags };
   }
 };
-
-// helpers: TODONOW: extract to helpers
 
 /**
  * Load image using DOM Image element
@@ -59,6 +55,12 @@ async function loadImage(path) {
   });
 }
 
+/**
+ * Generate a ImageData structure from a imagePath
+ *
+ * @param {String} imagePath
+ * @returns {Promise<ImageData>} loaded image
+ */
 const generateImageData = async (imagePath) => {
   // console.time("loadImage");
   let img = await loadImage(imagePath);
