@@ -65,7 +65,7 @@ const styles = {
   height: "100%",
 };
 
-// setup web workers with reference to store
+// setup web workers and stores
 initializeStore();
 
 module.exports = view(App);

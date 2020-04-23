@@ -1,15 +1,12 @@
 const { Component } = require("react");
 const { html } = require("htm/react");
 const PropTypes = require("prop-types");
+const { FixedSizeGrid: Grid } = require("react-window"); // Virtualize list for performance https://github.com/developerdizzle/react-virtual-list
 const debounce = require("lodash.debounce");
-// Virtualize list for performance https://github.com/developerdizzle/react-virtual-list
-const { FixedSizeGrid: Grid } = require("react-window");
 const ImageTile = require("../molecules/ImageTile");
 
 const GUTTER = 5;
 const ELEMENTS_PER_COLLUMN = 5;
-
-// TODONOW: fix issues when path is null in cell. Keeps being null after reflesh
 
 class VirtualizedGallery extends Component {
   constructor(props) {

@@ -37,6 +37,10 @@ let workers;
 
 const initializeStore = () => {
   workers = createWorkers();
+
+  // add to global window object for debug
+  window["appStore"] = appStore;
+  window["uiStore"] = uiStore;
 };
 
 // ACTION PROCESSING
