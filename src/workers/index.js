@@ -1,39 +1,35 @@
-function createWorkers(store) {
+let workers;
+
+// expose through getter
+const getWorkers = () => workers;
+
+const initializeWorkers = () => {
   const path = require("path");
 
-  // initializations
-  let imageTaggingWorker = new Worker(
-    path.resolve(__dirname, "imageTagging.js")
-  );
-
-  let recursiveImageFinderWorker = new Worker(
+  const recursiveImageFinderWorker = new Worker(
     path.resolve(__dirname, "recursiveImageFinder.js")
   );
 
-  // callbacks
-  imageTaggingWorker.onmessage = ({ data }) => {
-    const { generateMD5Hash } = require("../utils");
+  const imageTaggingWorker = new Worker(
+    path.resolve(__dirname, "imageTagging.js")
+  );
 
-    const imagePath = data.path;
-    const imageTags = data.tags;
-    const imageHash = generateMD5Hash(imagePath);
+  const filterResultsWorker = new Worker(
+    path.resolve(__dirname, "filterResults.js")
+  );
 
-    console.log("imageTaggingWorker to update store");
+  const pickTopTagsWorker = new Worker(
+    path.resolve(__dirname, "pickTopTags.js")
+  );
 
-    if (store.imageHashMap[imageHash]) {
-      // update if existing
-      store.imageHashMap[imageHash].tags = imageTags;
-    } else {
-      // initialize if non existing
-      store.imageHashMap[imageHash] = { path: imagePath, tags: imageTags };
-    }
+  workers = {
+    recursiveImageFinderWorker,
+    imageTaggingWorker,
+    filterResultsWorker,
+    pickTopTagsWorker,
   };
 
-  recursiveImageFinderWorker.onmessage = ({ data }) => {
-    store.imagePathsList = data.imagePathsList;
-  };
+  console.log("workers initialized", workers);
+};
 
-  return { imageTaggingWorker, recursiveImageFinderWorker };
-}
-
-module.exports = { createWorkers };
+module.exports = { initializeWorkers, getWorkers };

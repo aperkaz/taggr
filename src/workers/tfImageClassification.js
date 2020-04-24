@@ -1,80 +1,61 @@
+// @ts-ignore-next-line
 global.fetch = require("node-fetch");
 
-const tf = require("@tensorflow/tfjs");
-const mobilenet = require("@tensorflow-models/mobilenet");
-require("@tensorflow/tfjs-node");
+const path = require("path");
+const url = require("url");
 
-const fs = require("fs");
-const jpeg = require("jpeg-js");
+const tf = require("@tensorflow/tfjs-node");
 
-// TODO: load the model from the filesystem
-// https://github.com/bartosz-paternoga/MobileNet_tfjs-node_Serverless/tree/89a587bd25935d632e90af286abdbbcf658e5190
-// https://github.com/tensorflow/tfjs/blob/022376982ad26736abe92d587adb809b7f2482fb/tfjs-converter/demo/mobilenet/mobilenet.js
-// https://github.com/tensorflow/tfjs-examples/blob/master/mobilenet/index.js
-// https://github.com/tensorflow/tfjs/blob/26bccc44133ae14d98f3ac6f217a4ee8d51055f0/tfjs-node/src/image_test.ts
+const PROBABILITY_THRESHOLD = 0.5;
 
-const NUMBER_OF_CHANNELS = 3;
-const PROBABILITY_THRESHOLD = 0.1;
+const MODEL_URL = url.format({
+  pathname: path.join(__dirname, "./models/mobilenet/model.json"),
+  protocol: "file:",
+  slashes: true,
+});
 
-let mn_model;
-
-const readImage = (path) => {
-  const buf = fs.readFileSync(path);
-  const pixels = jpeg.decode(buf, true);
-  return pixels;
-};
-
-const imageByteArray = (image, numChannels) => {
-  const pixels = image.data;
-  const numPixels = image.width * image.height;
-  const values = new Int32Array(numPixels * numChannels);
-
-  for (let i = 0; i < numPixels; i++) {
-    for (let channel = 0; channel < numChannels; ++channel) {
-      values[i * numChannels + channel] = pixels[i * 4 + channel];
-    }
-  }
-
-  return values;
-};
-
-const imageToInput = (image, numChannels) => {
-  const values = imageByteArray(image, numChannels);
-  const outShape = [image.height, image.width, numChannels];
-  const input = tf.tensor3d(values, outShape, "int32");
-
-  return input;
-};
+let net;
 
 async function loadModel() {
-  if (mn_model) return;
+  const mobilenet = require("@tensorflow-models/mobilenet");
 
-  console.log("loadModel()");
-  console.time("loadModel");
-  const mn = new mobilenet.MobileNet(1, 1);
-  mn.path = `https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_1.0_224/model.json`;
-  await mn.load();
-  console.timeEnd("loadModel");
-  mn_model = mn;
-  return mn;
+  if (net) return;
+
+  // console.time("loadModel");
+
+  if (process.env.DEVELOPMENT_ENV) {
+    net = await mobilenet.load({
+      modelUrl: MODEL_URL,
+      version: 1,
+      alpha: 1,
+      inputRange: [0, 1], // fix the default of [-1,1]
+    });
+  } else {
+    // FIX: issue: when packaging, make sure the model files are copied elsewhere https://github.com/electron-userland/electron-forge/issues/1592
+    net = await mobilenet.load();
+  }
+
+  // console.timeEnd("loadModel");
+  return;
 }
 
 /**
- * Generate image classification tags for a given imagea above a probability threshold
- * @param {String} imagePath
- * @returns {Array} tags
+ * Generate image classification tags for a given image above a probability threshold
+ * @param {ImageData} imageData
+ * @returns {Promise<String[]>} tags
  */
-async function classifyImage(imagePath) {
-  console.time("classifyImage");
-  const image = readImage(imagePath);
-  const input = imageToInput(image, NUMBER_OF_CHANNELS);
+async function classifyImage(imageData) {
+  // console.time("transform");
+  const pixels = tf.browser.fromPixels(imageData);
+  const smallImg = tf.image.resizeBilinear(pixels, [224, 224]);
+  // console.timeEnd("transform");
 
-  await loadModel();
-
-  const rawPredictions = await mn_model.classify(input);
+  // console.time("detect");
+  let rawPredictions = await net.classify(smallImg);
+  // console.timeEnd("detect");
 
   // filter out predictions below threshold
-  const filteredRawPredictions = rawPredictions.filter(
+  let filteredRawPredictions = rawPredictions.filter(
     (rawPrediction) => rawPrediction.probability > PROBABILITY_THRESHOLD
   );
 
@@ -87,14 +68,24 @@ async function classifyImage(imagePath) {
     predictions.push(...tags);
   });
 
-  // free memory from TF-internal libraries from input image
-  input.dispose();
+  // free memory by cleaning TF-internals and variables
+  pixels.dispose();
+  smallImg.dispose();
+  imageData = null;
+  rawPredictions = null;
+  filteredRawPredictions = null;
 
-  console.timeEnd("classifyImage");
   return predictions;
 }
 
-module.exports = {
-  loadModel,
-  classifyImage,
-};
+module.exports = classifyImage;
+
+// load the required tensorflow.js models required by the worker on startup
+(async () => {
+  try {
+    await loadModel();
+    // console.log(await classifyImage("home/alain/Desktop/a/0.jpg"));
+  } catch (err) {
+    console.log(err);
+  }
+})();

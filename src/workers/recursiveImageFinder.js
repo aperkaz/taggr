@@ -1,16 +1,26 @@
-onmessage = async (e) => {
-  console.log("recursiveImageFinderWorker received task");
+const Comlink = require("comlink");
+
+Comlink.expose({
+  async process(path) {
+    return await findImagePathsInFolder(path);
+  },
+});
+
+/**
+ * Find all the paths of images recursively inside path
+ *
+ * @param {String} folderPath
+ * @returns {Promise<String[]>} imagePathsList
+ */
+async function findImagePathsInFolder(folderPath) {
   const readdirp = require("readdirp");
   let imagePathsList = [];
-
-  if (!e.data || !e.data.path) return [];
-  const folderPath = e.data.path;
 
   var settings = {
     // Filter files with js and json extension
     fileFilter: ["*.png", "*.PNG", "*.jpg", "*.JPG", ".*.jpeg", "*.JPEG"],
     // Filter by directory
-    directoryFilter: ["!.git", "!*modules"],
+    directoryFilter: ["!.git", "!*modules", "!.cache", "!.*"],
   };
 
   for await (const entry of readdirp(folderPath, settings)) {
@@ -18,5 +28,5 @@ onmessage = async (e) => {
     imagePathsList.push(`${folderPath}/${path}`);
   }
 
-  postMessage({ imagePathsList });
-};
+  return imagePathsList;
+}

@@ -1,0 +1,36 @@
+html{
+  height: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  height: 100%;
+  margin: 0;
+}
+
+#root{
+  height: 100%;
+}
+
+.dashboard__tile--loading{
+  height: 100%;
+  width: 100%;
+  border-radius: 4px;
+  animation-duration: 35s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: animatedPlaceHolder;
+  animation-timing-function: linear;
+  background: #f6f7f8;
+  background: linear-gradient(to right, #eeeeee 10%, #dddddd 25%, #eeeeee 50%);
+  position: relative;
+}
+
+@keyframes animatedPlaceHolder {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 5000px 0;
+    }
+  }
