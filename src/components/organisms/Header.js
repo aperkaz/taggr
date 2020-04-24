@@ -48,10 +48,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// TODONOW: rewrite tag count list with resolvers
-// TODONOW: fix windows bug
-// TODONOW: ship app MF
-const Header = ({ onInputChange, onPressReset, tagCountList }) => {
+const Header = ({
+  onInputChange,
+  onPressReset,
+  tagProcessingStatus,
+  tagCountList,
+}) => {
   const classes = useStyles();
 
   return html`
@@ -73,7 +75,9 @@ const Header = ({ onInputChange, onPressReset, tagCountList }) => {
                 <${SearchIcon} />
               </div>
               <${InputBase}
-                placeholder="Search by tag"
+                placeholder=${tagProcessingStatus
+                  ? tagProcessingStatus
+                  : "Search by tag"}
                 classes=${{
                   root: classes.inputRoot,
                   input: classes.inputInput,
@@ -104,11 +108,20 @@ const Header = ({ onInputChange, onPressReset, tagCountList }) => {
 Header.defaultProps = {
   onInputChange: () => null,
   onPressReset: () => null,
+  tagProcessingStatus: null,
+  tagCountList: [],
 };
 
 Header.propTypes = {
   onInputChange: PropTypes.func,
   onPressReset: PropTypes.func,
+  tagProcessingStatus: PropTypes.any,
+  tagCountList: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      count: PropTypes.number,
+    })
+  ),
 };
 
 module.exports = Header;

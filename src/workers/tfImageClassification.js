@@ -21,7 +21,7 @@ async function loadModel() {
 
   if (net) return;
 
-  // console.time("loadModel");
+  console.time("loadModel");
 
   if (process.env.DEVELOPMENT_ENV) {
     net = await mobilenet.load({
@@ -35,7 +35,7 @@ async function loadModel() {
     net = await mobilenet.load();
   }
 
-  // console.timeEnd("loadModel");
+  console.timeEnd("loadModel");
   return;
 }
 
@@ -45,14 +45,12 @@ async function loadModel() {
  * @returns {Promise<String[]>} tags
  */
 async function classifyImage(imageData) {
-  // console.time("transform");
   const pixels = tf.browser.fromPixels(imageData);
+  // Most required when passing an image Data of bigger sizes, to speed up // smallImg.dispose();
   const smallImg = tf.image.resizeBilinear(pixels, [224, 224]);
-  // console.timeEnd("transform");
 
-  // console.time("detect");
   let rawPredictions = await net.classify(smallImg);
-  // console.timeEnd("detect");
+  console.log(rawPredictions);
 
   // filter out predictions below threshold
   let filteredRawPredictions = rawPredictions.filter(

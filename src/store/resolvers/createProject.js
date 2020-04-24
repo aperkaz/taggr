@@ -36,18 +36,30 @@ const createProject = async (modules, payload) => {
   // Worker: calculate tags for images
   const imageTaggingWorker = Comlink.wrap(workers.imageTaggingWorker);
 
+  const imagesToProcess = imagePathListToProcess.length;
+
   while (imagePathListToProcess.length > 0) {
-    console.log("remaining: ", imagePathListToProcess.length);
+    const remaining = imagePathListToProcess.length;
+
+    // update analysis status in uiStore
+    modules.uiStore.tagProcessingStatus = `Processing ${remaining} / ${imagesToProcess}`;
+
+    console.time("processImage");
 
     const imagePath = imagePathListToProcess.pop();
     const hash = generateMD5Hash(imagePath);
-
     const imageData = await generateImageData(imagePath);
+
+    console.time("classify");
     const tags = await imageTaggingWorker.process(imageData);
+    console.timeEnd("classify");
 
     // save results in appStore
     modules.appStore.imageHashMap[hash] = { path: imagePath, tags };
+
+    console.timeEnd("processImage");
   }
+  modules.uiStore.tagProcessingStatus = null;
 
   // Worker: Sort tags by occcurrence, pick top 10
   const pickTopTagsWorker = Comlink.wrap(workers.pickTopTagsWorker);
@@ -74,18 +86,26 @@ async function loadImage(path) {
 }
 
 /**
- * Generate a ImageData structure from a imagePath
+ * Generate a ImageData structure from a imagePath. Prepocess using Canvas to algorithm input: 224px
  *
  * @param {String} imagePath
  * @returns {Promise<ImageData>} loaded image
  */
 const generateImageData = async (imagePath) => {
-  // console.time("loadImage");
   let img = await loadImage(imagePath);
-  // console.timeEnd("loadImage");
+
+  const MAX_HEIGHT = 224;
+
+  // calculate new ratios for image size, based on MAX_HEIGHT
+  if (img.height > MAX_HEIGHT) {
+    img.width *= MAX_HEIGHT / img.height;
+    img.height = MAX_HEIGHT;
+  }
 
   let canvas = new OffscreenCanvas(img.width, img.height);
-  canvas.getContext("2d").drawImage(img, 0, 0);
+  var ctx = canvas.getContext("2d");
+  // ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(img, 0, 0, img.width, img.height);
 
   const imageData = canvas
     .getContext("2d")

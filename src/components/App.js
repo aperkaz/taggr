@@ -40,6 +40,7 @@ const renderRoute = (route) => {
     case CONSTANTS.PAGES.DASHBOARD_PAGE:
       return html`<${DashboardPage}
         filteredImageList="${uiStore.filteredImageList}"
+        tagProcessingStatus="${uiStore.tagProcessingStatus}"
         tagCountList="${uiStore.tagCountList}"
         onInputChange="${debounce(
           (payload) =>

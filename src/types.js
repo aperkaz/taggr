@@ -17,6 +17,7 @@
  * @typedef {Object} uiStoreType Reactive store of UI relevant data.
  * @property {string} currentPage Active page, used as router.
  * @property {Object[]} filteredImageList Filtered images to display in dashboard.
+ * @property {String} tagProcessingStatus current status of processing
  * @property {Array[Object]} tagCountList ordered list of {tag-name, count} objects.
  */
 

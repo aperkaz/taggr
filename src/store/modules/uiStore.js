@@ -7,6 +7,7 @@ require("../../types");
  */
 let uiStore = store({
   currentPage: "START_PAGE",
+  tagProcessingStatus: null,
   filteredImageList: [],
   tagCountList: [], // ordered tagCount object list
 });

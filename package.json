@@ -5,7 +5,7 @@
   "description": "Rediscover your memories while keeping your privacy",
   "main": "src/entryMainProcess.js",
   "scripts": {
-    "start": "env DEVELOPMENT_ENV=true electron-forge start",
+    "start": "env DEVELOPMENT_ENV=false electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",

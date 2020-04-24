@@ -21,6 +21,7 @@ const styles = {
 const DashboardPage = ({
   onInputChange,
   onPressReset,
+  tagProcessingStatus,
   tagCountList,
   filteredImageList,
 }) =>
@@ -28,6 +29,7 @@ const DashboardPage = ({
     <${Header}
       onInputChange="${onInputChange}"
       onPressReset="${onPressReset}"
+      tagProcessingStatus=${tagProcessingStatus}
       tagCountList="${tagCountList}"
     />
     <div key="2" style=${styles.galleryWrapper}>
