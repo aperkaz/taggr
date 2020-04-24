@@ -5,9 +5,19 @@ const PropTypes = require("prop-types");
 const Loading = () =>
   html`<div key="loading" className="dashboard__tile--loading"></div>`;
 
+const normalizeImageUrl = (imagePath) => {
+  const normalize = require("normalize-path");
+
+  // fixes linux / windows compatibility
+  const normalizedImagePath = normalize(imagePath);
+  return `file:///${normalizedImagePath}`;
+};
+
 const styles = (imageUrl) => {
   // prefix non-http images (local)
-  const url = imageUrl.startsWith("http") ? imageUrl : `file:///${imageUrl}`;
+  const url = imageUrl.startsWith("http")
+    ? imageUrl
+    : normalizeImageUrl(imageUrl);
 
   return {
     height: "100%",

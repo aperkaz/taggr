@@ -5,7 +5,7 @@ const filterResultsByTag = async (modules, payload) => {
   const workers = getWorkers();
 
   // Worker: calculate resul set
-  const filterResultsWorker = Comlink.wrap(workers.filterResulsWorker);
+  const filterResultsWorker = Comlink.wrap(workers.filterResultsWorker);
   let results = await filterResultsWorker.process(
     modules.appStore.imageHashMap,
     payload

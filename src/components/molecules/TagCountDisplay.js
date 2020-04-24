@@ -19,27 +19,29 @@ const useStyles = makeStyles((theme) => ({
 
 const TagCountDisplay = ({ tagCountList }) => {
   const classes = useStyles();
-  return html` <div className="${classes.root}" key="tagCountDisplay">
-    <${Typography}
-      variant="h5"
-      style=${{
-        fontFamily: "Nunito",
-        marginRight: "1rem",
-      }}
-    >
-      Popular tags:
-    <//>
-    ${tagCountList.map(
-      (tagCount) =>
-        html`
-          <${Chip}
-            key="${tagCount.name}"
-            avatar=${html`<${Avatar}>${tagCount.count}<//>`}
-            label="${tagCount.name}"
-          />
-        `
-    )}
-  </div>`;
+  return tagCountList.length == 0
+    ? ``
+    : html` <div className="${classes.root}" key="tagCountDisplay">
+        <${Typography}
+          variant="h5"
+          style=${{
+            fontFamily: "Nunito",
+            marginRight: "1rem",
+          }}
+        >
+          Popular tags:
+        <//>
+        ${tagCountList.map(
+          (tagCount) =>
+            html`
+              <${Chip}
+                key="${tagCount.name}"
+                avatar=${html`<${Avatar}>${tagCount.count}<//>`}
+                label="${tagCount.name}"
+              />
+            `
+        )}
+      </div>`;
 };
 
 TagCountDisplay.propTypes = {

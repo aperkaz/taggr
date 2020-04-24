@@ -60,6 +60,7 @@
     "htm": "^3.0.4",
     "lodash.debounce": "^4.0.8",
     "node-fetch": "^2.6.0",
+    "normalize-path": "^3.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

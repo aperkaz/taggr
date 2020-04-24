@@ -1,4 +1,5 @@
 const Comlink = require("comlink");
+const filterResultsByTag = require("./filterResultsByTag");
 const { getWorkers } = require("../../workers/index");
 const { generateMD5Hash } = require("../../utils");
 
@@ -19,17 +20,26 @@ const createProject = async (modules, payload) => {
 
   // Worker: calculate all image paths in folder
   const imageFinderWorker = Comlink.wrap(workers.recursiveImageFinderWorker);
-  let imagePathList = await imageFinderWorker.process(payload);
+  let imagePathListToProcess = await imageFinderWorker.process(payload);
+
+  // save in appStore
+  imagePathListToProcess.forEach((imagePath) => {
+    const hash = generateMD5Hash(imagePath);
+    modules.appStore.imageHashMap[hash] = { path: imagePath, tags: null };
+  });
 
   console.log("calculate image paths in folder");
+
+  // Set the initial images in dashboard, prior to calculating tags
+  await filterResultsByTag(modules, "");
 
   // Worker: calculate tags for images
   const imageTaggingWorker = Comlink.wrap(workers.imageTaggingWorker);
 
-  while (imagePathList.length > 0) {
-    console.log("remaining: ", imagePathList.length);
+  while (imagePathListToProcess.length > 0) {
+    console.log("remaining: ", imagePathListToProcess.length);
 
-    const imagePath = imagePathList.pop();
+    const imagePath = imagePathListToProcess.pop();
     const hash = generateMD5Hash(imagePath);
 
     const imageData = await generateImageData(imagePath);
@@ -38,6 +48,14 @@ const createProject = async (modules, payload) => {
     // save results in appStore
     modules.appStore.imageHashMap[hash] = { path: imagePath, tags };
   }
+
+  // Worker: Sort tags by occcurrence, pick top 10
+  const pickTopTagsWorker = Comlink.wrap(workers.pickTopTagsWorker);
+  const topTags = await pickTopTagsWorker.process(
+    modules.appStore.imageHashMap,
+    10
+  );
+  modules.uiStore.tagCountList = topTags;
 };
 
 /**

@@ -14,14 +14,19 @@ const initializeWorkers = () => {
     path.resolve(__dirname, "imageTagging.js")
   );
 
-  const filterResulsWorker = new Worker(
+  const filterResultsWorker = new Worker(
     path.resolve(__dirname, "filterResults.js")
+  );
+
+  const pickTopTagsWorker = new Worker(
+    path.resolve(__dirname, "pickTopTags.js")
   );
 
   workers = {
     recursiveImageFinderWorker,
     imageTaggingWorker,
-    filterResulsWorker,
+    filterResultsWorker,
+    pickTopTagsWorker,
   };
 
   console.log("workers initialized", workers);

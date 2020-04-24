@@ -4,6 +4,8 @@ Comlink.expose({
   async process(imageHashMap, tagSearchValue) {
     const results = [];
 
+    console.log("filtering results");
+
     // iterate over all the images and return the ones with tag matches
     Object.keys(imageHashMap).some((key) => {
       const tags = imageHashMap[key].tags;
