@@ -42,7 +42,7 @@ const createProject = async (modules, payload) => {
     const remaining = imagePathListToProcess.length;
 
     // update analysis status in uiStore
-    modules.uiStore.tagProcessingStatus = `Processing ${remaining} / ${imagesToProcess}`;
+    modules.uiStore.tagProcessingStatus = `To process: ${remaining} / ${imagesToProcess}`;
 
     console.time("processImage");
 
