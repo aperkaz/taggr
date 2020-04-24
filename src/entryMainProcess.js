@@ -1,6 +1,7 @@
 const { app, BrowserWindow } = require("electron");
 const path = require("path");
 const os = require("os");
+const isDev = require("electron-is-dev");
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -9,37 +10,51 @@ if (require("electron-squirrel-startup")) {
 }
 
 const createWindow = () => {
+  // TODO: clean up config loading in envs
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
-    width: 960,
-    height: 1080,
-    webPreferences: {
-      nodeIntegration: true,
-      nodeIntegrationInWorker: true,
-      webSecurity: false,
-    },
-  });
+  let mainWindow;
+  if (isDev) {
+    mainWindow = new BrowserWindow({
+      width: 960,
+      height: 1080,
+      webPreferences: {
+        nodeIntegration: true,
+        nodeIntegrationInWorker: true,
+        webSecurity: false,
+      },
+    });
+  } else {
+    mainWindow = new BrowserWindow({
+      webPreferences: {
+        nodeIntegration: true,
+        nodeIntegrationInWorker: true,
+        webSecurity: false,
+      },
+    });
+  }
 
   // and load the index.html of the app.
   console.log(path.join(__dirname, "index.html"));
   mainWindow.loadFile(path.join(__dirname, "index.html"));
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  if (isDev) mainWindow.webContents.openDevTools();
 
   // Remove menu
   mainWindow.removeMenu();
 
-  mainWindow.setPosition(1200, 0);
+  if (isDev) mainWindow.setPosition(1200, 0);
 
   // Add react dev tools https://www.electronjs.org/docs/tutorial/devtools-extension
-  const reactExtension = BrowserWindow.addDevToolsExtension(
-    path.join(
-      os.homedir(),
-      "/.config/google-chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.6.0_0"
-    )
-  );
-  // BrowserWindow.removeDevToolsExtension(reactExtension);
+  if (isDev) {
+    const reactExtension = BrowserWindow.addDevToolsExtension(
+      path.join(
+        os.homedir(),
+        "/.config/google-chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.6.0_0"
+      )
+    );
+    // BrowserWindow.removeDevToolsExtension(reactExtension);
+  }
 };
 
 // This method will be called when Electron has finished
