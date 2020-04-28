@@ -49,6 +49,8 @@
     }
   },
   "dependencies": {
+    "@bugsnag/js": "^7.0.1",
+    "@bugsnag/plugin-react": "^7.0.1",
     "@material-ui/core": "^4.9.11",
     "@material-ui/icons": "^4.9.1",
     "@risingstack/react-easy-state": "^6.2.3",
@@ -61,12 +63,15 @@
     "htm": "^3.0.4",
     "lodash.debounce": "^4.0.8",
     "node-fetch": "^2.6.0",
+    "node-localstorage": "^2.1.6",
     "normalize-path": "^3.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-window": "^1.8.5",
-    "readdirp": "^3.4.0"
+    "readdirp": "^3.4.0",
+    "universal-analytics": "^0.4.20",
+    "uuid": "^7.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

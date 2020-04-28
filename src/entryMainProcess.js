@@ -59,6 +59,15 @@ const createWindow = () => {
 
   // Remove menu bar
   mainWindow.removeMenu();
+
+  // setup analytics - works
+  const { trackEvent } = require("./analytics");
+  global.trackEvent = trackEvent;
+
+  // initialize bug tracking - works. Need of React + Webpack for integration with error boundaries: https://docs.bugsnag.com/platforms/javascript/react/
+  // var Bugsnag = require("@bugsnag/js");
+  // Bugsnag.start({ apiKey: "07d881d081e03107d5055d9be9ba5c8c" });
+  // Bugsnag.notify(new Error("Test error"));
 };
 
 // This method will be called when Electron has finished
