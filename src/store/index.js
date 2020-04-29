@@ -1,5 +1,6 @@
-const appStore = require("./modules/appStore");
-const uiStore = require("./modules/uiStore");
+import appStore from "./modules/appStore";
+import uiStore from "./modules/uiStore";
+import { ACTIONS, triggerAction } from "./actions";
 
 const initializeStores = () => {
   // add to global window object for further debug
@@ -8,3 +9,4 @@ const initializeStores = () => {
 };
 
 export default initializeStores;
+export { ACTIONS, triggerAction };

@@ -110,6 +110,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-window": "^1.8.5",
+    "readdirp": "^3.4.0",
     "styled-components": "^5.1.0"
   }
 }

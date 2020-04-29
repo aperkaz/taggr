@@ -7,7 +7,7 @@ import "../../types";
  * @type {uiStoreType} uiStore
  */
 let uiStore = store({
-  currentPage: CONSTANTS.PAGES.DASHBOARD_PAGE,
+  currentPage: CONSTANTS.PAGES.START_PAGE,
   tagProcessingStatus: null,
   filteredImageList: [],
   tagCountList: [], // ordered tagCount object list

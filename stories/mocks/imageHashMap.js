@@ -3,6 +3,7 @@ export default {
     path: "/home/alain/Downloads/test_pictures/1478984049070 (10th copy).jpg",
     tags: ["cat", "dog"],
   },
+  // TODONOW: remove and pictures too
   "0f9238424e05746cdb4bb380e2427998": {
     path: "/home/alain/Downloads/test_pictures/1478984049070 (11th copy).jpg",
     tags: ["cat", "dog"],

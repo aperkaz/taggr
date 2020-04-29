@@ -32,8 +32,6 @@ const styles = {
 };
 
 // TODONOW: use styled components
-// style={styles.wrapper}
-// style={styles.main}
 
 const StartPage = ({ onSelectRootFolderPath }) => (
   <Wrapper>

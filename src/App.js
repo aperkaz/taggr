@@ -8,7 +8,7 @@ import debounce from "lodash.debounce";
 import StartPage from "./components/pages/StartPage";
 import DashboardPage from "./components/pages/DashboardPage";
 import uiStore from "./store/modules/uiStore";
-// const { triggerAction, ACTIONS } = require("../store/actions");
+const { triggerAction, ACTIONS } = require("./store");
 
 import CONSTANTS from "./constants";
 
@@ -21,17 +21,15 @@ const selectRootFolderPath = async () => {
 
   if (!projectRootFolderPath) return;
 
-  // TODONOW: trigger actions
-  console.log("select path");
-  // await triggerAction({
-  //   type: ACTIONS.SET_UI_PAGE,
-  //   payload: CONSTANTS.PAGES.DASHBOARD_PAGE,
-  // });
+  await triggerAction({
+    type: ACTIONS.SET_UI_PAGE,
+    payload: CONSTANTS.PAGES.DASHBOARD_PAGE,
+  });
 
-  // await triggerAction({
-  //   type: ACTIONS.CREATE_PROJECT,
-  //   payload: projectRootFolderPath,
-  // });
+  await triggerAction({
+    type: ACTIONS.CREATE_PROJECT,
+    payload: projectRootFolderPath,
+  });
 };
 
 const App = view(() => (
@@ -46,22 +44,23 @@ const renderRoute = (route) => {
       return (
         // TODONOW: add missing props
         <DashboardPage
-        // filteredImageList={uiStore.filteredImageList}
-        // tagProcessingStatus={uiStore.tagProcessingStatus}
-        // tagCountList={uiStore.tagCountList}
-        // onInputChange={debounce(
-        // (payload) =>
-        // triggerAction({
-        //   type: ACTIONS.FILTER_RESULTS_BY_TAG,
-        //   payload,
-        // }),
-        // 300
-        // )}
-        // onPressReset="${async () =>
-        // await triggerAction({
-        //   type: ACTIONS.SET_UI_PAGE,
-        //   payload: CONSTANTS.PAGES.START_PAGE,
-        // })}"
+          filteredImageList={uiStore.filteredImageList}
+          tagProcessingStatus={uiStore.tagProcessingStatus}
+          tagCountList={uiStore.tagCountList}
+          onInputChange={debounce(
+            (payload) =>
+              triggerAction({
+                type: ACTIONS.FILTER_RESULTS_BY_TAG,
+                payload,
+              }),
+            300
+          )}
+          onPressReset={async () =>
+            await triggerAction({
+              type: ACTIONS.SET_UI_PAGE,
+              payload: CONSTANTS.PAGES.START_PAGE,
+            })
+          }
         />
       );
       break;
