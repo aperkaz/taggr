@@ -1,15 +1,33 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
+import styled from "styled-components";
+
+const Wrapper = styled.div`
+  background-image: linear-gradient(
+    to top right,
+    rgb(101, 115, 255),
+    rgb(111, 114, 247),
+    rgb(120, 114, 239),
+    rgb(130, 113, 231),
+    rgb(139, 112, 223),
+    rgb(149, 111, 215),
+    rgb(158, 111, 208),
+    rgb(168, 110, 200),
+    rgb(177, 109, 192),
+    rgb(187, 108, 184),
+    rgb(196, 108, 176),
+    rgb(206, 107, 168)
+  );
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: auto;
+  text-align: center;
+`;
 
 const styles = {
-  wrapper: {
-    backgroundImage:
-      "linear-gradient(to top right, rgb(101, 115, 255), rgb(111, 114, 247), rgb(120, 114, 239), rgb(130, 113, 231), rgb(139, 112, 223), rgb(149, 111, 215), rgb(158, 111, 208), rgb(168, 110, 200), rgb(177, 109, 192), rgb(187, 108, 184), rgb(196, 108, 176), rgb(206, 107, 168))",
-    height: "100%",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-around",
-  },
+  wrapper: {},
   main: { margin: "auto", textAlign: "center" },
 };
 
@@ -18,7 +36,7 @@ const styles = {
 // style={styles.main}
 
 const StartPage = ({ onSelectRootFolderPath }) => (
-  <div>
+  <Wrapper>
     <div>
       <h1
         style={{
@@ -58,7 +76,7 @@ const StartPage = ({ onSelectRootFolderPath }) => (
         Select picture folder
       </Button>
     </div>
-  </div>
+  </Wrapper>
 );
 
 export default StartPage;

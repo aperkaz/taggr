@@ -1,22 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
+import styled from "styled-components";
 
-// TODONOW: add components
-// const Header = require("../organisms/Header");
-// const Gallery = require("../organisms/VirtualizedGallery");
+import Header from "../organisms/Header";
+import Gallery from "../organisms/VirtualizedGallery";
 
-const styles = {
-  wrapper: {
-    display: "flex",
-    flexDirection: "column",
-    height: "100%",
-  },
-  galleryWrapper: {
-    flexGrow: 1,
-    overflowY: "hidden",
-    margin: "5px 0",
-  },
-};
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`;
 
 const DashboardPage = ({
   onInputChange,
@@ -25,18 +18,15 @@ const DashboardPage = ({
   tagCountList,
   filteredImageList,
 }) => (
-  <div>
-    Dashboard page
-    {/* <Header
-      onInputChange="{onInputChange}"
-      onPressReset="{onPressReset}"
+  <Wrapper>
+    <Header
+      onInputChange={onInputChange}
+      onPressReset={onPressReset}
       tagProcessingStatus={tagProcessingStatus}
-      tagCountList="{tagCountList}"
+      tagCountList={tagCountList}
     />
-    <div key="2">
-      <Gallery imageList="{filteredImageList}" />
-    </div> */}
-  </div>
+    <Gallery imageList={filteredImageList} />
+  </Wrapper>
 );
 
 DashboardPage.defaultProps = {
