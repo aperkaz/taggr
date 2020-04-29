@@ -55,7 +55,7 @@ const loadImage = async (path) => {
     img.onerror = (err) => reject(err);
     img.onload = () => resolve(img);
 
-    img.src = path;
+    img.src = `file:///${path}`;
   });
 };
 
@@ -67,17 +67,67 @@ const loadImage = async (path) => {
 export const triggerImageTagsCalculation = async (imagePathsList) => {
   logAction("triggerImageTagsCalculation", imagePathsList.length);
 
-  // setup worker listener
-  store.workers.imageTaggingWorker.onmessage = ({ data }) => {
-    setImageTags(data.path, data.tags);
-  };
+  const Comlink = require("comlink");
 
-  // trigger worker
-  imagePathsList.forEach(async (imagePath) => {
-    store.workers.imageTaggingWorker.postMessage({
-      path: imagePath,
-    });
-  });
+  // Worker: calculate tags for images
+  const imageTaggingWorker = Comlink.wrap(store.workers.imageTaggingWorker);
+
+  const imagesToProcessCount = imagePathsList.length;
+
+  console.time("processAllImages");
+
+  while (imagePathsList.length > 0) {
+    const remaining = imagePathsList.length;
+
+    // update analysis status in uiStore
+    console.log(`To process: ${remaining} / ${imagesToProcessCount}`);
+
+    console.time("processImage");
+
+    const imagePath = imagePathsList.pop();
+    console.log(imagePath);
+    const hash = generateMD5Hash(imagePath);
+    const imageData = await generateImageData(imagePath);
+
+    console.time("classify");
+    const tags = await imageTaggingWorker.process(imageData);
+    console.timeEnd("classify");
+
+    // save results in appStore
+    // store.appStore.imageHashMap[hash] = { path: imagePath, tags };
+
+    console.timeEnd("processImage");
+  }
+
+  console.timeEnd("processAllImages");
+};
+
+/**
+ * Generate a ImageData structure from a imagePath. Prepocess using Canvas to algorithm input: 224px
+ *
+ * @param {String} imagePath
+ * @returns {Promise<ImageData>} loaded image
+ */
+const generateImageData = async (imagePath) => {
+  let img = await loadImage(imagePath);
+
+  const MAX_HEIGHT = 224;
+
+  // calculate new ratios for image size, based on MAX_HEIGHT
+  if (img.height > MAX_HEIGHT) {
+    img.width *= MAX_HEIGHT / img.height;
+    img.height = MAX_HEIGHT;
+  }
+
+  let canvas = new OffscreenCanvas(img.width, img.height);
+  var ctx = canvas.getContext("2d");
+  // ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(img, 0, 0, img.width, img.height);
+
+  const imageData = canvas
+    .getContext("2d")
+    .getImageData(0, 0, img.width, img.height);
+  return imageData;
 };
 
 /**
