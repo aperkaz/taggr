@@ -99,22 +99,16 @@
     "@risingstack/react-easy-state": "^6.2.1",
     "@tensorflow-models/mobilenet": "^2.0.4",
     "@tensorflow/tfjs": "^1.7.2",
-    "@tensorflow/tfjs-node": "^1.7.2",
     "@tensorflow/tfjs-converter": "^1.7.2",
-    "body-parser": "^1.19.0",
     "comlink": "^4.3.0",
-    "cookie-parser": "^1.4.5",
     "electron-is-dev": "^1.2.0",
     "electron-squirrel-startup": "^1.0.0",
-    "express": "^4.17.1",
-    "jpeg-js": "^0.3.7",
     "jpg-stream": "^1.1.2",
     "lodash.debounce": "^4.0.8",
     "multer": "^1.4.2",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "styled-components": "^5.1.0",
-    "typeface-roboto": "0.0.75"
+    "styled-components": "^5.1.0"
   }
 }

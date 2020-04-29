@@ -10,62 +10,50 @@ if (require("electron-squirrel-startup")) {
 }
 
 const createWindow = () => {
-  // Create the browser window.
-  const mainWindow = new BrowserWindow({
-    width: 900,
-    height: 1080,
-    webPreferences: {
-      nodeIntegration: true,
-      nodeIntegrationInWorker: true,
-      // allows to load local files -> file:///
-      webSecurity: false,
-    },
-  });
+  let mainWindow;
+
+  if (isDev) {
+    mainWindow = new BrowserWindow({
+      width: 960,
+      height: 1080,
+      webPreferences: {
+        nodeIntegration: true,
+        nodeIntegrationInWorker: true,
+        webSecurity: false,
+      },
+    });
+
+    mainWindow.setPosition(1200, 0);
+
+    // Open the DevTools.
+    mainWindow.webContents.openDevTools();
+
+    // Add react dev tools https://www.electronjs.org/docs/tutorial/devtools-extension
+    const reactExtension = BrowserWindow.addDevToolsExtension(
+      path.join(
+        os.homedir(),
+        "/.config/google-chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.6.0_0"
+      )
+    );
+    // BrowserWindow.removeDevToolsExtension(reactExtension);
+  } else {
+    mainWindow = new BrowserWindow({
+      webPreferences: {
+        nodeIntegration: true,
+        nodeIntegrationInWorker: true,
+        webSecurity: false,
+      },
+    });
+  }
 
   // and load the index.html of the app.
   console.log("loading add from: ", MAIN_WINDOW_WEBPACK_ENTRY);
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
-  // if (isDev) {
-  // Open the DevTools.
-  mainWindow.webContents.openDevTools();
-  // }
-
-  // Add react dev tools https://www.electronjs.org/docs/tutorial/devtools-extension
-  // const reactExtension = BrowserWindow.addDevToolsExtension(
-  //   path.join(
-  //     os.homedir(),
-  //     "/.config/google-chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.6.0_0"
-  //   )
-  // );
-  // BrowserWindow.removeDevToolsExtension(reactExtension);
-
   // Remove menu
   mainWindow.removeMenu();
 
   mainWindow.setPosition(1000, 0);
-
-  // child process spawn
-  // const fs = require("fs");
-  // const child_process = require("child_process");
-  // for (var i = 0; i < 1; i++) {
-  //   var worker_process = child_process.fork("src/child.js", [i]);
-  //   worker_process.on("message", (message) =>
-  //     console.log("from worker: ", message)
-  //   );
-  //   worker_process.on("close", function (code, signal) {
-  //     console.log(
-  //       "child process exited with code " + code + " signal: " + signal
-  //     );
-  //   });
-  // }
-
-  // var request = require("request");
-  // request("http://localhost:8081", function (error, response, body) {
-  //   if (!error && response.statusCode == 200) {
-  //     console.log(body); // Print the google web page.
-  //   }
-  // });
 };
 
 // This method will be called when Electron has finished
