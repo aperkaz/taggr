@@ -1,4 +1,4 @@
-export default [
+const imageList = [
   {
     hash: "1",
     path:
@@ -96,3 +96,5 @@ export default [
     tags: ["cat", "dog"],
   },
 ];
+
+export default imageList;

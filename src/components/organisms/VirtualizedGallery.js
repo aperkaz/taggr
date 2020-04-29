@@ -1,12 +1,13 @@
-const { Component } = require("react");
-const { html } = require("htm/react");
-const PropTypes = require("prop-types");
-const { FixedSizeGrid: Grid } = require("react-window"); // Virtualize list for performance https://github.com/developerdizzle/react-virtual-list
-const debounce = require("lodash.debounce");
-const ImageTile = require("../molecules/ImageTile");
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { FixedSizeGrid as Grid } from "react-window"; // Virtualize list for performance https://github.com/developerdizzle/react-virtual-list
+import debounce from "lodash.debounce";
+import ImageTile from "../molecules/ImageTile";
 
 const GUTTER = 5;
 const ELEMENTS_PER_COLLUMN = 5;
+
+// TODONOW: refactor with https://github.com/bvaughn/react-virtualized-auto-sizer/
 
 class VirtualizedGallery extends Component {
   constructor(props) {
@@ -78,27 +79,27 @@ class VirtualizedGallery extends Component {
         ? gridHeight / ELEMENTS_PER_COLLUMN
         : 250;
 
-    return html`
+    return (
       <div
-        ref=${(el) => (this.container = el)}
+        ref={(el) => (this.container = el)}
         id="virtualized-gallery-wrapper"
-        style=${{ height: "100%", overflowY: "hidden" }}
+        style={{ height: "100%", overflowY: "hidden" }}
       >
-        <${Grid}
-          className=${"Grid"}
-          columnCount=${ELEMENTS_PER_COLLUMN}
-          columnWidth=${columnWidth}
-          height=${gridHeight}
-          rowCount=${rowCount}
-          rowHeight=${rowHeight}
-          width=${gridWidth}
-          itemData=${imageList}
-          style=${{ overflowX: "hidden", margin: "5px auto 0" }}
+        <Grid
+          className="Grid"
+          columnCount={ELEMENTS_PER_COLLUMN}
+          columnWidth={columnWidth}
+          height={gridHeight}
+          rowCount={rowCount}
+          rowHeight={rowHeight}
+          width={gridWidth}
+          itemData={imageList}
+          style={{ overflowX: "hidden", margin: "5px auto 0" }}
         >
-          ${Cell}
-        <//>
+          {Cell}
+        </Grid>
       </div>
-    `;
+    );
   }
 }
 
@@ -108,16 +109,15 @@ const Cell = ({ columnIndex, rowIndex, style, data }) => {
 
   // TODO: clean: parametrize gallery elements
   const index = rowIndex * ELEMENTS_PER_COLLUMN + columnIndex;
-  return html`<div
-    key=${columnIndex + ":" + rowIndex}
-    style=${{ ...style, height, width }}
-  >
-    ${data[index]
-      ? html`<${ImageTile}
-          imageUrl="${data[index] ? data[index].path : ""}"
-        ><//>`
-      : ""}
-  </div>`;
+  return (
+    <div key={columnIndex + ":" + rowIndex} style={{ ...style, height, width }}>
+      {data[index] ? (
+        <ImageTile imageUrl={data[index] ? data[index].path : ""}></ImageTile>
+      ) : (
+        ""
+      )}
+    </div>
+  );
 };
 
 VirtualizedGallery.defaultProps = {
@@ -135,5 +135,4 @@ VirtualizedGallery.propTypes = {
 };
 
 // feature: image menu: https://github.com/aperkaz/taggr/blob/add-react/src/components/DashboardImageGallery.js
-
-module.exports = VirtualizedGallery;
+export default VirtualizedGallery;
