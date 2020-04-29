@@ -1,7 +1,7 @@
 const { dialog } = require("electron").remote;
 
 import React from "react";
-import { hot } from "react-hot-loader";
+import { hot, setConfig } from "react-hot-loader";
 import { view } from "@risingstack/react-easy-state";
 import debounce from "lodash.debounce";
 
@@ -54,15 +54,19 @@ const renderRoute = (route) => {
               }),
             300
           )}
-          onPressReset={async () =>
+          onPressReset={async () => {
             await triggerAction({
               type: ACTIONS.SET_UI_PAGE,
               payload: CONSTANTS.ROUTES.START_PAGE,
-            })
-          }
+            });
+          }}
         />
       );
   }
 };
+
+setConfig({
+  showReactDomPatchNotification: false,
+});
 
 export default hot(module)(App);
