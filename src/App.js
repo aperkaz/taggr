@@ -5,8 +5,8 @@ import { hot } from "react-hot-loader";
 import { view } from "@risingstack/react-easy-state";
 import debounce from "lodash.debounce";
 
-import StartPage from "./components/StartPage";
-import DashboardPage from "./components/DashboardPage";
+import StartPage from "./components/pages/StartPage";
+import DashboardPage from "./components/pages/DashboardPage";
 import uiStore from "./store/modules/uiStore";
 // const { triggerAction, ACTIONS } = require("../store/actions");
 

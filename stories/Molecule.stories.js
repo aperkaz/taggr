@@ -1,11 +1,10 @@
 import React from "react";
-import { action } from "@storybook/addon-actions";
-import ImageTileComp from "../src/components/ImageTile";
-import MenuComp from "../src/components/Menu";
+import ImageTileComp from "../src/components/molecules/ImageTile";
+import TagCountDisplayComp from "../src/components/molecules/TagCountDisplay";
 
 export default {
   title: "Molecules",
-  components: [ImageTileComp, MenuComp],
+  components: [ImageTileComp, TagCountDisplayComp],
 };
 
 export const Image = () => (
@@ -17,30 +16,20 @@ export const Image = () => (
   </div>
 );
 
-export const Menu = () => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  let menuProps = {
-    options: [
-      { text: "Option 1", onClick: action("select option 1") },
-      { text: "Option 2", onClick: action("select option 2") },
-    ],
-    onClose: () => triggerMenuClose(),
-  };
-
-  function triggerMenuOpen(e) {
-    console.log(e.currentTarget);
-    setAnchorEl(e.currentTarget);
-    console.log(menuProps);
-  }
-
-  function triggerMenuClose() {
-    setAnchorEl(null);
-  }
-
-  return (
-    <div>
-      <button onClick={triggerMenuOpen}>Trigger menu</button>
-      <MenuComp {...menuProps} anchorEl={anchorEl}></MenuComp>
-    </div>
-  );
-};
+export const TagCountDisplay = () => (
+  <div style={{ height: "200px", width: "100%" }}>
+    <TagCountDisplayComp
+      tagCountList={[
+        { name: "dogs", count: 220 },
+        { name: "cats", count: 119 },
+        { name: "party", count: 50 },
+        { name: "suit", count: 21 },
+        { name: "beer", count: 13 },
+        { name: "pizza", count: 9 },
+        { name: "forest", count: 5 },
+        { name: "sea", count: 2 },
+        { name: "dolphin", count: 1 },
+      ]}
+    />
+  </div>
+);
