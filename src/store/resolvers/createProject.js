@@ -42,6 +42,8 @@ const createProject = async (modules, payload) => {
 
   const imagesToProcessCount = imagePathListToProcess.length;
 
+  console.time("processImage ALL");
+
   while (imagePathListToProcess.length > 0) {
     const remaining = imagePathListToProcess.length;
 
@@ -63,6 +65,8 @@ const createProject = async (modules, payload) => {
 
     console.timeEnd("processImage");
   }
+
+  console.timeEnd("processImage ALL");
   modules.uiStore.tagProcessingStatus = null;
 
   // Worker: Sort tags by occcurrence, pick top 10

@@ -8,13 +8,11 @@ Comlink.expose({
    * @returns object list, as [{name: X, count: Y}]
    */
   async process(imageHashMap, maxNumberOfTags) {
-    console.log(imageHashMap);
     return await pickTopTags(imageHashMap, maxNumberOfTags);
   },
 });
 
 const pickTopTags = async (imageHashMap, maxNumberOfTags) => {
-  console.log("pick top tags");
   let tagCountMap = {};
 
   // iterate over all the images and return the ones with tag matches

@@ -6,4 +6,10 @@ import "./index.css";
 
 initializeStores();
 
+const { getGlobal } = require("electron").remote;
+const trackEvent = getGlobal("trackEvent");
+
+// trigger app started event
+trackEvent("User Interaction", "App opened");
+
 ReactDOM.render(<App />, document.getElementById("app"));
