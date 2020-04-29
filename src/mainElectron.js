@@ -25,9 +25,6 @@ const createWindow = () => {
 
     mainWindow.setPosition(1200, 0);
 
-    // Open the DevTools.
-    mainWindow.webContents.openDevTools();
-
     // Add react dev tools https://www.electronjs.org/docs/tutorial/devtools-extension
     const reactExtension = BrowserWindow.addDevToolsExtension(
       path.join(
@@ -54,6 +51,9 @@ const createWindow = () => {
   mainWindow.removeMenu();
 
   mainWindow.setPosition(1000, 0);
+
+  // Open the DevTools.
+  mainWindow.webContents.openDevTools();
 };
 
 // This method will be called when Electron has finished

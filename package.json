@@ -1,6 +1,6 @@
 {
-  "name": "privatus",
-  "productName": "privatus",
+  "name": "taggr",
+  "productName": "taggr",
   "version": "0.0.1",
   "description": "Privacy centric AI gallery",
   "main": ".webpack/main",
@@ -28,7 +28,7 @@
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "privatus_react"
+            "name": "taggr"
           }
         },
         {
