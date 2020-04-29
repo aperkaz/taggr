@@ -1,4 +1,4 @@
-// TODONOW: future fix
+// TODO: style: improve imports
 import uiStore from "./uiStore";
 import appStore from "./appStore";
 

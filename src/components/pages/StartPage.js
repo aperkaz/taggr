@@ -26,12 +26,7 @@ const Wrapper = styled.div`
   text-align: center;
 `;
 
-const styles = {
-  wrapper: {},
-  main: { margin: "auto", textAlign: "center" },
-};
-
-// TODONOW: use styled components
+// TODO: style: use styled components
 
 const StartPage = ({ onSelectRootFolderPath }) => (
   <Wrapper>

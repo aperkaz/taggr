@@ -7,7 +7,7 @@ import ImageTile from "../molecules/ImageTile";
 const GUTTER = 5;
 const ELEMENTS_PER_COLLUMN = 5;
 
-// TODONOW: refactor with https://github.com/bvaughn/react-virtualized-auto-sizer/
+// TODO: inprovement: refactor with https://github.com/bvaughn/react-virtualized-auto-sizer/
 
 class VirtualizedGallery extends Component {
   constructor(props) {

@@ -23,7 +23,7 @@ const selectRootFolderPath = async () => {
 
   await triggerAction({
     type: ACTIONS.SET_UI_PAGE,
-    payload: CONSTANTS.PAGES.DASHBOARD_PAGE,
+    payload: CONSTANTS.ROUTES.DASHBOARD_PAGE,
   });
 
   await triggerAction({
@@ -38,11 +38,10 @@ const App = view(() => (
 
 const renderRoute = (route) => {
   switch (route) {
-    case CONSTANTS.PAGES.START_PAGE:
+    case CONSTANTS.ROUTES.START_PAGE:
       return <StartPage onSelectRootFolderPath={selectRootFolderPath} />;
-    case CONSTANTS.PAGES.DASHBOARD_PAGE:
+    case CONSTANTS.ROUTES.DASHBOARD_PAGE:
       return (
-        // TODONOW: add missing props
         <DashboardPage
           filteredImageList={uiStore.filteredImageList}
           tagProcessingStatus={uiStore.tagProcessingStatus}
@@ -58,12 +57,11 @@ const renderRoute = (route) => {
           onPressReset={async () =>
             await triggerAction({
               type: ACTIONS.SET_UI_PAGE,
-              payload: CONSTANTS.PAGES.START_PAGE,
+              payload: CONSTANTS.ROUTES.START_PAGE,
             })
           }
         />
       );
-      break;
   }
 };
 

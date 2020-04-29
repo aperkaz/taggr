@@ -1,6 +1,5 @@
-// TODONOW: rename to routes
 const CONSTANTS = {
-  PAGES: {
+  ROUTES: {
     START_PAGE: "START_PAGE",
     DASHBOARD_PAGE: "DASHBOARD_PAGE",
   },
