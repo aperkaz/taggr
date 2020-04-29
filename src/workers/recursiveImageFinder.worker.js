@@ -14,7 +14,6 @@ Comlink.expose({
  * @returns {Promise<String[]>} imagePathsList
  */
 async function findImagePathsInFolder(folderPath) {
-  // const readdirp = require("readdirp");
   let imagePathsList = [];
 
   var settings = {

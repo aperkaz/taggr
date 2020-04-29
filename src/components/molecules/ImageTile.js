@@ -1,7 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-
-const Loading = () => <div className="dashboard__tile--loading"></div>;
+import styled from "styled-components";
 
 const normalizeImageUrl = (imagePath) => {
   const normalize = require("normalize-path");
@@ -11,53 +10,18 @@ const normalizeImageUrl = (imagePath) => {
   return `file:///${normalizedImagePath}`;
 };
 
-const styles = (imageUrl) => {
-  // prefix non-http images (local)
-  const url = imageUrl.startsWith("http")
-    ? imageUrl
-    : normalizeImageUrl(imageUrl);
-
-  return {
-    height: "100%",
-    width: "100%",
-    borderRadius: "4px",
-    backgroundImage: `url('${url}')`,
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center center",
-    backgroundSize: "cover",
-  };
-};
-
-const ImageComponent = ({ imageUrl }) => <div style={styles(imageUrl)}></div>;
-
 // TODO: replace by react image load component, nicer load animation
-class ImageTile extends Component {
-  constructor(props) {
-    super(props);
+const ImageTile = ({ imageUrl }) => <Container imageUrl={imageUrl} />;
 
-    this.state = { loading: true };
-    this.bgImg = null;
-  }
-
-  componentDidMount() {
-    if (!this.props.imageUrl) return;
-
-    this.bgImg = new Image();
-    this.bgImg.src = this.props.imageUrl;
-
-    this.bgImg.onload = () => {
-      this.setState({ loading: false });
-    };
-  }
-
-  render() {
-    return this.state.loading ? (
-      <Loading />
-    ) : (
-      <ImageComponent imageUrl={this.props.imageUrl} />
-    );
-  }
-}
+const Container = styled.div`
+  height: 100%;
+    width: 100%;
+    border-radius: 4px;
+    background-image: url('${(props) => normalizeImageUrl(props.imageUrl)}');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+`;
 
 ImageTile.propTypes = {
   imageUrl: PropTypes.string,

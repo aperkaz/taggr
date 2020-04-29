@@ -48,8 +48,7 @@ class VirtualizedGallery extends Component {
   }
 
   handleScroll(e) {
-    console.log("resize event");
-
+    // on sezise event
     const element = document.getElementById("virtualized-gallery-wrapper");
 
     this.setState({

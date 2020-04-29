@@ -65,7 +65,7 @@ async function classifyImage(imageData) {
   rawPredictions = null;
   filteredRawPredictions = null;
 
-  return rawPredictions;
+  return predictions;
 }
 
 export default classifyImage;

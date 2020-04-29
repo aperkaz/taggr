@@ -1,14 +1,13 @@
 import * as Comlink from "comlink";
-// const filterResultsByTag = require("./filterResultsByTag");
+import filterResultsByTag from "./filterResultsByTag";
 // const { getWorkers } = require("../../workers/index");
 import RecursiveImageFinderWorker from "../../workers/recursiveImageFinder.worker";
 import ImageTaggingWorker from "../../workers/imageTagging.worker";
+import PickTopTagsWorker from "../../workers/pickTopTags.worker";
 
 import { generateMD5Hash } from "../../utils";
 
 const createProject = async (modules, payload) => {
-  //   const workers = getWorkers();
-
   // erase existing data (uiStore and appStore)
   // TODO: improve, extract to its module
   modules.uiStore.tagSearchValue = "";
@@ -21,6 +20,7 @@ const createProject = async (modules, payload) => {
 
   // set root foler
   modules.appStore.rootFolderPath = payload;
+  console.log(payload);
 
   // Worker: calculate all image paths in folder
   const imageFinderWorker = Comlink.wrap(new RecursiveImageFinderWorker());
@@ -34,16 +34,13 @@ const createProject = async (modules, payload) => {
 
   console.log("calculated image paths in folder");
 
-  // TODONOW: complete
   // Set the initial images in dashboard, prior to calculating tags
-  //   await filterResultsByTag(modules, "");
+  await filterResultsByTag(modules, "");
 
   // Worker: calculate tags for images
   const imageTaggingWorker = Comlink.wrap(new ImageTaggingWorker());
 
   const imagesToProcessCount = imagePathListToProcess.length;
-
-  console.log(imagesToProcessCount);
 
   while (imagePathListToProcess.length > 0) {
     const remaining = imagePathListToProcess.length;
@@ -68,14 +65,13 @@ const createProject = async (modules, payload) => {
   }
   modules.uiStore.tagProcessingStatus = null;
 
-  // TODONOW: fix
   // Worker: Sort tags by occcurrence, pick top 10
-  //   const pickTopTagsWorker = Comlink.wrap(workers.pickTopTagsWorker);
-  //   const topTags = await pickTopTagsWorker.process(
-  //     modules.appStore.imageHashMap,
-  //     10
-  //   );
-  //   modules.uiStore.tagCountList = topTags;
+  const pickTopTagsWorker = Comlink.wrap(new PickTopTagsWorker());
+  const topTags = await pickTopTagsWorker.process(
+    modules.appStore.imageHashMap,
+    10
+  );
+  modules.uiStore.tagCountList = topTags;
 };
 
 /**
