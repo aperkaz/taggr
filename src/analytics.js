@@ -1,5 +1,5 @@
 // Inspiration article: https://kilianvalkhof.com/2018/apps/using-google-analytics-to-gather-usage-statistics-in-electron/
-// TODONOW: setup event tracking plan
+// TODO: improvement: setup event tracking plan
 
 const { app } = require("electron");
 const isDev = require("electron-is-dev");

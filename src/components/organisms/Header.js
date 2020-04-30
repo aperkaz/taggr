@@ -11,8 +11,7 @@ import SearchIcon from "@material-ui/icons/Search";
 
 import TagCountDisplay from "../molecules/TagCountDisplay";
 
-// TODO: style: configure theme with typography and colors
-// TODONOW: add provider this theme: https://material-ui.com/styles/advanced/#theming
+// TODO: style: configure theme with typography and colors. Add provider this theme: https://material-ui.com/styles/advanced/#theming
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
