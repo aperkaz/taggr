@@ -7,8 +7,8 @@ import debounce from "lodash.debounce";
 
 import StartPage from "./components/pages/StartPage";
 import DashboardPage from "./components/pages/DashboardPage";
-import uiStore from "./store/modules/uiStore";
-const { triggerAction, ACTIONS } = require("./store");
+import uiStore, { ACTIONS } from "./uiStore";
+import { triggerAction } from "./backend";
 
 import CONSTANTS from "./constants";
 
@@ -21,12 +21,12 @@ const selectRootFolderPath = async () => {
 
   if (!projectRootFolderPath) return;
 
-  await triggerAction({
+  triggerAction({
     type: ACTIONS.SET_UI_PAGE,
     payload: CONSTANTS.ROUTES.DASHBOARD_PAGE,
   });
 
-  await triggerAction({
+  triggerAction({
     type: ACTIONS.CREATE_PROJECT,
     payload: projectRootFolderPath,
   });
