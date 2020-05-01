@@ -49,7 +49,7 @@ const renderRoute = (route) => {
           onInputChange={debounce(
             (payload) =>
               triggerAction({
-                type: ACTIONS.FILTER_RESULTS_BY_TAG,
+                name: ACTIONS.FILTER_RESULTS_BY_TAG,
                 payload,
               }),
             300

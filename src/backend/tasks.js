@@ -27,11 +27,10 @@ const createTask = (name, payload) => {
 // Map uiActions to queue-tasks array
 let actionToTaskMap = {};
 
-actionToTaskMap[ACTIONS.SET_UI_ROUTE] = (p) => [
-  createTask(TASKS.SET_UI_ROUTE, p),
+actionToTaskMap[ACTIONS.SET_UI_ROUTE] = (newRoute) => [
+  createTask(TASKS.SET_UI_ROUTE, newRoute),
 ];
 
-// TODONOW: add cleaning of appStore as first step
 actionToTaskMap[ACTIONS.CREATE_PROJECT] = (p) => [
   createTask(TASKS.CLEAN_PROJECT_DATA, p),
   createTask(TASKS.SET_PROJECT_ROOT_FOLDER_PATH, p),
@@ -40,6 +39,8 @@ actionToTaskMap[ACTIONS.CREATE_PROJECT] = (p) => [
   createTask(TASKS.CALCULATE_IMAGE_TAGS, p),
 ];
 
-actionToTaskMap[ACTIONS.FILTER_RESULTS_BY_TAG] = null;
+actionToTaskMap[ACTIONS.FILTER_RESULTS_BY_TAG] = (searchValue) => [
+  createTask(TASKS.SEARCH_IMAGES_BY_TAG, searchValue),
+];
 
 export { actionToTaskMap };

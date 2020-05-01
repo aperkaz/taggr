@@ -3,36 +3,20 @@ import queue from "async/queue";
 import { TASKS } from "../tasks";
 import appStore from "../appStore";
 import uiStore from "../../uiStore";
-import {
-  generateMD5Hash,
-  generateImageData,
-  getImagesWithoutTags,
-} from "../../utils";
+import { generateMD5Hash, getImagesWithoutTags } from "../../utils";
+import imageTaggingQueue from "./imageTaggingQueue";
 // TODO: fix: import warning
+// @ts-ignore
 import RecursiveImageFinderWorker from "../../workers/recursiveImageFinder.worker";
+// @ts-ignore
 import FilterResultsWorker from "../../workers/filderResults.worker";
+// @ts-ignore
 import ImageTaggingWorker from "../../workers/imageTagging.worker";
 // TODO: improvement: add import alias
 
 let imagesTagged, imagesToTag;
 
-const imageTaggingQueue = queue(
-  async ({ imageHash, imageTaggingWorker }, callback) => {
-    const path = appStore.imageHashMap[imageHash].path;
-
-    let imageData = await generateImageData(path);
-
-    const tags = await imageTaggingWorker.process(imageData);
-
-    // save results in appStore
-    appStore.imageHashMap[imageHash] = { path: imageHash, tags };
-
-    imageData = null;
-    return callback(false);
-  },
-  2
-);
-
+// TODONOW: consider migrating away towards custom queue with interrupts
 export default queue(async ({ name, payload }, callback) => {
   console.log("--");
   console.log("Main Queue processing: ", name);
@@ -88,9 +72,12 @@ export default queue(async ({ name, payload }, callback) => {
       imageHashListToProcess.forEach((imageHash) => {
         imageTaggingQueue.push({ imageHash, imageTaggingWorker }, () => {
           imagesTagged++;
+          uiStore.tagProcessingStatus = `Processing: ${imagesTagged} / ${imagesToTag}`;
           console.log(`Processing: ${imagesTagged} / ${imagesToTag}`);
         });
       });
+
+      imageTaggingQueue.drain(() => (uiStore.tagProcessingStatus = null));
 
       break;
   }

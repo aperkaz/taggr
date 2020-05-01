@@ -41,8 +41,7 @@ async function loadModel() {
 async function classifyImage(imageData) {
   if (!net) await loadModel();
 
-  const pixels = tf.browser.fromPixels(imageData);
-
+  let pixels = tf.browser.fromPixels(imageData);
   let rawPredictions = await net.classify(pixels);
 
   // filter out predictions below threshold
@@ -61,6 +60,7 @@ async function classifyImage(imageData) {
 
   // free memory by cleaning TF-internals and variables
   pixels.dispose();
+  pixels = null;
   imageData = null;
   rawPredictions = null;
   filteredRawPredictions = null;
