@@ -54,10 +54,10 @@ export const generateImageData = async (imagePath) => {
 };
 
 /**
- * Returns the images hashes that must be tagged
+ * Returns the images hashes of the images that dont have tags
  * @param {Object} imageHashMap
  */
-export const calculateImagesThatNeedTagCalculation = (imageHashMap) => {
+export const getImagesWithoutTags = (imageHashMap) => {
   let imageHashListToProcess = [];
   Object.keys(imageHashMap).forEach((key) => {
     const image = imageHashMap[key];

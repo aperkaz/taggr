@@ -6,18 +6,32 @@ import uiStore from "../../uiStore";
 import {
   generateMD5Hash,
   generateImageData,
-  calculateImagesThatNeedTagCalculation,
+  getImagesWithoutTags,
 } from "../../utils";
 // TODO: fix: import warning
 import RecursiveImageFinderWorker from "../../workers/recursiveImageFinder.worker";
 import FilterResultsWorker from "../../workers/filderResults.worker";
 import ImageTaggingWorker from "../../workers/imageTagging.worker";
-import { Callback } from "@tensorflow/tfjs";
 // TODO: improvement: add import alias
 
-// const imageTaggingQueue= queue(({name,payload}, callback)=> {
+let imagesTagged, imagesToTag;
 
-// },1);
+const imageTaggingQueue = queue(
+  async ({ imageHash, imageTaggingWorker }, callback) => {
+    const path = appStore.imageHashMap[imageHash].path;
+
+    let imageData = await generateImageData(path);
+
+    const tags = await imageTaggingWorker.process(imageData);
+
+    // save results in appStore
+    appStore.imageHashMap[imageHash] = { path: imageHash, tags };
+
+    imageData = null;
+    return callback(false);
+  },
+  2
+);
 
 export default queue(async ({ name, payload }, callback) => {
   console.log("--");
@@ -64,48 +78,20 @@ export default queue(async ({ name, payload }, callback) => {
       break;
 
     case TASKS.CALCULATE_IMAGE_TAGS:
-      // TODO: interate over the appStore structure, and for the images that have tags: null, run algoritm
-
-      let imageHashListToProcess = calculateImagesThatNeedTagCalculation(
-        appStore.imageHashMap
-      );
-
       const imageTaggingWorker = Comlink.wrap(new ImageTaggingWorker());
 
-      let imageHashedToProcessCount = imageHashListToProcess.length;
+      let imageHashListToProcess = getImagesWithoutTags(appStore.imageHashMap);
 
-      console.time("process ALL");
+      imagesToTag = imageHashListToProcess.length;
+      imagesTagged = 0;
 
-      while (imageHashListToProcess.length > 0) {
-        const remaining = imageHashListToProcess.length;
+      imageHashListToProcess.forEach((imageHash) => {
+        imageTaggingQueue.push({ imageHash, imageTaggingWorker }, () => {
+          imagesTagged++;
+          console.log(`Processing: ${imagesTagged} / ${imagesToTag}`);
+        });
+      });
 
-        // TODONOW: add visibility of tasks in UI
-        // update analysis status in uiStore
-        // uiStore.tagProcessingStatus = `To process: ${remaining} / ${imagesToProcessCount}`;
-
-        console.log(`To process: ${remaining} / ${imageHashedToProcessCount}`);
-
-        // console.time("processImage");
-
-        const imageHash = imageHashListToProcess.pop();
-        // const hash = generateMD5Hash(imagePath);
-        const imageData = await generateImageData(
-          appStore.imageHashMap[imageHash].path
-        );
-
-        // console.time("classify");
-        const tags = await imageTaggingWorker.process(imageData);
-        // console.timeEnd("classify");
-
-        // save results in appStore
-        appStore.imageHashMap[imageHash] = { path: imageHash, tags };
-
-        // console.timeEnd("processImage");
-      }
-
-      console.timeEnd("process ALL");
-
-      // TODONOW: move into queue
       break;
   }
 
