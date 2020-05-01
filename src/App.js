@@ -22,18 +22,18 @@ const selectRootFolderPath = async () => {
   if (!projectRootFolderPath) return;
 
   triggerAction({
-    type: ACTIONS.SET_UI_PAGE,
+    name: ACTIONS.SET_UI_ROUTE,
     payload: CONSTANTS.ROUTES.DASHBOARD_PAGE,
   });
 
   triggerAction({
-    type: ACTIONS.CREATE_PROJECT,
+    name: ACTIONS.CREATE_PROJECT,
     payload: projectRootFolderPath,
   });
 };
 
 const App = view(() => (
-  <div style={{ height: "100%" }}>{renderRoute(uiStore.currentPage)}</div>
+  <div style={{ height: "100%" }}>{renderRoute(uiStore.activeRoute)}</div>
 ));
 
 const renderRoute = (route) => {
@@ -56,7 +56,7 @@ const renderRoute = (route) => {
           )}
           onPressReset={async () => {
             await triggerAction({
-              type: ACTIONS.SET_UI_PAGE,
+              name: ACTIONS.SET_UI_ROUTE,
               payload: CONSTANTS.ROUTES.START_PAGE,
             });
           }}

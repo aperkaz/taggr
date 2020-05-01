@@ -6,8 +6,8 @@ import * as Sentry from "@sentry/browser";
 import App from "./App";
 import "./index.css";
 
-// TODO: feature: timeline with pictures https://github.com/rmariuzzo/react-chronos
-// TODO: feature: timeline display of images per day http://tany.kim/quantify-your-year/#/
+// TODO: future-feature: timeline with pictures https://github.com/rmariuzzo/react-chronos
+// TODO: future-feature: timeline display of images per day http://tany.kim/quantify-your-year/#/
 
 // Setup tracking
 const { getGlobal } = require("electron").remote;

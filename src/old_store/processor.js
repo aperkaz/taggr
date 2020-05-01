@@ -8,7 +8,7 @@ import filterResultsByTag from "./resolvers/filterResultsByTag";
 let resolver = {};
 
 // Resolvers are async functions with access to persistence, filesystem, webworkers...
-resolver[ACTIONS.SET_UI_PAGE] = setUiPage;
+resolver[ACTIONS.SET_UI_ROUTE] = setUiPage;
 resolver[ACTIONS.CREATE_PROJECT] = async (m, p) => await createProject(m, p);
 resolver[ACTIONS.FILTER_RESULTS_BY_TAG] = async (m, p) =>
   await filterResultsByTag(m, p);
