@@ -12,6 +12,8 @@ import RecursiveImageFinderWorker from "../../workers/recursiveImageFinder.worke
 import FilterResultsWorker from "../../workers/filderResults.worker";
 // @ts-ignore
 import ImageTaggingWorker from "../../workers/imageTagging.worker";
+// @ts-ignore
+import PickTopTagsWorker from "../../workers/pickTopTags.worker";
 // TODO: improvement: add import alias
 
 let imagesTagged, imagesToTag;
@@ -77,9 +79,29 @@ export default queue(async ({ name, payload }, callback) => {
         });
       });
 
-      imageTaggingQueue.drain(() => (uiStore.tagProcessingStatus = null));
+      imageTaggingQueue.drain(async () => {
+        // When tagging complete, sort tags by occcurrence and pick top 20
+        const pickTopTagsWorker = Comlink.wrap(new PickTopTagsWorker());
+        const topTags = await pickTopTagsWorker.process(
+          appStore.imageHashMap,
+          20
+        );
+        uiStore.tagCountList = topTags;
+        uiStore.tagProcessingStatus = null;
+      });
 
       break;
+
+    // case TASKS.CALCULATE_TOP_TAGS:
+    //   // Worker: Sort tags by occcurrence, pick top 20
+    //   const pickTopTagsWorker = Comlink.wrap(new PickTopTagsWorker());
+    //   const topTags = await pickTopTagsWorker.process(
+    //     appStore.imageHashMap,
+    //     20
+    //   );
+    //   uiStore.tagCountList = topTags;
+
+    //   break;
   }
 
   callback();

@@ -39,7 +39,18 @@ const App = view(() => (
 const renderRoute = (route) => {
   switch (route) {
     case CONSTANTS.ROUTES.START_PAGE:
-      return <StartPage onSelectRootFolderPath={selectRootFolderPath} />;
+      return (
+        <StartPage
+          onSelectRootFolderPath={selectRootFolderPath}
+          onLogoClick={() =>
+            // https://github.com/electron/electron/issues/1344#issuecomment-339585884
+            triggerAction({
+              name: ACTIONS.SET_UI_ROUTE,
+              payload: CONSTANTS.ROUTES.START_PAGE,
+            })
+          }
+        />
+      );
     case CONSTANTS.ROUTES.DASHBOARD_PAGE:
       return (
         <DashboardPage
@@ -55,7 +66,7 @@ const renderRoute = (route) => {
             300
           )}
           onPressReset={async () => {
-            await triggerAction({
+            triggerAction({
               name: ACTIONS.SET_UI_ROUTE,
               payload: CONSTANTS.ROUTES.START_PAGE,
             });

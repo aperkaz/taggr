@@ -33,6 +33,8 @@ const createWindow = () => {
       )
     );
     // BrowserWindow.removeDevToolsExtension(reactExtension);
+
+    mainWindow.setPosition(1000, 0);
   } else {
     mainWindow = new BrowserWindow({
       webPreferences: {
@@ -49,8 +51,6 @@ const createWindow = () => {
 
   // Remove menu
   mainWindow.removeMenu();
-
-  mainWindow.setPosition(1000, 0);
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();

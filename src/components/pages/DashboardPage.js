@@ -12,6 +12,7 @@ const Wrapper = styled.div`
 `;
 
 const DashboardPage = ({
+  onLogoClick,
   onInputChange,
   onPressReset,
   tagProcessingStatus,
@@ -20,6 +21,7 @@ const DashboardPage = ({
 }) => (
   <Wrapper>
     <Header
+      onLogoClick={onLogoClick}
       onInputChange={onInputChange}
       onPressReset={onPressReset}
       tagProcessingStatus={tagProcessingStatus}

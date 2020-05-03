@@ -13,6 +13,7 @@ export const StartPage = () => (
   <FullHeight>
     <StartPageComp
       onSelectRootFolderPath={action("trigger folder selection dialog")}
+      onLogoClick={action("trigger logo click")}
     />
   </FullHeight>
 );

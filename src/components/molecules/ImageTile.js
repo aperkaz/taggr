@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import PropTypes, { nominalTypeHack } from "prop-types";
 import styled from "styled-components";
 
 const normalizeImageUrl = (imagePath) => {
@@ -7,7 +7,9 @@ const normalizeImageUrl = (imagePath) => {
 
   // fixes linux / windows compatibility
   const normalizedImagePath = normalize(imagePath);
-  return `file:///${normalizedImagePath}`;
+  return normalizedImagePath.startsWith("http")
+    ? normalizedImagePath
+    : `file:///${normalizedImagePath}`;
 };
 
 // TODO: replace by react image load component, nicer load animation

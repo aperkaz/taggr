@@ -82,7 +82,7 @@ class VirtualizedGallery extends Component {
       <div
         ref={(el) => (this.container = el)}
         id="virtualized-gallery-wrapper"
-        style={{ height: "100%", overflowY: "hidden" }}
+        style={{ height: "100%", overflow: "hidden" }}
       >
         <Grid
           className="Grid"
@@ -93,7 +93,11 @@ class VirtualizedGallery extends Component {
           rowHeight={rowHeight}
           width={gridWidth}
           itemData={imageList}
-          style={{ overflowX: "hidden", margin: "5px auto 0" }}
+          style={{
+            overflowX: "hidden",
+            margin: "5px 40px 5px 5px",
+            paddingRight: "20px",
+          }}
         >
           {Cell}
         </Grid>

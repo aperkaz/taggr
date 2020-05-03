@@ -44,18 +44,20 @@ async function classifyImage(imageData) {
   let pixels = tf.browser.fromPixels(imageData);
   let rawPredictions = await net.classify(pixels);
 
+  console.log(rawPredictions);
+
   // filter out predictions below threshold
   let filteredRawPredictions = rawPredictions.filter(
     (rawPrediction) => rawPrediction.probability > PROBABILITY_THRESHOLD
   );
 
-  // aggregate results
+  console.log(filteredRawPredictions);
+
+  // aggregate results, picking only the first name for each class
   const predictions = [];
   filteredRawPredictions.forEach((rawPrediction) => {
-    const tags = rawPrediction.className
-      .split(", ")
-      .map((name) => name.toLowerCase());
-    predictions.push(...tags);
+    const tag = rawPrediction.className.split(", ")[0].toLowerCase();
+    predictions.push(tag);
   });
 
   // free memory by cleaning TF-internals and variables

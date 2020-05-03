@@ -19,14 +19,12 @@ const useStyles = makeStyles((theme) => ({
 
 const TagCountDisplay = ({ tagCountList = [] }) => {
   const classes = useStyles();
-  return tagCountList.length == 0 ? (
-    ``
-  ) : (
+  return tagCountList.length == 0 ? null : (
     <div className={classes.root}>
       <Typography
         variant="h5"
         style={{
-          fontFamily: "Nunito",
+          fontFamily: "Open Sans",
           marginRight: "1rem",
         }}
       >

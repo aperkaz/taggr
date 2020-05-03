@@ -10,6 +10,8 @@ const LogoWrapper = styled.div`
   transform: rotate(-10deg);
 
   border-radius: 6px;
+
+  cursor: pointer;
 `;
 
 const LogoInner = styled.h1`
@@ -22,8 +24,8 @@ const LogoInner = styled.h1`
   transform: rotate(10deg);
 `;
 
-const Logo = ({ height = 40, width = 40 }) => (
-  <LogoWrapper height={height} width={width}>
+const Logo = ({ height = 40, width = 40, onClick = () => null }) => (
+  <LogoWrapper height={height} width={width} onClick={onClick}>
     <LogoInner height={height}>t</LogoInner>
   </LogoWrapper>
 );

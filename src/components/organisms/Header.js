@@ -1,104 +1,53 @@
 import React from "react";
 import PropTypes from "prop-types";
+import styled from "styled-components";
 
-import { fade, makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
+import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import InputBase from "@material-ui/core/InputBase";
-import SearchIcon from "@material-ui/icons/Search";
 
+import Logo from "../molecules/Logo";
 import TagCountDisplay from "../molecules/TagCountDisplay";
 
-// TODO: style: configure theme with typography and colors. Add provider this theme: https://material-ui.com/styles/advanced/#theming
-const useStyles = makeStyles((theme) => ({
-  grow: {
-    flexGrow: 1,
-  },
-  search: {
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing(1),
-    marginLeft: theme.spacing(3),
-    width: "auto",
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 1.5),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  inputRoot: {
-    color: "inherit",
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + {theme.spacing(4)}px)`,
-    transition: theme.transitions.create("width"),
-    width: "20ch",
-  },
-}));
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  align-items: center;
+`;
 
-const Header = ({
+const HeaderComp = ({
+  onLogoClick,
   onInputChange,
   onPressReset,
   tagProcessingStatus,
   tagCountList,
 }) => {
-  const classes = useStyles();
-
   return (
     <div>
-      <div className={classes.grow}>
-        <AppBar position="static">
-          <Toolbar variant="dense">
-            <Typography
-              variant="h5"
-              style={{
-                fontFamily: "Pacifico",
-              }}
-            >
-              taggr
-            </Typography>
-            <div className="{classes.grow}" />
-            <div className="{classes.search}">
-              <div className="{classes.searchIcon}">
-                <SearchIcon />
-              </div>
-              <InputBase
-                placeholder={
-                  tagProcessingStatus ? tagProcessingStatus : "Search by tag"
-                }
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-                onChange={(e) => onInputChange(e.target.value)}
-                inputProps={{ "aria-label": "search" }}
-              />
-            </div>
-            <Button
-              style={{
-                fontFamily: "Nunito",
-                background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
-                color: "white",
-              }}
-              onClick={onPressReset}
-            >
-              Reset
-            </Button>
-          </Toolbar>
-        </AppBar>
-      </div>
+      <Header>
+        <Logo onClick={onLogoClick} />
+        <TextField
+          id="outlined-basic"
+          label={tagProcessingStatus ? tagProcessingStatus : "Tags"}
+          variant="outlined"
+          placeholder={
+            tagProcessingStatus ? tagProcessingStatus : "Search by tag"
+          }
+          onChange={(e) => onInputChange(e.target.value)}
+        />
+        <Button
+          style={{
+            fontFamily: "Open Sans",
+            background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+            fontWeight: 600,
+            color: "white",
+            width: "6rem",
+          }}
+          onClick={onPressReset}
+        >
+          Reset
+        </Button>
+      </Header>
       <div style={{ marginTop: "8px" }}>
         <TagCountDisplay tagCountList={tagCountList} />
       </div>
@@ -106,14 +55,14 @@ const Header = ({
   );
 };
 
-Header.defaultProps = {
+HeaderComp.defaultProps = {
   onInputChange: () => null,
   onPressReset: () => null,
   tagProcessingStatus: null,
   tagCountList: [],
 };
 
-Header.propTypes = {
+HeaderComp.propTypes = {
   onInputChange: PropTypes.func,
   onPressReset: PropTypes.func,
   tagProcessingStatus: PropTypes.any,
@@ -125,4 +74,4 @@ Header.propTypes = {
   ),
 };
 
-export default Header;
+export default HeaderComp;

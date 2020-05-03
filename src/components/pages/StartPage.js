@@ -1,4 +1,5 @@
 import React from "react";
+// import { shell } from "electron";
 import Button from "@material-ui/core/Button";
 import styled from "styled-components";
 import Logo from "../molecules/Logo";
@@ -53,13 +54,6 @@ const UnderTitle = styled.p`
   font-size: 1.75rem;
 `;
 
-const SecondaryUnderTitle = styled.p`
-  margin-bottom: 3rem;
-  font-family: Open Sans;
-  color: white;
-  font-size: 1.75 rem;
-`;
-
 const Footer = styled.a`
   font-family: Open Sans;
   margin-bottom: 0.5rem;
@@ -67,18 +61,19 @@ const Footer = styled.a`
   font-weight: 600;
 `;
 
-const StartPage = ({ onSelectRootFolderPath }) => (
+const StartPage = ({ onSelectRootFolderPath, onLogoClick }) => (
   <Wrapper>
     <Header>
-      <Logo />
-      <div>menu</div>
+      <Logo onClick={onLogoClick} />
+      {/* <div>menu</div> */}
     </Header>
     <Main>
       <Title>Taggr</Title>
       <UnderTitle>
         Rediscover your memories while keeping your privacy
+        <br />
+        Powered by Machine-Learning
       </UnderTitle>
-      <SecondaryUnderTitle>Powered by Machine-Learning</SecondaryUnderTitle>
       <Button
         variant="outlined"
         size="large"
