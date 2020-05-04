@@ -55,7 +55,7 @@ const createWindow = () => {
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
 
-  // Setup analytics, only triggered in non dev envs
+  // Setup Google Analytics. Only triggered in non-dev envs
   const { trackEvent } = require("./analytics");
   global.trackEvent = trackEvent;
 };

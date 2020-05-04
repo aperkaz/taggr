@@ -8,8 +8,11 @@ import "../types";
  */
 let uiStore = store({
   activeRoute: CONSTANTS.ROUTES.START_PAGE,
-  tagSeachValue: "",
+  // Tasks
   tagProcessingStatus: null,
+
+  // Dashboard page
+  tagSeachValue: "",
   filteredImageList: [],
   tagCountList: [], // ordered tagCount object list
 });

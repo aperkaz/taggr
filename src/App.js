@@ -7,9 +7,9 @@ import debounce from "lodash.debounce";
 
 import StartPage from "./components/pages/StartPage";
 import DashboardPage from "./components/pages/DashboardPage";
+import UpdateModal from "./components/molecules/UpdateModal";
 import uiStore, { ACTIONS } from "./uiStore";
 import { triggerAction } from "./backend";
-
 import CONSTANTS from "./constants";
 
 const selectRootFolderPath = async () => {
@@ -33,7 +33,10 @@ const selectRootFolderPath = async () => {
 };
 
 const App = view(() => (
-  <div style={{ height: "100%" }}>{renderRoute(uiStore.activeRoute)}</div>
+  <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
+    <div style={{ height: "100%" }}>{renderRoute(uiStore.activeRoute)}</div>
+    <UpdateModal />
+  </div>
 ));
 
 const renderRoute = (route) => {

@@ -18,3 +18,7 @@ The app storage is divided in two parts, UI and backend. The UI store is reactiv
 
 Backend tasks are manages using queues, to present race conditions and allowing users to reset queues.
 
+## Future features
+
+TODO: future-feature: timeline with pictures https://github.com/rmariuzzo/react-chronos
+TODO: future-feature: timeline display of images per day http://tany.kim/quantify-your-year/#/
