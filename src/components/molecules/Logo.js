@@ -9,7 +9,9 @@ const LogoWrapper = styled.div`
   text-align: center;
   transform: rotate(-10deg);
 
+  border-width: 2px;
   border-radius: 6px;
+  border-style: solid;
 
   cursor: pointer;
 `;

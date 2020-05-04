@@ -1,31 +1,28 @@
 import React from "react";
-// import { shell } from "electron";
 import Button from "@material-ui/core/Button";
 import styled from "styled-components";
 import Logo from "../molecules/Logo";
+import backgroundImage from "./background.jpeg";
 
-const Wrapper = styled.div`
-  background-image: linear-gradient(
-    to top right,
-    rgb(101, 115, 255),
-    rgb(111, 114, 247),
-    rgb(120, 114, 239),
-    rgb(130, 113, 231),
-    rgb(139, 112, 223),
-    rgb(149, 111, 215),
-    rgb(158, 111, 208),
-    rgb(168, 110, 200),
-    rgb(177, 109, 192),
-    rgb(187, 108, 184),
-    rgb(196, 108, 176),
-    rgb(206, 107, 168)
+const InnerWrapper = styled.div`
+  background: linear-gradient(
+    -47deg,
+    rgb(135, 49, 232, 0.9) 0%,
+    rgb(69, 40, 220, 0.9) 100%
   );
+
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   margin: auto;
   text-align: center;
+`;
+
+const Wrapper = styled.div`
+  background: rgba(0, 0, 0, 0) url(${backgroundImage}) no-repeat scroll center
+    center / cover;
+  height: 100%;
 `;
 
 const Header = styled.div`
@@ -63,32 +60,34 @@ const Footer = styled.a`
 
 const StartPage = ({ onSelectRootFolderPath, onLogoClick }) => (
   <Wrapper>
-    <Header>
-      <Logo onClick={onLogoClick} />
-      {/* <div>menu</div> */}
-    </Header>
-    <Main>
-      <Title>Taggr</Title>
-      <UnderTitle>
-        Rediscover your memories while keeping your privacy
-        <br />
-        Powered by Machine-Learning
-      </UnderTitle>
-      <Button
-        variant="outlined"
-        size="large"
-        style={{
-          fontFamily: "Open Sans",
-          fontWeight: 600,
-          color: "white",
-          background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
-        }}
-        onClick={async () => await onSelectRootFolderPath()}
-      >
-        Select picture folder
-      </Button>
-    </Main>
-    <Footer href="https://taggr.ai">taggr.ai</Footer>
+    <InnerWrapper>
+      <Header>
+        <Logo onClick={onLogoClick} />
+        {/* <div>menu</div> */}
+      </Header>
+      <Main>
+        <Title>Taggr</Title>
+        <UnderTitle>
+          Rediscover your memories while keeping your privacy
+          <br />
+          Powered by Machine-Learning
+        </UnderTitle>
+        <Button
+          variant="outlined"
+          size="large"
+          style={{
+            fontFamily: "Open Sans",
+            fontWeight: 600,
+            color: "white",
+            background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+          }}
+          onClick={async () => await onSelectRootFolderPath()}
+        >
+          Select picture folder
+        </Button>
+      </Main>
+      <Footer href="https://taggr.ai">taggr.ai</Footer>
+    </InnerWrapper>
   </Wrapper>
 );
 
