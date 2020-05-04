@@ -22,3 +22,7 @@ Backend tasks are manages using queues, to present race conditions and allowing 
 
 TODO: future-feature: timeline with pictures https://github.com/rmariuzzo/react-chronos
 TODO: future-feature: timeline display of images per day http://tany.kim/quantify-your-year/#/
+
+## Releases
+
+https://github.com/aperkaz/taggr-releases/releases
