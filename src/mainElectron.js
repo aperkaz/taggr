@@ -35,6 +35,9 @@ const createWindow = () => {
     // BrowserWindow.removeDevToolsExtension(reactExtension);
 
     mainWindow.setPosition(1000, 0);
+
+    // Open the DevTools.
+    mainWindow.webContents.openDevTools();
   } else {
     mainWindow = new BrowserWindow({
       webPreferences: {
@@ -50,10 +53,7 @@ const createWindow = () => {
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
   // Remove menu
-  mainWindow.removeMenu();
-
-  // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  // mainWindow.removeMenu();
 
   // Setup Google Analytics. Only triggered in non-dev envs
   const { trackEvent } = require("./analytics");
