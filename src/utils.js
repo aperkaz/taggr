@@ -1,80 +1,70 @@
-const fs = require("fs");
-const crypto = require("crypto");
-const readdirp = require("readdirp");
-// const { classifyImage } = require("./workers/imageRecognitionHelper");
+import crypto from "crypto";
+import "./types";
 
 /**
  * Generate md5 hash string
  *
  * @param {String} input
  */
-function generateMD5Hash(input) {
+export function generateMD5Hash(input) {
   return crypto.createHash("md5").update(input).digest("hex");
 }
 
 /**
- * Generate md5 hash from file
+ * Load image using DOM Image element
  *
- * @param {String} filePath
+ * @param {String} path
+ * @returns {Promise<HTMLImageElement>} loaded image
  */
-function generateMD5FileHash(filePath) {
-  let file_buffer = fs.readFileSync(filePath);
-  return crypto.createHash("md5").update(file_buffer).digest("hex");
+async function loadImage(path) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onerror = (err) => reject(err);
+    img.onload = () => resolve(img);
+    img.src = `file:///${path}`;
+  });
 }
 
 /**
- * Recursively find all the image paths inside a given folder
+ * Generate a ImageData structure from a imagePath. Prepocess using Canvas to algorithm input: 224px
  *
- * @param {String} folderPath
- * @returns {Array} array of image paths
+ * @param {String} imagePath
+ * @returns {Promise<ImageData>} loaded image
  */
-async function recursivelyFindImages(folderPath) {
-  // console.time("recursivelyFindImages");
-  if (!folderPath) return [];
+export const generateImageData = async (imagePath) => {
+  let img = await loadImage(imagePath);
 
-  const imagePathList = [];
+  const MAX_HEIGHT = 224;
 
-  var settings = {
-    // Filter files with js and json extension
-    fileFilter: ["*.png", "*.PNG", "*.jpg", "*.JPG", ".*.jpeg", "*.JPEG"],
-    // Filter by directory
-    directoryFilter: ["!.git", "!*modules"],
-  };
-
-  for await (const entry of readdirp(folderPath, settings)) {
-    const { path } = entry;
-    imagePathList.push(`${folderPath}/${path}`);
+  // calculate new ratios for image size, based on MAX_HEIGHT
+  if (img.height > MAX_HEIGHT) {
+    img.width *= MAX_HEIGHT / img.height;
+    img.height = MAX_HEIGHT;
   }
 
-  // console.timeEnd("recursivelyFindImages");
+  let canvas = new OffscreenCanvas(img.width, img.height);
+  var ctx = canvas.getContext("2d");
+  // ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(img, 0, 0, img.width, img.height);
 
-  return imagePathList;
-}
+  const imageData = canvas
+    .getContext("2d")
+    .getImageData(0, 0, img.width, img.height);
+  return imageData;
+};
 
 /**
- * Populate an image map given an array of paths
- *
- * @param {Array} imagePathList
- * @returns {Object} map {image1Hash: {path: image1path, tags: []},...}
+ * Returns the images hashes of the images that dont have tags
+ * @param {Object} imageHashMap
  */
-function constructImageMap(imagePathList) {
-  if (!imagePathList) return {};
-
-  // console.time("constructImageMap");
-  const imageMap = {};
-
-  imagePathList.forEach((imagePath) => {
-    const generatedHash = generateMD5FileHash(imagePath);
-    imageMap[generatedHash] = { path: imagePath, tags: [] };
+export const getImagesWithoutTags = (imageHashMap) => {
+  let imageHashListToProcess = [];
+  Object.keys(imageHashMap).forEach((key) => {
+    const image = imageHashMap[key];
+    if (image.tags === null) {
+      imageHashListToProcess.push(key);
+    }
   });
 
-  // console.timeEnd("constructImageMap");
-  return imageMap;
-}
-
-module.exports = {
-  generateMD5Hash,
-  generateMD5FileHash,
-  constructImageMap,
-  recursivelyFindImages,
+  return imageHashListToProcess;
 };
