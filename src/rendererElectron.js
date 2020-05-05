@@ -26,4 +26,19 @@ const { getGlobal } = require("electron").remote;
 const trackEvent = getGlobal("trackEvent");
 trackEvent("User Interaction", "App opened");
 
+// Setup fps analytis in dev
+if (isDev) {
+  var script = document.createElement("script");
+  script.onload = function () {
+    var stats = new Stats();
+    document.body.appendChild(stats.dom);
+    requestAnimationFrame(function loop() {
+      stats.update();
+      requestAnimationFrame(loop);
+    });
+  };
+  script.src = "//mrdoob.github.io/stats.js/build/stats.min.js";
+  document.head.appendChild(script);
+}
+
 ReactDOM.render(<App />, document.getElementById("app"));

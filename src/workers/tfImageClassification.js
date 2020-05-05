@@ -15,8 +15,10 @@ const MODEL_URL = url.format({
 
 let net;
 
-async function loadModel() {
+export async function loadModel() {
   if (net) return;
+
+  console.log("loading model");
 
   console.time("loadModel");
 
@@ -44,14 +46,14 @@ async function classifyImage(imageData) {
   let pixels = tf.browser.fromPixels(imageData);
   let rawPredictions = await net.classify(pixels);
 
-  console.log(rawPredictions);
+  // console.log(rawPredictions);
 
   // filter out predictions below threshold
   let filteredRawPredictions = rawPredictions.filter(
     (rawPrediction) => rawPrediction.probability > PROBABILITY_THRESHOLD
   );
 
-  console.log(filteredRawPredictions);
+  // console.log(filteredRawPredictions);
 
   // aggregate results, picking only the first name for each class
   const predictions = [];

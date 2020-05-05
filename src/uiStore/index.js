@@ -1,4 +1,4 @@
-import { store } from "@risingstack/react-easy-state";
+import { store, autoEffect } from "@risingstack/react-easy-state";
 import isDev from "electron-is-dev";
 import CONSTANTS from "../constants";
 import "../types";
@@ -16,6 +16,8 @@ let uiStore = store({
   filteredImageList: [],
   tagCountList: [], // ordered tagCount object list
 });
+
+autoEffect(() => console.log(uiStore.filteredImageList.length));
 
 if (isDev) window["uiStore"] = uiStore;
 

@@ -1,5 +1,5 @@
 import * as Comlink from "comlink";
-import classifyImage from "./tfImageClassification";
+import classifyImage, { loadModel } from "./tfImageClassification";
 
 Comlink.expose({
   /**
@@ -12,3 +12,8 @@ Comlink.expose({
     return await classifyImage(imageData);
   },
 });
+
+// load model at the start of app
+(async () => {
+  await loadModel();
+})();

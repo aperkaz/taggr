@@ -3,9 +3,11 @@ import queue from "async/queue";
 import { TASKS } from "../tasks";
 import appStore from "../appStore";
 import uiStore from "../../uiStore";
-import { generateMD5Hash, getImagesWithoutTags } from "../../utils";
-import imageTaggingQueue from "./imageTaggingQueue";
-// TODO: fix: import warning
+import {
+  generateMD5Hash,
+  getImagesWithoutTags,
+  generateImageData,
+} from "../../utils";
 // @ts-ignore
 import RecursiveImageFinderWorker from "../../workers/recursiveImageFinder.worker";
 // @ts-ignore
@@ -16,9 +18,8 @@ import ImageTaggingWorker from "../../workers/imageTagging.worker";
 import PickTopTagsWorker from "../../workers/pickTopTags.worker";
 // TODO: improvement: add import alias
 
-let imagesTagged, imagesToTag;
+let initializedWorker = new ImageTaggingWorker();
 
-// TODONOW: consider migrating away towards custom queue with interrupts
 export default queue(async ({ name, payload }, callback) => {
   console.log("--");
   console.log("Main Queue processing: ", name);
@@ -64,44 +65,48 @@ export default queue(async ({ name, payload }, callback) => {
       break;
 
     case TASKS.CALCULATE_IMAGE_TAGS:
-      const imageTaggingWorker = Comlink.wrap(new ImageTaggingWorker());
+      let imageTaggingWorker = Comlink.wrap(initializedWorker);
 
       let imageHashListToProcess = getImagesWithoutTags(appStore.imageHashMap);
+      const imagesToTag = imageHashListToProcess.length;
+      let imagesTagged = 0;
 
-      imagesToTag = imageHashListToProcess.length;
-      imagesTagged = 0;
+      while (imageHashListToProcess.length > 0) {
+        const imageHash = imageHashListToProcess.pop();
+        const path = appStore.imageHashMap[imageHash].path;
 
-      imageHashListToProcess.forEach((imageHash) => {
-        imageTaggingQueue.push({ imageHash, imageTaggingWorker }, () => {
-          imagesTagged++;
-          uiStore.tagProcessingStatus = `Processing: ${imagesTagged} / ${imagesToTag}`;
-          console.log(`Processing: ${imagesTagged} / ${imagesToTag}`);
-        });
-      });
+        // TODONOW: due to the current store setups, forces whole store re-render.
+        // uiStore.tagProcessingStatus = `Processing: ${imagesTagged} / ${imagesToTag}`;
 
-      imageTaggingQueue.drain(async () => {
-        // When tagging complete, sort tags by occcurrence and pick top 20
-        const pickTopTagsWorker = Comlink.wrap(new PickTopTagsWorker());
-        const topTags = await pickTopTagsWorker.process(
-          appStore.imageHashMap,
-          20
-        );
-        uiStore.tagCountList = topTags;
-        uiStore.tagProcessingStatus = null;
-      });
+        let imageData = await generateImageData(path);
+        const tags = await imageTaggingWorker.process(imageData);
+        imagesTagged++;
+
+        // save results in appStore
+        appStore.imageHashMap[imageHash] = {
+          ...appStore.imageHashMap[imageHash],
+          tags,
+        };
+
+        // clean up
+        imageData = null;
+
+        // artificial await to keep fps up
+        await new Promise((r) => setTimeout(r, 80));
+      }
+
+      uiStore.tagProcessingStatus = "";
+
+      // When tagging complete, sort tags by occcurrence and pick top 20
+      const pickTopTagsWorker = Comlink.wrap(new PickTopTagsWorker());
+      const topTags = await pickTopTagsWorker.process(
+        appStore.imageHashMap,
+        20
+      );
+      uiStore.tagCountList = topTags;
+      uiStore.tagProcessingStatus = null;
 
       break;
-
-    // case TASKS.CALCULATE_TOP_TAGS:
-    //   // Worker: Sort tags by occcurrence, pick top 20
-    //   const pickTopTagsWorker = Comlink.wrap(new PickTopTagsWorker());
-    //   const topTags = await pickTopTagsWorker.process(
-    //     appStore.imageHashMap,
-    //     20
-    //   );
-    //   uiStore.tagCountList = topTags;
-
-    //   break;
   }
 
   callback();

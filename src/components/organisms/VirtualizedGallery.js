@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import memoize from "memoize-one";
+
 import PropTypes from "prop-types";
 import { FixedSizeGrid as Grid } from "react-window"; // Virtualize list for performance https://github.com/developerdizzle/react-virtual-list
 import Carousel, { Modal, ModalGateway } from "react-images";
@@ -10,6 +12,8 @@ const ELEMENTS_PER_COLLUMN = 5;
 
 // TODO: inprovement: refactor with https://github.com/bvaughn/react-virtualized-auto-sizer/
 
+// TODONOW: re renders every time a calculation is done, see why.
+// THE PROCESSING STATUS MODIFIES DASHBOARD, which forces the whole gallery to re-render
 class VirtualizedGallery extends Component {
   constructor(props) {
     super(props);
@@ -23,6 +27,14 @@ class VirtualizedGallery extends Component {
 
     this.setDimensions = this.setDimensions.bind(this);
     this.toggleLightbox = this.toggleLightbox.bind(this);
+
+    this.calculateCarouselImages = memoize((imageList) => {
+      console.log("calculating carousel images");
+      return imageList.map((imagePath) => ({
+        source: `file://${imagePath.path}`,
+      }));
+    });
+    this.prefixImagePaths = memoize(this.prefixImagePaths.bind(this));
     this.handleScroll = debounce(this.handleScroll.bind(this), 200);
   }
 
@@ -71,12 +83,16 @@ class VirtualizedGallery extends Component {
     });
   }
 
-  render() {
-    const imageList = this.props.imageList;
-    // TODONOW: performance: move out for performance reasons. Make sure all the calculations are done out of the render method
-    const carouselImages = imageList.map((imagePath) => ({
+  // Re-run the filter whenever the list array or filter text changes:
+  prefixImagePaths(imagePathsList) {
+    return imagePathsList.map((imagePath) => ({
       source: `file://${imagePath.path}`,
     }));
+  }
+
+  render() {
+    const imageList = this.props.imageList;
+
     const {
       dimensions: { height, width },
       lightboxIsOpen,
@@ -96,6 +112,10 @@ class VirtualizedGallery extends Component {
       gridHeight / ELEMENTS_PER_COLLUMN > 250
         ? gridHeight / ELEMENTS_PER_COLLUMN
         : 250;
+
+    const carouselImages = this.calculateCarouselImages(imageList);
+
+    console.log("re render virtual");
 
     return (
       <div
