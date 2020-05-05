@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { FixedSizeGrid as Grid } from "react-window"; // Virtualize list for performance https://github.com/developerdizzle/react-virtual-list
+import Carousel, { Modal, ModalGateway } from "react-images";
 import debounce from "lodash.debounce";
 import ImageTile from "../molecules/ImageTile";
 
@@ -16,10 +17,21 @@ class VirtualizedGallery extends Component {
     this.state = {
       dimensions: { height: 10, width: 10 },
       sizeSet: false,
+      selectedIndex: 0,
+      lightboxIsOpen: false,
     };
 
     this.setDimensions = this.setDimensions.bind(this);
+    this.toggleLightbox = this.toggleLightbox.bind(this);
     this.handleScroll = debounce(this.handleScroll.bind(this), 200);
+  }
+
+  toggleLightbox(selectedIndex) {
+    this.setState((prevState) => ({
+      ...prevState,
+      lightboxIsOpen: !prevState.lightboxIsOpen,
+      selectedIndex,
+    }));
   }
 
   setDimensions({ height, width }) {
@@ -61,8 +73,15 @@ class VirtualizedGallery extends Component {
 
   render() {
     const imageList = this.props.imageList;
+    // TODONOW: performance: move out for performance reasons. Make sure all the calculations are done out of the render method
+    const carouselImages = imageList.map((imagePath) => ({
+      source: `file://${imagePath.path}`,
+    }));
     const {
       dimensions: { height, width },
+      lightboxIsOpen,
+      selectedIndex,
+      // isLoading,
     } = this.state;
 
     const gridHeight = height - GUTTER * 2;
@@ -99,21 +118,38 @@ class VirtualizedGallery extends Component {
             paddingRight: "20px",
           }}
         >
-          {Cell}
+          {(props) => <Cell {...props} onClick={this.toggleLightbox} />}
         </Grid>
+
+        <ModalGateway>
+          {lightboxIsOpen ? (
+            <Modal onClose={this.toggleLightbox}>
+              <Carousel
+                // components={{ FooterCaption }}
+                currentIndex={selectedIndex}
+                // formatters={{ getAltText }}
+                views={carouselImages}
+              />
+            </Modal>
+          ) : null}
+        </ModalGateway>
       </div>
     );
   }
 }
 
-const Cell = ({ columnIndex, rowIndex, style, data }) => {
+const Cell = ({ columnIndex, rowIndex, style, data, onClick }) => {
   const height = style.height - GUTTER;
   const width = style.width - GUTTER;
 
   // TODO: clean: parametrize gallery elements
   const index = rowIndex * ELEMENTS_PER_COLLUMN + columnIndex;
   return (
-    <div key={columnIndex + ":" + rowIndex} style={{ ...style, height, width }}>
+    <div
+      key={columnIndex + ":" + rowIndex}
+      style={{ ...style, height, width }}
+      onClick={() => onClick(index)}
+    >
       {data[index] ? (
         <ImageTile imageUrl={data[index] ? data[index].path : ""}></ImageTile>
       ) : (
