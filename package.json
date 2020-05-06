@@ -72,6 +72,7 @@
                   "name": "main_window"
                 },
                 {
+                  "html": "./src/index.html",
                   "js": "./src/hiddenWindow.js",
                   "name": "hidden_window"
                 }

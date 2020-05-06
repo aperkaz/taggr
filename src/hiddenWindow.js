@@ -1,10 +1,11 @@
 const { ipcRenderer } = require("electron");
-import classifyImage, { loadModel } from "./workers/tfImageClassification";
+// import classifyImage, { loadModel } from "./workers/tfImageClassification";
+const logger = require("electron-timber");
+
+// const backendLogger = logger.create({ name: "backend" });
+// backendLogger.log("Hi from the hidden window");
 
 // TODONOW: proof of concept so far
-
-console.log("Hi for the hidden window");
-
 ipcRenderer.on("message", (event, message) => {
   console.log("hidden window processing message");
   console.log(message);
@@ -685,17 +686,17 @@ const pathsToProcess = [
   "/home/alain/Downloads/test_pictures/yo con clarc.jpg",
 ];
 
-(async () => {
-  console.log("load model");
-  await loadModel();
-  //   console.time("process");
-  //   // TODONOW: example of processing
-  //   for (let i = 0; i < pathsToProcess.length; i++) {
-  //     const imageData = await generateImageData(pathsToProcess[i]);
-  //     console.log(await classifyImage(imageData));
-  //   }
-  //   console.timeEnd("process");
-})();
+// (async () => {
+// console.log("load model");
+// await loadModel();
+//   console.time("process");
+//   // TODONOW: example of processing
+//   for (let i = 0; i < pathsToProcess.length; i++) {
+//     const imageData = await generateImageData(pathsToProcess[i]);
+//     console.log(await classifyImage(imageData));
+//   }
+//   console.timeEnd("process");
+// })();
 
 /**
  * Load image using DOM Image element

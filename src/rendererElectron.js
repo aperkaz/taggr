@@ -5,6 +5,7 @@ import isDev from "electron-is-dev";
 import * as Sentry from "@sentry/browser";
 import App from "./App";
 import "./index.css";
+import logger from "electron-timber";
 
 // Setup crash analytics
 if (!isDev)
@@ -60,5 +61,8 @@ if (isDev) {
 //     }
 //   }, 5000);
 // })();
+
+const backendLogger = logger.create({ name: "backend" });
+backendLogger.log("Hi from the renderer window");
 
 ReactDOM.render(<App />, document.getElementById("app"));

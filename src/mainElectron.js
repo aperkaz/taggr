@@ -2,12 +2,12 @@ const { app, BrowserWindow } = require("electron");
 const path = require("path");
 const os = require("os");
 const isDev = require("electron-is-dev");
+
+// TODONOW: fix logging https://github.com/sindresorhus/electron-timber
 const logger = require("electron-timber");
 
 let mainWindow, hiddenWindow;
 // TODONOW: refactor for clarity. Re-structure app https://blog.axosoft.com/electron-things-to-know/
-
-// TODONOW: add logging https://github.com/sindresorhus/electron-timber
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
