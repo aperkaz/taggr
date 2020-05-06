@@ -11,6 +11,7 @@ import UpdateModal from "./components/molecules/UpdateModal";
 import uiStore, { ACTIONS } from "./uiStore";
 import { triggerAction } from "../deprecated_backend";
 import CONSTANTS from "./uiStore/constants";
+import "./index.css";
 
 const selectRootFolderPath = async () => {
   const { filePaths } = await dialog.showOpenDialog({
@@ -54,29 +55,28 @@ const renderRoute = (route) => {
           }
         />
       );
-    case CONSTANTS.ROUTES.DASHBOARD_PAGE:
-      return (
-        <div>a</div>
-        // <DashboardPage
-        //   filteredImageList={uiStore.filteredImageList}
-        //   tagProcessingStatus={uiStore.tagProcessingStatus}
-        //   tagCountList={uiStore.tagCountList}
-        //   onInputChange={debounce(
-        //     (payload) =>
-        //       triggerAction({
-        //         name: ACTIONS.FILTER_RESULTS_BY_TAG,
-        //         payload,
-        //       }),
-        //     300
-        //   )}
-        //   onPressReset={async () => {
-        //     triggerAction({
-        //       name: ACTIONS.SET_UI_ROUTE,
-        //       payload: CONSTANTS.ROUTES.START_PAGE,
-        //     });
-        //   }}
-        // />
-      );
+    // case CONSTANTS.ROUTES.DASHBOARD_PAGE:
+    //   return (
+    //     <DashboardPage
+    //       filteredImageList={uiStore.filteredImageList}
+    //       tagProcessingStatus={uiStore.tagProcessingStatus}
+    //       tagCountList={uiStore.tagCountList}
+    //       onInputChange={debounce(
+    //         (payload) =>
+    //           triggerAction({
+    //             name: ACTIONS.FILTER_RESULTS_BY_TAG,
+    //             payload,
+    //           }),
+    //         300
+    //       )}
+    //       onPressReset={async () => {
+    //         triggerAction({
+    //           name: ACTIONS.SET_UI_ROUTE,
+    //           payload: CONSTANTS.ROUTES.START_PAGE,
+    //         });
+    //       }}
+    //     />
+    //   );
   }
 };
 

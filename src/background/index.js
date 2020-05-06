@@ -1,8 +1,6 @@
 const { ipcRenderer } = require("electron");
 const { getGlobal } = require("electron").remote;
-
 const backgroundLogger = getGlobal("backgroundLogger");
-backgroundLogger.log("Started");
 
 // TODONOW: proof of concept so far
 ipcRenderer.on("message", (event, message) => {
@@ -740,3 +738,5 @@ export const generateImageData = async (imagePath) => {
     .getImageData(0, 0, img.width, img.height);
   return imageData;
 };
+
+backgroundLogger.log("Background process started");

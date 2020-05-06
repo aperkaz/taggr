@@ -22,6 +22,24 @@
 
 // // let initializedWorker = new ImageTaggingWorker();
 
+// TODONOW: move backend communication to queue.Use https://github.com/sindresorhus/electron-timber for better login
+// Dummy event to hidden window
+// ipcRenderer.on("message", (event, message) => {
+//   console.log("main window processing message");
+//   console.log(message);
+// });
+
+// (() => {
+//   setTimeout(() => {
+//     let hiddenWindow = getGlobal("hiddenWindow");
+//     console.log(hiddenWindow);
+//     if (hiddenWindow) {
+//       console.log("hidden window found, sending message");
+//       hiddenWindow.webContents.send("message", "Message from Window 1");
+//     }
+//   }, 5000);
+// })();
+
 // export default queue(async ({ name, payload }, callback) => {
 //   console.log("--");
 //   console.log("Main Queue processing: ", name);
