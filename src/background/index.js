@@ -1,9 +1,8 @@
 const { ipcRenderer } = require("electron");
-// import classifyImage, { loadModel } from "./workers/tfImageClassification";
-const logger = require("electron-timber");
+const { getGlobal } = require("electron").remote;
 
-// const backendLogger = logger.create({ name: "backend" });
-// backendLogger.log("Hi from the hidden window");
+const backgroundLogger = getGlobal("backgroundLogger");
+backgroundLogger.log("Started");
 
 // TODONOW: proof of concept so far
 ipcRenderer.on("message", (event, message) => {

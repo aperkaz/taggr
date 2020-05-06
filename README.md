@@ -6,6 +6,8 @@ Powered by machine learning.
 
 ## Architecture
 
+Inspiration: https://blog.axosoft.com/electron-things-to-know/
+
 Main structure separated between UI and backend. 
 
 The UI follow an unidirectional dataflow pattern with React and a reactive uiStore. The UI fires ACTION which trigger processes in the backend, which modifies the uiStore and the App store.

@@ -9,8 +9,8 @@ import StartPage from "./components/pages/StartPage";
 // import DashboardPage from "./components/pages/DashboardPage";
 import UpdateModal from "./components/molecules/UpdateModal";
 import uiStore, { ACTIONS } from "./uiStore";
-import { triggerAction } from "./backend";
-import CONSTANTS from "./constants";
+import { triggerAction } from "../deprecated_backend";
+import CONSTANTS from "./uiStore/constants";
 
 const selectRootFolderPath = async () => {
   const { filePaths } = await dialog.showOpenDialog({
