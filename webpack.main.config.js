@@ -11,5 +11,5 @@ module.exports = {
     rules: require("./webpack.rules"),
   },
   // Creates a stats.html to inspect bundle size
-  plugins: [new Visualizer()],
+  // plugins: [new Visualizer()],
 };

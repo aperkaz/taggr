@@ -16,6 +16,9 @@ if (require("electron-squirrel-startup")) {
 }
 
 const createWindows = () => {
+  let mainWindow, hiddenWindow;
+
+  // TODONOW: reformat and improve
   if (isDev) {
     mainWindow = new BrowserWindow({
       width: 960,
@@ -30,18 +33,13 @@ const createWindows = () => {
     mainWindow.setPosition(1200, 0);
 
     // Add react dev tools https://www.electronjs.org/docs/tutorial/devtools-extension
-    // const reactExtension = BrowserWindow.addDevToolsExtension(
-    //   path.join(
-    //     os.homedir(),
-    //     "/.config/google-chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.6.0_0"
-    //   )
-    // );
+    const reactExtension = BrowserWindow.addDevToolsExtension(
+      path.join(
+        os.homedir(),
+        "/.config/google-chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.6.0_0"
+      )
+    );
     // BrowserWindow.removeDevToolsExtension(reactExtension);
-
-    mainWindow.setPosition(1000, 0);
-
-    // Open the DevTools.
-    mainWindow.webContents.openDevTools();
   } else {
     mainWindow = new BrowserWindow({
       webPreferences: {
@@ -55,10 +53,12 @@ const createWindows = () => {
   // and load the index.html of the app.
   logger.log("loading index.html from: ", MAIN_WINDOW_WEBPACK_ENTRY);
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
+  // Open the DevTools.
+  mainWindow.webContents.openDevTools();
 
   // Cleanup on mainWindow close
   mainWindow.on("closed", () => {
-    hiddenWindow.close();
+    // hiddenWindow.close();
   });
 
   // Create hidden window, to use as backend
@@ -71,13 +71,13 @@ const createWindows = () => {
     },
   });
   hiddenWindow.loadURL(HIDDEN_WINDOW_WEBPACK_ENTRY);
+  // Open the DevTools.
   hiddenWindow.webContents.openDevTools();
-
   // hiddenWindow.hide();
 
   // Link windows to global context to allow inter render process ipc calls
-  global.mainWindow = mainWindow;
-  global.hiddenWindow = hiddenWindow;
+  // global.mainWindow = mainWindow;
+  // global.hiddenWindow = hiddenWindow;
 
   // Remove menu
   // mainWindow.removeMenu();
@@ -100,11 +100,8 @@ app.on("window-all-closed", () => {
     app.quit();
   }
 
-  mainWindow.close();
-  hiddenWindow.close();
-
-  // global.mainWindow = null;
-  // global.hiddenWindow = null;
+  // mainWindow.close();
+  // hiddenWindow.close();
 });
 
 app.on("activate", () => {
