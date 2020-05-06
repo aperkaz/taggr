@@ -145,7 +145,7 @@ class VirtualizedGallery extends Component {
           {lightboxIsOpen ? (
             <Modal onClose={this.toggleLightbox}>
               <Carousel
-                // TODONOW: fix to render multiple images. Currently not lazy loaded. https://github.com/jossmac/react-images/issues/300
+                // TODONOW: fix to render carousel multiple images. Currently not lazy loaded, so very slow. https://github.com/jossmac/react-images/issues/300
                 currentIndex={0}
                 views={[carouselImages[selectedIndex]]}
               />

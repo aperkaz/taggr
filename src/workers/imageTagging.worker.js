@@ -13,7 +13,8 @@ Comlink.expose({
   },
 });
 
+// TODONOW: clean up
 // load model at the start of app
 (async () => {
-  await loadModel();
+  // await loadModel();
 })();

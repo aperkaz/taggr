@@ -1,3 +1,4 @@
+import { ipcRenderer } from "electron";
 import React from "react";
 import ReactDOM from "react-dom";
 import isDev from "electron-is-dev";
@@ -40,5 +41,19 @@ if (isDev) {
   script.src = "//mrdoob.github.io/stats.js/build/stats.min.js";
   document.head.appendChild(script);
 }
+
+// TODONOW: remove
+// Dummy event to hidden window
+let hiddenWindow = getGlobal("hiddenWindow");
+console.log(hiddenWindow);
+if (hiddenWindow) {
+  console.log("hidden window found, sending message");
+  hiddenWindow.webContents.send("message", "Message from Window 1");
+}
+
+ipcRenderer.on("message", (event, message) => {
+  console.log("main window processing message");
+  console.log(message);
+});
 
 ReactDOM.render(<App />, document.getElementById("app"));
