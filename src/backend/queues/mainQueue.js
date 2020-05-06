@@ -9,17 +9,18 @@ import {
   generateImageData,
 } from "../../utils";
 import imageTaggingQueue from "./imageTaggingQueue";
+// TODONOW: move workers to new backend
 // @ts-ignore
-import RecursiveImageFinderWorker from "../../workers/recursiveImageFinder.worker";
+// import RecursiveImageFinderWorker from "../../workers/recursiveImageFinder.worker";
 // @ts-ignore
-import FilterResultsWorker from "../../workers/filderResults.worker";
+// import FilterResultsWorker from "../../workers/filderResults.worker";
 // @ts-ignore
-import ImageTaggingWorker from "../../workers/imageTagging.worker";
+// import ImageTaggingWorker from "../../workers/imageTagging.worker";
 // @ts-ignore
-import PickTopTagsWorker from "../../workers/pickTopTags.worker";
+// import PickTopTagsWorker from "../../workers/pickTopTags.worker";
 // TODO: improvement: add import alias
 
-let initializedWorker = new ImageTaggingWorker();
+// let initializedWorker = new ImageTaggingWorker();
 
 export default queue(async ({ name, payload }, callback) => {
   console.log("--");
@@ -46,84 +47,64 @@ export default queue(async ({ name, payload }, callback) => {
       break;
 
     case TASKS.SEARCH_IMAGE_PATHS:
-      const imageFinderWorker = Comlink.wrap(new RecursiveImageFinderWorker());
-      const imagePathList = await imageFinderWorker.process(payload);
+      // TODONOW: move to backend
+      // const imageFinderWorker = Comlink.wrap(new RecursiveImageFinderWorker());
+      // const imagePathList = await imageFinderWorker.process(payload);
       // store in appStore
-      imagePathList.forEach((imagePath) => {
-        const hash = generateMD5Hash(imagePath);
-        appStore.imageHashMap[hash] = { path: imagePath, tags: null };
-      });
+      // imagePathList.forEach((imagePath) => {
+      //   const hash = generateMD5Hash(imagePath);
+      //   appStore.imageHashMap[hash] = { path: imagePath, tags: null };
+      // });
       break;
 
     case TASKS.SEARCH_IMAGES_BY_TAG:
-      const filterResultsWorker = Comlink.wrap(new FilterResultsWorker());
-      let results = await filterResultsWorker.process(
-        appStore.imageHashMap,
-        payload
-      );
+      // TODONOW: move to backend
+      // const filterResultsWorker = Comlink.wrap(new FilterResultsWorker());
+      // let results = await filterResultsWorker.process(
+      //   appStore.imageHashMap,
+      //   payload
+      // );
 
-      uiStore.filteredImageList = results;
+      // uiStore.filteredImageList = results;
       break;
 
     case TASKS.CALCULATE_IMAGE_TAGS:
-      let imageTaggingWorker = Comlink.wrap(initializedWorker);
+      // TODONOW: move to backend
+      // let imageTaggingWorker = Comlink.wrap(initializedWorker);
 
-      let imageHashListToProcess = getImagesWithoutTags(appStore.imageHashMap);
-      const imagesToTag = imageHashListToProcess.length;
-      let imagesTagged = 0;
+      // let imageHashListToProcess = getImagesWithoutTags(appStore.imageHashMap);
+      // const imagesToTag = imageHashListToProcess.length;
+      // let imagesTagged = 0;
 
-      imageHashListToProcess.forEach((imageHash) => {
-        imageTaggingQueue.push({ imageHash, imageTaggingWorker }, () => {
-          imagesTagged++;
-          uiStore.tagProcessingStatus = `Processing: ${imagesTagged} / ${imagesToTag}`;
-          console.log(`Processing: ${imagesTagged} / ${imagesToTag}`);
-        });
-      });
+      // const pathsToProcess = [];
 
-      imageTaggingQueue.drain(async () => {
-        // When tagging complete, sort tags by occcurrence and pick top 20
-        const pickTopTagsWorker = Comlink.wrap(new PickTopTagsWorker());
-        const topTags = await pickTopTagsWorker.process(
-          appStore.imageHashMap,
-          20
-        );
-        uiStore.tagCountList = topTags;
-        uiStore.tagProcessingStatus = null;
-      });
+      // imageHashListToProcess.forEach((hash) => {
+      //   const path = appStore.imageHashMap[hash].path;
+      //   pathsToProcess.push(path);
+      // });
 
-      // while (imageHashListToProcess.length > 0) {
-      //   const imageHash = imageHashListToProcess.pop();
-      //   const path = appStore.imageHashMap[imageHash].path;
+      // window["pathsToProcess"] = pathsToProcess;
 
-      //   // TODONOW: due to the current store setups, forces whole store re-render.
-      //   // uiStore.tagProcessingStatus = `Processing: ${imagesTagged} / ${imagesToTag}`;
-      //   console.log(`Processing: ${imagesTagged} / ${imagesToTag}`);
+      // // console.log(pathsToProcess);
 
-      //   let imageData = await generateImageData(path);
-      //   const tags = await imageTaggingWorker.process(imageData);
-      //   // const tags = [];
-      //   imagesTagged++;
+      // imageHashListToProcess.forEach((imageHash) => {
+      //   imageTaggingQueue.push({ imageHash, imageTaggingWorker }, () => {
+      //     imagesTagged++;
+      //     uiStore.tagProcessingStatus = `Processing: ${imagesTagged} / ${imagesToTag}`;
+      //     console.log(`Processing: ${imagesTagged} / ${imagesToTag}`);
+      //   });
+      // });
 
-      //   // save results in appStore
-      //   appStore.imageHashMap[imageHash] = {
-      //     ...appStore.imageHashMap[imageHash],
-      //     tags,
-      //   };
-
-      //   // clean up
-      //   imageData = null;
-      // }
-
-      // uiStore.tagProcessingStatus = "";
-
-      // // When tagging complete, sort tags by occcurrence and pick top 20
-      // const pickTopTagsWorker = Comlink.wrap(new PickTopTagsWorker());
-      // const topTags = await pickTopTagsWorker.process(
-      //   appStore.imageHashMap,
-      //   20
-      // );
-      // uiStore.tagCountList = topTags;
-      // uiStore.tagProcessingStatus = null;
+      // imageTaggingQueue.drain(async () => {
+      //   // When tagging complete, sort tags by occcurrence and pick top 20
+      //   const pickTopTagsWorker = Comlink.wrap(new PickTopTagsWorker());
+      //   const topTags = await pickTopTagsWorker.process(
+      //     appStore.imageHashMap,
+      //     20
+      //   );
+      //   uiStore.tagCountList = topTags;
+      //   uiStore.tagProcessingStatus = null;
+      // });
 
       break;
   }

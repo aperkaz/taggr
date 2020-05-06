@@ -42,18 +42,23 @@ if (isDev) {
   document.head.appendChild(script);
 }
 
-// TODONOW: remove
+// TODONOW: move backend communication to queue.Use https://github.com/sindresorhus/electron-timber for better login
 // Dummy event to hidden window
-let hiddenWindow = getGlobal("hiddenWindow");
-console.log(hiddenWindow);
-if (hiddenWindow) {
-  console.log("hidden window found, sending message");
-  hiddenWindow.webContents.send("message", "Message from Window 1");
-}
 
-ipcRenderer.on("message", (event, message) => {
-  console.log("main window processing message");
-  console.log(message);
-});
+// ipcRenderer.on("message", (event, message) => {
+//   console.log("main window processing message");
+//   console.log(message);
+// });
+
+// (() => {
+//   setTimeout(() => {
+//     let hiddenWindow = getGlobal("hiddenWindow");
+//     console.log(hiddenWindow);
+//     if (hiddenWindow) {
+//       console.log("hidden window found, sending message");
+//       hiddenWindow.webContents.send("message", "Message from Window 1");
+//     }
+//   }, 5000);
+// })();
 
 ReactDOM.render(<App />, document.getElementById("app"));

@@ -1,9 +1,13 @@
-const { app, BrowserWindow, webContents } = require("electron");
+const { app, BrowserWindow } = require("electron");
 const path = require("path");
 const os = require("os");
 const isDev = require("electron-is-dev");
+const logger = require("electron-timber");
 
 let mainWindow, hiddenWindow;
+// TODONOW: refactor for clarity. Re-structure app https://blog.axosoft.com/electron-things-to-know/
+
+// TODONOW: add logging https://github.com/sindresorhus/electron-timber
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -49,7 +53,7 @@ const createWindows = () => {
   }
 
   // and load the index.html of the app.
-  console.log("loading index.html from: ", MAIN_WINDOW_WEBPACK_ENTRY);
+  logger.log("loading index.html from: ", MAIN_WINDOW_WEBPACK_ENTRY);
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
   // Cleanup on mainWindow close

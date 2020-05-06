@@ -2,6 +2,7 @@ import queue from "async/queue";
 import appStore from "../appStore";
 import { generateImageData } from "../../utils";
 
+// TODONOW: remove in favor of backend process
 const imageTaggingQueue = queue(
   async ({ imageHash, imageTaggingWorker }, callback) => {
     const path = appStore.imageHashMap[imageHash].path;
@@ -21,7 +22,7 @@ const imageTaggingQueue = queue(
     return callback(false);
   },
   // with parallelism, they use the same worker thread: https://github.com/caolan/async/issues/1687
-  2
+  1
 );
 
 export default imageTaggingQueue;
