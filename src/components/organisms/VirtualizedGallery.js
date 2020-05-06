@@ -145,10 +145,9 @@ class VirtualizedGallery extends Component {
           {lightboxIsOpen ? (
             <Modal onClose={this.toggleLightbox}>
               <Carousel
-                // components={{ FooterCaption }}
-                currentIndex={selectedIndex}
-                // formatters={{ getAltText }}
-                views={carouselImages}
+                // TODONOW: fix to render multiple images. Currently not lazy loaded. https://github.com/jossmac/react-images/issues/300
+                currentIndex={0}
+                views={[carouselImages[selectedIndex]]}
               />
             </Modal>
           ) : null}

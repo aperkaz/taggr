@@ -77,9 +77,11 @@ export default queue(async ({ name, payload }, callback) => {
 
         // TODONOW: due to the current store setups, forces whole store re-render.
         // uiStore.tagProcessingStatus = `Processing: ${imagesTagged} / ${imagesToTag}`;
+        console.log(`Processing: ${imagesTagged} / ${imagesToTag}`);
 
         let imageData = await generateImageData(path);
         const tags = await imageTaggingWorker.process(imageData);
+        // const tags = [];
         imagesTagged++;
 
         // save results in appStore
@@ -90,9 +92,6 @@ export default queue(async ({ name, payload }, callback) => {
 
         // clean up
         imageData = null;
-
-        // artificial await to keep fps up
-        await new Promise((r) => setTimeout(r, 80));
       }
 
       uiStore.tagProcessingStatus = "";
