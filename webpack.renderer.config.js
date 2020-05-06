@@ -1,3 +1,4 @@
+var Visualizer = require("webpack-visualizer-plugin");
 const rules = require("./webpack.rules");
 
 rules.push({
@@ -24,4 +25,6 @@ module.exports = {
   module: {
     rules,
   },
+  // Creates a stats.html to inspect bundle size
+  plugins: [new Visualizer()],
 };

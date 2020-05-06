@@ -1,0 +1,7 @@
+{
+    "search.exclude": {
+        "**/.webpack": true,
+        "**/out": true,
+        "**/storybook-static": true
+    }
+}
