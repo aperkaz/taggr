@@ -43,14 +43,3 @@ export const setupFpsOverlayInDev = () => {
     document.head.appendChild(script);
   }
 };
-
-/**
- * Track Google Analytics event. main/analytics
- * @param {String} category
- * @param {String} action
- */
-export const trackEventInProd = (category, action) => {
-  const { getGlobal } = require("electron").remote;
-  const trackEvent = getGlobal("trackEvent");
-  trackEvent(category, action);
-};

@@ -1,14 +1,14 @@
 import isDev from "electron-is-dev";
-import "../types";
+import "./types";
 
 /**
  * @type {appStoreType} appStore
  */
-let appStore = {
+let store = {
   projectRootFolderPath: "",
   imageHashMap: {},
 };
 
-if (isDev) window["appStore"] = appStore;
+if (isDev) window["store"] = store;
 
-export default appStore;
+export default store;

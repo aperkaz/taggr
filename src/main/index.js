@@ -9,7 +9,6 @@ const logger = require("electron-timber");
 // GLOBALS
 global.rendererWindow = null;
 global.backgroundWindow = null;
-// global.trackEvent = null;
 global.backgroundLogger = logger.create({ name: "background" });
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -131,7 +130,7 @@ function createBackgroundWindow() {
 
 const setupGoogleAnalytics = () => {
   // Setup Google Analytics. Triggers events only in non-dev envs
-  const { trackEvent } = require("./analytics");
+  const { trackEvent } = require("../shared/analytics");
   global.trackEvent = trackEvent;
 };
 

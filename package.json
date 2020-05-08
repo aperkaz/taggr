@@ -67,12 +67,12 @@
               "config": "./webpack.renderer.config.js",
               "entryPoints": [
                 {
-                  "html": "./src/renderer/index.html",
+                  "html": "./src/renderer/statics/index.html",
                   "js": "./src/renderer/index.js",
                   "name": "main_window"
                 },
                 {
-                  "html": "./src/background/index.html",
+                  "html": "./src/background/statics/index.html",
                   "js": "./src/background/index.js",
                   "name": "hidden_window"
                 }

@@ -1,18 +1,29 @@
 import React from "react";
 import { hot, setConfig } from "react-hot-loader";
 import { connect } from "react-redux";
+import styled from "styled-components";
 import debounce from "lodash.debounce";
 
-import StartPage from "./components/pages/StartPage";
+import StartPage from "./pages/StartPage";
 // import DashboardPage from "./components/pages/DashboardPage";
-import UpdateModal from "./components/molecules/UpdateModal";
-import CONSTANTS from "./constants";
+import UpdateModal from "./molecules/UpdateModal";
+import CONSTANTS from "../store/constants";
+
+const Wrapper = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+
+const PageWrapper = styled.div`
+  height: 100%;
+`;
 
 const App = ({ activeRoute }) => (
-  <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
-    <div style={{ height: "100%" }}>{renderRoute(activeRoute)}</div>
+  <Wrapper>
+    <PageWrapper>{renderRoute(activeRoute)}</PageWrapper>
     <UpdateModal />
-  </div>
+  </Wrapper>
 );
 
 const renderRoute = (activeRoute) => {

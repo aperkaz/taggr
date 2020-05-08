@@ -1,12 +1,14 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 import { createProject } from "../services";
-import CONSTANTS from "../constants";
+import CONSTANTS from "./constants";
 
 const stateSlice = createSlice({
   name: "uiState",
   initialState: {
     activeRoute: CONSTANTS.ROUTES.START_PAGE,
-    // TODONOW: add the rest of the store
+    images: [],
+    imageFilter: {},
+    tagList: {},
   },
   reducers: {
     setActiveRoute: (state, action) => {

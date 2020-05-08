@@ -1,23 +1,17 @@
-import * as Comlink from "comlink";
+import store from "../store";
 
-Comlink.expose({
-  /**
-   * Pick top N tags from existing tag collection
-   *
-   * @param {Object} imageHashMap
-   * @returns object list, as [{name: X, count: Y}]
-   */
-  async process(imageHashMap, maxNumberOfTags) {
-    return await pickTopTags(imageHashMap, maxNumberOfTags);
-  },
-});
-
-const pickTopTags = async (imageHashMap, maxNumberOfTags) => {
+/**
+ * Pick top N tags from existing tag collection
+ *
+ * @param {Number} maxNumberOfTags
+ * @returns object list, as [{name: X, count: Y}]
+ */
+export const pickTopTags = async (maxNumberOfTags) => {
   let tagCountMap = {};
 
   // iterate over all the images and return the ones with tag matches
-  Object.keys(imageHashMap).forEach((key) => {
-    const tags = imageHashMap[key].tags;
+  Object.keys(store.imageHashMap).forEach((key) => {
+    const tags = store.imageHashMap[key].tags;
 
     // per eash tag, create count map
     tags.forEach((tag) => {

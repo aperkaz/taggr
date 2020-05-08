@@ -8,7 +8,7 @@ import styled from "styled-components";
 
 import Logo from "../molecules/Logo";
 import { setActiveRoute, serviceCreateProject } from "../../store";
-import CONSTANTS from "../../constants";
+import CONSTANTS from "../../store/constants";
 import backgroundImage from "./background.jpeg";
 
 const InnerWrapper = styled.div`
