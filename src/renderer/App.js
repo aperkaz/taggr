@@ -1,60 +1,24 @@
-const { dialog } = require("electron").remote;
-
 import React from "react";
 import { hot, setConfig } from "react-hot-loader";
-import { view } from "@risingstack/react-easy-state";
+import { connect } from "react-redux";
 import debounce from "lodash.debounce";
 
 import StartPage from "./components/pages/StartPage";
 // import DashboardPage from "./components/pages/DashboardPage";
 import UpdateModal from "./components/molecules/UpdateModal";
-import uiStore, { ACTIONS } from "./uiStore";
-import { triggerAction } from "../deprecated_backend";
-import CONSTANTS from "./uiStore/constants";
-import "./index.css";
+import CONSTANTS from "./constants";
 
-const selectRootFolderPath = async () => {
-  const { filePaths } = await dialog.showOpenDialog({
-    properties: ["openDirectory"],
-  });
-
-  const projectRootFolderPath = filePaths ? filePaths[0] : null;
-
-  if (!projectRootFolderPath) return;
-
-  triggerAction({
-    name: ACTIONS.SET_UI_ROUTE,
-    payload: CONSTANTS.ROUTES.DASHBOARD_PAGE,
-  });
-
-  triggerAction({
-    name: ACTIONS.CREATE_PROJECT,
-    payload: projectRootFolderPath,
-  });
-};
-
-const App = view(() => (
+const App = ({ activeRoute }) => (
   <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
-    <div style={{ height: "100%" }}>{renderRoute(uiStore.activeRoute)}</div>
+    <div style={{ height: "100%" }}>{renderRoute(activeRoute)}</div>
     <UpdateModal />
   </div>
-));
+);
 
-const renderRoute = (route) => {
-  switch (route) {
+const renderRoute = (activeRoute) => {
+  switch (activeRoute) {
     case CONSTANTS.ROUTES.START_PAGE:
-      return (
-        <StartPage
-          onSelectRootFolderPath={selectRootFolderPath}
-          onLogoClick={() =>
-            // https://github.com/electron/electron/issues/1344#issuecomment-339585884
-            triggerAction({
-              name: ACTIONS.SET_UI_ROUTE,
-              payload: CONSTANTS.ROUTES.START_PAGE,
-            })
-          }
-        />
-      );
+      return <StartPage />;
     // case CONSTANTS.ROUTES.DASHBOARD_PAGE:
     //   return (
     //     <DashboardPage
@@ -80,8 +44,10 @@ const renderRoute = (route) => {
   }
 };
 
+// redux bindings
+const mapStateToProps = (state) => ({ activeRoute: state.activeRoute });
+
 setConfig({
   showReactDomPatchNotification: false,
 });
-
-export default hot(module)(App);
+export default connect(mapStateToProps)(hot(module)(App));

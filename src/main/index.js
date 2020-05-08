@@ -81,6 +81,15 @@ function createMainWindow() {
     );
     // BrowserWindow.removeDevToolsExtension(reactExtension);
 
+    // Add redux dev tools https://stackoverflow.com/questions/59538654/electron-add-redux-devtools
+    const reduxExtension = BrowserWindow.addDevToolsExtension(
+      path.join(
+        os.homedir(),
+        "/.config/google-chrome/Default/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/2.17.0_0"
+      )
+    );
+    // BrowserWindow.removeDevToolsExtension(reduxExtension);
+
     return window;
   }
 }

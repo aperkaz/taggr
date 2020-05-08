@@ -1,6 +1,6 @@
 import { store } from "@risingstack/react-easy-state";
 import isDev from "electron-is-dev";
-import CONSTANTS from "./constants";
+import CONSTANTS from "../constants";
 import "../types";
 
 /**

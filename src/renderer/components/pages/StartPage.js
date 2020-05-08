@@ -1,7 +1,14 @@
+const { dialog } = require("electron").remote;
+
 import React from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import Button from "@material-ui/core/Button";
 import styled from "styled-components";
+
 import Logo from "../molecules/Logo";
+import { setActiveRoute, createFunction } from "../../store";
+import CONSTANTS from "../../constants";
 import backgroundImage from "./background.jpeg";
 
 const InnerWrapper = styled.div`
@@ -58,12 +65,12 @@ const Footer = styled.a`
   font-weight: 600;
 `;
 
-const StartPage = ({ onSelectRootFolderPath, onLogoClick }) => (
+export const StartPage = ({ setActiveRoute, createProject }) => (
   <Wrapper>
     <InnerWrapper>
       <Header>
-        <Logo onClick={onLogoClick} />
-        {/* <div>menu</div> */}
+        {/* TODO: clean up */}
+        <Logo onClick={() => null} />
       </Header>
       <Main>
         <Title>Taggr</Title>
@@ -81,7 +88,23 @@ const StartPage = ({ onSelectRootFolderPath, onLogoClick }) => (
             color: "white",
             background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
           }}
-          onClick={async () => await onSelectRootFolderPath()}
+          onClick={async () => {
+            const { filePaths } = await dialog.showOpenDialog({
+              properties: ["openDirectory"],
+            });
+
+            const projectRootFolderPath = filePaths ? filePaths[0] : null;
+
+            if (!projectRootFolderPath) return;
+
+            setActiveRoute(CONSTANTS.ROUTES.DASHBOARD_PAGE);
+
+            // TODOONOW: add
+            // triggerAction({
+            //   name: ACTIONS.CREATE_PROJECT,
+            //   payload: projectRootFolderPath,
+            // });
+          }}
         >
           Select picture folder
         </Button>
@@ -91,4 +114,14 @@ const StartPage = ({ onSelectRootFolderPath, onLogoClick }) => (
   </Wrapper>
 );
 
-export default StartPage;
+StartPage.propTypes = {
+  setActiveRoute: PropTypes.func,
+  createProject: PropTypes.func,
+};
+
+const mapDispatchToProps = {
+  setActiveRoute,
+  createFunction,
+};
+
+export default connect(null, mapDispatchToProps)(StartPage);
