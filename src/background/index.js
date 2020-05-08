@@ -8,7 +8,7 @@ import {
 } from "./utils";
 import store from "./store";
 
-import { IPC_CHANNELS } from "../shared";
+import IPC_CHANNELS from "../shared/ipcChannels";
 
 const backgroundLogger = getGlobal("backgroundLogger");
 

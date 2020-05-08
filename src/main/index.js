@@ -130,7 +130,7 @@ function createBackgroundWindow() {
 
 const setupGoogleAnalytics = () => {
   // Setup Google Analytics. Triggers events only in non-dev envs
-  const { trackEvent } = require("../shared/analytics");
+  const { trackEvent } = require("./analytics");
   global.trackEvent = trackEvent;
 };
 

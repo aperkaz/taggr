@@ -1,5 +1,5 @@
 import logger from "electron-timber";
-import { IPC_CHANNELS } from "../../shared";
+import IPC_CHANNELS from "../../shared/ipcChannels";
 const { ipcRenderer } = require("electron");
 const { getGlobal } = require("electron").remote;
 

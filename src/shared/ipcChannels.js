@@ -1,3 +1,3 @@
-export const IPC_CHANNELS = {
+export default {
   CREATE_PROJECT: "CREATE_PROJECT",
 };
