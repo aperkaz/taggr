@@ -1,5 +1,4 @@
 import crypto from "crypto";
-import "../renderer/types";
 
 /**
  * Generate md5 hash string

@@ -7,7 +7,7 @@ const isDev = require("electron-is-dev");
 const logger = require("electron-timber");
 
 // GLOBALS
-global.mainWindow = null;
+global.rendererWindow = null;
 global.backgroundWindow = null;
 // global.trackEvent = null;
 global.backgroundLogger = logger.create({ name: "background" });
@@ -17,22 +17,22 @@ if (require("electron-squirrel-startup")) {
   app.quit();
 }
 
-let backgroundWindow, mainWindow;
+let backgroundWindow, rendererWindow;
 
 const startApp = () => {
   backgroundWindow = createBackgroundWindow();
   global.backgroundWindow = backgroundWindow;
   logger.log("backgroundWindow created");
 
-  mainWindow = createMainWindow();
-  global.mainWindow = mainWindow;
-  logger.log("mainWindow created");
+  rendererWindow = createRendererWindow();
+  global.rendererWindow = rendererWindow;
+  logger.log("rendererWindow created");
 
   setupGoogleAnalytics();
   logger.log("setup google analytics");
 };
 
-function createMainWindow() {
+function createRendererWindow() {
   const devSettings = {
     width: 960,
     height: 1080,
@@ -62,7 +62,7 @@ function createMainWindow() {
   });
 
   // Remove menu
-  // mainWindow.removeMenu();
+  // rendererWindow.removeMenu();
 
   if (isDev) {
     window.setPosition(1200, 0);

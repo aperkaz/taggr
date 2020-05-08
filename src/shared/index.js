@@ -1,0 +1,3 @@
+export const IPC_CHANNELS = {
+  CREATE_PROJECT: "CREATE_PROJECT",
+};

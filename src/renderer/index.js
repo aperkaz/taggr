@@ -1,4 +1,3 @@
-import { ipcRenderer } from "electron";
 import logger from "electron-timber";
 
 import React from "react";

@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button";
 import styled from "styled-components";
 
 import Logo from "../molecules/Logo";
-import { setActiveRoute, createFunction } from "../../store";
+import { setActiveRoute, serviceCreateProject } from "../../store";
 import CONSTANTS from "../../constants";
 import backgroundImage from "./background.jpeg";
 
@@ -65,7 +65,7 @@ const Footer = styled.a`
   font-weight: 600;
 `;
 
-export const StartPage = ({ setActiveRoute, createProject }) => (
+export const StartPage = ({ setActiveRoute }) => (
   <Wrapper>
     <InnerWrapper>
       <Header>
@@ -99,11 +99,7 @@ export const StartPage = ({ setActiveRoute, createProject }) => (
 
             setActiveRoute(CONSTANTS.ROUTES.DASHBOARD_PAGE);
 
-            // TODOONOW: add
-            // triggerAction({
-            //   name: ACTIONS.CREATE_PROJECT,
-            //   payload: projectRootFolderPath,
-            // });
+            serviceCreateProject(projectRootFolderPath);
           }}
         >
           Select picture folder
@@ -121,7 +117,6 @@ StartPage.propTypes = {
 
 const mapDispatchToProps = {
   setActiveRoute,
-  createFunction,
 };
 
 export default connect(null, mapDispatchToProps)(StartPage);

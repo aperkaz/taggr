@@ -40,7 +40,7 @@ export async function loadModel() {
  * @param {ImageData} imageData
  * @returns {Promise<String[]>} tags
  */
-async function classifyImage(imageData) {
+export async function classifyImage(imageData) {
   if (!net) await loadModel();
 
   let pixels = tf.browser.fromPixels(imageData);
@@ -71,5 +71,3 @@ async function classifyImage(imageData) {
 
   return predictions;
 }
-
-export default classifyImage;
