@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import styled from "styled-components";
 
 import Header from "../organisms/Header";
@@ -12,12 +11,7 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-export const DashboardPage = ({
-  onInputChange,
-  onPressReset,
-  tags,
-  images,
-}) => (
+const DashboardPage = ({ onInputChange, onPressReset, tags, images }) => (
   <Wrapper>
     <Header
       onInputChange={onInputChange}
@@ -46,9 +40,4 @@ DashboardPage.propTypes = {
   ),
 };
 
-// redux bindings
-const mapStateToProps = (state) => ({ images: state.images });
-
-const mapDispatchToProps = {};
-
-export default connect(mapStateToProps, mapDispatchToProps)(DashboardPage);
+export default DashboardPage;

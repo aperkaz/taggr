@@ -123,24 +123,27 @@ class VirtualizedGallery extends Component {
         id="virtualized-gallery-wrapper"
         style={{ height: "100%", overflow: "hidden" }}
       >
-        <Grid
-          className="Grid"
-          columnCount={ELEMENTS_PER_COLLUMN}
-          columnWidth={columnWidth}
-          height={gridHeight}
-          rowCount={rowCount}
-          rowHeight={rowHeight}
-          width={gridWidth}
-          itemData={imageList}
-          style={{
-            overflowX: "hidden",
-            margin: "5px 40px 5px 5px",
-            paddingRight: "20px",
-          }}
-        >
-          {(props) => <Cell {...props} onClick={this.toggleLightbox} />}
-        </Grid>
-
+        {imageList.length ? (
+          <Grid
+            className="Grid"
+            columnCount={ELEMENTS_PER_COLLUMN}
+            columnWidth={columnWidth}
+            height={gridHeight}
+            rowCount={rowCount}
+            rowHeight={rowHeight}
+            width={gridWidth}
+            itemData={imageList}
+            style={{
+              overflowX: "hidden",
+              margin: "5px 40px 5px 5px",
+              paddingRight: "20px",
+            }}
+          >
+            {(props) => <Cell {...props} onClick={this.toggleLightbox} />}
+          </Grid>
+        ) : (
+          <div>Sorry, no results. Add more pics into the root folder X.</div>
+        )}
         <ModalGateway>
           {lightboxIsOpen ? (
             <Modal onClose={this.toggleLightbox}>

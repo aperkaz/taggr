@@ -6,6 +6,8 @@ import styled from "styled-components";
 
 import backgroundImage from "./background.jpeg";
 
+// TODONOW: refactor component structure to modules (each page one module. Shared comps in shared). Each page, one module. One connection to the store via wrapper.
+
 const InnerWrapper = styled.div`
   background: linear-gradient(
     -47deg,

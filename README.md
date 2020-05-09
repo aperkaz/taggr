@@ -15,6 +15,7 @@ The UI follow an unidirectional dataflow pattern with React and a reactive uiSto
 
 ## Future features
 
+TODO: add toast messages.
 TODO: future-feature: timeline with pictures https://github.com/rmariuzzo/react-chronos
 TODO: future-feature: timeline display of images per day http://tany.kim/quantify-your-year/#/
 IDEA: https://www.electronjs.org/devtron
