@@ -1,7 +1,7 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
-import StartPageComp from "../src/components/pages/StartPage";
-import DashboardPageComp from "../src/components/pages/DashboardPage";
+import StartPageComp from "../src/renderer/components/pages/StartPage";
+// import { DashboardPage as DashboardPageComp } from "../src/renderer/components/pages/DashboardPage";
 import FullHeight from "./utils";
 import imageList from "./mocks/imageList";
 
@@ -13,13 +13,12 @@ export const StartPage = () => (
   <FullHeight>
     <StartPageComp
       onSelectRootFolderPath={action("trigger folder selection dialog")}
-      onLogoClick={action("trigger logo click")}
     />
   </FullHeight>
 );
 
-export const DashboardPage = () => (
-  <FullHeight>
-    <DashboardPageComp filteredImageList={imageList} />
-  </FullHeight>
-);
+// export const DashboardPage = () => (
+//   <FullHeight>
+//     <DashboardPageComp filteredImageList={imageList} />
+//   </FullHeight>
+// );

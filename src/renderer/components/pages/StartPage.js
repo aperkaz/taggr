@@ -1,14 +1,9 @@
-const { dialog } = require("electron").remote;
-
 import React from "react";
-import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
 
-import Logo from "../molecules/Logo";
-import { setActiveRoute, serviceCreateProject } from "../../store";
-import CONSTANTS from "../../store/constants";
 import backgroundImage from "./background.jpeg";
 
 const InnerWrapper = styled.div`
@@ -32,23 +27,8 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 1rem;
-`;
-
 const Main = styled.div`
   margin: auto;
-`;
-
-const Title = styled.h1`
-  margin-top: 0;
-  margin-bottom: 3rem;
-  font-family: Poppins;
-  text-shadow: 0 0 0.5px #6f6e6e, 0 0 2px #10101d;
-  font-size: 5rem;
-  color: white;
 `;
 
 const UnderTitle = styled.p`
@@ -63,22 +43,28 @@ const Footer = styled.a`
   margin-bottom: 0.5rem;
   color: white;
   font-weight: 600;
+  text-decoration: none;
 `;
 
-export const StartPage = ({ setActiveRoute }) => (
+const StartPage = ({ onSelectRootFolderPath }) => (
   <Wrapper>
     <InnerWrapper>
-      <Header>
-        {/* TODO: clean up */}
-        <Logo onClick={() => null} />
-      </Header>
       <Main>
-        <Title>Taggr</Title>
-        <UnderTitle>
-          Rediscover your memories while keeping your privacy
-          <br />
-          Powered by Machine-Learning
-        </UnderTitle>
+        <Typography
+          variant="h1"
+          component="h1"
+          style={{ fontFamily: "Poppins, sans-serif", color: "white" }}
+          gutterBottom
+        >
+          taggr
+        </Typography>
+        <Typography
+          variant="h6"
+          style={{ fontFamily: "Poppins, sans-serif", color: "white" }}
+        >
+          Rediscover your <b>memories</b> while keeping your <b>privacy</b>
+        </Typography>
+        <UnderTitle></UnderTitle>
         <Button
           variant="outlined"
           size="large"
@@ -88,35 +74,30 @@ export const StartPage = ({ setActiveRoute }) => (
             color: "white",
             background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
           }}
-          onClick={async () => {
-            const { filePaths } = await dialog.showOpenDialog({
-              properties: ["openDirectory"],
-            });
-
-            const projectRootFolderPath = filePaths ? filePaths[0] : null;
-
-            if (!projectRootFolderPath) return;
-
-            setActiveRoute(CONSTANTS.ROUTES.DASHBOARD_PAGE);
-
-            serviceCreateProject(projectRootFolderPath);
-          }}
+          onClick={onSelectRootFolderPath}
         >
           Select picture folder
         </Button>
       </Main>
-      <Footer href="https://taggr.ai">taggr.ai</Footer>
+
+      <Footer href="https://taggr.ai">
+        <Typography
+          variant="h6"
+          style={{
+            fontFamily: "Poppins, sans-serif",
+            color: "white",
+            fontWeight: "bold",
+          }}
+        >
+          taggr.ai
+        </Typography>
+      </Footer>
     </InnerWrapper>
   </Wrapper>
 );
 
 StartPage.propTypes = {
-  setActiveRoute: PropTypes.func,
-  createProject: PropTypes.func,
+  onSelectRootFolderPath: PropTypes.func,
 };
 
-const mapDispatchToProps = {
-  setActiveRoute,
-};
-
-export default connect(null, mapDispatchToProps)(StartPage);
+export default StartPage;

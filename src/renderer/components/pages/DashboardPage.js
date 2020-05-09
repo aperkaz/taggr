@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import styled from "styled-components";
 
 import Header from "../organisms/Header";
@@ -11,38 +12,43 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-const DashboardPage = ({
-  onLogoClick,
+export const DashboardPage = ({
   onInputChange,
   onPressReset,
-  tagProcessingStatus,
-  tagCountList,
-  filteredImageList,
+  tags,
+  images,
 }) => (
   <Wrapper>
     <Header
-      onLogoClick={onLogoClick}
       onInputChange={onInputChange}
       onPressReset={onPressReset}
-      tagProcessingStatus={tagProcessingStatus}
-      tagCountList={tagCountList}
+      tagCountList={tags}
     />
-    <Gallery imageList={filteredImageList} />
+    <Gallery imageList={images} />
   </Wrapper>
 );
 
 DashboardPage.defaultProps = {
-  onInputChange: () => null,
-  filteredImageList: [],
+  onInputChange: () => console.log("onInputChange without prop"),
+  onPressReset: () => console.log("onPressReset without prop"),
+  tags: [],
+  images: [],
 };
 
 DashboardPage.propTypes = {
   onInputChange: PropTypes.func,
-  filteredImageList: PropTypes.arrayOf(
+  onPressReset: PropTypes.func,
+  tags: PropTypes.array,
+  images: PropTypes.arrayOf(
     PropTypes.shape({
       path: PropTypes.string,
     })
   ),
 };
 
-export default DashboardPage;
+// redux bindings
+const mapStateToProps = (state) => ({ images: state.images });
+
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardPage);

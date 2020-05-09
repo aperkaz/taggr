@@ -10,7 +10,7 @@ if (!backgroundWindow) {
 }
 
 /**
- * Trigger project creation in background process through IPC.
+ * Trigger project creation in background process through IPC channel: CREATE_PROJECT
  * @param {String} projectRootFolderPath
  */
 export const createProject = (projectRootFolderPath) => {
@@ -24,4 +24,8 @@ export const createProject = (projectRootFolderPath) => {
 
 ipcRenderer.on(IPC_CHANNELS.CREATE_PROJECT, (event, message) => {
   logger.log(`IPC: ${IPC_CHANNELS.CREATE_PROJECT} | ${message}`);
+});
+
+ipcRenderer.on(IPC_CHANNELS.NOTIFICATIONS, (event, message) => {
+  logger.log(`IPC: ${IPC_CHANNELS.NOTIFICATIONS} | ${message}`);
 });

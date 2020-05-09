@@ -17,7 +17,7 @@ function Types() {
     <div className={classes.root}>
       <Typography
         variant="h1"
-        component="h2"
+        component="h1"
         style={{ fontFamily: "Poppins, sans-serif" }}
         gutterBottom
       >
