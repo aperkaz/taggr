@@ -131,6 +131,7 @@
     "react-images": "^1.1.7",
     "react-map-gl": "^5.2.5",
     "react-redux": "^7.2.0",
+    "react-sizeme": "^2.6.12",
     "react-window": "^1.8.5",
     "readdirp": "^3.4.0",
     "semver": "^7.3.2",

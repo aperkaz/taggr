@@ -5,6 +5,8 @@ import styled from "styled-components";
 import Search from "../../shared/Search";
 import Gallery from "../../shared/VirtualizedGallery";
 
+// TODO: https://material-ui.com/components/tabs/#tabs
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;

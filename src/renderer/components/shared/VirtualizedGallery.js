@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { SizeMe } from "react-sizeme";
 import memoize from "memoize-one";
 import PropTypes from "prop-types";
 import { FixedSizeGrid as Grid } from "react-window"; // Virtualize list for performance https://github.com/developerdizzle/react-virtual-list
@@ -16,18 +17,16 @@ const ELEMENTS_PER_COLLUMN = 5;
 // THE PROCESSING STATUS MODIFIES DASHBOARD, which forces the whole gallery to re-render
 
 // TODO: update: lazy load images https://github.com/Aljullu/react-lazy-load-image-component
+
 class VirtualizedGallery extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      dimensions: { height: 10, width: 10 },
-      sizeSet: false,
       selectedIndex: 0,
       lightboxIsOpen: false,
     };
 
-    this.setDimensions = this.setDimensions.bind(this);
     this.toggleLightbox = this.toggleLightbox.bind(this);
 
     this.calculateCarouselImages = memoize((imageList) => {
@@ -37,7 +36,6 @@ class VirtualizedGallery extends Component {
       }));
     });
     this.prefixImagePaths = memoize(this.prefixImagePaths.bind(this));
-    this.handleScroll = debounce(this.handleScroll.bind(this), 200);
   }
 
   toggleLightbox(selectedIndex) {
@@ -46,43 +44,6 @@ class VirtualizedGallery extends Component {
       lightboxIsOpen: !prevState.lightboxIsOpen,
       selectedIndex,
     }));
-  }
-
-  setDimensions({ height, width }) {
-    this.setState({
-      dimensions: {
-        height,
-        width,
-      },
-    });
-  }
-
-  async componentDidMount() {
-    window.addEventListener("resize", this.handleScroll);
-
-    // hack to let htm render react and thus populate the node height
-    await new Promise((r) => setTimeout(r, 50));
-
-    this.setDimensions({
-      height: this.container.offsetHeight,
-      width: this.container.offsetWidth,
-    });
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.handleScroll);
-  }
-
-  handleScroll(e) {
-    // on sezise event
-    const element = document.getElementById("virtualized-gallery-wrapper");
-
-    this.setState({
-      dimensions: {
-        height: element.offsetHeight,
-        width: element.offsetWidth,
-      },
-    });
   }
 
   // Re-run the filter whenever the list array or filter text changes:
@@ -95,70 +56,83 @@ class VirtualizedGallery extends Component {
   render() {
     const imageList = this.props.imageList;
 
+    // console.log(this.props.size);
+
     const {
-      dimensions: { height, width },
+      // dimensions: { height, width },
       lightboxIsOpen,
       selectedIndex,
       // isLoading,
     } = this.state;
-
-    const gridHeight = height - GUTTER * 2;
-    const gridWidth = width - GUTTER * 2;
-
-    const columnWidth = gridWidth / ELEMENTS_PER_COLLUMN;
-
-    const rowCount = Math.ceil(imageList.length / ELEMENTS_PER_COLLUMN);
-
-    // min row height: 250
-    const rowHeight =
-      gridHeight / ELEMENTS_PER_COLLUMN > 250
-        ? gridHeight / ELEMENTS_PER_COLLUMN
-        : 250;
 
     const carouselImages = this.calculateCarouselImages(imageList);
 
     console.log("re render virtual");
 
     return (
-      <div
-        ref={(el) => (this.container = el)}
-        id="virtualized-gallery-wrapper"
-        style={{ height: "100%", overflow: "hidden" }}
-      >
-        {imageList.length ? (
-          <Grid
-            className="Grid"
-            columnCount={ELEMENTS_PER_COLLUMN}
-            columnWidth={columnWidth}
-            height={gridHeight}
-            rowCount={rowCount}
-            rowHeight={rowHeight}
-            width={gridWidth}
-            itemData={imageList}
-            style={{
-              overflowX: "hidden",
-              margin: "5px 40px 5px 5px",
-              paddingRight: "20px",
-            }}
-          >
-            {(props) => <Cell {...props} onClick={this.toggleLightbox} />}
-          </Grid>
-        ) : (
-          <div>Sorry, no results. Add more pics into the root folder X.</div>
-        )}
-        <ModalGateway>
-          {lightboxIsOpen ? (
-            <Modal onClose={this.toggleLightbox}>
-              <Carousel
-                // TODONOW: fix to render carousel multiple images. Currently does not support lazy loading, so very slow. https://github.com/jossmac/react-images/issues/300
-                currentIndex={0}
-                views={[carouselImages[selectedIndex]]}
-                components={{ Footer: () => <div></div> }}
-              />
-            </Modal>
-          ) : null}
-        </ModalGateway>
-      </div>
+      <SizeMe monitorHeight>
+        {({ size }) => {
+          console.log(size);
+          const { height, width } = size;
+
+          const gridHeight = height - GUTTER * 2;
+          const gridWidth = width - GUTTER * 2;
+
+          const columnWidth = gridWidth / ELEMENTS_PER_COLLUMN;
+
+          const rowCount = Math.ceil(imageList.length / ELEMENTS_PER_COLLUMN);
+
+          // min row height: 250
+          const rowHeight =
+            gridHeight / ELEMENTS_PER_COLLUMN > 250
+              ? gridHeight / ELEMENTS_PER_COLLUMN
+              : 250;
+
+          return (
+            <div
+              ref={(el) => (this.container = el)}
+              id="virtualized-gallery-wrapper"
+              style={{ height: "100%", overflow: "hidden" }}
+            >
+              {imageList.length ? (
+                <Grid
+                  className="Grid"
+                  columnCount={ELEMENTS_PER_COLLUMN}
+                  columnWidth={columnWidth}
+                  height={gridHeight}
+                  rowCount={rowCount}
+                  rowHeight={rowHeight}
+                  width={gridWidth}
+                  itemData={imageList}
+                  style={{
+                    overflowX: "hidden",
+                    margin: "5px 40px 5px 5px",
+                    paddingRight: "20px",
+                  }}
+                >
+                  {(props) => <Cell {...props} onClick={this.toggleLightbox} />}
+                </Grid>
+              ) : (
+                <div>
+                  Sorry, no results. Add more pics into the root folder X.
+                </div>
+              )}
+              <ModalGateway>
+                {lightboxIsOpen ? (
+                  <Modal onClose={this.toggleLightbox}>
+                    <Carousel
+                      // TODONOW: fix to render carousel multiple images. Currently does not support lazy loading, so very slow. https://github.com/jossmac/react-images/issues/300
+                      currentIndex={0}
+                      views={[carouselImages[selectedIndex]]}
+                      components={{ Footer: () => <div></div> }}
+                    />
+                  </Modal>
+                ) : null}
+              </ModalGateway>
+            </div>
+          );
+        }}
+      </SizeMe>
     );
   }
 }
@@ -198,5 +172,6 @@ VirtualizedGallery.propTypes = {
   ),
 };
 
-// feature: image menu: https://github.com/aperkaz/taggr/blob/add-react/src/components/DashboardImageGallery.js
 export default VirtualizedGallery;
+
+// TODO: fuutre feature: image menu: https://github.com/aperkaz/taggr/blob/add-react/src/components/DashboardImageGallery.js
