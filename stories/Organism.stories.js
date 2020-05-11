@@ -12,9 +12,19 @@ export default {
   title: "Organisms",
 };
 
-export const Header = () => <HeaderComp>hi</HeaderComp>;
+export const Header = () => (
+  <HeaderComp onSettingsClick={action("click settings")} />
+);
 
-export const HeaderProcessing = () => (
+export const Search = () => (
+  <SearchComp
+    onInputChange={action("input change")}
+    onPressReset={action("press reset")}
+    tagProcessingStatus="Processing 321 / 684"
+  />
+);
+
+export const SearchProcessing = () => (
   <SearchComp
     onInputChange={action("input change")}
     onPressReset={action("press reset")}
