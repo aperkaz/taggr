@@ -6,6 +6,7 @@ import Link from "@material-ui/core/Link";
 const accessToken =
   "pk.eyJ1IjoidGFnZ3IiLCJhIjoiY2thMmJ0cGgyMDh2aDNocG5kZjcwaTdrOSJ9.dLriq493UOY4Jt-xZaAAZQ";
 
+// TODO: improve: add backdrop when there are no images to show, with tip: https://material-ui.com/components/backdrop/
 export default function Map({ images = [], onImageSelect = () => null }) {
   const [viewport, setViewport] = useState({
     latitude: 45.4211,
