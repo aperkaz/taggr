@@ -7,7 +7,7 @@ import {
   generateMD5Hash,
 } from "./utils";
 import store from "./store";
-
+import { setImages } from "../renderer/store";
 import IPC_CHANNELS from "../shared/ipcChannels";
 
 const backgroundLogger = getGlobal("backgroundLogger");
@@ -37,6 +37,14 @@ ipcRenderer.on(
       const hash = generateMD5Hash(imagePath);
       store.imageHashMap[hash] = { path: imagePath, tags: null };
     });
+    rendererWindow.webContents.send(IPC_CHANNELS.CREATE_PROJECT, {
+      type: setImages.type,
+      payload: Object.keys(store.imageHashMap).map((key) => ({
+        hash: key,
+        tags: store.imageHashMap[key].tags,
+        path: normalizeImageUrl(store.imageHashMap[key].path),
+      })),
+    });
 
     // compute tags for all images in the store
     let totalImagesToTag = imagePathsToProcess.length;
@@ -64,6 +72,19 @@ ipcRenderer.on(
     );
   }
 );
+
+// TODONOW: extract to utils/helpers
+const normalizeImageUrl = (imagePath) => {
+  const normalize = require("normalize-path");
+
+  console.log(imagePath);
+
+  // fixes linux / windows compatibility
+  const normalizedImagePath = normalize(imagePath);
+  return normalizedImagePath.startsWith("http")
+    ? normalizedImagePath
+    : `file:///${normalizedImagePath}`;
+};
 
 (async () => {
   await loadModel();

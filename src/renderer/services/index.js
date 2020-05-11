@@ -3,6 +3,8 @@ import IPC_CHANNELS from "../../shared/ipcChannels";
 const { ipcRenderer } = require("electron");
 const { getGlobal } = require("electron").remote;
 
+import store, { setImages } from "../store";
+
 // initialize global reference to backgroundWindow
 let backgroundWindow = getGlobal("backgroundWindow");
 if (!backgroundWindow) {
@@ -24,6 +26,16 @@ export const createProject = (projectRootFolderPath) => {
 
 ipcRenderer.on(IPC_CHANNELS.CREATE_PROJECT, (event, message) => {
   logger.log(`IPC: ${IPC_CHANNELS.CREATE_PROJECT} | ${message}`);
+
+  const type = message.type;
+  const payload = message.payload;
+
+  switch (type) {
+    case setImages.type:
+      store.dispatch(setImages(payload));
+      break;
+    default:
+  }
 });
 
 ipcRenderer.on(IPC_CHANNELS.NOTIFICATIONS, (event, message) => {

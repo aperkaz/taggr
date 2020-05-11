@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import memoize from "memoize-one";
-
 import PropTypes from "prop-types";
 import { FixedSizeGrid as Grid } from "react-window"; // Virtualize list for performance https://github.com/developerdizzle/react-virtual-list
 import Carousel, { Modal, ModalGateway } from "react-images";
@@ -14,6 +13,8 @@ const ELEMENTS_PER_COLLUMN = 5;
 
 // TODONOW: re renders every time a calculation is done, see why.
 // THE PROCESSING STATUS MODIFIES DASHBOARD, which forces the whole gallery to re-render
+
+// TODO: update: lazy load images https://github.com/Aljullu/react-lazy-load-image-component
 class VirtualizedGallery extends Component {
   constructor(props) {
     super(props);
@@ -30,8 +31,8 @@ class VirtualizedGallery extends Component {
 
     this.calculateCarouselImages = memoize((imageList) => {
       console.log("calculating carousel images");
-      return imageList.map((imagePath) => ({
-        source: `file://${imagePath.path}`,
+      return imageList.map((image) => ({
+        source: image.path,
       }));
     });
     this.prefixImagePaths = memoize(this.prefixImagePaths.bind(this));
@@ -148,9 +149,10 @@ class VirtualizedGallery extends Component {
           {lightboxIsOpen ? (
             <Modal onClose={this.toggleLightbox}>
               <Carousel
-                // TODONOW: fix to render carousel multiple images. Currently not lazy loaded, so very slow. https://github.com/jossmac/react-images/issues/300
+                // TODONOW: fix to render carousel multiple images. Currently does not support lazy loading, so very slow. https://github.com/jossmac/react-images/issues/300
                 currentIndex={0}
                 views={[carouselImages[selectedIndex]]}
+                components={{ Footer: () => <div></div> }}
               />
             </Modal>
           ) : null}

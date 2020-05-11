@@ -15,12 +15,16 @@ const stateSlice = createSlice({
       state.activeRoute = action.payload;
       return state;
     },
+    setImages: (state, action) => {
+      state.images = action.payload;
+      return state;
+    },
     // non-reduced actions, for service layer interaction visibility
     triggerCreateProject: (state) => state,
   },
 });
 
-export const { setActiveRoute } = stateSlice.actions;
+export const { setActiveRoute, setImages } = stateSlice.actions;
 
 // Actions with side effects (calls to the service layer)
 export const serviceCreateProject = (projectRootFolderPath) => {
