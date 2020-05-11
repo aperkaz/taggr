@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TagCountDisplay = ({ tagCountList = [] }) => {
+const TagCountDisplay = ({ tagCountList = [], onTagClick = (t) => null }) => {
   const classes = useStyles();
   return tagCountList.length == 0 ? null : (
     <div className={classes.root}>
@@ -30,12 +30,16 @@ const TagCountDisplay = ({ tagCountList = [] }) => {
       >
         Popular tags:
       </Typography>
-      {tagCountList.map((tagCount) => (
-        <Chip
-          key={tagCount.name}
-          avatar={<Avatar>{tagCount.count}</Avatar>}
-          label={tagCount.name}
-        />
+      {tagCountList.map((tag) => (
+        <a
+          key={tag.name}
+          onClick={(e) => {
+            e.preventDefault();
+            onTagClick(tag.name);
+          }}
+        >
+          <Chip avatar={<Avatar>{tag.count}</Avatar>} label={tag.name} />
+        </a>
       ))}
     </div>
   );

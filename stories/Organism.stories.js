@@ -1,5 +1,6 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
+import { withKnobs, text, boolean, number } from "@storybook/addon-knobs";
 import HeaderComp from "../src/renderer/components/shared/Header";
 import SearchComp from "../src/renderer/components/shared/Search";
 import VirtualizedGalleryComp from "../src/renderer/components/shared/VirtualizedGallery";
@@ -10,6 +11,7 @@ import FullHeight from "./utils";
 
 export default {
   title: "Organisms",
+  decorators: [withKnobs],
 };
 
 export const Header = () => (
@@ -18,17 +20,18 @@ export const Header = () => (
 
 export const Search = () => (
   <SearchComp
+    isTaskOngoing={boolean("isTaskOngoing", false)}
+    taskName={text(
+      "taskName",
+      "Be patient, the minions are working on your memories!"
+    )}
+    taskPercentage={number("taskPercentage", 50)}
     onInputChange={action("input change")}
     onPressReset={action("press reset")}
-    tagProcessingStatus="Processing 321 / 684"
-  />
-);
-
-export const SearchProcessing = () => (
-  <SearchComp
-    onInputChange={action("input change")}
-    onPressReset={action("press reset")}
-    tagProcessingStatus="Processing 321 / 684"
+    tagCountList={[
+      { name: "tag1", count: 11 },
+      { name: "tag2", count: 6 },
+    ]}
   />
 );
 
