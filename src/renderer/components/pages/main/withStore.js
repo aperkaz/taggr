@@ -1,9 +1,9 @@
 import { connect } from "react-redux";
-import DashboardPage from "./DashboardPage";
+import MainPage from "./Page";
 
 // redux bindings
 const mapStateToProps = (state) => ({ images: state.images });
 
 const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(DashboardPage);
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

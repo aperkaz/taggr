@@ -5,17 +5,17 @@ import styled from "styled-components";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
-import Logo from "../molecules/Logo";
-import TagCountDisplay from "../molecules/TagCountDisplay";
+import Logo from "./Logo";
+import TagCountDisplay from "./TagCountDisplay";
 
-const Header = styled.div`
+const Search = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 1rem;
   align-items: center;
 `;
 
-const HeaderComp = ({
+const SearchComp = ({
   onLogoClick,
   onInputChange,
   onPressReset,
@@ -24,7 +24,7 @@ const HeaderComp = ({
 }) => {
   return (
     <div>
-      <Header>
+      <Search>
         <Logo onClick={onLogoClick} />
         <TextField
           id="outlined-basic"
@@ -47,7 +47,7 @@ const HeaderComp = ({
         >
           Reset
         </Button>
-      </Header>
+      </Search>
       <div style={{ marginTop: "8px" }}>
         <TagCountDisplay tagCountList={tagCountList} />
       </div>
@@ -55,14 +55,14 @@ const HeaderComp = ({
   );
 };
 
-HeaderComp.defaultProps = {
+SearchComp.defaultProps = {
   onInputChange: () => null,
   onPressReset: () => null,
   tagProcessingStatus: null,
   tagCountList: [],
 };
 
-HeaderComp.propTypes = {
+SearchComp.propTypes = {
   onInputChange: PropTypes.func,
   onPressReset: PropTypes.func,
   tagProcessingStatus: PropTypes.any,
@@ -74,4 +74,4 @@ HeaderComp.propTypes = {
   ),
 };
 
-export default HeaderComp;
+export default SearchComp;

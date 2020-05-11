@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import Header from "../organisms/Header";
-import Gallery from "../organisms/VirtualizedGallery";
+import Search from "../../shared/Search";
+import Gallery from "../../shared/VirtualizedGallery";
 
 const Wrapper = styled.div`
   display: flex;
@@ -11,9 +11,9 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-const DashboardPage = ({ onInputChange, onPressReset, tags, images }) => (
+const MainPage = ({ onInputChange, onPressReset, tags, images }) => (
   <Wrapper>
-    <Header
+    <Search
       onInputChange={onInputChange}
       onPressReset={onPressReset}
       tagCountList={tags}
@@ -22,14 +22,14 @@ const DashboardPage = ({ onInputChange, onPressReset, tags, images }) => (
   </Wrapper>
 );
 
-DashboardPage.defaultProps = {
+MainPage.defaultProps = {
   onInputChange: () => console.log("onInputChange without prop"),
   onPressReset: () => console.log("onPressReset without prop"),
   tags: [],
   images: [],
 };
 
-DashboardPage.propTypes = {
+MainPage.propTypes = {
   onInputChange: PropTypes.func,
   onPressReset: PropTypes.func,
   tags: PropTypes.array,
@@ -40,4 +40,4 @@ DashboardPage.propTypes = {
   ),
 };
 
-export default DashboardPage;
+export default MainPage;

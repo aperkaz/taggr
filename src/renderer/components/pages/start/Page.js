@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
 
-import backgroundImage from "./background.jpeg";
+import backgroundImage from "../../../statics/background.jpeg";
 
 // TODONOW: refactor component structure to modules (each page one module. Shared comps in shared). Each page, one module. One connection to the store via wrapper.
 

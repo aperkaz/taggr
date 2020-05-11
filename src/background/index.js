@@ -50,6 +50,7 @@ ipcRenderer.on(
     let totalImagesToTag = imagePathsToProcess.length;
     let imagesTagged = 0;
 
+    console.time("processImages");
     while (imagePathsToProcess.length > 0) {
       const imagePath = imagePathsToProcess.pop();
 
@@ -65,6 +66,7 @@ ipcRenderer.on(
       imagesTagged++;
       console.log(`Processing: ${imagesTagged} / ${totalImagesToTag}`);
     }
+    console.timeEnd("processImages");
 
     rendererWindow.webContents.send(
       IPC_CHANNELS.CREATE_PROJECT,
@@ -76,8 +78,6 @@ ipcRenderer.on(
 // TODONOW: extract to utils/helpers
 const normalizeImageUrl = (imagePath) => {
   const normalize = require("normalize-path");
-
-  console.log(imagePath);
 
   // fixes linux / windows compatibility
   const normalizedImagePath = normalize(imagePath);

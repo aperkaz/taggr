@@ -4,12 +4,13 @@ import PropTypes from "prop-types";
 import { FixedSizeGrid as Grid } from "react-window"; // Virtualize list for performance https://github.com/developerdizzle/react-virtual-list
 import Carousel, { Modal, ModalGateway } from "react-images";
 import debounce from "lodash.debounce";
-import ImageTile from "../molecules/ImageTile";
+import ImageTile from "./ImageTile";
 
 const GUTTER = 5;
 const ELEMENTS_PER_COLLUMN = 5;
 
 // TODO: inprovement: refactor with https://github.com/bvaughn/react-virtualized-auto-sizer/
+// https://github.com/ctrlplusb/react-sizeme
 
 // TODONOW: re renders every time a calculation is done, see why.
 // THE PROCESSING STATUS MODIFIES DASHBOARD, which forces the whole gallery to re-render

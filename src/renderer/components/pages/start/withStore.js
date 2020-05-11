@@ -1,11 +1,11 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 
-import { setActiveRoute, serviceCreateProject } from "../../store";
-import CONSTANTS from "../../store/constants";
-import StartPage from "./StartPage";
+import { setActiveRoute, serviceCreateProject } from "../../../store";
+import CONSTANTS from "../../../store/constants";
+import StartPage from "./Page";
 
-const StartPageWithStore = () => {
+const withStore = () => {
   const dispatch = useDispatch();
 
   const onSelectRootFolderPath = async () => {
@@ -26,4 +26,4 @@ const StartPageWithStore = () => {
   return <StartPage onSelectRootFolderPath={onSelectRootFolderPath} />;
 };
 
-export default StartPageWithStore;
+export default withStore;

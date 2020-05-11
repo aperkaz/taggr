@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import debounce from "lodash.debounce";
 
-import StartPage from "./pages/StartPageWithStore";
-import DashboardPage from "./pages/DashboardPageWithStore";
+import StartPage from "./pages/start";
+import DashboardPage from "./pages/main";
 import UpdateModal from "./molecules/UpdateModal";
 import CONSTANTS from "../store/constants";
 
