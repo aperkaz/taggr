@@ -2,6 +2,7 @@ const CONSTANTS = {
   ROUTES: {
     START_PAGE: "START_PAGE",
     DASHBOARD_PAGE: "DASHBOARD_PAGE",
+    SETTINGS: "SETTINGS",
   },
 };
 

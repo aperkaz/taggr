@@ -11,6 +11,7 @@ import robotGif from "../../statics/robot.gif"; // https://dribbble.com/shots/50
 const FlexWrapper = styled.div`
   display: flex;
   justify-content: center;
+  padding-top: 10px;
 `;
 
 const Progress = styled.div`
@@ -19,13 +20,15 @@ const Progress = styled.div`
   text-align: right;
 `;
 
-const SearchComp = ({
-  isTaskOngoing = false,
-  taskName = "",
-  taskPercentage = 0,
+const Search = ({
+  task: {
+    isOngoing: isTaskOngoing,
+    name: taskName,
+    percentage: taskPercentage,
+  },
   onInputChange,
   onPressReset,
-  tagCountList = [],
+  tagCountList,
 }) => {
   const [inputValue, setInputValue] = useState("");
 
@@ -92,24 +95,28 @@ const SearchComp = ({
   );
 };
 
-// TODONOW: upadate
-SearchComp.defaultProps = {
-  onInputChange: () => null,
-  onPressReset: () => null,
-  tagProcessingStatus: null,
-  tagCountList: [],
+Search.defaultProps = {
+  task: {
+    isOngoing: false,
+    name: "",
+    percentage: 0,
+  },
 };
 
-SearchComp.propTypes = {
-  onInputChange: PropTypes.func,
-  onPressReset: PropTypes.func,
-  tagProcessingStatus: PropTypes.any,
+Search.PropTypes = {
+  task: PropTypes.shape({
+    isOngoing: PropTypes.bool,
+    name: PropTypes.string,
+    percentage: PropTypes.number,
+  }),
   tagCountList: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,
       count: PropTypes.number,
     })
-  ),
+  ).isRequired,
+  onInputChange: PropTypes.func.isRequired,
+  onPressReset: PropTypes.func.isRequired,
 };
 
-export default SearchComp;
+export default Search;

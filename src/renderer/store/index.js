@@ -7,8 +7,12 @@ const stateSlice = createSlice({
   initialState: {
     activeRoute: CONSTANTS.ROUTES.START_PAGE,
     images: [],
-    imageFilter: {},
-    tagList: {},
+    tags: [], // TODONOW: populate from backend
+    task: {
+      isOngoing: false,
+      name: "Be patient, the robots are analysing your memories!",
+      percentage: 0,
+    },
   },
   reducers: {
     setActiveRoute: (state, action) => {
@@ -17,6 +21,10 @@ const stateSlice = createSlice({
     },
     setImages: (state, action) => {
       state.images = action.payload;
+      return state;
+    },
+    setTask: (state, action) => {
+      state.task = action.payload;
       return state;
     },
     // non-reduced actions, for service layer interaction visibility

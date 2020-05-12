@@ -53,12 +53,8 @@ const Header = ({ onSettingsClick }) => (
   </Wrapper>
 );
 
-Header.propTypes = {
-  onSettingsClick: PropTypes.func,
-};
-
-Header.defaultProps = {
-  onSettingsClick: () => console.log("onSettingsClick undefined"),
+Header.PropTypes = {
+  onSettingsClick: PropTypes.func.isRequired,
 };
 
 export default Header;

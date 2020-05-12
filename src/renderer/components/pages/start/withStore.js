@@ -23,7 +23,17 @@ const withStore = () => {
     serviceCreateProject(projectRootFolderPath);
   };
 
-  return <StartPage onSelectRootFolderPath={onSelectRootFolderPath} />;
+  const onSelectLogo = () => {
+    const { shell } = require("electron");
+    shell.openExternal("https://taggr.ai");
+  };
+
+  return (
+    <StartPage
+      onSelectRootFolderPath={onSelectRootFolderPath}
+      onSelectLogo={onSelectLogo}
+    />
+  );
 };
 
 export default withStore;

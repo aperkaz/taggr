@@ -13,12 +13,41 @@ export const StartPage = () => (
   <FullHeight>
     <StartPageComp
       onSelectRootFolderPath={action("trigger folder selection dialog")}
+      onSelectLogo={action("trigger navigation to webpage")}
     />
   </FullHeight>
 );
 
 export const MainPage = () => (
   <FullHeight>
-    <MainPageComp images={imageList} />
+    <MainPageComp
+      onSettingsClick={action("navigate to settings")}
+      task={{
+        isOngoing: false,
+        name: "Be patient, the robots are analysing your memories!",
+        percentage: 0,
+      }}
+      onInputChange={action("input change")}
+      onPressReset={action("reset press")}
+      tags={[{ name: "tag1", count: 10 }]}
+      images={imageList}
+    />
+  </FullHeight>
+);
+
+export const MainPageWithTask = () => (
+  <FullHeight>
+    <MainPageComp
+      onSettingsClick={action("navigate to settings")}
+      task={{
+        isOngoing: true,
+        name: "Be patient, the robots are analysing your memories!",
+        percentage: 0,
+      }}
+      onInputChange={action("input change")}
+      onPressReset={action("reset press")}
+      tags={[{ name: "tag1", count: 10 }]}
+      images={imageList}
+    />
   </FullHeight>
 );

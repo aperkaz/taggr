@@ -107,7 +107,7 @@ VirtualizedGallery.defaultProps = {
   imageList: [],
 };
 
-VirtualizedGallery.propTypes = {
+VirtualizedGallery.PropTypes = {
   imageList: PropTypes.arrayOf(
     PropTypes.shape({
       hash: PropTypes.string,

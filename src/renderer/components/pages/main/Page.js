@@ -2,10 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
+import Header from "../../shared/Header";
 import Search from "../../shared/Search";
 import Gallery from "../../shared/VirtualizedGallery";
 
-// TODO: https://material-ui.com/components/tabs/#tabs
+// TODO: feature: https://material-ui.com/components/tabs/#tabs
 
 const Wrapper = styled.div`
   display: flex;
@@ -13,9 +14,18 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-const MainPage = ({ onInputChange, onPressReset, tags, images }) => (
+const MainPage = ({
+  onSettingsClick,
+  task,
+  onInputChange,
+  onPressReset,
+  tags,
+  images,
+}) => (
   <Wrapper>
+    <Header onSettingsClick={onSettingsClick} />
     <Search
+      task={task}
       onInputChange={onInputChange}
       onPressReset={onPressReset}
       tagCountList={tags}
@@ -24,22 +34,21 @@ const MainPage = ({ onInputChange, onPressReset, tags, images }) => (
   </Wrapper>
 );
 
-MainPage.defaultProps = {
-  onInputChange: () => console.log("onInputChange without prop"),
-  onPressReset: () => console.log("onPressReset without prop"),
-  tags: [],
-  images: [],
-};
-
-MainPage.propTypes = {
-  onInputChange: PropTypes.func,
-  onPressReset: PropTypes.func,
-  tags: PropTypes.array,
+MainPage.PropTypes = {
+  onSettingsClick: PropTypes.func.isRequired,
+  task: PropTypes.shape({
+    isOngoing: PropTypes.bool,
+    name: PropTypes.string,
+    percentage: PropTypes.number,
+  }),
+  onInputChange: PropTypes.func.isRequired,
+  onPressReset: PropTypes.func.isRequired,
+  tags: PropTypes.array.isRequired,
   images: PropTypes.arrayOf(
     PropTypes.shape({
       path: PropTypes.string,
     })
-  ),
+  ).isRequired,
 };
 
 export default MainPage;

@@ -52,7 +52,7 @@ const Footer = styled.div`
   }
 `;
 
-const StartPage = ({ onSelectRootFolderPath }) => (
+const StartPage = ({ onSelectRootFolderPath, onSelectLogo }) => (
   <Wrapper>
     <InnerWrapper>
       <Main>
@@ -86,12 +86,7 @@ const StartPage = ({ onSelectRootFolderPath }) => (
         </Button>
       </Main>
 
-      <Footer
-        onClick={() => {
-          const { shell } = require("electron");
-          shell.openExternal("https://taggr.ai");
-        }}
-      >
+      <Footer onClick={onSelectLogo}>
         <Typography
           variant="h6"
           style={{
@@ -107,8 +102,9 @@ const StartPage = ({ onSelectRootFolderPath }) => (
   </Wrapper>
 );
 
-StartPage.propTypes = {
+StartPage.PropTypes = {
   onSelectRootFolderPath: PropTypes.func,
+  onSelectLogo: PropTypes.func,
 };
 
 export default StartPage;

@@ -45,7 +45,7 @@ const TagCountDisplay = ({ tagCountList = [], onTagClick = (t) => null }) => {
   );
 };
 
-TagCountDisplay.propTypes = {
+TagCountDisplay.PropTypes = {
   tagCountList: PropTypes.array,
 };
 
