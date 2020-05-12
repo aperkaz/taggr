@@ -39,7 +39,17 @@
         },
         {
           "name": "@electron-forge/maker-deb",
-          "config": {}
+          "config": {
+            "categories": ["Graphics", "Photography"],
+            "description": "Rediscover your memories while keeping your privacy.",
+            "genericName": "Enhanced Gallery",
+            "homepage": "https://taggr.ai/",
+            "icon": "iconLinux.png",
+            "maintainer": "Alain Perkaz",
+            "name": "taggr",
+            "productDescription": "Keep your privacy while you rediscover your memories. You own your data, and all the computations by taggr happen locally. \n Easy to set up, ready to plug into your existing file system. \n\n Features: \n -Automatic image tagging using machine learning. \n -Aggregate images system-wide, while curating results. \n -Blazing fast image view experience \n -Geolocate your memories \n -And much more! \n\n Check upcoming features and updates in https://taggr.ai/",
+            "section": "graphics"
+          }
         },
         {
           "name": "@electron-forge/maker-rpm",

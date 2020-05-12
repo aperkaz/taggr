@@ -6,7 +6,7 @@ import debounce from "lodash.debounce";
 
 import StartPage from "./pages/start";
 import DashboardPage from "./pages/main";
-import UpdateModal from "./molecules/UpdateModal";
+import UpdateModal from "./shared/UpdateModal";
 import CONSTANTS from "../store/constants";
 
 const Wrapper = styled.div`
