@@ -137,6 +137,7 @@
     "electron-squirrel-startup": "^1.0.0",
     "electron-timber": "^0.5.1",
     "lodash.debounce": "^4.0.8",
+    "lodash.throttle": "^4.1.1",
     "node-localstorage": "^2.1.6",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",

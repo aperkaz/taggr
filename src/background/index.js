@@ -1,6 +1,4 @@
 const { getGlobal } = require("electron").remote;
-
-import * as Comlink from "comlink";
 import { ipcRenderer } from "electron";
 import { loadModel, classifyImage } from "./features/tfImageClassification";
 import {
@@ -11,17 +9,9 @@ import {
 import store from "./store";
 import { setImages, setTask } from "../renderer/store";
 import IPC_CHANNELS from "../shared/ipcChannels";
-import ImageTaggingWorker from "./features/imageTagging.worker";
+import throttle from "lodash.throttle";
 
 const backgroundLogger = getGlobal("backgroundLogger");
-
-let worker, imageTaggingWorker;
-
-// (async () => {
-//   const MyClass = Comlink.wrap(new ImageTaggingWorker());
-//   worker = await new MyClass();
-//   await worker.init();
-// })();
 
 // TODO: feature: add switch based on the action types: CREATE_PROJECT,
 // TODO: improve: refactor and simplify. /features folder -> createProject(). Or extract store helper methods
@@ -67,15 +57,12 @@ ipcRenderer.on(IPC_CHANNELS.MESSAGE_BUS, async (event, message) => {
 
   console.time("processImages");
 
-  // const net = getModel();
-
   while (imagePathsToProcess.length > 0) {
     const imagePath = imagePathsToProcess.pop();
 
     const hash = generateMD5Hash(imagePath);
     const imageData = await generateImageData(imagePath);
 
-    // const tags = await worker.process(imageData);
     const tags = await classifyImage(imageData);
 
     store.imageHashMap[hash] = {
@@ -87,11 +74,8 @@ ipcRenderer.on(IPC_CHANNELS.MESSAGE_BUS, async (event, message) => {
     console.log(`Processing: ${imagesTagged} / ${totalImagesToTag}`);
 
     // update task status
-    sendToRenderer({
-      type: setTask.type,
-      payload: {
-        percentage: Math.floor((imagesTagged * 100) / totalImagesToTag),
-      },
+    debouncedUpdateStatus(setTask.type, {
+      percentage: Math.floor((imagesTagged * 100) / totalImagesToTag),
     });
   }
   console.timeEnd("processImages");
@@ -104,6 +88,13 @@ ipcRenderer.on(IPC_CHANNELS.MESSAGE_BUS, async (event, message) => {
     },
   });
 });
+
+const debouncedUpdateStatus = throttle((type, payload) => {
+  sendToRenderer({
+    type,
+    payload,
+  });
+}, 500);
 
 /**
  * Send {senderId: X, type: ACTION.TYPE, payload: {}} to renderer process

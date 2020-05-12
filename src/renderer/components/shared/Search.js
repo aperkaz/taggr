@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import styled from "styled-components";
@@ -35,7 +35,7 @@ const Search = ({
 
   return isTaskOngoing ? (
     <FlexWrapper>
-      <video src={robotVideo} height="100px" autoPlay loop></video>
+      <video src={robotVideo} height="100px"></video>
       <Progress>
         <Typography
           variant="subtitle1"
@@ -55,7 +55,7 @@ const Search = ({
           %{taskPercentage}
         </Typography>
       </Progress>
-      <video src={robotVideo} height="100px" autoPlay loop></video>
+      <video src={robotVideo} height="100px"></video>
     </FlexWrapper>
   ) : (
     <div style={{ padding: "20px 0" }}>
@@ -120,8 +120,9 @@ Search.PropTypes = {
   onPressReset: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({ task: state.task });
+// const mapStateToProps = (state) => ({ task: state.task });
 
-export default connect(mapStateToProps)(Search);
+// TODONOW: does not need to be connected here
+// export default connect(mapStateToProps)(Search);
 
-// export default Search;
+export default Search;

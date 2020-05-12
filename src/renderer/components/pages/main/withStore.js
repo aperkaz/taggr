@@ -12,9 +12,13 @@ const withStore = () => {
   };
   const onInputChange = (v) => {
     console.log("input changed", v);
+    // TODONOW:
   };
   const onPressReset = () => {
     console.log("reset pressed");
+
+    dispatch(setActiveRoute(CONSTANTS.ROUTES.START_PAGE));
+    // TODONOW: clean up store, call backend. The backend should trigger the actions to clean up
   };
 
   return (
@@ -23,6 +27,7 @@ const withStore = () => {
         onSettingsClick,
         onInputChange,
         onPressReset,
+        task: useSelector((s) => s.task),
         tags: useSelector((s) => s.tags),
         images: useSelector((s) => s.images),
       }}

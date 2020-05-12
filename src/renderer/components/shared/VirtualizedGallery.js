@@ -119,7 +119,7 @@ VirtualizedGallery.PropTypes = {
   ),
 };
 
-export default VirtualizedGallery;
+export default React.memo(VirtualizedGallery);
 
 // TODO: future feature: image menu: https://github.com/aperkaz/taggr/blob/add-react/src/components/DashboardImageGallery.js
 // TODO: update: lazy load images in carousel https://github.com/Aljullu/react-lazy-load-image-component

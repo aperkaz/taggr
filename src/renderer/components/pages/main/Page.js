@@ -16,6 +16,7 @@ const Wrapper = styled.div`
 
 const MainPage = ({
   onSettingsClick,
+  task,
   onInputChange,
   onPressReset,
   tags,
@@ -24,6 +25,7 @@ const MainPage = ({
   <Wrapper>
     <Header onSettingsClick={onSettingsClick} />
     <Search
+      task={task}
       onInputChange={onInputChange}
       onPressReset={onPressReset}
       tagCountList={tags}
