@@ -13,19 +13,6 @@ export const setupCrashAnalyticsInProd = () => {
 };
 
 /**
- * Open all links within the renderer process with the client's external browser
- */
-export const setupLinkRoutingToExternalBrowser = () => {
-  let shell = require("electron").shell;
-  document.addEventListener("click", function (event) {
-    if (event.target.tagName === "A" && event.target.href.startsWith("http")) {
-      event.preventDefault();
-      shell.openExternal(event.target.href);
-    }
-  });
-};
-
-/**
  * Add overlay with FPS count in dev environment
  */
 export const setupFpsOverlayInDev = () => {

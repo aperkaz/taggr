@@ -40,12 +40,16 @@ const UnderTitle = styled.p`
   font-size: 1.75rem;
 `;
 
-const Footer = styled.a`
+const Footer = styled.div`
   font-family: Open Sans;
   margin-bottom: 0.5rem;
   color: white;
   font-weight: 600;
   text-decoration: none;
+
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const StartPage = ({ onSelectRootFolderPath }) => (
@@ -82,7 +86,12 @@ const StartPage = ({ onSelectRootFolderPath }) => (
         </Button>
       </Main>
 
-      <Footer href="https://taggr.ai">
+      <Footer
+        onClick={() => {
+          const { shell } = require("electron");
+          shell.openExternal("https://taggr.ai");
+        }}
+      >
         <Typography
           variant="h6"
           style={{

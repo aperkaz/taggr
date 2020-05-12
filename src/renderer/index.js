@@ -8,13 +8,11 @@ import App from "./components/App";
 import {
   setupFpsOverlayInDev,
   setupCrashAnalyticsInProd,
-  setupLinkRoutingToExternalBrowser,
 } from "./components/utils";
 import "./statics/index.css";
 
 setupFpsOverlayInDev();
 setupCrashAnalyticsInProd();
-setupLinkRoutingToExternalBrowser();
 
 trackEventInProd("User Interaction", "App opened");
 

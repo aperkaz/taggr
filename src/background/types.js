@@ -8,5 +8,21 @@
  * @typedef {Object} appStoreType Reactive store of backend relevant data.
  * @property {string} projectRootFolderPath Path to the current root folder (project).
  * @property {Object} imageHashMap Map of image information, by image hash (from path).
+ *
  */
 const imageHashMap = { hash1: { path: "path1", tags: ["t1", "t2"] } };
+
+/**
+ * @type {messageType} message
+ */
+/**
+ * @typedef {Object} messageType Message to pass over IPC between windows.
+ * @property {number=} senderId id of the sennder process (rederer, background, main). Added by helpers.
+ * @property {string} type type of message action. Either redux action or background acitons.
+ * @property {Object} payload Object with the required data to perform the type action.
+ */
+const exampleMessage = {
+  senderId: 4,
+  type: "CREATE_PROJECT",
+  payload: "project/root",
+};

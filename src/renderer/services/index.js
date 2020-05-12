@@ -1,15 +1,8 @@
 import logger from "electron-timber";
 import IPC_CHANNELS from "../../shared/ipcChannels";
 const { ipcRenderer } = require("electron");
-const { getGlobal } = require("electron").remote;
 
 import store, { setImages } from "../store";
-
-// initialize global reference to backgroundWindow
-let backgroundWindow = getGlobal("backgroundWindow");
-if (!backgroundWindow) {
-  logger.error("backgroundWindow not found");
-}
 
 /**
  * Trigger project creation in background process through IPC channel: CREATE_PROJECT
@@ -18,26 +11,38 @@ if (!backgroundWindow) {
 export const createProject = (projectRootFolderPath) => {
   logger.log("service: createProject,", projectRootFolderPath);
 
-  backgroundWindow.webContents.send(
-    IPC_CHANNELS.CREATE_PROJECT,
-    projectRootFolderPath
-  );
+  sendToBackground({ type: "CREATE_PROJECT", payload: projectRootFolderPath });
 };
 
-ipcRenderer.on(IPC_CHANNELS.CREATE_PROJECT, (event, message) => {
-  logger.log(`IPC: ${IPC_CHANNELS.CREATE_PROJECT} | ${message}`);
+/**
+ * Send message to background process through IPC.
+ * @param {messageType} message
+ */
+const sendToBackground = (message) => {
+  const { getGlobal } = require("electron").remote;
+  const backgroundWindow = getGlobal("backgroundWindow");
+  let {
+    webContents: { id: rendererWindowId },
+  } = getGlobal("rendererWindow");
 
-  const type = message.type;
-  const payload = message.payload;
+  backgroundWindow.webContents.send(IPC_CHANNELS.MESSAGE_BUS, {
+    ...message,
+    senderId: rendererWindowId,
+  });
+};
 
-  switch (type) {
-    case setImages.type:
-      store.dispatch(setImages(payload));
-      break;
-    default:
+ipcRenderer.on(
+  IPC_CHANNELS.MESSAGE_BUS,
+  (event, { senderId, type, payload }) => {
+    logger.log(
+      `IPC: ${IPC_CHANNELS.MESSAGE_BUS} | from ${senderId} | type: ${type} | payload: ${payload}`
+    );
+
+    switch (type) {
+      case setImages.type:
+        store.dispatch(setImages(payload));
+        break;
+      default:
+    }
   }
-});
-
-ipcRenderer.on(IPC_CHANNELS.NOTIFICATIONS, (event, message) => {
-  logger.log(`IPC: ${IPC_CHANNELS.NOTIFICATIONS} | ${message}`);
-});
+);

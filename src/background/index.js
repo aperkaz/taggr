@@ -1,4 +1,5 @@
 const { getGlobal } = require("electron").remote;
+
 import { ipcRenderer } from "electron";
 import { loadModel, classifyImage } from "./features/tfImageClassification";
 import {
@@ -19,61 +20,77 @@ if (!rendererWindow) {
 }
 
 // TODONOW: refactor and simplify. /features folder -> createProject(). Or extract store helper methods
-ipcRenderer.on(
-  IPC_CHANNELS.CREATE_PROJECT,
-  async (event, projectRootFolderPath) => {
-    backgroundLogger.log(
-      `IPC: ${IPC_CHANNELS.CREATE_PROJECT} | ${projectRootFolderPath}`
-    );
+ipcRenderer.on(IPC_CHANNELS.MESSAGE_BUS, async (event, message) => {
+  const { senderId, type, payload } = message;
 
-    store.projectRootFolderPath = projectRootFolderPath;
+  backgroundLogger.log(
+    `IPC: ${IPC_CHANNELS.MESSAGE_BUS} | from ${senderId} | type: ${type} | payload: ${payload}`
+  );
 
-    let imagePathsToProcess = await recursivelyFindImages(
-      projectRootFolderPath
-    );
+  // TODONOW: add switch based on the action types: CREATE_PROJECT,
 
-    // generate data structure for all images
-    imagePathsToProcess.forEach((imagePath) => {
-      const hash = generateMD5Hash(imagePath);
-      store.imageHashMap[hash] = { path: imagePath, tags: null };
-    });
-    rendererWindow.webContents.send(IPC_CHANNELS.CREATE_PROJECT, {
-      type: setImages.type,
-      payload: Object.keys(store.imageHashMap).map((key) => ({
-        hash: key,
-        tags: store.imageHashMap[key].tags,
-        path: normalizeImageUrl(store.imageHashMap[key].path),
-      })),
-    });
+  store.projectRootFolderPath = payload;
 
-    // compute tags for all images in the store
-    let totalImagesToTag = imagePathsToProcess.length;
-    let imagesTagged = 0;
+  let imagePathsToProcess = await recursivelyFindImages(payload);
 
-    console.time("processImages");
-    while (imagePathsToProcess.length > 0) {
-      const imagePath = imagePathsToProcess.pop();
+  // generate data structure for all images
+  imagePathsToProcess.forEach((imagePath) => {
+    const hash = generateMD5Hash(imagePath);
+    store.imageHashMap[hash] = { path: imagePath, tags: null };
+  });
 
-      const hash = generateMD5Hash(imagePath);
-      const imageData = await generateImageData(imagePath);
-      const tags = await classifyImage(imageData);
+  sendToRenderer({
+    type: setImages.type,
+    payload: Object.keys(store.imageHashMap).map((key) => ({
+      hash: key,
+      tags: store.imageHashMap[key].tags,
+      path: normalizeImageUrl(store.imageHashMap[key].path),
+    })),
+  });
 
-      store.imageHashMap[hash] = {
-        ...store.imageHashMap[hash],
-        tags: tags ? tags : [],
-      };
+  // compute tags for all images in the store
+  let totalImagesToTag = imagePathsToProcess.length;
+  let imagesTagged = 0;
 
-      imagesTagged++;
-      console.log(`Processing: ${imagesTagged} / ${totalImagesToTag}`);
-    }
-    console.timeEnd("processImages");
+  console.time("processImages");
+  while (imagePathsToProcess.length > 0) {
+    const imagePath = imagePathsToProcess.pop();
 
-    rendererWindow.webContents.send(
-      IPC_CHANNELS.CREATE_PROJECT,
-      `Project created successsfully, with ${totalImagesToTag} images`
-    );
+    const hash = generateMD5Hash(imagePath);
+    const imageData = await generateImageData(imagePath);
+    const tags = await classifyImage(imageData);
+
+    store.imageHashMap[hash] = {
+      ...store.imageHashMap[hash],
+      tags: tags ? tags : [],
+    };
+
+    imagesTagged++;
+    console.log(`Processing: ${imagesTagged} / ${totalImagesToTag}`);
   }
-);
+  console.timeEnd("processImages");
+
+  sendToRenderer({
+    type: "",
+    payload: `Project created successsfully, with ${totalImagesToTag} images`,
+  });
+});
+
+/**
+ * Send {senderId: X, type: ACTION.TYPE, payload: {}} to renderer process
+ * @param {messageType} message
+ */
+const sendToRenderer = (message) => {
+  const rendererWindow = getGlobal("rendererWindow");
+  let {
+    webContents: { id: backgroundWindowId },
+  } = getGlobal("backgroundWindow");
+
+  rendererWindow.webContents.send(IPC_CHANNELS.MESSAGE_BUS, {
+    ...message,
+    senderId: backgroundWindowId,
+  });
+};
 
 // TODONOW: extract to utils/helpers
 const normalizeImageUrl = (imagePath) => {

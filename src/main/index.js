@@ -63,11 +63,11 @@ function createRendererWindow() {
   // Remove menu
   // rendererWindow.removeMenu();
 
+  // Open the DevTools.
+  window.webContents.openDevTools();
+
   if (isDev) {
     window.setPosition(1200, 0);
-
-    // Open the DevTools.
-    window.webContents.openDevTools();
 
     // Add react dev tools https://www.electronjs.org/docs/tutorial/devtools-extension
     const path = require("path");
@@ -91,6 +91,8 @@ function createRendererWindow() {
 
     return window;
   }
+
+  return window;
 }
 
 function createBackgroundWindow() {
@@ -102,7 +104,7 @@ function createBackgroundWindow() {
   };
 
   const prodSettings = {
-    show: false,
+    // show: false,
     webPreferences: {
       nodeIntegration: true,
       webSecurity: false,
@@ -113,9 +115,13 @@ function createBackgroundWindow() {
 
   window.loadURL(HIDDEN_WINDOW_WEBPACK_ENTRY);
 
+  // Open the DevTools.
+  window.webContents.openDevTools();
+
   if (isDev) {
-    // Open the DevTools.
-    window.webContents.openDevTools();
+    // TODO: pre-release: remove dev tools and menu from all non-dev builds
+    // // Open the DevTools.
+    // window.webContents.openDevTools();
   }
 
   // Reset reference on close
