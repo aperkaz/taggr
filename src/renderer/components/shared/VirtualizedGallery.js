@@ -62,6 +62,8 @@ const Grid = ({ size: { height, width }, imageList, onCellClick }) => {
   if (!imageList.length)
     return <div>Sorry, no results. Add more pics into the root folder X.</div>;
 
+  console.log("gallery repainted");
+
   return (
     <FixedSizeGrid
       className="Grid"

@@ -10,7 +10,7 @@ const stateSlice = createSlice({
     tags: [], // TODONOW: populate from backend
     task: {
       isOngoing: false,
-      name: "Be patient, the robots are analysing your memories!",
+      name: "",
       percentage: 0,
     },
   },
@@ -24,7 +24,7 @@ const stateSlice = createSlice({
       return state;
     },
     setTask: (state, action) => {
-      state.task = action.payload;
+      state.task = { ...state.task, ...action.payload };
       return state;
     },
     // non-reduced actions, for service layer interaction visibility
@@ -32,7 +32,7 @@ const stateSlice = createSlice({
   },
 });
 
-export const { setActiveRoute, setImages } = stateSlice.actions;
+export const { setActiveRoute, setImages, setTask } = stateSlice.actions;
 
 // Actions with side effects (calls to the service layer)
 export const serviceCreateProject = (projectRootFolderPath) => {

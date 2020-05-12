@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import TextField from "@material-ui/core/TextField";
@@ -6,7 +7,7 @@ import Button from "@material-ui/core/Button";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Typography from "@material-ui/core/Typography";
 import TagCountDisplay from "./TagCountDisplay";
-import robotGif from "../../statics/robot.gif"; // https://dribbble.com/shots/5012092-Mr-Robot
+import robotVideo from "../../statics/robot.mp4"; // https://dribbble.com/shots/5012092-Mr-Robot
 
 const FlexWrapper = styled.div`
   display: flex;
@@ -34,7 +35,7 @@ const Search = ({
 
   return isTaskOngoing ? (
     <FlexWrapper>
-      <img src={robotGif} height="100px" />
+      <video src={robotVideo} height="100px" autoPlay loop></video>
       <Progress>
         <Typography
           variant="subtitle1"
@@ -54,7 +55,7 @@ const Search = ({
           %{taskPercentage}
         </Typography>
       </Progress>
-      <img src={robotGif} height="100px" />
+      <video src={robotVideo} height="100px" autoPlay loop></video>
     </FlexWrapper>
   ) : (
     <div style={{ padding: "20px 0" }}>
@@ -119,4 +120,8 @@ Search.PropTypes = {
   onPressReset: PropTypes.func.isRequired,
 };
 
-export default Search;
+const mapStateToProps = (state) => ({ task: state.task });
+
+export default connect(mapStateToProps)(Search);
+
+// export default Search;

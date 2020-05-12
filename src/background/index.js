@@ -1,5 +1,6 @@
 const { getGlobal } = require("electron").remote;
 
+import * as Comlink from "comlink";
 import { ipcRenderer } from "electron";
 import { loadModel, classifyImage } from "./features/tfImageClassification";
 import {
@@ -8,18 +9,22 @@ import {
   generateMD5Hash,
 } from "./utils";
 import store from "./store";
-import { setImages } from "../renderer/store";
+import { setImages, setTask } from "../renderer/store";
 import IPC_CHANNELS from "../shared/ipcChannels";
+import ImageTaggingWorker from "./features/imageTagging.worker";
 
 const backgroundLogger = getGlobal("backgroundLogger");
 
-// get global reference to rendererWindow, for IPC communication
-const rendererWindow = getGlobal("rendererWindow");
-if (!rendererWindow) {
-  backgroundLogger.error("rendererWindow not found");
-}
+let worker, imageTaggingWorker;
 
-// TODONOW: refactor and simplify. /features folder -> createProject(). Or extract store helper methods
+// (async () => {
+//   const MyClass = Comlink.wrap(new ImageTaggingWorker());
+//   worker = await new MyClass();
+//   await worker.init();
+// })();
+
+// TODO: feature: add switch based on the action types: CREATE_PROJECT,
+// TODO: improve: refactor and simplify. /features folder -> createProject(). Or extract store helper methods
 ipcRenderer.on(IPC_CHANNELS.MESSAGE_BUS, async (event, message) => {
   const { senderId, type, payload } = message;
 
@@ -27,10 +32,18 @@ ipcRenderer.on(IPC_CHANNELS.MESSAGE_BUS, async (event, message) => {
     `IPC: ${IPC_CHANNELS.MESSAGE_BUS} | from ${senderId} | type: ${type} | payload: ${payload}`
   );
 
-  // TODONOW: add switch based on the action types: CREATE_PROJECT,
+  // initialize task visibility in rederer
+  sendToRenderer({
+    type: setTask.type,
+    payload: {
+      isOngoing: true,
+      name: "Be patient, the robots are analysing your memories!",
+      percentage: 0,
+    },
+  });
 
+  // find images in project folder
   store.projectRootFolderPath = payload;
-
   let imagePathsToProcess = await recursivelyFindImages(payload);
 
   // generate data structure for all images
@@ -53,11 +66,16 @@ ipcRenderer.on(IPC_CHANNELS.MESSAGE_BUS, async (event, message) => {
   let imagesTagged = 0;
 
   console.time("processImages");
+
+  // const net = getModel();
+
   while (imagePathsToProcess.length > 0) {
     const imagePath = imagePathsToProcess.pop();
 
     const hash = generateMD5Hash(imagePath);
     const imageData = await generateImageData(imagePath);
+
+    // const tags = await worker.process(imageData);
     const tags = await classifyImage(imageData);
 
     store.imageHashMap[hash] = {
@@ -67,12 +85,23 @@ ipcRenderer.on(IPC_CHANNELS.MESSAGE_BUS, async (event, message) => {
 
     imagesTagged++;
     console.log(`Processing: ${imagesTagged} / ${totalImagesToTag}`);
+
+    // update task status
+    sendToRenderer({
+      type: setTask.type,
+      payload: {
+        percentage: Math.floor((imagesTagged * 100) / totalImagesToTag),
+      },
+    });
   }
   console.timeEnd("processImages");
 
+  // end task in renderer
   sendToRenderer({
-    type: "",
-    payload: `Project created successsfully, with ${totalImagesToTag} images`,
+    type: setTask.type,
+    payload: {
+      isOngoing: false,
+    },
   });
 });
 

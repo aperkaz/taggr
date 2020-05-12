@@ -16,7 +16,6 @@ const Wrapper = styled.div`
 
 const MainPage = ({
   onSettingsClick,
-  task,
   onInputChange,
   onPressReset,
   tags,
@@ -25,7 +24,6 @@ const MainPage = ({
   <Wrapper>
     <Header onSettingsClick={onSettingsClick} />
     <Search
-      task={task}
       onInputChange={onInputChange}
       onPressReset={onPressReset}
       tagCountList={tags}
@@ -33,6 +31,14 @@ const MainPage = ({
     <Gallery imageList={images} />
   </Wrapper>
 );
+
+MainPage.defaultProps = {
+  task: {
+    isOngoing: false,
+    name: "",
+    percentage: 0,
+  },
+};
 
 MainPage.PropTypes = {
   onSettingsClick: PropTypes.func.isRequired,

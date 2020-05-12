@@ -1,8 +1,8 @@
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import MainPage from "./Page";
 import { setActiveRoute } from "../../../store";
 import CONSTANTS from "../../../store/constants";
-// import withStore from "../start/withStore";
 
 const withStore = () => {
   const dispatch = useDispatch();
@@ -23,7 +23,6 @@ const withStore = () => {
         onSettingsClick,
         onInputChange,
         onPressReset,
-        task: useSelector((s) => s.task),
         tags: useSelector((s) => s.tags),
         images: useSelector((s) => s.images),
       }}

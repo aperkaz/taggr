@@ -2,7 +2,7 @@ import logger from "electron-timber";
 import IPC_CHANNELS from "../../shared/ipcChannels";
 const { ipcRenderer } = require("electron");
 
-import store, { setImages } from "../store";
+import store, { setImages, setTask } from "../store";
 
 /**
  * Trigger project creation in background process through IPC channel: CREATE_PROJECT
@@ -35,12 +35,15 @@ ipcRenderer.on(
   IPC_CHANNELS.MESSAGE_BUS,
   (event, { senderId, type, payload }) => {
     logger.log(
-      `IPC: ${IPC_CHANNELS.MESSAGE_BUS} | from ${senderId} | type: ${type} | payload: ${payload}`
+      `IPC: ${IPC_CHANNELS.MESSAGE_BUS} | from ${senderId} | type: ${type}`
     );
 
     switch (type) {
       case setImages.type:
         store.dispatch(setImages(payload));
+        break;
+      case setTask.type:
+        store.dispatch(setTask(payload));
         break;
       default:
     }

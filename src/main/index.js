@@ -39,6 +39,7 @@ function createRendererWindow() {
       nodeIntegration: true,
       nodeIntegrationInWorker: true,
       webSecurity: false,
+      backgroundThrottling: false, // TODONOW: check
     },
   };
 

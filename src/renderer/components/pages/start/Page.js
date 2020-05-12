@@ -102,7 +102,7 @@ const StartPage = ({ onSelectRootFolderPath, onSelectLogo }) => (
   </Wrapper>
 );
 
-StartPage.PropTypes = {
+StartPage.propTypes = {
   onSelectRootFolderPath: PropTypes.func,
   onSelectLogo: PropTypes.func,
 };

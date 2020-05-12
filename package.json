@@ -40,7 +40,10 @@
         {
           "name": "@electron-forge/maker-deb",
           "config": {
-            "categories": ["Graphics", "Photography"],
+            "categories": [
+              "Graphics",
+              "Photography"
+            ],
             "description": "Rediscover your memories while keeping your privacy.",
             "genericName": "Enhanced Gallery",
             "homepage": "https://taggr.ai/",
