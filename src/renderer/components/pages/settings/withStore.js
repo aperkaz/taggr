@@ -7,11 +7,6 @@ import SettingsPage from "./Page";
 const withStore = () => {
   const dispatch = useDispatch();
 
-  const onSelectRootFolderPath = async () => {
-    // TODO: example
-    dispatch(setActiveRoute(CONSTANTS.ROUTES.DASHBOARD_PAGE));
-  };
-
   const onSelectReset = () => {
     // TODONOW: add stop signal to ongoing flows!!!!!
     dispatch(setActiveRoute(CONSTANTS.ROUTES.START_PAGE));
@@ -24,7 +19,7 @@ const withStore = () => {
 
   const onSelectSupport = () => {
     const { shell } = require("electron");
-    shell.openExternal("https://taggr.ai");
+    shell.openExternal("https://taggr.ai/support.html");
   };
 
   return (
