@@ -3,7 +3,7 @@ import { SizeMe } from "react-sizeme";
 import PropTypes from "prop-types";
 import { FixedSizeGrid } from "react-window"; // Virtualize list for performance https://github.com/developerdizzle/react-virtual-list
 import Carousel, { Modal, ModalGateway } from "react-images";
-import ImageTile from "./ImageTile";
+import ImageTile from "../molecules/ImageTile";
 
 const GUTTER = 5;
 const ELEMENTS_PER_COLLUMN = 5;

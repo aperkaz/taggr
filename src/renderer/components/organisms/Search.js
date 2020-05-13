@@ -1,13 +1,12 @@
-import React, { useState, useMemo } from "react";
-import { connect } from "react-redux";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Typography from "@material-ui/core/Typography";
-import TagCountDisplay from "./TagCountDisplay";
-import robotVideo from "../../statics/robot.mp4"; // https://dribbble.com/shots/5012092-Mr-Robot
+import TagCountDisplay from "../molecules/TagCountDisplay";
+import robotImage from "../../statics/robot.jpg"; // https://dribbble.com/shots/5012092-Mr-Robot
 
 const FlexWrapper = styled.div`
   display: flex;
@@ -35,7 +34,7 @@ const Search = ({
 
   return isTaskOngoing ? (
     <FlexWrapper>
-      <video src={robotVideo} height="100px"></video>
+      <img src={robotImage} height="100px" />
       <Progress>
         <Typography
           variant="subtitle1"
@@ -55,7 +54,7 @@ const Search = ({
           %{taskPercentage}
         </Typography>
       </Progress>
-      <video src={robotVideo} height="100px"></video>
+      <img src={robotImage} height="100px" />
     </FlexWrapper>
   ) : (
     <div style={{ padding: "20px 0" }}>

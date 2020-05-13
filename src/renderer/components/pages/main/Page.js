@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import Header from "../../shared/Header";
-import Search from "../../shared/Search";
-import Gallery from "../../shared/VirtualizedGallery";
+import Header from "../../organisms/Header";
+import Search from "../../organisms/Search";
+import Gallery from "../../organisms/VirtualizedGallery";
 
 // TODO: feature: https://material-ui.com/components/tabs/#tabs
 

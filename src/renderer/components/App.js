@@ -2,11 +2,10 @@ import React from "react";
 import { hot, setConfig } from "react-hot-loader";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import debounce from "lodash.debounce";
 
 import StartPage from "./pages/start";
 import DashboardPage from "./pages/main";
-import UpdateModal from "./shared/UpdateModal";
+import UpdateModal from "./molecules/UpdateModal";
 import CONSTANTS from "../store/constants";
 
 const Wrapper = styled.div`
@@ -34,27 +33,6 @@ const renderRoute = (activeRoute) => {
       return <DashboardPage />;
   }
 };
-
-/**
- * 
-        // filteredImageList={uiStore.filteredImageList}
-        // tagProcessingStatus={uiStore.tagProcessingStatus}
-        // tagCountList={uiStore.tagCountList}
-        // onInputChange={debounce(
-        //   (payload) =>
-        //     triggerAction({
-        //       name: ACTIONS.FILTER_RESULTS_BY_TAG,
-        //       payload,
-        //     }),
-        //   300
-        // )}
-        // onPressReset={async () => {
-        //   triggerAction({
-        //     name: ACTIONS.SET_UI_ROUTE,
-        //     payload: CONSTANTS.ROUTES.START_PAGE,
-        //   });
-        // }}}
-        */
 
 // redux bindings
 const mapStateToProps = (state) => ({ activeRoute: state.activeRoute });

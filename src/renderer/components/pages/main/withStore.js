@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import MainPage from "./Page";
-import { setActiveRoute } from "../../../store";
+import { setActiveRoute, resetState } from "../../../store";
 import CONSTANTS from "../../../store/constants";
 
 const withStore = () => {
@@ -18,7 +18,9 @@ const withStore = () => {
     console.log("reset pressed");
 
     dispatch(setActiveRoute(CONSTANTS.ROUTES.START_PAGE));
-    // TODONOW: clean up store, call backend. The backend should trigger the actions to clean up
+    dispatch(resetState());
+
+    // TODONOW: clean backend too. IPC message, with  BE action
   };
 
   return (

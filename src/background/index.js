@@ -7,7 +7,7 @@ import {
   generateMD5Hash,
 } from "./utils";
 import store from "./store";
-import { setImages, setTask } from "../renderer/store";
+import { setImages, setTask, setTags } from "../renderer/store";
 import IPC_CHANNELS from "../shared/ipcChannels";
 import throttle from "lodash.throttle";
 
@@ -46,7 +46,7 @@ ipcRenderer.on(IPC_CHANNELS.MESSAGE_BUS, async (event, message) => {
     type: setImages.type,
     payload: Object.keys(store.imageHashMap).map((key) => ({
       hash: key,
-      tags: store.imageHashMap[key].tags,
+      tags: null,
       path: normalizeImageUrl(store.imageHashMap[key].path),
     })),
   });
@@ -74,11 +74,19 @@ ipcRenderer.on(IPC_CHANNELS.MESSAGE_BUS, async (event, message) => {
     console.log(`Processing: ${imagesTagged} / ${totalImagesToTag}`);
 
     // update task status
-    debouncedUpdateStatus(setTask.type, {
+    updateTaskStatus(setTask.type, {
       percentage: Math.floor((imagesTagged * 100) / totalImagesToTag),
     });
   }
   console.timeEnd("processImages");
+
+  // calculate top 20 tags
+  const topTags = await pickTopTags(store.imageHashMap, 20);
+  // send tags to renderer
+  sendToRenderer({
+    type: setTags.type,
+    payload: await pickTopTags(store.imageHashMap, 20),
+  });
 
   // end task in renderer
   sendToRenderer({
@@ -89,7 +97,7 @@ ipcRenderer.on(IPC_CHANNELS.MESSAGE_BUS, async (event, message) => {
   });
 });
 
-const debouncedUpdateStatus = throttle((type, payload) => {
+const updateTaskStatus = throttle((type, payload) => {
   sendToRenderer({
     type,
     payload,
@@ -121,6 +129,64 @@ const normalizeImageUrl = (imagePath) => {
   return normalizedImagePath.startsWith("http")
     ? normalizedImagePath
     : `file:///${normalizedImagePath}`;
+};
+
+/**
+ * Pick top N tags from existing tag collection
+ *
+ * @param {Object} imageHashMap
+ * @param {number} maxNumberOfTags
+ * @returns object list, as [{name: X, count: Y}]
+ */
+const pickTopTags = async (imageHashMap, maxNumberOfTags) => {
+  let tagCountMap = {};
+
+  // iterate over all the images and return the ones with tag matches
+  Object.keys(imageHashMap).forEach((key) => {
+    const tags = imageHashMap[key].tags;
+
+    // per eash tag, create count map
+    tags.forEach((tag) => {
+      if (!tagCountMap[tag]) {
+        tagCountMap[tag] = { name: tag, count: 1 };
+      } else {
+        tagCountMap[tag].count++;
+      }
+    });
+  });
+
+  // flatten and order the count map
+  const results = [];
+  Object.keys(tagCountMap).forEach((key) => {
+    const tagCountPair = tagCountMap[key];
+    addOrderedDescendentByCount(results, tagCountPair);
+  });
+
+  return results.slice(0, maxNumberOfTags);
+};
+
+/**
+ *
+ * @param {Object[]} results
+ * @param {TagCountPairType} tagCountPair
+ * @typedef {Object} TagCountPairType
+ * @property {string} name tag name
+ * @property {number} count count of that tag in project
+ */
+const addOrderedDescendentByCount = (results, tagCountPair) => {
+  let found = false;
+
+  for (let i = 0; i < results.length; i++) {
+    if (tagCountPair.count > results[i].count) {
+      results.splice(i, 0, tagCountPair);
+      found = true;
+      break;
+    }
+  }
+
+  if (!found) {
+    results.push(tagCountPair);
+  }
 };
 
 (async () => {
