@@ -11,7 +11,12 @@ const generateImageHashMap = (imagePathList) => {
 
   imagePathList.forEach((imagePath) => {
     const hash = generateMD5Hash(imagePath);
-    imageHashMap[hash] = { path: normalizeImageUrl(imagePath), tags: null };
+    imageHashMap[hash] = {
+      path: normalizeImageUrl(imagePath),
+      rawPath: imagePath,
+      tags: null,
+      location: null,
+    };
   });
 
   return imageHashMap;

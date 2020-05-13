@@ -10,7 +10,14 @@
  * @property {Object} imageHashMap Map of image information, by image hash (from path).
  *
  */
-const imageHashMap = { hash1: { path: "path1", tags: ["t1", "t2"] } };
+const imageHashMap = {
+  hash1: {
+    path: "file:///path1",
+    rawPath: "path1",
+    tags: ["t1", "t2"],
+    location: { lat: "", long: "" },
+  },
+};
 
 /**
  * @type {messageType} message
