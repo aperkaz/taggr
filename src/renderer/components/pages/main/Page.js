@@ -12,22 +12,10 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-const MainPage = ({
-  onSettingsClick,
-  task,
-  onInputChange,
-  onPressReset,
-  tags,
-  images,
-}) => (
+const MainPage = ({ onSettingsClick, task, onInputChange, tags, images }) => (
   <Wrapper>
     <Header onSettingsClick={onSettingsClick} />
-    <Search
-      task={task}
-      onInputChange={onInputChange}
-      onPressReset={onPressReset}
-      tagCountList={tags}
-    />
+    <Search task={task} onInputChange={onInputChange} tagCountList={tags} />
     <Gallery imageList={images} />
   </Wrapper>
 );
@@ -48,7 +36,6 @@ MainPage.PropTypes = {
     percentage: PropTypes.number,
   }),
   onInputChange: PropTypes.func.isRequired,
-  onPressReset: PropTypes.func.isRequired,
   tags: PropTypes.array.isRequired,
   images: PropTypes.arrayOf(
     PropTypes.shape({

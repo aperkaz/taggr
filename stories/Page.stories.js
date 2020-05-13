@@ -2,6 +2,7 @@ import React from "react";
 import { action } from "@storybook/addon-actions";
 import StartPageComp from "../src/renderer/components/pages/start/Page";
 import MainPageComp from "../src/renderer/components/pages/main/Page";
+import SettingsPageComp from "../src/renderer/components/pages/settings/Page";
 import FullHeight from "./utils";
 import imageList from "./mocks/imageList";
 
@@ -48,6 +49,16 @@ export const MainPageWithTask = () => (
       onPressReset={action("reset press")}
       tags={[{ name: "tag1", count: 10 }]}
       images={imageList}
+    />
+  </FullHeight>
+);
+
+export const SettingsPage = () => (
+  <FullHeight>
+    <SettingsPageComp
+      onSelectReset={action("trigger reset")}
+      onSelectSave={action("trigger save")}
+      onSelectSupport={action("trigger support")}
     />
   </FullHeight>
 );

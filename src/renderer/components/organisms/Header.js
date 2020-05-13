@@ -36,7 +36,7 @@ const Header = ({ onSettingsClick }) => (
     <Link
       href="#"
       color="inherit"
-      style={{ margin: "auto 0" }}
+      style={{ margin: "auto 0", textDecoration: "none" }}
       onClick={(e) => {
         e.preventDefault();
         onSettingsClick();

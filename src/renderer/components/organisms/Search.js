@@ -27,7 +27,6 @@ const Search = ({
     percentage: taskPercentage,
   },
   onInputChange,
-  onPressReset,
   tagCountList,
 }) => {
   const [inputValue, setInputValue] = useState("");
@@ -70,17 +69,17 @@ const Search = ({
             onInputChange(e.target.value);
           }}
         />
-        <Button
+        {/* <Button
           style={{
             fontFamily: "Open Sans",
             background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
             fontWeight: 600,
             color: "white",
           }}
-          onClick={onPressReset}
+          // onClick={onPressReset}
         >
-          Reset taggr
-        </Button>
+          TODONOW: surprise me
+        </Button> */}
       </FlexWrapper>
       <div style={{ marginTop: "8px" }}>
         <TagCountDisplay
@@ -116,12 +115,6 @@ Search.PropTypes = {
     })
   ).isRequired,
   onInputChange: PropTypes.func.isRequired,
-  onPressReset: PropTypes.func.isRequired,
 };
-
-// const mapStateToProps = (state) => ({ task: state.task });
-
-// TODONOW: does not need to be connected here
-// export default connect(mapStateToProps)(Search);
 
 export default Search;

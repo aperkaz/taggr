@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 import StartPage from "./pages/start";
 import DashboardPage from "./pages/main";
+import SettingsPage from "./pages/settings";
 import UpdateModal from "./molecules/UpdateModal";
 import CONSTANTS from "../store/constants";
 
@@ -31,6 +32,8 @@ const renderRoute = (activeRoute) => {
       return <StartPage />;
     case CONSTANTS.ROUTES.DASHBOARD_PAGE:
       return <DashboardPage />;
+    case CONSTANTS.ROUTES.SETTINGS_PAGE:
+      return <SettingsPage />;
   }
 };
 

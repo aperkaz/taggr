@@ -20,20 +20,23 @@ const generateTags = async (sourceImageHashMap) => {
   console.time("processImages");
 
   while (imageHasesToProcess.length > 0) {
-    const hash = imageHasesToProcess.pop();
+    let hash = imageHasesToProcess.pop();
 
-    // const hash = generateMD5Hash(hash);
-    const imageData = await generateImageData(sourceImageHashMap[hash].path);
+    let imageData = await generateImageData(sourceImageHashMap[hash].path);
 
-    const tags = await classifyImage(imageData);
+    let tags = await classifyImage(imageData);
 
     imageHashMap[hash] = {
       ...sourceImageHashMap[hash],
       tags: tags ? tags : [],
     };
 
-    imagesTagged++;
-    console.log(`Processing: ${imagesTagged} / ${totalImagesToTag}`);
+    console.log(`Processing: ${imagesTagged++} / ${totalImagesToTag}`);
+
+    // clean up
+    hash = null;
+    imageData = null;
+    tags = null;
 
     // update task status
     sendToRendererThrottled({

@@ -22,11 +22,9 @@ const TagCountDisplay = ({ tagCountList = [], onTagClick = (t) => null }) => {
   return tagCountList.length == 0 ? null : (
     <div className={classes.root}>
       <Typography
-        variant="h5"
-        style={{
-          fontFamily: "Open Sans",
-          marginRight: "1rem",
-        }}
+        variant="h6"
+        style={{ fontFamily: "Poppins, sans-serif", marginRight: "1rem" }}
+        gutterBottom
       >
         Popular tags:
       </Typography>

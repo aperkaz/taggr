@@ -95,7 +95,7 @@ const Cell = ({ columnIndex, rowIndex, style, data, onClick }) => {
     <div
       key={columnIndex + ":" + rowIndex}
       style={{ ...style, height, width }}
-      onClick={() => onClick(index)}
+      onClick={() => (data[index] ? onClick(index) : "")}
     >
       {data[index] ? (
         <ImageTile imageUrl={data[index] ? data[index].path : ""}></ImageTile>

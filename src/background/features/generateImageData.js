@@ -16,13 +16,19 @@ const generateImageData = async (imagePath) => {
   }
 
   let canvas = new OffscreenCanvas(img.width, img.height);
-  var ctx = canvas.getContext("2d");
+  let ctx = canvas.getContext("2d");
   // ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(img, 0, 0, img.width, img.height);
 
   const imageData = canvas
     .getContext("2d")
     .getImageData(0, 0, img.width, img.height);
+
+  // clean up
+  img = null;
+  canvas = null;
+  ctx = null;
+
   return imageData;
 };
 

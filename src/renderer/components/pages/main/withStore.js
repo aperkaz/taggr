@@ -13,7 +13,7 @@ const withStore = () => {
   const dispatch = useDispatch();
 
   const onSettingsClick = () => {
-    dispatch(setActiveRoute(CONSTANTS.ROUTES.SETTINGS));
+    dispatch(setActiveRoute(CONSTANTS.ROUTES.SETTINGS_PAGE));
   };
 
   const onInputChange = debounce((v) => {
@@ -22,17 +22,11 @@ const withStore = () => {
     serviceSearchImages(v);
   }, 200);
 
-  const onPressReset = () => {
-    dispatch(setActiveRoute(CONSTANTS.ROUTES.START_PAGE));
-    serviceDeleteProject();
-  };
-
   return (
     <MainPage
       {...{
         onSettingsClick,
         onInputChange,
-        onPressReset,
         task: useSelector((s) => s.task),
         tags: useSelector((s) => s.tags),
         images: useSelector((s) => s.images),
