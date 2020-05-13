@@ -19,7 +19,7 @@ const withStore = () => {
 
   const onSelectSupport = () => {
     const { shell } = require("electron");
-    shell.openExternal("https://taggr.ai/support.html");
+    shell.openExternal("https://taggr.ai/support");
   };
 
   return (
