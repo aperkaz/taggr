@@ -1,23 +1,20 @@
-import { resetState } from "../store";
+import { resetStore } from "../store";
 import { sendToRenderer } from "../services/utils";
+
+import { resetState } from "../../renderer/store";
 
 /**
  * Delete allt the information relevant to the project from the backend
  */
 const deleteProject = () => {
-  // flush store
-  resetState();
+  resetStore();
 
-  // TODONOW: notify the app state when cleaned up, update redux store
-  // update rederer state
-  // sendToRenderer({
-  // type: setImages.type,
-  // payload: Object.keys(store.imageHashMap).map((key) => ({
-  //   hash: key,
-  //   tags: null,
-  //   path: normalizeImageUrl(store.imageHashMap[key].path),
-  // })),
-  // });
+  sendToRenderer({
+    type: resetState.type,
+    payload: null,
+  });
 };
 
 export default deleteProject;
+
+// TODO: review the flow of actions. right now mished between service layer and ipc

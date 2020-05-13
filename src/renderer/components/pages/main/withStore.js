@@ -1,8 +1,13 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import MainPage from "./Page";
-import { setActiveRoute, resetState } from "../../../store";
+import {
+  setActiveRoute,
+  serviceDeleteProject,
+  serviceSearchImages,
+} from "../../../store";
 import CONSTANTS from "../../../store/constants";
+import debounce from "lodash.debounce";
 
 const withStore = () => {
   const dispatch = useDispatch();
@@ -10,17 +15,16 @@ const withStore = () => {
   const onSettingsClick = () => {
     dispatch(setActiveRoute(CONSTANTS.ROUTES.SETTINGS));
   };
-  const onInputChange = (v) => {
+
+  const onInputChange = debounce((v) => {
     console.log("input changed", v);
-    // TODONOW: call backend
-  };
+
+    serviceSearchImages(v);
+  }, 200);
+
   const onPressReset = () => {
-    console.log("reset pressed");
-
     dispatch(setActiveRoute(CONSTANTS.ROUTES.START_PAGE));
-    dispatch(resetState());
-
-    // TODONOW: clean backend too. IPC message, with  BE action
+    serviceDeleteProject();
   };
 
   return (

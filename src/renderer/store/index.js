@@ -1,5 +1,5 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
-import { createProject } from "../services";
+import { createProject, deleteProject, searchImages } from "../services";
 import CONSTANTS from "./constants";
 
 const initialState = {
@@ -30,9 +30,6 @@ const stateSlice = createSlice({
     setTags: (state, action) => {
       state.tags = action.payload;
     },
-
-    // non-reduced actions, for service layer interaction visibility
-    triggerCreateProject: (state) => state,
   },
 });
 
@@ -44,10 +41,17 @@ export const {
   setTags,
 } = stateSlice.actions;
 
-// Actions with side effects (calls to the service layer)
+// Actions with side effects (incl. calls to the service layer). The backend will trigger the actions.
 export const serviceCreateProject = (projectRootFolderPath) => {
-  store.dispatch(stateSlice.actions.triggerCreateProject());
   createProject(projectRootFolderPath);
+};
+
+export const serviceDeleteProject = () => {
+  deleteProject();
+};
+
+export const serviceSearchImages = (tagValue) => {
+  searchImages(tagValue);
 };
 
 const store = configureStore({ reducer: stateSlice.reducer });

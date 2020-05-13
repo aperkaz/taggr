@@ -9,10 +9,16 @@ const initialState = {
 /**
  * @type {appStoreType} appStore
  */
-let store = initialState;
+let store = { ...initialState };
 
 if (isDev) window["store"] = store;
 
-export const resetState = () => (store = initialState);
+export const resetStore = () => {
+  console.log("resetting store");
+  store = { ...initialState };
+  console.log(store);
+
+  if (isDev) window["store"] = store;
+};
 
 export default store;

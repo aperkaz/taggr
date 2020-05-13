@@ -1,10 +1,10 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
 import { withKnobs, text, boolean, number } from "@storybook/addon-knobs";
-import HeaderComp from "../src/renderer/components/shared/Header";
-import SearchComp from "../src/renderer/components/shared/Search";
-import VirtualizedGalleryComp from "../src/renderer/components/shared/VirtualizedGallery";
-import MapComp from "../src/renderer/components/shared/Map";
+import HeaderComp from "../src/renderer/components/organisms/Header";
+import SearchComp from "../src/renderer/components/organisms/Search";
+import VirtualizedGalleryComp from "../src/renderer/components/organisms/VirtualizedGallery";
+import MapComp from "../src/renderer/components/organisms/Map";
 import imageList from "./mocks/imageList";
 
 import FullHeight from "./utils";

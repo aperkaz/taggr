@@ -3,6 +3,7 @@ import IPC_CHANNELS from "../../shared/ipcChannels";
 import FLOWS from "../flows";
 import createProject from "../flows/createProject";
 import deleteProject from "../flows/deleteProject";
+import searchImages from "../flows/searchImages";
 import { backgroundLogger } from "../index";
 import "../types";
 
@@ -22,6 +23,9 @@ ipcRenderer.on(IPC_CHANNELS.MESSAGE_BUS, async (event, message) => {
       break;
     case FLOWS.DELETE_PROJECT:
       deleteProject();
+      break;
+    case FLOWS.SEARCH_IMAGES:
+      await searchImages(payload);
       break;
     default:
       console.log("background ACTION not found: ");

@@ -6,8 +6,6 @@ import Header from "../../organisms/Header";
 import Search from "../../organisms/Search";
 import Gallery from "../../organisms/VirtualizedGallery";
 
-// TODO: feature: https://material-ui.com/components/tabs/#tabs
-
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -60,3 +58,5 @@ MainPage.PropTypes = {
 };
 
 export default MainPage;
+
+// TODO: feature: https://material-ui.com/components/tabs/#tabs

@@ -1,4 +1,5 @@
 import generateMD5Hash from "./generateMD5Hash";
+import normalizeImageUrl from "./normalizeImageUrl";
 
 /**
  * Generate main data structure from image path list
@@ -10,7 +11,7 @@ const generateImageHashMap = (imagePathList) => {
 
   imagePathList.forEach((imagePath) => {
     const hash = generateMD5Hash(imagePath);
-    imageHashMap[hash] = { path: imagePath, tags: null };
+    imageHashMap[hash] = { path: normalizeImageUrl(imagePath), tags: null };
   });
 
   return imageHashMap;

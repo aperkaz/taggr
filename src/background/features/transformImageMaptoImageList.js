@@ -1,5 +1,3 @@
-import normalizeImageUrl from "./normalizeImageUrl";
-
 /**
  * Transfrom the imageHashMap to imageList
  *
@@ -10,8 +8,7 @@ function transformImageMaptoImageList(imageHashMap) {
   return Object.keys(imageHashMap).map((key) => ({
     hash: imageHashMap[key].hash,
     tags: imageHashMap[key].tags,
-    // TODO: improvement: normaly as the first step, recursivelyFindImages
-    path: normalizeImageUrl(imageHashMap[key].path),
+    path: imageHashMap[key].path,
   }));
 }
 

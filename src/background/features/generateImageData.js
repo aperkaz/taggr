@@ -37,8 +37,7 @@ async function loadImage(path) {
     const img = new Image();
     img.onerror = (err) => reject(err);
     img.onload = () => resolve(img);
-    // TODO: improvement: consider removing file:/// and adding it at the top level
-    img.src = `file:///${path}`;
+    img.src = path;
   });
 }
 
