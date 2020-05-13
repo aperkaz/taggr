@@ -3,15 +3,16 @@ import IPC_CHANNELS from "../../shared/ipcChannels";
 const { ipcRenderer } = require("electron");
 
 import store, { setImages, setTask, setTags } from "../store";
+import FLOWS from "../../background/flows";
 
 /**
  * Trigger project creation in background process through IPC channel: CREATE_PROJECT
- * @param {String} projectRootFolderPath
+ * @param {String} folderPath root folder path for the project
  */
-export const createProject = (projectRootFolderPath) => {
-  logger.log("service: createProject,", projectRootFolderPath);
+export const createProject = (folderPath) => {
+  logger.log("service: createProject,", folderPath);
 
-  sendToBackground({ type: "CREATE_PROJECT", payload: projectRootFolderPath });
+  sendToBackground({ type: FLOWS.CREATE_PROJECT, payload: folderPath });
 };
 
 /**

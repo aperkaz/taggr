@@ -1,5 +1,6 @@
 import store from "../store";
 
+// TODONOW: refactor to not have dependency to the store
 const filterImagesByTag = (tagSearchValue) => {
   const results = [];
 

@@ -1,0 +1,6 @@
+const FLOWS = {
+  CREATE_PROJECT: "CREATE_PROJECT",
+  DELETE_PROJECT: "DELETE_PROJECT",
+};
+
+export default FLOWS;

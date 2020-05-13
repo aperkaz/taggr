@@ -59,8 +59,9 @@ const Grid = ({ size: { height, width }, imageList, onCellClick }) => {
       ? gridHeight / ELEMENTS_PER_COLLUMN
       : 250;
 
-  if (!imageList.length)
-    return <div>Sorry, no results. Add more pics into the root folder X.</div>;
+  // TODO: improve: add loading spinner /image
+  // if (!imageList.length)
+  // return <div>Sorry, no results. Add more pics into the root folder X.</div>;
 
   console.log("gallery repainted");
 

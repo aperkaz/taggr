@@ -12,7 +12,7 @@ const withStore = () => {
   };
   const onInputChange = (v) => {
     console.log("input changed", v);
-    // TODONOW:
+    // TODONOW: call backend
   };
   const onPressReset = () => {
     console.log("reset pressed");

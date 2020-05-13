@@ -1,17 +1,16 @@
-import store from "../store";
-
 /**
  * Pick top N tags from existing tag collection
  *
+ * @param {Object} imageHashMap
  * @param {Number} maxNumberOfTags
  * @returns object list, as [{name: X, count: Y}]
  */
-export const pickTopTags = async (maxNumberOfTags) => {
+const getTopTags = async (imageHashMap, maxNumberOfTags) => {
   let tagCountMap = {};
 
   // iterate over all the images and return the ones with tag matches
-  Object.keys(store.imageHashMap).forEach((key) => {
-    const tags = store.imageHashMap[key].tags;
+  Object.keys(imageHashMap).forEach((key) => {
+    const tags = imageHashMap[key].tags;
 
     // per eash tag, create count map
     tags.forEach((tag) => {
@@ -56,3 +55,5 @@ const addOrderedDescendentByCount = (results, tagCountPair) => {
     results.push(tagCountPair);
   }
 };
+
+export default getTopTags;
