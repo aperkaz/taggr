@@ -16,6 +16,7 @@ The UI follow an unidirectional dataflow pattern with React and a reactive uiSto
 ## Future features
 
 TODO: Clean up notification code part
+TODO: add image manipulation: https://github.com/EyalAr/lwip#rotate
 TODO: replace gallery view, with lazy loading: https://github.com/xiaolin/react-image-gallery
 TODO: speeding up the classification: https://github.com/tensorflow/tfjs-examples/blob/master/mnist-node/data.js
 TODO: future-feature: timeline with pictures https://github.com/rmariuzzo/react-chronos

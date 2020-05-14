@@ -7,7 +7,6 @@ const PROBABILITY_THRESHOLD = 0.5;
 
 let net;
 
-// TODONOW; move model loading here
 export async function loadModel() {
   if (net) return;
 
