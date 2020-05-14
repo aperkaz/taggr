@@ -3,7 +3,13 @@ import IPC_CHANNELS from "../../shared/ipcChannels";
 const { ipcRenderer } = require("electron");
 import { sendToBackground } from "./utils";
 
-import store, { setImages, setTask, setTags, resetState } from "../store";
+import store, {
+  setImages,
+  setTask,
+  setTags,
+  resetState,
+  setImagesWithLocation,
+} from "../store";
 import FLOWS from "../../background/flows";
 
 /**
@@ -40,6 +46,9 @@ ipcRenderer.on(
     switch (type) {
       case setImages.type:
         store.dispatch(setImages(payload));
+        break;
+      case setImagesWithLocation.type:
+        store.dispatch(setImagesWithLocation(payload));
         break;
       case setTask.type:
         store.dispatch(setTask(payload));

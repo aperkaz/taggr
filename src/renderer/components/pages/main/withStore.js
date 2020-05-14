@@ -1,11 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import MainPage from "./Page";
-import {
-  setActiveRoute,
-  serviceDeleteProject,
-  serviceSearchImages,
-} from "../../../store";
+import { setActiveRoute, serviceSearchImages } from "../../../store";
 import CONSTANTS from "../../../store/constants";
 import debounce from "lodash.debounce";
 
@@ -30,6 +26,7 @@ const withStore = () => {
         task: useSelector((s) => s.task),
         tags: useSelector((s) => s.tags),
         images: useSelector((s) => s.images),
+        imagesWithLocation: useSelector((s) => s.imagesWithLocation),
       }}
     />
   );

@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
 
 const Wrapper = styled.div`
-  height: 40px;
+  min-height: 40px;
   padding: 0 1em;
 
   background: linear-gradient(

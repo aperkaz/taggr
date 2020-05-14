@@ -6,9 +6,7 @@
  */
 function transformImageMaptoImageList(imageHashMap) {
   return Object.keys(imageHashMap).map((key) => ({
-    hash: imageHashMap[key].hash,
-    tags: imageHashMap[key].tags,
-    path: imageHashMap[key].path,
+    ...imageHashMap[key],
   }));
 }
 

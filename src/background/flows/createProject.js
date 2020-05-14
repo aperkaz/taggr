@@ -1,16 +1,26 @@
-import { setImages, setTask, setTags } from "../../renderer/store";
+import {
+  setImages,
+  setImagesWithLocation,
+  setTask,
+  setTags,
+} from "../../renderer/store";
 import { sendToRenderer } from "../services/utils";
 import recursivelyFindImages from "../features/recursivelyFindImages";
 import generateImageHashMap from "../features/generateImageHashMap";
 import generateTags from "../features/generateTags";
-import generateLocations from "../features/generateLocations";
+import generateLocations, {
+  getImagesWihLocation,
+} from "../features/generateLocations";
 import transformImageMaptoImageList from "../features/transformImageMaptoImageList";
 import getTopTags from "../features/getTopTags";
 
-import store from "../store";
+import { setProjectRootFolderPath, setImageHashMap } from "../store";
 
 const createProject = async (projectRootFolderPath) => {
-  store.projectRootFolderPath = projectRootFolderPath;
+  // object that contains all the project information
+  let imageHashMap = {};
+
+  setProjectRootFolderPath(projectRootFolderPath);
 
   // notify finding images
   sendToRenderer({
@@ -26,12 +36,12 @@ const createProject = async (projectRootFolderPath) => {
     projectRootFolderPath
   );
 
-  store.imageHashMap = generateImageHashMap(imagePathsToProcess);
+  imageHashMap = generateImageHashMap(imagePathsToProcess);
 
-  // send image list to renderer
+  // send initial image list to renderer
   sendToRenderer({
     type: setImages.type,
-    payload: transformImageMaptoImageList(store.imageHashMap),
+    payload: transformImageMaptoImageList(imageHashMap),
   });
 
   // notify finding images
@@ -46,9 +56,15 @@ const createProject = async (projectRootFolderPath) => {
 
   // compute gps position for all images
   console.time("generateAllLocations");
-  store.imageHashMap = await generateLocations(store.imageHashMap);
+  imageHashMap = await generateLocations(imageHashMap);
   console.timeEnd("generateAllLocations");
   // console.log(store.imageHashMap);
+
+  // send image list to renderer
+  sendToRenderer({
+    type: setImagesWithLocation.type,
+    payload: getImagesWihLocation(imageHashMap),
+  });
 
   // notify for tag generation
   sendToRenderer({
@@ -61,15 +77,18 @@ const createProject = async (projectRootFolderPath) => {
   });
 
   // compute tags for all images
-  store.imageHashMap = await generateTags(store.imageHashMap);
+  imageHashMap = await generateTags(imageHashMap);
 
-  console.log(store.imageHashMap);
+  console.log("after tags");
+  console.log(imageHashMap);
 
   // calculate top 20 tags, send to renderer
   sendToRenderer({
     type: setTags.type,
-    payload: await getTopTags(store.imageHashMap, 20),
+    payload: await getTopTags(imageHashMap, 20),
   });
+
+  setImageHashMap(imageHashMap);
 
   // end task in renderer
   sendToRenderer({
@@ -77,6 +96,12 @@ const createProject = async (projectRootFolderPath) => {
     payload: {
       isOngoing: false,
     },
+  });
+
+  // send image list to renderer
+  sendToRenderer({
+    type: setImages.type,
+    payload: transformImageMaptoImageList(imageHashMap),
   });
 };
 

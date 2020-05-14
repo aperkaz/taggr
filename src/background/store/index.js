@@ -21,4 +21,12 @@ export const resetStore = () => {
   if (isDev) window["store"] = store;
 };
 
+export const setProjectRootFolderPath = (projectRootFolderPath) => {
+  store.projectRootFolderPath = projectRootFolderPath;
+};
+
+export const setImageHashMap = (imageHashMap) => {
+  store.imageHashMap = imageHashMap;
+};
+
 export default store;

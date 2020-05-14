@@ -20,14 +20,15 @@ export const Header = () => (
 
 export const Search = () => (
   <SearchComp
-    isTaskOngoing={boolean("isTaskOngoing", false)}
-    taskName={text(
-      "taskName",
-      "Be patient, the minions are working on your memories!"
-    )}
-    taskPercentage={number("taskPercentage", 50)}
+    task={{
+      isOngoing: boolean("isTaskOngoing", false),
+      name: text(
+        "taskName",
+        "Be patient, the minions are working on your memories!"
+      ),
+      percentage: number("taskPercentage", 50),
+    }}
     onInputChange={action("input change")}
-    onPressReset={action("press reset")}
     tagCountList={[
       { name: "tag1", count: 11 },
       { name: "tag2", count: 6 },
@@ -43,6 +44,9 @@ export const VirtualizedGallery = () => (
 
 export const Map = () => (
   <FullHeight>
-    <MapComp images={imageList} onImageSelect={action(`select image`)} />
+    <MapComp
+      imageList={imageList.filter((i) => i.location && i.location.lat)}
+      onImageSelect={action(`select image`)}
+    />
   </FullHeight>
 );

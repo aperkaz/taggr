@@ -33,7 +33,7 @@ const startApp = () => {
 
 function createRendererWindow() {
   const devSettings = {
-    width: 1460,
+    width: 1060,
     height: 1080,
     webPreferences: {
       nodeIntegration: true,

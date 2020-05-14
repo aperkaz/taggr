@@ -5,6 +5,7 @@ import CONSTANTS from "./constants";
 const initialState = {
   activeRoute: CONSTANTS.ROUTES.START_PAGE,
   images: [],
+  imagesWithLocation: [],
   tags: [],
   task: {
     isOngoing: false,
@@ -24,6 +25,9 @@ const stateSlice = createSlice({
     setImages: (state, action) => {
       state.images = action.payload;
     },
+    setImagesWithLocation: (state, action) => {
+      state.imagesWithLocation = action.payload;
+    },
     setTask: (state, action) => {
       state.task = { ...state.task, ...action.payload };
     },
@@ -37,6 +41,7 @@ export const {
   resetState,
   setActiveRoute,
   setImages,
+  setImagesWithLocation,
   setTask,
   setTags,
 } = stateSlice.actions;

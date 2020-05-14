@@ -114,4 +114,21 @@ const getImagesWithoutLocation = (imageHashMap) => {
   return imageHashListToProcess;
 };
 
+/**
+ * Get the images that have latitude
+ * @param {Object} imageHashMap
+ * @returns {string[]} list of image hashes without tags
+ */
+export const getImagesWihLocation = (imageHashMap) => {
+  let imagesWithLocation = [];
+  Object.keys(imageHashMap).forEach((key) => {
+    const image = imageHashMap[key];
+    if (image.location && image.location.lat) {
+      imagesWithLocation.push(image);
+    }
+  });
+
+  return imagesWithLocation;
+};
+
 export default generateLocations;
