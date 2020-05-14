@@ -10,19 +10,21 @@ import getTopTags from "../features/getTopTags";
 import store from "../store";
 
 const createProject = async (projectRootFolderPath) => {
-  // open task in renderer
+  store.projectRootFolderPath = projectRootFolderPath;
+
+  // notify finding images
   sendToRenderer({
     type: setTask.type,
     payload: {
       isOngoing: true,
-      name: "Be patient, the robots are analysing your memories!",
+      name: "Locating all the pictures!",
       percentage: 0,
     },
   });
 
-  store.projectRootFolderPath = projectRootFolderPath;
-
-  let imagePathsToProcess = await recursivelyFindImages(projectRootFolderPath);
+  const imagePathsToProcess = await recursivelyFindImages(
+    projectRootFolderPath
+  );
 
   store.imageHashMap = generateImageHashMap(imagePathsToProcess);
 
@@ -32,14 +34,31 @@ const createProject = async (projectRootFolderPath) => {
     payload: transformImageMaptoImageList(store.imageHashMap),
   });
 
-  console.log(store.imageHashMap);
+  // notify finding images
+  sendToRenderer({
+    type: setTask.type,
+    payload: {
+      isOngoing: true,
+      name: `The robots are extracting the gps data from ${imagePathsToProcess.length} images!`,
+      percentage: 0,
+    },
+  });
 
   // compute gps position for all images
   console.time("generateAllLocations");
-  // TODONOW: fix. read only jpeg files
-  // store.imageHashMap = await generateLocations(store.imageHashMap);
+  store.imageHashMap = await generateLocations(store.imageHashMap);
   console.timeEnd("generateAllLocations");
   // console.log(store.imageHashMap);
+
+  // notify for tag generation
+  sendToRenderer({
+    type: setTask.type,
+    payload: {
+      isOngoing: true,
+      name: `Be patient, the robots are analysing your ${imagePathsToProcess.length} memories!`,
+      percentage: 0,
+    },
+  });
 
   // compute tags for all images
   store.imageHashMap = await generateTags(store.imageHashMap);

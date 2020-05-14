@@ -5,7 +5,9 @@
  * @returns {Promise<ImageData>} loaded image
  */
 const generateImageData = async (imagePath) => {
+  console.time("loadImage");
   let img = await loadImage(imagePath);
+  console.timeEnd("loadImage");
 
   const MAX_HEIGHT = 224;
 

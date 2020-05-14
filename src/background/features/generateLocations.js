@@ -1,4 +1,7 @@
 import piexif from "piexifjs";
+import isImageOfType from "./isImageOfType";
+import { sendToRendererThrottled } from "../services/utils";
+import { setTask } from "../../renderer/store";
 // import fs from "fs";
 
 /**
@@ -8,32 +11,48 @@ import piexif from "piexifjs";
 const generateLocations = async (sourceImageHashMap) => {
   const fs = require("fs");
   const util = require("util");
-
   const readFile = util.promisify(fs.readFile);
 
-  const imageHashMap = {};
+  const imageHashMap = { ...sourceImageHashMap };
 
-  const imageHasesToProcess = getImagesWithoutLocation(sourceImageHashMap);
+  const imageHasesToProcess = getImagesWithoutLocation(imageHashMap);
+
+  const totalImagesToGeolocate = imageHasesToProcess.length;
+  let imagesLocated = 0;
 
   while (imageHasesToProcess.length > 0) {
-    let hash = imageHasesToProcess.pop();
+    imagesLocated++;
 
-    // TODONOW: read only JPEG files, not the rest!
+    sendToRendererThrottled({
+      type: setTask.type,
+      payload: {
+        percentage: Math.floor((imagesLocated * 100) / totalImagesToGeolocate),
+      },
+    });
 
-    let jpeg = await readFile(sourceImageHashMap[hash].rawPath);
+    const hash = imageHasesToProcess.pop();
+    const imagePath = imageHashMap[hash].rawPath;
 
-    // console.timeEnd("readFile");
+    // read only JPEG files, not the rest!
+    if (
+      !(isImageOfType(imagePath, "jpeg") || isImageOfType(imagePath, "jpg"))
+    ) {
+      continue;
+    }
 
-    // console.time("toString");
+    console.log(`Analyzing: ${imagePath}`);
+
+    let jpeg = await readFile(imageHashMap[hash].rawPath);
     let data = jpeg.toString("binary");
-    // console.timeEnd("toString");
 
-    // console.time("getLocation");
     const location = hasLatLong(data) ? getLatLong(data) : {};
-    // console.timeEnd("getLocation");
+
+    if (Object.keys(location).length > 0) {
+      console.log("geolocation found!: ", imagePath);
+    }
 
     imageHashMap[hash] = {
-      ...sourceImageHashMap[hash],
+      ...imageHashMap[hash],
       location: location ? location : {},
     };
   }
@@ -44,7 +63,20 @@ const generateLocations = async (sourceImageHashMap) => {
 const hasLatLong = (data) => {
   let exifObj = piexif.load(data);
 
-  return Object.keys(exifObj["GPS"]).length;
+  // if there is exif GPS object
+  if (Object.keys(exifObj["GPS"]).length) {
+    // if the exif GPS object has lat/long
+    if (
+      exifObj.GPS[piexif.GPSIFD.GPSLatitude] &&
+      exifObj.GPS[piexif.GPSIFD.GPSLatitude].length &&
+      exifObj.GPS[piexif.GPSIFD.GPSLongitude] &&
+      exifObj.GPS[piexif.GPSIFD.GPSLongitude].length
+    ) {
+      return true;
+    }
+  }
+
+  return false;
 };
 
 const getLatLong = (data) => {
@@ -66,7 +98,7 @@ const getLatLong = (data) => {
 };
 
 /**
- * Returns the images hashes of the images that dont have location
+ * Returns the JEPG, images hashes of the images that dont have location
  * @param {Object} imageHashMap
  * @returns {string[]} list of image hashes without tags
  */

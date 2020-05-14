@@ -22,9 +22,13 @@ const generateTags = async (sourceImageHashMap) => {
   while (imageHasesToProcess.length > 0) {
     let hash = imageHasesToProcess.pop();
 
+    // console.time("generateImageData");
     let imageData = await generateImageData(sourceImageHashMap[hash].path);
+    // console.timeEnd("generateImageData");
 
+    // console.time("classifyImage");
     let tags = await classifyImage(imageData);
+    // console.timeEnd("classifyImage");
 
     imageHashMap[hash] = {
       ...sourceImageHashMap[hash],
