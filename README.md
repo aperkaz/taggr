@@ -13,6 +13,9 @@ Main structure separated between UI and backend.
 The UI follow an unidirectional dataflow pattern with React and a reactive uiStore.
 
 
+## Notes 
+Sometimes windows build fails. Try to clean cache and delete package-lock as in: https://github.com/cncjs/cncjs/issues/172
+
 ## Future features
 
 - TODO: Clean up notification code part
