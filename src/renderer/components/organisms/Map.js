@@ -14,22 +14,8 @@ const Map = ({ imageList = [], onImageSelect = () => null }) => {
     longitude: -75.6903,
     zoom: 1,
   });
-  // const [selectedImage, setSelectedImage] = useState(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [imagePreview, setImagePreview] = useState(false);
-
-  // useEffect(() => {
-  //   const listener = (e) => {
-  //     if (e.key === "Escape") {
-  //       setSelectedIndex(0);
-  //     }
-  //   };
-  //   window.addEventListener("keydown", listener);
-
-  //   return () => {
-  //     window.removeEventListener("keydown", listener);
-  //   };
-  // }, []);
 
   return (
     <div style={{ height: "100%", width: "100%" }}>
@@ -49,6 +35,9 @@ const Map = ({ imageList = [], onImageSelect = () => null }) => {
             // TODONOW: replace with hash
             // key={image.hash}
             key={index}
+            // Given marker dimensions (H x W): 20 x 14 :https://material.io/resources/icons/?search=map&icon=room&style=baseline
+            offsetTop={-20}
+            offsetLeft={-7}
             latitude={image.location.lat}
             longitude={image.location.long}
           >
@@ -60,7 +49,7 @@ const Map = ({ imageList = [], onImageSelect = () => null }) => {
                 setSelectedIndex(index);
               }}
             >
-              <RoomIcon />
+              <RoomIcon fontSize="large" />
             </Link>
           </Marker>
         ))}
