@@ -41,9 +41,9 @@ const generateLocations = async (sourceImageHashMap) => {
     const normalize = require("normalize-path");
     const imagePath = normalize(imageHashMap[hash].rawPath);
 
-    const exifData = await getEXIF(imagePath);
-    console.log("exif");
-    console.log(exifData);
+    let exifData = await getEXIF(imagePath);
+    // console.log("exif");
+    // console.log(exifData);
 
     // check if gps is contained
     const latitude = get(exifData, "gps.GPSLatitude", null);
@@ -64,30 +64,15 @@ const generateLocations = async (sourceImageHashMap) => {
 
     const { lat, lon } = toDecimal(geoString);
 
-    console.log("lat: ", lat);
-    console.log("lon: ", lon);
-
-    // response.gps
-    // response.gps.GPSLatitude
-    // responose.gps.GPSLongitude
-
-    // console.log(`Analyzing: ${imagePath}`);
-    // console.log(imagePath);
-    // let jpeg = await readFile(imagePath);
-    // // console.log(jpeg.length); // 1582463
-    // let data = jpeg.toString("binary"); // data is the same
-    // // console.log(data);
-
-    // const location = hasLatLong(data) ? getLatLong(data) : {};
-
-    // if (Object.keys(location).length > 0) {
-    //   console.log(`geolocation found!: Lat: ${lat} \nLon: ${lon}`);
-    // }
+    // console.log("lat: ", lat);
+    // console.log("lon: ", lon);
 
     imageHashMap[hash] = {
       ...imageHashMap[hash],
       location: location ? { lat, long: lon } : {},
     };
+
+    exifData = null;
   }
 
   return imageHashMap;
