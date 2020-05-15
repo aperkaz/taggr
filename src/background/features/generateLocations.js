@@ -1,7 +1,9 @@
 import piexif from "piexifjs";
 import isImageOfType from "./isImageOfType";
+import get from "lodash.get";
 import { sendToRendererThrottled } from "../services/utils";
 import { getStopFlow } from "../store";
+// import piexif from "./piexif";
 
 import { setTask } from "../../renderer/store";
 
@@ -24,6 +26,8 @@ const generateLocations = async (sourceImageHashMap) => {
   let imagesLocated = 0;
 
   while (imageHasesToProcess.length > 0) {
+    if (getStopFlow()) return;
+
     imagesLocated++;
 
     sendToRendererThrottled({
@@ -34,37 +38,82 @@ const generateLocations = async (sourceImageHashMap) => {
     });
 
     const hash = imageHasesToProcess.pop();
-    const imagePath = imageHashMap[hash].rawPath;
+    const normalize = require("normalize-path");
+    const imagePath = normalize(imageHashMap[hash].rawPath);
 
-    // read only JPEG files, not the rest!
-    if (
-      !(isImageOfType(imagePath, "jpeg") || isImageOfType(imagePath, "jpg"))
-    ) {
-      continue;
-    }
+    const exifData = await getEXIF(imagePath);
+    console.log("exif");
 
-    console.log(`Analyzing: ${imagePath}`);
+    // check if gps is contained
+    const latitude = get(exifData, "gps.GPSLatitude", null);
+    const longitude = get(exifData, "gps.GPSLongitude", null);
 
-    let jpeg = await readFile(imageHashMap[hash].rawPath);
-    let data = jpeg.toString("binary");
+    if (!latitude || !longitude) continue;
 
-    const location = hasLatLong(data) ? getLatLong(data) : {};
+    const latDMS = exifData.gps.GPSLatitude;
+    const longDMS = exifData.gps.GPSLongitude;
 
-    if (Object.keys(location).length > 0) {
-      console.log("geolocation found!: ", imagePath);
-    }
+    const geoString = `${get(exifData, "gps.GPSLatitudeRef", "")}${
+      latDMS[0]
+    }° ${latDMS[1]}' ${latDMS[2]}" ${get(exifData, "gps.GPSLongitudeRef", "")}${
+      longDMS[0]
+    }° ${longDMS[1]}' ${longDMS[2]}"`;
+
+    const { lat, lon } = toDecimal(geoString);
+
+    console.log("lat: ", lat);
+    console.log("lon: ", lon);
+
+    // response.gps
+    // response.gps.GPSLatitude
+    // responose.gps.GPSLongitude
+
+    // console.log(`Analyzing: ${imagePath}`);
+    // console.log(imagePath);
+    // let jpeg = await readFile(imagePath);
+    // // console.log(jpeg.length); // 1582463
+    // let data = jpeg.toString("binary"); // data is the same
+    // // console.log(data);
+
+    // const location = hasLatLong(data) ? getLatLong(data) : {};
+
+    // if (Object.keys(location).length > 0) {
+    //   console.log(`geolocation found!: Lat: ${lat} \nLon: ${lon}`);
+    // }
 
     imageHashMap[hash] = {
       ...imageHashMap[hash],
-      location: location ? location : {},
+      location: location ? { lat, long: lon } : {},
     };
   }
 
   return imageHashMap;
 };
 
+const toDecimal = (latLongString) => {
+  var parseDMS = require("parse-dms");
+
+  return parseDMS(latLongString);
+};
+
+const getEXIF = (filePath) => {
+  var ExifImage = require("exif").ExifImage;
+
+  return new Promise((resolve) => {
+    new ExifImage(filePath, (err, data) => {
+      resolve(data);
+    });
+  });
+};
+
 const hasLatLong = (data) => {
-  let exifObj = piexif.load(data);
+  let exifObj;
+  try {
+    exifObj = piexif.load(data);
+  } catch (e) {
+    return false;
+  }
+  console.log("hasLatLong()");
 
   // if there is exif GPS object
   if (Object.keys(exifObj["GPS"]).length) {
@@ -84,6 +133,9 @@ const hasLatLong = (data) => {
 
 const getLatLong = (data) => {
   let exifObj = piexif.load(data);
+  console.log("getLatLong()");
+
+  console.log(exifObj["GPS"]);
 
   // read latitude
   const lat = piexif.GPSHelper.dmsRationalToDeg(

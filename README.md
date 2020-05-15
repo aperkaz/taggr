@@ -19,6 +19,7 @@ Sometimes windows build fails. Try to clean cache and delete package-lock as in:
 ## Future features
 
 - TODO: Clean up notification code part
+- TODO: chrome cache hogs the ram: https://github.com/electron/electron/blob/master/docs/api/session.md#sesclearcachecallback
 - TODO: look into mapbox performance: https://docs.mapbox.com/help/troubleshooting/mapbox-gl-js-performance/ and https://docs.mapbox.com/help/glossary/style-optimized-vector-tiles/
 - TODO: add image manipulation: https://github.com/EyalAr/lwip#rotate
 - TODO: replace gallery view, with lazy loading: https://github.com/xiaolin/react-image-gallery

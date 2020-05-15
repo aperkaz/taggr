@@ -1,5 +1,5 @@
 const { getGlobal } = require("electron").remote;
-export const backgroundLogger = getGlobal("backgroundLogger");
+// export const backgroundLogger = getGlobal("backgroundLogger");
 import { loadModel } from "./features/classifyImage";
 import "./services";
 
@@ -8,5 +8,5 @@ import "./services";
   await loadModel();
 })();
 
-backgroundLogger.log("Background process started");
+// backgroundLogger.log("Background process started");
 // TODO: improvement: review logger utility

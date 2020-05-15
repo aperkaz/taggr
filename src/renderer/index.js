@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import logger from "electron-timber";
+// import logger from "electron-timber";
 import trackEventInProd from "../shared/trackEventInProd";
 import store from "./store";
 import App from "./components/App";
@@ -23,4 +23,4 @@ ReactDOM.render(
   document.getElementById("app")
 );
 
-logger.log("Renderer process started");
+// logger.log("Renderer process started");
