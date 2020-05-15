@@ -20,6 +20,7 @@ The UI follow an unidirectional dataflow pattern with React and a reactive uiSto
 - TODO: add image manipulation: https://github.com/EyalAr/lwip#rotate
 - TODO: replace gallery view, with lazy loading: https://github.com/xiaolin/react-image-gallery
 - TODO: speeding up the classification: https://github.com/tensorflow/tfjs-examples/blob/master/mnist-node/data.js
+- TODO: look into tensorflow alternatives: evaluate performance: with article https://learn.ml5js.org/docs/#/reference/face-api?id=demo
 - TODO: future-feature: timeline with pictures https://github.com/rmariuzzo/react-chronos
 - TODO: future-feature: timeline display of images per day http://tany.kim/quantify-your-year/#/
 IDEA: https://www.electronjs.org/devtron
