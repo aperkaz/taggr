@@ -1,14 +1,17 @@
 import piexif from "piexifjs";
 import isImageOfType from "./isImageOfType";
 import { sendToRendererThrottled } from "../services/utils";
+import { getStopFlow } from "../store";
+
 import { setTask } from "../../renderer/store";
-// import fs from "fs";
 
 /**
  * Generate the location info for all the images in the imageHashMap
  * @param {Object} sourceImageHashMap
  */
 const generateLocations = async (sourceImageHashMap) => {
+  if (getStopFlow()) return;
+
   const fs = require("fs");
   const util = require("util");
   const readFile = util.promisify(fs.readFile);

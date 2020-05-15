@@ -1,3 +1,5 @@
+import { getStopFlow } from "../store";
+
 /**
  * Generate a ImageData structure from a imagePath. Prepocess using Canvas to algorithm input: 224px
  *
@@ -5,9 +7,9 @@
  * @returns {Promise<ImageData>} loaded image
  */
 const generateImageData = async (imagePath) => {
-  console.time("loadImage");
+  if (getStopFlow()) return;
+
   let img = await loadImage(imagePath);
-  console.timeEnd("loadImage");
 
   const MAX_HEIGHT = 224;
 

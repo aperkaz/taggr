@@ -35,9 +35,9 @@ const Map = ({ imageList = [], onImageSelect = () => null }) => {
             // TODONOW: replace with hash
             // key={image.hash}
             key={index}
-            // Given marker dimensions (H x W): 20 x 14 :https://material.io/resources/icons/?search=map&icon=room&style=baseline
-            offsetTop={-20}
-            offsetLeft={-7}
+            // Given marker dimensions (H x W): 35 x 35 :https://material.io/resources/icons/?search=map&icon=room&style=baseline
+            offsetTop={-35}
+            offsetLeft={-17.5}
             latitude={image.location.lat}
             longitude={image.location.long}
           >

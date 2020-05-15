@@ -1,11 +1,11 @@
-import store from "../store";
+import { getImageHashMap } from "../store";
 import { sendToRenderer } from "../services/utils";
 
 import { setImages } from "../../renderer/store";
 
 const searchImages = async (payload) => {
   console.time("searchImages");
-  const matchingImages = getImagesByTag(store.imageHashMap, payload);
+  const matchingImages = getImagesByTag(getImageHashMap(), payload);
   console.timeEnd("searchImages");
 
   sendToRenderer({ type: setImages.type, payload: matchingImages });
@@ -28,6 +28,8 @@ const getImagesByTag = (imageHashMap, tagSearchValue) => {
       }
     }
   });
+
+  console.log(results);
 
   return results;
 };

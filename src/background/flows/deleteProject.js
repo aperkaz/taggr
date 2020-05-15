@@ -1,14 +1,22 @@
-import { resetStore } from "../store";
+import { resetStore, setStopFlow } from "../store";
 import { sendToRenderer } from "../services/utils";
 
 import { resetState } from "../../renderer/store";
 
 /**
- * Delete allt the information relevant to the project from the backend
+ * Stop the current flows and delete the information relevant to the project from the backend
  */
-const deleteProject = () => {
+const deleteProject = async () => {
+  // background
+  // TODONOW: fix superhack
+  setStopFlow(true);
+  await new Promise((r) => setTimeout(r, 200));
   resetStore();
+  await new Promise((r) => setTimeout(r, 1500)); // leave time for flows to stop.
+  resetStore();
+  setStopFlow(false);
 
+  // renderer
   sendToRenderer({
     type: resetState.type,
     payload: null,
@@ -17,4 +25,4 @@ const deleteProject = () => {
 
 export default deleteProject;
 
-// TODO: review the flow of actions. right now mished between service layer and ipc
+// TODO: refactor: move shared actions to /shared.

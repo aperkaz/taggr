@@ -16,6 +16,11 @@ import getTopTags from "../features/getTopTags";
 
 import { setProjectRootFolderPath, setImageHashMap } from "../store";
 
+/**
+ * Flow for initializing and generating project.
+ * Each flow updates the store information when completed, acting as an atomic operation.
+ * @param {string} projectRootFolderPath
+ */
 const createProject = async (projectRootFolderPath) => {
   // object that contains all the project information
   let imageHashMap = {};
@@ -56,9 +61,12 @@ const createProject = async (projectRootFolderPath) => {
 
   // compute gps position for all images
   console.time("generateAllLocations");
-  imageHashMap = await generateLocations(imageHashMap);
+  try {
+    imageHashMap = await generateLocations(imageHashMap);
+  } catch (e) {
+    console.error("issue generating geolocations: ", e);
+  }
   console.timeEnd("generateAllLocations");
-  // console.log(store.imageHashMap);
 
   // send image list to renderer
   sendToRenderer({
@@ -78,9 +86,6 @@ const createProject = async (projectRootFolderPath) => {
 
   // compute tags for all images
   imageHashMap = await generateTags(imageHashMap);
-
-  console.log("after tags");
-  console.log(imageHashMap);
 
   // calculate top 20 tags, send to renderer
   sendToRenderer({

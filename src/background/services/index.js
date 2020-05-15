@@ -7,6 +7,8 @@ import searchImages from "../flows/searchImages";
 import { backgroundLogger } from "../index";
 import "../types";
 
+// TODONOW: add queue for long flows (createProject)
+
 /**
  * Listener for the IPC messages
  */
@@ -22,7 +24,7 @@ ipcRenderer.on(IPC_CHANNELS.MESSAGE_BUS, async (event, message) => {
       await createProject(payload);
       break;
     case FLOWS.DELETE_PROJECT:
-      deleteProject();
+      await deleteProject();
       break;
     case FLOWS.SEARCH_IMAGES:
       await searchImages(payload);

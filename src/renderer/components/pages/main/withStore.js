@@ -13,8 +13,6 @@ const withStore = () => {
   };
 
   const onInputChange = debounce((v) => {
-    console.log("input changed", v);
-
     serviceSearchImages(v);
   }, 200);
 

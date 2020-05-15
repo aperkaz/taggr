@@ -1,8 +1,9 @@
-import { sendToRenderer, sendToRendererThrottled } from "../services/utils";
-import { setImages, setTask, setTags } from "../../renderer/store";
-
+import { sendToRendererThrottled } from "../services/utils";
 import generateImageData from "./generateImageData";
 import { classifyImage } from "./classifyImage";
+import { getStopFlow } from "../store";
+
+import { setTask } from "../../renderer/store";
 
 /**
  * Generate the tags for all the untaged images in the imageHashMap
@@ -10,6 +11,8 @@ import { classifyImage } from "./classifyImage";
  * @param {Object} sourceImageHashMap
  */
 const generateTags = async (sourceImageHashMap) => {
+  if (getStopFlow()) return;
+
   const imageHashMap = {};
 
   const imageHasesToProcess = getImagesWithoutTags(sourceImageHashMap);
@@ -20,6 +23,8 @@ const generateTags = async (sourceImageHashMap) => {
   console.time("processImages");
 
   while (imageHasesToProcess.length > 0) {
+    if (getStopFlow()) return;
+
     let hash = imageHasesToProcess.pop();
 
     // console.time("generateImageData");
