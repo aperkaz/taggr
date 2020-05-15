@@ -32,7 +32,7 @@ const Main = styled.div`
 `;
 
 const Footer = styled.div`
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 
   :hover {
     cursor: pointer;

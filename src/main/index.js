@@ -6,6 +6,8 @@ const { app, BrowserWindow } = require("electron");
 const isDev = require("electron-is-dev");
 const logger = require("electron-timber");
 
+const IS_DEV_BUILD = false;
+
 // GLOBALS
 global.rendererWindow = null;
 global.backgroundWindow = null;
@@ -60,13 +62,7 @@ function createRendererWindow() {
     if (backgroundWindow) backgroundWindow.close();
   });
 
-  // Remove menu
-  // rendererWindow.removeMenu();
-
-  // Open the DevTools.
-  window.webContents.openDevTools();
-
-  if (isDev) {
+  if (isDev || IS_DEV_BUILD) {
     window.setPosition(1200, 0);
 
     // Add react dev tools https://www.electronjs.org/docs/tutorial/devtools-extension
@@ -89,8 +85,14 @@ function createRendererWindow() {
     );
     // BrowserWindow.removeDevToolsExtension(reduxExtension);
 
+    // Open the DevTools.
+    window.webContents.openDevTools();
+
     return window;
   }
+
+  // Remove menu
+  rendererWindow.removeMenu();
 
   return window;
 }
@@ -104,7 +106,7 @@ function createBackgroundWindow() {
   };
 
   const prodSettings = {
-    // show: false,
+    show: IS_DEV_BUILD,
     webPreferences: {
       nodeIntegration: true,
       webSecurity: false,
@@ -115,13 +117,9 @@ function createBackgroundWindow() {
 
   window.loadURL(HIDDEN_WINDOW_WEBPACK_ENTRY);
 
-  // Open the DevTools.
-  window.webContents.openDevTools();
-
-  if (isDev) {
-    // TODO: pre-release: remove dev tools and menu from all non-dev builds
-    // // Open the DevTools.
-    // window.webContents.openDevTools();
+  if (isDev || IS_DEV_BUILD) {
+    // Open the DevTools.
+    window.webContents.openDevTools();
   }
 
   // Reset reference on close

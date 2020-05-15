@@ -97,9 +97,7 @@ const Cell = ({ columnIndex, rowIndex, style, data, onClick }) => {
     >
       {data[index] ? (
         <ImageTile imageUrl={data[index] ? data[index].path : ""}></ImageTile>
-      ) : (
-        ""
-      )}
+      ) : null}
     </div>
   );
 };

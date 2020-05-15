@@ -9,7 +9,7 @@ const normalizeImageUrl = (imagePath) => {
   const normalizedImagePath = normalize(imagePath);
   return normalizedImagePath.startsWith("http")
     ? normalizedImagePath
-    : `file:///${normalizedImagePath}`;
+    : `file://${normalizedImagePath}`;
 };
 
 export default normalizeImageUrl;

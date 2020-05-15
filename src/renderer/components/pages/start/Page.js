@@ -40,7 +40,7 @@ const UnderTitle = styled.p`
 
 const Footer = styled.div`
   font-family: Open Sans;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   color: white;
   font-weight: 600;
   text-decoration: none;
