@@ -16,7 +16,11 @@ The UI follow an unidirectional dataflow pattern with React and a reactive uiSto
 ## Notes 
 Sometimes windows build fails. Try to clean cache and delete package-lock as in: https://github.com/cncjs/cncjs/issues/172
 
-## Future features
+## Notes
+
+- TF context explodes in size after many invocations. Errors:
+   WebGL: INVALID_OPERATION: clientWaitSync: object does not belong to this context
+WebGL: CONTEXT_LOST_WEBGL: loseContext: context lost
 
 - JUST because something work in development, it doesnt mean it will work in prod. Make sure the encodings are set up in the index.html of EACH process (rendere, background...). The TO string methods will behave crazy...
 - TODO: Clean up notification code part

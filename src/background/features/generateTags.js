@@ -23,37 +23,42 @@ const generateTags = async (sourceImageHashMap) => {
   console.time("processImages");
 
   while (imageHasesToProcess.length > 0) {
-    if (getStopFlow()) return;
-
     let hash = imageHasesToProcess.pop();
 
-    // console.time("generateImageData");
-    let imageData = await generateImageData(sourceImageHashMap[hash].path);
-    // console.timeEnd("generateImageData");
+    try {
+      if (getStopFlow()) return;
 
-    // console.time("classifyImage");
-    let tags = await classifyImage(imageData);
-    // console.timeEnd("classifyImage");
+      // console.time("generateImageData");
+      let imageData = await generateImageData(sourceImageHashMap[hash].path);
+      // console.timeEnd("generateImageData");
 
-    imageHashMap[hash] = {
-      ...sourceImageHashMap[hash],
-      tags: tags ? tags : [],
-    };
+      // console.time("classifyImage");
+      let tags = await classifyImage(imageData);
+      // console.timeEnd("classifyImage");
 
-    console.log(`Processing: ${imagesTagged++} / ${totalImagesToTag}`);
+      imageHashMap[hash] = {
+        ...sourceImageHashMap[hash],
+        tags: tags ? tags : [],
+      };
 
-    // clean up
-    hash = null;
-    imageData = null;
-    tags = null;
+      console.log(`Processing: ${imagesTagged++} / ${totalImagesToTag}`);
+      console.log(sourceImageHashMap[hash].path);
 
-    // update task status
-    sendToRendererThrottled({
-      type: setTask.type,
-      payload: {
-        percentage: Math.floor((imagesTagged * 100) / totalImagesToTag),
-      },
-    });
+      // clean up
+      hash = null;
+      imageData = null;
+      tags = null;
+
+      // update task status
+      sendToRendererThrottled({
+        type: setTask.type,
+        payload: {
+          percentage: Math.floor((imagesTagged * 100) / totalImagesToTag),
+        },
+      });
+    } catch (e) {
+      console.error(sourceImageHashMap[hash].path);
+    }
   }
   console.timeEnd("processImages");
 
