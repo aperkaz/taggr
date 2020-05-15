@@ -43,6 +43,7 @@ const generateLocations = async (sourceImageHashMap) => {
 
     const exifData = await getEXIF(imagePath);
     console.log("exif");
+    console.log(exifData);
 
     // check if gps is contained
     const latitude = get(exifData, "gps.GPSLatitude", null);
@@ -58,6 +59,8 @@ const generateLocations = async (sourceImageHashMap) => {
     }° ${latDMS[1]}' ${latDMS[2]}" ${get(exifData, "gps.GPSLongitudeRef", "")}${
       longDMS[0]
     }° ${longDMS[1]}' ${longDMS[2]}"`;
+
+    console.log(geoString);
 
     const { lat, lon } = toDecimal(geoString);
 
