@@ -28,13 +28,13 @@ const generateTags = async (sourceImageHashMap) => {
     try {
       if (getStopFlow()) return;
 
-      // console.time("generateImageData");
+      console.time("generateImageData");
       let imageData = await generateImageData(sourceImageHashMap[hash].path);
-      // console.timeEnd("generateImageData");
+      console.timeEnd("generateImageData");
 
-      // console.time("classifyImage");
+      console.time("classifyImage");
       let tags = await classifyImage(imageData);
-      // console.timeEnd("classifyImage");
+      console.timeEnd("classifyImage");
 
       imageHashMap[hash] = {
         ...sourceImageHashMap[hash],

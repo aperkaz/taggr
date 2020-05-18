@@ -9,7 +9,9 @@ import { getStopFlow } from "../store";
 const generateImageData = async (imagePath) => {
   if (getStopFlow()) return;
 
+  console.time("loadImage");
   let img = await loadImage(imagePath);
+  console.timeEnd("loadImage");
 
   const MAX_HEIGHT = 224;
 
@@ -19,6 +21,7 @@ const generateImageData = async (imagePath) => {
     img.height = MAX_HEIGHT;
   }
 
+  console.time("transformInCanvas");
   let canvas = new OffscreenCanvas(img.width, img.height);
   let ctx = canvas.getContext("2d");
   // ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -27,6 +30,8 @@ const generateImageData = async (imagePath) => {
   const imageData = canvas
     .getContext("2d")
     .getImageData(0, 0, img.width, img.height);
+
+  console.timeEnd("transformInCanvas");
 
   // clean up
   img = null;

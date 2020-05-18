@@ -85,7 +85,9 @@ const createProject = async (projectRootFolderPath) => {
   });
 
   // compute tags for all images
+  console.time("computeTags");
   imageHashMap = await generateTags(imageHashMap);
+  console.timeEnd("computeTags");
 
   // calculate top 20 tags, send to renderer
   sendToRenderer({

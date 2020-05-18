@@ -22,7 +22,6 @@ Sometimes windows build fails. Try to clean cache and delete package-lock as in:
    WebGL: INVALID_OPERATION: clientWaitSync: object does not belong to this context
 WebGL: CONTEXT_LOST_WEBGL: loseContext: context lost
 
-- JUST because something work in development, it doesnt mean it will work in prod. Make sure the encodings are set up in the index.html of EACH process (rendere, background...). The TO string methods will behave crazy...
 - TODO: Clean up notification code part
 - TODO: chrome cache hogs the ram: https://github.com/electron/electron/blob/master/docs/api/session.md#sesclearcachecallback
 - TODO: look into mapbox performance: https://docs.mapbox.com/help/troubleshooting/mapbox-gl-js-performance/ and https://docs.mapbox.com/help/glossary/style-optimized-vector-tiles/
@@ -34,8 +33,9 @@ WebGL: CONTEXT_LOST_WEBGL: loseContext: context lost
 - TODO: future-feature: timeline display of images per day http://tany.kim/quantify-your-year/#/
 IDEA: https://www.electronjs.org/devtron
 
-- TODO: look into reading thumbnails.
 - TODO: consider loading images with canvas element and proper size: https://codesandbox.io/s/compare-im-loading-5tptn?file=/src/index.js
+
+- Persistence: https://github.com/sindresorhus/electron-store
 
 ## Releases
 
