@@ -1,4 +1,3 @@
-import piexif from "piexifjs";
 import isImageOfType from "./isImageOfType";
 import get from "lodash.get";
 import { sendToRendererThrottled } from "../services/utils";
@@ -92,52 +91,6 @@ const getEXIF = (filePath) => {
       resolve(data);
     });
   });
-};
-
-const hasLatLong = (data) => {
-  let exifObj;
-  try {
-    exifObj = piexif.load(data);
-  } catch (e) {
-    return false;
-  }
-  console.log("hasLatLong()");
-
-  // if there is exif GPS object
-  if (Object.keys(exifObj["GPS"]).length) {
-    // if the exif GPS object has lat/long
-    if (
-      exifObj.GPS[piexif.GPSIFD.GPSLatitude] &&
-      exifObj.GPS[piexif.GPSIFD.GPSLatitude].length &&
-      exifObj.GPS[piexif.GPSIFD.GPSLongitude] &&
-      exifObj.GPS[piexif.GPSIFD.GPSLongitude].length
-    ) {
-      return true;
-    }
-  }
-
-  return false;
-};
-
-const getLatLong = (data) => {
-  let exifObj = piexif.load(data);
-  console.log("getLatLong()");
-
-  console.log(exifObj["GPS"]);
-
-  // read latitude
-  const lat = piexif.GPSHelper.dmsRationalToDeg(
-    exifObj["GPS"][piexif.GPSIFD.GPSLatitude],
-    exifObj["GPS"][piexif.GPSIFD.GPSLatitudeRef]
-  );
-
-  // read longitude
-  const long = piexif.GPSHelper.dmsRationalToDeg(
-    exifObj["GPS"][piexif.GPSIFD.GPSLongitude],
-    exifObj["GPS"][piexif.GPSIFD.GPSLongitudeRef]
-  );
-
-  return { lat, long };
 };
 
 /**
