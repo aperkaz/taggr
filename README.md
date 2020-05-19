@@ -1,42 +1,77 @@
 # taggr
 
-Rediscover your memories while keeping your privacy.
+Rediscover your **memories** while keeping your **privacy**.
 
 Powered by machine learning.
 
 ## Architecture
 
-Inspiration: https://blog.axosoft.com/electron-things-to-know/
+**Modularized structure** for UI and backend, running on separated `BrowserWindow` processes: `renderer` for UI, `background` for backend.
 
-Main structure separated between UI and backend. 
+This allows to perform the long and resource intensive backend operations without blocking the UI thread.
 
-The UI follow an unidirectional dataflow pattern with React and a reactive uiStore.
+**Message passing** interconnection betweeen modules, through [IPC](https://www.electronjs.org/docs/api/ipc-renderer).
+
+Since the backend executes long running tasks, sync connections are not an option. The message passing acts as a the communication interfact between modules. Each module implements `services`, which deal with the incomming and outgoing messages for that module
+
+### Folder structure
+
+```
+src
+└───background -- BACKEND: io disk, long computations, machine learning
+│   └───features -- utils as pure functions
+│   └───flows -- high level flows (create project...). Use features and triggered by service layer
+│   └───services -- interface layer with the renderer process
+│   └───statics -- statics for electron process
+│   └───store -- persistence layer. Simple JSON storage for now.
+│   │   index.js -- module entry point
+│   │   types.js -- jsDoc types
+│
+└───main -- Main process of electron. Spins off background/renderer processes
+│   │   analytics.js -- google event analytics setup
+│   │   index.js -- main entry point
+│
+└───renderer -- UI. React and Redux. Smart / dummy components
+│   └───components -- React components. molecules / organisms / pages
+│   └───services -- interface layer with the background process 
+│   └───statics -- statics for electron process
+│   └───store -- Redux store, actions and reducers.
+│   │   index.js -- module entry point
+│   │   types.js -- jsDoc types
+│  
+└───shared -- shared code between renderer/background. Actions, Constants...
+│   │   ipcChannels.js -- definition of ipc channel to use between modules
+│   │   trackEventInProd.js -- helper to track events in both modules
+│   │   ... TODO: expose each modules public actions
+│
+stories -- storybook stories for isolated component testing
+README.md
+webpack
+```
 
 
-## Notes 
-Sometimes windows build fails. Try to clean cache and delete package-lock as in: https://github.com/cncjs/cncjs/issues/172
+## Issues
 
-## Notes
+- **Too much ram**: chromium caches the images as they are loaded. When the images are big, the cache grows very fast.
+  - Solutions: Resize images to size -> speeds up loading, ML computations and removes cache issue. [sharp](https://github.com/lovell/sharp) . Exaple: https://github.com/aperkaz/tensorflow-playground
 
-- TF context explodes in size after many invocations. Errors:
-   WebGL: INVALID_OPERATION: clientWaitSync: object does not belong to this context
-WebGL: CONTEXT_LOST_WEBGL: loseContext: context lost
+- **Too much ram**: when anaylzing many images, the ram grows over time, eventually killing the app.
 
-- TODO: Clean up notification code part
-- TODO: chrome cache hogs the ram: https://github.com/electron/electron/blob/master/docs/api/session.md#sesclearcachecallback
-- TODO: look into mapbox performance: https://docs.mapbox.com/help/troubleshooting/mapbox-gl-js-performance/ and https://docs.mapbox.com/help/glossary/style-optimized-vector-tiles/
-- TODO: add image manipulation: https://github.com/EyalAr/lwip#rotate
-- TODO: replace gallery view, with lazy loading: https://github.com/xiaolin/react-image-gallery
-- TODO: speeding up the classification: https://github.com/tensorflow/tfjs-examples/blob/master/mnist-node/data.js
-- TODO: look into tensorflow alternatives: evaluate performance: with article https://learn.ml5js.org/docs/#/reference/face-api?id=demo
-- TODO: future-feature: timeline with pictures https://github.com/rmariuzzo/react-chronos
-- TODO: future-feature: timeline display of images per day http://tany.kim/quantify-your-year/#/
-IDEA: https://www.electronjs.org/devtron
+## Future Features
 
-- TODO: consider loading images with canvas element and proper size: https://codesandbox.io/s/compare-im-loading-5tptn?file=/src/index.js
-
-- Persistence: https://github.com/sindresorhus/electron-store
+- Project information persistence: https://github.com/sindresorhus/electron-store
+- Images rotation: [sharp](https://github.com/lovell/sharp)
+- Replace gallery view with lazy loading: https://github.com/xiaolin/react-image-gallery
+- Timeline with pictures https://github.com/rmariuzzo/react-chronos
+- Timeline display of images per day http://tany.kim/quantify-your-year/#/
+- Add more ML: look into tensorflow alternatives: evaluate performance: with article https://learn.ml5js.org/docs/#/reference/face-api?id=demo
+- Speed up app by paralelization. Exaple: https://github.com/aperkaz/tensorflow-playground
 
 ## Releases
 
 https://github.com/aperkaz/taggr-releases/releases
+
+## Resources of interes
+
+- High-level project structure: https://blog.axosoft.com/electron-things-to-know/
+- Window builds fail randomly due to problems with the cache. Try to clean cache and delete package-lock as in: https://github.com/cncjs/cncjs/issues/172
