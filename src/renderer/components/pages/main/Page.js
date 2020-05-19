@@ -58,8 +58,8 @@ const NavigationTabs = ({ value, handleChange }) => {
         textColor="primary"
         centered
       >
-        <Tab label="Memories" />
-        <Tab label="Map" />
+        <Tab style={{ fontFamily: "Poppins, sans-serif" }} label="Memories" />
+        <Tab style={{ fontFamily: "Poppins, sans-serif" }} label="Map" />
       </Tabs>
     </Paper>
   );

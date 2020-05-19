@@ -6,7 +6,7 @@ const { app, BrowserWindow } = require("electron");
 const isDev = require("electron-is-dev");
 // const logger = require("electron-timber");
 
-const IS_DEV_BUILD = false;
+const IS_DEV_BUILD = true;
 
 // GLOBALS
 global.rendererWindow = null;
@@ -41,6 +41,7 @@ function createRendererWindow() {
       nodeIntegration: true,
       nodeIntegrationInWorker: true,
       webSecurity: false,
+      preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
     },
   };
 
@@ -49,6 +50,7 @@ function createRendererWindow() {
       nodeIntegration: true,
       nodeIntegrationInWorker: true,
       webSecurity: false,
+      preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
     },
   };
 
@@ -71,7 +73,7 @@ function createRendererWindow() {
     const reactExtension = BrowserWindow.addDevToolsExtension(
       path.join(
         os.homedir(),
-        "/.config/google-chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.6.0_0"
+        "/.config/google-chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.7.0_0"
       )
     );
     // BrowserWindow.removeDevToolsExtension(reactExtension);
@@ -103,6 +105,7 @@ function createBackgroundWindow() {
       nodeIntegration: true,
       webSecurity: false,
       nodeIntegrationInWorker: true,
+      preload: HIDDEN_WINDOW_PRELOAD_WEBPACK_ENTRY,
     },
   };
 
@@ -112,6 +115,7 @@ function createBackgroundWindow() {
       nodeIntegration: true,
       webSecurity: false,
       nodeIntegrationInWorker: true,
+      preload: HIDDEN_WINDOW_PRELOAD_WEBPACK_ENTRY,
     },
   };
 
