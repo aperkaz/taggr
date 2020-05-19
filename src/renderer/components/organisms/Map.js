@@ -20,10 +20,11 @@ const Map = ({ imageList = [], onImageSelect = () => null }) => {
   return (
     <div style={{ height: "100%", width: "100%" }}>
       <ReactMapGL
-        width="100%"
-        height="100%"
         {...viewport}
         mapboxApiAccessToken={accessToken}
+        width="100%"
+        height="100%"
+        mapStyle="mapbox://styles/taggr/cka6yzzew11f71iogmj35drzc?optimize=true"
         onViewportChange={(viewport) => {
           // prevent overriding the height and width: https://github.com/visgl/react-map-gl/issues/604#issuecomment-462398674
           const { width, height, ...etc } = viewport;
@@ -74,5 +75,3 @@ const Map = ({ imageList = [], onImageSelect = () => null }) => {
 };
 
 export default React.memo(Map);
-
-// TODONOW: fix position of marker, located at the top left of the icon, not bottom

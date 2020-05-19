@@ -50,6 +50,8 @@ const generateTags = async (sourceImageHashMap) => {
       tags = null;
 
       // update task status
+      // TODONOW: fix: since the whole main page is connected to the store, it re-renders every time a new notification comes.
+      // SOLUTION: connect the notification component directly to the store.
       sendToRendererThrottled({
         type: setTask.type,
         payload: {
