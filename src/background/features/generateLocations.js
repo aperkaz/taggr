@@ -1,8 +1,6 @@
-import isImageOfType from "./isImageOfType";
 import get from "lodash.get";
 import { sendToRendererThrottled } from "../services/utils";
 import { getStopFlow } from "../store";
-// import piexif from "./piexif";
 
 import { setTask } from "../../renderer/store";
 
@@ -41,8 +39,6 @@ const generateLocations = async (sourceImageHashMap) => {
     const imagePath = normalize(imageHashMap[hash].rawPath);
 
     let exifData = await getEXIF(imagePath);
-    // console.log("exif");
-    // console.log(exifData);
 
     // check if gps is contained
     const latitude = get(exifData, "gps.GPSLatitude", null);
