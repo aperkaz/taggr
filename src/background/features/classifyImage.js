@@ -3,7 +3,7 @@ global.fetch = require("node-fetch");
 const tf = require("@tensorflow/tfjs");
 const mobilenet = require("@tensorflow-models/mobilenet");
 
-const PROBABILITY_THRESHOLD = 0.5;
+const PROBABILITY_THRESHOLD = 0.65;
 
 let net;
 
