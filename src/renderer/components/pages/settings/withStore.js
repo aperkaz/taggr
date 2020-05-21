@@ -1,16 +1,16 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { setActiveRoute, serviceDeleteProject } from "../../../store";
+import { setActiveRoute } from "../../../store";
 import CONSTANTS from "../../../store/constants";
 import SettingsPage from "./Page";
+import { deleteProject } from "../../../services";
 
 const withStore = () => {
   const dispatch = useDispatch();
 
   const onSelectReset = () => {
-    // TODONOW: add stop signal to ongoing flows!!!!!
     dispatch(setActiveRoute(CONSTANTS.ROUTES.START_PAGE));
-    serviceDeleteProject();
+    deleteProject();
   };
 
   const onSelectSave = () => {

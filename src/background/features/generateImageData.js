@@ -1,5 +1,3 @@
-import { getStopFlow } from "../store";
-
 /**
  * Generate a ImageData structure from a imagePath. Prepocess using Canvas to algorithm input: 224px
  *
@@ -7,8 +5,6 @@ import { getStopFlow } from "../store";
  * @returns {Promise<ImageData>} loaded image
  */
 const generateImageData = async (imagePath) => {
-  if (getStopFlow()) return;
-
   console.time("loadImage");
   let img = await loadImage(imagePath);
   console.timeEnd("loadImage");

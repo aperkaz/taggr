@@ -1,4 +1,4 @@
-import { resetStore, setStopFlow } from "../store";
+import { resetStore, stopFlows } from "../store";
 import { sendToRenderer } from "../services/utils";
 
 import { resetState } from "../../renderer/store";
@@ -8,13 +8,8 @@ import { resetState } from "../../renderer/store";
  */
 const deleteProject = async () => {
   // background
-  // TODONOW: fix superhack
-  setStopFlow(true);
-  await new Promise((r) => setTimeout(r, 200));
+  stopFlows();
   resetStore();
-  await new Promise((r) => setTimeout(r, 1500)); // leave time for flows to stop.
-  resetStore();
-  setStopFlow(false);
 
   // renderer
   sendToRenderer({

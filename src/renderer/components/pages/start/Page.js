@@ -57,18 +57,25 @@ const StartPage = ({ onSelectRootFolderPath, onSelectLogo }) => (
         <Typography
           variant="h1"
           component="h1"
-          style={{ fontFamily: "Poppins, sans-serif", color: "white" }}
+          style={{
+            fontFamily: "Poppins, sans-serif",
+            color: "white",
+            marginBottom: ".5em",
+          }}
           gutterBottom
         >
           taggr
         </Typography>
         <Typography
           variant="h6"
-          style={{ fontFamily: "Poppins, sans-serif", color: "white" }}
+          style={{
+            fontFamily: "Poppins, sans-serif",
+            color: "white",
+            marginBottom: "2.5em",
+          }}
         >
           Rediscover your <b>memories</b> while keeping your <b>privacy</b>
         </Typography>
-        <UnderTitle></UnderTitle>
         <Button
           variant="outlined"
           size="large"

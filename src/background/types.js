@@ -8,7 +8,7 @@
  * @typedef {Object} appStoreType Reactive store of backend relevant data.
  * @property {string} projectRootFolderPath Path to the current root folder (project).
  * @property {Object} imageHashMap Map of image information, by image hash (from path).
- * @property {boolean} stopFlow TODONOW: temporary flag for stopping the execution of flows
+ * @property {Object[]} flows array of active flows
  */
 const imageHashMap = {
   hash1: {

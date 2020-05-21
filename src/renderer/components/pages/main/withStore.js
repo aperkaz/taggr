@@ -1,9 +1,10 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import MainPage from "./Page";
-import { setActiveRoute, serviceSearchImages } from "../../../store";
+import { setActiveRoute } from "../../../store";
 import CONSTANTS from "../../../store/constants";
 import debounce from "lodash.debounce";
+import { searchImages } from "../../../services";
 
 const withStore = () => {
   const dispatch = useDispatch();
@@ -13,7 +14,7 @@ const withStore = () => {
   };
 
   const onInputChange = debounce((v) => {
-    serviceSearchImages(v);
+    searchImages(v);
   }, 200);
 
   return (

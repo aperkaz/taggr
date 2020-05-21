@@ -39,8 +39,8 @@ const Map = ({ imageList = [], onImageSelect = () => null }) => {
             // Given marker dimensions (H x W): 35 x 35 :https://material.io/resources/icons/?search=map&icon=room&style=baseline
             offsetTop={-35}
             offsetLeft={-17.5}
-            latitude={image.location.lat}
-            longitude={image.location.long}
+            latitude={image.location.latitude}
+            longitude={image.location.longitude}
           >
             <Link
               href="#"

@@ -1,6 +1,5 @@
 import generateMD5Hash from "./generateMD5Hash";
 import normalizeImageUrl from "./normalizeImageUrl";
-import { getStopFlow } from "../store";
 
 /**
  * Generate main data structure from image path list
@@ -8,8 +7,6 @@ import { getStopFlow } from "../store";
  * @returns {Object} imageHashMap
  */
 const generateImageHashMap = (imagePathList) => {
-  if (getStopFlow()) return;
-
   const imageHashMap = {};
 
   imagePathList.forEach((imagePath) => {

@@ -47,17 +47,17 @@ export const {
 } = stateSlice.actions;
 
 // Actions with side effects (incl. calls to the service layer). The backend will trigger the actions.
-export const serviceCreateProject = (projectRootFolderPath) => {
-  createProject(projectRootFolderPath);
-};
+// export const serviceCreateProject = (projectRootFolderPath) => {
+//   createProject(projectRootFolderPath);
+// };
 
-export const serviceDeleteProject = () => {
-  deleteProject();
-};
+// export const serviceDeleteProject = () => {
+//   deleteProject();
+// };
 
-export const serviceSearchImages = (tagValue) => {
-  searchImages(tagValue);
-};
+// export const serviceSearchImages = (tagValue) => {
+//   searchImages(tagValue);
+// };
 
 const store = configureStore({ reducer: stateSlice.reducer });
 export default store;

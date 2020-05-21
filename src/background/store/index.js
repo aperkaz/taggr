@@ -4,7 +4,7 @@ import "../types";
 const initialState = {
   projectRootFolderPath: "",
   imageHashMap: {},
-  stopFlow: false, // TODONOW: super hack, rething flows with queues
+  flows: [],
 };
 
 /**
@@ -17,7 +17,6 @@ if (isDev) window["store"] = store;
 
 export const resetStore = () => {
   store = { ...initialState };
-  // console.log(store);
 
   if (isDev) window["store"] = store;
 };
@@ -30,10 +29,17 @@ export const setImageHashMap = (imageHashMap) => {
   store.imageHashMap = imageHashMap;
 };
 
-export const setStopFlow = (value) => {
-  store.stopFlow = value;
+export const addFlow = (flow) => {
+  store.flows.push(flow);
 };
 
-export const getStopFlow = () => store.stopFlow;
+export const deleteFlows = () => (store.flows = []);
+
+export const stopFlows = () => {
+  store.flows.forEach((flow) => {
+    flow.stop();
+  });
+  deleteFlows();
+};
 
 export const getImageHashMap = () => store.imageHashMap;

@@ -78,7 +78,7 @@ const Search = ({
           }}
           // onClick={onPressReset}
         >
-          TODONOW: surprise me
+          TODO: feature:  surprise me
         </Button> */}
       </FlexWrapper>
       <div style={{ marginTop: "8px" }}>

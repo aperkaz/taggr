@@ -1,13 +1,14 @@
 import { ipcRenderer } from "electron";
 import IPC_CHANNELS from "../../shared/ipcChannels";
 import FLOWS from "../flows";
-import createProject from "../flows/createProject";
+import CreateProject from "../flows/createProject";
 import deleteProject from "../flows/deleteProject";
 import searchImages from "../flows/searchImages";
 // import { backgroundLogger } from "../index";
 import "../types";
+import { addFlow, deleteFlows } from "../store";
 
-// TODONOW: add queue for long flows (createProject)
+const createProject = new CreateProject();
 
 /**
  * Listener for the IPC messages
@@ -21,7 +22,9 @@ ipcRenderer.on(IPC_CHANNELS.MESSAGE_BUS, async (event, message) => {
 
   switch (type) {
     case FLOWS.CREATE_PROJECT:
-      await createProject(payload);
+      addFlow(createProject);
+      await createProject.process(payload);
+      deleteFlows();
       break;
     case FLOWS.DELETE_PROJECT:
       await deleteProject();

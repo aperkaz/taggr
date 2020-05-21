@@ -5,7 +5,7 @@ import { FixedSizeGrid } from "react-window"; // Virtualize list for performance
 import Carousel, { Modal, ModalGateway } from "react-images";
 import ImageTile from "../molecules/ImageTile";
 
-const GUTTER = 5;
+const GUTTER = 10;
 const ELEMENTS_PER_COLLUMN = 5;
 
 const VirtualizedGallery = ({ imageList }) => {
@@ -21,7 +21,12 @@ const VirtualizedGallery = ({ imageList }) => {
     <div style={{ height: "100%" }}>
       <SizeMe monitorHeight>
         {({ size }) => (
-          <div style={{ height: "100%", overflow: "hidden" }}>
+          <div
+            style={{
+              height: "100%",
+              overflow: "hidden",
+            }}
+          >
             <Grid size={size} imageList={imageList} onCellClick={openPreview} />
           </div>
         )}
@@ -31,6 +36,7 @@ const VirtualizedGallery = ({ imageList }) => {
           <Modal onClose={() => setImagePreview(!imagePreview)}>
             <Carousel
               // TODO: improvement: allow carousel to render multiple images. Currently does not support lazy loading, so very slow. https://github.com/jossmac/react-images/issues/300
+              // TODO: add index, and dynamically cahnge the view data
               currentIndex={0}
               views={[
                 {
@@ -75,8 +81,8 @@ const Grid = ({ size: { height, width }, imageList, onCellClick }) => {
       itemData={imageList}
       style={{
         overflowX: "hidden",
-        margin: "5px 40px 5px 5px",
-        paddingRight: "20px",
+        margin: "10px",
+        // paddingRight: "20px",
       }}
     >
       {(props) => <Cell {...props} onClick={onCellClick} />}
