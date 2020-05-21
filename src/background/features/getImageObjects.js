@@ -13,6 +13,9 @@ export const loadModel = async () => {
 };
 
 const getObjects = async (imageData) => {
+  // TODO: research why runing in node?
+  tf.setBackend("webgl");
+  console.log(tf.env());
   const objects = [];
 
   console.time("detect objects");
