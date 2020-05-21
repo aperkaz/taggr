@@ -3,10 +3,10 @@ import { classifyImage } from "./classifyImage";
 
 /**
  * Get tags for image
- * @param {string} imagePath
+ * @param {ImageData} imageData
  */
-const getImageTags = async (imagePath) => {
-  let imageData = await generateImageData(imagePath);
+const getImageTags = async (imageData) => {
+  // let imageData = await generateImageData(imagePath);
   let tags = await classifyImage(imageData);
 
   // clean up

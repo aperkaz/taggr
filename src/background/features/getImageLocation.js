@@ -23,7 +23,7 @@ const getEXIF = (filePath) => {
 const getLocation = async (imagePath) => {
   let exifData = await getEXIF(imagePath);
 
-  console.log(exifData);
+  // console.log(exifData);
 
   // check if gps is contained
   const latitude = get(exifData, "gps.GPSLatitude", null);
@@ -40,7 +40,7 @@ const getLocation = async (imagePath) => {
     longDMS[1]
   }' ${longDMS[2]}"`;
 
-  console.log(geoString);
+  // console.log(geoString);
 
   const { lat, lon } = toDecimal(geoString);
 

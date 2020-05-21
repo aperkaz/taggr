@@ -10,7 +10,7 @@ const getTopTags = async (imageHashMap, maxNumberOfTags) => {
 
   // iterate over all the images and return the ones with tag matches
   Object.keys(imageHashMap).forEach((key) => {
-    const tags = imageHashMap[key].tags;
+    const tags = imageHashMap[key].tags ? imageHashMap[key].tags : [];
 
     // per eash tag, create count map
     tags.forEach((tag) => {

@@ -16,6 +16,8 @@ import getImageLocation, {
   getImagesWihLocation,
 } from "../features/getImageLocation";
 import getImageTags from "../features/getImageTags";
+import isImageSexy from "../features/isImageSexy";
+import generateImageData from "../features/generateImageData";
 
 /**
  * Flow for initializing and generating project.
@@ -66,11 +68,15 @@ class CreateProject {
       const rawImagePath = imagePathsToProcess.shift();
       const hash = generateMD5Hash(rawImagePath);
       const imagePath = imageHashMap[hash].path;
+      const imageData = await generateImageData(imagePath);
+
+      console.log(rawImagePath);
 
       imageHashMap[hash] = {
         ...imageHashMap[hash],
         location: await getImageLocation(rawImagePath),
-        tags: await getImageTags(imagePath),
+        // tags: await getImageTags(imageData),
+        isSexy: await isImageSexy(imageData),
       };
       processed++;
 

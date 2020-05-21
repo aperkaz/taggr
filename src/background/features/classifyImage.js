@@ -10,9 +10,9 @@ let net;
 export async function loadModel() {
   if (net) return;
 
-  console.time("loadModel");
+  console.time("loadModel mobilenet");
   net = await mobilenet.load();
-  console.timeEnd("loadModel");
+  console.timeEnd("loadModel mobilenet");
 }
 
 /**

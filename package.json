@@ -141,6 +141,7 @@
     "lodash.get": "^4.4.2",
     "lodash.throttle": "^4.1.1",
     "node-localstorage": "^2.1.6",
+    "nsfwjs": "^2.2.0",
     "parse-dms": "0.0.3",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
