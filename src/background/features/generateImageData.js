@@ -1,20 +1,16 @@
 /**
  * Generate a ImageData structure from a imagePath. Prepocess using Canvas to algorithm input: 224px
  *
- * @param {String} imagePath
+ * @param {HTMLImageElement} img
  * @returns {Promise<ImageData>} loaded image
  */
-const generateImageData = async (imagePath) => {
-  // console.time("loadImage");
-  let img = await loadImage(imagePath);
-  // console.timeEnd("loadImage");
-
-  const MAX_HEIGHT = 224;
-
-  // calculate new ratios for image size, based on MAX_HEIGHT
-  if (img.height > MAX_HEIGHT) {
-    img.width *= MAX_HEIGHT / img.height;
-    img.height = MAX_HEIGHT;
+const generateImageData = async (img, dataHeight = null) => {
+  if (dataHeight) {
+    // calculate new ratios for image size, based on MAX_HEIGHT
+    if (img.height > dataHeight) {
+      img.width *= dataHeight / img.height;
+      img.height = dataHeight;
+    }
   }
 
   // console.time("transformInCanvas");
@@ -43,13 +39,13 @@ const generateImageData = async (imagePath) => {
  * @param {String} path
  * @returns {Promise<HTMLImageElement>} loaded image
  */
-async function loadImage(path) {
+export const loadImage = async (path) => {
   return new Promise((resolve, reject) => {
     const img = new Image();
     img.onerror = (err) => reject(err);
     img.onload = () => resolve(img);
     img.src = path;
   });
-}
+};
 
 export default generateImageData;

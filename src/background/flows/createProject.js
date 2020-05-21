@@ -17,7 +17,8 @@ import getImageLocation, {
 } from "../features/getImageLocation";
 import getImageTags from "../features/getImageTags";
 import isImageSexy from "../features/isImageSexy";
-import generateImageData from "../features/generateImageData";
+import generateImageData, { loadImage } from "../features/generateImageData";
+import getImageObjects from "../features/getImageObjects";
 
 /**
  * Flow for initializing and generating project.
@@ -68,15 +69,18 @@ class CreateProject {
       const rawImagePath = imagePathsToProcess.shift();
       const hash = generateMD5Hash(rawImagePath);
       const imagePath = imageHashMap[hash].path;
-      const imageData = await generateImageData(imagePath);
+      const imgHtml = await loadImage(imagePath);
+      const smallImageData = await generateImageData(imgHtml, 224);
+      const fullImageData = await generateImageData(imgHtml);
 
       console.log(rawImagePath);
 
       imageHashMap[hash] = {
         ...imageHashMap[hash],
-        location: await getImageLocation(rawImagePath),
-        tags: await getImageTags(imageData),
-        isSexy: await isImageSexy(imageData),
+        // location: await getImageLocation(rawImagePath),
+        // tags: await getImageTags(smallImageData),
+        objects: await getImageObjects(fullImageData), // WORKS AMAZING. Faster with fullimage data!!
+        // isSexy: await isImageSexy(smallImageData),
       };
       processed++;
 

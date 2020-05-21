@@ -1,4 +1,3 @@
-import generateImageData from "./generateImageData";
 import { classifyImage } from "./classifyImage";
 
 /**
