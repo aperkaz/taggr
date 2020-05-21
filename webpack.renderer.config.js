@@ -26,13 +26,12 @@ module.exports = {
   module: {
     rules,
   },
-  // Fix model imports
-  // context: path.join(__dirname, 'your-app'),
-  plugins: [
-    new CopyWebpackPlugin([
-      { from: "src/background/statics/quant_mid", to: "quant_mid" },
-    ]),
-  ],
+  // Fix model imports. Can be used for classification, object recognition...
+  // plugins: [
+  //   new CopyWebpackPlugin([
+  //     { from: "src/background/statics/quant_mid", to: "quant_mid" },
+  //   ]),
+  // ],
   // Creates a stats.html to inspect bundle size
   // plugins: [new Visualizer()],
 };

@@ -1,8 +1,6 @@
 import * as nsfwjs from "nsfwjs";
 
-const SEXY_THRESHOLD = 0.6;
-
-// TODONOW: set prod: tf.enableProdMode()
+const SEXY_THRESHOLD = 0.9;
 
 let model;
 
@@ -10,7 +8,7 @@ export async function loadModel() {
   if (model) return;
 
   console.time("loadModel nsfwjs");
-  model = await nsfwjs.load("/quant_mid/", { type: "graph" });
+  model = await nsfwjs.load();
   console.timeEnd("loadModel nsfwjs");
 }
 

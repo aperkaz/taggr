@@ -75,7 +75,7 @@ class CreateProject {
       imageHashMap[hash] = {
         ...imageHashMap[hash],
         location: await getImageLocation(rawImagePath),
-        // tags: await getImageTags(imageData),
+        tags: await getImageTags(imageData),
         isSexy: await isImageSexy(imageData),
       };
       processed++;

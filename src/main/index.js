@@ -6,7 +6,7 @@ const { app, BrowserWindow } = require("electron");
 const isDev = require("electron-is-dev");
 // const logger = require("electron-timber");
 
-const IS_DEV_BUILD = false;
+const IS_DEV_BUILD = true;
 
 // GLOBALS
 global.rendererWindow = null;
