@@ -61,6 +61,7 @@ class CreateProject {
     const toProcess = imagePathsToProcess.length;
     let processed = 0;
     // PROCESS IMAGES
+    console.time("processAllImages");
     while (this.isActive && imagePathsToProcess.length) {
       const rawImagePath = imagePathsToProcess.shift();
       const hash = generateMD5Hash(rawImagePath);
@@ -88,6 +89,8 @@ class CreateProject {
       type: setTags.type,
       payload: await getTopTags(imageHashMap, 20),
     });
+    console.timeEnd("processAllImages");
+
     // send images with location
     sendToRenderer({
       type: setImagesWithLocation.type,

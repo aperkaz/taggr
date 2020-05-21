@@ -10,8 +10,8 @@ const recursivelyFindImages = async (folderPath) => {
   let imagePathsList = [];
 
   var settings = {
-    // Filter files with js and json extension
-    fileFilter: ["*.png", "*.PNG", "*.jpg", "*.JPG", ".*.jpeg", "*.JPEG"],
+    // Filter files with png and jpeg extension
+    fileFilter: ["*.png", "*.PNG", "*.jpg", "*.JPG", "*.jpeg", "*.JPEG"],
     // Filter by directory
     directoryFilter: ["!.git", "!*modules", "!.cache", "!.*"],
   };
