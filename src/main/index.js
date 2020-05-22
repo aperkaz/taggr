@@ -39,7 +39,6 @@ function createRendererWindow() {
     height: 1080,
     webPreferences: {
       nodeIntegration: true,
-      nodeIntegrationInWorker: true,
       webSecurity: false,
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
     },
@@ -48,7 +47,6 @@ function createRendererWindow() {
   const prodSettings = {
     webPreferences: {
       nodeIntegration: true,
-      nodeIntegrationInWorker: true,
       webSecurity: false,
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
     },
@@ -122,6 +120,8 @@ function createBackgroundWindow() {
   let window = new BrowserWindow(isDev ? devSettings : prodSettings);
 
   window.loadURL(HIDDEN_WINDOW_WEBPACK_ENTRY);
+  // TODO: bug: webgl not working in linux when nodeIntegration enabled
+  // window.loadURL("https://get.webgl.org/webgl2/");
 
   if (isDev || IS_DEV_BUILD) {
     // Open the DevTools.

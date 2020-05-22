@@ -71,16 +71,16 @@ class CreateProject {
       const hash = generateMD5Hash(rawImagePath);
       const imagePath = imageHashMap[hash].path;
       let imgHtml = await loadImage(imagePath);
-      let smallImageData = await generateImageData(imgHtml, 224);
-      // fullImageData = await generateImageData(imgHtml, 1080);
+      // let smallImageData = await generateImageData(imgHtml, 224);
+      fullImageData = await generateImageData(imgHtml, 1080);
 
       console.log(rawImagePath);
 
       imageHashMap[hash] = {
         ...imageHashMap[hash],
         // location: await getImageLocation(rawImagePath),
-        // tags: await getImageTags(smallImageData),
-        objects: await getImageObjects(smallImageData), // WORKS AMAZING. Faster with fullimage data!!
+        tags: await getImageTags(fullImageData),
+        objects: await getImageObjects(fullImageData), // WORKS AMAZING. Faster with fullimage data!!
         // isSexy: await isImageSexy(smallImageData),
       };
       processed++;
@@ -93,8 +93,8 @@ class CreateProject {
         },
       });
 
-      // clean up
-      smallImageData = null;
+      // clean up TODO: clean up
+      // smallImageData = null;
       fullImageData = null;
       imgHtml = null;
     }

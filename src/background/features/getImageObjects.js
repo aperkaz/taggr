@@ -1,5 +1,5 @@
 const tf = require("@tensorflow/tfjs");
-tf.enableProdMode();
+// tf.enableProdMode();
 const cocoSsd = require("@tensorflow-models/coco-ssd");
 
 const MIN_SCORE = 0.5;
@@ -8,18 +8,20 @@ let net;
 
 export const loadModel = async () => {
   console.time("loadModel coco-ssd");
-  net = await cocoSsd.load("lite_mobilenet_v2");
+  // net = await cocoSsd.load("lite_mobilenet_v2");
+  net = await cocoSsd.load();
   console.timeEnd("loadModel coco-ssd");
 };
 
 const getObjects = async (imageData) => {
-  // TODO: research why runing in node?
-  tf.setBackend("webgl");
-  console.log(tf.env());
+  if (!net) await loadModel();
+
+  let pixels = tf.browser.fromPixels(imageData);
+
   const objects = [];
 
   console.time("detect objects");
-  const predictions = await net.detect(imageData);
+  const predictions = await net.detect(pixels);
 
   predictions.forEach((prediction) => {
     const score = prediction.score;

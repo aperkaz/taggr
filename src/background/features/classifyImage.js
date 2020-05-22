@@ -1,7 +1,6 @@
 // @ts-ignore-next-line
 global.fetch = require("node-fetch");
 const tf = require("@tensorflow/tfjs");
-tf.enableProdMode();
 const mobilenet = require("@tensorflow-models/mobilenet");
 
 const PROBABILITY_THRESHOLD = 0.65;
@@ -25,9 +24,10 @@ export async function classifyImage(imageData) {
   if (!net) await loadModel();
 
   let pixels = tf.browser.fromPixels(imageData);
-  let rawPredictions = await net.classify(pixels);
 
-  // console.log(rawPredictions);
+  console.time("classify");
+  let rawPredictions = await net.classify(pixels);
+  console.timeEnd("classify");
 
   // filter out predictions below threshold
   let filteredRawPredictions = rawPredictions.filter(
@@ -44,8 +44,8 @@ export async function classifyImage(imageData) {
   });
 
   // free memory by cleaning TF-internals and variables
-  pixels.dispose();
-  pixels = null;
+  // pixels.dispose();
+  // pixels = null;
   imageData = null;
   rawPredictions = null;
   filteredRawPredictions = null;
