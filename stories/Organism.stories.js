@@ -45,7 +45,7 @@ export const VirtualizedGallery = () => (
 export const Map = () => (
   <FullHeight>
     <MapComp
-      imageList={imageList.filter((i) => i.location && i.location.lat)}
+      imageList={imageList.filter((i) => i.location && i.location.latitude)}
       onImageSelect={action(`select image`)}
     />
   </FullHeight>
