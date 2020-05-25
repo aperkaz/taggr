@@ -13,6 +13,11 @@ export const loadModel = async () => {
   console.timeEnd("loadModel coco-ssd");
 };
 
+/**
+ * Get objects in an image
+ * @param {ImageData} imageData
+ * @returns {Promise<string[]>} array with object tags
+ */
 const getObjects = async (imageData) => {
   if (!net) await loadModel();
 
@@ -27,7 +32,8 @@ const getObjects = async (imageData) => {
     const score = prediction.score;
     const predictedClass = prediction.class;
     if (score > MIN_SCORE) {
-      objects.push({ name: predictedClass, score });
+      objects.push(predictedClass);
+      // objects.push({ name: predictedClass, score });
     }
   });
   console.timeEnd("detect objects");
@@ -36,8 +42,9 @@ const getObjects = async (imageData) => {
 };
 
 /**
- * Get objects in an image
+ * Get object tags in an image
  * @param {ImageData} imageData
+ * @returns {Promise<string[]>} array with object tags
  */
 const getImageObjects = async (imageData) => {
   return await getObjects(imageData);

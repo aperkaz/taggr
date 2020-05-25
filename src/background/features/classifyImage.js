@@ -44,8 +44,8 @@ export async function classifyImage(imageData) {
   });
 
   // free memory by cleaning TF-internals and variables
-  // pixels.dispose();
-  // pixels = null;
+  pixels.dispose();
+  pixels = null;
   imageData = null;
   rawPredictions = null;
   filteredRawPredictions = null;

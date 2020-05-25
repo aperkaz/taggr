@@ -26,7 +26,6 @@ const generateImageData = async (img, dataHeight = null) => {
   // console.timeEnd("transformInCanvas");
 
   // clean up
-  img = null;
   canvas = null;
   ctx = null;
 

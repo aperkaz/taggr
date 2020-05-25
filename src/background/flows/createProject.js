@@ -65,22 +65,22 @@ class CreateProject {
     let processed = 0;
     // PROCESS IMAGES
     console.time("processAllImages");
-    let fullImageData;
     while (this.isActive && imagePathsToProcess.length) {
       const rawImagePath = imagePathsToProcess.shift();
       const hash = generateMD5Hash(rawImagePath);
       const imagePath = imageHashMap[hash].path;
       let imgHtml = await loadImage(imagePath);
-      // let smallImageData = await generateImageData(imgHtml, 224);
-      fullImageData = await generateImageData(imgHtml, 1080);
-
-      console.log(rawImagePath);
+      let smallImageData = await generateImageData(imgHtml, 224);
+      let fullImageData = await generateImageData(imgHtml, 1080);
 
       imageHashMap[hash] = {
         ...imageHashMap[hash],
         // location: await getImageLocation(rawImagePath),
-        tags: await getImageTags(fullImageData),
-        objects: await getImageObjects(fullImageData), // WORKS AMAZING. Faster with fullimage data!!
+        tags: [
+          ...(await getImageTags(smallImageData)),
+          // WORKS AMAZING. Faster with fullimage data!!,
+          ...(await getImageObjects(fullImageData)),
+        ],
         // isSexy: await isImageSexy(smallImageData),
       };
       processed++;
@@ -93,10 +93,10 @@ class CreateProject {
         },
       });
 
-      // clean up TODO: clean up
-      // smallImageData = null;
-      fullImageData = null;
+      // clean up
       imgHtml = null;
+      smallImageData = null;
+      fullImageData = null;
     }
     if (!this.isActive) return;
 
