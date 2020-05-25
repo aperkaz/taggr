@@ -73,6 +73,8 @@ class CreateProject {
       let smallImageData = await generateImageData(imgHtml, 224);
       let fullImageData = await generateImageData(imgHtml, 1080);
 
+      // TO speed up: Promise.allSettled()
+
       imageHashMap[hash] = {
         ...imageHashMap[hash],
         // location: await getImageLocation(rawImagePath),
