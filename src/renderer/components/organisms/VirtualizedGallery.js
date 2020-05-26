@@ -5,6 +5,8 @@ import { FixedSizeGrid } from "react-window"; // Virtualize list for performance
 import Carousel, { Modal, ModalGateway } from "react-images";
 import ImageTile from "../molecules/ImageTile";
 
+// TODONOW: replace with: https://codesandbox.io/s/simple-react-lightbox-t6dbq?file=/src/App.js
+
 const GUTTER = 10;
 const ELEMENTS_PER_COLLUMN = 5;
 

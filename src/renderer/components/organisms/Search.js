@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
+import MaterialButton from "@material-ui/core/Button";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Typography from "@material-ui/core/Typography";
 import TagCountDisplay from "../molecules/TagCountDisplay";
@@ -47,25 +47,29 @@ const TaskProgress = ({ name, percentage }) => (
 );
 
 const Wrapper = styled.div`
-  padding-top: 20px;
+  width: 100%;
 
   display: flex;
-  justify-content: space-around;
 `;
 
-const Section = styled.div`
+const Filters = styled.div`
+  width: 85%;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+`;
+
+const Filter = styled.div`
+  margin: 16px 8px;
+
   border: 1px solid #dddddd;
   box-sizing: border-box;
   border-radius: 4px;
 
   display: flex;
-  /* flex-direction: column; */
-  justify-content: start;
-  align-items: flex-start;
-
-  width: 100%;
-
-  padding: 8px;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Title = styled.div`
@@ -81,10 +85,36 @@ const Title = styled.div`
   font-family: Roboto;
 
   position: relative;
-  margin: 0 auto;
-  top: -20px;
-  margin-bottom: -18px;
+  top: -12px;
+  margin-bottom: -6px;
 `;
+
+const ButtonWrapper = styled.div`
+  margin: 0 8px 8px;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
+const SearchButton = ({ text }) => (
+  <MaterialButton
+    variant="outlined"
+    style={{
+      margin: "4px",
+      minWidth: "130px",
+      textTransform: "capitalize",
+    }}
+  >
+    <Typography
+      variant="subtitle2"
+      style={{ fontFamily: "Open Sans" }}
+      gutterBottom
+    >
+      {text}
+    </Typography>
+  </MaterialButton>
+);
 
 const Search = ({
   task: {
@@ -92,224 +122,64 @@ const Search = ({
     name: taskName,
     percentage: taskPercentage,
   },
-  onInputChange,
-  tagCountList,
 }) => {
-  const [inputValue, setInputValue] = useState("");
+  // TODONOW: manage filter values
+  // const [inputValue, setInputValue] = useState("");
 
   return isTaskOngoing ? (
     <TaskProgress name={taskName} percentage={taskPercentage} />
   ) : (
     <Wrapper>
-      <Section>
-        <Title>when</Title>
-        <Button
-          variant="outlined"
-          style={{
-            margin: "8px",
-            textTransform: "capitalize",
-          }}
-        >
-          <Typography
-            variant="subtitle1"
-            style={{ fontFamily: "Open Sans" }}
-            gutterBottom
-          >
-            🌙 Late nights
-          </Typography>
-        </Button>
-        <Button
-          variant="outlined"
-          style={{ margin: "8px", textTransform: "capitalize" }}
-        >
-          <Typography
-            variant="subtitle1"
-            style={{ fontFamily: "Open Sans" }}
-            gutterBottom
-          >
-            🌅 Early mornings
-          </Typography>
-        </Button>
-        <div></div>
-      </Section>
-      <Section>
-        <Title>what</Title>
-        <Button
-          variant="outlined"
-          style={{ margin: "8px", textTransform: "capitalize" }}
-        >
-          <Typography
-            variant="subtitle1"
-            style={{ fontFamily: "Open Sans" }}
-            gutterBottom
-          >
-            🌚 Dark pics
-          </Typography>
-        </Button>
-        <Button
-          variant="outlined"
-          style={{ margin: "8px", textTransform: "capitalize" }}
-        >
-          <Typography
-            variant="subtitle1"
-            style={{ fontFamily: "Open Sans" }}
-            gutterBottom
-          >
-            💡 Bright pics
-          </Typography>
-        </Button>
-        <Button
-          variant="outlined"
-          style={{ margin: "8px", textTransform: "capitalize" }}
-        >
-          <Typography
-            variant="subtitle1"
-            style={{ fontFamily: "Open Sans" }}
-            gutterBottom
-          >
-            🚗 Vehicles
-          </Typography>
-        </Button>
-        <Button
-          variant="outlined"
-          style={{ margin: "8px", textTransform: "capitalize" }}
-        >
-          <Typography
-            variant="subtitle1"
-            style={{ fontFamily: "Open Sans" }}
-            gutterBottom
-          >
-            🐱 Animals
-          </Typography>
-        </Button>
-        <Button
-          variant="outlined"
-          style={{ margin: "8px", textTransform: "capitalize" }}
-        >
-          <Typography
-            variant="subtitle1"
-            style={{ fontFamily: "Open Sans" }}
-            gutterBottom
-          >
-            🍜 Food / Drinks
-          </Typography>
-        </Button>
-        <Button
-          variant="outlined"
-          style={{ margin: "8px", textTransform: "capitalize" }}
-        >
-          <Typography
-            variant="subtitle1"
-            style={{ fontFamily: "Open Sans" }}
-            gutterBottom
-          >
-            ⚽️ Sports
-          </Typography>
-        </Button>
-      </Section>
-      <Section>
-        <Title>where</Title>
-        <Button
-          variant="outlined"
-          style={{ margin: "8px", textTransform: "capitalize" }}
-        >
-          <Typography
-            variant="subtitle1"
-            style={{ fontFamily: "Open Sans" }}
-            gutterBottom
-          >
-            ⛰ Mountains
-          </Typography>
-        </Button>
-        <Button
-          variant="outlined"
-          style={{ margin: "8px", textTransform: "capitalize" }}
-        >
-          <Typography
-            variant="subtitle1"
-            style={{ fontFamily: "Open Sans" }}
-            gutterBottom
-          >
-            🌊 Water
-          </Typography>
-        </Button>
-      </Section>
-      <Section>
-        <Title>people</Title>
-        <Button
-          variant="outlined"
-          style={{ margin: "8px", textTransform: "capitalize" }}
-        >
-          <Typography
-            variant="subtitle1"
-            style={{ fontFamily: "Open Sans" }}
-            gutterBottom
-          >
-            🤗 Happy
-          </Typography>
-        </Button>
-        <Button
-          variant="outlined"
-          style={{ margin: "8px", textTransform: "capitalize" }}
-        >
-          <Typography
-            variant="subtitle1"
-            style={{ fontFamily: "Open Sans" }}
-            gutterBottom
-          >
-            ☹️ Sad
-          </Typography>
-        </Button>
-        <Button
-          variant="outlined"
-          style={{ margin: "8px", textTransform: "capitalize" }}
-        >
-          <Typography
-            variant="subtitle1"
-            style={{ fontFamily: "Open Sans" }}
-            gutterBottom
-          >
-            💨 Alone
-          </Typography>
-        </Button>{" "}
-        <Button
-          variant="outlined"
-          style={{ margin: "8px", textTransform: "capitalize" }}
-        >
-          <Typography
-            variant="subtitle1"
-            style={{ fontFamily: "Open Sans" }}
-            gutterBottom
-          >
-            👯‍♂️ Group
-          </Typography>
-        </Button>
-      </Section>
+      <Filters>
+        <Filter>
+          <Title>when</Title>
+          <ButtonWrapper>
+            <SearchButton text="🌙 Nights" />
+            <SearchButton text="🌅 Mornings" />
+          </ButtonWrapper>
+        </Filter>
+        <Filter>
+          <Title>what</Title>
+          <ButtonWrapper>
+            <SearchButton text="🌚 Dark pics" />
+            <SearchButton text="💡 Bright pics" />
+            <SearchButton text="🚗 Vehicles" />
+            <SearchButton text=" 🐱 Animals" />
+            <SearchButton text="🍜 Food" />
+            <SearchButton text="⚽️ Sports" />
+          </ButtonWrapper>
+        </Filter>
+        <Filter>
+          <Title>where</Title>
+          <ButtonWrapper>
+            <SearchButton text="⛰ Mountains" />
+            <SearchButton text="🌊 Water" />
+          </ButtonWrapper>
+        </Filter>
+        <Filter>
+          <Title>people</Title>
+          <ButtonWrapper>
+            <SearchButton text="🤗 Happy" />
+            <SearchButton text="☹️ Sad" />
+            <SearchButton text="💨 Alone" />
+            <SearchButton text="👯‍♂️ Group" />
+          </ButtonWrapper>
+        </Filter>
+      </Filters>
+      <MaterialButton
+        variant="outlined"
+        size="large"
+        style={{
+          margin: "auto",
+          fontFamily: "Open Sans",
+          fontWeight: 600,
+          color: "white",
+          background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+        }}
+      >
+        surprise me
+      </MaterialButton>
     </Wrapper>
-    // <div style={{ padding: "20px 0" }}>
-    //   <FlexWrapper>
-    //     <TextField
-    //       id="outlined-basic"
-    //       label="Tags"
-    //       variant="outlined"
-    //       placeholder="Search by tag"
-    //       value={inputValue}
-    //       onChange={(e) => {
-    //         setInputValue(e.target.value);
-    //         onInputChange(e.target.value);
-    //       }}
-    //     />
-    //   </FlexWrapper>
-    //   <div style={{ marginTop: "8px" }}>
-    //     <TagCountDisplay
-    //       tagCountList={tagCountList}
-    //       onTagClick={(t) => {
-    //         setInputValue(t);
-    //         onInputChange(t);
-    //       }}
-    //     />
-    //   </div>
-    // </div>
   );
 };
 
