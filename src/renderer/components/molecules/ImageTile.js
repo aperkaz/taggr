@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -12,14 +11,6 @@ const Wrapper = styled.div`
     background-size: cover;
 `;
 
-const ImageTile = ({ imageUrl }) => <Wrapper imageUrl={imageUrl} />;
-
-ImageTile.PropTypes = {
-  imageUrl: PropTypes.string,
-};
-
-ImageTile.defaultProps = {
-  imageUrl: "",
-};
+const ImageTile = ({ imageUrl = "" }) => <Wrapper imageUrl={imageUrl} />;
 
 export default ImageTile;
