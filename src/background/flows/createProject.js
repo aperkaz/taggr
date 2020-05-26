@@ -16,9 +16,10 @@ import getImageLocation, {
   getImagesWihLocation,
 } from "../features/getImageLocation";
 import getImageTags from "../features/getImageTags";
-import isImageSexy from "../features/isImageSexy";
+// import isImageSexy from "../features/isImageSexy";
 import generateImageData, { loadImage } from "../features/generateImageData";
 import getImageObjects from "../features/getImageObjects";
+import get from "lodash.get";
 
 /**
  * Flow for initializing and generating project.
@@ -69,18 +70,16 @@ class CreateProject {
       const rawImagePath = imagePathsToProcess.shift();
       const hash = generateMD5Hash(rawImagePath);
       const imagePath = imageHashMap[hash].path;
+
       let imgHtml = await loadImage(imagePath);
       let smallImageData = await generateImageData(imgHtml, 224);
-      let fullImageData = await generateImageData(imgHtml, 1080);
-
-      // TO speed up: Promise.allSettled()
+      let fullImageData = await generateImageData(imgHtml, 720);
 
       imageHashMap[hash] = {
         ...imageHashMap[hash],
-        // location: await getImageLocation(rawImagePath),
+        location: await getImageLocation(rawImagePath),
         tags: [
           ...(await getImageTags(smallImageData)),
-          // WORKS AMAZING. Faster with fullimage data!!,
           ...(await getImageObjects(fullImageData)),
         ],
         // isSexy: await isImageSexy(smallImageData),
@@ -100,6 +99,7 @@ class CreateProject {
       smallImageData = null;
       fullImageData = null;
     }
+
     if (!this.isActive) return;
 
     // send top 20 tag list
