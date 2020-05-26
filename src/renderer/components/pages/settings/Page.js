@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
 
 import backgroundImage from "../../../statics/background.jpeg";
+import FancyButton from "../../molecules/FancyButton";
 
 const Wrapper = styled.div`
   background: rgba(0, 0, 0, 0) url(${backgroundImage}) no-repeat scroll center
@@ -69,19 +70,7 @@ const SettingsPage = ({ onSelectReset, onSelectSave, onSelectSupport }) => (
           Reset app
         </Button>
         <br />
-        <Button
-          variant="outlined"
-          size="large"
-          style={{
-            fontFamily: "Open Sans",
-            fontWeight: 600,
-            color: "white",
-            background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
-          }}
-          onClick={onSelectSave}
-        >
-          Save
-        </Button>
+        <FancyButton text="Save" onClick={onSelectSave} />
       </Main>
 
       <Footer onClick={onSelectSupport}>

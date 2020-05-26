@@ -5,6 +5,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import Button from "@material-ui/core/Button";
 import semverCompare from "semver/functions/compare";
+import FancyButton from "./FancyButton";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -60,22 +61,13 @@ const UpdateModal = ({
             <br />
             New app version: {latestAppVersion}
           </p>
-          <Button
-            variant="outlined"
-            size="large"
-            style={{
-              fontFamily: "Open Sans",
-              fontWeight: 600,
-              color: "white",
-              background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
-            }}
+          <FancyButton
+            text="Download new version"
             onClick={async () => {
               setIsOpen(false);
               await onUpdateSelect();
             }}
-          >
-            Download new version
-          </Button>
+          />
         </div>
       </Fade>
     </Modal>

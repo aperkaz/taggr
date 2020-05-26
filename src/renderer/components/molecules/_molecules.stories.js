@@ -4,6 +4,7 @@ import { withKnobs, text, boolean, number } from "@storybook/addon-knobs";
 
 import ImageTileComp from "./ImageTile";
 import UpdateModalComp from "./UpdateModal";
+import FancyButtonComp from "./FancyButton";
 
 export default {
   title: "Molecules",
@@ -17,11 +18,16 @@ export const ImageTile = () => (
 );
 
 export const UpdateModal = () => (
-  <div>
-    <UpdateModalComp
-      currentAppVersion={text("currentAppVersion", "v0.0.0")}
-      latestAppVersion={text("latestAppVersion", "v0.0.1")}
-      onUpdateSelect={action("trigger update action")}
-    />
-  </div>
+  <UpdateModalComp
+    currentAppVersion={text("currentAppVersion", "v0.0.0")}
+    latestAppVersion={text("latestAppVersion", "v0.0.1")}
+    onUpdateSelect={action("trigger update action")}
+  />
+);
+
+export const FancyButton = () => (
+  <FancyButtonComp
+    text={text("text", "Press Me")}
+    onClick={action("trigger onClick")}
+  />
 );

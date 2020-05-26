@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
 
 import backgroundImage from "../../../statics/background.jpeg";
+import FancyButton from "../../molecules/FancyButton";
 
 const InnerWrapper = styled.div`
   background: linear-gradient(
@@ -76,19 +77,10 @@ const StartPage = ({ onSelectRootFolderPath, onSelectLogo }) => (
         >
           Rediscover your <b>memories</b> while keeping your <b>privacy</b>
         </Typography>
-        <Button
-          variant="outlined"
-          size="large"
-          style={{
-            fontFamily: "Open Sans",
-            fontWeight: 600,
-            color: "white",
-            background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
-          }}
+        <FancyButton
+          text="Select picture folder"
           onClick={onSelectRootFolderPath}
-        >
-          Select picture folder
-        </Button>
+        />
       </Main>
 
       <Footer onClick={onSelectLogo}>

@@ -5,8 +5,8 @@ import TextField from "@material-ui/core/TextField";
 import MaterialButton from "@material-ui/core/Button";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Typography from "@material-ui/core/Typography";
-import TagCountDisplay from "../molecules/TagCountDisplay";
 import robotImage from "../../statics/robot.jpg"; // https://dribbble.com/shots/5012092-Mr-Robot
+import FancyButton from "../molecules/FancyButton";
 
 const FlexWrapper = styled.div`
   display: flex;
@@ -166,19 +166,9 @@ const Search = ({
           </ButtonWrapper>
         </Filter>
       </Filters>
-      <MaterialButton
-        variant="outlined"
-        size="large"
-        style={{
-          margin: "auto",
-          fontFamily: "Open Sans",
-          fontWeight: 600,
-          color: "white",
-          background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
-        }}
-      >
-        surprise me
-      </MaterialButton>
+      <div style={{ margin: "auto" }}>
+        <FancyButton text="surprise me" />
+      </div>
     </Wrapper>
   );
 };

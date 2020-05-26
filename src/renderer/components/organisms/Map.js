@@ -8,7 +8,7 @@ const accessToken =
   "pk.eyJ1IjoidGFnZ3IiLCJhIjoiY2thMmJ0cGgyMDh2aDNocG5kZjcwaTdrOSJ9.dLriq493UOY4Jt-xZaAAZQ";
 
 // TODO: improve: add backdrop when there are no images to show, with tip: https://material-ui.com/components/backdrop/
-const Map = ({ imageList = [], onImageSelect = () => null }) => {
+const Map = ({ imageList = [] }) => {
   const [viewport, setViewport] = useState({
     latitude: 45.4211,
     longitude: -75.6903,

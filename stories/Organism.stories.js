@@ -4,7 +4,6 @@ import { withKnobs, text, boolean, number } from "@storybook/addon-knobs";
 import HeaderComp from "../src/renderer/components/organisms/Header";
 import SearchComp from "../src/renderer/components/organisms/Search";
 import VirtualizedGalleryComp from "../src/renderer/components/organisms/VirtualizedGallery";
-import MapComp from "../src/renderer/components/organisms/Map";
 import imageList from "./mocks/imageList";
 
 import FullHeight from "./utils";
@@ -13,10 +12,6 @@ export default {
   title: "Organisms",
   decorators: [withKnobs],
 };
-
-export const Header = () => (
-  <HeaderComp onSettingsClick={action("click settings")} />
-);
 
 export const Search = () => (
   <SearchComp
@@ -39,14 +34,5 @@ export const Search = () => (
 export const VirtualizedGallery = () => (
   <FullHeight>
     <VirtualizedGalleryComp imageList={imageList} />
-  </FullHeight>
-);
-
-export const Map = () => (
-  <FullHeight>
-    <MapComp
-      imageList={imageList.filter((i) => i.location && i.location.latitude)}
-      onImageSelect={action(`select image`)}
-    />
   </FullHeight>
 );
