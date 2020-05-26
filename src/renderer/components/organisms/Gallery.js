@@ -10,7 +10,7 @@ import ImageTile from "../molecules/ImageTile";
 const GUTTER = 10;
 const ELEMENTS_PER_COLLUMN = 5;
 
-const VirtualizedGallery = ({ imageList }) => {
+const Gallery = ({ imageList }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [imagePreview, setImagePreview] = useState(false);
 
@@ -110,11 +110,11 @@ const Cell = ({ columnIndex, rowIndex, style, data, onClick }) => {
   );
 };
 
-VirtualizedGallery.defaultProps = {
+Gallery.defaultProps = {
   imageList: [],
 };
 
-VirtualizedGallery.PropTypes = {
+Gallery.PropTypes = {
   imageList: PropTypes.arrayOf(
     PropTypes.shape({
       hash: PropTypes.string,
@@ -124,7 +124,7 @@ VirtualizedGallery.PropTypes = {
   ),
 };
 
-export default React.memo(VirtualizedGallery);
+export default React.memo(Gallery);
 
 // TODO: future feature: image menu: https://github.com/aperkaz/taggr/blob/add-react/src/components/DashboardImageGallery.js
 // TODO: update: lazy load images in carousel https://github.com/Aljullu/react-lazy-load-image-component
