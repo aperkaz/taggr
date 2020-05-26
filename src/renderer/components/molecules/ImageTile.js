@@ -12,7 +12,6 @@ const Wrapper = styled.div`
     background-size: cover;
 `;
 
-// TODO: replace by react image load component, nicer load animation
 const ImageTile = ({ imageUrl }) => <Wrapper imageUrl={imageUrl} />;
 
 ImageTile.PropTypes = {
