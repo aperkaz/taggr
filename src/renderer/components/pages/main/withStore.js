@@ -1,9 +1,10 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import debounce from "lodash.debounce";
+
 import MainPage from "./Page";
 import { setActiveRoute } from "../../../store";
 import CONSTANTS from "../../../store/constants";
-import debounce from "lodash.debounce";
 import { searchImages } from "../../../services";
 
 const withStore = () => {
@@ -21,9 +22,7 @@ const withStore = () => {
     <MainPage
       {...{
         onSettingsClick,
-        onInputChange,
         task: useSelector((s) => s.task),
-        tags: useSelector((s) => s.tags),
         images: useSelector((s) => s.images),
         imagesWithLocation: useSelector((s) => s.imagesWithLocation),
       }}

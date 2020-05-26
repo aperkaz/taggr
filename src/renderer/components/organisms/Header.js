@@ -4,8 +4,8 @@ import Section from "./Filter";
 
 const Header = ({
   task: {
-    isOngoing: isTaskOngoing = false,
-    name: taskName = "",
+    isOngoing: isTaskOngoing = true,
+    name: taskName = "not defined ",
     percentage: taskPercentage = 0,
   },
 }) => {

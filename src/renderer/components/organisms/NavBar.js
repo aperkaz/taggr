@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import styled from "styled-components";
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
@@ -20,11 +19,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
 `;
 
-const Div = styled.div`
-  margin: auto 0;
-`;
-
-const NavBar = ({ onSettingsClick }) => (
+const NavBar = ({ onSettingsClick = () => null }) => (
   <Wrapper>
     <Typography
       variant="h5"
@@ -52,9 +47,5 @@ const NavBar = ({ onSettingsClick }) => (
     </Link>
   </Wrapper>
 );
-
-NavBar.PropTypes = {
-  onSettingsClick: PropTypes.func.isRequired,
-};
 
 export default NavBar;

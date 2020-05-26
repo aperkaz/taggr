@@ -1,6 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
 
@@ -51,7 +49,10 @@ const Footer = styled.div`
   }
 `;
 
-const StartPage = ({ onSelectRootFolderPath, onSelectLogo }) => (
+const StartPage = ({
+  onSelectRootFolderPath = () => null,
+  onSelectLogo = () => null,
+}) => (
   <Wrapper>
     <InnerWrapper>
       <Main>
@@ -98,10 +99,5 @@ const StartPage = ({ onSelectRootFolderPath, onSelectLogo }) => (
     </InnerWrapper>
   </Wrapper>
 );
-
-StartPage.propTypes = {
-  onSelectRootFolderPath: PropTypes.func,
-  onSelectLogo: PropTypes.func,
-};
 
 export default StartPage;

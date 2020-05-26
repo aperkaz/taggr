@@ -1,13 +1,12 @@
 import React from "react";
-import PropTypes from "prop-types";
 import styled from "styled-components";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 
+import NavBar from "../../organisms/NavBar";
 import Header from "../../organisms/Header";
-import Search from "../../organisms/Search";
-import Gallery from "../../organisms/VirtualizedGallery";
+import Gallery from "../../organisms/Gallery";
 import Map from "../../organisms/Map";
 
 const Wrapper = styled.div`
@@ -17,12 +16,10 @@ const Wrapper = styled.div`
 `;
 
 const MainPage = ({
-  onSettingsClick,
+  onSettingsClick = () => null,
   task,
-  onInputChange,
-  tags,
-  images,
-  imagesWithLocation,
+  images = [],
+  imagesWithLocation = [],
 }) => {
   const [value, setValue] = React.useState(0);
 
@@ -32,8 +29,8 @@ const MainPage = ({
 
   return (
     <Wrapper>
-      <Header onSettingsClick={onSettingsClick} />
-      <Search task={task} onInputChange={onInputChange} tagCountList={tags} />
+      <NavBar onSettingsClick={onSettingsClick} />
+      <Header task={task} />
 
       <NavigationTabs value={value} handleChange={handleChange} />
       {value === 0 ? <Gallery imageList={images} /> : null}
@@ -63,30 +60,6 @@ const NavigationTabs = ({ value, handleChange }) => {
       </Tabs>
     </Paper>
   );
-};
-
-MainPage.defaultProps = {
-  task: {
-    isOngoing: false,
-    name: "",
-    percentage: 0,
-  },
-};
-
-MainPage.PropTypes = {
-  onSettingsClick: PropTypes.func.isRequired,
-  task: PropTypes.shape({
-    isOngoing: PropTypes.bool,
-    name: PropTypes.string,
-    percentage: PropTypes.number,
-  }),
-  onInputChange: PropTypes.func.isRequired,
-  tags: PropTypes.array.isRequired,
-  images: PropTypes.arrayOf(
-    PropTypes.shape({
-      path: PropTypes.string,
-    })
-  ).isRequired,
 };
 
 export default MainPage;
