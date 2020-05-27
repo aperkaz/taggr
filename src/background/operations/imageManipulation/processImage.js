@@ -3,7 +3,7 @@ import { classifyImage } from "../imageRecognition/classification";
 // import { getImageTags } from "../tags";
 import { loadImage, generateImageData } from "./utils";
 import objectRecognitionImage from "../imageRecognition/objectRecognition";
-import CUSTOM_TAGS from "../tags/customTags";
+import CUSTOM_TAGS, { calculateTag } from "../tags/customTags";
 
 /**
  * Process an image and extract all the tags
@@ -46,9 +46,11 @@ const getImageTags = async (smallImageData, fullImageData) => {
   const cocoSsdClassNames = await objectRecognitionImage(fullImageData);
   console.log(cocoSsdClassNames);
 
+  // Construct custom tags
   CUSTOM_TAGS.forEach((tag) => {
-    if (tag.calculate(imageNetClassIds, cocoSsdClassNames)) {
-      tags.push(tag.name);
+    const tagName = tag.name;
+    if (calculateTag(imageNetClassIds, cocoSsdClassNames, tagName)) {
+      tags.push(tagName);
     }
   });
 
