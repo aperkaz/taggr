@@ -81,6 +81,8 @@ const Grid = ({ size: { height, width }, imageList, onCellClick }) => {
       rowHeight={rowHeight}
       width={gridWidth}
       itemData={imageList}
+      // overscanRowCount={10}
+      // overscanColumnCount={10}
       style={{
         overflowX: "hidden",
         margin: "10px",
