@@ -39,8 +39,9 @@ const Title = styled.div`
   color: #717171;
   background-color: white;
 
-  font-weight: 500;
-  font-family: Roboto;
+  font-weight: 700;
+  font-family: Open Sans;
+  font-size: 14px;
 
   position: relative;
   top: -12px;

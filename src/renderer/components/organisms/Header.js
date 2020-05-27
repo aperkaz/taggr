@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import TaskProgress from "../molecules/TaskProgress";
-import Section from "./Filter";
+import Filter from "./Filter";
 
 const Header = ({
   task: {
@@ -15,7 +15,7 @@ const Header = ({
   return isTaskOngoing ? (
     <TaskProgress name={taskName} percentage={taskPercentage} />
   ) : (
-    <Section />
+    <Filter />
   );
 };
 

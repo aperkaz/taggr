@@ -3,23 +3,20 @@ import {
   setImagesWithLocation,
   setTask,
   setTags,
-} from "../../renderer/store";
+} from "../../renderer/store"; // TODO: improvement: move action exports to /shared
+import {
+  recursivelyFindImages,
+  generateImageHashMap,
+  transformImageMaptoImageList,
+  generateMD5Hash,
+} from "../operations/utils";
+import {
+  processImage,
+  getTopTags,
+  getImagesWithLocation,
+} from "../operations/imageManipulation";
 import { sendToRenderer, sendToRendererThrottled } from "../services/utils";
-import recursivelyFindImages from "../features/recursivelyFindImages";
-import generateImageHashMap from "../features/generateImageHashMap";
-import transformImageMaptoImageList from "../features/transformImageMaptoImageList";
-import getTopTags from "../features/getTopTags";
-
 import { setProjectRootFolderPath, setImageHashMap } from "../store";
-import generateMD5Hash from "../features/generateMD5Hash";
-import getImageLocation, {
-  getImagesWihLocation,
-} from "../features/getImageLocation";
-import getImageTags from "../features/getImageTags";
-// import isImageSexy from "../features/isImageSexy";
-import generateImageData, { loadImage } from "../features/generateImageData";
-import getImageObjects from "../features/getImageObjects";
-import get from "lodash.get";
 
 /**
  * Flow for initializing and generating project.
@@ -50,6 +47,7 @@ class CreateProject {
 
     setProjectRootFolderPath(projectRootFolderPath);
 
+    // LOCATE PICTURES
     this.notify("Locating all the pictures!");
     const imagePathsToProcess = await recursivelyFindImages(
       projectRootFolderPath
@@ -62,29 +60,20 @@ class CreateProject {
       payload: transformImageMaptoImageList(imageHashMap),
     });
 
+    // PROCESS IMAGES
     const toProcess = imagePathsToProcess.length;
     let processed = 0;
-    // PROCESS IMAGES
+
     console.time("processAllImages");
     while (this.isActive && imagePathsToProcess.length) {
       const rawImagePath = imagePathsToProcess.shift();
       const hash = generateMD5Hash(rawImagePath);
       const imagePath = imageHashMap[hash].path;
 
-      let imgHtml = await loadImage(imagePath);
-      let smallImageData = await generateImageData(imgHtml, 224);
-      let fullImageData = await generateImageData(imgHtml, 720);
-
       imageHashMap[hash] = {
         ...imageHashMap[hash],
-        location: await getImageLocation(rawImagePath),
-        tags: [
-          ...(await getImageTags(smallImageData)),
-          ...(await getImageObjects(fullImageData)),
-        ],
-        // isSexy: await isImageSexy(smallImageData),
+        ...(await processImage(rawImagePath, imagePath)),
       };
-      processed++;
 
       sendToRendererThrottled({
         type: setTask.type,
@@ -93,29 +82,27 @@ class CreateProject {
           percentage: Math.floor((processed * 100) / toProcess),
         },
       });
-
-      // clean up
-      imgHtml = null;
-      smallImageData = null;
-      fullImageData = null;
+      processed++;
     }
 
     if (!this.isActive) return;
 
-    // send top 20 tag list
+    // SEND TOP 20 TAGS (TODONOW: modify and send send active filters in future)
     sendToRenderer({
       type: setTags.type,
       payload: await getTopTags(imageHashMap, 20),
     });
     console.timeEnd("processAllImages");
 
-    // send images with location
+    // SEND IMAGES WITH LOCATION
     sendToRenderer({
       type: setImagesWithLocation.type,
-      payload: getImagesWihLocation(imageHashMap),
+      payload: getImagesWithLocation(imageHashMap),
     });
 
     this.notify("finish processing", 100, false);
+
+    // PERSIST IN STORE
     setImageHashMap(imageHashMap);
   }
 

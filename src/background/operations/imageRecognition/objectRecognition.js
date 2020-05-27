@@ -14,16 +14,16 @@ export const loadModel = async () => {
 };
 
 /**
- * Get objects in an image
+ * Get coco-ssd class ids for an image
  * @param {ImageData} imageData
- * @returns {Promise<string[]>} array with object tags
+ * @returns {Promise<string[]>} array with coco-ssd class names
  */
-const getObjects = async (imageData) => {
+const objectRecognitionImage = async (imageData) => {
+  const cocoSsdClassNames = [];
+
   if (!net) await loadModel();
 
   let pixels = tf.browser.fromPixels(imageData);
-
-  const objects = [];
 
   console.time("detect objects");
   const predictions = await net.detect(pixels);
@@ -32,22 +32,16 @@ const getObjects = async (imageData) => {
     const score = prediction.score;
     const predictedClass = prediction.class;
     if (score > MIN_SCORE) {
-      objects.push(predictedClass);
-      // objects.push({ name: predictedClass, score });
+      cocoSsdClassNames.push(predictedClass);
     }
   });
   console.timeEnd("detect objects");
 
-  return objects;
+  // clean up
+  pixels.dispose();
+  pixels = null;
+
+  return cocoSsdClassNames;
 };
 
-/**
- * Get object tags in an image
- * @param {ImageData} imageData
- * @returns {Promise<string[]>} array with object tags
- */
-const getImageObjects = async (imageData) => {
-  return await getObjects(imageData);
-};
-
-export default getImageObjects;
+export default objectRecognitionImage;

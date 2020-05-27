@@ -17,10 +17,16 @@ const getEXIF = (filePath) => {
 };
 
 /**
- * Get the location info for an image
- * @param {string} imagePath
+ * @typedef {Object} LatLong
+ * @property {number} latitude - The latitude
+ * @property {number} longitude - The longitude
  */
-const getLocation = async (imagePath) => {
+/**
+ * Get the location info for an image
+ * @param {string} imagePath without file:// prefix
+ * @returns {Promise<LatLong>}
+ */
+export const getImageLocation = async (imagePath) => {
   let exifData = await getEXIF(imagePath);
 
   // console.log(exifData);
@@ -40,19 +46,16 @@ const getLocation = async (imagePath) => {
     longDMS[1]
   }' ${longDMS[2]}"`;
 
-  // console.log(geoString);
-
   const { lat, lon } = toDecimal(geoString);
-
   return { latitude: lat, longitude: lon };
 };
 
 /**
- * Get the images that have latitude
+ * Get the images that have location data from store
  * @param {Object} imageHashMap
- * @returns {string[]} list of image hashes without tags
+ * @returns {string[]} list of image hashes with location data
  */
-export const getImagesWihLocation = (imageHashMap) => {
+export const getImagesWithLocation = (imageHashMap) => {
   let imagesWithLocation = [];
   Object.keys(imageHashMap).forEach((key) => {
     const image = imageHashMap[key];
@@ -63,5 +66,3 @@ export const getImagesWihLocation = (imageHashMap) => {
 
   return imagesWithLocation;
 };
-
-export default getLocation;

@@ -16,9 +16,9 @@ export async function loadModel() {
 }
 
 /**
- * Generate image classification tags for a given image above a probability threshold
+ * Generate the image classification ids for a given image.
  * @param {ImageData} imageData
- * @returns {Promise<String[]>} tags
+ * @returns {Promise<number[]>} imagenet class ids
  */
 export async function classifyImage(imageData) {
   if (!net) await loadModel();
@@ -27,33 +27,15 @@ export async function classifyImage(imageData) {
 
   console.time("classify");
   let logits = await net.infer(pixels);
-  console.log(await getTopKImagenetClassNumbers(logits));
-
-  // let rawPredictions = await net.classify(pixels);
+  let imageNetClassNumbers = await getTopKImagenetClassNumbers(logits);
   console.timeEnd("classify");
-
-  // filter out predictions below threshold
-  // let filteredRawPredictions = rawPredictions.filter(
-  //   (rawPrediction) => rawPrediction.probability > PROBABILITY_THRESHOLD
-  // );
-
-  // console.log(filteredRawPredictions);
-
-  // aggregate results, picking only the first name for each class
-  const predictions = [];
-  // filteredRawPredictions.forEach((rawPrediction) => {
-  //   const tag = rawPrediction.className.split(", ")[0].toLowerCase();
-  //   predictions.push(tag);
-  // });
 
   // free memory by cleaning TF-internals and variables
   pixels.dispose();
   pixels = null;
-  imageData = null;
-  // rawPredictions = null;
-  // filteredRawPredictions = null;
+  logits = null;
 
-  return predictions;
+  return imageNetClassNumbers;
 }
 
 var __awaiter =
@@ -230,28 +212,7 @@ function getTopKImagenetClassNumbers(logits, topK = 5) {
   });
 }
 
-// CUSTOM CLASSES FOR SORTING:
-
-// // when
-// const night;
-// const morning;
-// // what
-// const dark;
-// const bright;
-// const vehicle;
-// const animal;
-// const food;
-// const drink;
-// const sports;
-// // where
-// const mountain;
-// const waterside ;
-// // people
-// const happy;
-// const sad;
-// const surprised;
-// const alone;
-// const peopleGroup;
+// TODONOW: clean up
 
 /**
  * Identify if image contains animals, by imagenet class numbers

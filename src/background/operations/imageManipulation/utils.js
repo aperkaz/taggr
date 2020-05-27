@@ -1,10 +1,25 @@
 /**
+ * Load image using the DOM Image element
+ *
+ * @param {String} path
+ * @returns {Promise<HTMLImageElement>} loaded image
+ */
+export const loadImage = async (path) => {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onerror = (err) => reject(err);
+    img.onload = () => resolve(img);
+    img.src = path;
+  });
+};
+
+/**
  * Generate a ImageData structure from a imagePath. Prepocess using Canvas to algorithm input: 224px
  *
  * @param {HTMLImageElement} img
  * @returns {Promise<ImageData>} loaded image
  */
-const generateImageData = async (img, dataHeight = null) => {
+export const generateImageData = async (img, dataHeight = null) => {
   if (dataHeight) {
     // calculate new ratios for image size, based on MAX_HEIGHT
     if (img.height > dataHeight) {
@@ -31,20 +46,3 @@ const generateImageData = async (img, dataHeight = null) => {
 
   return imageData;
 };
-
-/**
- * Load image using DOM Image element
- *
- * @param {String} path
- * @returns {Promise<HTMLImageElement>} loaded image
- */
-export const loadImage = async (path) => {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.onerror = (err) => reject(err);
-    img.onload = () => resolve(img);
-    img.src = path;
-  });
-};
-
-export default generateImageData;
