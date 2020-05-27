@@ -8,14 +8,12 @@ const Header = ({
     name: taskName = "not defined ",
     percentage: taskPercentage = 0,
   },
+  onFilterChange,
 }) => {
-  // TODONOW: manage filter values
-  // const [inputValue, setInputValue] = useState("");
-
   return isTaskOngoing ? (
     <TaskProgress name={taskName} percentage={taskPercentage} />
   ) : (
-    <Filter />
+    <Filter onFilterChange={onFilterChange} />
   );
 };
 

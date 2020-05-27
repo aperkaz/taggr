@@ -14,8 +14,11 @@ const withStore = () => {
     dispatch(setActiveRoute(CONSTANTS.ROUTES.SETTINGS_PAGE));
   };
 
-  const onInputChange = debounce((v) => {
-    searchImages(v);
+  const onFilterChange = debounce((rawFilter) => {
+    // console.log(rawFilter);
+    // send to backend only enabled filters, ex. {dog: true}
+    let filter = Object.keys(rawFilter).filter((k) => rawFilter[k]);
+    searchImages(filter);
   }, 200);
 
   return (
@@ -23,6 +26,7 @@ const withStore = () => {
       {...{
         onSettingsClick,
         task: useSelector((s) => s.task),
+        onFilterChange,
         images: useSelector((s) => s.images),
         imagesWithLocation: useSelector((s) => s.imagesWithLocation),
       }}

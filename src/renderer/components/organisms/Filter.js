@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import FancyButton from "../molecules/FancyButton";
@@ -56,48 +56,93 @@ const ButtonWrapper = styled.div`
   justify-content: center;
 `;
 
-const Filter = () => (
-  <Wrapper>
-    <Sections>
-      <Section>
-        <Title>when</Title>
-        <ButtonWrapper>
-          <FilterButton text="🌙 Nights" />
-          <FilterButton text="🌅 Mornings" />
-        </ButtonWrapper>
-      </Section>
-      <Section>
-        <Title>what</Title>
-        <ButtonWrapper>
-          <FilterButton text="🌚 Dark pics" />
-          <FilterButton text="💡 Bright pics" />
-          <FilterButton text="🚗 Vehicles" />
-          <FilterButton text=" 🐱 Animals" />
-          <FilterButton text="🍜 Food" />
-          <FilterButton text="⚽️ Sports" />
-        </ButtonWrapper>
-      </Section>
-      <Section>
-        <Title>where</Title>
-        <ButtonWrapper>
-          <FilterButton text="⛰ Mountains" />
-          <FilterButton text="🌊 Water" />
-        </ButtonWrapper>
-      </Section>
-      <Section>
-        <Title>people</Title>
-        <ButtonWrapper>
-          <FilterButton text="🤗 Happy" />
-          <FilterButton text="☹️ Sad" />
-          <FilterButton text="💨 Alone" />
-          <FilterButton text="👯‍♂️ Group" />
-        </ButtonWrapper>
-      </Section>
-    </Sections>
-    <div style={{ margin: "auto" }}>
-      <FancyButton text="surprise me" />
-    </div>
-  </Wrapper>
-);
+const Filter = ({ onFilterChange }) => {
+  const [activeFilter, setActiveFilter] = useState({
+    dark: false,
+    bright: false,
+    vehicle: false,
+    animal: false,
+    food: false,
+    sport: false,
+  });
+
+  const triggerFilter = (name) => {
+    const newFilter = {
+      ...activeFilter,
+      [name]: !activeFilter[name],
+    };
+
+    onFilterChange(newFilter);
+    setActiveFilter(newFilter);
+  };
+
+  return (
+    <Wrapper>
+      <Sections>
+        {/* <Section>
+          <Title>when</Title>
+          <ButtonWrapper>
+            <FilterButton text="🌙 Nights" />
+            <FilterButton text="🌅 Mornings" />
+          </ButtonWrapper>
+        </Section> */}
+        <Section>
+          <Title>what</Title>
+          <ButtonWrapper>
+            <FilterButton
+              text="🌚 Dark pics"
+              active={activeFilter.dark}
+              onClick={() => triggerFilter("dark")}
+            />
+            <FilterButton
+              text="💡 Bright pics"
+              active={activeFilter.bright}
+              onClick={() => triggerFilter("bright")}
+            />
+            <FilterButton
+              text="🚗 Vehicles"
+              active={activeFilter.vehicle}
+              onClick={() => triggerFilter("vehicle")}
+            />
+            <FilterButton
+              text=" 🐱 Animals"
+              active={activeFilter.animal}
+              onClick={() => triggerFilter("animal")}
+            />
+            <FilterButton
+              text="🍜 Food"
+              active={activeFilter.food}
+              onClick={() => triggerFilter("food")}
+            />
+            <FilterButton
+              text="⚽️ Sports"
+              active={activeFilter.sport}
+              onClick={() => triggerFilter("sport")}
+            />
+          </ButtonWrapper>
+        </Section>
+        {/* <Section>
+          <Title>where</Title>
+          <ButtonWrapper>
+            <FilterButton text="⛰ Mountains" />
+            <FilterButton text="🌊 Water" />
+          </ButtonWrapper>
+        </Section>
+        <Section>
+          <Title>people</Title>
+          <ButtonWrapper>
+            <FilterButton text="🤗 Happy" />
+            <FilterButton text="☹️ Sad" />
+            <FilterButton text="💨 Alone" />
+            <FilterButton text="👯‍♂️ Group" />
+          </ButtonWrapper>
+        </Section> */}
+      </Sections>
+      <div style={{ margin: "auto" }}>
+        <FancyButton text="surprise me" />
+      </div>
+    </Wrapper>
+  );
+};
 
 export default Filter;

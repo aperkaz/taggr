@@ -18,6 +18,7 @@ const Wrapper = styled.div`
 const MainPage = ({
   onSettingsClick = () => null,
   task,
+  onFilterChange,
   images = [],
   imagesWithLocation = [],
 }) => {
@@ -30,7 +31,7 @@ const MainPage = ({
   return (
     <Wrapper>
       <NavBar onSettingsClick={onSettingsClick} />
-      <Header task={task} />
+      <Header task={task} onFilterChange={onFilterChange} />
 
       <NavigationTabs value={value} handleChange={handleChange} />
       {value === 0 ? <Gallery imageList={images} /> : null}

@@ -22,6 +22,7 @@ export const FancyButton = () => (
 export const FilterButton = () => (
   <FilterButtonComp
     text={text("text", "🚀 Moon")}
+    active={boolean("active", false)}
     onClick={action("trigger onClick")}
   />
 );

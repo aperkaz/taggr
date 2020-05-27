@@ -29,10 +29,10 @@ export const deleteProject = () => {
 
 /**
  * Trigger image search in background process
- * @param {String} tagValue partial value of image tag
+ * @param {String[]} tagValues
  */
-export const searchImages = (tagValue) => {
-  sendToBackground({ type: FLOWS.SEARCH_IMAGES, payload: tagValue });
+export const searchImages = (tagValues) => {
+  sendToBackground({ type: FLOWS.SEARCH_IMAGES, payload: tagValues });
 };
 
 // Listener for incomming IPC messages

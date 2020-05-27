@@ -29,6 +29,7 @@ export const Header = () => (
       ),
       percentage: number("taskPercentage", 50),
     }}
+    onFilterChange={action("trigger backend result filter")}
   />
 );
 

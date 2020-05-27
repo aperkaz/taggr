@@ -1,5 +1,5 @@
 const { getGlobal } = require("electron").remote;
-// export const backgroundLogger = getGlobal("backgroundLogger");
+export const backgroundLogger = getGlobal("backgroundLogger");
 import { loadModel as classifyImageLoadModel } from "./operations/imageRecognition/classification";
 // import { loadModel as isImageSexyLoadModel } from "./features/isImageSexy";
 import { loadModel as objectRecognitionLoadModel } from "./operations/imageRecognition/objectRecognition";

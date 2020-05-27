@@ -16,9 +16,9 @@ const createProject = new CreateProject();
 ipcRenderer.on(IPC_CHANNELS.MESSAGE_BUS, async (event, message) => {
   const { senderId, type, payload } = message;
 
-  // backgroundLogger.log(
-  //   `IPC: ${IPC_CHANNELS.MESSAGE_BUS} | from ${senderId} | type: ${type} | payload: ${payload}`
-  // );
+  console.log(
+    `IPC: ${IPC_CHANNELS.MESSAGE_BUS} | from ${senderId} | type: ${type} | payload: ${payload}`
+  );
 
   switch (type) {
     case FLOWS.CREATE_PROJECT:
