@@ -1,5 +1,5 @@
 const tf = require("@tensorflow/tfjs");
-// tf.enableProdMode();
+tf.enableProdMode();
 const cocoSsd = require("@tensorflow-models/coco-ssd");
 
 const MIN_SCORE = 0.5;

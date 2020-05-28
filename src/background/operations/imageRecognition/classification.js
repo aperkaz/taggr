@@ -1,9 +1,10 @@
 // @ts-ignore-next-line
 global.fetch = require("node-fetch");
 const tf = require("@tensorflow/tfjs");
+tf.enableProdMode();
 const mobilenet = require("@tensorflow-models/mobilenet");
 
-const PROBABILITY_THRESHOLD = 0.65;
+const PROBABILITY_THRESHOLD = 0.75;
 
 let net;
 
@@ -201,6 +202,8 @@ function getTopKImagenetClassNumbers(logits, topK = 5) {
           }
           topImagenetClassIds = [];
           for (i = 0; i < topkIndices.length; i++) {
+            // console.log(topkIndices[i]);
+            // console.log(topkValues[i]);
             if (topkValues[i] >= PROBABILITY_THRESHOLD) {
               topImagenetClassIds.push(topkIndices[i]);
             }
@@ -211,14 +214,3 @@ function getTopKImagenetClassNumbers(logits, topK = 5) {
     });
   });
 }
-
-// TODONOW: clean up
-
-/**
- * Identify if image contains animals, by imagenet class numbers
- * @param {number[]} imagenetClassNumbers list of imagenet classification numbers
- * @returns {boolean}
- */
-const isAnimal = (imagenetClassNumbers) => {
-  return imagenetClassNumbers.some((number) => 0 <= number && number <= 397);
-};

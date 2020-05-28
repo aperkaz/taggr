@@ -19,7 +19,7 @@ import range from "lodash.range";
  * @param {string[]} cocoSsdClassNames
  * @param {string} tagName
  */
-export const calculateTag = (imageNetClassIds, cocoSsdClassNames, tagName) => {
+const calculateTag = (imageNetClassIds, cocoSsdClassNames, tagName) => {
   // console.log(CUSTOM_TAGS);
   // TODONOW: add tests
   if (
@@ -37,6 +37,24 @@ export const calculateTag = (imageNetClassIds, cocoSsdClassNames, tagName) => {
     return true;
 
   return false;
+};
+
+/**
+ * Return list of custom tags for image.
+ * @param {number[]} imageNetClassIds
+ * @param {string[]} cocoSsdClassNames
+ * @returns {string[]}
+ */
+export const calculateTags = (imageNetClassIds, cocoSsdClassNames) => {
+  const tags = [];
+
+  Object.keys(CUSTOM_TAGS).forEach((tagName) => {
+    if (calculateTag(imageNetClassIds, cocoSsdClassNames, tagName)) {
+      tags.push(tagName);
+    }
+  });
+
+  return tags;
 };
 
 const CUSTOM_TAGS = {
@@ -205,5 +223,3 @@ const CUSTOM_TAGS = {
   //   cocoSsdClassIds: ["person"],
   // },
 };
-
-export default CUSTOM_TAGS;

@@ -19,12 +19,18 @@ export const loadImage = async (path) => {
  * @param {HTMLImageElement} img
  * @returns {Promise<ImageData>} loaded image
  */
-export const generateImageData = async (img, dataHeight = null) => {
-  if (dataHeight) {
+export const generateImageData = async (img, minHeighWidth = null) => {
+  if (minHeighWidth) {
     // calculate new ratios for image size, based on MAX_HEIGHT
-    if (img.height > dataHeight) {
-      img.width *= dataHeight / img.height;
-      img.height = dataHeight;
+
+    if (img.height >= img.width) {
+      img.width *= minHeighWidth / img.height;
+      img.height = minHeighWidth;
+    }
+
+    if (img.height < img.width) {
+      img.width = minHeighWidth;
+      img.height *= minHeighWidth / img.width;
     }
   }
 

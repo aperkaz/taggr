@@ -4,7 +4,7 @@ import normalizeImageUrl from "./normalizeImageUrl";
 /**
  * Generate main data structure from image path list
  * @param {string[]} imagePathList
- * @returns {Object} imageHashMap
+ * @returns {ImageHashMapType} imageHashMap
  */
 const generateImageHashMap = (imagePathList) => {
   const imageHashMap = {};

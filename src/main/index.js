@@ -41,6 +41,7 @@ function createRendererWindow() {
       nodeIntegration: true,
       webSecurity: false,
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
+      backgroundThrottling: false,
     },
   };
 
@@ -49,6 +50,7 @@ function createRendererWindow() {
       nodeIntegration: true,
       webSecurity: false,
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
+      backgroundThrottling: false,
     },
   };
 
@@ -104,6 +106,7 @@ function createBackgroundWindow() {
       webSecurity: false,
       nodeIntegrationInWorker: true,
       preload: HIDDEN_WINDOW_PRELOAD_WEBPACK_ENTRY,
+      backgroundThrottling: false,
     },
   };
 
@@ -114,6 +117,7 @@ function createBackgroundWindow() {
       webSecurity: false,
       nodeIntegrationInWorker: true,
       preload: HIDDEN_WINDOW_PRELOAD_WEBPACK_ENTRY,
+      backgroundThrottling: false,
     },
   };
 

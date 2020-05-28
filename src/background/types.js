@@ -2,10 +2,10 @@
 // Setup: add `"javascript.implicitProjectConfig.checkJs": true` to VSCode settings
 
 /**
- * @type {appStoreType} appStore
+ * @type {AppStoreType} appStore
  */
 /**
- * @typedef {Object} appStoreType Reactive store of backend relevant data.
+ * @typedef {Object} AppStoreType Reactive store of backend relevant data.
  * @property {string} projectRootFolderPath Path to the current root folder (project).
  * @property {Object} imageHashMap Map of image information, by image hash (from path).
  * @property {Object[]} flows array of active flows
@@ -18,6 +18,19 @@ const imageHashMap = {
     location: { lat: "", long: "" },
   },
 };
+
+/**
+ * @type {ImageHashMapType} imageHashMap
+ */
+/**
+ * @typedef {Object<string,ImageDataType>} ImageHashMapType main structure for image storage
+ * @typedef {Object} ImageDataType main structure for image storage
+ * @property {string} hash
+ * @property {string} path prefixed by file://
+ * @property {string} rawPath
+ * @property {string[]} tags
+ * @property {Object} location
+ */
 
 /**
  * @type {messageType} message

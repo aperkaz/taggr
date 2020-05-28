@@ -9,7 +9,7 @@ const initialState = {
 
 /**
  * Do not read it directly. ES6 modules imports are read only, so the store imported in other modules remains an outdated copy
- * @type {appStoreType} appStore
+ * @type {AppStoreType} appStore
  */
 let store = { ...initialState };
 
