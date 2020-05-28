@@ -12,7 +12,7 @@ import CUSTOM_TAGS, { calculateTag } from "../tags/customTags";
  */
 const processImage = async (rawImagePath, imagePath) => {
   let imgHtml = await loadImage(imagePath);
-  let smallImageData = await generateImageData(imgHtml, 224);
+  let smallImageData = await generateImageData(imgHtml, 300);
   let fullImageData = await generateImageData(imgHtml, 720);
 
   const data = {
