@@ -19,31 +19,33 @@ const imageHashMap = {
     tags: ["vehicle"],
     location: {},
   },
+  image3: {
+    hash: "image2",
+    path: "./path",
+    rawPath: "./path",
+    tags: [],
+    location: {},
+  },
 };
 
 test("searchImages with single tag", () => {
-  const searchTags = ["animal"];
+  const resultImages = searchImagesByTags(imageHashMap, ["vehicle"]);
 
-  const images = searchImagesByTags(imageHashMap, searchTags);
-
-  expect(images.length).toBe(1);
-  expect(images[0].hash).toBe("image1");
+  expect(resultImages.length).toBe(2);
+  expect(resultImages[0].hash).toBe("image1");
 });
 
 test("searchImages with multiple tags", () => {
-  const searchTags = ["animal", "vehicle"];
+  const resultImages = searchImagesByTags(imageHashMap, ["animal", "vehicle"]);
 
-  const images = searchImagesByTags(imageHashMap, searchTags);
-
-  expect(images.length).toBe(1);
-  expect(images[0].hash).toBe("image1");
+  expect(resultImages.length).toBe(1);
+  expect(resultImages[0].hash).toBe("image1");
 });
 
 test("searchImages with empty tags", () => {
-  const searchTags = [];
+  const allImagesInCollection = Object.keys(imageHashMap).length;
 
-  const images = searchImagesByTags(imageHashMap, searchTags);
+  const resultImages = searchImagesByTags(imageHashMap, []);
 
-  expect(images.length).toBe(1);
-  expect(images[0].hash).toBe("image1");
+  expect(resultImages.length).toBe(allImagesInCollection);
 });

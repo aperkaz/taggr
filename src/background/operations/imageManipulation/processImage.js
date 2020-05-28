@@ -1,6 +1,5 @@
 import { getImageLocation } from "./location";
 import { classifyImage } from "../imageRecognition/classification";
-// import { getImageTags } from "../tags";
 import { loadImage, generateImageData } from "./utils";
 import objectRecognitionImage from "../imageRecognition/objectRecognition";
 import { calculateTags } from "../tags/customTags";
