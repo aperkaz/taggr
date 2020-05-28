@@ -19,6 +19,7 @@ const imageHashMap = {
   },
 };
 
+// https://stackoverflow.com/questions/19513955/how-to-document-a-dictionary-in-jsdoc
 /**
  * @type {ImageHashMapType} imageHashMap
  */
