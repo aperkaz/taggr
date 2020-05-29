@@ -1,9 +1,5 @@
-import {
-  setImages,
-  setImagesWithLocation,
-  setTask,
-  setTags,
-} from "../../renderer/store"; // TODO: improvement: move action exports to /shared
+import { RENDERER_ACTIONS } from "../../shared/actions";
+
 import {
   recursivelyFindImages,
   generateImageHashMap,
@@ -30,7 +26,7 @@ class CreateProject {
 
   notify(message, percentage = 0, isOngoing = true) {
     sendToRendererThrottled({
-      type: setTask.type,
+      type: RENDERER_ACTIONS.setTask.type,
       payload: {
         isOngoing,
         name: message,
@@ -56,7 +52,7 @@ class CreateProject {
     // GENERATE STRUCTURE
     imageHashMap = generateImageHashMap(imagePathsToProcess);
     sendToRenderer({
-      type: setImages.type,
+      type: RENDERER_ACTIONS.setImages.type,
       payload: transformImageMaptoImageList(imageHashMap),
     });
 
@@ -76,7 +72,7 @@ class CreateProject {
       };
 
       sendToRendererThrottled({
-        type: setTask.type,
+        type: RENDERER_ACTIONS.setTask.type,
         payload: {
           name: `Processing ${toProcess} memories!`,
           percentage: Math.floor((processed * 100) / toProcess),
@@ -89,14 +85,14 @@ class CreateProject {
 
     // SEND TOP 20 TAGS (TODONOW: modify and send send active filters in future)
     sendToRenderer({
-      type: setTags.type,
+      type: RENDERER_ACTIONS.setTags.type,
       payload: await getTopTags(imageHashMap, 20),
     });
     console.timeEnd("processAllImages");
 
     // SEND IMAGES WITH LOCATION
     sendToRenderer({
-      type: setImagesWithLocation.type,
+      type: RENDERER_ACTIONS.setImagesWithLocation.type,
       payload: getImagesWithLocation(imageHashMap),
     });
 

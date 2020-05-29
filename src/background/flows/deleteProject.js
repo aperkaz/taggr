@@ -1,7 +1,7 @@
+import { RENDERER_ACTIONS } from "../../shared/actions";
+
 import { resetStore, stopFlows } from "../store";
 import { sendToRenderer } from "../services/utils";
-
-import { resetState } from "../../renderer/store";
 
 /**
  * Stop the current flows and delete the information relevant to the project from the backend
@@ -13,7 +13,7 @@ const deleteProject = async () => {
 
   // renderer
   sendToRenderer({
-    type: resetState.type,
+    type: RENDERER_ACTIONS.resetState.type,
     payload: null,
   });
 };

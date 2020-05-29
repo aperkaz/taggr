@@ -1,30 +1,28 @@
-import logger from "electron-timber";
-import IPC_CHANNELS from "../../shared/ipcChannels";
 const { ipcRenderer } = require("electron");
-import { sendToBackground } from "./utils";
+import logger from "electron-timber";
 
-import store, {
-  setImages,
-  setTask,
-  setTags,
-  resetState,
-  setImagesWithLocation,
-} from "../store";
-import FLOWS from "../../background/flows";
+import IPC_CHANNELS from "../../shared/ipcChannels";
+import { BACKGROUND_ACTIONS } from "../../shared/actions";
+
+import store, { ACTIONS } from "../store";
+import { sendToBackground } from "./utils";
 
 /**
  * Trigger project creation in background process
  * @param {String} folderPath root folder path for the project
  */
 export const createProject = (folderPath) => {
-  sendToBackground({ type: FLOWS.CREATE_PROJECT, payload: folderPath });
+  sendToBackground({
+    type: BACKGROUND_ACTIONS.CREATE_PROJECT,
+    payload: folderPath,
+  });
 };
 
 /**
  * Trigger project deletion in background process
  */
 export const deleteProject = () => {
-  sendToBackground({ type: FLOWS.DELETE_PROJECT, payload: null });
+  sendToBackground({ type: BACKGROUND_ACTIONS.DELETE_PROJECT, payload: null });
 };
 
 /**
@@ -32,7 +30,10 @@ export const deleteProject = () => {
  * @param {String[]} tagValues
  */
 export const searchImages = (tagValues) => {
-  sendToBackground({ type: FLOWS.SEARCH_IMAGES, payload: tagValues });
+  sendToBackground({
+    type: BACKGROUND_ACTIONS.SEARCH_IMAGES,
+    payload: tagValues,
+  });
 };
 
 // Listener for incomming IPC messages
@@ -44,20 +45,20 @@ ipcRenderer.on(
     );
 
     switch (type) {
-      case setImages.type:
-        store.dispatch(setImages(payload));
+      case ACTIONS.setImages.type:
+        store.dispatch(ACTIONS.setImages(payload));
         break;
-      case setImagesWithLocation.type:
-        store.dispatch(setImagesWithLocation(payload));
+      case ACTIONS.setImagesWithLocation.type:
+        store.dispatch(ACTIONS.setImagesWithLocation(payload));
         break;
-      case setTask.type:
-        store.dispatch(setTask(payload));
+      case ACTIONS.setTask.type:
+        store.dispatch(ACTIONS.setTask(payload));
         break;
-      case setTags.type:
-        store.dispatch(setTags(payload));
+      case ACTIONS.setTags.type:
+        store.dispatch(ACTIONS.setTags(payload));
         break;
-      case resetState.type:
-        store.dispatch(resetState());
+      case ACTIONS.resetState.type:
+        store.dispatch(ACTIONS.resetState());
         break;
       default:
     }

@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 
-import { setActiveRoute } from "../../../store";
+import { ACTIONS } from "../../../store";
 import { createProject } from "../../../services";
 import CONSTANTS from "../../../store/constants";
 import StartPage from "./Page";
@@ -20,7 +20,7 @@ const withStore = () => {
 
     if (!projectRootFolderPath) return;
 
-    dispatch(setActiveRoute(CONSTANTS.ROUTES.DASHBOARD_PAGE));
+    dispatch(ACTIONS.setActiveRoute(CONSTANTS.ROUTES.DASHBOARD_PAGE));
     createProject(projectRootFolderPath);
   };
 

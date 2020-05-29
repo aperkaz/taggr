@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import debounce from "lodash.debounce";
 
 import MainPage from "./Page";
-import { setActiveRoute } from "../../../store";
+import { ACTIONS } from "../../../store";
 import CONSTANTS from "../../../store/constants";
 import { searchImages } from "../../../services";
 
@@ -11,7 +11,7 @@ const withStore = () => {
   const dispatch = useDispatch();
 
   const onSettingsClick = () => {
-    dispatch(setActiveRoute(CONSTANTS.ROUTES.SETTINGS_PAGE));
+    dispatch(ACTIONS.setActiveRoute(CONSTANTS.ROUTES.SETTINGS_PAGE));
   };
 
   const onFilterChange = debounce((rawFilter) => {

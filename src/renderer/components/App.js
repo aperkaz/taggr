@@ -50,11 +50,6 @@ const App = ({ activeRoute }) => {
       console.log(
         `Current version: ${currentAppVersion} | Latest version: ${latestAppVersion}`
       );
-
-      // open modal if new version of app exists
-      if (semverCompare(currentAppVersion, latestAppVersion) === -1) {
-        handleOpen();
-      }
     });
   };
 
@@ -66,10 +61,9 @@ const App = ({ activeRoute }) => {
     <Wrapper>
       <PageWrapper>{renderRoute(activeRoute)}</PageWrapper>
       <UpdateModal
-        // currentAppVersion={}
-        updateAction={async (event) => {
-          handleClose();
-          event.preventDefault();
+        currentAppVersion={state.currentAppVersion}
+        latestAppVersion={state.latestAppVersion}
+        onUpdateSelect={() => {
           shell.openExternal("https://taggr.ai");
         }}
       />
