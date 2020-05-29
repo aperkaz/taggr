@@ -1,7 +1,7 @@
 // @ts-ignore-next-line
 global.fetch = require("node-fetch");
 const tf = require("@tensorflow/tfjs");
-tf.enableProdMode();
+// tf.enableProdMode();
 const mobilenet = require("@tensorflow-models/mobilenet");
 
 const PROBABILITY_THRESHOLD = 0.75;
@@ -24,7 +24,7 @@ export async function loadModel() {
 export async function classifyImage(imageData) {
   if (!net) await loadModel();
 
-  let pixels = tf.browser.fromPixels(imageData);
+  let pixels = tf.tidy(() => tf.browser.fromPixels(imageData));
 
   console.time("classify");
   let logits = await net.infer(pixels);

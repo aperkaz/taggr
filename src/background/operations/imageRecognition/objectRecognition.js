@@ -1,5 +1,4 @@
 const tf = require("@tensorflow/tfjs");
-tf.enableProdMode();
 const cocoSsd = require("@tensorflow-models/coco-ssd");
 
 const MIN_SCORE = 0.5;
@@ -23,7 +22,7 @@ const objectRecognitionImage = async (imageData) => {
 
   if (!net) await loadModel();
 
-  let pixels = tf.browser.fromPixels(imageData);
+  let pixels = tf.tidy(() => tf.browser.fromPixels(imageData));
 
   console.time("detect objects");
   const predictions = await net.detect(pixels);
