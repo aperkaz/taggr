@@ -11,7 +11,8 @@ const Wrapper = styled.div`
 `;
 
 const Sections = styled.div`
-  width: 85%;
+  /* width: 85%; */
+  width: 100%;
 
   display: flex;
   align-items: flex-start;
@@ -58,12 +59,20 @@ const ButtonWrapper = styled.div`
 
 const Filter = ({ onFilterChange }) => {
   const [activeFilter, setActiveFilter] = useState({
-    dark: false,
-    bright: false,
+    // WHAT
+    // dark: false,
+    // bright: false,
     vehicle: false,
+    boat: false,
     animal: false,
     food: false,
+    drink: false,
     sport: false,
+    // WHERE
+    nature: false,
+    water: false,
+    // PEOPLE
+    person: false,
   });
 
   const triggerFilter = (name) => {
@@ -89,7 +98,7 @@ const Filter = ({ onFilterChange }) => {
         <Section>
           <Title>what</Title>
           <ButtonWrapper>
-            <FilterButton
+            {/* <FilterButton
               text="🌚 Dark pics"
               active={activeFilter.dark}
               onClick={() => triggerFilter("dark")}
@@ -98,11 +107,21 @@ const Filter = ({ onFilterChange }) => {
               text="💡 Bright pics"
               active={activeFilter.bright}
               onClick={() => triggerFilter("bright")}
+            /> */}
+            <FilterButton
+              text="😀 People"
+              active={activeFilter.person}
+              onClick={() => triggerFilter("person")}
             />
             <FilterButton
               text="🚗 Vehicles"
               active={activeFilter.vehicle}
               onClick={() => triggerFilter("vehicle")}
+            />
+            <FilterButton
+              text="🚤 Boat"
+              active={activeFilter.boat}
+              onClick={() => triggerFilter("boat")}
             />
             <FilterButton
               text=" 🐱 Animals"
@@ -115,20 +134,33 @@ const Filter = ({ onFilterChange }) => {
               onClick={() => triggerFilter("food")}
             />
             <FilterButton
+              text="🍺 Drinks"
+              active={activeFilter.drink}
+              onClick={() => triggerFilter("drink")}
+            />
+            <FilterButton
               text="⚽️ Sports"
               active={activeFilter.sport}
               onClick={() => triggerFilter("sport")}
             />
           </ButtonWrapper>
         </Section>
-        {/* <Section>
+        <Section>
           <Title>where</Title>
           <ButtonWrapper>
-            <FilterButton text="⛰ Mountains" />
-            <FilterButton text="🌊 Water" />
+            <FilterButton
+              text="⛰ Nature"
+              active={activeFilter.nature}
+              onClick={() => triggerFilter("nature")}
+            />
+            <FilterButton
+              text="🌊 Water"
+              active={activeFilter.water}
+              onClick={() => triggerFilter("water")}
+            />
           </ButtonWrapper>
         </Section>
-        <Section>
+        {/* <Section>
           <Title>people</Title>
           <ButtonWrapper>
             <FilterButton text="🤗 Happy" />
@@ -138,9 +170,9 @@ const Filter = ({ onFilterChange }) => {
           </ButtonWrapper>
         </Section> */}
       </Sections>
-      <div style={{ margin: "auto" }}>
+      {/* <div style={{ margin: "auto" }}>
         <FancyButton text="surprise me" />
-      </div>
+      </div> */}
     </Wrapper>
   );
 };

@@ -1,19 +1,6 @@
 import range from "lodash.range";
 import get from "lodash.get";
 
-// // when
-// const night;
-// const morning;
-// // what
-// const dark;
-// const bright;
-// // people
-// const happy;
-// const sad;
-// const surprised;
-// const alone;
-// const peopleGroup;
-
 /**
  * Return true is an image classifies as the given tagName.
  * @param {number[]} imageNetClassIds

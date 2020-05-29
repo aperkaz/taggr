@@ -2,8 +2,8 @@ import React from "react";
 import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
 
-import backgroundImage from "../../../statics/background.jpeg";
 import FancyButton from "../../molecules/FancyButton";
+import backgroundImage from "../../../statics/background.jpeg";
 
 const InnerWrapper = styled.div`
   background: linear-gradient(
@@ -28,13 +28,6 @@ const Wrapper = styled.div`
 
 const Main = styled.div`
   margin: auto;
-`;
-
-const UnderTitle = styled.p`
-  margin-bottom: 2rem;
-  font-family: Open Sans;
-  color: white;
-  font-size: 1.75rem;
 `;
 
 const Footer = styled.div`
