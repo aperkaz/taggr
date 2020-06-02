@@ -1,0 +1,16 @@
+{
+  "name": "node_scripts",
+  "version": "1.0.0",
+  "description": "helper scripts",
+  "main": "resizeImages.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alain Perkaz",
+  "license": "ISC",
+  "dependencies": {
+    "path": "^0.12.7",
+    "sharp": "^0.25.3",
+    "tiny-async-pool": "^1.1.0"
+  }
+}
