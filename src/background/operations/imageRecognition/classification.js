@@ -24,7 +24,7 @@ export async function loadModel() {
 export async function classifyImage(imageData) {
   if (!net) await loadModel();
 
-  let pixels = tf.tidy(() => tf.browser.fromPixels(imageData));
+  let pixels = tf.browser.fromPixels(imageData);
 
   console.time("classify");
   let logits = await net.infer(pixels);

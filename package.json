@@ -135,6 +135,7 @@
     "@types/jest": "^25.2.3",
     "async": "^3.2.0",
     "babel-jest": "^26.0.1",
+    "comlink": "^4.3.0",
     "electron-is-dev": "^1.2.0",
     "electron-squirrel-startup": "^1.0.0",
     "electron-timber": "^0.5.1",

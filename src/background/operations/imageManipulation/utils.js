@@ -14,35 +14,47 @@ export const loadImage = async (path) => {
 };
 
 /**
- * Generate a ImageData structure from a imagePath. Prepocess using Canvas to algorithm input: 224px
+ * Generate a ImageData structure from a imagePath.
+ * Prepocess using Canvas with maximum height/weight
  *
  * @param {HTMLImageElement} img
  * @returns {Promise<ImageData>} loaded image
  */
-export const generateImageData = async (img, minHeighWidth = null) => {
-  if (minHeighWidth) {
-    // calculate new ratios for image size, based on MAX_HEIGHT
+export const generateImageData = async (img, minWidthHeigh = 224) => {
+  let newHeight = img.height;
+  let newWidth = img.width;
 
-    if (img.height >= img.width) {
-      img.width *= minHeighWidth / img.height;
-      img.height = minHeighWidth;
-    }
+  if (img.width > img.height) {
+    if (img.height >= minWidthHeigh) {
+      const ratio = minWidthHeigh / img.height;
 
-    if (img.height < img.width) {
-      img.width = minHeighWidth;
-      img.height *= minHeighWidth / img.width;
+      newHeight = minWidthHeigh;
+      newWidth = Math.round(img.width * ratio);
     }
   }
 
+  if (img.width <= img.height) {
+    if (img.width >= minWidthHeigh) {
+      const ratio = minWidthHeigh / img.width;
+
+      newHeight = Math.round(img.height * ratio);
+      newWidth = minWidthHeigh;
+    }
+  }
+
+  console.log(`w: ${img.width}, h: ${img.height}`);
+  console.log(`w: ${newWidth}, h: ${newHeight}`);
+
   // console.time("transformInCanvas");
-  let canvas = new OffscreenCanvas(img.width, img.height);
+  let canvas = new OffscreenCanvas(newWidth, newHeight);
+
   let ctx = canvas.getContext("2d");
   // ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.drawImage(img, 0, 0, img.width, img.height);
+  ctx.drawImage(img, 0, 0, newWidth, newHeight);
 
   const imageData = canvas
     .getContext("2d")
-    .getImageData(0, 0, img.width, img.height);
+    .getImageData(0, 0, newWidth, newHeight);
 
   // console.timeEnd("transformInCanvas");
 

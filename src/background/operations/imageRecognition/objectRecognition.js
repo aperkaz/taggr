@@ -7,7 +7,7 @@ let net;
 
 export const loadModel = async () => {
   console.time("loadModel coco-ssd");
-  // net = await cocoSsd.load("lite_mobilenet_v2");
+  // net = await cocoSsd.load({ base: "mobilenet_v2" });
   net = await cocoSsd.load();
   console.timeEnd("loadModel coco-ssd");
 };
@@ -25,7 +25,7 @@ const objectRecognitionImage = async (imageData) => {
   let pixels = tf.tidy(() => tf.browser.fromPixels(imageData));
 
   console.time("detect objects");
-  const predictions = await net.detect(pixels);
+  let predictions = await net.detect(pixels);
 
   predictions.forEach((prediction) => {
     const score = prediction.score;
@@ -36,9 +36,10 @@ const objectRecognitionImage = async (imageData) => {
   });
   console.timeEnd("detect objects");
 
-  // clean up
+  // free memory by cleaning TF-internals and variables
   pixels.dispose();
   pixels = null;
+  predictions = null;
 
   return cocoSsdClassNames;
 };

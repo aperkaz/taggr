@@ -7,7 +7,7 @@ sharp.concurrency(1);
 
 const asyncPool = require("tiny-async-pool");
 
-const inputPath = "/home/alain/Desktop/pics/pictures"; // ex. 35GB
+const inputPath = "/home/alain/Dropbox/ALAIN/pictures"; // ex. 35GB
 const outputPath = "/home/alain/Desktop/pics/out"; // ex. 300MB x100 smaller (conversion in )
 
 async function run() {
