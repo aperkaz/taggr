@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ReactMapGL, { Marker } from "react-map-gl";
 import RoomIcon from "@material-ui/icons/Room";
 import Link from "@material-ui/core/Link";
-import Carousel, { Modal, ModalGateway } from "react-images";
+import FsLightbox from "fslightbox-react";
 
 const accessToken =
   "pk.eyJ1IjoidGFnZ3IiLCJhIjoiY2thMmJ0cGgyMDh2aDNocG5kZjcwaTdrOSJ9.dLriq493UOY4Jt-xZaAAZQ";
@@ -15,7 +15,7 @@ const Map = ({ imageList = [] }) => {
     zoom: 1,
   });
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [imagePreview, setImagePreview] = useState(false);
+  const [toggler, setToggler] = useState(false);
 
   return (
     <div style={{ height: "100%", width: "100%" }}>
@@ -46,7 +46,7 @@ const Map = ({ imageList = [] }) => {
               href="#"
               onClick={(e) => {
                 e.preventDefault();
-                setImagePreview(true);
+                setToggler(!toggler);
                 setSelectedIndex(index);
               }}
             >
@@ -55,21 +55,13 @@ const Map = ({ imageList = [] }) => {
           </Marker>
         ))}
       </ReactMapGL>
-      <ModalGateway>
-        {imagePreview ? (
-          <Modal onClose={() => setImagePreview(!imagePreview)}>
-            <Carousel
-              currentIndex={0}
-              views={[
-                {
-                  source: imageList[selectedIndex].path,
-                },
-              ]}
-              components={{ Footer: () => <div></div> }}
-            />
-          </Modal>
-        ) : null}
-      </ModalGateway>
+      <FsLightbox
+        toggler={toggler}
+        sources={[
+          imageList[selectedIndex] ? imageList[selectedIndex].path : null,
+        ]}
+        key={selectedIndex}
+      />
     </div>
   );
 };

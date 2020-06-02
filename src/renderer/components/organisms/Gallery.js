@@ -2,21 +2,22 @@ import React, { useState } from "react";
 import { SizeMe } from "react-sizeme";
 import PropTypes from "prop-types";
 import { FixedSizeGrid } from "react-window"; // Virtualize list for performance https://github.com/developerdizzle/react-virtual-list
-import Carousel, { Modal, ModalGateway } from "react-images";
-import ImageTile from "../molecules/ImageTile";
+import FsLightbox from "fslightbox-react";
 
-// TODONOW: replace with: https://codesandbox.io/s/simple-react-lightbox-t6dbq?file=/src/App.js
+import ImageTile from "../molecules/ImageTile";
 
 const GUTTER = 10;
 const ELEMENTS_PER_COLLUMN = 5;
 
 const Gallery = ({ imageList }) => {
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [imagePreview, setImagePreview] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [toggler, setToggler] = useState(false);
 
-  const openPreview = (index) => {
+  const openPreview = async (index) => {
     setSelectedIndex(index);
-    setImagePreview(true);
+    // hack to prevent lightbox with isOpen: undefined
+    await new Promise((r) => setTimeout(r, 10));
+    setToggler(!toggler);
   };
 
   return (
@@ -33,23 +34,13 @@ const Gallery = ({ imageList }) => {
           </div>
         )}
       </SizeMe>
-      <ModalGateway>
-        {imagePreview ? (
-          <Modal onClose={() => setImagePreview(!imagePreview)}>
-            <Carousel
-              // TODO: improvement: allow carousel to render multiple images. Currently does not support lazy loading, so very slow. https://github.com/jossmac/react-images/issues/300
-              // TODO: add index, and dynamically cahnge the view data
-              currentIndex={0}
-              views={[
-                {
-                  source: imageList[selectedIndex].path,
-                },
-              ]}
-              components={{ Footer: () => <div></div> }}
-            />
-          </Modal>
-        ) : null}
-      </ModalGateway>
+      <FsLightbox
+        toggler={toggler}
+        sources={[
+          imageList[selectedIndex] ? imageList[selectedIndex].path : null,
+        ]}
+        key={selectedIndex}
+      />
     </div>
   );
 };

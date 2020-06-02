@@ -59,6 +59,7 @@ webpack
 
 ## Future Features
 
+- Image editor: https://ui.toast.com/tui-image-editor/
 - Project information persistence: https://github.com/sindresorhus/electron-store
 - Images rotation: [sharp](https://github.com/lovell/sharp)
 - Replace gallery view with lazy loading: https://github.com/xiaolin/react-image-gallery
