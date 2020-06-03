@@ -13,7 +13,7 @@ import "./statics/index.css";
 setupFpsOverlayInDev();
 setupCrashAnalyticsInProd();
 
-trackEventInProd("User Interaction", "App opened");
+trackEventInProd({ category: "User Interaction", action: "App opened" });
 
 ReactDOM.render(
   <Provider store={store}>

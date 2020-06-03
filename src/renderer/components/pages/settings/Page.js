@@ -98,7 +98,7 @@ const SettingsPage = ({ onSelectReset, onSelectSave, onOpenLink }) => (
         >
           {/* Support us ❤️  */}
           <p>Open-beta release: v0.0.1</p>
-          <p>
+          <div>
             Performance improvements and new features:{" "}
             <A onClick={() => onOpenLink("https://taggr.ai/#roadmap")}>
               check progress
@@ -106,7 +106,7 @@ const SettingsPage = ({ onSelectReset, onSelectSave, onOpenLink }) => (
             {/* We are continuously working on preformance improvements and exciting
             new features (facial recognition, timeline representation of our
             pictures). */}
-          </p>
+          </div>
           <p>
             Suggestions or improvements? Reach out to: <b>contact@taggr.ai</b>
           </p>

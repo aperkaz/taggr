@@ -2,7 +2,6 @@
 // TODO: improvement: setup event tracking plan
 
 const { app } = require("electron");
-const isDev = require("electron-is-dev");
 
 const ua = require("universal-analytics");
 const { v4: uuid } = require("uuid");
@@ -17,10 +16,14 @@ nodeStorage.setItem("userid", userId);
 
 const usr = ua("UA-164532505-3", userId);
 
-// track only production data
+/**
+ * Track event in google analytics
+ * @param {string} category
+ * @param {string} action
+ * @param {string} label
+ * @param {number} value
+ */
 function trackEvent(category, action, label, value) {
-  if (isDev) return;
-
   usr
     .event({
       ec: category,
