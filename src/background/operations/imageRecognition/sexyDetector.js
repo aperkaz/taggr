@@ -7,9 +7,9 @@ let model;
 export async function loadModel() {
   if (model) return;
 
-  console.time("loadModel nsfwjs");
+  console.time("loadModel sexy");
   model = await nsfwjs.load();
-  console.timeEnd("loadModel nsfwjs");
+  console.timeEnd("loadModel sexy");
 }
 
 /**
@@ -20,11 +20,7 @@ export async function loadModel() {
 const isImageSexy = async (imageData) => {
   if (!model) await loadModel();
 
-  //   console.time("predict1");
   let predictions = await model.classify(imageData);
-  //   console.timeEnd("predict1");
-  console.log("Predictions: ", predictions);
-
   const sexyPrediction = predictions.find((p) => p.className === "Sexy");
 
   return sexyPrediction.probability > SEXY_THRESHOLD;

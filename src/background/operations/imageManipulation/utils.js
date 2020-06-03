@@ -42,9 +42,6 @@ export const generateImageData = async (img, minWidthHeigh = 224) => {
     }
   }
 
-  console.log(`w: ${img.width}, h: ${img.height}`);
-  console.log(`w: ${newWidth}, h: ${newHeight}`);
-
   // console.time("transformInCanvas");
   let canvas = new OffscreenCanvas(newWidth, newHeight);
 

@@ -59,6 +59,7 @@ webpack
 
 ## Future Features
 
+- Some images are displayed rotated, example in thailand trip 
 - Remove text selection: https://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting
 - Image editor: https://ui.toast.com/tui-image-editor/
 - Project information persistence: https://github.com/sindresorhus/electron-store

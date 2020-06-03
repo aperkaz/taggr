@@ -16,11 +16,9 @@ const processImage = async (rawImagePath, imagePath) => {
 
   // ML classification
   const imageNetClassIds = await classifyImage(imageData);
-  console.log(imageNetClassIds);
 
   // ML object recognition
   const cocoSsdClassNames = await objectRecognitionImage(imageData);
-  console.log(cocoSsdClassNames);
 
   const data = {
     location: await getImageLocation(rawImagePath),

@@ -29,8 +29,6 @@ const getEXIF = (filePath) => {
 export const getImageLocation = async (imagePath) => {
   let exifData = await getEXIF(imagePath);
 
-  // console.log(exifData);
-
   // check if gps is contained
   const latitude = get(exifData, "gps.GPSLatitude", null);
   const longitude = get(exifData, "gps.GPSLongitude", null);

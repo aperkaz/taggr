@@ -15,7 +15,6 @@ const withStore = () => {
   };
 
   const onFilterChange = debounce((rawFilter) => {
-    // console.log(rawFilter);
     // send to backend only enabled filters, ex. {dog: true}
     let filter = Object.keys(rawFilter).filter((k) => rawFilter[k]);
     searchImages(filter);

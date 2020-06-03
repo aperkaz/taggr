@@ -4,14 +4,12 @@
  */
 const { app, BrowserWindow } = require("electron");
 const isDev = require("electron-is-dev");
-// const logger = require("electron-timber");
 
 const IS_DEV_BUILD = false;
 
 // GLOBALS
 global.rendererWindow = null;
 global.backgroundWindow = null;
-// global.backgroundLogger = logger.create({ name: "background" });
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -23,14 +21,11 @@ let backgroundWindow, rendererWindow;
 const startApp = () => {
   backgroundWindow = createBackgroundWindow();
   global.backgroundWindow = backgroundWindow;
-  // logger.log("backgroundWindow created");
 
   rendererWindow = createRendererWindow();
   global.rendererWindow = rendererWindow;
-  // logger.log("rendererWindow created");
 
   setupGoogleAnalytics();
-  // logger.log("setup google analytics");
 };
 
 function createRendererWindow() {

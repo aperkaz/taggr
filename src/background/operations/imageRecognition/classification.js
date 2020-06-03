@@ -11,9 +11,9 @@ let net;
 export async function loadModel() {
   if (net) return;
 
-  console.time("loadModel mobilenet");
+  console.time("loadModel classification");
   net = await mobilenet.load();
-  console.timeEnd("loadModel mobilenet");
+  console.timeEnd("loadModel classification");
 }
 
 /**
@@ -26,10 +26,10 @@ export async function classifyImage(imageData) {
 
   let pixels = tf.browser.fromPixels(imageData);
 
-  console.time("classify");
+  // console.time("classify");
   let logits = await net.infer(pixels);
   let imageNetClassNumbers = await getTopKImagenetClassNumbers(logits);
-  console.timeEnd("classify");
+  // console.timeEnd("classify");
 
   // free memory by cleaning TF-internals and variables
   pixels.dispose();
@@ -202,8 +202,6 @@ function getTopKImagenetClassNumbers(logits, topK = 5) {
           }
           topImagenetClassIds = [];
           for (i = 0; i < topkIndices.length; i++) {
-            // console.log(topkIndices[i]);
-            // console.log(topkValues[i]);
             if (topkValues[i] >= PROBABILITY_THRESHOLD) {
               topImagenetClassIds.push(topkIndices[i]);
             }

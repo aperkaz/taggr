@@ -20,7 +20,5 @@ export const searchImagesByTags = (imageHashMap, searchTags) => {
     }
   });
 
-  // console.log(results);
-
   return results;
 };

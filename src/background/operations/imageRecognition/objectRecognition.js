@@ -6,10 +6,10 @@ const MIN_SCORE = 0.5;
 let net;
 
 export const loadModel = async () => {
-  console.time("loadModel coco-ssd");
+  console.time("loadModel object recognition");
   // net = await cocoSsd.load({ base: "mobilenet_v2" });
   net = await cocoSsd.load();
-  console.timeEnd("loadModel coco-ssd");
+  console.timeEnd("loadModel object recognition");
 };
 
 /**
@@ -24,7 +24,7 @@ const objectRecognitionImage = async (imageData) => {
 
   let pixels = tf.tidy(() => tf.browser.fromPixels(imageData));
 
-  console.time("detect objects");
+  // console.time("detect objects");
   let predictions = await net.detect(pixels);
 
   predictions.forEach((prediction) => {
@@ -34,7 +34,7 @@ const objectRecognitionImage = async (imageData) => {
       cocoSsdClassNames.push(predictedClass);
     }
   });
-  console.timeEnd("detect objects");
+  // console.timeEnd("detect objects");
 
   // free memory by cleaning TF-internals and variables
   pixels.dispose();

@@ -1,5 +1,4 @@
 const { ipcRenderer } = require("electron");
-import logger from "electron-timber";
 
 import IPC_CHANNELS from "../../shared/ipcChannels";
 import { BACKGROUND_ACTIONS } from "../../shared/actions";
@@ -40,9 +39,9 @@ export const searchImages = (tagValues) => {
 ipcRenderer.on(
   IPC_CHANNELS.MESSAGE_BUS,
   (event, { senderId, type, payload }) => {
-    logger.log(
-      `IPC: ${IPC_CHANNELS.MESSAGE_BUS} | from ${senderId} | type: ${type}`
-    );
+    // console.log(
+    //   `IPC: ${IPC_CHANNELS.MESSAGE_BUS} | from ${senderId} | type: ${type}`
+    // );
 
     switch (type) {
       case ACTIONS.setImages.type:
