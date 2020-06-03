@@ -44,10 +44,12 @@ const Map = ({ imageList = [] }) => {
           >
             <Link
               href="#"
-              onClick={(e) => {
+              onClick={async (e) => {
                 e.preventDefault();
-                setToggler(!toggler);
                 setSelectedIndex(index);
+                // hack to prevent lightbox with isOpen: undefined
+                await new Promise((r) => setTimeout(r, 10));
+                setToggler(!toggler);
               }}
             >
               <RoomIcon fontSize="large" />

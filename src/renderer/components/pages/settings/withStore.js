@@ -17,16 +17,21 @@ const withStore = () => {
     dispatch(ACTIONS.setActiveRoute(CONSTANTS.ROUTES.DASHBOARD_PAGE));
   };
 
-  const onSelectSupport = () => {
+  // const onSelectSupport = () => {
+  //   const { shell } = require("electron");
+  //   shell.openExternal("https://taggr.ai/support");
+  // };
+
+  const onOpenLink = (href) => {
     const { shell } = require("electron");
-    shell.openExternal("https://taggr.ai/support");
+    shell.openExternal(href);
   };
 
   return (
     <SettingsPage
       onSelectReset={onSelectReset}
       onSelectSave={onSelectSave}
-      onSelectSupport={onSelectSupport}
+      onOpenLink={onOpenLink}
     />
   );
 };

@@ -35,12 +35,25 @@ const Main = styled.div`
 const Footer = styled.div`
   margin-bottom: 1rem;
 
+  /* :hover {
+    cursor: pointer;
+  } */
+`;
+
+const A = styled.div`
+  display: inline;
+
+  text-decoration: none;
+  color: white;
+
   :hover {
     cursor: pointer;
   }
+
+  font-weight: bold;
 `;
 
-const SettingsPage = ({ onSelectReset, onSelectSave, onSelectSupport }) => (
+const SettingsPage = ({ onSelectReset, onSelectSave, onOpenLink }) => (
   <Wrapper>
     <InnerWrapper>
       <Main>
@@ -49,7 +62,7 @@ const SettingsPage = ({ onSelectReset, onSelectSave, onSelectSupport }) => (
           style={{
             fontFamily: "Poppins, sans-serif",
             color: "white",
-            marginBottom: "15vh",
+            marginBottom: "10vh",
           }}
         >
           Settings
@@ -63,7 +76,7 @@ const SettingsPage = ({ onSelectReset, onSelectSave, onSelectSupport }) => (
             fontFamily: "Open Sans",
             fontWeight: 600,
             color: "white",
-            marginBottom: "15vh",
+            marginBottom: "10vh",
           }}
           onClick={onSelectReset}
         >
@@ -73,15 +86,30 @@ const SettingsPage = ({ onSelectReset, onSelectSave, onSelectSupport }) => (
         <FancyButton text="Save" onClick={onSelectSave} />
       </Main>
 
-      <Footer onClick={onSelectSupport}>
+      <Footer
+      // onClick={onSelectSupport}
+      >
         <Typography
-          variant="h5"
+          variant="h6"
           style={{
             fontFamily: "Poppins, sans-serif",
             color: "white",
           }}
         >
-          Support us ❤️
+          {/* Support us ❤️  */}
+          <p>Open-beta release: v0.0.1</p>
+          <p>
+            Performance improvements and new features:{" "}
+            <A onClick={() => onOpenLink("https://taggr.ai/#roadmap")}>
+              check progress
+            </A>
+            {/* We are continuously working on preformance improvements and exciting
+            new features (facial recognition, timeline representation of our
+            pictures). */}
+          </p>
+          <p>
+            Suggestions or improvements? Reach out to: <b>contact@taggr.ai</b>
+          </p>
         </Typography>
       </Footer>
     </InnerWrapper>
@@ -91,7 +119,8 @@ const SettingsPage = ({ onSelectReset, onSelectSave, onSelectSupport }) => (
 SettingsPage.propTypes = {
   onSelectReset: PropTypes.func,
   onSelectSave: PropTypes.func,
-  onSelectSupport: PropTypes.func,
+  // onSelectSupport: PropTypes.func,
+  onOpenLink: PropTypes.func,
 };
 
 export default SettingsPage;
