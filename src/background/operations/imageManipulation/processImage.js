@@ -10,15 +10,23 @@ import { calculateTags } from "../tags/customTags";
  * @param {string} imagePath with file://
  */
 const processImage = async (rawImagePath, imagePath) => {
+  console.time('classify');
   let imgHtml = await loadImage(imagePath);
-  let imageData = await generateImageData(imgHtml);
-  // let imageDataFull = await generateImageData(imgHtml, 500);
+  console.timeEnd('classify');
 
+  console.time('imageData');
+  let imageData = await generateImageData(imgHtml);
+  console.timeEnd('imageData');
+  
   // ML classification
+  console.time('classify');
   const imageNetClassIds = await classifyImage(imageData);
+  console.timeEnd('classify');
 
   // ML object recognition
+  console.time('object');
   const cocoSsdClassNames = await objectRecognitionImage(imageData);
+  console.timeEnd('object');
 
   const data = {
     location: await getImageLocation(rawImagePath),

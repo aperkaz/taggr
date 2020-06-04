@@ -24,12 +24,15 @@ const recursivelyFindImages = async (folderPath) => {
       path,
       stats: { size },
     } = entry;
-    projectSize += size;
+
+    // in windows, files read as bigint. in linux, as number
+    const normalizedSize = (typeof size === 'bigint')? Number(size) : size;
+    projectSize +=normalizedSize;
+
     imagePathsList.push(`${folderPath}/${path}`);
   }
 
   // TODONOW: extract reporting
-  const imageSizeInMb = Math.round(projectSize / 1000000);
   trackEventInProd({
     category: "User Interaction",
     action: "Project created",
@@ -41,7 +44,7 @@ const recursivelyFindImages = async (folderPath) => {
     category: "User Interaction",
     action: "Project created",
     label: "Size (mb)",
-    value: imageSizeInMb,
+    value: Math.round(projectSize/1000000),
   });
 
   return imagePathsList;
