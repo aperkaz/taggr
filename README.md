@@ -59,6 +59,7 @@ webpack
 
 ## Future Features
 
+- Add github actions build: https://github.com/malept/electron-forge-demo123/actions/runs/116519042/workflow
 - Some images are displayed rotated, example in thailand trip 
 - Remove text selection: https://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting
 - Image editor: https://ui.toast.com/tui-image-editor/

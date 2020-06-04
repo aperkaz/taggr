@@ -17,7 +17,7 @@
   },
   "keywords": [],
   "author": {
-    "name": "aperkaz",
+    "name": "Alain Perkaz",
     "email": "alainperkaz@gmail.com"
   },
   "license": "MIT",
@@ -28,7 +28,10 @@
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "taggr"
+            "name": "taggr",
+            
+            "iconUrl": "C:\\Users\\test\\Desktop\\taggr\\iconWindows.ico",
+            "setupIcon": "C:\\Users\\test\\Desktop\\taggr\\iconWindows.ico"
           }
         },
         {
