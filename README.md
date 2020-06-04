@@ -64,6 +64,7 @@ webpack
 - Some images are displayed rotated, example in thailand trip 
 - Remove text selection: https://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting
 - Image editor: https://ui.toast.com/tui-image-editor/
+- Integration with 3rd party image sharing programs.
 - Project information persistence: https://github.com/sindresorhus/electron-store
 - Images rotation: [sharp](https://github.com/lovell/sharp)
 - Replace gallery view with lazy loading: https://github.com/xiaolin/react-image-gallery
