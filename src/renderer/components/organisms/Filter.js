@@ -160,15 +160,16 @@ const Filter = ({ onFilterChange }) => {
             />
           </ButtonWrapper>
         </Section>
-        {/* <Section>
-          <Title>people</Title>
+        <Section>
+          <Title>emotions [comming soon]</Title>
           <ButtonWrapper>
-            <FilterButton text="🤗 Happy" />
-            <FilterButton text="☹️ Sad" />
-            <FilterButton text="💨 Alone" />
-            <FilterButton text="👯‍♂️ Group" />
+            <FilterButton text="🤗 Happy" disabled={true} />
+            <FilterButton text="☹️ Sad" disabled={true} />
+            <FilterButton text="😲 Surprised" disabled={true} />
+            <FilterButton text="😱 Fear" disabled={true} />
+            <FilterButton text="😠 Angry" disabled={true} />
           </ButtonWrapper>
-        </Section> */}
+        </Section>
       </Sections>
       {/* <div style={{ margin: "auto" }}>
         <FancyButton text="surprise me" />

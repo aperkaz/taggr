@@ -2,9 +2,15 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
-const FilterButton = ({ text = "", active = false, onClick = () => null }) => (
+const FilterButton = ({
+  text = "",
+  active = false,
+  disabled = false,
+  onClick = () => null,
+}) => (
   <Button
     variant="outlined"
+    disabled={disabled}
     style={{
       margin: "4px",
       minWidth: "130px",
