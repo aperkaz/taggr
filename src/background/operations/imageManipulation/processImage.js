@@ -10,28 +10,28 @@ import { calculateTags } from "../tags/customTags";
  * @param {string} imagePath with file://
  */
 const processImage = async (rawImagePath, imagePath) => {
-  console.time('classify');
+  console.time("loadImage");
   let imgHtml = await loadImage(imagePath);
-  console.timeEnd('classify');
+  console.timeEnd("loadImage");
 
-  console.time('imageData');
+  console.time("imageData");
   let imageData = await generateImageData(imgHtml);
-  console.timeEnd('imageData');
-  
+  console.timeEnd("imageData");
+
+  // TODO: performance: extract to web worker to not block the other render processes
   // ML classification
-  console.time('classify');
+  console.time("classify");
   const imageNetClassIds = await classifyImage(imageData);
-  console.timeEnd('classify');
+  console.timeEnd("classify");
 
   // ML object recognition
-  console.time('object');
+  console.time("object");
   const cocoSsdClassNames = await objectRecognitionImage(imageData);
-  console.timeEnd('object');
+  console.timeEnd("object");
 
   const data = {
     location: await getImageLocation(rawImagePath),
     tags: calculateTags(imageNetClassIds, cocoSsdClassNames),
-    // tags: calculateTags(imageNetClassIds, []),
     // isSexy: await isImageSexy(smallImageData),
   };
 

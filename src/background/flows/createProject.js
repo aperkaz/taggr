@@ -66,11 +66,6 @@ class CreateProject {
       const hash = generateMD5Hash(rawImagePath);
       const imagePath = imageHashMap[hash].path;
 
-      imageHashMap[hash] = {
-        ...imageHashMap[hash],
-        ...(await processImage(rawImagePath, imagePath)),
-      };
-
       sendToRendererThrottled({
         type: RENDERER_ACTIONS.setTask.type,
         payload: {
@@ -78,16 +73,17 @@ class CreateProject {
           percentage: Math.floor((processed * 100) / toProcess),
         },
       });
+
+      imageHashMap[hash] = {
+        ...imageHashMap[hash],
+        ...(await processImage(rawImagePath, imagePath)),
+      };
+
       processed++;
     }
 
     if (!this.isActive) return;
 
-    // SEND TOP 20 TAGS (TODONOW: modify and send send active filters in future)
-    sendToRenderer({
-      type: RENDERER_ACTIONS.setTags.type,
-      payload: await getTopTags(imageHashMap, 20),
-    });
     console.timeEnd("processAllImages");
 
     // SEND IMAGES WITH LOCATION
