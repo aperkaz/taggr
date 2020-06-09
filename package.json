@@ -29,7 +29,6 @@
           "name": "@electron-forge/maker-squirrel",
           "config": {
             "name": "taggr",
-            
             "iconUrl": "C:\\Users\\test\\Desktop\\taggr\\iconWindows.ico",
             "setupIcon": "C:\\Users\\test\\Desktop\\taggr\\iconWindows.ico"
           }
