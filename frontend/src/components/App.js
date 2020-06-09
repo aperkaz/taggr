@@ -3,11 +3,11 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import semverCompare from "semver/functions/compare";
 
-import StartPage from "./start";
-import DashboardPage from "./main";
-import SettingsPage from "./settings";
-import UpdateModal from "../molecules/UpdateModal";
-import CONSTANTS from "../../store/constants";
+import StartPage from "./pages/start";
+import DashboardPage from "./pages/main";
+import SettingsPage from "./pages/settings";
+import UpdateModal from "./molecules/UpdateModal";
+import CONSTANTS from "../store/constants";
 
 const Wrapper = styled.div`
   height: 100%;
@@ -79,6 +79,8 @@ const renderRoute = (activeRoute) => {
       return <DashboardPage />;
     case CONSTANTS.ROUTES.SETTINGS_PAGE:
       return <SettingsPage />;
+    default:
+      return <div>my names is jeff</div>;
   }
 };
 
