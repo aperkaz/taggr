@@ -1,19 +1,19 @@
 {
   "name": "taggr",
   "productName": "taggr",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "My Electron application description",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "make": "rm -rf src/build; npm run build --prefix ../frontend; mv ../frontend/build ./src/frontend-build; electron-forge make",
+    "make": "rm -rf frontend-statics; npm run build --prefix ../frontend; mv ../frontend/build ./frontend-statics; electron-forge make",
     "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\""
   },
   "keywords": [],
   "author": {
-    "name": "aperkaz",
+    "name": "Alain Perkaz",
     "email": "alainperkaz@gmail.com"
   },
   "license": "MIT",
@@ -24,7 +24,9 @@
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "forge_basic"
+            "name": "taggr",
+            "iconUrl": "C:\\Users\\test\\Desktop\\taggr\\electron\\resources\\iconWindows.ico",
+            "setupIcon": "C:\\Users\\test\\Desktop\\taggr\\electron\\resources\\iconWindows.ico"
           }
         },
         {
@@ -35,16 +37,42 @@
         },
         {
           "name": "@electron-forge/maker-deb",
-          "config": {}
+          "config": {
+            "categories": [
+              "Graphics",
+              "Photography"
+            ],
+            "description": "Rediscover your memories while keeping your privacy.",
+            "genericName": "Enhanced Gallery",
+            "homepage": "https://taggr.ai/",
+            "icon": "resources/iconLinux.png",
+            "maintainer": "Alain Perkaz",
+            "name": "taggr",
+            "productDescription": "Keep your privacy while you rediscover your memories. You own your data, and all the computations by taggr happen locally. \n Easy to set up, ready to plug into your existing file system. \n\n Features: \n -Automatic image tagging using machine learning. \n -Aggregate images system-wide, while curating results. \n -Blazing fast image view experience \n -Geolocate your memories \n -And much more! \n\n Check upcoming features and updates in https://taggr.ai/",
+            "section": "graphics"
+          }
         },
         {
           "name": "@electron-forge/maker-rpm",
           "config": {}
         }
+      ],
+      "publishers": [
+        {
+          "name": "@electron-forge/publisher-github",
+          "config": {
+            "repository": {
+              "owner": "aperkaz",
+              "name": "taggr-releases"
+            },
+            "authToken": "e8c0863978337e54145b6ab38ab5b99388c6fd03"
+          }
+        }
       ]
     }
   },
   "dependencies": {
+    "@electron-forge/publisher-github": "^6.0.0-beta.51",
     "@tensorflow-models/mobilenet": "^2.0.4",
     "@tensorflow/tfjs-node": "^2.0.0",
     "electron-is-dev": "^1.2.0",

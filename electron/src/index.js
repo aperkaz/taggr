@@ -32,7 +32,7 @@ const createWindow = (socketName) => {
   clientWin.loadURL(
     isDev
       ? "http://localhost:3001"
-      : `file://${path.join(__dirname, "./frontend-build/index.html")}`
+      : `file://${path.join(__dirname, "../frontend-statics/index.html")}`
   );
 
   // Open the DevTools.
