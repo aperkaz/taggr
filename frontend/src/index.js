@@ -2,10 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import App from "./components/App";
+import { setupFpsOverlayInDev } from "./components/utils";
+
 import * as serviceWorker from "./serviceWorker";
 import store from "./store";
-import { init } from "./services";
+import { initSocketToServer } from "./services";
 import "./statics/index.css";
+
+if (window.IS_DEV) setupFpsOverlayInDev();
+if (window.IS_DEV != null) initSocketToServer();
 
 ReactDOM.render(
   <React.StrictMode>
@@ -20,6 +25,3 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
-
-// TODO: fix
-if (window.IS_DEV != null) init();

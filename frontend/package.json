@@ -47,6 +47,7 @@
     "react-sizeme": "^2.6.12",
     "react-window": "^1.8.5",
     "semver": "^7.3.2",
+    "stats.js": "^0.17.0",
     "styled-components": "^5.1.1"
   },
   "devDependencies": {

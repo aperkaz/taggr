@@ -1,20 +1,24 @@
-// TODONOW: rewrite to use node-ipc
+// Connection state
+const replyHandlers = new Map();
+const listeners = new Map();
+let messageQueue = [];
+let socketClient = null;
 
-// Init
-export async function init() {
+/**
+ * Initialize the socket connection with the backend
+ */
+export async function initSocketToServer() {
   const socketName = await window.getServerSocket();
   connectSocket(socketName, () => {
     console.log("Connected!");
   });
 }
 
-// State
-const replyHandlers = new Map();
-const listeners = new Map();
-let messageQueue = [];
-let socketClient = null;
-
-// Functions
+/**
+ * Connect to a given socket
+ * @param {string} name
+ * @param {function(): any} onOpen
+ */
 function connectSocket(name, onOpen) {
   window.ipcConnect(name, function (client) {
     client.on("message", (data) => {
