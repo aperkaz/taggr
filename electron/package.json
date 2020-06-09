@@ -25,8 +25,10 @@
           "name": "@electron-forge/maker-squirrel",
           "config": {
             "name": "taggr",
-            "iconUrl": "C:\\Users\\test\\Desktop\\taggr\\electron\\resources\\iconWindows.ico",
-            "setupIcon": "C:\\Users\\test\\Desktop\\taggr\\electron\\resources\\iconWindows.ico"
+            "iconUrl": "C:\\Users\\diana\\Desktop\\taggr\\electron\\resources\\iconWindows.ico",
+            "setupIcon": "C:\\Users\\diana\\Desktop\\taggr\\electron\\resources\\iconWindows.ico",
+            "certificateFile": "C:\\Users\\diana\\Desktop\\taggr\\electron\\resources\\WindowsCodeSigningCertificate.pfx",
+            "certificatePassword": "sa69uphlZOzplSFjNaNw"
           }
         },
         {
