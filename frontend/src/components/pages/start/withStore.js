@@ -6,11 +6,11 @@ import { createProject } from "../../../services";
 import CONSTANTS from "../../../store/constants";
 import StartPage from "./Page";
 
-const withStore = () => {
+const WithStore = () => {
   const dispatch = useDispatch();
 
   const onSelectRootFolderPath = async () => {
-    const { dialog } = require("electron").remote;
+    const { dialog } = window.require("electron").remote;
 
     const { filePaths } = await dialog.showOpenDialog({
       properties: ["openDirectory"],
@@ -25,7 +25,7 @@ const withStore = () => {
   };
 
   const onSelectLogo = () => {
-    const { shell } = require("electron");
+    const { shell } = window.require("electron");
     shell.openExternal("https://taggr.ai");
   };
 
@@ -37,4 +37,4 @@ const withStore = () => {
   );
 };
 
-export default withStore;
+export default WithStore;

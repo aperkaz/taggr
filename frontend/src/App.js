@@ -1,17 +1,13 @@
-const { app } = require("electron").remote;
-let shell = require("electron").shell;
-
 import React, { useEffect } from "react";
-import { hot, setConfig } from "react-hot-loader";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import semverCompare from "semver/functions/compare";
 
-import StartPage from "./pages/start";
-import DashboardPage from "./pages/main";
-import SettingsPage from "./pages/settings";
-import UpdateModal from "./molecules/UpdateModal";
-import CONSTANTS from "../store/constants";
+import StartPage from "./components/pages/start";
+import DashboardPage from "./components/pages/main";
+import SettingsPage from "./components/pages/settings";
+import UpdateModal from "./components/molecules/UpdateModal";
+import CONSTANTS from "./store/constants";
 
 const Wrapper = styled.div`
   height: 100%;
@@ -37,6 +33,8 @@ const App = ({ activeRoute }) => {
       const descendingOrderVersionTags = tagList.sort((v1, v2) => {
         return semverCompare(v2.name, v1.name);
       });
+
+      const { app } = window.require("electron").remote;
 
       const latestAppVersion = descendingOrderVersionTags[0].name;
       const currentAppVersion = `v${app.getVersion()}`;
@@ -64,6 +62,7 @@ const App = ({ activeRoute }) => {
         currentAppVersion={state.currentAppVersion}
         latestAppVersion={state.latestAppVersion}
         onUpdateSelect={() => {
+          let shell = window.require("electron").shell;
           shell.openExternal("https://taggr.ai");
         }}
       />
@@ -72,6 +71,7 @@ const App = ({ activeRoute }) => {
 };
 
 const renderRoute = (activeRoute) => {
+  // return <div>hey</div>;
   switch (activeRoute) {
     case CONSTANTS.ROUTES.START_PAGE:
       return <StartPage />;
@@ -85,7 +85,4 @@ const renderRoute = (activeRoute) => {
 // redux bindings
 const mapStateToProps = (state) => ({ activeRoute: state.activeRoute });
 
-setConfig({
-  showReactDomPatchNotification: false,
-});
-export default connect(mapStateToProps)(hot(module)(App));
+export default connect(mapStateToProps)(App);

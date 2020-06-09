@@ -7,8 +7,8 @@ import HeaderComp from "./Header";
 import GalleryComp from "./Gallery";
 import MapComp from "./Map";
 
-import FullHeight from "../stories/utils";
-import imageList from "../stories/mocks/imageList";
+import FullHeight from "../../stories/utils";
+import imageList from "../../stories/mocks/imageList";
 
 export default {
   title: "Organisms",

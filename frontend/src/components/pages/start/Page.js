@@ -3,7 +3,7 @@ import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
 
 import FancyButton from "../../molecules/FancyButton";
-import backgroundImage from "../../statics/background.jpeg";
+import backgroundImage from "../../../statics/background.jpeg";
 
 const InnerWrapper = styled.div`
   background: linear-gradient(

@@ -5,8 +5,8 @@ import StartPageComp from "./start/Page";
 import MainPageComp from "./main/Page";
 import SettingsPageComp from "./settings/Page";
 
-import FullHeight from "../stories/utils";
-import imageList from "../stories/mocks/imageList";
+import FullHeight from "../../stories/utils";
+import imageList from "../../stories/mocks/imageList";
 
 export default {
   title: "Pages",

@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
 
 import FancyButton from "../../molecules/FancyButton";
-import backgroundImage from "../../statics/background.jpeg";
+import backgroundImage from "../../../statics/background.jpeg";
 
 const Wrapper = styled.div`
   background: rgba(0, 0, 0, 0) url(${backgroundImage}) no-repeat scroll center
