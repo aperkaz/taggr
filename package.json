@@ -18,6 +18,7 @@
     "electron:test": "cd electron; npm run test"
   },
   "dependencies": {
+    "@types/jest": "^25.2.3",
     "concurrently": "^5.2.0"
   }
 }

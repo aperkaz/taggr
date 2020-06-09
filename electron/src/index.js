@@ -15,7 +15,7 @@ if (require("electron-squirrel-startup")) {
   app.quit();
 }
 
-const createWindow = (socketName) => {
+const createClientWindow = (socketName) => {
   // Create the browser window.
   clientWin = new BrowserWindow({
     x: 900,
@@ -25,6 +25,7 @@ const createWindow = (socketName) => {
     webPreferences: {
       webSecurity: false,
       nodeIntegration: true,
+      preload: __dirname + "/client-preload.js",
     },
   });
 
@@ -85,7 +86,7 @@ const createBackgroundProcess = (socketName) => {
 const initializeApp = async () => {
   let serverSocket = await findOpenSocket();
 
-  createWindow(serverSocket);
+  createClientWindow(serverSocket);
 
   if (isDev) {
     createBackgroundWindow(serverSocket);

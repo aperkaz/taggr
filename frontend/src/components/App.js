@@ -34,6 +34,9 @@ const App = ({ activeRoute }) => {
         return semverCompare(v2.name, v1.name);
       });
 
+      // TODO: hack to prevent electron to be required from the browser
+      if (window.IS_DEV == null) return;
+
       const { app } = window.require("electron").remote;
 
       const latestAppVersion = descendingOrderVersionTags[0].name;

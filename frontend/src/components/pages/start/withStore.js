@@ -2,7 +2,9 @@ import React from "react";
 import { useDispatch } from "react-redux";
 
 import { ACTIONS } from "../../../store";
-import { createProject } from "../../../services";
+// import { createProject } from "../../../services";
+import { send } from "../../../services";
+
 import CONSTANTS from "../../../store/constants";
 import StartPage from "./Page";
 
@@ -10,18 +12,22 @@ const WithStore = () => {
   const dispatch = useDispatch();
 
   const onSelectRootFolderPath = async () => {
-    const { dialog } = window.require("electron").remote;
+    let result = await send("make-factorial", { num: 5 });
+    console.log(result);
 
-    const { filePaths } = await dialog.showOpenDialog({
-      properties: ["openDirectory"],
-    });
+    return;
+    // const { dialog } = window.require("electron").remote;
 
-    const projectRootFolderPath = filePaths ? filePaths[0] : null;
+    // const { filePaths } = await dialog.showOpenDialog({
+    //   properties: ["openDirectory"],
+    // });
 
-    if (!projectRootFolderPath) return;
+    // const projectRootFolderPath = filePaths ? filePaths[0] : null;
 
-    dispatch(ACTIONS.setActiveRoute(CONSTANTS.ROUTES.DASHBOARD_PAGE));
-    createProject(projectRootFolderPath);
+    // if (!projectRootFolderPath) return;
+
+    // dispatch(ACTIONS.setActiveRoute(CONSTANTS.ROUTES.DASHBOARD_PAGE));
+    // createProject(projectRootFolderPath);
   };
 
   const onSelectLogo = () => {
