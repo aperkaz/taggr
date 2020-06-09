@@ -1,4 +1,6 @@
+var Visualizer = require("webpack-visualizer-plugin");
 const rules = require("./webpack.rules");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 rules.push({
   test: /\.css$/,
@@ -24,4 +26,12 @@ module.exports = {
   module: {
     rules,
   },
+  // Fix model imports. Can be used for classification, object recognition...
+  // plugins: [
+  //   new CopyWebpackPlugin([
+  //     { from: "src/background/statics/quant_mid", to: "quant_mid" },
+  //   ]),
+  // ],
+  // Creates a stats.html to inspect bundle size
+  // plugins: [new Visualizer()],
 };

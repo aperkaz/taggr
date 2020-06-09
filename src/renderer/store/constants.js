@@ -1,0 +1,9 @@
+const CONSTANTS = {
+  ROUTES: {
+    START_PAGE: "START_PAGE",
+    DASHBOARD_PAGE: "DASHBOARD_PAGE",
+    SETTINGS_PAGE: "SETTINGS_PAGE",
+  },
+};
+
+export default CONSTANTS;

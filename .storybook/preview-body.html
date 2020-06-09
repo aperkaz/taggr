@@ -1,49 +1,36 @@
 <!-- Fonts -->
-<!-- TODONOW: add fonts to normal build -->
+<!-- TODO: add fonts to normal build -->
 <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans|Poppins&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+
 
 <style>
-    html {
-        height: 100%;
-    }
-
-    body {
-        height: 100%;
+    html,
+    body,
+    #app {
         margin: 0;
-    }
-
-    /* Hide scrollbar in virtualized gallery */
-    #virtualized-gallery-wrapper::-webkit-scrollbar {
-        width: .2em;
-    }
-
-    #root {
         height: 100%;
+        overflow: hidden;
     }
 
-
-    .dashboard__tile--loading {
-        height: 100%;
-        width: 100%;
-        border-radius: 4px;
-        animation-duration: 35s;
-        animation-fill-mode: forwards;
-        animation-iteration-count: infinite;
-        animation-name: placeHolderShimmer;
-        animation-timing-function: linear;
-        background: #f6f7f8;
-        background: linear-gradient(to right, #eeeeee 10%, #dddddd 25%, #eeeeee 50%);
-        position: relative;
+    /* width */
+    ::-webkit-scrollbar {
+        width: 5px;
     }
 
-    @keyframes placeHolderShimmer {
-        0% {
-            background-position: 0 0;
-        }
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
 
-        100% {
-            background-position: 5000px 0;
-        }
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
     }
 </style>

@@ -17,7 +17,7 @@ module.exports = [
 
   // Image loader: https://github.com/electron-react-boilerplate/electron-react-boilerplate/issues/250
   {
-    test: /\.(png|jpe?g|gif)$/i,
+    test: /\.(png|jpe?g|gif|webp|mp4)$/i,
     loader: "url-loader",
     options: { publicPath: " ../" },
   },
