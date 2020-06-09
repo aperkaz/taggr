@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Typography from "@material-ui/core/Typography";
-import robotImage from "../../statics/robot.jpg"; // https://dribbble.com/shots/5012092-Mr-Robot
 
 const FlexWrapper = styled.div`
   display: flex;
@@ -19,7 +18,6 @@ const Progress = styled.div`
 
 const TaskProgress = ({ name, percentage }) => (
   <FlexWrapper>
-    <img src={robotImage} height="100px" />
     <Progress>
       <Typography
         variant="subtitle1"
@@ -39,7 +37,6 @@ const TaskProgress = ({ name, percentage }) => (
         %{percentage}
       </Typography>
     </Progress>
-    <img src={robotImage} height="100px" />
   </FlexWrapper>
 );
 

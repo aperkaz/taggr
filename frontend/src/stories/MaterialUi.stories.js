@@ -4,6 +4,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import FullHeight from "./utils";
 
+// TODO: refactor and extract molecules. Configure material-ui with context provider
+
 const useStyles = makeStyles({
   root: {
     width: "100%",
