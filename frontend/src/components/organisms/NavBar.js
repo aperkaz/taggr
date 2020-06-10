@@ -3,23 +3,31 @@ import styled from "styled-components";
 import Typography from "../atoms/Typography";
 import Link from "@material-ui/core/Link";
 
-import MenuIcon from "@material-ui/icons/Menu";
-import SettingsIcon from "@material-ui/icons/Settings";
-
 const Wrapper = styled.div`
-  min-height: 40px;
+  min-height: 50px;
+
+  background: linear-gradient(
+    354.71deg,
+    rgba(135, 49, 232, 0.9) 0%,
+    rgba(69, 40, 220, 0.9) 100%
+  );
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
 
   display: flex;
-  justify-content: space-between;
-`;
-
-const Filters = styled.div`
-  display: flex;
+  justify-content: center;
   align-items: center;
 `;
 
-const Settings = styled.div`
+const Tabs = styled.div`
   display: flex;
+`;
+
+const Tab = styled.div`
+  padding: 0 1em;
+
+  display: flex;
+  flex-direction: column;
   align-items: center;
 
   :hover {
@@ -27,68 +35,23 @@ const Settings = styled.div`
   }
 `;
 
-const NavBar = ({
-  onFiltersClick = () => null,
-  onSettingsClick = () => null,
-}) => (
-  <Wrapper>
-    <Link
-      href="#"
-      color="inherit"
-      style={{ margin: "auto 0", textDecoration: "none" }}
-      onClick={(e) => {
-        e.preventDefault();
-        onFiltersClick();
-      }}
-    >
-      <Filters>
-        <MenuIcon />
-        <Typography
-          variant="h6"
-          style={{ fontWeight: "bold", paddingLeft: ".5em" }}
-        >
-          Filters
-        </Typography>
-      </Filters>
-    </Link>
-    <Settings>
-      {/* <Link
-        href="#"
-        color="inherit"
-        style={{ margin: "0", textDecoration: "none" }}
-        onClick={(e) => {
-          e.preventDefault();
-          onSettingsClick();
-        }}
-      > */}
-      <SettingsIcon onClick={() => onSettingsClick()} />
-      {/* </Link> */}
-    </Settings>
+const Underline = styled.div`
+  width: 120%;
+  border-top: 2px solid white;
+`;
 
-    {/* <Typography
-      variant="h5"
-      style={{ fontFamily: "Poppins, sans-serif", margin: "auto 0" }}
-      gutterBottom
-    >
-      taggr
-    </Typography>
-    <Link
-      href="#"
-      color="inherit"
-      style={{ margin: "auto 0", textDecoration: "none" }}
-      onClick={(e) => {
-        e.preventDefault();
-        onSettingsClick();
-      }}
-    >
-      <Typography
-        variant="subtitle1"
-        gutterBottom
-        style={{ fontFamily: "Open Sans", margin: "0" }}
-      >
-        Settings
-      </Typography>
-    </Link> */}
+const NavBar = ({ activeTab = 0, tabs = [], selectTab = () => null }) => (
+  <Wrapper>
+    <Tabs>
+      {tabs.map((tab, index) => (
+        <Tab key={index} onClick={() => selectTab(index)}>
+          <Typography variant="h5" style={{ color: "white" }}>
+            {tab}
+          </Typography>
+          {activeTab == index ? <Underline></Underline> : null}
+        </Tab>
+      ))}
+    </Tabs>
   </Wrapper>
 );
 

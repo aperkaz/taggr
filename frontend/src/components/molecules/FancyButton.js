@@ -12,7 +12,7 @@ const FancyButton = ({ text = "", onClick = () => null }) => (
     }}
     onClick={onClick}
   >
-    <Typography variant="subtitle1" color="white">
+    <Typography variant="subtitle1" style={{ color: "white" }}>
       {text}
     </Typography>
   </Button>

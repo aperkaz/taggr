@@ -1,9 +1,11 @@
 import React from "react";
-import { action } from "@storybook/addon-actions";
+import { action, decorate } from "@storybook/addon-actions";
 import { withKnobs, text, boolean, number } from "@storybook/addon-knobs";
 
-import NavBarComp from "./NavBar";
 import HeaderComp from "./Header";
+import NavBarComp from "./NavBar";
+
+import FiltersComp from "./Filters";
 import GalleryComp from "./Gallery";
 import MapComp from "./Map";
 
@@ -15,15 +17,23 @@ export default {
   decorators: [withKnobs],
 };
 
-export const NavBar = () => (
-  <NavBarComp
+export const Header = () => (
+  <HeaderComp
     onFiltersClick={action("click filters")}
     onSettingsClick={action("click settings")}
   />
 );
 
-export const Header = () => (
-  <HeaderComp
+export const NavBar = () => (
+  <NavBarComp
+    activeTab={1}
+    tabs={["Timeline", "Gallery", "Map"]}
+    selectTab={action("selected")}
+  />
+);
+
+export const FiltersTodo = () => (
+  <FiltersComp
     task={{
       isOngoing: boolean("isTaskOngoing", false),
       name: text(
