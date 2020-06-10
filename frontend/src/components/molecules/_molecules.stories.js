@@ -2,6 +2,8 @@ import React from "react";
 import { action } from "@storybook/addon-actions";
 import { withKnobs, text, boolean } from "@storybook/addon-knobs";
 
+import NightsStay from "@material-ui/icons/NightsStay";
+
 import FancyButtonComp from "./FancyButton";
 import FilterButtonComp from "./FilterButton";
 import UpdateModalComp from "./UpdateModal";
@@ -12,17 +14,18 @@ export default {
   decorators: [withKnobs],
 };
 
-export const FancyButton = () => (
-  <FancyButtonComp
-    text={text("text", "Press Me")}
+export const FilterButton = () => (
+  <FilterButtonComp
+    icon={<NightsStay />}
+    text={text("text", "Moon")}
+    active={boolean("active", false)}
     onClick={action("trigger onClick")}
   />
 );
 
-export const FilterButton = () => (
-  <FilterButtonComp
-    text={text("text", "🚀 Moon")}
-    active={boolean("active", false)}
+export const FancyButton = () => (
+  <FancyButtonComp
+    text={text("text", "Press Me")}
     onClick={action("trigger onClick")}
   />
 );

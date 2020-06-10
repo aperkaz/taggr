@@ -6,6 +6,8 @@ import Fade from "@material-ui/core/Fade";
 import semverCompare from "semver/functions/compare";
 import FancyButton from "./FancyButton";
 
+// TODO: style: polish style
+
 const useStyles = makeStyles((theme) => ({
   modal: {
     display: "flex",
