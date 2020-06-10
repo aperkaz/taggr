@@ -75,11 +75,17 @@
   },
   "dependencies": {
     "@electron-forge/publisher-github": "^6.0.0-beta.51",
+    "@tensorflow-models/coco-ssd": "^2.0.3",
     "@tensorflow-models/mobilenet": "^2.0.4",
     "@tensorflow/tfjs-node": "^2.0.0",
     "electron-is-dev": "^1.2.0",
     "electron-squirrel-startup": "^1.0.0",
-    "node-ipc": "^9.1.1"
+    "exif": "^0.6.0",
+    "lodash.range": "^3.2.0",
+    "node-ipc": "^9.1.1",
+    "normalize-path": "^3.0.0",
+    "parse-dms": "0.0.3",
+    "readdirp": "^3.4.0"
   },
   "devDependencies": {
     "@electron-forge/cli": "6.0.0-beta.51",
