@@ -1,23 +1,26 @@
+const FLOWS = require("./flows");
+
+const CreateProject = require("./flows/createProject");
+const deleteProject = require("./flows/deleteProject");
+const searchImages = require("./flows/searchImages");
+
+const { addFlow, deleteFlows } = require("./store");
+
+const createProject = new CreateProject();
+
 let handlers = {};
-
-handlers._history = [];
-
-handlers["make-factorial"] = async ({ num }) => {
-  handlers._history.push(num);
-
-  function fact(n) {
-    if (n === 1) {
-      return 1;
-    }
-    return n * fact(n - 1);
-  }
-
-  console.log("making factorial");
-  return fact(num);
-};
 
 handlers["create-project"] = async ({ projectRootFolderPath }) => {
   console.log("creating project for ", projectRootFolderPath);
+
+  // add flow to list of active flows
+  addFlow(createProject);
+
+  // trigger flow
+  await createProject.process(projectRootFolderPath);
+
+  // clean active flows
+  deleteFlows();
 };
 
 handlers["filter-images"] = async ({ filter }) => {
