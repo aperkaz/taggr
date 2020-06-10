@@ -12,26 +12,10 @@ const { promisify } = require("util");
 const readFile = promisify(fs.readFile);
 
 (async () => {
-  // TODONOW: remove
-  // require("http")
-  //   .createServer(function (req, res) {
-  //     res.setHeader("Content-Type", "application/json");
-  //     res.setHeader("Access-Control-Allow-Origin", "*");
-  //     res.setHeader(
-  //       "Access-Control-Allow-Headers",
-  //       "Origin, X-Requested-With, Content-Type, Accept"
-  //     );
-  //     res.end(JSON.stringify({ a: 1 }));
-
-  //     // res.end("Hello from server started by Electron app!");
-  //   })
-  //   .listen(9001);
-
-  await initialize();
-
-  for (var i = 0; i < 100; i++) {
-    console.log(await classify("/home/alain/Desktop/pics/pictures/0.jpg"));
-  }
+  // await initialize();
+  // for (var i = 0; i < 100; i++) {
+  //   console.log(await classify("/home/alain/Desktop/pics/pictures/0.jpg"));
+  // }
 })();
 
 let net;
