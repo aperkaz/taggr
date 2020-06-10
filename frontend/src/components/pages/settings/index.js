@@ -1,5 +1,5 @@
 import SettingsPage from "./Page";
-import WithStore from "./withStore";
+import WithStore from "./WithStore";
 
 export { SettingsPage };
 export default WithStore;

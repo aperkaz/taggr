@@ -68,7 +68,12 @@ function connectSocket(name, onOpen) {
   });
 }
 
-export function send(name, args) {
+/**
+ * Send payload to server
+ * @param {string} name
+ * @param {Object} args
+ */
+function send(name, args) {
   return new Promise((resolve, reject) => {
     let id = window.uuid.v4();
     replyHandlers.set(id, { resolve, reject });
@@ -99,24 +104,21 @@ export function unlisten(name) {
   listeners.set(name, []);
 }
 
-// const { ipcRenderer } = require("electron");
+/**
+ * Trigger project creation in background process
+ * Background handlers: electron/src/server/server-handlers
+ */
+export const createProject = ({ projectRootFolderPath = "" }) => {
+  send("create-project", { projectRootFolderPath });
+};
 
-// import IPC_CHANNELS from "../../shared/ipcChannels";
-// import { BACKGROUND_ACTIONS } from "../../shared/actions";
+export const filterImages = ({ filter }) => {
+  send("filter-images", { filter });
+};
 
-// import store, { ACTIONS } from "../store";
-// import { sendToBackground } from "./utils";
-
-// /**
-//  * Trigger project creation in background process
-//  * @param {String} folderPath root folder path for the project
-//  */
-// export const createProject = (folderPath) => {
-//   sendToBackground({
-//     type: BACKGROUND_ACTIONS.CREATE_PROJECT,
-//     payload: folderPath,
-//   });
-// };
+export const deleteProject = () => {
+  send("deleteProject", {});
+};
 
 // /**
 //  * Trigger project deletion in background process
@@ -125,16 +127,7 @@ export function unlisten(name) {
 //   sendToBackground({ type: BACKGROUND_ACTIONS.DELETE_PROJECT, payload: null });
 // };
 
-// /**
-//  * Trigger image search in background process
-//  * @param {String[]} tagValues
-//  */
-// export const searchImages = (tagValues) => {
-//   sendToBackground({
-//     type: BACKGROUND_ACTIONS.SEARCH_IMAGES,
-//     payload: tagValues,
-//   });
-// };
+// TODONOW: listen on incoming node-ipc
 
 // // Listener for incomming IPC messages
 // ipcRenderer.on(

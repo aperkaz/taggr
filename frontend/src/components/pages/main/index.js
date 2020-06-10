@@ -1,5 +1,5 @@
 import MainPage from "./Page";
-import withStore from "./withStore";
+import WithStore from "./WithStore";
 
 export { MainPage };
-export default withStore;
+export default WithStore;

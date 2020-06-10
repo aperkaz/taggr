@@ -1,5 +1,5 @@
 import StartPage from "./Page";
-import WithStore from "./withStore";
+import WithStore from "./WithStore";
 
 export { StartPage };
 export default WithStore;
