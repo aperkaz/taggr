@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 import { SizeMe } from "react-sizeme";
 import { FixedSizeGrid } from "react-window"; // Virtualize list for performance https://github.com/developerdizzle/react-virtual-list
 import FsLightbox from "fslightbox-react";

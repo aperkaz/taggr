@@ -12,7 +12,7 @@ const Wrapper = styled.div`
     rgba(69, 40, 220, 0.9) 100%
   );
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12);
-  border-radius: 4px;
+  border-radius: 6px;
 
   display: flex;
   justify-content: center;

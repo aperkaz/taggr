@@ -24,7 +24,7 @@ const Section = styled.div`
 
   border: 1px solid #dddddd;
   box-sizing: border-box;
-  border-radius: 4px;
+  border-radius: 6px;
 
   display: flex;
   flex-direction: column;
@@ -34,7 +34,7 @@ const Section = styled.div`
 const Title = styled.div`
   border: 1px solid #dddddd;
   box-sizing: border-box;
-  border-radius: 4px;
+  border-radius: 6px;
   padding: 2px 4px;
 
   color: #717171;
