@@ -1,8 +1,9 @@
 const { app, BrowserWindow } = require("electron");
 let { fork } = require("child_process");
+let path = require("path");
+const os = require("os");
+
 let findOpenSocket = require("./find-open-socket");
-// TODONOW: remove path?
-const path = require("path");
 const isDev = require("electron-is-dev");
 
 let clientWin;
@@ -36,17 +37,31 @@ const createClientWindow = (socketName) => {
       : `file://${path.join(__dirname, "../frontend-statics/index.html")}`
   );
 
-  // Open the DevTools.
-  clientWin.webContents.openDevTools();
-
-  // TODONOW: add react devtools
-  // TODONOW: add redux devtools
-
   clientWin.webContents.on("did-finish-load", () => {
     clientWin.webContents.send("set-socket", {
       name: socketName,
     });
   });
+
+  // Add react dev tools https://www.electronjs.org/docs/tutorial/devtools-extension
+  const reactExtension = BrowserWindow.addDevToolsExtension(
+    path.join(
+      os.homedir(),
+      "/.config/google-chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.7.0_0"
+    )
+  );
+  // BrowserWindow.removeDevToolsExtension(reactExtension);
+
+  // Add redux dev tools https://stackoverflow.com/questions/59538654/electron-add-redux-devtools
+  const reduxExtension = BrowserWindow.addDevToolsExtension(
+    path.join(
+      os.homedir(),
+      "/.config/google-chrome/Default/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/2.17.0_0"
+    )
+  );
+  // BrowserWindow.removeDevToolsExtension(reduxExtension);
+
+  // Note: devTools must be open manually, they dont load when loading webcontents by url: https://github.com/electron/electron/issues/17799
 };
 
 const createBackgroundWindow = (socketName) => {

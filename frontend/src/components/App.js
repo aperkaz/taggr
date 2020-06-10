@@ -74,7 +74,6 @@ const App = ({ activeRoute }) => {
 };
 
 const renderRoute = (activeRoute) => {
-  // return <div>hey</div>;
   switch (activeRoute) {
     case CONSTANTS.ROUTES.START_PAGE:
       return <StartPage />;
