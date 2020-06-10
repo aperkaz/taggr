@@ -1,27 +1,71 @@
 import React from "react";
 import styled from "styled-components";
-import Typography from "@material-ui/core/Typography";
+import Typography from "../atoms/Typography";
 import Link from "@material-ui/core/Link";
+
+import MenuIcon from "@material-ui/icons/Menu";
+import SettingsIcon from "@material-ui/icons/Settings";
 
 const Wrapper = styled.div`
   min-height: 40px;
-  padding: 0 1em;
-
-  background: linear-gradient(
-    355.93deg,
-    rgba(135, 49, 232, 0.9) 0%,
-    rgba(69, 40, 220, 0.9) 100%
-  );
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12);
-  color: white;
 
   display: flex;
   justify-content: space-between;
 `;
 
-const NavBar = ({ onSettingsClick = () => null }) => (
+const Filters = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const Settings = styled.div`
+  display: flex;
+  align-items: center;
+
+  :hover {
+    cursor: pointer;
+  }
+`;
+
+const NavBar = ({
+  onFiltersClick = () => null,
+  onSettingsClick = () => null,
+}) => (
   <Wrapper>
-    <Typography
+    <Link
+      href="#"
+      color="inherit"
+      style={{ margin: "auto 0", textDecoration: "none" }}
+      onClick={(e) => {
+        e.preventDefault();
+        onFiltersClick();
+      }}
+    >
+      <Filters>
+        <MenuIcon />
+        <Typography
+          variant="h6"
+          style={{ fontWeight: "bold", paddingLeft: ".5em" }}
+        >
+          Filters
+        </Typography>
+      </Filters>
+    </Link>
+    <Settings>
+      {/* <Link
+        href="#"
+        color="inherit"
+        style={{ margin: "0", textDecoration: "none" }}
+        onClick={(e) => {
+          e.preventDefault();
+          onSettingsClick();
+        }}
+      > */}
+      <SettingsIcon onClick={() => onSettingsClick()} />
+      {/* </Link> */}
+    </Settings>
+
+    {/* <Typography
       variant="h5"
       style={{ fontFamily: "Poppins, sans-serif", margin: "auto 0" }}
       gutterBottom
@@ -44,7 +88,7 @@ const NavBar = ({ onSettingsClick = () => null }) => (
       >
         Settings
       </Typography>
-    </Link>
+    </Link> */}
   </Wrapper>
 );
 

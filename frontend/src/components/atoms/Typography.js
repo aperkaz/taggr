@@ -18,10 +18,13 @@ const styles = {
 };
 
 const Typography = (props) => {
-  const { variant, color = "black" } = props;
+  const { variant, style: propStyles = {} } = props;
 
   return (
-    <MaterialTypography variant={variant} style={{ ...styles[variant], color }}>
+    <MaterialTypography
+      variant={variant}
+      style={{ ...styles[variant], ...propStyles }}
+    >
       {props.children}
     </MaterialTypography>
   );

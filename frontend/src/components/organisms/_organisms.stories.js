@@ -16,7 +16,10 @@ export default {
 };
 
 export const NavBar = () => (
-  <NavBarComp onSettingsClick={action("click settings")} />
+  <NavBarComp
+    onFiltersClick={action("click filters")}
+    onSettingsClick={action("click settings")}
+  />
 );
 
 export const Header = () => (

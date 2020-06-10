@@ -33,13 +33,13 @@ export const Typography = () => (
 );
 export const TypographyColors = () => (
   <div>
-    <TypographyComp variant="h1" color="red">
+    <TypographyComp variant="h1" style={{ color: "red" }}>
       h1. taggr typography
     </TypographyComp>
-    <TypographyComp variant="h2" color="blue">
+    <TypographyComp variant="h2" style={{ color: "blue" }}>
       h2. taggr typography
     </TypographyComp>
-    <TypographyComp variant="h3" color="grey">
+    <TypographyComp variant="h3" style={{ color: "grey" }}>
       h3. taggr typography
     </TypographyComp>
     <TypographyComp variant="h4">h4. taggr typography</TypographyComp>
