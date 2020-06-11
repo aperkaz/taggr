@@ -47,8 +47,12 @@ const Backdrop = styled.div`
 `;
 
 const Panel = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+
   margin: 0.5em;
-  height: calc(100% - 1em);
+  height: calc(100vh - 1em);
   width: 480px;
 
   border-radius: 6px;
@@ -70,12 +74,21 @@ const Close = styled(CloseIcon)`
   right: calc(100% - 480px);
 
   margin-top: 0.15em;
+  margin-right: 0.25em;
+
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const Body = styled.div`
   flex-grow: 1;
 
+  /* Enable scroll-behavior, but hide scroll-bar */
   overflow-y: scroll;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const Filter = styled.div`
@@ -136,14 +149,13 @@ const FooterButtons = styled.div`
 `;
 
 // TODONOW: add state for active filters, callback and reset options
-const Filters = ({ isOpen = false, triggerSearchWithFilter = (f) => null }) => {
-  const currentDate = new Date();
-  const pastDate = new Date(
-    new Date().setFullYear(currentDate.getFullYear() - 10)
-  );
-
-  const [fromDate, setFromDate] = useState(pastDate);
-  const [toDate, setToDate] = useState(currentDate);
+const Filters = ({
+  isOpen = false,
+  onClose,
+  triggerSearchWithFilter = (f) => null,
+}) => {
+  const [fromDate, setFromDate] = useState(null);
+  const [toDate, setToDate] = useState(null);
 
   const [activeFilters, setActiveFilters] = useState({
     // When - date pickers keep their own state
@@ -176,11 +188,11 @@ const Filters = ({ isOpen = false, triggerSearchWithFilter = (f) => null }) => {
   };
 
   const resetState = () => {
-    setFromDate(pastDate);
-    setToDate(currentDate);
+    setFromDate(null);
+    setToDate(null);
 
     // toggle false all filter items
-    const resetFilters = activeFilters;
+    const resetFilters = { ...activeFilters };
     Object.keys(resetFilters).forEach((key) => {
       resetFilters[key] = false;
     });
@@ -190,10 +202,10 @@ const Filters = ({ isOpen = false, triggerSearchWithFilter = (f) => null }) => {
   };
 
   return (
-    <Backdrop>
+    <Backdrop style={{ visibility: isOpen ? "visible" : "hidden" }}>
       <Panel>
         <Title>
-          <Close />
+          <Close onClick={onClose} />
           <Typography variant="h5">Filters</Typography>
         </Title>
         <Body>
@@ -213,6 +225,7 @@ const Filters = ({ isOpen = false, triggerSearchWithFilter = (f) => null }) => {
                   KeyboardButtonProps={{
                     "aria-label": "change date",
                   }}
+                  style={{ marginTop: 0 }}
                 />
                 <KeyboardDatePicker
                   margin="normal"
@@ -224,6 +237,7 @@ const Filters = ({ isOpen = false, triggerSearchWithFilter = (f) => null }) => {
                   KeyboardButtonProps={{
                     "aria-label": "change date",
                   }}
+                  style={{ marginTop: 0 }}
                 />
               </TimeSelectoGrid>
             </MuiPickersUtilsProvider>
@@ -362,7 +376,10 @@ const Filters = ({ isOpen = false, triggerSearchWithFilter = (f) => null }) => {
             <ButtonFancy
               text={"Apply"}
               style={{ width: "100%", margin: "1em  1em 1em .5em" }}
-              onClick={() => triggerSearchWithFilter(activeFilters)}
+              onClick={() => {
+                triggerSearchWithFilter(activeFilters);
+                onClose();
+              }}
             />
           </FooterButtons>
         </div>

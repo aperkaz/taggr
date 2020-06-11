@@ -19,7 +19,7 @@ const ButtonFilter = ({
       minWidth: "130px",
       textTransform: "capitalize",
       background: active
-        ? "linear-gradient(70.98deg, #FE6B8B 9.38%, #FF8E53 91.67%)"
+        ? "linear-gradient(70.98deg, #fe7996 9.38%, #ff9964 91.67%)"
         : "white",
       ...styles,
     }}

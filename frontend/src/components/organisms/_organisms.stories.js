@@ -23,28 +23,20 @@ export const Header = () => (
   />
 );
 
-export const NavBar = () => (
-  <NavBarComp
-    activeTab={1}
-    tabs={["Timeline", "Gallery", "Map"]}
-    selectTab={action("selected")}
-  />
-);
+export const NavBar = () => {
+  const [activeTab, setActiveTab] = React.useState(0);
 
-// TODONOW: remove and clean up
-// export const FiltersTodo = () => (
-//   <FiltersComp
-//     task={{
-//       isOngoing: boolean("isTaskOngoing", false),
-//       name: text(
-//         "taskName",
-//         "Be patient, the minions are working on your memories!"
-//       ),
-//       percentage: number("taskPercentage", 50),
-//     }}
-//     onFilterChange={action("trigger backend result filter")}
-//   />
-// );
+  return (
+    <NavBarComp
+      value={activeTab}
+      tabs={["Timeline", "Gallery", "Map"]}
+      onChange={(t) => {
+        console.log(t);
+        setActiveTab(t);
+      }}
+    />
+  );
+};
 
 export const Gallery = () => (
   <FullHeight>
@@ -60,9 +52,13 @@ export const Map = () => (
   </FullHeight>
 );
 
-export const Filters = () => (
-  <FullHeight>
-    <div>some content</div>
-    <FiltersComp />
-  </FullHeight>
-);
+export const Filters = () => {
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  return (
+    <div>
+      <button onClick={() => setIsOpen(true)}>open filters</button>
+      <FiltersComp isOpen={isOpen} onClose={() => setIsOpen(false)} />
+    </div>
+  );
+};
