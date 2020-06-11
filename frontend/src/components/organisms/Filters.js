@@ -149,11 +149,7 @@ const FooterButtons = styled.div`
 `;
 
 // TODONOW: add state for active filters, callback and reset options
-const Filters = ({
-  isOpen = false,
-  onClose,
-  triggerSearchWithFilter = (f) => null,
-}) => {
+const Filters = ({ isOpen = false, onClose, triggerSearch }) => {
   const [fromDate, setFromDate] = useState(null);
   const [toDate, setToDate] = useState(null);
 
@@ -198,7 +194,11 @@ const Filters = ({
     });
     setActiveFilters(resetFilters);
 
-    triggerSearchWithFilter(resetFilters);
+    triggerSearch({
+      fromDate: fromDate,
+      toDate: toDate,
+      tags: [],
+    });
   };
 
   return (
@@ -377,7 +377,17 @@ const Filters = ({
               text={"Apply"}
               style={{ width: "100%", margin: "1em  1em 1em .5em" }}
               onClick={() => {
-                triggerSearchWithFilter(activeFilters);
+                const activeTags = [];
+                Object.keys(activeFilters).forEach((key) => {
+                  if (activeFilters[key]) {
+                    activeTags.push(key);
+                  }
+                });
+                triggerSearch({
+                  fromDate: fromDate,
+                  toDate: toDate,
+                  tags: activeTags,
+                });
                 onClose();
               }}
             />

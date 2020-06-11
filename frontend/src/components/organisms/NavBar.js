@@ -29,6 +29,7 @@ const NavBar = ({ value = 0, tabs = [], onChange = (i) => null }) => (
     <CustomTabs value={value} onChange={(event, tab) => onChange(tab)} centered>
       {tabs.map((tab, index) => (
         <CustomTab
+          key={index}
           label={
             <Typography variant="h5" style={{ color: "white" }}>
               {tab}

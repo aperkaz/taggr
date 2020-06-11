@@ -58,7 +58,11 @@ export const Filters = () => {
   return (
     <div>
       <button onClick={() => setIsOpen(true)}>open filters</button>
-      <FiltersComp isOpen={isOpen} onClose={() => setIsOpen(false)} />
+      <FiltersComp
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        triggerSearch={(filters) => console.log("searching for: ", filters)}
+      />
     </div>
   );
 };
