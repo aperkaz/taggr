@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import Typography from "../atoms/Typography";
-import Link from "@material-ui/core/Link";
 
 const Wrapper = styled.div`
   min-height: 50px;
@@ -40,7 +39,7 @@ const Underline = styled.div`
   border-top: 2px solid white;
 `;
 
-const NavBar = ({ activeTab = 0, tabs = [], selectTab = () => null }) => (
+const NavBar = ({ activeTab = 0, tabs = [], selectTab = (i) => null }) => (
   <Wrapper>
     <Tabs>
       {tabs.map((tab, index) => (
@@ -48,7 +47,7 @@ const NavBar = ({ activeTab = 0, tabs = [], selectTab = () => null }) => (
           <Typography variant="h5" style={{ color: "white" }}>
             {tab}
           </Typography>
-          {activeTab == index ? <Underline></Underline> : null}
+          {activeTab === index ? <Underline></Underline> : null}
         </Tab>
       ))}
     </Tabs>

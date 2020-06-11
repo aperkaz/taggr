@@ -2,13 +2,18 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import Typography from "../atoms/Typography";
 
-const FancyButton = ({ text = "", onClick = () => null }) => (
+const ButtonRegular = ({
+  text = "",
+  onClick = () => null,
+  style: styles = {},
+}) => (
   <Button
     variant="outlined"
     size="large"
     style={{
       border: "none",
-      background: "linear-gradient(70.98deg, #FE6B8B 9.38%, #FF8E53 91.67%)",
+      background: "#95878A",
+      ...styles,
     }}
     onClick={onClick}
   >
@@ -18,4 +23,4 @@ const FancyButton = ({ text = "", onClick = () => null }) => (
   </Button>
 );
 
-export default FancyButton;
+export default ButtonRegular;

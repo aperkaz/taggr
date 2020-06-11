@@ -1,6 +1,6 @@
 import React from "react";
-import { action, decorate } from "@storybook/addon-actions";
-import { withKnobs, text, boolean, number } from "@storybook/addon-knobs";
+import { action } from "@storybook/addon-actions";
+import { withKnobs } from "@storybook/addon-knobs";
 
 import HeaderComp from "./Header";
 import NavBarComp from "./NavBar";

@@ -2,12 +2,13 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import Typography from "../atoms/Typography";
 
-const FilterButton = ({
+const ButtonFilter = ({
   icon,
   text = "",
   active = false,
   disabled = false,
   onClick = () => null,
+  style: styles = {},
 }) => (
   <Button
     variant="outlined"
@@ -20,6 +21,7 @@ const FilterButton = ({
       background: active
         ? "linear-gradient(70.98deg, #FE6B8B 9.38%, #FF8E53 91.67%)"
         : "white",
+      ...styles,
     }}
     onClick={onClick}
   >
@@ -27,4 +29,4 @@ const FilterButton = ({
   </Button>
 );
 
-export default FilterButton;
+export default ButtonFilter;

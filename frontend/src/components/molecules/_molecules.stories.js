@@ -5,8 +5,9 @@ import NightsStay from "@material-ui/icons/NightsStay";
 
 import FullHeight from "../../stories/utils";
 
-import FancyButtonComp from "./FancyButton";
-import FilterButtonComp from "./FilterButton";
+import ButtonFancyComp from "./ButtonFancy";
+import ButtonRegularComp from "./ButtonRegular";
+import ButtonFilterComp from "./ButtonFilter";
 import UpdateModalComp from "./UpdateModal";
 import ImageTileComp from "./ImageTile";
 import LoadingComp from "./Loading";
@@ -16,18 +17,25 @@ export default {
   decorators: [withKnobs],
 };
 
-export const FilterButton = () => (
-  <FilterButtonComp
-    icon={<NightsStay />}
-    text={text("text", "Moon")}
-    active={boolean("active", false)}
+export const ButtonFancy = () => (
+  <ButtonFancyComp
+    text={text("text", "Press Me")}
     onClick={action("trigger onClick")}
   />
 );
 
-export const FancyButton = () => (
-  <FancyButtonComp
+export const ButtonRegular = () => (
+  <ButtonRegularComp
     text={text("text", "Press Me")}
+    onClick={action("trigger onClick")}
+  />
+);
+
+export const ButtonFilter = () => (
+  <ButtonFilterComp
+    icon={<NightsStay />}
+    text={text("text", "Moon")}
+    active={boolean("active", false)}
     onClick={action("trigger onClick")}
   />
 );

@@ -1,4 +1,4 @@
-import React, { Children } from "react";
+import React from "react";
 import MaterialTypography from "@material-ui/core/Typography";
 
 const styles = {

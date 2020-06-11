@@ -4,7 +4,7 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import semverCompare from "semver/functions/compare";
-import FancyButton from "./FancyButton";
+import ButtonFancy from "./ButtonFancy";
 
 // TODO: style: polish style
 
@@ -62,7 +62,7 @@ const UpdateModal = ({
             <br />
             New app version: {latestAppVersion}
           </p>
-          <FancyButton
+          <ButtonFancy
             text="Download new version"
             onClick={async () => {
               setIsOpen(false);
