@@ -47,6 +47,8 @@ const Backdrop = styled.div`
 `;
 
 const Panel = styled.div`
+  z-index: 500;
+
   position: absolute;
   top: 0;
   left: 0;
@@ -149,7 +151,7 @@ const FooterButtons = styled.div`
 `;
 
 // TODONOW: add state for active filters, callback and reset options
-const Filters = ({ isOpen = false, onClose, triggerSearch }) => {
+const Filters = ({ isOpen = false, triggerFiltersClose, triggerSearch }) => {
   const [fromDate, setFromDate] = useState(null);
   const [toDate, setToDate] = useState(null);
 
@@ -205,7 +207,7 @@ const Filters = ({ isOpen = false, onClose, triggerSearch }) => {
     <Backdrop style={{ visibility: isOpen ? "visible" : "hidden" }}>
       <Panel>
         <Title>
-          <Close onClick={onClose} />
+          <Close onClick={triggerFiltersClose} />
           <Typography variant="h5">Filters</Typography>
         </Title>
         <Body>
@@ -388,7 +390,7 @@ const Filters = ({ isOpen = false, onClose, triggerSearch }) => {
                   toDate: toDate,
                   tags: activeTags,
                 });
-                onClose();
+                triggerFiltersClose();
               }}
             />
           </FooterButtons>

@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
 
-import FancyButton from "../../molecules/ButtonFancy";
+import FancyButton from "../../molecules/FancyButton";
 import backgroundImage from "../../../statics/background.jpeg";
 
 const Wrapper = styled.div`

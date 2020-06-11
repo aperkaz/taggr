@@ -1,11 +1,9 @@
 import React from "react";
-// import Typography from "@material-ui/core/Typography";
+import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
 
-import FancyButton from "../../molecules/ButtonFancy";
+import FancyButton from "../../molecules/FancyButton";
 import backgroundImage from "../../../statics/background.jpeg";
-
-import Typography from "../../atoms/Typography";
 
 const InnerWrapper = styled.div`
   background: linear-gradient(
@@ -64,10 +62,11 @@ const StartPage = ({
           taggr
         </Typography>
         <Typography
-          variant="h5"
+          variant="h6"
           style={{
+            fontFamily: "Poppins, sans-serif",
             color: "white",
-            marginBottom: "2em",
+            marginBottom: "2.5em",
           }}
         >
           Rediscover your <b>memories</b> while keeping your <b>privacy</b>
@@ -79,7 +78,14 @@ const StartPage = ({
       </Main>
 
       <Footer onClick={onSelectLogo}>
-        <Typography variant="h5" style={{ color: "white" }}>
+        <Typography
+          variant="h6"
+          style={{
+            fontFamily: "Poppins, sans-serif",
+            color: "white",
+            fontWeight: "bold",
+          }}
+        >
           taggr.ai
         </Typography>
       </Footer>

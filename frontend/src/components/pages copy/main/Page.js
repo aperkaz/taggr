@@ -1,57 +1,41 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 
-import Filters from "../../organisms/Filters";
-import Header from "../../organisms/Header";
-
 import NavBar from "../../organisms/NavBar";
-
+import Header from "../../organisms/Header";
 import Gallery from "../../organisms/Gallery";
 import Map from "../../organisms/Map";
 
 const Wrapper = styled.div`
-  margin: 0.5em 1em;
-
   display: flex;
   flex-direction: column;
   height: 100%;
 `;
 
 const MainPage = ({
-  onSettingsClick,
-  onSearchTriggered,
+  onSettingsClick = () => null,
   task,
-  // onFilterChange = () => null,
+  onFilterChange = () => null,
   images = [],
   imagesWithLocation = [],
 }) => {
-  const [isFiltersOpen, setIsFilterOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState(0);
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   return (
     <Wrapper>
-      <Filters
-        isOpen={isFiltersOpen}
-        triggerFiltersClose={() => setIsFilterOpen(false)}
-        triggerSearch={onSearchTriggered}
-      />
-      <Header
-        // TODO: add task completion
-        // task={task}
-        onFiltersClick={() => setIsFilterOpen(true)}
-        onSettingsClick={onSettingsClick}
-      />
-      <NavBar
-        tabList={["Timeline", "Gallery", "Map"]}
-        activeTab={activeTab}
-        handleChange={setActiveTab}
-      />
-      {activeTab === 0 ? <div>timeline</div> : null}
-      {activeTab === 1 ? <div>gallery</div> : null}
-      {activeTab === 2 ? <div>map</div> : null}
+      <NavBar onSettingsClick={onSettingsClick} />
+      <Header task={task} onFilterChange={onFilterChange} />
+
+      <NavigationTabs value={value} handleChange={handleChange} />
+      {value === 0 ? <Gallery imageList={images} /> : null}
+      {value === 1 ? <Map imageList={imagesWithLocation} /> : null}
     </Wrapper>
   );
 };
