@@ -20,7 +20,7 @@ const Gallery = ({ imageList = [] }) => {
   };
 
   return (
-    <div style={{ height: "100%" }}>
+    <div style={{ height: "100%", marginTop: ".25em" }}>
       <SizeMe monitorHeight>
         {({ size }) => (
           <div
@@ -46,7 +46,7 @@ const Gallery = ({ imageList = [] }) => {
 
 const Grid = ({ size: { height, width }, imageList, onCellClick }) => {
   const gridHeight = height - GUTTER * 2;
-  const gridWidth = width - GUTTER * 2;
+  const gridWidth = width;
 
   const columnWidth = gridWidth / ELEMENTS_PER_COLLUMN;
   const rowCount = Math.ceil(imageList.length / ELEMENTS_PER_COLLUMN);
@@ -75,7 +75,7 @@ const Grid = ({ size: { height, width }, imageList, onCellClick }) => {
       // overscanColumnCount={10}
       style={{
         overflowX: "hidden",
-        margin: "10px",
+        marginTop: ".5em",
         // paddingRight: "20px",
       }}
     >

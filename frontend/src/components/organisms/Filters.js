@@ -36,6 +36,8 @@ import ButtonRegular from "../molecules/ButtonRegular";
 import ButtonFilter from "../molecules/ButtonFilter";
 
 const Backdrop = styled.div`
+  z-index: 100;
+
   position: absolute;
   top: 0;
   right: 0;
@@ -47,7 +49,7 @@ const Backdrop = styled.div`
 `;
 
 const Panel = styled.div`
-  z-index: 500;
+  z-index: 101;
 
   position: absolute;
   top: 0;
@@ -197,8 +199,8 @@ const Filters = ({ isOpen = false, triggerFiltersClose, triggerSearch }) => {
     setActiveFilters(resetFilters);
 
     triggerSearch({
-      fromDate: fromDate,
-      toDate: toDate,
+      fromDate: null,
+      toDate: null,
       tags: [],
     });
   };

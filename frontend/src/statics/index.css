@@ -28,3 +28,8 @@ html, body, #root {
 .fslightbox-source.fslightbox-opacity-1 {
   border-radius: 6px;
 }
+
+ /* MAP GL Radius */
+ .mapboxgl-map{
+  border-radius: 6px;
+}
