@@ -23,8 +23,8 @@ const Wrapper = styled.div`
 const MainPage = ({
   onSettingsClick,
   onSearchTriggered,
+  // TODONOW: add task to header
   task,
-  // onFilterChange = () => null,
   images = [],
   imagesWithLocation = [],
 }) => {
@@ -39,19 +39,20 @@ const MainPage = ({
         triggerSearch={onSearchTriggered}
       />
       <Header
-        // TODO: add task completion
+        // TODONOW: add task completion
         // task={task}
         onFiltersClick={() => setIsFilterOpen(true)}
         onSettingsClick={onSettingsClick}
       />
       <NavBar
-        tabList={["Timeline", "Gallery", "Map"]}
+        tabList={["Gallery", "Map"]}
         activeTab={activeTab}
         handleChange={setActiveTab}
       />
-      {activeTab === 0 ? <div>timeline</div> : null}
-      {activeTab === 1 ? <div>gallery</div> : null}
-      {activeTab === 2 ? <div>map</div> : null}
+      {/* TODONOW: add teaser for timeline */}
+      {/* {activeTab === 0 ? <div>timeline</div> : null} */}
+      {activeTab === 0 ? <Gallery imageList={images} /> : null}
+      {activeTab === 1 ? <Map imageList={imagesWithLocation} /> : null}
     </Wrapper>
   );
 };

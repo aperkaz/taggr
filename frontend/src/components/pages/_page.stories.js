@@ -6,7 +6,7 @@ import MainPageComp from "./main/Page";
 import SettingsPageComp from "./settings/Page";
 
 import FullHeight from "../../stories/utils";
-import imageList from "../../stories/mocks/imageList";
+import { images, imagesWithLocation } from "../../stories/mocks/imageList";
 
 export default {
   title: "Pages",
@@ -35,8 +35,8 @@ export const Main = () => (
         ),
         percentage: number("taskPercentage", 50),
       }}
-      images={imageList}
-      imagesWithLocation={imageList}
+      images={images}
+      imagesWithLocation={imagesWithLocation}
     />
   </FullHeight>
 );
