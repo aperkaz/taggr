@@ -7,6 +7,7 @@
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
+    "make:frontend": "rm -rf frontend-statics; npm run build --prefix ../frontend; mv ../frontend/build ./frontend-statics",
     "make": "rm -rf frontend-statics; npm run build --prefix ../frontend; mv ../frontend/build ./frontend-statics; electron-forge make",
     "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\""

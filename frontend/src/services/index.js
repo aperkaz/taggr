@@ -1,3 +1,5 @@
+import store, { ACTIONS } from "../store";
+
 // Connection state
 const replyHandlers = new Map();
 const listeners = new Map();
@@ -100,6 +102,12 @@ export function listen(name, cb) {
   };
 }
 
+// TODONOW: move to servise/listeners
+listen("update-images", (images) => {
+  console.log("images updated from the backend", images);
+  store.dispatch(ACTIONS.setImages(images));
+});
+
 export function unlisten(name) {
   listeners.set(name, []);
 }
@@ -109,14 +117,18 @@ export function unlisten(name) {
  * Background handlers: electron/src/server/server-handlers
  */
 export const createProject = ({ projectRootFolderPath = "" }) => {
+  console.log("sending create-project: ", projectRootFolderPath);
   send("create-project", { projectRootFolderPath });
 };
 
 export const filterImages = ({ filter }) => {
+  console.log("sending filter-images: ", filter);
+
   send("filter-images", { filter });
 };
 
 export const deleteProject = () => {
+  console.log("sending delete-project");
   send("deleteProject", {});
 };
 

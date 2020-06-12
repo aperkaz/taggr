@@ -36,6 +36,9 @@ const createClientWindow = (socketName) => {
       ? "http://localhost:3001"
       : `file://${path.join(__dirname, "../frontend-statics/index.html")}`
   );
+  // clientWin.loadURL(
+  //   `file://${path.join(__dirname, "../frontend-statics/index.html")}`
+  // );
 
   clientWin.webContents.on("did-finish-load", () => {
     clientWin.webContents.send("set-socket", {

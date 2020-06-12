@@ -23,8 +23,14 @@ handlers["create-project"] = async ({ projectRootFolderPath }) => {
   deleteFlows();
 };
 
+handlers["delete-project"] = () => {
+  console.log("delete project!");
+};
+
 handlers["filter-images"] = async ({ filter }) => {
   console.log("filtering images: ", filter);
+
+  // return images, imagesWithLocation;
 };
 
 module.exports = handlers;

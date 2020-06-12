@@ -33,20 +33,31 @@ const Gallery = ({ imageList = [] }) => {
           </div>
         )}
       </SizeMe>
-      <FsLightbox
+      {/* <FsLightbox
         toggler={toggler}
         sources={[
           imageList[selectedIndex] ? imageList[selectedIndex].path : null,
         ]}
         key={selectedIndex}
-      />
+      /> */}
     </div>
   );
 };
 
 const Grid = ({ size: { height, width }, imageList, onCellClick }) => {
-  const gridHeight = height - GUTTER * 2;
-  const gridWidth = width;
+  console.log("height:", height);
+  console.log("width:", width);
+  height = height ? height : 0;
+  width = width ? width : 0;
+
+  let gridHeight = height - GUTTER * 2;
+  let gridWidth = width;
+
+  // gridHeight = gridHeight ? gridHeight : 0;
+  // gridWidth = gridWidth ? gridWidth : 0;
+
+  console.log(gridHeight);
+  console.log(gridWidth);
 
   const columnWidth = gridWidth / ELEMENTS_PER_COLLUMN;
   const rowCount = Math.ceil(imageList.length / ELEMENTS_PER_COLLUMN);
@@ -56,6 +67,8 @@ const Grid = ({ size: { height, width }, imageList, onCellClick }) => {
     gridHeight / ELEMENTS_PER_COLLUMN > 250
       ? gridHeight / ELEMENTS_PER_COLLUMN
       : 250;
+  // rowHeight = rowHeight ? rowHeight : 0;
+  console.log(rowHeight);
 
   // TODO: improve: add loading spinner /image
   // if (!imageList.length)
@@ -85,8 +98,8 @@ const Grid = ({ size: { height, width }, imageList, onCellClick }) => {
 };
 
 const Cell = ({ columnIndex, rowIndex, style, data, onClick }) => {
-  const height = style.height - GUTTER;
-  const width = style.width - GUTTER;
+  const height = style.height ? style.height - GUTTER : 0;
+  const width = style.width ? style.width - GUTTER : 0;
 
   const index = rowIndex * ELEMENTS_PER_COLLUMN + columnIndex;
   return (

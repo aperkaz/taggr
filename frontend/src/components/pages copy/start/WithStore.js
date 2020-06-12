@@ -20,8 +20,6 @@ const WithStore = () => {
 
     if (!projectRootFolderPath) return;
 
-    dispatch(ACTIONS.setImages(["images"]));
-
     dispatch(ACTIONS.setActiveRoute(CONSTANTS.ROUTES.DASHBOARD_PAGE));
 
     createProject({ projectRootFolderPath });

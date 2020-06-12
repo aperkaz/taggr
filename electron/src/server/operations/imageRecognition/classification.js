@@ -18,22 +18,18 @@ async function loadModel() {
 
 /**
  * Generate the image classification ids for a given image.
- * @param {ImageData} imageData
+ * @param {any} imageTensor
  * @returns {Promise<number[]>} imagenet class ids
  */
-async function classifyImage(imageData) {
+async function classifyImage(imageTensor) {
   if (!net) await loadModel();
 
-  let pixels = tf.browser.fromPixels(imageData);
-
   // console.time("classify");
-  let logits = await net.infer(pixels);
+  let logits = await net.infer(imageTensor);
   let imageNetClassNumbers = await getTopKImagenetClassNumbers(logits);
   // console.timeEnd("classify");
 
   // free memory by cleaning TF-internals and variables
-  pixels.dispose();
-  pixels = null;
   logits = null;
 
   return imageNetClassNumbers;

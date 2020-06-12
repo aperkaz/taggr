@@ -14,18 +14,16 @@ const loadModel = async () => {
 
 /**
  * Get coco-ssd class ids for an image
- * @param {ImageData} imageData
+ * @param {ImageData} imageTensor
  * @returns {Promise<string[]>} array with coco-ssd class names
  */
-const objectRecognitionImage = async (imageData) => {
+const objectRecognitionImage = async (imageTensor) => {
   const cocoSsdClassNames = [];
 
   if (!net) await loadModel();
 
-  let pixels = tf.tidy(() => tf.browser.fromPixels(imageData));
-
   // console.time("detect objects");
-  let predictions = await net.detect(pixels);
+  let predictions = await net.detect(imageTensor);
 
   predictions.forEach((prediction) => {
     const score = prediction.score;
@@ -37,8 +35,6 @@ const objectRecognitionImage = async (imageData) => {
   // console.timeEnd("detect objects");
 
   // free memory by cleaning TF-internals and variables
-  pixels.dispose();
-  pixels = null;
   predictions = null;
 
   return cocoSsdClassNames;

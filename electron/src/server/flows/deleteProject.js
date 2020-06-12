@@ -1,7 +1,7 @@
 // const { RENDERER_ACTIONS } = require("../../shared/actions");
-
+// TODONOW: complete
 const { resetStore, stopFlows } = require("../store");
-const { sendToRenderer } = require("../services/utils");
+// const { sendToRenderer } = require("../services/utils");
 
 /**
  * Stop the current flows and delete the information relevant to the project from the backend
@@ -20,5 +20,3 @@ const deleteProject = async () => {
 };
 
 module.exports = deleteProject;
-
-// TODO: refactor: move shared actions to /shared.

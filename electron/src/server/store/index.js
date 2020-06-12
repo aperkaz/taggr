@@ -1,4 +1,5 @@
-const isDev = require("electron-is-dev");
+const isDevInWindow = false;
+
 // TODONOW: fix types
 // require("../types");
 
@@ -14,12 +15,12 @@ const initialState = {
  */
 let store = { ...initialState };
 
-if (isDev) window["store"] = store;
+if (isDevInWindow) window["store"] = store;
 
 const resetStore = () => {
   store = { ...initialState };
 
-  if (isDev) window["store"] = store;
+  if (isDevInWindow) window["store"] = store;
 };
 
 const setProjectRootFolderPath = (projectRootFolderPath) => {

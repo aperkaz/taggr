@@ -1,4 +1,4 @@
-// const { RENDERER_ACTIONS } = require("../../shared/actions");
+// TODONOW: move out of here
 
 const {
   recursivelyFindImages,
@@ -14,6 +14,8 @@ const {
 // import { sendToRenderer, sendToRendererThrottled } from "./services/utils";
 const { setProjectRootFolderPath, setImageHashMap } = require("../store");
 
+const { serviceUpdateImages } = require("../services");
+
 /**
  * Flow for initializing and generating project.
  * Each flow updates the store information when completed, acting as an atomic operation.
@@ -25,7 +27,9 @@ class CreateProject {
   }
 
   notify(message, percentage = 0, isOngoing = true) {
-    console.log("notify UI");
+    console.log("notify UI: ", message);
+
+    // send("test", "hello jeff");
     // TODONOW: implement;
     // sendToRendererThrottled({
     //   type: RENDERER_ACTIONS.setTask.type,
@@ -46,20 +50,17 @@ class CreateProject {
     setProjectRootFolderPath(projectRootFolderPath);
 
     // LOCATE PICTURES
-    this.notify("Locating all the pictures!");
     const imagePathsToProcess = await recursivelyFindImages(
       projectRootFolderPath
     );
 
     // GENERATE STRUCTURE
     imageHashMap = generateImageHashMap(imagePathsToProcess);
-    // TODONO: send to renderer
-    // sendToRenderer({
-    //   type: RENDERER_ACTIONS.setImages.type,
-    //   payload: transformImageMaptoImageList(imageHashMap),
-    // });
+    // send image structure to frontend
+    serviceUpdateImages(transformImageMaptoImageList(imageHashMap));
 
     // PROCESS IMAGES
+    console.log("process images");
     const toProcess = imagePathsToProcess.length;
     let processed = 0;
 
@@ -80,7 +81,7 @@ class CreateProject {
 
       imageHashMap[hash] = {
         ...imageHashMap[hash],
-        ...(await processImage(rawImagePath, imagePath)),
+        ...(await processImage(rawImagePath)),
       };
 
       processed++;
