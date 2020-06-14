@@ -1,9 +1,9 @@
-const FLOWS = require("./flows");
-const CreateProject = require("./flows/createProject");
-const deleteProject = require("./flows/deleteProject");
-const searchImages = require("./flows/searchImages");
+const FLOWS = require("../flows");
+const CreateProject = require("../flows/createProject");
+const deleteProject = require("../flows/deleteProject");
+const searchImages = require("../flows/searchImages");
 
-const { addFlow, deleteFlows, stopFlows, resetStore } = require("./store");
+const { addFlow, deleteFlows, stopFlows, resetStore } = require("../store");
 
 const createProjectFlow = new CreateProject();
 

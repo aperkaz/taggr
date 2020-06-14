@@ -90,7 +90,7 @@ const createBackgroundWindow = (socketName) => {
 };
 
 const createBackgroundProcess = (socketName) => {
-  serverProcess = fork(__dirname + "/server/server.js", [
+  serverProcess = fork(__dirname + "/server/index.js", [
     "--subprocess",
     app.getVersion(),
     socketName,

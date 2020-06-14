@@ -27,7 +27,7 @@ const processImage = async (imagePath) => {
   console.timeEnd("object");
 
   const data = {
-    // location: await getImageLocation(rawImagePath),
+    location: await getImageLocation(imagePath),
     tags: calculateTags(imageNetClassIds, cocoSsdClassNames),
     // isSexy: await isImageSexy(smallImageData),
   };
