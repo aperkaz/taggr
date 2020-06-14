@@ -6,7 +6,7 @@ import { setupFpsOverlayInDev } from "./components/utils";
 
 import * as serviceWorker from "./serviceWorker";
 import store from "./store";
-import { initSocketToServer } from "./services";
+import { initSocketToServer } from "./services/helpers";
 import "./statics/index.css";
 
 if (window.IS_DEV) setupFpsOverlayInDev();

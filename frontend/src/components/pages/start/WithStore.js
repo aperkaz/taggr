@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 
 import StartPage from "./Page";
-import { createProject } from "../../../services";
+import { serviceCreateProject } from "../../../services";
 import { ACTIONS } from "../../../store";
 import CONSTANTS from "../../../store/constants";
 
@@ -22,7 +22,7 @@ const WithStore = () => {
 
     dispatch(ACTIONS.setActiveRoute(CONSTANTS.ROUTES.DASHBOARD_PAGE));
 
-    createProject({ projectRootFolderPath });
+    serviceCreateProject({ projectRootFolderPath });
   };
 
   const onSelectLogo = () => {

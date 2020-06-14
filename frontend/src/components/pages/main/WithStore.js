@@ -5,7 +5,7 @@ import debounce from "lodash.debounce";
 import MainPage from "./Page";
 import { ACTIONS } from "../../../store";
 import CONSTANTS from "../../../store/constants";
-import { filterImages } from "../../../services";
+import { serviceFilterImages } from "../../../services";
 
 const WithStore = () => {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ const WithStore = () => {
   const onFilterChange = debounce((rawFilter) => {
     // send to backend only enabled filters, ex. {dog: true}
     let filter = Object.keys(rawFilter).filter((k) => rawFilter[k]);
-    filterImages({ filter });
+    serviceFilterImages({ filter });
   }, 200);
 
   return (
