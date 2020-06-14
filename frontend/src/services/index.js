@@ -129,7 +129,7 @@ export const filterImages = ({ filter }) => {
 
 export const deleteProject = () => {
   console.log("sending delete-project");
-  send("deleteProject", {});
+  send("delete-project", {});
 };
 
 // /**
