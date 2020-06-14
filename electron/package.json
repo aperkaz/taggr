@@ -51,7 +51,7 @@
             "icon": "resources/iconLinux.png",
             "maintainer": "Alain Perkaz",
             "name": "taggr",
-            "productDescription": "Keep your privacy while you rediscover your memories. You own your data, and all the computations by taggr happen locally. \n Easy to set up, ready to plug into your existing file system. \n\n Features: \n -Automatic image tagging using machine learning. \n -Aggregate images system-wide, while curating results. \n -Blazing fast image view experience \n -Geolocate your memories \n -And much more! \n\n Check upcoming features and updates in https://taggr.ai/",
+            "productDescription": "Keep your privacy while you rediscover your memories. You own your data, and all the computations by taggr happen locally. \n Easy to set up, ready to plug into your existing file system. \n\n Features: \n -Automatic image tagging using machine learning. \n -Aggregate images system-wide, while curating results. \n -Blazing fast image viewing experience \n -Geolocate your memories \n -And much more! \n\n Check upcoming features and updates in https://taggr.ai/",
             "section": "graphics"
           }
         },
