@@ -20,20 +20,26 @@ const recursivelyFindImages = async (folderPath) => {
     alwaysStat: true,
   };
 
-  for await (const entry of readdirp(folderPath, settings)) {
-    const {
-      path,
-      stats: { size },
-    } = entry;
+  try {
+    for await (const entry of readdirp(folderPath, settings)) {
+      const {
+        path,
+        stats: { size },
+      } = entry;
 
-    // in windows, files read as bigint. in linux, as number
-    const normalizedSize = typeof size === "bigint" ? Number(size) : size;
-    projectSize += normalizedSize;
+      // in windows, files read as bigint. in linux, as number
+      const normalizedSize = typeof size === "bigint" ? Number(size) : size;
+      projectSize += normalizedSize;
 
-    imagePathsList.push(`${folderPath}/${path}`);
+      imagePathsList.push(`${folderPath}/${path}`);
+    }
+  } catch (e) {
+    // TODO: Sentry: send error.
+    // Error reading folders
+    console.log(e);
   }
 
-  // TODONOW: extract reporting
+  // TODONOW: add reporting again
   // trackEventInProd({
   //   category: "User Interaction",
   //   action: "Project created",

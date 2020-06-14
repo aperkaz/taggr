@@ -1,7 +1,17 @@
 const FLOWS = require("../flows");
 const CreateProject = require("../flows/createProject");
-const deleteProject = require("../flows/deleteProject");
-const searchImages = require("../flows/searchImages");
+// TODO: clean up
+// const deleteProject = require("../flows/deleteProject");
+
+const {
+  filterImages,
+  filterImagesWithLocation,
+} = require("../flows/filterImages");
+
+const {
+  serviceUpdateImages,
+  serviceUpdateImagesWithLocation,
+} = require("../services");
 
 const { addFlow, deleteFlows, stopFlows, resetStore } = require("../store");
 
@@ -29,10 +39,9 @@ handlers["delete-project"] = async () => {
   resetStore();
 };
 
-handlers["filter-images"] = async ({ filter }) => {
-  console.log("filtering images: ", filter);
-
-  // return images, imagesWithLocation;
+handlers["filter-images"] = async (filters) => {
+  serviceUpdateImages(filterImages(filters));
+  serviceUpdateImagesWithLocation(filterImagesWithLocation(filters));
 };
 
 module.exports = handlers;

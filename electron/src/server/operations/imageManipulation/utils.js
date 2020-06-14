@@ -20,10 +20,24 @@ const loadImageAsUint8Array = async (path) => {
  * Generate tfjs tensor from a uint8Array from an image
  *
  * @param {Uint8Array} uint8Array
- * @returns {Promise<any>} loaded image
+ * @returns {any} loaded image
  */
-const getImageTensor = async (uint8Array) => {
-  return await tf.node.decodeImage(uint8Array);
+const getImageTensor = (uint8Array) => {
+  let imageTensor;
+
+  try {
+    imageTensor = tf.tidy(() => {
+      return tf.node.decodeImage(uint8Array);
+    });
+  } catch (e) {
+    // console.log(e);
+    // TODO: Sentry. report console.error();
+    // creates emtpy tensor when error
+    imageTensor = tf.zeros([0, 0, 0, 0]);
+  }
+  console.log("jeff");
+
+  return imageTensor;
 };
 
 module.exports = {

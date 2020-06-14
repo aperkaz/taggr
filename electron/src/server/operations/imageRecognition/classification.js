@@ -24,13 +24,16 @@ async function loadModel() {
 async function classifyImage(imageTensor) {
   if (!net) await loadModel();
 
-  // console.time("classify");
-  let logits = await net.infer(imageTensor);
-  let imageNetClassNumbers = await getTopKImagenetClassNumbers(logits);
-  // console.timeEnd("classify");
+  let imageNetClassNumbers = [];
 
-  // free memory by cleaning TF-internals and variables
-  logits = null;
+  try {
+    let logits = await net.infer(imageTensor);
+    imageNetClassNumbers = await getTopKImagenetClassNumbers(logits);
+  } catch (e) {
+    // TODO: Sentry: send error.
+    // Error when classifying image
+    console.log(e);
+  }
 
   return imageNetClassNumbers;
 }

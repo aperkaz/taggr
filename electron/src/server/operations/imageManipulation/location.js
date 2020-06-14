@@ -27,25 +27,34 @@ const getEXIF = (filePath) => {
  * @returns {Promise<LatLong>}
  */
 const getImageLocation = async (imagePath) => {
-  let exifData = await getEXIF(imagePath);
+  try {
+    let exifData = await getEXIF(imagePath);
 
-  // check if gps is contained
-  const latitude = get(exifData, "gps.GPSLatitude", null);
-  const longitude = get(exifData, "gps.GPSLongitude", null);
+    // check if gps is contained
+    const latitude = get(exifData, "gps.GPSLatitude", null);
+    const longitude = get(exifData, "gps.GPSLongitude", null);
 
-  if (!latitude || !longitude) return;
+    if (!latitude || !longitude) return;
 
-  const latDMS = exifData.gps.GPSLatitude;
-  const longDMS = exifData.gps.GPSLongitude;
+    const latDMS = exifData.gps.GPSLatitude;
+    const longDMS = exifData.gps.GPSLongitude;
 
-  const geoString = `${get(exifData, "gps.GPSLatitudeRef", "")}${latDMS[0]}° ${
-    latDMS[1]
-  }' ${latDMS[2]}" ${get(exifData, "gps.GPSLongitudeRef", "")}${longDMS[0]}° ${
-    longDMS[1]
-  }' ${longDMS[2]}"`;
+    const geoString = `${get(exifData, "gps.GPSLatitudeRef", "")}${
+      latDMS[0]
+    }° ${latDMS[1]}' ${latDMS[2]}" ${get(exifData, "gps.GPSLongitudeRef", "")}${
+      longDMS[0]
+    }° ${longDMS[1]}' ${longDMS[2]}"`;
 
-  const { lat, lon } = toDecimal(geoString);
-  return { latitude: lat, longitude: lon };
+    const { lat, lon } = toDecimal(geoString);
+
+    return { latitude: lat, longitude: lon };
+  } catch (e) {
+    // TODO: Sentry: send error.
+    // TODO: create backedn wide helper HOF that reports to SENTRY
+    // Error reading gps data
+    console.log(e);
+  }
+  return;
 };
 
 /**

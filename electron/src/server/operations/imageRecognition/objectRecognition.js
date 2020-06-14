@@ -18,24 +18,25 @@ const loadModel = async () => {
  * @returns {Promise<string[]>} array with coco-ssd class names
  */
 const objectRecognitionImage = async (imageTensor) => {
-  const cocoSsdClassNames = [];
-
   if (!net) await loadModel();
 
-  // console.time("detect objects");
-  let predictions = await net.detect(imageTensor);
+  let cocoSsdClassNames = [];
 
-  predictions.forEach((prediction) => {
-    const score = prediction.score;
-    const predictedClass = prediction.class;
-    if (score > MIN_SCORE) {
-      cocoSsdClassNames.push(predictedClass);
-    }
-  });
-  // console.timeEnd("detect objects");
+  try {
+    let predictions = await net.detect(imageTensor);
 
-  // free memory by cleaning TF-internals and variables
-  predictions = null;
+    predictions.forEach((prediction) => {
+      const score = prediction.score;
+      const predictedClass = prediction.class;
+      if (score > MIN_SCORE) {
+        cocoSsdClassNames.push(predictedClass);
+      }
+    });
+  } catch (e) {
+    // TODO: Sentry: send error.
+    // Error when object recognitions image
+    console.log(e);
+  }
 
   return cocoSsdClassNames;
 };

@@ -14,10 +14,8 @@ const WithStore = () => {
     dispatch(ACTIONS.setActiveRoute(CONSTANTS.ROUTES.SETTINGS_PAGE));
   };
 
-  const onFilterChange = debounce((rawFilter) => {
-    // send to backend only enabled filters, ex. {dog: true}
-    let filter = Object.keys(rawFilter).filter((k) => rawFilter[k]);
-    serviceFilterImages({ filter });
+  const onSearchTriggered = debounce((filters) => {
+    serviceFilterImages(filters);
   }, 200);
 
   return (
@@ -25,7 +23,7 @@ const WithStore = () => {
       {...{
         onSettingsClick,
         task: useSelector((s) => s.task),
-        onFilterChange,
+        onSearchTriggered,
         images: useSelector((s) => s.images),
         imagesWithLocation: useSelector((s) => s.imagesWithLocation),
       }}

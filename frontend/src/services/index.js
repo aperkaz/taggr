@@ -17,10 +17,10 @@ export const serviceCreateProject = ({ projectRootFolderPath = "" }) => {
 
 /**
  * Filter images based on filter. The backend will send messages once the computation is complete.
- * @param {Object} payload {projectRootFolderPath: Object}
+ * @param {Object} filters {projectRootFolderPath: Object}
  */
-export const serviceFilterImages = ({ filter }) => {
-  send("filter-images", { filter });
+export const serviceFilterImages = (filters) => {
+  send("filter-images", filters);
 };
 
 /**

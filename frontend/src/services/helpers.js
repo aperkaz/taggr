@@ -94,7 +94,7 @@ function connectSocket(name, onOpen) {
  * @param {Object} args
  */
 export function send(name, args) {
-  console.log(`FE sends message: ${name} | ${args}`);
+  console.log(`FE sends message: ${name} | ${JSON.stringify(args)}`);
   return new Promise((resolve, reject) => {
     let id = window.uuid.v4();
     replyHandlers.set(id, { resolve, reject });

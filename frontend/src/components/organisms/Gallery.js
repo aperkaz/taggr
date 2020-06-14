@@ -5,8 +5,6 @@ import FsLightbox from "fslightbox-react";
 
 import ImageTile from "../molecules/ImageTile";
 
-// TODONOW: clean console.log
-
 const GUTTER = 10;
 const ELEMENTS_PER_COLLUMN = 5;
 
@@ -47,19 +45,11 @@ const Gallery = ({ imageList = [] }) => {
 };
 
 const Grid = ({ size: { height, width }, imageList, onCellClick }) => {
-  console.log("height:", height);
-  console.log("width:", width);
   height = height ? height : 0;
   width = width ? width : 0;
 
   let gridHeight = height - GUTTER * 2;
   let gridWidth = width;
-
-  // gridHeight = gridHeight ? gridHeight : 0;
-  // gridWidth = gridWidth ? gridWidth : 0;
-
-  // console.log(gridHeight);
-  // console.log(gridWidth);
 
   const columnWidth = gridWidth / ELEMENTS_PER_COLLUMN;
   const rowCount = Math.ceil(imageList.length / ELEMENTS_PER_COLLUMN);
@@ -69,8 +59,6 @@ const Grid = ({ size: { height, width }, imageList, onCellClick }) => {
     gridHeight / ELEMENTS_PER_COLLUMN > 250
       ? gridHeight / ELEMENTS_PER_COLLUMN
       : 250;
-  // rowHeight = rowHeight ? rowHeight : 0;
-  // console.log(rowHeight);
 
   // TODO: improve: add loading spinner /image
   // if (!imageList.length)

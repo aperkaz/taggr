@@ -1,13 +1,12 @@
 // The interface with the UI (React interface)
 const ipc = require("./helpers");
 
-// TODO: improvement: add naming to all services. Research online.
 const serviceUpdateImages = (images) => {
   ipc.send("update-images", images);
 };
 
 const serviceUpdateImagesWithLocation = (imagesWithLocation) => {
-  ipc.send("update-images-with-location");
+  ipc.send("update-images-with-location", imagesWithLocation);
 };
 
 const serviceUpdateTask = (task) => {

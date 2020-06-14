@@ -13,9 +13,8 @@ const calculateTags = require("../tags/customTags");
 const processImage = async (imagePath) => {
   console.log(imagePath);
   let uint8Array = await loadImageAsUint8Array(imagePath);
-  let imageTensor = await getImageTensor(uint8Array);
+  let imageTensor = getImageTensor(uint8Array);
 
-  // TODO: performance: extract to web worker to not block the other render processes
   // ML classification
   console.time("classify");
   const imageNetClassIds = await classifyImage(imageTensor);
