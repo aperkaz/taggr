@@ -51,8 +51,6 @@ const calculateTags = (imageNetClassIds, cocoSsdClassNames) => {
     }
   });
 
-  console.log(tags);
-
   return tags;
 };
 

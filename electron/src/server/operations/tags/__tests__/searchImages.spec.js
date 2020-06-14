@@ -1,54 +1,50 @@
-// import { searchImagesByTags } from "../searchImagesByTags";
-// import "../../../types";
+const searchImagesByTags = require("../searchImagesByTags");
 
-// /**
-//  * @type {ImageHashMapType}
-//  */
-// const imageHashMap = {
-//   image1: {
-//     hash: "image1",
-//     path: "./path",
-//     rawPath: "./path",
-//     tags: ["animal", "vehicle"],
-//     location: {},
-//   },
-//   image2: {
-//     hash: "image2",
-//     path: "./path",
-//     rawPath: "./path",
-//     tags: ["vehicle"],
-//     location: {},
-//   },
-//   image3: {
-//     hash: "image2",
-//     path: "./path",
-//     rawPath: "./path",
-//     tags: [],
-//     location: {},
-//   },
-// };
+/**
+ * @type {ImageHashMapType}
+ */
+const imageHashMap = {
+  image1: {
+    hash: "image1",
+    path: "./path",
+    rawPath: "./path",
+    tags: ["animal", "vehicle"],
+    location: {},
+  },
+  image2: {
+    hash: "image2",
+    path: "./path",
+    rawPath: "./path",
+    tags: ["vehicle"],
+    location: {},
+  },
+  image3: {
+    hash: "image2",
+    path: "./path",
+    rawPath: "./path",
+    tags: [],
+    location: {},
+  },
+};
 
-// test("searchImages with single tag", () => {
-//   const resultImages = searchImagesByTags(imageHashMap, ["vehicle"]);
+test("searchImages with single tag", () => {
+  const resultImages = searchImagesByTags(imageHashMap, ["vehicle"]);
 
-//   expect(resultImages.length).toBe(2);
-//   expect(resultImages[0].hash).toBe("image1");
-// });
+  expect(resultImages.length).toBe(2);
+  expect(resultImages[0].hash).toBe("image1");
+});
 
-// test("searchImages with multiple tags", () => {
-//   const resultImages = searchImagesByTags(imageHashMap, ["animal", "vehicle"]);
+test("searchImages with multiple tags", () => {
+  const resultImages = searchImagesByTags(imageHashMap, ["animal", "vehicle"]);
 
-//   expect(resultImages.length).toBe(1);
-//   expect(resultImages[0].hash).toBe("image1");
-// });
+  expect(resultImages.length).toBe(1);
+  expect(resultImages[0].hash).toBe("image1");
+});
 
-// test("searchImages with empty tags", () => {
-//   const allImagesInCollection = Object.keys(imageHashMap).length;
+test("searchImages with empty tags", () => {
+  const allImagesInCollection = Object.keys(imageHashMap).length;
 
-//   const resultImages = searchImagesByTags(imageHashMap, []);
+  const resultImages = searchImagesByTags(imageHashMap, []);
 
-//   expect(resultImages.length).toBe(allImagesInCollection);
-// });
-test("adds 1 + 2 to equal 3", () => {
-  expect(3).toBe(3);
+  expect(resultImages.length).toBe(allImagesInCollection);
 });
