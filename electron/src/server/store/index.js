@@ -1,8 +1,11 @@
+require("./types");
+
+// TODO: extract to env variable
 const isDevInWindow = false;
 
-// TODONOW: fix types
-// require("../types");
-
+/**
+ * @type {AppStoreType} initialState
+ */
 const initialState = {
   projectRootFolderPath: "",
   imageHashMap: {},
@@ -10,7 +13,8 @@ const initialState = {
 };
 
 /**
- * Do not read it directly. ES6 modules imports are read only, so the store imported in other modules remains an outdated copy
+ * Store for the Backend.
+ * Do not read it directly.
  * @type {AppStoreType} appStore
  */
 let store = { ...initialState };
@@ -33,11 +37,13 @@ const setImageHashMap = (imageHashMap) => {
   store.imageHashMap = imageHashMap;
 };
 
+/**
+ * Long running operatoins in the backend are called Flows (ex. image processing)
+ * @param {any} flow
+ */
 const addFlow = (flow) => {
   store.flows.push(flow);
 };
-
-const deleteFlows = () => (store.flows = []);
 
 const stopFlows = () => {
   store.flows.forEach((flow) => {
@@ -46,12 +52,14 @@ const stopFlows = () => {
   deleteFlows();
 };
 
+const deleteFlows = () => (store.flows = []);
+
 module.exports = {
   resetStore,
   setProjectRootFolderPath,
   getImageHashMap,
   setImageHashMap,
   addFlow,
-  deleteFlows,
   stopFlows,
+  deleteFlows,
 };

@@ -6,6 +6,8 @@
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
+    "test":"jest", 
+    "test:watch": "jest --watch",
     "package": "electron-forge package",
     "make:frontend": "rm -rf frontend-statics; npm run build --prefix ../frontend; mv ../frontend/build ./frontend-statics",
     "make": "rm -rf frontend-statics; npm run build --prefix ../frontend; mv ../frontend/build ./frontend-statics; electron-forge make",
@@ -95,6 +97,7 @@
     "@electron-forge/maker-rpm": "6.0.0-beta.51",
     "@electron-forge/maker-squirrel": "6.0.0-beta.51",
     "@electron-forge/maker-zip": "6.0.0-beta.51",
-    "electron": "9.0.2"
+    "electron": "9.0.2",
+    "jest": "^26.0.1"
   }
 }

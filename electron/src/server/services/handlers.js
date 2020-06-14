@@ -1,8 +1,4 @@
-const FLOWS = require("../flows");
 const CreateProject = require("../flows/createProject");
-// TODO: clean up
-// const deleteProject = require("../flows/deleteProject");
-
 const {
   filterImages,
   filterImagesWithLocation,
