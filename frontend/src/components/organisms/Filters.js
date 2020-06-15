@@ -8,9 +8,10 @@ import {
 
 // ICONS
 import CloseIcon from "@material-ui/icons/Close";
+// TODO: feature: add morning/night pictures
 // when
-import MorningIcon from "@material-ui/icons/WbSunny";
-import NightIcon from "@material-ui/icons/Brightness2";
+// import MorningIcon from "@material-ui/icons/WbSunny";
+// import NightIcon from "@material-ui/icons/Brightness2";
 // what
 import PeopleIcon from "@material-ui/icons/AccessibilityNew";
 import AnimalsIcon from "@material-ui/icons/Pets";
@@ -154,15 +155,14 @@ const FooterButtons = styled.div`
 
 const EMPTY_EPOCH_TIME = null;
 
-// TODONOW: add state for active filters, callback and reset options
 const Filters = ({ isOpen = false, triggerFiltersClose, triggerSearch }) => {
   const [fromDate, setFromDate] = useState(EMPTY_EPOCH_TIME);
   const [toDate, setToDate] = useState(EMPTY_EPOCH_TIME);
 
   const [activeFilters, setActiveFilters] = useState({
     // When - date pickers keep their own state
-    morning: false,
-    night: false,
+    // morning: false,
+    // night: false,
     // What
     people: false,
     animals: false,
@@ -177,7 +177,6 @@ const Filters = ({ isOpen = false, triggerFiltersClose, triggerSearch }) => {
     fear: false,
     anger: false,
     disgust: false,
-    // Age - TODO:
   });
 
   const triggerFilter = (name) => {
@@ -254,7 +253,7 @@ const Filters = ({ isOpen = false, triggerFiltersClose, triggerSearch }) => {
               </TimeSelectoGrid>
             </MuiPickersUtilsProvider>
 
-            <ButtonGrid>
+            {/* <ButtonGrid>
               <ButtonFilter
                 icon={<MorningIcon />}
                 text={"Morning"}
@@ -268,7 +267,7 @@ const Filters = ({ isOpen = false, triggerFiltersClose, triggerSearch }) => {
                 onClick={() => triggerFilter("night")}
               />
               <span />
-            </ButtonGrid>
+            </ButtonGrid> */}
           </Filter>
           <Filter>
             <FilterTitle>
