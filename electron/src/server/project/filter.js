@@ -4,17 +4,17 @@ const store = require("../store");
  * Filter images
  *
  * @param {FilterType} filters
- * @returns {Promise<{images: ImageType[], imagesWithLocation: ImageType[]}>} images
+ * @returns {{images: ImageType[], imagesWithLocation: ImageType[]}} images
  */
-const filterImages = async (filters) => {
-  console.log("about to filter images");
+const filterImages = (filters) => {
+  // console.log("about to filter images");
   let images = [];
   let imagesWithLocation = [];
 
   const allImages = store.getImageHashMap();
   const allImagesWithLocation = store.getImagesWithLocation();
 
-  console.time("searchImages");
+  // console.time("searchImages");
 
   // All images
   Object.keys(allImages).forEach((key) => {
@@ -34,7 +34,7 @@ const filterImages = async (filters) => {
     }
   });
 
-  console.timeEnd("searchImages");
+  // console.timeEnd("searchImages");
 
   return { images, imagesWithLocation };
 };
@@ -56,6 +56,8 @@ const filterImage = (image, filters) => {
 
 /**
  * Determine if date is in range
+ * Dates in UNIX EPOCH format
+ *
  * @param {Object} args
  * @param {number|null} args.date
  * @param {number|null} args.fromDate
@@ -100,6 +102,6 @@ const arrayContains = (arrayA, arrayB) => {
   return arrayB.every((bItem) => arrayA.includes(bItem));
 };
 
-// TODO: add unit test to the filters
+// TODONOW: add unit test to the filters
 
-module.exports = { filterImages };
+module.exports = { filterImages, isDateInRange };

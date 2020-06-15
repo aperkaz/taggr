@@ -22,7 +22,7 @@ const imageHashType = {
     path: "file:///path1",
     rawPath: "path1",
     tags: ["t1", "t2"],
-    location: { lat: "", long: "" },
+    location: { lat: 123, long: 2341 },
   },
 };
 
@@ -35,7 +35,7 @@ const imageHashType = {
  * @property {string} path
  * @property {string} rawPath
  * @property {string[]} tags
- * @property {{latitude: string,longitude: string}} location
+ * @property {{latitude: number,longitude: number}} location
  * @property {number|null} creationDate
  */
 

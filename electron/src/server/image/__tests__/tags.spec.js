@@ -1,4 +1,4 @@
-const calculateTags = require("../customTags");
+const { calculateTags } = require("../tags");
 
 describe("calculateTags()", () => {
   test("with imageNetClassIds", () => {

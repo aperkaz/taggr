@@ -287,4 +287,5 @@ const calculateTags = (imageNetClassIds, cocoSsdClassNames) => {
 
 module.exports = {
   getTags,
+  calculateTags,
 };
