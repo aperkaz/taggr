@@ -1,26 +1,30 @@
 import React from "react";
+import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 import Typography from "../atoms/Typography";
 
-const ButtonRegular = ({
-  text = "",
-  onClick = () => null,
-  style: styles = {},
-}) => (
+const CustomButtom = styled(({ extendedStyles, ...other }) => (
   <Button
-    variant="outlined"
+    variant="contained"
     size="large"
-    style={{
-      border: "none",
-      background: "#95878A",
-      ...styles,
-    }}
-    onClick={onClick}
-  >
-    <Typography variant="subtitle1" style={{ color: "white" }}>
+    {...other}
+    style={{ ...extendedStyles }}
+  />
+))`
+  color: white;
+  background: linear-gradient(70.98deg, #95878a 9.38%, #95878a 91.67%);
+`;
+
+const ButtonRegular = ({
+  text,
+  style: extendedStyles = {},
+  onClick = () => null,
+}) => (
+  <CustomButtom onClick={onClick} extendedStyles={extendedStyles}>
+    <Typography variant="h6" style={{ color: "white" }}>
       {text}
     </Typography>
-  </Button>
+  </CustomButtom>
 );
 
 export default ButtonRegular;

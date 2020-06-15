@@ -5,6 +5,8 @@ import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
 
 import FancyButton from "../../molecules/ButtonFancy";
+import ButtonRegular from "../../molecules/ButtonRegular";
+
 import backgroundImage from "../../../statics/background.jpeg";
 
 const Wrapper = styled.div`
@@ -68,27 +70,21 @@ const SettingsPage = ({ onSelectReset, onSelectSave, onOpenLink }) => (
           Settings
         </Typography>
 
-        <Button
-          variant="contained"
-          color="secondary"
-          size="large"
+        <ButtonRegular
+          text={"Reset app"}
+          onClick={onSelectReset}
           style={{
             fontFamily: "Open Sans",
             fontWeight: 600,
             color: "white",
-            marginBottom: "10vh",
+            marginBottom: "8vh",
           }}
-          onClick={onSelectReset}
-        >
-          Reset app
-        </Button>
+        />
         <br />
         <FancyButton text="Save" onClick={onSelectSave} />
       </Main>
 
-      <Footer
-      // onClick={onSelectSupport}
-      >
+      <Footer>
         <Typography
           variant="h6"
           style={{
@@ -115,12 +111,5 @@ const SettingsPage = ({ onSelectReset, onSelectSave, onOpenLink }) => (
     </InnerWrapper>
   </Wrapper>
 );
-
-SettingsPage.propTypes = {
-  onSelectReset: PropTypes.func,
-  onSelectSave: PropTypes.func,
-  // onSelectSupport: PropTypes.func,
-  onOpenLink: PropTypes.func,
-};
 
 export default SettingsPage;

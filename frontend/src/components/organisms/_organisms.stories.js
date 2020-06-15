@@ -9,7 +9,7 @@ import MapComp from "./Map";
 import FiltersComp from "./Filters";
 
 import FullHeight from "../../stories/utils";
-import imageList from "../../stories/mocks/imageList";
+import { images, imagesWithLocation } from "../../stories/mocks/imageList";
 
 export default {
   title: "Organisms",
@@ -28,9 +28,9 @@ export const NavBar = () => {
 
   return (
     <NavBarComp
-      value={activeTab}
-      tabs={["Timeline", "Gallery", "Map"]}
-      onChange={(t) => {
+      tabList={["Timeline", "Gallery", "Map"]}
+      activeTab={activeTab}
+      handleChange={(t) => {
         console.log(t);
         setActiveTab(t);
       }}
@@ -40,14 +40,16 @@ export const NavBar = () => {
 
 export const Gallery = () => (
   <FullHeight>
-    <GalleryComp imageList={imageList} />
+    <GalleryComp imageList={images} />
   </FullHeight>
 );
 
 export const Map = () => (
   <FullHeight>
     <MapComp
-      imageList={imageList.filter((i) => i.location && i.location.latitude)}
+      imageList={imagesWithLocation.filter(
+        (i) => i.location && i.location.latitude
+      )}
     />
   </FullHeight>
 );

@@ -19,7 +19,11 @@ const CustomTab = withStyles({
   },
 })(Tab);
 
-const NavBar = ({ tabList, activeTab = 0, handleChange = (i) => null }) => (
+const NavBar = ({
+  tabList = [],
+  activeTab = 0,
+  handleChange = (i) => null,
+}) => (
   <Paper
     style={{
       background: `linear-gradient(354.71deg, rgba(135, 49, 232, 0.9) 0%, rgba(69, 40, 220, 0.9) 100%)`,

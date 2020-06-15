@@ -384,6 +384,7 @@ const Filters = ({ isOpen = false, triggerFiltersClose, triggerSearch }) => {
               style={{ width: "100%", margin: "1em .5em 1em 1em" }}
               onClick={resetState}
             />
+
             <ButtonFancy
               text={"Apply"}
               style={{ width: "100%", margin: "1em  1em 1em .5em" }}
