@@ -85,6 +85,8 @@ class Project {
       };
     }
 
+    if (!this.isProcessingActive) return;
+
     // update store
     store.setProject({ rootFolder: path, imageHashMap });
 
@@ -111,11 +113,6 @@ class Project {
 }
 
 const projectSingelton = new Project();
-
-// TODONOW: move to storage layer. Store
-const filterImages = (filters) => {
-  console.log("filtering images");
-};
 
 module.exports = {
   create: projectSingelton.create,

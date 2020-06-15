@@ -41,8 +41,6 @@ const getImageHashMap = () => store.imageHashMap;
 
 // TODO: improve the store access layer
 const getImagesWithLocation = () => {
-  console.log(store);
-
   let imagesWithLocation = [];
   Object.keys(store.imageHashMap).forEach((key) => {
     const image = store.imageHashMap[key];

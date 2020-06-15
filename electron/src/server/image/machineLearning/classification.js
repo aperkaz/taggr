@@ -8,6 +8,9 @@ const PROBABILITY_THRESHOLD = 0.75;
 
 let net;
 
+// initialize model
+loadModel();
+
 async function loadModel() {
   if (net) return;
 
@@ -213,6 +216,5 @@ function getTopKImagenetClassNumbers(logits, topK = 5) {
 }
 
 module.exports = {
-  loadModel,
   getClassificationIds,
 };

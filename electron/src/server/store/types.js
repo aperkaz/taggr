@@ -36,6 +36,7 @@ const imageHashType = {
  * @property {string} rawPath
  * @property {string[]} tags
  * @property {{latitude: string,longitude: string}} location
+ * @property {number|null} creationDate
  */
 
 /**
@@ -46,4 +47,14 @@ const imageHashType = {
  * @property {boolean} isOngoing
  * @property {string} [name]
  * @property {number} [percentage]
+ */
+
+/**
+ * @type {FilterType}
+ */
+/**
+ * @typedef {Object} FilterType
+ * @property {number} fromDate
+ * @property {number} toDate
+ * @property {string[]} tags
  */

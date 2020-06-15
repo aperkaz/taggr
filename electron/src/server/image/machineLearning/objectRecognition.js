@@ -5,19 +5,22 @@ const MIN_SCORE = 0.5;
 
 let net;
 
-const loadModel = async () => {
+// initialize model
+loadModel();
+
+async function loadModel() {
   console.time("loadModel object recognition");
   // net = await cocoSsd.load({ base: "mobilenet_v2" });
   net = await cocoSsd.load();
   console.timeEnd("loadModel object recognition");
-};
+}
 
 /**
  * Get coco-ssd class ids for an image
  * @param {ImageData} imageTensor
  * @returns {Promise<string[]>} array with coco-ssd class names
  */
-const getObjectRecognitionClassNames = async (imageTensor) => {
+async function getObjectRecognitionClassNames(imageTensor) {
   if (!net) await loadModel();
 
   let cocoSsdClassNames = [];
@@ -39,6 +42,6 @@ const getObjectRecognitionClassNames = async (imageTensor) => {
   }
 
   return cocoSsdClassNames;
-};
+}
 
-module.exports = { loadModel, getObjectRecognitionClassNames };
+module.exports = { getObjectRecognitionClassNames };

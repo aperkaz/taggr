@@ -14,9 +14,13 @@ const process = async (path) => {
   const location = await getLocation(path);
   console.log("location: ", JSON.stringify(location));
 
+  // TODONOW: add function, with EXIF read.
+  // const creationDate = await getCreationDate(path);
+
   const imageData = {
     location,
     tags,
+    creationDate: 0, // TODONOW: read read date
     // isSexy: await isImageSexy(smallImageData),
   };
 
