@@ -57,4 +57,4 @@ const recursivelyFindImages = async (folderPath) => {
   return imagePathsList;
 };
 
-module.exports = recursivelyFindImages;
+module.exports = { recursivelyFindImages };

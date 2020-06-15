@@ -1,30 +1,23 @@
 // Inspiration: https://medium.com/@trukrs/type-safe-javascript-with-jsdoc-7a2a63209b76
 // Setup: add `"javascript.implicitProjectConfig.checkJs": true` to VSCode settings
-// Objects: https://stackoverflow.com/questions/19513955/how-to-document-a-dictionary-in-jsdoc
+// Define objects: https://stackoverflow.com/questions/6460604/how-to-describe-object-arguments-in-jsdoc
 
 /**
- * @type {AppStoreType} appStore
+ * @type {AppStoreType}
  */
 /**
  * @typedef {Object} AppStoreType Reactive store of backend relevant data.
  * @property {string} projectRootFolderPath Path to the current root folder (project).
- * @property {Object} imageHashMap Map of image information, by image hash (from path).
- * @property {Object[]} flows array of active flows
+ * @property {ImageHashMapType} imageHashMap Map of image information, by image hash (from path).
  */
 
 /**
- * @type {ImageHashMapType} imageHashMap
+ * @type {ImageHashMapType}
  */
 /**
- * @typedef {Object<string,ImageDataType>} ImageHashMapType main structure for image storage
- * @typedef {Object} ImageDataType main structure for image storage
- * @property {string} hash
- * @property {string} path prefixed by file://
- * @property {string} rawPath
- * @property {string[]} tags
- * @property {Object} location
+ * @typedef {Object<string,ImageType>} ImageHashMapType
  */
-const example = {
+const imageHashType = {
   hash: {
     path: "file:///path1",
     rawPath: "path1",
@@ -32,3 +25,25 @@ const example = {
     location: { lat: "", long: "" },
   },
 };
+
+/**
+ * @type {ImageType}
+ */
+/**
+ * @typedef {Object} ImageType
+ * @property {string} hash
+ * @property {string} path
+ * @property {string} rawPath
+ * @property {string[]} tags
+ * @property {{latitude: string,longitude: string}} location
+ */
+
+/**
+ * @type {TaskType}
+ */
+/**
+ * @typedef {Object} TaskType
+ * @property {boolean} isOngoing
+ * @property {string} [name]
+ * @property {number} [percentage]
+ */

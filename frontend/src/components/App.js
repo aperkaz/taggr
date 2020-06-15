@@ -82,7 +82,7 @@ const renderRoute = (activeRoute) => {
     case CONSTANTS.ROUTES.SETTINGS_PAGE:
       return <SettingsPage />;
     default:
-      return <div>my names is jeff</div>;
+      return <div>TODO: add placeholder</div>;
   }
 };
 

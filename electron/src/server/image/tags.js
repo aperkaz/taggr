@@ -1,57 +1,40 @@
 const range = require("lodash.range");
 const get = require("lodash.get");
 
-/**
- * Return true is an image classifies as the given tagName.
- * @param {number[]} imageNetClassIds
- * @param {string[]} cocoSsdClassNames
- * @param {string} tagName
- */
-const calculateTag = (imageNetClassIds, cocoSsdClassNames, tagName) => {
-  const tagImageNetClassIds = get(
-    CUSTOM_TAGS[tagName],
-    "imageNetClassIds",
-    null
-  );
-  const tagCocoSsdClassNames = get(
-    CUSTOM_TAGS[tagName],
-    "cocoSsdClassNames",
-    null
-  );
-
-  if (
-    imageNetClassIds &&
-    tagImageNetClassIds &&
-    imageNetClassIds.some((id) => tagImageNetClassIds.includes(id))
-  )
-    return true;
-
-  if (
-    cocoSsdClassNames &&
-    tagCocoSsdClassNames &&
-    cocoSsdClassNames.some((name) => tagCocoSsdClassNames.includes(name))
-  )
-    return true;
-
-  return false;
-};
+const { loadFileAsUint8Array } = require("../filesystem");
+const { getImageTensor } = require("./machineLearning/tensor");
+const { getClassificationIds } = require("./machineLearning/classification");
+const {
+  getObjectRecognitionClassNames,
+} = require("./machineLearning/objectRecognition");
 
 /**
- * Return list of custom tags for image.
- * @param {number[]} imageNetClassIds
- * @param {string[]} cocoSsdClassNames
- * @returns {string[]}
+ * Extract the tags from an image
+ *
+ * @param {string} path without file://
+ * @returns {Promise<string[]>}
  */
-const calculateTags = (imageNetClassIds, cocoSsdClassNames) => {
-  const tags = [];
+const getTags = async (path) => {
+  // TODONOW: performance: look into memory leak in processing
+  let uint8Array = await loadFileAsUint8Array(path);
+  let imageTensor = getImageTensor(uint8Array);
 
-  Object.keys(CUSTOM_TAGS).forEach((tagName) => {
-    if (calculateTag(imageNetClassIds, cocoSsdClassNames, tagName)) {
-      tags.push(tagName);
-    }
-  });
+  // ML classification
+  console.time("classify");
+  const imageNetClassIds = await getClassificationIds(imageTensor);
+  console.timeEnd("classify");
 
-  return tags;
+  // ML object recognition
+  console.time("object");
+  const cocoSsdClassNames = await getObjectRecognitionClassNames(imageTensor);
+  console.timeEnd("object");
+
+  // clean up
+  uint8Array = null;
+  imageTensor.dispose();
+  imageTensor = null;
+
+  return calculateTags(imageNetClassIds, cocoSsdClassNames);
 };
 
 const CUSTOM_TAGS = {
@@ -247,4 +230,61 @@ const CUSTOM_TAGS = {
   },
 };
 
-module.exports = calculateTags;
+/**
+ * Return true is an image classifies as the given tagName.
+ *
+ * @param {number[]} imageNetClassIds
+ * @param {string[]} cocoSsdClassNames
+ * @param {string} tagName
+ */
+const calculateTag = (imageNetClassIds, cocoSsdClassNames, tagName) => {
+  const tagImageNetClassIds = get(
+    CUSTOM_TAGS[tagName],
+    "imageNetClassIds",
+    null
+  );
+  const tagCocoSsdClassNames = get(
+    CUSTOM_TAGS[tagName],
+    "cocoSsdClassNames",
+    null
+  );
+
+  if (
+    imageNetClassIds &&
+    tagImageNetClassIds &&
+    imageNetClassIds.some((id) => tagImageNetClassIds.includes(id))
+  )
+    return true;
+
+  if (
+    cocoSsdClassNames &&
+    tagCocoSsdClassNames &&
+    cocoSsdClassNames.some((name) => tagCocoSsdClassNames.includes(name))
+  )
+    return true;
+
+  return false;
+};
+
+/**
+ * Return list of custom tags for image.
+ *
+ * @param {number[]} imageNetClassIds
+ * @param {string[]} cocoSsdClassNames
+ * @returns {string[]}
+ */
+const calculateTags = (imageNetClassIds, cocoSsdClassNames) => {
+  const tags = [];
+
+  Object.keys(CUSTOM_TAGS).forEach((tagName) => {
+    if (calculateTag(imageNetClassIds, cocoSsdClassNames, tagName)) {
+      tags.push(tagName);
+    }
+  });
+
+  return tags;
+};
+
+module.exports = {
+  getTags,
+};

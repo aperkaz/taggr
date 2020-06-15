@@ -7,10 +7,11 @@ import { registerHandler } from "./helpers";
 
 /**
  * Update the images in the Frontend.
- * @param {Object[]} images
+ * @param {{images: Object[], imagesWithLocation: Object[]}} images
  */
-registerHandler("update-images", (images) => {
+registerHandler("update-images", ({ images, imagesWithLocation }) => {
   store.dispatch(ACTIONS.setImages(images));
+  store.dispatch(ACTIONS.setImagesWithLocation(imagesWithLocation));
 });
 
 /**

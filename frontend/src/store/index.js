@@ -5,7 +5,6 @@ const initialState = {
   activeRoute: CONSTANTS.ROUTES.START_PAGE,
   images: [],
   imagesWithLocation: [],
-  tags: [],
   task: {
     isOngoing: false,
     name: "",
@@ -29,9 +28,6 @@ const stateSlice = createSlice({
     },
     setTask: (state, action) => {
       state.task = { ...state.task, ...action.payload };
-    },
-    setTags: (state, action) => {
-      state.tags = action.payload;
     },
   },
 });

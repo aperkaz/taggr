@@ -21,7 +21,7 @@ async function loadModel() {
  * @param {any} imageTensor
  * @returns {Promise<number[]>} imagenet class ids
  */
-async function classifyImage(imageTensor) {
+async function getClassificationIds(imageTensor) {
   if (!net) await loadModel();
 
   let imageNetClassNumbers = [];
@@ -214,5 +214,5 @@ function getTopKImagenetClassNumbers(logits, topK = 5) {
 
 module.exports = {
   loadModel,
-  classifyImage,
+  getClassificationIds,
 };

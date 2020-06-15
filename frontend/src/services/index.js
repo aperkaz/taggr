@@ -7,6 +7,8 @@
 import { send } from "./helpers";
 import "./handlers"; // registers handlers
 
+// TODONOW: refactor to services/handler, like in BE. Out of the index.js
+
 /**
  * Create a new taggr project
  * @param {Object} payload {projectRootFolderPath: string}

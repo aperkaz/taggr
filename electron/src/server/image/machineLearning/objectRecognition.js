@@ -17,7 +17,7 @@ const loadModel = async () => {
  * @param {ImageData} imageTensor
  * @returns {Promise<string[]>} array with coco-ssd class names
  */
-const objectRecognitionImage = async (imageTensor) => {
+const getObjectRecognitionClassNames = async (imageTensor) => {
   if (!net) await loadModel();
 
   let cocoSsdClassNames = [];
@@ -41,4 +41,4 @@ const objectRecognitionImage = async (imageTensor) => {
   return cocoSsdClassNames;
 };
 
-module.exports = { loadModel, objectRecognitionImage };
+module.exports = { loadModel, getObjectRecognitionClassNames };
