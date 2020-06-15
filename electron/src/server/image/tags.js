@@ -2,11 +2,7 @@ const range = require("lodash.range");
 const get = require("lodash.get");
 
 const { loadFileAsUint8Array } = require("../filesystem");
-const { getImageTensor } = require("./machineLearning/tensor");
 const { getClassificationIds } = require("./machineLearning/classification");
-const {
-  getObjectRecognitionClassNames,
-} = require("./machineLearning/objectRecognition");
 
 /**
  * Extract the tags from an image
@@ -15,6 +11,11 @@ const {
  * @returns {Promise<string[]>}
  */
 const getTags = async (path) => {
+  const { getImageTensor } = require("./machineLearning/tensor");
+  const {
+    getObjectRecognitionClassNames,
+  } = require("./machineLearning/objectRecognition");
+
   // TODONOW: performance: look into memory leak in processing
   let uint8Array = await loadFileAsUint8Array(path);
   let imageTensor = getImageTensor(uint8Array);
@@ -38,12 +39,14 @@ const getTags = async (path) => {
 };
 
 const CUSTOM_TAGS = {
-  // when
+  // WHEN
   // { name: "night" },
   // { name: "morning" },
-  // what
-  // { name: "dark" },
-  // { name: "bright" },
+  // WHAT
+  person: {
+    name: "person",
+    cocoSsdClassNames: ["person"],
+  },
   animal: {
     name: "animal",
     imageNetClassIds: [...range(0, 398), 537],
@@ -102,20 +105,7 @@ const CUSTOM_TAGS = {
       874,
       880,
       895,
-    ],
-    cocoSsdClassNames: [
-      "bicycle",
-      "car",
-      "motorcycle",
-      "airplane",
-      "bus",
-      "train",
-      "truck",
-    ],
-  },
-  boat: {
-    name: "boat",
-    imageNetClassIds: [
+      // boats:
       472,
       484,
       510,
@@ -129,7 +119,16 @@ const CUSTOM_TAGS = {
       833,
       871,
     ],
-    cocoSsdClassNames: ["boat"],
+    cocoSsdClassNames: [
+      "bicycle",
+      "car",
+      "motorcycle",
+      "airplane",
+      "bus",
+      "train",
+      "truck",
+      "boat",
+    ],
   },
   food: {
     name: "food",
@@ -217,17 +216,19 @@ const CUSTOM_TAGS = {
       "tennis racket",
     ],
   },
-  // where
-  nature: {
-    name: "nature",
-    imageNetClassIds: [500, 703, 803, ...range(970, 981), ...range(984, 998)],
-  },
-  water: { name: "water", imageNetClassIds: [525, 562, 563, 842] },
-  // people
-  person: {
-    name: "person",
-    cocoSsdClassNames: ["person"],
-  },
+
+  // EMOTIONS
+  // TODO: add
+
+  // AGE
+  // TODO: add
+
+  // LEGACY - not working so well. Wait till segmentation works.
+  // nature: {
+  //   name: "nature",
+  //   imageNetClassIds: [500, 703, 803, ...range(970, 981), ...range(984, 998)],
+  // },
+  // water: { name: "water", imageNetClassIds: [525, 562, 563, 842] },
 };
 
 /**
