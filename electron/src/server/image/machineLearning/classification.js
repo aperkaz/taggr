@@ -1,7 +1,5 @@
 // @ts-ignore-next-line
 global.fetch = require("node-fetch");
-const tf = require("@tensorflow/tfjs");
-// tf.enableProdMode();
 const mobilenet = require("@tensorflow-models/mobilenet");
 
 const PROBABILITY_THRESHOLD = 0.75;

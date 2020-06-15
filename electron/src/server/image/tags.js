@@ -1,8 +1,11 @@
 const range = require("lodash.range");
 const get = require("lodash.get");
 
-const { loadFileAsUint8Array } = require("../filesystem");
+const filesystem = require("../filesystem");
 const { getClassificationIds } = require("./machineLearning/classification");
+const {
+  getObjectRecognitionClassNames,
+} = require("./machineLearning/objectRecognition");
 
 /**
  * Extract the tags from an image
@@ -12,12 +15,9 @@ const { getClassificationIds } = require("./machineLearning/classification");
  */
 const getTags = async (path) => {
   const { getImageTensor } = require("./machineLearning/tensor");
-  const {
-    getObjectRecognitionClassNames,
-  } = require("./machineLearning/objectRecognition");
 
   // TODONOW: performance: look into memory leak in processing
-  let uint8Array = await loadFileAsUint8Array(path);
+  let uint8Array = await filesystem.loadFileAsUint8Array(path);
   let imageTensor = getImageTensor(uint8Array);
 
   // ML classification
@@ -43,12 +43,12 @@ const CUSTOM_TAGS = {
   // { name: "night" },
   // { name: "morning" },
   // WHAT
-  person: {
-    name: "person",
+  people: {
+    name: "people",
     cocoSsdClassNames: ["person"],
   },
-  animal: {
-    name: "animal",
+  animals: {
+    name: "animals",
     imageNetClassIds: [...range(0, 398), 537],
     cocoSsdClassNames: [
       "bird",
@@ -63,8 +63,8 @@ const CUSTOM_TAGS = {
       "giraffe",
     ],
   },
-  vehicle: {
-    name: "vehicle",
+  vehicles: {
+    name: "vehicles",
     imageNetClassIds: [
       403,
       404,
@@ -165,8 +165,8 @@ const CUSTOM_TAGS = {
       "dining table",
     ],
   },
-  drink: {
-    name: "drink",
+  drinks: {
+    name: "drinks",
     imageNetClassIds: [
       503,
       504,
@@ -185,8 +185,8 @@ const CUSTOM_TAGS = {
     ],
     cocoSsdClassNames: ["bottle", "wine glass", "cup"],
   },
-  sport: {
-    name: "sport",
+  sports: {
+    name: "sports",
     imageNetClassIds: [
       701,
       722,

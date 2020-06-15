@@ -1,4 +1,3 @@
-const tf = require("@tensorflow/tfjs");
 const cocoSsd = require("@tensorflow-models/coco-ssd");
 
 const MIN_SCORE = 0.5;

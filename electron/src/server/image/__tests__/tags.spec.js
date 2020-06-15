@@ -7,21 +7,21 @@ describe("calculateTags()", () => {
     const tags = calculateTags([397], []);
 
     expect(tags.length).toBe(1);
-    expect(tags).toEqual(["animal"]);
+    expect(tags).toEqual(["animals"]);
   });
 
   test("with cocoSsdClassNames", () => {
     const tags = calculateTags([], ["bird"]);
 
     expect(tags.length).toBe(1);
-    expect(tags).toEqual(["animal"]);
+    expect(tags).toEqual(["animals"]);
   });
 
   test("with imageNetClassIds and cocoSsdClassNames", () => {
     const tags = calculateTags([397], ["bird"]);
 
     expect(tags.length).toBe(1);
-    expect(tags).toEqual(["animal"]);
+    expect(tags).toEqual(["animals"]);
   });
 
   test("with empty imageNetClassIds and cocoSsdClassNames", () => {
@@ -33,8 +33,8 @@ describe("calculateTags()", () => {
 
 // WHAT
 
-describe("custom tag: person", () => {
-  let tagName = "person";
+describe("custom tag: people", () => {
+  let tagName = "people";
 
   const validImageNetClassIds = [];
   const invalidImageNetClassIds = [99999];
@@ -71,8 +71,8 @@ describe("custom tag: person", () => {
   });
 });
 
-describe("custom tag: animal", () => {
-  const tagName = "animal";
+describe("custom tag: animals", () => {
+  const tagName = "animals";
 
   const validImageNetClassIds = [397];
   const invalidImageNetClassIds = [99999];
@@ -109,8 +109,8 @@ describe("custom tag: animal", () => {
   });
 });
 
-describe("custom tag: vehicle", () => {
-  let tagName = "vehicle";
+describe("custom tag: vehicles", () => {
+  let tagName = "vehicles";
 
   const validImageNetClassIds = [403];
   const invalidImageNetClassIds = [99999];
@@ -185,8 +185,8 @@ describe("custom tag: food", () => {
   });
 });
 
-describe("custom tag: drink", () => {
-  let tagName = "drink";
+describe("custom tag: drinks", () => {
+  let tagName = "drinks";
 
   const validImageNetClassIds = [503];
   const invalidImageNetClassIds = [99999];
@@ -223,8 +223,8 @@ describe("custom tag: drink", () => {
   });
 });
 
-describe("custom tag: sport", () => {
-  let tagName = "sport";
+describe("custom tag: sports", () => {
+  let tagName = "sports";
 
   const validImageNetClassIds = [701];
   const invalidImageNetClassIds = [99999];
