@@ -1,8 +1,9 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
-import { withKnobs } from "@storybook/addon-knobs";
+import { withKnobs, boolean, number, text } from "@storybook/addon-knobs";
 
 import HeaderComp from "./Header";
+// TODO: add TaskProgress story here
 import NavBarComp from "./NavBar";
 import GalleryComp from "./Gallery";
 import MapComp from "./Map";
@@ -18,6 +19,14 @@ export default {
 
 export const Header = () => (
   <HeaderComp
+    task={{
+      isOngoing: boolean("isTaskOngoing", false),
+      name: text(
+        "taskName",
+        "Be patient, the minions are working on your memories!"
+      ),
+      percentage: number("taskPercentage", 50),
+    }}
     onFiltersClick={action("click filters")}
     onSettingsClick={action("click settings")}
   />

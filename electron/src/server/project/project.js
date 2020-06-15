@@ -74,7 +74,7 @@ class Project {
       services.services.updateTask({
         name: `Processing ${toProcess} memories!`,
         isOngoing: true,
-        percentage: Math.floor(
+        percentage: Math.ceil(
           ((toProcess - imagePathsToProcess.length) * 100) / toProcess
         ),
       });

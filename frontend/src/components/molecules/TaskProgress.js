@@ -1,20 +1,29 @@
 import React from "react";
 import styled from "styled-components";
-
+import { withStyles } from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Typography from "@material-ui/core/Typography";
 
 const FlexWrapper = styled.div`
   display: flex;
   justify-content: center;
-  padding-top: 10px;
 `;
 
 const Progress = styled.div`
-  margin: auto 0;
+  margin: 0 0 1em;
   min-width: 30%;
   text-align: right;
 `;
+
+const BorderLinearProgress = withStyles(() => ({
+  root: {
+    borderRadius: 2,
+  },
+  bar: {
+    borderRadius: 5,
+    background: "linear-gradient(70.98deg, #fe4e74 9.38%, #ff8a4d 91.67%)",
+  },
+}))(LinearProgress);
 
 const TaskProgress = ({ name, percentage }) => (
   <FlexWrapper>
@@ -29,13 +38,7 @@ const TaskProgress = ({ name, percentage }) => (
       >
         {name}
       </Typography>
-      <LinearProgress variant="determinate" value={percentage} />
-      <Typography
-        variant="overline"
-        style={{ fontFamily: "Open Sans, sans-serif" }}
-      >
-        %{percentage}
-      </Typography>
+      <BorderLinearProgress variant="determinate" value={percentage} />
     </Progress>
   </FlexWrapper>
 );

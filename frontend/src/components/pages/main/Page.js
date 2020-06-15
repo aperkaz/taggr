@@ -23,7 +23,6 @@ const Wrapper = styled.div`
 const MainPage = ({
   onSettingsClick,
   onSearchTriggered,
-  // TODONOW: add task to header
   task,
   images = [],
   imagesWithLocation = [],
@@ -39,8 +38,7 @@ const MainPage = ({
         triggerSearch={onSearchTriggered}
       />
       <Header
-        // TODONOW: add task completion
-        // task={task}
+        task={task}
         onFiltersClick={() => setIsFilterOpen(true)}
         onSettingsClick={onSettingsClick}
       />

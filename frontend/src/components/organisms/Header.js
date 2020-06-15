@@ -2,9 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import Typography from "../atoms/Typography";
 import Link from "@material-ui/core/Link";
-
 import MenuIcon from "@material-ui/icons/Menu";
 import SettingsIcon from "@material-ui/icons/Settings";
+
+import TaskProgress from "../molecules/TaskProgress";
 
 const Wrapper = styled.div`
   min-height: 40px;
@@ -30,66 +31,40 @@ const Settings = styled.div`
 const Header = ({
   onFiltersClick = () => null,
   onSettingsClick = () => null,
-}) => (
-  <Wrapper>
-    <Link
-      href="#"
-      color="inherit"
-      style={{ margin: "auto 0", textDecoration: "none" }}
-      onClick={(e) => {
-        e.preventDefault();
-        onFiltersClick();
-      }}
-    >
-      <Filters>
-        <MenuIcon />
-        <Typography
-          variant="h6"
-          style={{ fontWeight: "bold", paddingLeft: ".5em" }}
-        >
-          Filters
-        </Typography>
-      </Filters>
-    </Link>
-    <Settings>
-      {/* <Link
+  task: {
+    isOngoing: isTaskOngoing = true,
+    name: taskName = "not defined ",
+    percentage: taskPercentage = 0,
+  },
+}) => {
+  return isTaskOngoing ? (
+    <TaskProgress name={taskName} percentage={taskPercentage} />
+  ) : (
+    <Wrapper>
+      <Link
         href="#"
         color="inherit"
-        style={{ margin: "0", textDecoration: "none" }}
+        style={{ margin: "auto 0", textDecoration: "none" }}
         onClick={(e) => {
           e.preventDefault();
-          onSettingsClick();
+          onFiltersClick();
         }}
-      > */}
-      <SettingsIcon onClick={() => onSettingsClick()} />
-      {/* </Link> */}
-    </Settings>
-
-    {/* <Typography
-      variant="h5"
-      style={{ fontFamily: "Poppins, sans-serif", margin: "auto 0" }}
-      gutterBottom
-    >
-      taggr
-    </Typography>
-    <Link
-      href="#"
-      color="inherit"
-      style={{ margin: "auto 0", textDecoration: "none" }}
-      onClick={(e) => {
-        e.preventDefault();
-        onSettingsClick();
-      }}
-    >
-      <Typography
-        variant="subtitle1"
-        gutterBottom
-        style={{ fontFamily: "Open Sans", margin: "0" }}
       >
-        Settings
-      </Typography>
-    </Link> */}
-  </Wrapper>
-);
+        <Filters>
+          <MenuIcon />
+          <Typography
+            variant="h6"
+            style={{ fontWeight: "bold", paddingLeft: ".5em" }}
+          >
+            Filters
+          </Typography>
+        </Filters>
+      </Link>
+      <Settings>
+        <SettingsIcon onClick={() => onSettingsClick()} />
+      </Settings>
+    </Wrapper>
+  );
+};
 
 export default Header;
