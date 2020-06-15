@@ -9,6 +9,8 @@ function init(socketName, handlers) {
       let msg = JSON.parse(data);
       let { id, name, args } = msg;
 
+      console.log(`BE receive: ${name} | ${JSON.stringify(args)}`);
+
       if (handlers[name]) {
         handlers[name](args).then(
           (result) => {
@@ -45,7 +47,7 @@ function init(socketName, handlers) {
 }
 
 function send(name, args) {
-  console.log(`BE send: ${name} | ${args}`);
+  console.log(`BE send: ${name} | ${JSON.stringify(args)}`);
   ipc.server.broadcast("message", JSON.stringify({ type: "push", name, args }));
 }
 

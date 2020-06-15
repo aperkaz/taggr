@@ -16,8 +16,6 @@ const createProjectFlow = new CreateProject();
 let handlers = {};
 
 handlers["create-project"] = async ({ projectRootFolderPath }) => {
-  console.log("creating project for ", projectRootFolderPath);
-
   // add flow to list of active flows
   addFlow(createProjectFlow);
 
@@ -36,6 +34,7 @@ handlers["delete-project"] = async () => {
 };
 
 handlers["filter-images"] = async (filters) => {
+  // TODO: improvement use only a updateImage service, not 2
   serviceUpdateImages(filterImages(filters));
   serviceUpdateImagesWithLocation(filterImagesWithLocation(filters));
 };

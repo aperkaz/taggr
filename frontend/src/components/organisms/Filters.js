@@ -152,10 +152,12 @@ const FooterButtons = styled.div`
   display: flex;
 `;
 
+const EMPTY_EPOCH_TIME = null;
+
 // TODONOW: add state for active filters, callback and reset options
 const Filters = ({ isOpen = false, triggerFiltersClose, triggerSearch }) => {
-  const [fromDate, setFromDate] = useState(null);
-  const [toDate, setToDate] = useState(null);
+  const [fromDate, setFromDate] = useState(EMPTY_EPOCH_TIME);
+  const [toDate, setToDate] = useState(EMPTY_EPOCH_TIME);
 
   const [activeFilters, setActiveFilters] = useState({
     // When - date pickers keep their own state
@@ -188,8 +190,8 @@ const Filters = ({ isOpen = false, triggerFiltersClose, triggerSearch }) => {
   };
 
   const resetState = () => {
-    setFromDate(null);
-    setToDate(null);
+    setFromDate(EMPTY_EPOCH_TIME);
+    setToDate(EMPTY_EPOCH_TIME);
 
     // toggle false all filter items
     const resetFilters = { ...activeFilters };
@@ -199,8 +201,8 @@ const Filters = ({ isOpen = false, triggerFiltersClose, triggerSearch }) => {
     setActiveFilters(resetFilters);
 
     triggerSearch({
-      fromDate: null,
-      toDate: null,
+      fromDate: EMPTY_EPOCH_TIME,
+      toDate: EMPTY_EPOCH_TIME,
       tags: [],
     });
   };
@@ -225,7 +227,10 @@ const Filters = ({ isOpen = false, triggerFiltersClose, triggerSearch }) => {
                   label="From date"
                   format="dd/MM/yyyy"
                   value={fromDate}
-                  onChange={setFromDate}
+                  onChange={(date) => {
+                    const epochDate = date ? date.getTime() : EMPTY_EPOCH_TIME;
+                    setFromDate(epochDate);
+                  }}
                   KeyboardButtonProps={{
                     "aria-label": "change date",
                   }}
@@ -237,7 +242,10 @@ const Filters = ({ isOpen = false, triggerFiltersClose, triggerSearch }) => {
                   label="To date"
                   format="dd/MM/yyyy"
                   value={toDate}
-                  onChange={setToDate}
+                  onChange={(date) => {
+                    const epochDate = date ? date.getTime() : EMPTY_EPOCH_TIME;
+                    setToDate(epochDate);
+                  }}
                   KeyboardButtonProps={{
                     "aria-label": "change date",
                   }}

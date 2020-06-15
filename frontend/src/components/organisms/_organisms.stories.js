@@ -60,7 +60,7 @@ export const Filters = () => {
       <button onClick={() => setIsOpen(true)}>open filters</button>
       <FiltersComp
         isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
+        triggerFiltersClose={() => setIsOpen(false)}
         triggerSearch={(filters) => console.log("searching for: ", filters)}
       />
     </div>
