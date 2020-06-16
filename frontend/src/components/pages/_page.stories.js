@@ -1,6 +1,12 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
-import { withKnobs, boolean, text, number } from "@storybook/addon-knobs";
+import {
+  withKnobs,
+  boolean,
+  text,
+  number,
+  array,
+} from "@storybook/addon-knobs";
 import StartPageComp from "./start/Page";
 import MainPageComp from "./main/Page";
 import SettingsPageComp from "./settings/Page";
@@ -36,7 +42,7 @@ export const Main = () => (
         percentage: number("taskPercentage", 50),
       }}
       images={images}
-      imagesWithLocation={imagesWithLocation}
+      imagesWithLocation={array("imagesWithLocation", imagesWithLocation)}
     />
   </FullHeight>
 );

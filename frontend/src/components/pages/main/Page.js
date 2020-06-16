@@ -43,14 +43,20 @@ const MainPage = ({
         onSettingsClick={onSettingsClick}
       />
       <NavBar
-        tabList={["Gallery", "Map"]}
+        tabList={imagesWithLocation.length ? ["Gallery", "Map"] : ["Gallery"]}
         activeTab={activeTab}
         handleChange={setActiveTab}
       />
       {/* TODONOW: add teaser for timeline */}
       {/* {activeTab === 0 ? <div>timeline</div> : null} */}
       {activeTab === 0 ? <Gallery imageList={images} /> : null}
-      {activeTab === 1 ? <Map imageList={imagesWithLocation} /> : null}
+      {activeTab === 1 ? (
+        imagesWithLocation.length ? (
+          <Map imageList={imagesWithLocation} />
+        ) : (
+          setActiveTab(0)
+        )
+      ) : null}
     </Wrapper>
   );
 };
