@@ -1,8 +1,10 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
+import Typography from "../atoms/Typography";
 
 const Wrapper = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100%;
@@ -45,37 +47,55 @@ const Hr = styled.hr`
   height: 40%;
   position: absolute;
   border-radius: 50%;
-  animation: ${spin} 2s ease infinite;
+  animation: ${spin} ${(props) => props.animationDuration}s ease infinite;
 `;
 
 const Element1 = styled(Hr)`
   background: #8731e8;
-  animation-delay: -1.5s;
+  animation-delay: ${(props) => props.animationDelay}s;
 `;
 
 const Element2 = styled(Hr)`
   background: #4528dc;
-  animation-delay: -1s;
+  animation-delay: ${(props) => props.animationDelay}s;
 `;
 
 const Element3 = styled(Hr)`
   background: #ff8e53;
-  animation-delay: -0.5s;
+  animation-delay: ${(props) => props.animationDelay}s;
 `;
 
 const Element4 = styled(Hr)`
   background: #fe6b8b;
+  animation-delay: ${(props) => props.animationDelay}s;
 `;
 
-const Loading = () => (
-  <Wrapper>
-    <AnimationWrapper>
-      <Element1 />
-      <Element2 />
-      <Element3 />
-      <Element4 />
-    </AnimationWrapper>
-  </Wrapper>
-);
+const Loading = ({ animationDuration = 6, text = "" }) => {
+  const elements = 4;
+  const animationUnit = animationDuration / elements;
+
+  return (
+    <Wrapper>
+      <AnimationWrapper>
+        <Element1 animationDuration={animationDuration} animationDelay={0} />
+        <Element2
+          animationDuration={animationDuration}
+          animationDelay={animationUnit * 1}
+        />
+        <Element3
+          animationDuration={animationDuration}
+          animationDelay={animationUnit * 2}
+        />
+        <Element4
+          animationDuration={animationDuration}
+          animationDelay={animationUnit * 3}
+        />
+      </AnimationWrapper>
+      <Typography variant={"h6"} style={{ marginTop: "2em" }}>
+        {text}
+      </Typography>
+    </Wrapper>
+  );
+};
 
 export default Loading;

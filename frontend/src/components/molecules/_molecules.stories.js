@@ -67,6 +67,9 @@ export const ImageTile = () => (
 
 export const Loading = () => (
   <FullHeight>
-    <LoadingComp />
+    <LoadingComp
+      animationDuration={number("animation", 8)}
+      text={text(text, "No pictures found, try to change the filters.")}
+    />
   </FullHeight>
 );
