@@ -62,7 +62,7 @@ webpack
 - **Too much ram**: chromium caches the images as they are loaded. When the images are big, the cache grows very fast.
   - Solutions: Resize images to size -> speeds up loading, ML computations and removes cache issue. [sharp](https://github.com/lovell/sharp) . Exaple: https://github.com/aperkaz/tensorflow-playground
 
-- **Too much ram**: when anaylzing many images, the ram grows over time, eventually killing the app.
+- **Windows build**: the tfjs bindings for windows are not located properly, they are built into `napi-v6`, it should be renamed to `napi-v5`.
 
 ## Future Features
 
