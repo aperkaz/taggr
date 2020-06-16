@@ -1,6 +1,7 @@
 const fs = require("fs");
 const { promisify } = require("util");
 const readFile = promisify(fs.readFile);
+const readStats = promisify(fs.stat);
 
 /**
  * Load image as Uint8Array.
@@ -28,7 +29,22 @@ const loadEXIFData = (path) => {
   });
 };
 
+/**
+ * Load file stats from path.
+ * @param {string} path
+ */
+const loadFilesystemStats = async (path) => {
+  try {
+    return await readStats(path);
+  } catch (e) {
+    // TODONOW: send error to sentry. File not found (likely removed after project creation)
+    // console.log(e);
+    return {};
+  }
+};
+
 module.exports = {
   loadFileAsUint8Array,
   loadEXIFData,
+  loadFilesystemStats,
 };

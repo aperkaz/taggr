@@ -1,5 +1,5 @@
 const process = require("./process");
-const location = require("./location"); // TODONOW: do we need to export this?
+const location = require("./location");
 const tensor = require("./machineLearning/tensor");
 const tags = require("./tags");
 

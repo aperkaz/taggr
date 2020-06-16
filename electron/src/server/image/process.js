@@ -1,3 +1,4 @@
+const filesystem = require("../filesystem");
 const { getTags } = require("./tags");
 const { getLocation } = require("./location");
 
@@ -14,13 +15,12 @@ const process = async (path) => {
   const location = await getLocation(path);
   console.log("location: ", JSON.stringify(location));
 
-  // TODONOW: add function, with EXIF read.
-  // const creationDate = await getCreationDate(path);
+  const creationDate = await filesystem.getFileCreationDate(path);
 
   const imageData = {
     location,
     tags,
-    creationDate: 0, // TODONOW: read read date
+    creationDate,
     // isSexy: await isImageSexy(smallImageData),
   };
 

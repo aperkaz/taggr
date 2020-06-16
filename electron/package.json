@@ -6,7 +6,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
-    "test":"jest", 
+    "test": "jest",
     "test:watch": "jest --watch",
     "package": "electron-forge package",
     "make:frontend": "rm -rf frontend-statics; npm run build --prefix ../frontend; mv ../frontend/build ./frontend-statics",
@@ -84,6 +84,7 @@
     "electron-is-dev": "^1.2.0",
     "electron-squirrel-startup": "^1.0.0",
     "exif": "^0.6.0",
+    "lodash.get": "^4.4.2",
     "lodash.range": "^3.2.0",
     "lodash.throttle": "^4.1.1",
     "node-ipc": "^9.1.1",
