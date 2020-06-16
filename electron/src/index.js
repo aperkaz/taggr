@@ -129,8 +129,6 @@ app.on("before-quit", function () {
     serverProcess.kill();
     serverProcess = null;
   }
-  // TODONOW: if works, remove
-  // if (serverProc) serverProc.kill("SIGINT");
 });
 
 // Quit when all windows are closed.
