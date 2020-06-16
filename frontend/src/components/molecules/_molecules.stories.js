@@ -1,6 +1,6 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
-import { withKnobs, text, boolean } from "@storybook/addon-knobs";
+import { withKnobs, text, boolean, number } from "@storybook/addon-knobs";
 import NightsStay from "@material-ui/icons/NightsStay";
 
 import FullHeight from "../../stories/utils";
@@ -10,6 +10,7 @@ import ButtonRegularComp from "./ButtonRegular";
 import ButtonFilterComp from "./ButtonFilter";
 import UpdateModalComp from "./UpdateModal";
 import ImageTileComp from "./ImageTile";
+import TaskProgressComp from "./TaskProgress";
 import LoadingComp from "./Loading";
 
 export default {
@@ -46,6 +47,16 @@ export const UpdateModal = () => (
     latestAppVersion={text("latestAppVersion", "v0.0.1")}
     onUpdateSelect={action("trigger update action")}
   />
+);
+
+export const TaskProgress = () => (
+  <TaskProgressComp
+    name={text(
+      "taskName",
+      "Be patient, the minions are working on your memories!"
+    )}
+    percentage={number("taskPercentage", 50)}
+  ></TaskProgressComp>
 );
 
 export const ImageTile = () => (

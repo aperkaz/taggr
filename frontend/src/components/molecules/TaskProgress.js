@@ -17,7 +17,8 @@ const Progress = styled.div`
 
 const BorderLinearProgress = withStyles(() => ({
   root: {
-    borderRadius: 2,
+    borderRadius: 4,
+    height: 6,
   },
   bar: {
     borderRadius: 5,
