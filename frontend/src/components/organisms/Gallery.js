@@ -3,6 +3,7 @@ import { SizeMe } from "react-sizeme";
 import { FixedSizeGrid } from "react-window"; // Virtualize list for performance https://github.com/developerdizzle/react-virtual-list
 import FsLightbox from "fslightbox-react";
 
+import Loading from "../molecules/Loading";
 import ImageTile from "../molecules/ImageTile";
 
 const GUTTER = 10;
@@ -21,25 +22,35 @@ const Gallery = ({ imageList = [] }) => {
 
   return (
     <div style={{ height: "100%", marginTop: ".25em" }}>
-      <SizeMe monitorHeight>
-        {({ size }) => (
-          <div
-            style={{
-              height: "100%",
-              overflow: "hidden",
-            }}
-          >
-            <Grid size={size} imageList={imageList} onCellClick={openPreview} />
-          </div>
-        )}
-      </SizeMe>
-      <FsLightbox
-        toggler={toggler}
-        sources={[
-          imageList[selectedIndex] ? imageList[selectedIndex].path : null,
-        ]}
-        key={selectedIndex}
-      />
+      {imageList.length === 0 ? (
+        <Loading text="No pictures found, try to change the filters."></Loading>
+      ) : (
+        <>
+          <SizeMe monitorHeight>
+            {({ size }) => (
+              <div
+                style={{
+                  height: "100%",
+                  overflow: "hidden",
+                }}
+              >
+                <Grid
+                  size={size}
+                  imageList={imageList}
+                  onCellClick={openPreview}
+                />
+              </div>
+            )}
+          </SizeMe>
+          <FsLightbox
+            toggler={toggler}
+            sources={[
+              imageList[selectedIndex] ? imageList[selectedIndex].path : null,
+            ]}
+            key={selectedIndex}
+          />
+        </>
+      )}
     </div>
   );
 };

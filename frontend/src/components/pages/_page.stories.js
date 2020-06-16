@@ -41,7 +41,7 @@ export const Main = () => (
         ),
         percentage: number("taskPercentage", 50),
       }}
-      images={images}
+      images={array("images", images)}
       imagesWithLocation={array("imagesWithLocation", imagesWithLocation)}
     />
   </FullHeight>
