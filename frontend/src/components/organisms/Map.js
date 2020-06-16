@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   height: 100%;
   width: 100%;
   margin-top: 1em;
-  /* compensates for unevent css rules */
+  /* compensates for uneven css rules */
   margin-bottom: 1.5em;
 
   border-radius: 6px;

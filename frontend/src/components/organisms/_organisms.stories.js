@@ -7,6 +7,7 @@ import HeaderComp from "./Header";
 import NavBarComp from "./NavBar";
 import GalleryComp from "./Gallery";
 import MapComp from "./Map";
+import FacesComp from "./Faces";
 import FiltersComp from "./Filters";
 
 import FullHeight from "../../stories/utils";
@@ -60,6 +61,12 @@ export const Map = () => (
         (i) => i.location && i.location.latitude
       )}
     />
+  </FullHeight>
+);
+
+export const Faces = () => (
+  <FullHeight>
+    <FacesComp />
   </FullHeight>
 );
 
