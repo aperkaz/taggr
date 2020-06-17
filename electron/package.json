@@ -11,6 +11,7 @@
     "package": "electron-forge package",
     "make:frontend": "rm -rf frontend-statics; npm run build --prefix ../frontend; mv ../frontend/build ./frontend-statics",
     "make": "rm -rf frontend-statics; npm run build --prefix ../frontend; mv ../frontend/build ./frontend-statics; electron-forge make",
+    "make:windows": "electron-forge make",
     "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\""
   },
@@ -28,9 +29,9 @@
           "name": "@electron-forge/maker-squirrel",
           "config": {
             "name": "taggr",
-            "iconUrl": "C:\\Users\\diana\\Desktop\\taggr\\electron\\resources\\iconWindows.ico",
-            "setupIcon": "C:\\Users\\diana\\Desktop\\taggr\\electron\\resources\\iconWindows.ico",
-            "certificateFile": "C:\\Users\\diana\\Desktop\\taggr\\electron\\resources\\WindowsCodeSigningCertificate.pfx",
+            "iconUrl": "C:\\Users\\test\\Desktop\\taggr\\electron\\resources\\iconWindows.ico",
+            "setupIcon": "C:\\Users\\test\\Desktop\\taggr\\electron\\resources\\iconWindows.ico",
+            "certificateFile": "C:\\Users\\test\\Desktop\\taggr\\electron\\resources\\WindowsCodeSigningCertificate.pfx",
             "certificatePassword": "sa69uphlZOzplSFjNaNw"
           }
         },

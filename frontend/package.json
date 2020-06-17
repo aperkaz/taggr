@@ -4,8 +4,8 @@
   "private": true,
   "homepage": "./",
   "scripts": {
-    "start:dev": "PORT=3001 react-scripts start",
-    "start": "PORT=3001 BROWSER=none react-scripts start",
+    "start:dev": "cross-env PORT=3001 react-scripts start",
+    "start": "cross-env PORT=3001 BROWSER=none react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -58,6 +58,7 @@
     "@storybook/addon-links": "^5.3.19",
     "@storybook/addons": "^5.3.19",
     "@storybook/preset-create-react-app": "^3.0.0",
-    "@storybook/react": "^5.3.19"
+    "@storybook/react": "^5.3.19",
+    "cross-env": "^7.0.2"
   }
 }

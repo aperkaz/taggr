@@ -65,7 +65,10 @@ const createClientWindow = (socketName) => {
   // BrowserWindow.removeDevToolsExtension(reduxExtension);
 
   // Note: devTools must be open manually, they dont load when loading webcontents by url: https://github.com/electron/electron/issues/17799
+  
+  // TODONOW: add custom build options
   // clientWin.removeMenu();
+
 };
 
 const createBackgroundWindow = (socketName) => {
@@ -88,6 +91,7 @@ const createBackgroundWindow = (socketName) => {
   serverWin.webContents.on("did-finish-load", () => {
     serverWin.webContents.send("set-socket", { name: socketName });
   });
+
 };
 
 const createBackgroundProcess = (socketName) => {
@@ -125,8 +129,6 @@ app.on("before-quit", function () {
     serverProcess.kill();
     serverProcess = null;
   }
-  // TODONOW: if works, remove
-  // if (serverProc) serverProc.kill("SIGINT");
 });
 
 // Quit when all windows are closed.
