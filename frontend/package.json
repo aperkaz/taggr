@@ -4,11 +4,10 @@
   "private": true,
   "homepage": "./",
   "scripts": {
-    "start:dev": "cross-env PORT=3001 react-scripts start",
-    "start": "cross-env PORT=3001 BROWSER=none react-scripts start",
+    "start:linux": "PORT=3001 BROWSER=none react-scripts start",
+    "start:windows": "PORT=3001 BROWSER=none react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public"
   },
@@ -41,6 +40,7 @@
     "date-fns": "^2.14.0",
     "fslightbox-react": "^1.4.9",
     "i": "^0.3.6",
+    "lodash.get": "^4.4.2",
     "npm": "^6.14.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

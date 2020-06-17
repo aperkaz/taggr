@@ -8,14 +8,14 @@
   },
   "license": "MIT",
   "scripts": {
-    "start": "concurrently \"npm run frontend:start\" \"npm run electron:start\"",
-    "test": "concurrently \"npm run frontend:test\" \"npm run electron:test\"",
-    "frontend:install": "cd frontend; npm i",
-    "frontend:start": "cd frontend; npm run start",
-    "frontend:test": "cd frontend; npm run test",
-    "electron:install": "cd electron; npm i",
-    "electron:start": "cd electron; npm run start",
-    "electron:test": "cd electron; npm run test"
+    "dev:linux": "sh ./scripts/dev-linux.sh",
+    "dev:windows": "",
+    "build:test:linux": "sh ./scripts/build-test-linux.sh",
+    "build:test:windows": "",
+    "build:production:linux": "sh ./scripts/build-production-linux.sh",
+    "build:production:windows": "",
+    "publish": "",
+    "test:linux": "concurrently \"npm run test --prefix ./frontend\" \"npm run test --prefix ./electron\""
   },
   "dependencies": {
     "@types/jest": "^25.2.3",

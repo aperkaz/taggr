@@ -9,11 +9,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "package": "electron-forge package",
-    "make:frontend": "rm -rf frontend-statics; npm run build --prefix ../frontend; mv ../frontend/build ./frontend-statics",
-    "make": "rm -rf frontend-statics; npm run build --prefix ../frontend; mv ../frontend/build ./frontend-statics; electron-forge make",
-    "make:windows": "electron-forge make",
-    "publish": "electron-forge publish",
-    "lint": "echo \"No linting configured\""
+    "make": "electron-forge make",
+    "publish": "electron-forge publish"
   },
   "keywords": [],
   "author": {
@@ -82,7 +79,6 @@
     "@tensorflow-models/coco-ssd": "^2.0.3",
     "@tensorflow-models/mobilenet": "^2.0.4",
     "@tensorflow/tfjs-node": "^2.0.0",
-    "electron-is-dev": "^1.2.0",
     "electron-squirrel-startup": "^1.0.0",
     "exif": "^0.6.0",
     "lodash.get": "^4.4.2",

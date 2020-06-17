@@ -15,6 +15,8 @@ if (process.argv[2] === "--subprocess") {
 
   let socketName = process.argv[4];
   ipc.init(socketName, serverHandlers);
+
+  console.log("browser window: process.env.TAGGR_ENV: ", process.env.TAGGR_ENV);
 } else {
   let { ipcRenderer, remote } = require("electron");
   isDev = true;
@@ -23,4 +25,6 @@ if (process.argv[2] === "--subprocess") {
   ipcRenderer.on("set-socket", (event, { name }) => {
     ipc.init(name, serverHandlers);
   });
+
+  console.log("node process: process.env.TAGGR_ENV: ", process.env.TAGGR_ENV);
 }

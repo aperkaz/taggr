@@ -89,3 +89,5 @@ typings/
 
 # Electron-Forge
 out/
+
+electron/src/env.json

@@ -1,11 +1,12 @@
 import * as Sentry from "@sentry/browser";
-import isDev from "electron-is-dev";
+import { isDevEnv } from "../../environment";
 
+// TODONOW: make sure this works, sentry too
 /**
  * Initialize Sentry in production env
  */
 export const setupCrashAnalyticsInProd = () => {
-  if (!isDev)
+  if (!isDevEnv)
     Sentry.init({
       dsn:
         "https://c413216c810946559e9d5c1feb34c92f@o385452.ingest.sentry.io/5218191",
@@ -16,7 +17,7 @@ export const setupCrashAnalyticsInProd = () => {
  * Add overlay with FPS count in dev environment
  */
 export const setupFpsOverlayInDev = () => {
-  if (isDev) {
+  if (isDevEnv()) {
     var script = document.createElement("script");
     script.onload = function () {
       var stats = new Stats();

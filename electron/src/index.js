@@ -4,7 +4,18 @@ let path = require("path");
 const os = require("os");
 
 let findOpenSocket = require("./find-open-socket");
-const isDev = require("electron-is-dev");
+
+const {
+  setEnvironment,
+  isDevEnv,
+  isBuildTestEnv,
+  isBuildProductionEnv,
+} = require("./env/index");
+
+// Set env variable
+const appEnv = require("./env.json");
+console.log("Electron environment: ", appEnv);
+setEnvironment(appEnv.env);
 
 let clientWin;
 let serverWin;
@@ -26,13 +37,18 @@ const createClientWindow = (socketName) => {
     webPreferences: {
       webSecurity: false,
       nodeIntegration: true,
-      preload: __dirname + "/client-preload.js",
+      preload:
+        __dirname +
+        `/client-preload/client-preload-${process.env.TAGGR_ENV}.js`,
     },
   });
 
+  if (isDevEnv) {
+  }
+
   // and load the index.html of the app.
   clientWin.loadURL(
-    isDev
+    isDevEnv()
       ? "http://localhost:3001"
       : `file://${path.join(__dirname, "../frontend-statics/index.html")}`
   );
@@ -46,29 +62,31 @@ const createClientWindow = (socketName) => {
     });
   });
 
-  // Add react dev tools https://www.electronjs.org/docs/tutorial/devtools-extension
-  const reactExtension = BrowserWindow.addDevToolsExtension(
-    path.join(
-      os.homedir(),
-      "/.config/google-chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.7.0_0"
-    )
-  );
-  // BrowserWindow.removeDevToolsExtension(reactExtension);
+  if (isDevEnv() || isBuildTestEnv()) {
+    // Note: devTools must be open manually, they dont load when loading webcontents by url: https://github.com/electron/electron/issues/17799
 
-  // Add redux dev tools https://stackoverflow.com/questions/59538654/electron-add-redux-devtools
-  const reduxExtension = BrowserWindow.addDevToolsExtension(
-    path.join(
-      os.homedir(),
-      "/.config/google-chrome/Default/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/2.17.0_0"
-    )
-  );
-  // BrowserWindow.removeDevToolsExtension(reduxExtension);
+    // Add react dev tools https://www.electronjs.org/docs/tutorial/devtools-extension
+    const reactExtension = BrowserWindow.addDevToolsExtension(
+      path.join(
+        os.homedir(),
+        "/.config/google-chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.7.0_0"
+      )
+    );
+    // BrowserWindow.removeDevToolsExtension(reactExtension);
 
-  // Note: devTools must be open manually, they dont load when loading webcontents by url: https://github.com/electron/electron/issues/17799
-  
-  // TODONOW: add custom build options
-  // clientWin.removeMenu();
+    // Add redux dev tools https://stackoverflow.com/questions/59538654/electron-add-redux-devtools
+    const reduxExtension = BrowserWindow.addDevToolsExtension(
+      path.join(
+        os.homedir(),
+        "/.config/google-chrome/Default/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/2.17.0_0"
+      )
+    );
+    // BrowserWindow.removeDevToolsExtension(reduxExtension);
+  }
 
+  if (isBuildProductionEnv()) {
+    clientWin.removeMenu();
+  }
 };
 
 const createBackgroundWindow = (socketName) => {
@@ -91,7 +109,6 @@ const createBackgroundWindow = (socketName) => {
   serverWin.webContents.on("did-finish-load", () => {
     serverWin.webContents.send("set-socket", { name: socketName });
   });
-
 };
 
 const createBackgroundProcess = (socketName) => {
@@ -111,7 +128,7 @@ const initializeApp = async () => {
 
   createClientWindow(serverSocket);
 
-  if (isDev) {
+  if (isDevEnv() || isBuildTestEnv()) {
     createBackgroundWindow(serverSocket);
   } else {
     createBackgroundProcess(serverSocket);
