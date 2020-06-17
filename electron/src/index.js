@@ -65,6 +65,7 @@ const createClientWindow = (socketName) => {
   // BrowserWindow.removeDevToolsExtension(reduxExtension);
 
   // Note: devTools must be open manually, they dont load when loading webcontents by url: https://github.com/electron/electron/issues/17799
+  // clientWin.removeMenu();
 };
 
 const createBackgroundWindow = (socketName) => {
