@@ -1,16 +1,4 @@
-// import * as Sentry from "@sentry/browser";
 import Stats from "stats.js";
-
-/**
- * Initialize Sentry in production env
- */
-// export const setupCrashAnalyticsInProd = () => {
-//   if (!isDev)
-//     Sentry.init({
-//       dsn:
-//         "https://c413216c810946559e9d5c1feb34c92f@o385452.ingest.sentry.io/5218191",
-//     });
-// };
 
 /**
  * Add overlay with FPS count in dev environment

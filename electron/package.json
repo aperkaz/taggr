@@ -76,6 +76,7 @@
   },
   "dependencies": {
     "@electron-forge/publisher-github": "^6.0.0-beta.51",
+    "@sentry/node": "^5.17.0",
     "@tensorflow-models/coco-ssd": "^2.0.3",
     "@tensorflow-models/mobilenet": "^2.0.4",
     "@tensorflow/tfjs-node": "^2.0.0",

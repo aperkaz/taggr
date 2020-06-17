@@ -4,13 +4,12 @@ let path = require("path");
 const os = require("os");
 
 let findOpenSocket = require("./find-open-socket");
-
 const {
   setEnvironment,
   isDevEnv,
   isBuildTestEnv,
   isBuildProductionEnv,
-} = require("./env/index");
+} = require("./server/env");
 
 // Set env variable
 const appEnv = require("./env.json");
@@ -42,9 +41,6 @@ const createClientWindow = (socketName) => {
         `/client-preload/client-preload-${process.env.TAGGR_ENV}.js`,
     },
   });
-
-  if (isDevEnv) {
-  }
 
   // and load the index.html of the app.
   clientWin.loadURL(
