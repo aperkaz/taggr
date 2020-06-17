@@ -4,8 +4,7 @@
   "private": true,
   "homepage": "./",
   "scripts": {
-    "start:linux": "PORT=3001 BROWSER=none react-scripts start",
-    "start:windows": "PORT=3001 BROWSER=none react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "storybook": "start-storybook -p 9009 -s public",

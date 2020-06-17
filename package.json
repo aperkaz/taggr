@@ -8,14 +8,12 @@
   },
   "license": "MIT",
   "scripts": {
-    "dev:linux": "sh ./scripts/dev-linux.sh",
-    "dev:windows": "",
-    "build:test:linux": "sh ./scripts/build-test-linux.sh",
-    "build:test:windows": "",
-    "build:production:linux": "sh ./scripts/build-production-linux.sh",
-    "build:production:windows": "",
+    "dev": "sh ./scripts/dev.sh",
+    "build:test": "sh ./scripts/build-test.sh",
+    "build:production": "sh ./scripts/build-production.sh",
+
     "publish": "",
-    "test:linux": "concurrently \"npm run test --prefix ./frontend\" \"npm run test --prefix ./electron\""
+    "test": "concurrently \"npm run test --prefix ./frontend\" \"npm run test --prefix ./electron\""
   },
   "dependencies": {
     "@types/jest": "^25.2.3",

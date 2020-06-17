@@ -28,22 +28,16 @@ The backend gets an single environment: `process.env.TAGGR_ENV`, with value: `de
 - `build:test`: `frontend` served from statics. `backend` running inside node process. Sentry integration enabled. Firebase events enabled.
 
 ```json
+// NOTE: in windows, fire the commands from git-bash console
+
 // ----- dev -----
 npm run dev:linux
-// TODONOW
-npm run dev:windows
 
 // ----- build-test -----
-// linux
 npm run build:test
-// windows
-TODONOW
 
 // ----- build-production -----
-// linux
 npm run build:production
-// windows
-TODONOW
 ```
 
 ## Publishing
