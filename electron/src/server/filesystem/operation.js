@@ -2,8 +2,10 @@ require("bytenode");
 const readdirp = require("readdirp");
 const get = require("lodash.get");
 const load = require("./load");
-// TODONOW: rethings event tracking
-// const trackEventInProd =require( "../../../shared/trackEventInProd)";
+const {
+  trackCreatedProjectImages,
+  trackCreatedProjectSize,
+} = require("../analytics/googleAnalytics");
 
 /**
  * Recursively find all the image paths inside the folderPath
@@ -42,20 +44,8 @@ async function recursivelyFindImages(folderPath) {
     console.log(e);
   }
 
-  // TODONOW: add reporting again
-  // trackEventInProd({
-  //   category: "User Interaction",
-  //   action: "Project created",
-  //   label: "Image count",
-  //   value: imagePathsList.length,
-  // });
-
-  // trackEventInProd({
-  //   category: "User Interaction",
-  //   action: "Project created",
-  //   label: "Size (mb)",
-  //   value: Math.round(projectSize / 1000000),
-  // });
+  trackCreatedProjectImages(imagePathsList.length);
+  trackCreatedProjectSize(Math.round(projectSize / 1000000));
 
   return imagePathsList;
 }

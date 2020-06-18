@@ -1,7 +1,12 @@
 require("bytenode");
 let ipc = require("./services/helpers");
 let serverHandlers = require("./services/handlers");
+
+// setup analytics
 require("./analytics/sentry");
+const { trackAppOpened } = require("./analytics/googleAnalytics");
+
+trackAppOpened();
 
 let version;
 

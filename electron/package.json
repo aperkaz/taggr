@@ -82,14 +82,17 @@
     "@tensorflow/tfjs-node": "^2.0.0",
     "bytenode": "^1.1.6",
     "electron-squirrel-startup": "^1.0.0",
+    "env-paths": "^2.2.0",
     "exif": "^0.6.0",
     "lodash.get": "^4.4.2",
     "lodash.range": "^3.2.0",
     "lodash.throttle": "^4.1.1",
     "node-ipc": "^9.1.1",
+    "node-localstorage": "^2.1.6",
     "normalize-path": "^3.0.0",
     "parse-dms": "0.0.3",
-    "readdirp": "^3.4.0"
+    "readdirp": "^3.4.0",
+    "universal-analytics": "^0.4.20"
   },
   "devDependencies": {
     "@electron-forge/cli": "6.0.0-beta.51",
