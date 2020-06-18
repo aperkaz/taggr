@@ -91,3 +91,5 @@ typings/
 out/
 
 electron/src/env.json
+
+*.jsc
