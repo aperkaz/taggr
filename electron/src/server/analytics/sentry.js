@@ -1,3 +1,4 @@
+const bytenode = require("bytenode");
 const Sentry = require("@sentry/node");
 const { isBuildTestEnv, isBuildProductionEnv } = require("../env");
 

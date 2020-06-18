@@ -1,3 +1,5 @@
+const bytenode = require("bytenode");
+
 const services = require("./services");
 const project = require("../project");
 

@@ -1,3 +1,4 @@
+const bytenode = require("bytenode");
 const filesystem = require("../filesystem");
 const image = require("../image");
 const store = require("../store");

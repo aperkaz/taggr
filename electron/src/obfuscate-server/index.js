@@ -89,7 +89,7 @@ const removeFiles = (files) => {
   const sourceFiles = await recursivelyFindSourceFiles(SERVER_PATH);
 
   // 2. convert them all to jsc in folders
-  // compileAllJsToJscInFolder(SERVER_PATH, sourceFiles);
+  compileAllJsToJscInFolder(SERVER_PATH, sourceFiles);
 
   // 3. remove original files
   // console.log(await recursivelyFindSourceFiles(SERVER_PATH));

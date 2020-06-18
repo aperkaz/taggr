@@ -1,7 +1,7 @@
 /**
  * Touchpoint with the FE, through node-ipc
  */
-
+const bytenode = require("bytenode");
 const ipc = require("./helpers");
 
 // @ts-ignore-next-line

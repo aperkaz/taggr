@@ -1,3 +1,4 @@
+const bytenode = require("bytenode");
 const get = require("lodash.get");
 const { loadEXIFData } = require("../filesystem");
 

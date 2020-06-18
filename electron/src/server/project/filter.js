@@ -1,3 +1,4 @@
+const bytenode = require("bytenode");
 const store = require("../store");
 
 /**

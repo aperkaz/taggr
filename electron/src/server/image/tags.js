@@ -1,3 +1,4 @@
+const bytenode = require("bytenode");
 const range = require("lodash.range");
 const get = require("lodash.get");
 

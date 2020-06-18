@@ -1,3 +1,4 @@
+const bytenode = require("bytenode");
 let project = require("./project");
 let filter = require("./filter");
 
