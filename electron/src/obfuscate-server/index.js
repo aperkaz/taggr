@@ -5,8 +5,6 @@ const readdirp = require("readdirp");
 
 const SERVER_PATH = path.resolve(__dirname, "../server");
 
-// only execute when building for production
-
 const recursivelyFindSourceFiles = async (path) => {
   let sourceFilesPaths = [];
 
