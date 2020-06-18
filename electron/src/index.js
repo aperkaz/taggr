@@ -4,12 +4,14 @@ let path = require("path");
 const os = require("os");
 
 let findOpenSocket = require("./find-open-socket");
+require("./obfuscated-server/touchpoint");
+
 const {
   setEnvironment,
   isDevEnv,
   isBuildTestEnv,
   isBuildProductionEnv,
-} = require("./server/env");
+} = require("./obfuscated-server/env");
 
 // Set env variable
 const appEnv = require("./env.json");
@@ -108,7 +110,7 @@ const createBackgroundWindow = (socketName) => {
 };
 
 const createBackgroundProcess = (socketName) => {
-  serverProcess = fork(__dirname + "/server/index.js", [
+  serverProcess = fork(__dirname + "/server/touchpoint.js", [
     "--subprocess",
     app.getVersion(),
     socketName,
