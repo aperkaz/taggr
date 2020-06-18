@@ -11,7 +11,7 @@ const load = require("./load");
  * @param {String} folderPath
  * @returns {Promise<String[]>} image paths list
  */
-const recursivelyFindImages = async (folderPath) => {
+async function recursivelyFindImages(folderPath) {
   let imagePathsList = [];
   let projectSize = 0;
 
@@ -58,7 +58,7 @@ const recursivelyFindImages = async (folderPath) => {
   // });
 
   return imagePathsList;
-};
+}
 
 /**
  * Get file creation date in UNIX EPOCH
@@ -66,7 +66,7 @@ const recursivelyFindImages = async (folderPath) => {
  * @param {string} path
  * @returns {Promise<number|null>}
  */
-const getFileCreationDate = async (path) => {
+async function getFileCreationDate(path) {
   const exifData = await load.loadEXIFData(path);
   const exifDateTimeOriginal = get(exifData, "exif.DateTimeOriginal", null);
   const exifCreateDate = get(exifData, "exif.CreateDate", null);
@@ -93,7 +93,7 @@ const getFileCreationDate = async (path) => {
   if (mtime && mtime !== 0) return mtime.getTime();
 
   return null;
-};
+}
 
 /**
  * Transform string to UTC EPOCH time. Uses local timezone for conversion.

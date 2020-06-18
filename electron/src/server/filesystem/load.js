@@ -10,11 +10,11 @@ const readStats = promisify(fs.stat);
  * @param {string} path
  * @returns {Promise<Uint8Array>}
  */
-const loadFileAsUint8Array = async (path) => {
+async function loadFileAsUint8Array(path) {
   const image = await readFile(path);
   const buf = Buffer.from(image);
   return new Uint8Array(buf);
-};
+}
 
 /**
  * Load EXIF data from path.
@@ -34,7 +34,7 @@ const loadEXIFData = (path) => {
  * Load file stats from path.
  * @param {string} path
  */
-const loadFilesystemStats = async (path) => {
+async function loadFilesystemStats(path) {
   try {
     return await readStats(path);
   } catch (e) {
@@ -42,7 +42,7 @@ const loadFilesystemStats = async (path) => {
     // console.log(e);
     return {};
   }
-};
+}
 
 module.exports = {
   loadFileAsUint8Array,
