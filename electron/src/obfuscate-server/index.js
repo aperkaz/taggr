@@ -1,8 +1,11 @@
 const bytenode = require("bytenode");
+const path = require("path");
+const fs = require("fs");
+const readdirp = require("readdirp");
+
+const SERVER_PATH = path.resolve(__dirname, "../server");
 
 const recursivelyFindSourceFiles = async (path) => {
-  const readdirp = require("readdirp");
-
   let sourceFilesPaths = [];
 
   var settings = {
@@ -15,15 +18,13 @@ const recursivelyFindSourceFiles = async (path) => {
   for await (const entry of readdirp(path, settings)) {
     const { path } = entry;
 
-    sourceFilesPaths.push(path);
+    sourceFilesPaths.push(`${SERVER_PATH}/${path}`);
   }
 
   return sourceFilesPaths;
 };
 
 const recursivelyFindCompiledFiles = async (path) => {
-  const readdirp = require("readdirp");
-
   let compiledFiles = [];
 
   var settings = {
@@ -36,7 +37,7 @@ const recursivelyFindCompiledFiles = async (path) => {
   for await (const entry of readdirp(path, settings)) {
     const { path } = entry;
 
-    compiledFiles.push(path);
+    compiledFiles.push(`${SERVER_PATH}/${path}`);
   }
 
   return compiledFiles;
@@ -56,9 +57,9 @@ const compileAllJsToJscInFolder = (sourcePath, sourceFiles) => {
     const fileName = originalFilename.split(".js").shift();
     console.log("filename: ", fileName);
 
-    const originFilePath = `${sourcePath}/${sourceFile}`;
+    const originFilePath = `${sourceFile}`;
     console.log("org: ", originFilePath);
-    const destinationFilePath = `${sourcePath}/${
+    const destinationFilePath = `${
       relativeFolder ? `${relativeFolder}/` : ""
     }${fileName}.jsc`;
     console.log("dest: ", destinationFilePath);
@@ -72,21 +73,17 @@ const compileAllJsToJscInFolder = (sourcePath, sourceFiles) => {
 const removeFiles = (files) => {
   const fs = require("fs");
 
-  files.forEach((sourceFile) => {
-    fs.unlinkSync(sourceFile);
+  files.forEach((file) => {
+    fs.unlinkSync(file);
   });
 };
 
 (async () => {
   "use strict";
 
-  const fs = require("fs");
   const v8 = require("v8");
-  const path = require("path");
 
   v8.setFlagsFromString("--no-lazy");
-
-  const SERVER_PATH = path.resolve(__dirname, "../server");
 
   // 1. find all src.js files
   const sourceFiles = await recursivelyFindSourceFiles(SERVER_PATH);
@@ -99,7 +96,8 @@ const removeFiles = (files) => {
   // removeFiles(await recursivelyFindSourceFiles(SERVER_PATH));
 
   // 4. remove compiles files
-  removeFiles(await recursivelyFindCompiledFiles(SERVER_PATH));
+  // console.log(await recursivelyFindCompiledFiles(SERVER_PATH));
+  // removeFiles(await recursivelyFindCompiledFiles(SERVER_PATH));
 })();
 
 // require("./src/main-window.src.jsc");
