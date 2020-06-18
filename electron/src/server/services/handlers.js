@@ -5,16 +5,16 @@ const project = require("../project");
 
 let handlers = {};
 
-handlers["create-project"] = async ({ projectRootFolderPath }) => {
+handlers["create-project"] = async function ({ projectRootFolderPath }) {
   project.create(projectRootFolderPath);
 };
 
 // TODO: rename to destroy-project accross FE & BE
-handlers["delete-project"] = async () => {
+handlers["delete-project"] = async function () {
   project.destroy();
 };
 
-handlers["filter-images"] = async (filters) => {
+handlers["filter-images"] = async function (filters) {
   const images = await project.filterImages(filters);
   services.updateImages(images);
 };
