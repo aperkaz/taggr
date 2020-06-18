@@ -1,4 +1,4 @@
-const bytenode = require("bytenode");
+require("bytenode");
 const filesystem = require("../filesystem");
 const { getTags } = require("./tags");
 const { getLocation } = require("./location");

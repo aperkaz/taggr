@@ -1,4 +1,4 @@
-const bytenode = require("bytenode");
+require("bytenode");
 const readdirp = require("readdirp");
 const get = require("lodash.get");
 const load = require("./load");

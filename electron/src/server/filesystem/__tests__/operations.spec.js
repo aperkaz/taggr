@@ -1,3 +1,4 @@
+require("bytenode");
 const operation = require("../operation");
 
 jest.mock("../load", () => ({

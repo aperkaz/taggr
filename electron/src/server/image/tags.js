@@ -1,8 +1,8 @@
-const bytenode = require("bytenode");
+require("bytenode");
 const range = require("lodash.range");
 const get = require("lodash.get");
 
-const filesystem = require("../filesystem");
+const filesystem = require("../filesystem/index");
 const { getClassificationIds } = require("./machineLearning/classification");
 const {
   getObjectRecognitionClassNames,
