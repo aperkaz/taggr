@@ -73,6 +73,9 @@ const compileAllJsToJscInFolder = (sourcePath, sourceFiles) => {
 const removeFiles = (files) => {
   const fs = require("fs");
 
+  // do not remove the entry point for the node process ./server/entry.js
+  files = files.filter((file) => !file.includes("server/entry"));
+
   files.forEach((file) => {
     fs.unlinkSync(file);
   });

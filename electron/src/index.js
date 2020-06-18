@@ -112,7 +112,7 @@ const createBackgroundWindow = (socketName) => {
 };
 
 const createBackgroundProcess = (socketName) => {
-  serverProcess = fork(__dirname + "/server/index.jsc", [
+  serverProcess = fork(__dirname + "/server/entry.js", [
     "--subprocess",
     app.getVersion(),
     socketName,
@@ -129,7 +129,8 @@ const initializeApp = async () => {
   createClientWindow(serverSocket);
 
   if (isDevEnv() || isBuildTestEnv()) {
-    createBackgroundWindow(serverSocket);
+    // createBackgroundWindow(serverSocket);
+    createBackgroundProcess(serverSocket);
   } else {
     createBackgroundProcess(serverSocket);
   }
