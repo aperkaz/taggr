@@ -6,7 +6,8 @@ const os = require("os");
 
 let findOpenSocket = require("./find-open-socket");
 
-require("./obfuscate-server");
+// DEPLOY: manually run it before prod deploy
+// require("./obfuscate-server");
 
 const {
   setEnvironment,
@@ -129,8 +130,8 @@ const initializeApp = async () => {
   createClientWindow(serverSocket);
 
   if (isDevEnv() || isBuildTestEnv()) {
-    // createBackgroundWindow(serverSocket);
-    createBackgroundProcess(serverSocket);
+    createBackgroundWindow(serverSocket);
+    // createBackgroundProcess(serverSocket);
   } else {
     createBackgroundProcess(serverSocket);
   }

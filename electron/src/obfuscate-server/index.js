@@ -5,6 +5,8 @@ const readdirp = require("readdirp");
 
 const SERVER_PATH = path.resolve(__dirname, "../server");
 
+// only execute when building for production
+
 const recursivelyFindSourceFiles = async (path) => {
   let sourceFilesPaths = [];
 
@@ -71,8 +73,6 @@ const compileAllJsToJscInFolder = (sourcePath, sourceFiles) => {
 };
 
 const removeFiles = (files) => {
-  const fs = require("fs");
-
   // do not remove the entry point for the node process ./server/entry.js
   files = files.filter((file) => !file.includes("server/entry"));
 
@@ -85,7 +85,6 @@ const removeFiles = (files) => {
   "use strict";
 
   const v8 = require("v8");
-
   v8.setFlagsFromString("--no-lazy");
 
   // 1. find all src.js files
