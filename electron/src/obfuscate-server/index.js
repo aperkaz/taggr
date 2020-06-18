@@ -42,7 +42,7 @@ const recursivelyFindCompiledFiles = async (path) => {
   return compiledFiles;
 };
 
-const compileAllJsToJscInFolder = (sourceFiles) => {
+const compileAllJsToJscInFolder = (sourcePath, sourceFiles) => {
   sourceFiles.forEach((sourceFile) => {
     console.log("sourceFile: ", sourceFile);
 
@@ -56,9 +56,9 @@ const compileAllJsToJscInFolder = (sourceFiles) => {
     const fileName = originalFilename.split(".js").shift();
     console.log("filename: ", fileName);
 
-    const originFilePath = `${__dirname}/${sourceFile}`;
+    const originFilePath = `${sourcePath}/${sourceFile}`;
     console.log("org: ", originFilePath);
-    const destinationFilePath = `${__dirname}/${relativeFolder}/${fileName}.jsc`;
+    const destinationFilePath = `${sourcePath}/${relativeFolder}/${fileName}.jsc`;
     console.log("dest: ", destinationFilePath);
 
     bytenode.compileFile(originFilePath, destinationFilePath);
@@ -84,16 +84,16 @@ const removeFiles = (files) => {
 
   v8.setFlagsFromString("--no-lazy");
 
-  const OUTPUT_PATH = __dirname;
+  const SERVER_PATH = path.resolve(__dirname, "../server");
 
   // 1. find all src.js files
-  const sourceFiles = await recursivelyFindSourceFiles(__dirname);
+  const sourceFiles = await recursivelyFindSourceFiles(SERVER_PATH);
 
   // 2. convert them all to jsc in folders
-  //   compileAllJsToJscInFolder(sourceFiles);
+  compileAllJsToJscInFolder(SERVER_PATH, sourceFiles);
 
   // 3. remove original files
-  //   removeFiles(await recursivelyFindSourceFiles(__dirname));
+  removeFiles(await recursivelyFindSourceFiles(__dirname));
 
   // 4. remove compiles files
   // removeFiles(await recursivelyFindCompiledFiles(__dirname));

@@ -1,17 +1,19 @@
 const { app, BrowserWindow } = require("electron");
 let { fork } = require("child_process");
 let path = require("path");
+const bytenode = require("bytenode");
 const os = require("os");
 
 let findOpenSocket = require("./find-open-socket");
-require("./obfuscated-server/touchpoint");
+
+require("./obfuscate-server");
 
 const {
   setEnvironment,
   isDevEnv,
   isBuildTestEnv,
   isBuildProductionEnv,
-} = require("./obfuscated-server/env");
+} = require("./server/env");
 
 // Set env variable
 const appEnv = require("./env.json");
