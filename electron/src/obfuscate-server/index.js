@@ -58,7 +58,9 @@ const compileAllJsToJscInFolder = (sourcePath, sourceFiles) => {
 
     const originFilePath = `${sourcePath}/${sourceFile}`;
     console.log("org: ", originFilePath);
-    const destinationFilePath = `${sourcePath}/${relativeFolder}/${fileName}.jsc`;
+    const destinationFilePath = `${sourcePath}/${
+      relativeFolder ? `${relativeFolder}/` : ""
+    }${fileName}.jsc`;
     console.log("dest: ", destinationFilePath);
 
     bytenode.compileFile(originFilePath, destinationFilePath);
@@ -93,10 +95,11 @@ const removeFiles = (files) => {
   compileAllJsToJscInFolder(SERVER_PATH, sourceFiles);
 
   // 3. remove original files
-  removeFiles(await recursivelyFindSourceFiles(__dirname));
+  // console.log(await recursivelyFindSourceFiles(SERVER_PATH));
+  // removeFiles(await recursivelyFindSourceFiles(SERVER_PATH));
 
   // 4. remove compiles files
-  // removeFiles(await recursivelyFindCompiledFiles(__dirname));
+  removeFiles(await recursivelyFindCompiledFiles(SERVER_PATH));
 })();
 
 // require("./src/main-window.src.jsc");

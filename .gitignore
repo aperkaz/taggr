@@ -92,4 +92,4 @@ out/
 
 electron/src/env.json
 
-*.jsc
+# *.jsc
