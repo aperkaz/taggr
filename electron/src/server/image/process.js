@@ -8,7 +8,7 @@ const { getLocation } = require("./location");
  *
  * @param {string} path
  */
-const process = async (path) => {
+const process = async function (path) {
   console.log("processing image: ", path);
 
   const tags = await getTags(path);

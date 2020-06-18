@@ -14,7 +14,7 @@ const {
  * @param {string} path without file://
  * @returns {Promise<string[]>}
  */
-const getTags = async (path) => {
+const getTags = async function (path) {
   const { getImageTensor } = require("./machineLearning/tensor");
 
   // TODONOW: performance: look into memory leak in processing

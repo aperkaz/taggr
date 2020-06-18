@@ -7,7 +7,7 @@ const { loadEXIFData } = require("../filesystem");
  * @param {string} imagePath without file:// prefix
  * @returns {Promise<{latitude: number, longitude: number}>}
  */
-const getLocation = async (imagePath) => {
+const getLocation = async function (imagePath) {
   try {
     let exifData = await loadEXIFData(imagePath);
 
