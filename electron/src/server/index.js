@@ -1,3 +1,5 @@
+const bytenode = require("bytenode");
+
 let ipc = require("./services/helpers");
 let serverHandlers = require("./services/handlers");
 require("./analytics/sentry");

@@ -13,7 +13,7 @@ const {
   isDevEnv,
   isBuildTestEnv,
   isBuildProductionEnv,
-} = require("./server/env");
+} = require("./env/env");
 
 // Set env variable
 const appEnv = require("./env.json");
@@ -112,7 +112,7 @@ const createBackgroundWindow = (socketName) => {
 };
 
 const createBackgroundProcess = (socketName) => {
-  serverProcess = fork(__dirname + "/server/touchpoint.js", [
+  serverProcess = fork(__dirname + "/server/index.jsc", [
     "--subprocess",
     app.getVersion(),
     socketName,
