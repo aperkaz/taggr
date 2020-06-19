@@ -30,7 +30,7 @@ const getLocation = async function (imagePath) {
 
     return { latitude: lat, longitude: lon };
   } catch (e) {
-    // TODO: Sentry: send error.
+    // TODO: TODONOW: send error.
     // TODO: create backedn wide helper HOF that reports to SENTRY
     // Error reading gps data
     console.log(e);

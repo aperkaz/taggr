@@ -35,7 +35,7 @@ async function getObjectRecognitionClassNames(imageTensor) {
       }
     });
   } catch (e) {
-    // TODO: Sentry: send error.
+    // TODONOW: Sentry: send error.
     // Error when object recognitions image
     console.log(e);
   }

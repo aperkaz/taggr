@@ -38,8 +38,11 @@ async function recursivelyFindImages(folderPath) {
 
       imagePathsList.push(`${folderPath}/${path}`);
     }
+
+    trackCreatedProjectImages(imagePathsList.length);
+    trackCreatedProjectSize(Math.round(projectSize / 1000000));
   } catch (e) {
-    // TODO: Sentry: send error.
+    // TODONOW: Sentry: send error.
     // Error reading folders
     console.log(e);
   }

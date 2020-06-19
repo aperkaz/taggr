@@ -15,7 +15,7 @@ const getImageTensor = (uint8Array) => {
     });
   } catch (e) {
     // console.log(e);
-    // TODO: Sentry. report console.error();
+    // TODONOW: Sentry. report console.error();
     // creates emtpy tensor when error
     imageTensor = tf.zeros([0, 0, 0, 0]);
   }

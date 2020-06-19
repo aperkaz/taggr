@@ -9,7 +9,8 @@ import ImageTile from "../molecules/ImageTile";
 const GUTTER = 10;
 const ELEMENTS_PER_COLLUMN = 5;
 
-const Gallery = ({ imageList = [] }) => {
+// imageList could be null or array
+const Gallery = ({ imageList }) => {
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [toggler, setToggler] = useState(false);
 
@@ -22,8 +23,14 @@ const Gallery = ({ imageList = [] }) => {
 
   return (
     <div style={{ height: "100%", marginTop: ".25em" }}>
-      {imageList.length === 0 ? (
-        <Loading text="No pictures found, try to change the filters."></Loading>
+      {!imageList || imageList.length === 0 ? (
+        <Loading
+          text={`${
+            !imageList
+              ? "Searching for images"
+              : "No pictures found, try to change the filters."
+          }`}
+        ></Loading>
       ) : (
         <>
           <SizeMe monitorHeight>

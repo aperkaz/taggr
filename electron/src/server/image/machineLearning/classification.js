@@ -31,7 +31,7 @@ async function getClassificationIds(imageTensor) {
     let logits = await net.infer(imageTensor);
     imageNetClassNumbers = await getTopKImagenetClassNumbers(logits);
   } catch (e) {
-    // TODO: Sentry: send error.
+    // TODO: TODONOW: send error.
     // Error when classifying image
     console.log(e);
   }

@@ -1,2 +1,2 @@
 require("bytenode");
-require("./index.jsc");
+require("./index");

@@ -25,7 +25,7 @@ const MainPage = ({
   onSettingsClick,
   onSearchTriggered,
   task,
-  images = [],
+  images,
   imagesWithLocation = [],
 }) => {
   const [isFiltersOpen, setIsFilterOpen] = useState(false);

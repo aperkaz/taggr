@@ -3,7 +3,7 @@ import CONSTANTS from "./constants";
 
 const initialState = {
   activeRoute: CONSTANTS.ROUTES.START_PAGE,
-  images: [],
+  images: null,
   imagesWithLocation: [],
   task: {
     isOngoing: false,
