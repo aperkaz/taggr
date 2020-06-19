@@ -58,7 +58,7 @@ The backend gets an single environment: `process.env.TAGGR_ENV`, with value: `de
 // NOTE: in windows, execute the commands from git-bash console
 
 // ----- dev -----
-npm run dev:linux
+npm run dev
 
 // ----- build-test -----
 npm run build:test
@@ -68,6 +68,13 @@ npm run build:production
 ```
 
 ## Publishing
+
+Run: 
+```javascript
+npm run publish
+```
+
+Generated prod buil and updates the `taggr-releases` repo. Generate build in windows and update it manually. Make sure that the `taggr` version in the package.json is updated. 
 
 ### Production build
 
