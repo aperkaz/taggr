@@ -69,12 +69,17 @@ npm run build:production
 
 ## Publishing
 
-Run: 
+Run:
+
 ```javascript
 npm run publish
 ```
 
-Generated prod buil and updates the `taggr-releases` repo. Generate build in windows and update it manually. Make sure that the `taggr` version in the package.json is updated. 
+Generated prod buil and updates the `taggr-releases` repo. Generate build in windows and update it manually. Make sure that the `taggr` version in the package.json is updated.
+
+1. Execute `npm run publish`
+2. Increate the version in `electron/package.json`
+3. Build windows and upload manually.
 
 ### Production build
 
