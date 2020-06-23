@@ -1,0 +1,106 @@
+{
+  "name": "taggr",
+  "productName": "taggr",
+  "version": "0.0.4",
+  "description": "My Electron application description",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Alain Perkaz",
+    "email": "alainperkaz@gmail.com"
+  },
+  "license": "MIT",
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "taggr",
+            "iconUrl": "C:\\Users\\test\\Desktop\\taggr\\electron\\resources\\iconWindows.ico",
+            "setupIcon": "C:\\Users\\test\\Desktop\\taggr\\electron\\resources\\iconWindows.ico",
+            "certificateFile": "C:\\Users\\test\\Desktop\\taggr\\electron\\resources\\WindowsCodeSigningCertificate.pfx",
+            "certificatePassword": "sa69uphlZOzplSFjNaNw"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {
+            "categories": [
+              "Graphics",
+              "Photography"
+            ],
+            "description": "Rediscover your memories while keeping your privacy.",
+            "genericName": "Enhanced Gallery",
+            "homepage": "https://taggr.ai/",
+            "icon": "resources/iconLinux.png",
+            "maintainer": "Alain Perkaz",
+            "name": "taggr",
+            "productDescription": "Keep your privacy while you rediscover your memories. You own your data, and all the computations by taggr happen locally. \n Easy to set up, ready to plug into your existing file system. \n\n Features: \n -Automatic image tagging using machine learning. \n -Aggregate images system-wide, while curating results. \n -Blazing fast image viewing experience \n -Geolocate your memories \n -And much more! \n\n Check upcoming features and updates in https://taggr.ai/",
+            "section": "graphics"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ],
+      "publishers": [
+        {
+          "name": "@electron-forge/publisher-github",
+          "config": {
+            "repository": {
+              "owner": "aperkaz",
+              "name": "taggr-releases"
+            },
+            "authToken": "e8c0863978337e54145b6ab38ab5b99388c6fd03"
+          }
+        }
+      ]
+    }
+  },
+  "dependencies": {
+    "@electron-forge/publisher-github": "^6.0.0-beta.51",
+    "@sentry/node": "^5.17.0",
+    "@tensorflow-models/coco-ssd": "^2.0.3",
+    "@tensorflow-models/mobilenet": "^2.0.4",
+    "@tensorflow/tfjs-node": "^2.0.0",
+    "bytenode": "^1.1.6",
+    "electron-squirrel-startup": "^1.0.0",
+    "env-paths": "^2.2.0",
+    "exif": "^0.6.0",
+    "lodash.get": "^4.4.2",
+    "lodash.range": "^3.2.0",
+    "lodash.throttle": "^4.1.1",
+    "node-ipc": "^9.1.1",
+    "node-localstorage": "^2.1.6",
+    "normalize-path": "^3.0.0",
+    "parse-dms": "0.0.3",
+    "readdirp": "^3.4.0",
+    "universal-analytics": "^0.4.20"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "6.0.0-beta.51",
+    "@electron-forge/maker-deb": "6.0.0-beta.51",
+    "@electron-forge/maker-rpm": "6.0.0-beta.51",
+    "@electron-forge/maker-squirrel": "6.0.0-beta.51",
+    "@electron-forge/maker-zip": "6.0.0-beta.51",
+    "electron": "9.0.2",
+    "jest": "^26.0.1"
+  }
+}

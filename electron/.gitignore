@@ -1,4 +1,4 @@
-electron-old
+frontend-statics
 
 # Logs
 logs
@@ -60,7 +60,7 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-# .env
+.env
 .env.test
 
 # parcel-bundler cache (https://parceljs.org/)
@@ -89,7 +89,3 @@ typings/
 
 # Electron-Forge
 out/
-
-electron/src/env.json
-
-# *.jsc
