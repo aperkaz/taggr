@@ -109,6 +109,7 @@ https://github.com/aperkaz/taggr-releases/releases
 - Add more ML: look into tensorflow alternatives: evaluate performance: with article https://learn.ml5js.org/docs/#/reference/face-api?id=demo
 - Speed up app by paralelization. Exaple: https://github.com/aperkaz/tensorflow-playground
 - Food classification: https://github.com/stratospark/food-101-keras/issues/14
+- Reverse geocoding: https://docs.mapbox.com/help/how-mapbox-works/geocoding/
 
 ## Known Issues
 
