@@ -6,8 +6,8 @@ import FsLightbox from "fslightbox-react";
 import Loading from "../molecules/Loading";
 import ImageTile from "../molecules/ImageTile";
 
-const GUTTER = 10;
-const ELEMENTS_PER_COLLUMN = 5;
+const GUTTER = 16;
+const ELEMENTS_PER_COLLUMN = 4;
 
 // imageList could be null or array
 const Gallery = ({ imageList }) => {
@@ -22,7 +22,7 @@ const Gallery = ({ imageList }) => {
   };
 
   return (
-    <div style={{ height: "100%", marginTop: ".25em" }}>
+    <div style={{ height: "100%" }}>
       {!imageList || imageList.length === 0 ? (
         <Loading
           text={`${
@@ -66,7 +66,9 @@ const Grid = ({ size: { height, width }, imageList, onCellClick }) => {
   height = height ? height : 0;
   width = width ? width : 0;
 
-  let gridHeight = height - GUTTER * 2;
+  // let gridHeight = height - GUTTER * 2;
+  let gridHeight = height;
+
   let gridWidth = width;
 
   const columnWidth = gridWidth / ELEMENTS_PER_COLLUMN;
@@ -96,8 +98,6 @@ const Grid = ({ size: { height, width }, imageList, onCellClick }) => {
       // overscanColumnCount={10}
       style={{
         overflowX: "hidden",
-        marginTop: ".5em",
-        // paddingRight: "20px",
       }}
     >
       {(props) => <Cell {...props} onClick={onCellClick} />}

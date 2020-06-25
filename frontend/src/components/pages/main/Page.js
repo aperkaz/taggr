@@ -33,11 +33,12 @@ const ContentWrapper = styled.div`
 `;
 
 const FilterWrapper = styled.div`
-  width: 350px;
+  min-width: 350px;
   margin: 0 0 1rem 1rem;
   background-color: grey;
 `;
 
+// TODONOW: investigate. apparently there is a bug with the resize of images when resize.
 const ContentPanel = styled.div`
   flex-grow: 1;
   margin: 0 1rem 1rem 1rem;

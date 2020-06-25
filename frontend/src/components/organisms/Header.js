@@ -41,6 +41,7 @@ const Header = ({ tabList, activeTab, onActiveTabChange, onSettingsClick }) => (
       style={{
         background: `linear-gradient(354.71deg, rgba(135, 49, 232, 0.9) 0%, rgba(69, 40, 220, 0.9) 100%)`,
         boxShadow: `0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12)`,
+        borderRadius: "6px",
       }}
     >
       <CustomTabs
