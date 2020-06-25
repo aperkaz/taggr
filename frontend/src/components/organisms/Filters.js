@@ -7,8 +7,6 @@ import {
 } from "@material-ui/pickers";
 
 // ICONS
-import CloseIcon from "@material-ui/icons/Close";
-// TODO: feature: add morning/night pictures
 // when
 // import MorningIcon from "@material-ui/icons/WbSunny";
 // import NightIcon from "@material-ui/icons/Brightness2";
@@ -33,62 +31,34 @@ import DisgustIcon from "@material-ui/icons/SportsMma";
 
 import Typography from "../atoms/Typography";
 import ButtonFancy from "../molecules/ButtonFancy";
-import ButtonRegular from "../molecules/ButtonRegular";
 import ButtonFilter from "../molecules/ButtonFilter";
 
-const Backdrop = styled.div`
-  z-index: 100;
-
-  position: absolute;
-  top: 0;
-  right: 0;
-
+const BorderWrap = styled.div`
   height: 100%;
-  width: 100%;
+  width: 424px;
 
-  background-color: rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+
+  background: linear-gradient(70.98deg, #ff96ad 9.38%, #feaf85 91.67%);
+
+  display: flex;
 `;
 
 const Panel = styled.div`
-  z-index: 101;
+  margin: 4px;
 
-  position: absolute;
-  top: 0;
-  left: 0;
+  background: white;
 
-  margin: 0.5em;
-  height: calc(100vh - 1em);
-  width: 480px;
+  border-radius: 4px;
 
-  border-radius: 6px;
-
-  background-color: white;
-
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-`;
-
-const Title = styled.div`
-  margin-top: 0.25em;
-  text-align: center;
-`;
-
-const Close = styled(CloseIcon)`
-  position: absolute;
-  right: calc(100% - 480px);
-
-  margin-top: 0.15em;
-  margin-right: 0.25em;
-
-  :hover {
-    cursor: pointer;
-  }
+  align-items: center;
 `;
 
 const Body = styled.div`
-  flex-grow: 1;
-
   /* Enable scroll-behavior, but hide scroll-bar */
   overflow-y: scroll;
   ::-webkit-scrollbar {
@@ -97,7 +67,7 @@ const Body = styled.div`
 `;
 
 const Filter = styled.div`
-  margin: 1.7em 0.5em;
+  margin: 1.7rem 1rem;
 
   border: 2px solid #9f9e9e;
   box-sizing: border-box;
@@ -122,44 +92,43 @@ const FilterTitle = styled.div`
 `;
 
 const TimeSelectoGrid = styled.div`
-  margin: 0 1em 1em;
+  margin: 0 1rem 1rem;
 
   display: grid;
   justify-content: start;
   grid-auto-flow: row;
 
   grid-template-columns: repeat(2, auto);
-  grid-gap: 1em;
+  grid-gap: 1rem;
 `;
 
 const ButtonGrid = styled.div`
-  margin: 0 1em 1em;
+  margin: 0 1rem 1rem;
 
   display: grid;
-  justify-content: start;
+  justify-content: center;
   grid-auto-flow: row;
 
   grid-template-columns: repeat(3, auto);
-  grid-gap: 1em;
+  grid-gap: 1rem;
 `;
 
 const FooterDivider = styled.div`
-  margin: 1em auto 0;
-  width: 40%;
-  border-top: 2px solid #9f9e9e;
-`;
+  margin: auto auto 2rem;
 
-const FooterButtons = styled.div`
-  display: flex;
+  height: 2px;
+  width: 80%;
+
+  background: linear-gradient(70.98deg, #fe6b8b 9.38%, #ff8e53 91.67%);
 `;
 
 const EMPTY_EPOCH_TIME = null;
 
-const Filters = ({ isOpen = false, triggerFiltersClose, triggerSearch }) => {
+const Filters = ({ onFilterChange }) => {
   const [fromDate, setFromDate] = useState(EMPTY_EPOCH_TIME);
   const [toDate, setToDate] = useState(EMPTY_EPOCH_TIME);
 
-  const [activeFilters, setActiveFilters] = useState({
+  const [activeTags, setActiveTags] = useState({
     // When - date pickers keep their own state
     // morning: false,
     // night: false,
@@ -179,13 +148,55 @@ const Filters = ({ isOpen = false, triggerFiltersClose, triggerSearch }) => {
     disgust: false,
   });
 
-  const triggerFilter = (name) => {
-    const newFilter = {
-      ...activeFilters,
-      [name]: !activeFilters[name],
+  const fromDateChange = (epochDate) => {
+    setFromDate(epochDate);
+
+    triggerSearch({
+      fromDate: epochDate,
+      toDate: toDate,
+      tags: activeTags,
+    });
+  };
+
+  const toDateChange = (epochDate) => {
+    setToDate(epochDate);
+
+    triggerSearch({
+      fromDate: fromDate,
+      toDate: epochDate,
+      tags: activeTags,
+    });
+  };
+
+  const tagChange = (name) => {
+    const newTags = {
+      ...activeTags,
+      [name]: !activeTags[name],
     };
 
-    setActiveFilters(newFilter);
+    setActiveTags(newTags);
+
+    // search on each change
+    triggerSearch({
+      fromDate: fromDate,
+      toDate: toDate,
+      tags: newTags,
+    });
+  };
+
+  const triggerSearch = ({ fromDate, toDate, tags }) => {
+    const activeTagsAsList = [];
+    Object.keys(tags).forEach((key) => {
+      if (tags[key]) {
+        activeTagsAsList.push(key);
+      }
+    });
+
+    onFilterChange({
+      fromDate,
+      toDate,
+      tags: activeTagsAsList,
+    });
   };
 
   const resetState = () => {
@@ -193,11 +204,11 @@ const Filters = ({ isOpen = false, triggerFiltersClose, triggerSearch }) => {
     setToDate(EMPTY_EPOCH_TIME);
 
     // toggle false all filter items
-    const resetFilters = { ...activeFilters };
+    const resetFilters = { ...activeTags };
     Object.keys(resetFilters).forEach((key) => {
       resetFilters[key] = false;
     });
-    setActiveFilters(resetFilters);
+    setActiveTags(resetFilters);
 
     triggerSearch({
       fromDate: EMPTY_EPOCH_TIME,
@@ -207,12 +218,11 @@ const Filters = ({ isOpen = false, triggerFiltersClose, triggerSearch }) => {
   };
 
   return (
-    <Backdrop style={{ visibility: isOpen ? "visible" : "hidden" }}>
+    <BorderWrap>
       <Panel>
-        <Title>
-          <Close onClick={triggerFiltersClose} />
-          <Typography variant="h5">Filters</Typography>
-        </Title>
+        <Typography variant="h5" style={{ margin: "2rem 0 1rem" }}>
+          Filters
+        </Typography>
         <Body>
           <Filter>
             <FilterTitle>
@@ -228,7 +238,7 @@ const Filters = ({ isOpen = false, triggerFiltersClose, triggerSearch }) => {
                   value={fromDate}
                   onChange={(date) => {
                     const epochDate = date ? date.getTime() : EMPTY_EPOCH_TIME;
-                    setFromDate(epochDate);
+                    fromDateChange(epochDate);
                   }}
                   KeyboardButtonProps={{
                     "aria-label": "change date",
@@ -243,7 +253,7 @@ const Filters = ({ isOpen = false, triggerFiltersClose, triggerSearch }) => {
                   value={toDate}
                   onChange={(date) => {
                     const epochDate = date ? date.getTime() : EMPTY_EPOCH_TIME;
-                    setToDate(epochDate);
+                    toDateChange(epochDate);
                   }}
                   KeyboardButtonProps={{
                     "aria-label": "change date",
@@ -252,22 +262,6 @@ const Filters = ({ isOpen = false, triggerFiltersClose, triggerSearch }) => {
                 />
               </TimeSelectoGrid>
             </MuiPickersUtilsProvider>
-
-            {/* <ButtonGrid>
-              <ButtonFilter
-                icon={<MorningIcon />}
-                text={"Morning"}
-                active={activeFilters.morning}
-                onClick={() => triggerFilter("morning")}
-              />
-              <ButtonFilter
-                icon={<NightIcon />}
-                text={"Night"}
-                active={activeFilters.night}
-                onClick={() => triggerFilter("night")}
-              />
-              <span />
-            </ButtonGrid> */}
           </Filter>
           <Filter>
             <FilterTitle>
@@ -277,38 +271,38 @@ const Filters = ({ isOpen = false, triggerFiltersClose, triggerSearch }) => {
               <ButtonFilter
                 icon={<PeopleIcon />}
                 text={"People"}
-                active={activeFilters.people}
-                onClick={() => triggerFilter("people")}
+                active={activeTags.people}
+                onClick={() => tagChange("people")}
               />
               <ButtonFilter
                 icon={<AnimalsIcon />}
                 text={"Animals"}
-                active={activeFilters.animals}
-                onClick={() => triggerFilter("animals")}
+                active={activeTags.animals}
+                onClick={() => tagChange("animals")}
               />
               <ButtonFilter
                 icon={<VehiclesIcon />}
                 text={"Vehicles"}
-                active={activeFilters.vehicles}
-                onClick={() => triggerFilter("vehicles")}
+                active={activeTags.vehicles}
+                onClick={() => tagChange("vehicles")}
               />
               <ButtonFilter
                 icon={<FoodIcon />}
                 text={"Food"}
-                active={activeFilters.food}
-                onClick={() => triggerFilter("food")}
+                active={activeTags.food}
+                onClick={() => tagChange("food")}
               />
               <ButtonFilter
                 icon={<DrinksIcon />}
                 text={"Drinks"}
-                active={activeFilters.drinks}
-                onClick={() => triggerFilter("drinks")}
+                active={activeTags.drinks}
+                onClick={() => tagChange("drinks")}
               />
               <ButtonFilter
                 icon={<SportsIcon />}
                 text={"Sports"}
-                active={activeFilters.sports}
-                onClick={() => triggerFilter("sports")}
+                active={activeTags.sports}
+                onClick={() => tagChange("sports")}
               />
             </ButtonGrid>
           </Filter>
@@ -323,94 +317,242 @@ const Filters = ({ isOpen = false, triggerFiltersClose, triggerSearch }) => {
                 icon={<HappyIcon />}
                 text={"Happy"}
                 disabled={true}
-                onClick={() => triggerFilter("happy")}
+                onClick={() => tagChange("happy")}
               />
               <ButtonFilter
                 icon={<SadIcon />}
                 text={"Sad"}
                 disabled={true}
-                onClick={() => triggerFilter("sad")}
+                onClick={() => tagChange("sad")}
               />
               <ButtonFilter
                 icon={<SurpriseIcon />}
                 text={"Surprise"}
                 disabled={true}
-                onClick={() => triggerFilter("surprise")}
+                onClick={() => tagChange("surprise")}
               />
               <ButtonFilter
                 icon={<FearIcon />}
                 text={"Fear"}
                 disabled={true}
-                onClick={() => triggerFilter("fear")}
+                onClick={() => tagChange("fear")}
               />
               <ButtonFilter
                 icon={<AngerIcon />}
                 text={"Anger"}
                 disabled={true}
-                onClick={() => triggerFilter("anger")}
+                onClick={() => tagChange("anger")}
               />
               <ButtonFilter
                 icon={<DisgustIcon />}
                 text={"Disgust"}
                 disabled={true}
-                onClick={() => triggerFilter("disgust")}
+                onClick={() => tagChange("disgust")}
               />
             </ButtonGrid>
           </Filter>
-          {/* <Filter>
-            <FilterTitle>
-              <Typography value={"subtitle1"}>age [comming soon]</Typography>
-            </FilterTitle>
-            <ButtonGrid>
-              <ButtonFilter
-                icon={<YoungIcon />}
-                text={"Young"}
-                disabled={true}
-              />
-              <ButtonFilter
-                icon={<AdultIcon />}
-                text={"Adult"}
-                disabled={true}
-              />
-              <ButtonFilter icon={<OldIcon />} text={"Old"} disabled={true} />
-            </ButtonGrid>
-          </Filter> */}
         </Body>
-        <div>
-          <FooterDivider />
-          <FooterButtons>
-            <ButtonRegular
-              text={"Reset"}
-              style={{ width: "100%", margin: "1em .5em 1em 1em" }}
-              onClick={resetState}
-            />
-
-            <ButtonFancy
-              text={"Apply"}
-              style={{ width: "100%", margin: "1em  1em 1em .5em" }}
-              onClick={() => {
-                const activeTags = [];
-                Object.keys(activeFilters).forEach((key) => {
-                  if (activeFilters[key]) {
-                    activeTags.push(key);
-                  }
-                });
-                triggerSearch({
-                  fromDate: fromDate,
-                  toDate: toDate,
-                  tags: activeTags,
-                });
-                triggerFiltersClose();
-              }}
-            />
-          </FooterButtons>
-        </div>
+        <FooterDivider />
+        <ButtonFancy
+          text={"Reset"}
+          style={{ width: "70%", margin: "0 auto 2rem" }}
+          onClick={resetState}
+        />
       </Panel>
-    </Backdrop>
+    </BorderWrap>
   );
 };
 
+//  <Title>
+//   <Typography variant="h5">Filters</Typography>
+// </Title>
+// {/* <Body>
+//   <Filter>
+//     <FilterTitle>
+//       <Typography value={"subtitle1"}>when</Typography>
+//     </FilterTitle>
+//     <MuiPickersUtilsProvider utils={DateFnsUtils}>
+//       <TimeSelectoGrid>
+//         <KeyboardDatePicker
+//           margin="normal"
+//           id="date-picker-dialog"
+//           label="From date"
+//           format="dd/MM/yyyy"
+//           value={fromDate}
+//           onChange={(date) => {
+//             const epochDate = date ? date.getTime() : EMPTY_EPOCH_TIME;
+//             setFromDate(epochDate);
+//           }}
+//           KeyboardButtonProps={{
+//             "aria-label": "change date",
+//           }}
+//           style={{ marginTop: 0 }}
+//         />
+//         <KeyboardDatePicker
+//           margin="normal"
+//           id="date-picker-dialog"
+//           label="To date"
+//           format="dd/MM/yyyy"
+//           value={toDate}
+//           onChange={(date) => {
+//             const epochDate = date ? date.getTime() : EMPTY_EPOCH_TIME;
+//             setToDate(epochDate);
+//           }}
+//           KeyboardButtonProps={{
+//             "aria-label": "change date",
+//           }}
+//           style={{ marginTop: 0 }}
+//         />
+//       </TimeSelectoGrid>
+//     </MuiPickersUtilsProvider>
+
+//     {/* <ButtonGrid>
+//         <ButtonFilter
+//           icon={<MorningIcon />}
+//           text={"Morning"}
+//           active={activeFilters.morning}
+//           onClick={() => triggerFilter("morning")}
+//         />
+//         <ButtonFilter
+//           icon={<NightIcon />}
+//           text={"Night"}
+//           active={activeFilters.night}
+//           onClick={() => triggerFilter("night")}
+//         />
+//         <span />
+//       </ButtonGrid> */
+//       </Filter>
+//       <Filter>
+//         <FilterTitle>
+//           <Typography value={"subtitle1"}>what</Typography>
+//         </FilterTitle>
+//         <ButtonGrid>
+//           <ButtonFilter
+//             icon={<PeopleIcon />}
+//             text={"People"}
+//             active={activeFilters.people}
+//             onClick={() => triggerFilter("people")}
+//           />
+//           <ButtonFilter
+//             icon={<AnimalsIcon />}
+//             text={"Animals"}
+//             active={activeFilters.animals}
+//             onClick={() => triggerFilter("animals")}
+//           />
+//           <ButtonFilter
+//             icon={<VehiclesIcon />}
+//             text={"Vehicles"}
+//             active={activeFilters.vehicles}
+//             onClick={() => triggerFilter("vehicles")}
+//           />
+//           <ButtonFilter
+//             icon={<FoodIcon />}
+//             text={"Food"}
+//             active={activeFilters.food}
+//             onClick={() => triggerFilter("food")}
+//           />
+//           <ButtonFilter
+//             icon={<DrinksIcon />}
+//             text={"Drinks"}
+//             active={activeFilters.drinks}
+//             onClick={() => triggerFilter("drinks")}
+//           />
+//           <ButtonFilter
+//             icon={<SportsIcon />}
+//             text={"Sports"}
+//             active={activeFilters.sports}
+//             onClick={() => triggerFilter("sports")}
+//           />
+//         </ButtonGrid>
+//       </Filter>
+//       <Filter>
+//         <FilterTitle>
+//           <Typography value={"subtitle1"}>emotions [comming soon]</Typography>
+//         </FilterTitle>
+//         <ButtonGrid>
+//           <ButtonFilter
+//             icon={<HappyIcon />}
+//             text={"Happy"}
+//             disabled={true}
+//             onClick={() => triggerFilter("happy")}
+//           />
+//           <ButtonFilter
+//             icon={<SadIcon />}
+//             text={"Sad"}
+//             disabled={true}
+//             onClick={() => triggerFilter("sad")}
+//           />
+//           <ButtonFilter
+//             icon={<SurpriseIcon />}
+//             text={"Surprise"}
+//             disabled={true}
+//             onClick={() => triggerFilter("surprise")}
+//           />
+//           <ButtonFilter
+//             icon={<FearIcon />}
+//             text={"Fear"}
+//             disabled={true}
+//             onClick={() => triggerFilter("fear")}
+//           />
+//           <ButtonFilter
+//             icon={<AngerIcon />}
+//             text={"Anger"}
+//             disabled={true}
+//             onClick={() => triggerFilter("anger")}
+//           />
+//           <ButtonFilter
+//             icon={<DisgustIcon />}
+//             text={"Disgust"}
+//             disabled={true}
+//             onClick={() => triggerFilter("disgust")}
+//           />
+//         </ButtonGrid>
+//       </Filter>
+//       {/* <Filter>
+//           <FilterTitle>
+//             <Typography value={"subtitle1"}>age [comming soon]</Typography>
+//           </FilterTitle>
+//           <ButtonGrid>
+//             <ButtonFilter
+//               icon={<YoungIcon />}
+//               text={"Young"}
+//               disabled={true}
+//             />
+//             <ButtonFilter
+//               icon={<AdultIcon />}
+//               text={"Adult"}
+//               disabled={true}
+//             />
+//             <ButtonFilter icon={<OldIcon />} text={"Old"} disabled={true} />
+//           </ButtonGrid>
+//         </Filter> */}
+//     </Body> */}
+//     <div>
+//       <FooterDivider />
+//       <FooterButtons>
+//         <ButtonFancy
+//           text={"Reset"}
+//           style={{ width: "80%", margin: "1em  auto .5em" }}
+//           onClick={() => {
+//             resetState();
+
+//             // TODONOW: extract to onChange
+//             const activeTags = [];
+//             Object.keys(activeFilters).forEach((key) => {
+//               if (activeFilters[key]) {
+//                 activeTags.push(key);
+//               }
+//             });
+//             triggerSearch({
+//               fromDate: fromDate,
+//               toDate: toDate,
+//               tags: activeTags,
+//             });
+//           }}
+//         />
+//       </FooterButtons>
+//     </div>
+
 // TODO: imporvement: extract filter config to object and iterate over it
-// TODO: improvement: customize button to align closer to the designs: https://material-ui.com/components/buttons/#button
 
 export default Filters;

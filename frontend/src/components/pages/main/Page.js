@@ -23,19 +23,16 @@ const HeaderWrapper = styled.div`
   height: 50px;
 
   margin: 1rem;
-
-  /* background-color: grey; */
 `;
 
 const ContentWrapper = styled.div`
+  overflow: hidden;
   flex-grow: 1;
   display: flex;
 `;
 
 const FilterWrapper = styled.div`
-  min-width: 350px;
   margin: 0 0 1rem 1rem;
-  background-color: grey;
 `;
 
 // TODONOW: investigate. apparently there is a bug with the resize of images when resize.
@@ -50,7 +47,6 @@ const MainPage = ({
   images,
   imagesWithLocation = [],
 }) => {
-  const [isFiltersOpen, setIsFilterOpen] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
 
   return (
@@ -64,7 +60,9 @@ const MainPage = ({
         />
       </HeaderWrapper>
       <ContentWrapper>
-        <FilterWrapper>filter</FilterWrapper>
+        <FilterWrapper>
+          <Filters onFilterChange={onSearchTriggered} />
+        </FilterWrapper>
         <ContentPanel>
           <Gallery imageList={images} />
         </ContentPanel>

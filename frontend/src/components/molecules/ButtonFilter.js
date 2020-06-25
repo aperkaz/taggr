@@ -16,11 +16,12 @@ const ButtonFilter = ({
     startIcon={icon}
     disabled={disabled}
     style={{
-      minWidth: "130px",
+      minWidth: "105px",
       textTransform: "capitalize",
       background: active
         ? "linear-gradient(70.98deg, #fe7996 9.38%, #ff9964 91.67%)"
         : "white",
+      margin: "auto",
       ...styles,
     }}
     onClick={onClick}

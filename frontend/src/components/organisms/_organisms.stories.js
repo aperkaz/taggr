@@ -57,16 +57,9 @@ export const Faces = () => (
 );
 
 export const Filters = () => {
-  const [isOpen, setIsOpen] = React.useState(false);
-
   return (
-    <div>
-      <button onClick={() => setIsOpen(true)}>open filters</button>
-      <FiltersComp
-        isOpen={isOpen}
-        triggerFiltersClose={() => setIsOpen(false)}
-        triggerSearch={(filters) => console.log("searching for: ", filters)}
-      />
-    </div>
+    <FiltersComp
+      onFilterChange={(filters) => console.log("searching for: ", filters)}
+    />
   );
 };
