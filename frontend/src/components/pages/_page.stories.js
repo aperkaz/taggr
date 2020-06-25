@@ -44,14 +44,6 @@ export const Main = () => (
     <MainPageComp
       onSettingsClick={action("trigger navigate to settings")}
       onSearchTriggered={action("filter search has been triggered")}
-      task={{
-        isOngoing: boolean("isTaskOngoing", true),
-        name: text(
-          "taskName",
-          "Be patient, the minions are working on your memories!"
-        ),
-        percentage: number("taskPercentage", 50),
-      }}
       images={array("images", images)}
       imagesWithLocation={array("imagesWithLocation", imagesWithLocation)}
     />

@@ -3,8 +3,6 @@ import { action } from "@storybook/addon-actions";
 import { withKnobs, boolean, number, text } from "@storybook/addon-knobs";
 
 import HeaderComp from "./Header";
-// TODO: add TaskProgress story here
-import NavBarComp from "./NavBar";
 import GalleryComp from "./Gallery";
 import MapComp from "./Map";
 import FacesComp from "./Faces";
@@ -18,33 +16,21 @@ export default {
   decorators: [withKnobs],
 };
 
-export const Header = () => (
-  <HeaderComp
-    task={{
-      isOngoing: boolean("isTaskOngoing", false),
-      name: text(
-        "taskName",
-        "Be patient, the minions are working on your memories!"
-      ),
-      percentage: number("taskPercentage", 50),
-    }}
-    onFiltersClick={action("click filters")}
-    onSettingsClick={action("click settings")}
-  />
-);
-
-export const NavBar = () => {
+export const Header = () => {
   const [activeTab, setActiveTab] = React.useState(0);
 
   return (
-    <NavBarComp
-      tabList={["Timeline", "Gallery", "Map"]}
-      activeTab={activeTab}
-      handleChange={(t) => {
-        console.log(t);
-        setActiveTab(t);
-      }}
-    />
+    <div style={{ width: "100%" }}>
+      <HeaderComp
+        tabList={["Faces", "Gallery", "Map"]}
+        activeTab={activeTab}
+        onActiveTabChange={(t) => {
+          action(`active tab changed`)(t);
+          setActiveTab(t);
+        }}
+        onSettingsClick={action("trigger action click")}
+      />
+    </div>
   );
 };
 
