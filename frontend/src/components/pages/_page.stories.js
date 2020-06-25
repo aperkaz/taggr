@@ -8,6 +8,7 @@ import {
   array,
 } from "@storybook/addon-knobs";
 import StartPageComp from "./start/Page";
+import ProcessingPageComp from "./processing/Page";
 import MainPageComp from "./main/Page";
 import SettingsPageComp from "./settings/Page";
 
@@ -24,6 +25,16 @@ export const Start = () => (
     <StartPageComp
       onSelectRootFolderPath={action("trigger folder selection dialog")}
       onSelectLogo={action("trigger navigation to webpage")}
+    />
+  </FullHeight>
+);
+
+export const Processing = () => (
+  <FullHeight>
+    <ProcessingPageComp
+      title={text("title", "Locating 192 memories")}
+      subtitle={text("subtitle", "This may take some time, be patient!")}
+      percentage={number("processPercentage", 10)}
     />
   </FullHeight>
 );

@@ -5,7 +5,7 @@ import Link from "@material-ui/core/Link";
 import MenuIcon from "@material-ui/icons/Menu";
 import SettingsIcon from "@material-ui/icons/Settings";
 
-import TaskProgress from "../molecules/TaskProgress";
+import ProgressBar from "../molecules/ProgressBar";
 
 const Wrapper = styled.div`
   min-height: 40px;
@@ -38,7 +38,7 @@ const Header = ({
   },
 }) => {
   return isTaskOngoing ? (
-    <TaskProgress name={taskName} percentage={taskPercentage} />
+    <ProgressBar name={taskName} percentage={taskPercentage} />
   ) : (
     <Wrapper>
       <Link

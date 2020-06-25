@@ -10,7 +10,7 @@ import ButtonRegularComp from "./ButtonRegular";
 import ButtonFilterComp from "./ButtonFilter";
 import UpdateModalComp from "./UpdateModal";
 import ImageTileComp from "./ImageTile";
-import TaskProgressComp from "./TaskProgress";
+import ProgressBarComp from "./ProgressBar";
 import LoadingComp from "./Loading";
 
 export default {
@@ -49,14 +49,8 @@ export const UpdateModal = () => (
   />
 );
 
-export const TaskProgress = () => (
-  <TaskProgressComp
-    name={text(
-      "taskName",
-      "Be patient, the minions are working on your memories!"
-    )}
-    percentage={number("taskPercentage", 50)}
-  ></TaskProgressComp>
+export const ProgressBar = () => (
+  <ProgressBarComp percentage={number("taskPercentage", 50)}></ProgressBarComp>
 );
 
 export const ImageTile = () => (

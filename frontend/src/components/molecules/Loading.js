@@ -1,6 +1,5 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import Typography from "../atoms/Typography";
 
 const Wrapper = styled.div`
   display: flex;
@@ -91,9 +90,6 @@ const Loading = ({ animationDuration = 6, text = "" }) => {
           animationDelay={animationUnit * 3}
         />
       </AnimationWrapper>
-      <Typography variant={"h6"} style={{ marginTop: "2em" }}>
-        {text}
-      </Typography>
     </Wrapper>
   );
 };

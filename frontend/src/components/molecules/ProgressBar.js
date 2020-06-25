@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { withStyles } from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import Typography from "@material-ui/core/Typography";
 
 const FlexWrapper = styled.div`
   display: flex;
@@ -10,15 +9,17 @@ const FlexWrapper = styled.div`
 `;
 
 const Progress = styled.div`
+  width: 100%;
+  height: 100%;
   margin: 0 0 1em;
-  min-width: 30%;
+
   text-align: right;
 `;
 
 const BorderLinearProgress = withStyles(() => ({
   root: {
     borderRadius: 4,
-    height: 6,
+    height: 10,
   },
   bar: {
     borderRadius: 5,
@@ -26,22 +27,12 @@ const BorderLinearProgress = withStyles(() => ({
   },
 }))(LinearProgress);
 
-const TaskProgress = ({ name, percentage }) => (
+const ProgressBar = ({ percentage }) => (
   <FlexWrapper>
     <Progress>
-      <Typography
-        variant="subtitle1"
-        style={{
-          fontFamily: "Poppins, sans-serif",
-          textAlign: "center",
-          margin: ".75rem 0",
-        }}
-      >
-        {name}
-      </Typography>
       <BorderLinearProgress variant="determinate" value={percentage} />
     </Progress>
   </FlexWrapper>
 );
 
-export default TaskProgress;
+export default ProgressBar;
