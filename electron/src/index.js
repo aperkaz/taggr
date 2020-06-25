@@ -21,6 +21,13 @@ const appEnv = require("./env.json");
 console.log("Electron environment: ", appEnv);
 setEnvironment(appEnv.env);
 
+// Set os variable
+const isWin = process.platform === "win32";
+const isLinux = ["aix", "freebsd", "linux", "openbsd", "sunos"].includes(
+  process.platform
+);
+const isMac = process.platform === "darwin";
+
 let clientWin;
 let serverWin;
 let serverProcess;
@@ -38,6 +45,9 @@ const createClientWindow = (socketName) => {
     y: 0,
     width: 1000,
     height: 1000,
+    icon: isWin
+      ? `${path.join(__dirname, "../resources/iconWindows.ico")}`
+      : `${path.join(__dirname, "../resources/iconLinux.png")}`,
     webPreferences: {
       webSecurity: false,
       nodeIntegration: true,
