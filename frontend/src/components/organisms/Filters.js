@@ -30,7 +30,7 @@ import DisgustIcon from "@material-ui/icons/SportsMma";
 // import OldIcon from "@material-ui/icons/SentimentSatisfiedAlt";
 
 import Typography from "../atoms/Typography";
-import ButtonFancy from "../molecules/ButtonFancy";
+import ButtonRegular from "../molecules/ButtonRegular";
 import ButtonFilter from "../molecules/ButtonFilter";
 
 const BorderWrap = styled.div`
@@ -40,7 +40,8 @@ const BorderWrap = styled.div`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 6px;
 
-  background: linear-gradient(70.98deg, #ff96ad 9.38%, #feaf85 91.67%);
+  /* background: linear-gradient(70.98deg, #ff96ad 9.38%, #feaf85 91.67%); */
+  background: #9f9e9e;
 
   display: flex;
 `;
@@ -114,12 +115,14 @@ const ButtonGrid = styled.div`
 `;
 
 const FooterDivider = styled.div`
-  margin: auto auto 2rem;
+  margin: auto auto 1rem;
 
-  height: 2px;
+  height: 4px;
   width: 80%;
 
-  background: linear-gradient(70.98deg, #fe6b8b 9.38%, #ff8e53 91.67%);
+  background: linear-gradient(70.98deg, #ff96ad 9.38%, #feaf85 91.67%);
+
+  border-radius: 4px;
 `;
 
 const EMPTY_EPOCH_TIME = null;
@@ -220,7 +223,7 @@ const Filters = ({ onFilterChange }) => {
   return (
     <BorderWrap>
       <Panel>
-        <Typography variant="h5" style={{ margin: "2rem 0 1rem" }}>
+        <Typography variant="h5" style={{ margin: "1rem 0 .5rem" }}>
           Filters
         </Typography>
         <Body>
@@ -353,9 +356,9 @@ const Filters = ({ onFilterChange }) => {
           </Filter>
         </Body>
         <FooterDivider />
-        <ButtonFancy
+        <ButtonRegular
           text={"Reset"}
-          style={{ width: "70%", margin: "0 auto 2rem" }}
+          style={{ width: "70%", margin: "0 auto 1rem" }}
           onClick={resetState}
         />
       </Panel>

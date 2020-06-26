@@ -59,14 +59,31 @@ const MainPage = ({
           onSettingsClick={onSettingsClick}
         />
       </HeaderWrapper>
-      <ContentWrapper>
-        <FilterWrapper>
-          <Filters onFilterChange={onSearchTriggered} />
-        </FilterWrapper>
-        <ContentPanel>
-          <Gallery imageList={images} />
-        </ContentPanel>
-      </ContentWrapper>
+
+      {activeTab === 0 ? (
+        <ContentWrapper>
+          <ContentPanel>
+            <Faces />
+          </ContentPanel>
+        </ContentWrapper>
+      ) : null}
+      {activeTab === 1 ? (
+        <ContentWrapper>
+          <FilterWrapper>
+            <Filters onFilterChange={onSearchTriggered} />
+          </FilterWrapper>
+          <ContentPanel>
+            <Gallery imageList={images} />
+          </ContentPanel>
+        </ContentWrapper>
+      ) : null}
+      {activeTab === 2 ? (
+        <ContentWrapper>
+          <ContentPanel>
+            <Map imageList={imagesWithLocation} />
+          </ContentPanel>
+        </ContentWrapper>
+      ) : null}
     </Wrapper>
   );
 };
