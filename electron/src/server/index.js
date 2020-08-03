@@ -5,12 +5,17 @@ let serverHandlers = require("./services/handlers");
 // setup analytics
 require("./analytics/sentry");
 const { trackAppOpened } = require("./analytics/googleAnalytics");
-
 trackAppOpened();
 
 let version;
 
 // TODONOW: add environmental variable so the backend returns https: images rather than http: in development
+
+// check if project data exists
+
+// yes, start screen
+
+// no, calculate diff, analyze
 
 /**
  * Initialize the backend and the node-ipc sockects

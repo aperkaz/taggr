@@ -26,9 +26,8 @@ electron
 └───frontend-statics -- copy of create-react-app build command, without source maps
 └───out -- generated executables (win/linux/mac)
 └───resources -- statics for building the app (certificates, icon files)
-└───src 
-│   └───client-preload -- scripts injected to the client window, with the environmental variables
-│   └───env -- env
+└───src
+│   └───env -- env and client-preload scripts injected to the client window, with the environmental variables 
 │   └───obfuscate-server -- script for obfuscating backend code before prod
 │   └───server -- backend
 │   │   entry.js -- entry point for the node-process to the ofuscated code
@@ -110,6 +109,34 @@ https://github.com/aperkaz/taggr-releases/releases
 - Speed up app by paralelization. Exaple: https://github.com/aperkaz/tensorflow-playground
 - Food classification: https://github.com/stratospark/food-101-keras/issues/14
 - Reverse geocoding: https://docs.mapbox.com/help/how-mapbox-works/geocoding/
+- File sharing options: 
+https://share.storewise.tech/upload
+https://send.firefox.com/
+https://safenote.co/upload-file ??
+- Partial hash
+```
+//whirlpoolHash.js
+
+const len = 4096,
+pos = 0, offset =0,
+file = './video.mp4',
+buff = Buffer.alloc(len);
+
+fs.open(file, 'r', (err, fd) => {
+ fs.read(fd, buff, offset, len, pos, (err, bytes, buff) => {
+ const hash = crypto
+ .createHash('whirlpool')
+ .update(buff)
+ .digest('hex');
+ console.log(hash);
+ /* prints following hash
+  ea8f4f1c979cd850bde3dd731b283c31ed6658c3e01
+  d3f47538967e07a9d37cfca8cf22e744bd6f14977b9
+  c81fc116c4009dd93018ff5526602e35b2e305f1ac
+ */
+ });
+});
+```
 
 ## Known Issues
 

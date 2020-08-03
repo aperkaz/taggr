@@ -21,6 +21,7 @@ const appEnv = require("./env.json");
 console.log("Electron environment: ", appEnv);
 setEnvironment(appEnv.env);
 
+// TODONOW: move to /env
 // Set os variable
 const isWin = process.platform === "win32";
 const isLinux = ["aix", "freebsd", "linux", "openbsd", "sunos"].includes(
@@ -51,9 +52,7 @@ const createClientWindow = (socketName) => {
     webPreferences: {
       webSecurity: false,
       nodeIntegration: true,
-      preload:
-        __dirname +
-        `/client-preload/client-preload-${process.env.TAGGR_ENV}.js`,
+      preload: __dirname + `/env/${process.env.TAGGR_ENV}-client-preload.js`,
     },
   });
 
@@ -176,6 +175,3 @@ app.on("activate", async () => {
     initializeApp();
   }
 });
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and import them here.
