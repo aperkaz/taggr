@@ -95,6 +95,7 @@ https://github.com/aperkaz/taggr-releases/releases
 
 ## Future Features
 
+- Add node_modules migration, to fix the known issue.
 - Certificate trust increase: https://support.ksoftware.net/support/solutions/articles/215894-what-is-this-file-is-not-commonly-downloaded-and-could-harm-your-computer-message-smartscreen-
 - Add github actions build: https://github.com/malept/electron-forge-demo123/actions/runs/116519042/workflow
 - Some images are displayed rotated, example in thailand trip 
