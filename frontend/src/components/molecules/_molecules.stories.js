@@ -69,7 +69,7 @@ export const Loading = () => (
   <FullHeight>
     <LoadingComp
       animationDuration={number("animation", 8)}
-      text={text(text, "No pictures found, try to change the filters.")}
+      text={text("text", "No pictures found, try to change the filters.")}
     />
   </FullHeight>
 );

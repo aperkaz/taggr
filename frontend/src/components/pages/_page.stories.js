@@ -10,6 +10,7 @@ import {
 import StartPageComp from "./start/Page";
 import MainPageComp from "./main/Page";
 import SettingsPageComp from "./settings/Page";
+import PrepocessPage from "./preprocess/Page";
 
 import FullHeight from "../../stories/utils";
 import { images, imagesWithLocation } from "../../stories/mocks/imageList";
@@ -23,6 +24,15 @@ export const Start = () => (
   <FullHeight>
     <StartPageComp
       onSelectRootFolderPath={action("trigger folder selection dialog")}
+      onSelectLogo={action("trigger navigation to webpage")}
+    />
+  </FullHeight>
+);
+
+export const Preprocess = () => (
+  <FullHeight>
+    <PrepocessPage
+      memoryNumber={text("memoryNumber", '1832')}
       onSelectLogo={action("trigger navigation to webpage")}
     />
   </FullHeight>

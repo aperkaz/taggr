@@ -4,9 +4,9 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import semverCompare from "semver/functions/compare";
-import ButtonFancy from "./ButtonFancy";
 
-// TODO: style: polish style
+import ButtonFancy from "./ButtonFancy";
+import Typography from "../atoms/Typography";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -56,12 +56,15 @@ const UpdateModal = ({
     >
       <Fade in={isOpen}>
         <div className={classes.paper}>
-          <h2 id="transition-modal-title">Update available</h2>
-          <p id="transition-modal-description">
+          <Typography variant="h3">Update available</Typography>
+          <Typography variant="subtitle1">
             Current app version: {currentAppVersion}
-            <br />
+          </Typography>
+          <Typography variant="subtitle1">
             New app version: {latestAppVersion}
-          </p>
+          </Typography>
+          <br />
+
           <ButtonFancy
             text="Download new version"
             onClick={async () => {

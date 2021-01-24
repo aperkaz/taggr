@@ -1,11 +1,15 @@
 import React from "react";
-// import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
 
 import FancyButton from "../../molecules/ButtonFancy";
 import backgroundImage from "../../../statics/background.jpeg";
-
 import Typography from "../../atoms/Typography";
+
+const Wrapper = styled.div`
+  background: rgba(0, 0, 0, 0) url(${backgroundImage}) no-repeat scroll center
+    center / cover;
+  height: 100%;
+`;
 
 const InnerWrapper = styled.div`
   background: linear-gradient(
@@ -20,12 +24,6 @@ const InnerWrapper = styled.div`
   justify-content: space-evenly;
   margin: auto;
   text-align: center;
-`;
-
-const Wrapper = styled.div`
-  background: rgba(0, 0, 0, 0) url(${backgroundImage}) no-repeat scroll center
-    center / cover;
-  height: 100%;
 `;
 
 const Main = styled.div`
@@ -70,7 +68,7 @@ const StartPage = ({
             marginBottom: "2em",
           }}
         >
-          Rediscover your <b>memories</b> while keeping your <b>privacy</b>
+          Rediscover your memories while keeping your privacy
         </Typography>
         <FancyButton
           text="Select picture folder"
