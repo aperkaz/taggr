@@ -95,6 +95,8 @@ https://github.com/aperkaz/taggr-releases/releases
 
 ## Future Features
 
+- Generate lisence: https://github.com/nicroto/license-key
+- Future Landing page: https://twizzle.app/
 - Add node_modules migration, to fix the known issue.
 - Certificate trust increase: https://support.ksoftware.net/support/solutions/articles/215894-what-is-this-file-is-not-commonly-downloaded-and-could-harm-your-computer-message-smartscreen-
 - Add github actions build: https://github.com/malept/electron-forge-demo123/actions/runs/116519042/workflow
@@ -107,7 +109,7 @@ https://github.com/aperkaz/taggr-releases/releases
 - Timeline with pictures https://github.com/rmariuzzo/react-chronos
 - Timeline display of images per day http://tany.kim/quantify-your-year/#/
 - Add more ML: look into tensorflow alternatives: evaluate performance: with article https://learn.ml5js.org/docs/#/reference/face-api?id=demo
-- Speed up app by paralelization. Exaple: https://github.com/aperkaz/tensorflow-playground
+- Speed up app by paralelization. Example: https://github.com/aperkaz/tensorflow-playground
 - Food classification: https://github.com/stratospark/food-101-keras/issues/14
 - Reverse geocoding: https://docs.mapbox.com/help/how-mapbox-works/geocoding/
 - File sharing options: 
@@ -141,7 +143,7 @@ fs.open(file, 'r', (err, fd) => {
 
 ## Known Issues
 
-- **Windows build**: the tfjs bindings for windows are not located properly, they are built into `napi-v6`, it should be renamed to `napi-v5`.
+- **Windows / Mac build**: the tfjs bindings for windows are not located properly, they are built into `napi-v6`, it should be renamed to `napi-v5`. In `electron/node_modules/@tensorflow/tfjs-node/lib/napi-v6`, rename.
 
 ## Resources of interes
 

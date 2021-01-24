@@ -11,6 +11,7 @@ import StartPageComp from "./start/Page";
 import ProcessingPageComp from "./processing/Page";
 import MainPageComp from "./main/Page";
 import SettingsPageComp from "./settings/Page";
+import PrepocessPage from "./preprocess/Page";
 
 import FullHeight from "../../stories/utils";
 import { images, imagesWithLocation } from "../../stories/mocks/imageList";
