@@ -18,7 +18,6 @@ This allows to perform the long and resource intensive backend operations withou
 
 Since the backend executes long running tasks, sync connections are not an option. The message passing acts as a the communication interfact between modules. Each module implements `services`, which deal with the incomming (`handlers`) and outgoing (`services`) messages for that module.
 
-
 ### Folder structure
 
 ```
@@ -27,7 +26,7 @@ electron
 └───out -- generated executables (win/linux/mac)
 └───resources -- statics for building the app (certificates, icon files)
 └───src
-│   └───env -- env and client-preload scripts injected to the client window, with the environmental variables 
+│   └───env -- env and client-preload scripts injected to the client window, with the environmental variables
 │   └───obfuscate-server -- script for obfuscating backend code before prod
 │   └───server -- backend
 │   │   entry.js -- entry point for the node-process to the ofuscated code
@@ -40,10 +39,7 @@ scripts -- scripts for dev/building/publishing the app
 
 3 app environments. `dev`, `build-test` and `build-production`.
 
-The frontend gets the env variables (helpers at `./src/env`):
--`WINDOW.IS_DEV`
--`WINDOW.IS_BUILD_TEST`
--`WINDOW.IS_BUILD_PRODUCTION`
+The frontend gets the env variables (helpers at `./src/env`): -`WINDOW.IS_DEV` -`WINDOW.IS_BUILD_TEST` -`WINDOW.IS_BUILD_PRODUCTION`
 
 The backend gets an single environment: `process.env.TAGGR_ENV`, with value: `dev`, `build-test`, `build-production`. Helpers at `./src/env`
 
@@ -100,7 +96,7 @@ https://github.com/aperkaz/taggr-releases/releases
 - Add node_modules migration, to fix the known issue.
 - Certificate trust increase: https://support.ksoftware.net/support/solutions/articles/215894-what-is-this-file-is-not-commonly-downloaded-and-could-harm-your-computer-message-smartscreen-
 - Add github actions build: https://github.com/malept/electron-forge-demo123/actions/runs/116519042/workflow
-- Some images are displayed rotated, example in thailand trip 
+- Some images are displayed rotated, example in thailand trip
 - Image editor: https://ui.toast.com/tui-image-editor/
 - Integration with 3rd party image sharing programs.
 - Project information persistence: https://github.com/sindresorhus/electron-store
@@ -112,11 +108,12 @@ https://github.com/aperkaz/taggr-releases/releases
 - Speed up app by paralelization. Example: https://github.com/aperkaz/tensorflow-playground
 - Food classification: https://github.com/stratospark/food-101-keras/issues/14
 - Reverse geocoding: https://docs.mapbox.com/help/how-mapbox-works/geocoding/
-- File sharing options: 
-https://share.storewise.tech/upload
-https://send.firefox.com/
-https://safenote.co/upload-file ??
+- File sharing options:
+  https://share.storewise.tech/upload
+  https://send.firefox.com/
+  https://safenote.co/upload-file ??
 - Partial hash
+
 ```
 //whirlpoolHash.js
 
@@ -140,6 +137,8 @@ fs.open(file, 'r', (err, fd) => {
  });
 });
 ```
+
+- micro animations: https://www.joshwcomeau.com/react/boop/
 
 ## Known Issues
 
