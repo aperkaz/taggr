@@ -1,42 +1,17 @@
-// import React from "react";
-// import { useDispatch } from "react-redux";
+import React from "react";
+import useDispatch from "react-redux";
 
-// import StartPage from "./Page";
-// import { serviceCreateProject } from "../../../services";
-// import { ACTIONS } from "../../../store";
-// import CONSTANTS from "../../../store/constants";
+import ProcessPage from "./Page";
 
-// const WithStore = () => {
-//   const dispatch = useDispatch();
+const WithStore = () => {
+  const dispatch = useDispatch();
 
-//   const onSelectRootFolderPath = async () => {
-//     const { dialog } = window.require("electron").remote;
+  const onSelectLogo = () => {
+    const { shell } = window.require("electron");
+    shell.openExternal("https://taggr.ai");
+  };
 
-//     const { filePaths } = await dialog.showOpenDialog({
-//       properties: ["openDirectory"],
-//     });
-
-//     const projectRootFolderPath = filePaths ? filePaths[0] : null;
-
-//     if (!projectRootFolderPath) return;
-
-//     dispatch(ACTIONS.setActiveRoute(CONSTANTS.ROUTES.DASHBOARD_PAGE));
-
-//     serviceCreateProject({ projectRootFolderPath });
-//   };
-
-//   const onSelectLogo = () => {
-//     const { shell } = window.require("electron");
-//     shell.openExternal("https://taggr.ai");
-//   };
-
-//   return (
-//     <StartPage
-//       onSelectRootFolderPath={onSelectRootFolderPath}
-//       onSelectLogo={onSelectLogo}
-//     />
-//   );
-// };
+  return <ProcessPage memoryNumber={"1283"} onSelectLogo={onSelectLogo} />;
+};
 
 export default WithStore;
-// TODONOW: connect

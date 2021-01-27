@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Paper from "@material-ui/core/Paper";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
 
 import Header from "../../organisms/Header";
 
@@ -13,7 +10,7 @@ import Faces from "../../organisms/Faces";
 import Map from "../../organisms/Map";
 
 const Wrapper = styled.div`
-  height: 100%;
+  height: 100vh;
 
   display: flex;
   flex-direction: column;

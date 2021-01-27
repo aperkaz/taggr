@@ -23,7 +23,7 @@ const Typography = (props) => {
   return (
     <MaterialTypography
       variant={variant}
-      style={{ ...styles[variant], ...propStyles }}
+      style={{ ...styles[variant], ...propStyles, userSelect: "none" }}
     >
       {props.children}
     </MaterialTypography>

@@ -11,7 +11,7 @@ import backgroundImage from "../../../statics/background.jpeg";
 const Wrapper = styled.div`
   background: rgba(0, 0, 0, 0) url(${backgroundImage}) no-repeat scroll center
     center / cover;
-  height: 100%;
+  height: 100vh;
 `;
 
 const InnerWrapper = styled.div`

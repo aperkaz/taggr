@@ -3,10 +3,12 @@ import styled from "styled-components";
 
 import Typography from "../../atoms/Typography";
 import Loading from "../../molecules/Loading";
-import ProgressBar from "../../molecules/ProgressBar";
+import dots from "../../../statics/dots.svg";
 
 const Wrapper = styled.div`
-  height: 100%;
+  background: url(${dots}) repeat center/auto;
+
+  height: 100vh;
 
   display: flex;
   flex-direction: column;
@@ -24,7 +26,7 @@ const ProcessWrapper = styled.div`
 
 const Center = styled.div`
   width: 100%;
-  margin-top: 12vh;
+  margin-top: 22vh;
 `;
 
 const Footer = styled.div`
@@ -39,33 +41,31 @@ const Footer = styled.div`
   }
 `;
 
-const ProcessingPage = ({ title, subtitle, percentage }) => (
+const ProcessingPage = ({
+  memoryNumber = "",
+  handleSelectLogo = () => null,
+}) => (
   <Wrapper>
     <Center>
-      <Loading />
+      <Loading animationDuration={4} />
 
       <Typography variant="h3" style={{ textAlign: "center" }}>
-        {title}
+        {`Locating ${memoryNumber} memories 🚀`}
       </Typography>
-      {subtitle ? (
-        <Typography
-          variant="h6"
-          style={{
-            color: "#9F9999",
-            textAlign: "center",
-            marginTop: "1rem",
-          }}
-        >
-          {subtitle}
-        </Typography>
-      ) : null}
 
-      <ProcessWrapper>
-        {percentage ? <ProgressBar percentage={percentage} /> : null}
-      </ProcessWrapper>
+      <Typography
+        variant="h6"
+        style={{
+          color: "#9F9999",
+          textAlign: "center",
+          marginTop: "1rem",
+        }}
+      >
+        This may take some time, be patient !
+      </Typography>
     </Center>
 
-    <Footer>
+    <Footer onClick={handleSelectLogo}>
       <Typography variant="h5">taggr.ai</Typography>
     </Footer>
   </Wrapper>
