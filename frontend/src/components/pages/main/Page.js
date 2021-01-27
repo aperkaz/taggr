@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import Header from "../../organisms/Header";
-
 import Filters from "../../organisms/Filters";
-
+import FiltersLoading from "../../organisms/FiltersLoading";
 import Gallery from "../../organisms/Gallery";
 import Faces from "../../organisms/Faces";
 import Map from "../../organisms/Map";
@@ -19,7 +18,7 @@ const Wrapper = styled.div`
 const HeaderWrapper = styled.div`
   height: 50px;
 
-  margin: 1rem;
+  margin: 1rem 1rem 0;
 `;
 
 const ContentWrapper = styled.div`
@@ -29,20 +28,21 @@ const ContentWrapper = styled.div`
 `;
 
 const FilterWrapper = styled.div`
-  margin: 0 0 1rem 1rem;
+  margin: 1rem;
 `;
 
 // TODONOW: investigate. apparently there is a bug with the resize of images when resize.
 const ContentPanel = styled.div`
   flex-grow: 1;
-  margin: 0 1rem 1rem 1rem;
+  margin: 1rem 1rem 1rem 0;
 `;
 
 const MainPage = ({
-  onSettingsClick,
-  onSearchTriggered,
+  isLoading = true,
   images,
   imagesWithLocation = [],
+  onSettingsClick,
+  onSearchTriggered,
 }) => {
   const [activeTab, setActiveTab] = useState(0);
 
@@ -67,7 +67,11 @@ const MainPage = ({
       {activeTab === 1 ? (
         <ContentWrapper>
           <FilterWrapper>
-            <Filters onFilterChange={onSearchTriggered} />
+            {isLoading ? (
+              <FiltersLoading processed={531} total={1382} />
+            ) : (
+              <Filters onFilterChange={onSearchTriggered} />
+            )}
           </FilterWrapper>
           <ContentPanel>
             <Gallery imageList={images} />
@@ -84,45 +88,5 @@ const MainPage = ({
     </Wrapper>
   );
 };
-
-/**
- * <Wrapper>
-      <Filters
-        isOpen={isFiltersOpen}
-        triggerFiltersClose={() => setIsFilterOpen(false)}
-        triggerSearch={onSearchTriggered}
-      />
-
-      <Header
-        tabList={
-          imagesWithLocation.length
-            ? ["Gallery", "Faces", "Map"]
-            : ["Gallery", "Faces"]
-        }
-        activeTab={activeTab}
-        handleChange={setActiveTab}
-      />
-      <TabPanel value={activeTab} index={0}>
-        gallery
-       <Gallery imageList={images} /> 
-        // </TabPanel>
-        // <TabPanel value={activeTab} index={1}>
-        //   <Faces />
-        // </TabPanel>
-        // <TabPanel value={activeTab} index={2}>
-        //   <Map imageList={imagesWithLocation} />
-        // </TabPanel>
-  
-        {activeTab === 0 ? <Gallery imageList={images} /> : null}
-        {activeTab === 1 ? <Faces /> : null}
-        {activeTab === 2 ? (
-          imagesWithLocation.length ? (
-            <Map imageList={imagesWithLocation} />
-          ) : (
-            setActiveTab(0)
-          )
-        ) : null} 
-       </Wrapper>
- */
 
 export default MainPage;

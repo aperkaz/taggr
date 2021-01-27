@@ -1,6 +1,6 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
-import { withKnobs, text, number, array } from "@storybook/addon-knobs";
+import { withKnobs, text, boolean, array } from "@storybook/addon-knobs";
 import StartPageComp from "./start/Page";
 import ProcessingPageComp from "./processing/Page";
 import MainPageComp from "./main/Page";
@@ -31,8 +31,9 @@ export const Main = () => (
   <MainPageComp
     onSettingsClick={action("trigger navigate to settings")}
     onSearchTriggered={action("filter search has been triggered")}
-    images={array("images", images)}
-    imagesWithLocation={array("imagesWithLocation", imagesWithLocation)}
+    images={images}
+    imagesWithLocation={imagesWithLocation}
+    isLoading={boolean("isLoading")}
   />
 );
 

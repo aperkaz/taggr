@@ -7,6 +7,7 @@ import GalleryComp from "./Gallery";
 import MapComp from "./Map";
 import FacesComp from "./Faces";
 import FiltersComp from "./Filters";
+import FiltersLoadingComp from "./FiltersLoading";
 
 import FullHeight from "../../stories/utils";
 import { images, imagesWithLocation } from "../../stories/mocks/imageList";
@@ -61,5 +62,13 @@ export const Filters = () => {
     <FiltersComp
       onFilterChange={(filters) => console.log("searching for: ", filters)}
     />
+  );
+};
+
+export const FiltersLoading = () => {
+  return (
+    <div style={{ height: "95vh", margin: "1rem" }}>
+      <FiltersLoadingComp processed={345} total={2155} />
+    </div>
   );
 };

@@ -15,7 +15,7 @@ const Wrapper = styled.div`
 const Settings = styled.div`
   position: absolute;
   top: 6px;
-  right: 1rem;
+  right: 10px;
 
   :hover {
     cursor: pointer;
