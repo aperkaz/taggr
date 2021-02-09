@@ -84,6 +84,7 @@
     "electron-squirrel-startup": "^1.0.0",
     "env-paths": "^2.2.0",
     "exif": "^0.6.0",
+    "got": "^11.8.1",
     "lodash.get": "^4.4.2",
     "lodash.range": "^3.2.0",
     "lodash.throttle": "^4.1.1",

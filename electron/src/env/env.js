@@ -1,5 +1,6 @@
 const get = require("lodash.get");
 
+// TODONOW: why is this duplicated??
 /**
  * Set env in nodejs
  *
