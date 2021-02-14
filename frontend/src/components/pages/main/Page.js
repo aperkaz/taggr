@@ -38,13 +38,13 @@ const ContentPanel = styled.div`
 `;
 
 const MainPage = ({
-  isLoading = true,
+  isLoading,
   images,
   imagesWithLocation = [],
   onSettingsClick,
   onSearchTriggered,
 }) => {
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState(1);
 
   return (
     <Wrapper>

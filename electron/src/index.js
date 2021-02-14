@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, protocol } = require("electron");
 let { fork } = require("child_process");
 let path = require("path");
 const bytenode = require("bytenode");
@@ -145,6 +145,14 @@ const initializeApp = async () => {
     createBackgroundProcess(serverSocket);
   }
 };
+
+// fixes: https://github.com/electron/electron/issues/23757
+app.whenReady().then(() => {
+  protocol.registerFileProtocol("file", (request, callback) => {
+    const pathname = decodeURI(request.url.replace("file:///", ""));
+    callback(pathname);
+  });
+});
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

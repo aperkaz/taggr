@@ -8,8 +8,6 @@ import store from "./store";
 import { initSocketToServer } from "./services/helpers";
 import "./statics/index.css";
 
-import * as Sentry from "@sentry/browser";
-
 // SETUP ANALYTICS
 import "./analystics";
 import { isBuildTestEnv, isBuildProductionEnv } from "./environment";
