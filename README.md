@@ -110,9 +110,8 @@ https://github.com/aperkaz/taggr-releases/releases
 - Reverse geocoding: https://docs.mapbox.com/help/how-mapbox-works/geocoding/
 - File sharing options:
   https://share.storewise.tech/upload
-  https://send.firefox.com/
   https://safenote.co/upload-file ??
-- Partial hash
+- Partial hash of file
 
 ```
 //whirlpoolHash.js
@@ -138,6 +137,7 @@ fs.open(file, 'r', (err, fd) => {
 });
 ```
 
+- use stripe + email for key validation. Set a flag in the DB, ask stripe from droplet in digital ocean: https://stripe.com/docs/api/orders/update
 - micro animations: https://www.joshwcomeau.com/react/boop/
 
 ## Known Issues
