@@ -91,9 +91,13 @@ https://github.com/aperkaz/taggr-releases/releases
 
 ## Future Features
 
-- Generate lisence: https://github.com/nicroto/license-key
+- Stripe payments with Netlify functions: https://github.com/aperkaz/test-stripe-nelify-functions
+  https://labs.thisdot.co/blog/build-your-backend-with-netlify-functions-in-20-minutes
+  https://blog.appsignal.com/2014/08/28/handling-vat-with-stripe.html
+  https://stripe.com/docs/payments/accept-a-payment?integration=checkout
+
 - Future Landing page: https://twizzle.app/
-- Add node_modules migration, to fix the known issue.
+- Add node_modules migration, to fix the known issues.
 - Certificate trust increase: https://support.ksoftware.net/support/solutions/articles/215894-what-is-this-file-is-not-commonly-downloaded-and-could-harm-your-computer-message-smartscreen-
 - Add github actions build: https://github.com/malept/electron-forge-demo123/actions/runs/116519042/workflow
 - Some images are displayed rotated, example in thailand trip
