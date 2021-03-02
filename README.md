@@ -95,6 +95,7 @@ https://github.com/aperkaz/taggr-releases/releases
   https://labs.thisdot.co/blog/build-your-backend-with-netlify-functions-in-20-minutes
   https://blog.appsignal.com/2014/08/28/handling-vat-with-stripe.html
   https://stripe.com/docs/payments/accept-a-payment?integration=checkout
+- Layout masonry: https://github.com/bvaughn/react-virtualized/issues/1366
 
 - Future Landing page: https://twizzle.app/
 - Add node_modules migration, to fix the known issues.
