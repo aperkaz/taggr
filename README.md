@@ -154,3 +154,4 @@ fs.open(file, 'r', (err, fd) => {
 - Modern electron apps: https://github.com/jlongster/electron-with-server-example
 - High-level project structure: https://blog.axosoft.com/electron-things-to-know/
 - Window builds fail randomly due to problems with the cache. Try to clean cache and delete package-lock as in: https://github.com/cncjs/cncjs/issues/172
+- EU vat (local VAT up to 10.000E a year): https://europa.eu/youreurope/business/selling-in-eu/selling-goods-services/provide-services-abroad/index_es.htm#rules-annual-turnovers
