@@ -98,6 +98,7 @@ https://github.com/aperkaz/taggr-releases/releases
 - Layout masonry: https://github.com/bvaughn/react-virtualized/issues/1366
 
 - Future Landing page: https://twizzle.app/
+- Chat for users to report their view: https://small.chat/pricing/
 - Add node_modules migration, to fix the known issues.
 - Certificate trust increase: https://support.ksoftware.net/support/solutions/articles/215894-what-is-this-file-is-not-commonly-downloaded-and-could-harm-your-computer-message-smartscreen-
 - Add github actions build: https://github.com/malept/electron-forge-demo123/actions/runs/116519042/workflow
