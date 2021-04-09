@@ -31,7 +31,6 @@ const FilterWrapper = styled.div`
   margin: 1rem;
 `;
 
-// TODONOW: investigate. apparently there is a bug with the resize of images when resize.
 const ContentPanel = styled.div`
   flex-grow: 1;
   margin: 1rem 1rem 1rem 0;

@@ -5,7 +5,7 @@ import debounce from "lodash.debounce";
 import MainPage from "./Page";
 import { ACTIONS } from "../../../store";
 import CONSTANTS from "../../../store/constants";
-import { serviceFilterImages } from "../../../services";
+import * as services from "../../../services";
 
 const WithStore = () => {
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ const WithStore = () => {
   };
 
   const onSearchTriggered = debounce((filters) => {
-    serviceFilterImages(filters);
+    services.filterImages(filters);
   }, 200);
 
   return (

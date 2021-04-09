@@ -1,7 +1,7 @@
 /**
  * Touchpoint with the FE, through node-ipc
  */
-const bytenode = require("bytenode");
+const { FE_EVENTS } = require("../../IPC_EVENTS");
 const ipc = require("./helpers");
 
 // @ts-ignore-next-line
@@ -13,7 +13,7 @@ require("../store/types");
  * @param {{images: ImageType[], imagesWithLocation:ImageType[]}} images
  */
 const updateImages = (images) => {
-  ipc.send("update-images", images);
+  ipc.send(FE_EVENTS.UPDATE_IMAGES, images);
 };
 
 /**
@@ -22,15 +22,20 @@ const updateImages = (images) => {
  * @param {TaskType} task
  */
 const updateTask = (task) => {
-  ipc.send("update-task", task);
+  ipc.send(FE_EVENTS.UPDATE_TASK, task);
+};
+
+const setRoute = (route) => {
+  ipc.send(FE_EVENTS.SET_ROUTE, route);
 };
 
 const resetState = () => {
-  ipc.send("reset-state", null);
+  ipc.send(FE_EVENTS.RESET_STATE, null);
 };
 
 module.exports = {
   updateImages,
   updateTask,
+  setRoute,
   resetState,
 };

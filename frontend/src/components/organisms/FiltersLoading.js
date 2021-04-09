@@ -22,7 +22,7 @@ const BorderWrap = styled.div`
 
 const Span = styled.span`
   background: linear-gradient(85.64deg, #ff96ad 0%, #feaf85 91.67%);
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 `;
 
@@ -43,7 +43,7 @@ const Filters = ({ processed = 0, total = 0 }) => {
           marginTop: "2rem",
         }}
       >
-        {processed} <Span>/</Span> {total}
+        {processed} <Span /> {total}
       </Typography>
     </BorderWrap>
   );

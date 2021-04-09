@@ -42,9 +42,7 @@ const Map = ({ imageList = [] }) => {
       >
         {imageList.map((image, index) => (
           <Marker
-            // TODONOW: replace with hash
-            // key={image.hash}
-            key={index}
+            key={image.hash}
             // Given marker dimensions (H x W): 35 x 35 :https://material.io/resources/icons/?search=map&icon=room&style=baseline
             offsetTop={-35}
             offsetLeft={-17.5}

@@ -5,29 +5,28 @@
  * Background handlers: electron/src/server/server-handlers
  */
 import { send } from "./helpers";
+import { BE_EVENTS } from "../IPC_EVENTS";
 import "./handlers"; // registers handlers
-
-// TODONOW: refactor to services/handler, like in BE. Out of the index.js
 
 /**
  * Create a new taggr project
  * @param {Object} payload {projectRootFolderPath: string}
  */
-export const serviceCreateProject = ({ projectRootFolderPath = "" }) => {
-  send("create-project", { projectRootFolderPath });
+export const createProject = ({ projectRootFolderPath = "" }) => {
+  send(BE_EVENTS.CREATE_PROJECT, { projectRootFolderPath });
 };
 
 /**
  * Filter images based on filter. The backend will send messages once the computation is complete.
  * @param {Object} filters {projectRootFolderPath: Object}
  */
-export const serviceFilterImages = (filters) => {
-  send("filter-images", filters);
+export const filterImages = (filters) => {
+  send(BE_EVENTS.FILTER_IMAGES, filters);
 };
 
 /**
  * Delete existing taggr project. Stops processing if active.
  */
-export const serviceDeleteProject = () => {
-  send("delete-project", {});
+export const deleteProject = () => {
+  send(BE_EVENTS.DELETE_PROJECT, {});
 };

@@ -12,14 +12,7 @@ const trackEvent = async ({ type, props, screenWidth = 0 }) => {
   };
 
   try {
-    // await got.post("https://plausible.io/api/event", {
-    //   body: JSON.stringify(body),
-    //   headers: {
-    //     "Content-Type": "text/plain",
-    //   },
-    // });
-
-    const res = await fetch("https://plausible.io/api/event", {
+    await fetch("https://plausible.io/api/event", {
       method: "POST",
       headers: {
         "Content-Type": "text/plain",

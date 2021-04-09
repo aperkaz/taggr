@@ -1,14 +1,9 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 
 import StartPage from "./Page";
-import { serviceCreateProject } from "../../../services";
-import { ACTIONS } from "../../../store";
-import CONSTANTS from "../../../store/constants";
+import * as services from "../../../services";
 
 const WithStore = () => {
-  const dispatch = useDispatch();
-
   const onSelectRootFolderPath = async () => {
     const { dialog } = window.require("electron").remote;
 
@@ -20,9 +15,7 @@ const WithStore = () => {
 
     if (!projectRootFolderPath) return;
 
-    dispatch(ACTIONS.setActiveRoute(CONSTANTS.ROUTES.DASHBOARD_PAGE));
-
-    serviceCreateProject({ projectRootFolderPath });
+    services.createProject({ projectRootFolderPath });
   };
 
   const onSelectLogo = () => {

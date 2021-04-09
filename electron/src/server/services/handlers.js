@@ -2,20 +2,21 @@ const bytenode = require("bytenode");
 
 const services = require("./services");
 const project = require("../project");
+const { BE_EVENTS } = require("../../../../frontend/src/IPC_EVENTS");
 
 let handlers = {};
 
-handlers["create-project"] = async function ({ projectRootFolderPath }) {
-  console.log("[BE] = create-project: ", projectRootFolderPath);
+handlers[BE_EVENTS.CREATE_PROJECT] = async function ({
+  projectRootFolderPath,
+}) {
   project.create(projectRootFolderPath);
 };
 
-// TODO: rename to destroy-project accross FE & BE
-handlers["delete-project"] = async function () {
+handlers[BE_EVENTS.DELETE_PROJECT] = async function () {
   project.destroy();
 };
 
-handlers["filter-images"] = async function (filters) {
+handlers[BE_EVENTS.FILTER_IMAGES] = async function (filters) {
   const images = await project.filterImages(filters);
   services.updateImages(images);
 };

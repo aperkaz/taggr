@@ -1,6 +1,6 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
-import { withKnobs, text, boolean, array } from "@storybook/addon-knobs";
+import { withKnobs, text, boolean } from "@storybook/addon-knobs";
 import StartPageComp from "./start/Page";
 import ProcessingPageComp from "./processing/Page";
 import MainPageComp from "./main/Page";

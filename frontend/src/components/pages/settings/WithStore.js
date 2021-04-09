@@ -3,13 +3,13 @@ import { useDispatch } from "react-redux";
 import { ACTIONS } from "../../../store";
 import CONSTANTS from "../../../store/constants";
 import SettingsPage from "./Page";
-import { serviceDeleteProject } from "../../../services";
+import * as services from "../../../services";
 
 const WithStore = () => {
   const dispatch = useDispatch();
 
   const onSelectReset = () => {
-    serviceDeleteProject();
+    services.deleteProject();
 
     dispatch(ACTIONS.resetState());
     dispatch(ACTIONS.setActiveRoute(CONSTANTS.ROUTES.START_PAGE));
