@@ -11,13 +11,13 @@ require("../store/types");
  * Generate main data structure from image path list
  *
  * @param {string[]} imagePathList
- * @returns {ImageHashMapType|{}} imageHashMap
+ * @returns {Promise<ImageHashMapType|{}>} imageHashMap
  */
-const generateImageHashMap = (imagePathList) => {
+const generateImageHashMap = async (imagePathList) => {
   const imageHashMap = {};
 
-  imagePathList.forEach((imagePath) => {
-    const hash = filesystem.generateMD5HashFromString(imagePath);
+  for (const imagePath of imagePathList) {
+    const hash = await filesystem.generateMD5HashFromFile(imagePath);
     imageHashMap[hash] = {
       hash,
       // TODO: improvement add http:// images when in dev
@@ -26,7 +26,7 @@ const generateImageHashMap = (imagePathList) => {
       tags: null,
       location: null,
     };
-  });
+  }
 
   return imageHashMap;
 };
@@ -55,10 +55,14 @@ class Project {
     this.isProcessingActive = true;
 
     // locate pic paths
+    console.time("imagePathsToProcess");
     const imagePathsToProcess = await filesystem.recursivelyFindImages(path);
+    console.timeEnd("imagePathsToProcess");
 
-    // generate structure
-    const imageHashMap = generateImageHashMap(imagePathsToProcess);
+    // generate in memory structure, while calculating the hashes
+    console.time("generateImageHashMap");
+    const imageHashMap = await generateImageHashMap(imagePathsToProcess);
+    console.timeEnd("generateImageHashMap");
 
     // populate FE
     services.services.updateImages({
@@ -66,43 +70,45 @@ class Project {
       imagesWithLocation: [],
     });
 
+    // Store in BE
+
     // process images
-    const toProcess = imagePathsToProcess.length;
-    while (this.isProcessingActive && imagePathsToProcess.length) {
-      const imagePath = imagePathsToProcess.shift();
-      const hash = filesystem.generateMD5HashFromString(imagePath);
+    // const toProcess = imagePathsToProcess.length;
+    // while (this.isProcessingActive && imagePathsToProcess.length) {
+    //   const imagePath = imagePathsToProcess.shift();
+    //   const hash = filesystem.generateMD5HashFromString(imagePath);
 
-      services.services.updateTask({
-        name: `Processing ${toProcess} memories!`,
-        isOngoing: true,
-        percentage: Math.ceil(
-          ((toProcess - imagePathsToProcess.length) * 100) / toProcess
-        ),
-      });
+    //   services.services.updateTask({
+    //     name: `Processing ${toProcess} memories!`,
+    //     isOngoing: true,
+    //     percentage: Math.ceil(
+    //       ((toProcess - imagePathsToProcess.length) * 100) / toProcess
+    //     ),
+    //   });
 
-      imageHashMap[hash] = {
-        ...imageHashMap[hash],
-        ...(await image.process(imagePath)),
-      };
-    }
+    //   imageHashMap[hash] = {
+    //     ...imageHashMap[hash],
+    //     ...(await image.process(imagePath)),
+    //   };
+    // }
 
-    if (!this.isProcessingActive) return;
+    // if (!this.isProcessingActive) return;
 
     // update store
-    store.setProject({ rootFolder: path, imageHashMap });
+    // store.setProject({ rootFolder: path, imageHashMap });
 
     // update task to stopped
-    services.services.updateTask({
-      isOngoing: false,
-    });
+    // services.services.updateTask({
+    //   isOngoing: false,
+    // });
 
-    // send location pictures
-    services.services.updateImages({
-      images: transformImageMaptoImageList(imageHashMap),
-      imagesWithLocation: transformImageMaptoImageList(
-        store.getImagesWithLocation()
-      ),
-    });
+    // // send location pictures
+    // services.services.updateImages({
+    //   images: transformImageMaptoImageList(imageHashMap),
+    //   imagesWithLocation: transformImageMaptoImageList(
+    //     store.getImagesWithLocation()
+    //   ),
+    // });
 
     this.isProcessingActive = false;
   }

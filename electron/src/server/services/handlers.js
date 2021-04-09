@@ -6,6 +6,7 @@ const project = require("../project");
 let handlers = {};
 
 handlers["create-project"] = async function ({ projectRootFolderPath }) {
+  console.log("[BE] = create-project: ", projectRootFolderPath);
   project.create(projectRootFolderPath);
 };
 

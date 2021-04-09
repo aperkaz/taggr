@@ -47,7 +47,8 @@ function init(socketName, handlers) {
 }
 
 function send(name, args) {
-  console.log(`BE send: ${name} | ${JSON.stringify(args)}`);
+  // console.log(`BE send: ${name} | ${JSON.stringify(args)}`);
+  console.log(`BE send: ${name}`);
   ipc.server.broadcast("message", JSON.stringify({ type: "push", name, args }));
 }
 

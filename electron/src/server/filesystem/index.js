@@ -10,5 +10,5 @@ module.exports = {
   recursivelyFindImages: operation.recursivelyFindImages,
   getFileCreationDate: operation.getFileCreationDate,
   normalizeUrl: urls.normalizeUrl,
-  generateMD5HashFromString: urls.generateMD5HashFromString,
+  generateMD5HashFromFile: urls.generateMD5HashFromFile,
 };
