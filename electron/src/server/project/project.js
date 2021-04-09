@@ -1,8 +1,11 @@
 const bytenode = require("bytenode");
+const path = require("path");
+const fs = require("fs");
 const filesystem = require("../filesystem");
 const image = require("../image");
 const store = require("../store");
 const services = require("../services");
+const db = require("../db");
 
 // @ts-ignore-next-line
 require("../store/types");
@@ -20,7 +23,6 @@ const generateImageHashMap = async (imagePathList) => {
     const hash = await filesystem.generateMD5HashFromFile(imagePath);
     imageHashMap[hash] = {
       hash,
-      // TODO: improvement add http:// images when in dev
       path: filesystem.normalizeUrl(imagePath),
       rawPath: imagePath,
       tags: null,
@@ -44,7 +46,7 @@ function transformImageMaptoImageList(imageHashMap) {
 }
 
 /**
- * Singelton class, acts as ORM
+ * Singelton class
  */
 class Project {
   constructor() {
@@ -52,6 +54,8 @@ class Project {
   }
 
   async create(path) {
+    services.services.setRoute("PROCESSING_PAGE");
+
     this.isProcessingActive = true;
 
     // locate pic paths
@@ -64,20 +68,32 @@ class Project {
     const imageHashMap = await generateImageHashMap(imagePathsToProcess);
     console.timeEnd("generateImageHashMap");
 
+    // Re-share images, update the path to new route
+    console.log("TODONOW: re-shape images!");
+
+    // Store images in DB
+    Object.keys(imageHashMap).forEach((key) => {
+      db.saveImage(imageHashMap[key]);
+    });
+
     // populate FE
     services.services.updateImages({
       images: transformImageMaptoImageList(imageHashMap),
       imagesWithLocation: [],
     });
 
-    // Store in BE
+    services.services.setRoute("DASHBOARD_PAGE");
 
+    this.isProcessingActive = false;
+  }
+
+  // TODONOW: move all the processing into a separate method
+  process() {
     // process images
     // const toProcess = imagePathsToProcess.length;
     // while (this.isProcessingActive && imagePathsToProcess.length) {
     //   const imagePath = imagePathsToProcess.shift();
     //   const hash = filesystem.generateMD5HashFromString(imagePath);
-
     //   services.services.updateTask({
     //     name: `Processing ${toProcess} memories!`,
     //     isOngoing: true,
@@ -85,23 +101,18 @@ class Project {
     //       ((toProcess - imagePathsToProcess.length) * 100) / toProcess
     //     ),
     //   });
-
     //   imageHashMap[hash] = {
     //     ...imageHashMap[hash],
     //     ...(await image.process(imagePath)),
     //   };
     // }
-
     // if (!this.isProcessingActive) return;
-
     // update store
     // store.setProject({ rootFolder: path, imageHashMap });
-
     // update task to stopped
     // services.services.updateTask({
     //   isOngoing: false,
     // });
-
     // // send location pictures
     // services.services.updateImages({
     //   images: transformImageMaptoImageList(imageHashMap),
@@ -109,8 +120,6 @@ class Project {
     //     store.getImagesWithLocation()
     //   ),
     // });
-
-    this.isProcessingActive = false;
   }
 
   destroy() {
@@ -123,5 +132,6 @@ const projectSingelton = new Project();
 
 module.exports = {
   create: projectSingelton.create,
+  process: projectSingelton.process,
   destroy: projectSingelton.destroy,
 };

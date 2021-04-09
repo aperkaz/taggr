@@ -4,6 +4,7 @@ import styled from "styled-components";
 import semverCompare from "semver/functions/compare";
 
 import StartPage from "./pages/start";
+import ProcessingPage from "./pages/processing";
 import DashboardPage from "./pages/main";
 import SettingsPage from "./pages/settings";
 import UpdateModal from "./molecules/UpdateModal";
@@ -77,8 +78,11 @@ const renderRoute = (activeRoute) => {
   switch (activeRoute) {
     case CONSTANTS.ROUTES.START_PAGE:
       return <StartPage />;
+    case CONSTANTS.ROUTES.PROCESSING_PAGE:
+      return <ProcessingPage />;
     case CONSTANTS.ROUTES.DASHBOARD_PAGE:
       return <DashboardPage />;
+
     case CONSTANTS.ROUTES.SETTINGS_PAGE:
       return <SettingsPage />;
     default:
