@@ -1,4 +1,9 @@
 const { app, BrowserWindow, protocol } = require("electron");
+const {
+  default: installExtension,
+  REACT_DEVELOPER_TOOLS,
+  REDUX_DEVTOOLS,
+} = require("electron-devtools-installer");
 let { fork } = require("child_process");
 let path = require("path");
 const bytenode = require("bytenode");
@@ -6,7 +11,7 @@ const os = require("os");
 
 let findOpenSocket = require("./find-open-socket");
 
-// DEPLOY: manually run it before prod deploy
+// TODONOW: DEPLOY: manually run it before prod deploy
 // require("./obfuscate-server");
 
 const {
@@ -56,43 +61,18 @@ const createClientWindow = (socketName) => {
     },
   });
 
-  // and load the index.html of the app.
+  // Load the index.html of the app into the browser window
   clientWin.loadURL(
     isDevEnv()
       ? "http://localhost:3001"
       : `file://${path.join(__dirname, "../frontend-statics/index.html")}`
   );
-  // clientWin.loadURL(
-  //   `file://${path.join(__dirname, "../frontend-statics/index.html")}`
-  // );
 
   clientWin.webContents.on("did-finish-load", () => {
     clientWin.webContents.send("set-socket", {
       name: socketName,
     });
   });
-
-  if (isDevEnv() || isBuildTestEnv()) {
-    // Note: devTools must be open manually, they dont load when loading webcontents by url: https://github.com/electron/electron/issues/17799
-
-    // Add react dev tools https://www.electronjs.org/docs/tutorial/devtools-extension
-    const reactExtension = BrowserWindow.addDevToolsExtension(
-      path.join(
-        os.homedir(),
-        "/.config/google-chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.7.0_0"
-      )
-    );
-    // BrowserWindow.removeDevToolsExtension(reactExtension);
-
-    // Add redux dev tools https://stackoverflow.com/questions/59538654/electron-add-redux-devtools
-    const reduxExtension = BrowserWindow.addDevToolsExtension(
-      path.join(
-        os.homedir(),
-        "/.config/google-chrome/Default/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/2.17.0_0"
-      )
-    );
-    // BrowserWindow.removeDevToolsExtension(reduxExtension);
-  }
 
   if (isBuildProductionEnv()) {
     clientWin.removeMenu();
@@ -153,6 +133,15 @@ app.whenReady().then(() => {
     callback(pathname);
   });
 });
+
+// Add extensions: https://github.com/MarshallOfSound/electron-devtools-installer
+if (isDevEnv() || isBuildTestEnv()) {
+  app.whenReady().then(() => {
+    installExtension([REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS])
+      .then((name) => console.log(`Added Extension:  ${name}`))
+      .catch((err) => console.log("An error occurred: ", err));
+  });
+}
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
