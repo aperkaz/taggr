@@ -28,9 +28,12 @@ const initialize = () => {
 
   const saveImage = (image) => db.set(`images.${image.hash}`, image).write();
 
+  const getImages = () => db.get(`images`).value();
+
   return {
     // db,
     saveImage,
+    getImages,
   };
 };
 

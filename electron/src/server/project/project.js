@@ -76,10 +76,11 @@ class Project {
     // const outputDir = "/Users/alain/Downloads/output";
     // await resizeImages(imagePathsInProject, outputDir);
 
-    // Store images in DB
+    // 4. Store images in DB
     Object.keys(imageHashMap).forEach((key) => {
       db.saveImage(imageHashMap[key]);
     });
+    // console.log(await db.getImages());
 
     // populate FE
     services.services.updateImages({
