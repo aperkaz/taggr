@@ -9,7 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "jimp": "^0.16.1",
     "sequelize": "^6.5.0",
+    "sharp": "^0.28.1",
     "sqlite3": "^5.0.1"
   }
 }

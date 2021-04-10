@@ -6,12 +6,17 @@ const image = require("../image");
 const store = require("../store");
 const services = require("../services");
 const db = require("../db");
+const { recursivelyFindImages } = require("../utils/find-image-path-recursive");
+const logFunctionPerf = require("../utils/log-function-perf");
+const generateFileHash = require("../utils/generate-hash");
+// const resizeImages = require("../utils/resize-images");
 
 // @ts-ignore-next-line
 require("../store/types");
 
 /**
- * Generate main data structure from image path list
+ * Generate main data structure from image path list.
+ * Images are stored in the app dire, with hash names
  *
  * @param {string[]} imagePathList
  * @returns {Promise<ImageHashMapType|{}>} imageHashMap
@@ -20,7 +25,7 @@ const generateImageHashMap = async (imagePathList) => {
   const imageHashMap = {};
 
   for (const imagePath of imagePathList) {
-    const hash = await filesystem.generateMD5HashFromFile(imagePath);
+    const hash = await generateFileHash(imagePath);
     imageHashMap[hash] = {
       hash,
       path: filesystem.normalizeUrl(imagePath),
@@ -58,18 +63,18 @@ class Project {
 
     this.isProcessingActive = true;
 
-    // locate pic paths
-    console.time("imagePathsToProcess");
-    const imagePathsToProcess = await filesystem.recursivelyFindImages(path);
-    console.timeEnd("imagePathsToProcess");
+    // 1. Locate image paths in project
+    const imagePathsInProject = await recursivelyFindImages(path);
 
-    // generate in memory structure, while calculating the hashes
-    console.time("generateImageHashMap");
-    const imageHashMap = await generateImageHashMap(imagePathsToProcess);
-    console.timeEnd("generateImageHashMap");
+    // 2. Generate in memory structure, and calculate the file hashes
+    const imageHashMap = await logFunctionPerf(generateImageHashMap)(
+      imagePathsInProject
+    );
 
-    // Re-share images, update the path to new route
-    console.log("TODONOW: re-shape images!");
+    // 3. Optimize images
+    // const outputDir = path.join(paths.data, "/images");
+    // const outputDir = "/Users/alain/Downloads/output";
+    // await resizeImages(imagePathsInProject, outputDir);
 
     // Store images in DB
     Object.keys(imageHashMap).forEach((key) => {

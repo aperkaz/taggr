@@ -91,6 +91,9 @@ https://github.com/aperkaz/taggr-releases/releases
 
 ## Future Features
 
+- Images pre-processing: [sharp](https://github.com/lovell/sharp)
+  https://github.com/andrewrt/ef6-sharp
+
 - Stripe payments with Netlify functions: https://github.com/aperkaz/test-stripe-nelify-functions
   https://labs.thisdot.co/blog/build-your-backend-with-netlify-functions-in-20-minutes
   https://blog.appsignal.com/2014/08/28/handling-vat-with-stripe.html
@@ -106,7 +109,7 @@ https://github.com/aperkaz/taggr-releases/releases
 - Image editor: https://ui.toast.com/tui-image-editor/
 - Integration with 3rd party image sharing programs.
 - Project information persistence: https://github.com/sindresorhus/electron-store
-- Images rotation: [sharp](https://github.com/lovell/sharp)
+
 - Replace gallery view with lazy loading: https://github.com/xiaolin/react-image-gallery
 - Timeline with pictures https://github.com/rmariuzzo/react-chronos
 - Timeline display of images per day http://tany.kim/quantify-your-year/#/

@@ -19,22 +19,4 @@ const normalizeUrl = (imagePath) => {
     : `file://${normalizedImagePath}`;
 };
 
-/**
- * Generate md5 hash from file. Use initial 4k only.
- *
- * @param {string} filePath
- */
-async function generateMD5HashFromFile(filePath) {
-  const len = 4096,
-    pos = 0,
-    offset = 0,
-    buff = Buffer.alloc(len);
-
-  const fd = await openFile(filePath);
-  const tempBuff = await readFile(fd, buff, offset, len, pos);
-  const hash = crypto.createHash("md5").update(tempBuff.buffer).digest("hex");
-
-  return hash;
-}
-
-module.exports = { normalizeUrl, generateMD5HashFromFile };
+module.exports = { normalizeUrl };
