@@ -1,9 +1,4 @@
-const filter = require("../filter");
-
-jest.mock("../../store");
-
-// @ts-ignore-next-line
-require("../../store/types");
+const filter = require("./filter");
 
 describe("isDateInRange()", () => {
   test("date not set", () => {

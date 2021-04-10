@@ -1,25 +1,19 @@
-const bytenode = require("bytenode");
-const store = require("../store");
-
 /**
  * Filter images
  *
  * @param {FilterType} filters
  * @returns {{images: ImageType[], imagesWithLocation: ImageType[]}} images
  */
-const filterImages = (filters) => {
+const filterImages = (imageMap, filters) => {
   // console.log("about to filter images");
   let images = [];
   let imagesWithLocation = [];
 
-  const allImages = store.getImageHashMap();
-  const allImagesWithLocation = store.getImagesWithLocation();
-
   // console.time("searchImages");
 
   // All images
-  Object.keys(allImages).forEach((key) => {
-    const image = allImages[key];
+  Object.keys(imageMap).forEach((key) => {
+    const image = imageMap[key];
 
     if (filterImage(image, filters)) {
       images.push(image);
@@ -27,13 +21,13 @@ const filterImages = (filters) => {
   });
 
   // Images with location
-  Object.keys(allImagesWithLocation).forEach((key) => {
-    const imageWithLocation = allImagesWithLocation[key];
+  // Object.keys(allImagesWithLocation).forEach((key) => {
+  //   const imageWithLocation = allImagesWithLocation[key];
 
-    if (filterImage(imageWithLocation, filters)) {
-      imagesWithLocation.push(imageWithLocation);
-    }
-  });
+  //   if (filterImage(imageWithLocation, filters)) {
+  //     imagesWithLocation.push(imageWithLocation);
+  //   }
+  // });
 
   // console.timeEnd("searchImages");
 

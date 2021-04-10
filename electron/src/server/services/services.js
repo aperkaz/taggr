@@ -5,7 +5,7 @@ const { FE_EVENTS } = require("../../IPC_EVENTS");
 const ipc = require("./helpers");
 
 // @ts-ignore-next-line
-require("../store/types");
+require("../entities/types");
 
 /**
  * Update images in FE

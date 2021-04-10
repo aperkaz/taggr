@@ -1,7 +1,7 @@
 const bytenode = require("bytenode");
 
 const services = require("./services");
-const project = require("../project");
+const project = require("../entities/Project");
 const { BE_EVENTS } = require("../../../../frontend/src/IPC_EVENTS");
 
 let handlers = {};
@@ -17,7 +17,7 @@ handlers[BE_EVENTS.DELETE_PROJECT] = async function () {
 };
 
 handlers[BE_EVENTS.FILTER_IMAGES] = async function (filters) {
-  const images = await project.filterImages(filters);
+  const images = project.filterImages(filters);
   services.updateImages(images);
 };
 
