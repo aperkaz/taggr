@@ -8,6 +8,11 @@ const normalizeUrl = (imagePath) => {
     : `file://${normalizedImagePath}`;
 };
 
+import Image from "../shared/Image";
+
+console.log(Image.print());
+console.log(Image.print());
+
 console.log(normalizeUrl("/Users/alain/Downloads/test.jpg"));
 
 const mobilenet = require("@tensorflow-models/mobilenet");
