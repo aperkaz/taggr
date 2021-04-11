@@ -4,8 +4,17 @@ const Handler = () => {
   console.log("[BE]: message handler: ", MESSAGES_PASSING.DEFAULT_CHANNEL);
   const bc = new BroadcastChannel(MESSAGES_PASSING.DEFAULT_CHANNEL);
 
-  bc.onmessage = function (ev) {
-    console.log("BE: ", ev);
+  /**
+   *
+   * @param {{data: {type: string, payload: any}}} message
+   */
+  bc.onmessage = function ({ data }) {
+    console.log(data);
+
+    switch (data.type) {
+      case MESSAGES_PASSING.MESSAGE_TYPES.INITIALIZE_PROJECT:
+        console.log("initialize project!");
+    }
   };
 
   /**

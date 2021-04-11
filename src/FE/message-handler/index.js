@@ -5,13 +5,13 @@ const Handler = () => {
   const bc = new BroadcastChannel(MESSAGES_PASSING.DEFAULT_CHANNEL);
 
   bc.onmessage = function (ev) {
-    console.log("FE: ", ev);
+    console.log("[FE]: received", ev);
   };
 
   /**
    * @param {{type: string, payload: any}} message
    */
-  const postMessage = ({ type, payload }) => {
+  const postMessage = ({ type, payload = {} }) => {
     console.log(`[FE] send: `, type);
     bc.postMessage({ type, payload });
   };

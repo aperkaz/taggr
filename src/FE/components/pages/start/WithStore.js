@@ -1,7 +1,8 @@
 import React from "react";
 
 import StartPage from "./Page";
-// import * as services from "../../../services";
+import messageHandler from "../../../message-handler";
+import MESSAGES_PASSING from "../../../../shared/message-passings";
 
 const WithStore = () => {
   const onSelectRootFolderPath = async () => {
@@ -11,11 +12,13 @@ const WithStore = () => {
       properties: ["openDirectory"],
     });
 
-    const projectRootFolderPath = filePaths ? filePaths[0] : null;
+    const rootFolderPath = filePaths ? filePaths[0] : null;
 
-    if (!projectRootFolderPath) return;
+    if (!rootFolderPath) return;
 
-    // services.createProject({ projectRootFolderPath });
+    messageHandler.postMessage(
+      MESSAGES_PASSING.MESSAGES.initializeProject(rootFolderPath)
+    );
   };
 
   const onSelectLogo = () => {
