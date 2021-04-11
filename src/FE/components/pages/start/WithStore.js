@@ -1,7 +1,7 @@
 import React from "react";
 
 import StartPage from "./Page";
-import * as services from "../../../services";
+// import * as services from "../../../services";
 
 const WithStore = () => {
   const onSelectRootFolderPath = async () => {
@@ -15,7 +15,7 @@ const WithStore = () => {
 
     if (!projectRootFolderPath) return;
 
-    services.createProject({ projectRootFolderPath });
+    // services.createProject({ projectRootFolderPath });
   };
 
   const onSelectLogo = () => {

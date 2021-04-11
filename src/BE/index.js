@@ -1,3 +1,9 @@
+// Initialize communication handler
+import messageHandler from "./message-handler";
+messageHandler.postMessage({ type: "test", payload: "Hola BE" });
+
+// TEST STUFF
+
 const normalizeUrl = (imagePath) => {
   const normalize = require("normalize-path");
 
@@ -6,20 +12,6 @@ const normalizeUrl = (imagePath) => {
   return normalizedImagePath.startsWith("http")
     ? normalizedImagePath
     : `file://${normalizedImagePath}`;
-};
-
-import Image from "../shared/Image";
-
-console.log(Image.print());
-console.log(Image.print());
-
-// IPC
-const bc = new BroadcastChannel("test_channel");
-
-bc.postMessage("This is BE.");
-bc.onmessage = function (ev) {
-  console.log("BE: ", ev);
-  bc.postMessage("This is BE.");
 };
 
 console.log(normalizeUrl("/Users/alain/Downloads/test.jpg"));
