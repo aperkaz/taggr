@@ -1,21 +1,98 @@
 {
-  "name": "taggr",
-  "productName": "taggr",
-  "description": "Rediscover your memories while keeping your privacy",
-  "author": {
-    "name": "Alain Perkaz",
-    "email": "alainperkaz@gmail.com"
-  },
-  "license": "MIT",
+  "name": "sharp-ef6",
+  "productName": "taggr-webpack",
+  "version": "1.0.0",
+  "description": "My Electron application description",
+  "main": ".webpack/main",
   "scripts": {
-    "dev": "sh ./scripts/dev.sh",
-    "build:test": "sh ./scripts/build-test.sh",
-    "build:production": "sh ./scripts/build-production.sh",
-    "publish": "",
-    "test": "concurrently \"npm run test --prefix ./frontend\" \"npm run test --prefix ./electron\""
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\""
+  },
+  "keywords": [],
+  "license": "MIT",
+  "config": {
+    "forge": {
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "test_ef6"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ],
+      "plugins": [
+        [
+          "@electron-forge/plugin-webpack",
+          {
+            "mainConfig": "./webpack.main.config.js",
+            "renderer": {
+              "config": "./webpack.renderer.config.js",
+              "entryPoints": [
+                {
+                  "html": "./src/FE/index.html",
+                  "js": "./src/FE/index.js",
+                  "name": "fe_window"
+                },
+                {
+                  "html": "./src/BE/index.html",
+                  "js": "./src/BE/index.js",
+                  "name": "be_window"
+                }
+              ]
+            }
+          }
+        ]
+      ]
+    }
   },
   "dependencies": {
-    "@types/jest": "^25.2.3",
-    "concurrently": "^5.2.0"
+    "@babel/runtime": "^7.13.10",
+    "@tensorflow-models/mobilenet": "2.0.4",
+    "@tensorflow/tfjs-converter": "1.7.4",
+    "@tensorflow/tfjs-core": "1.7.4",
+    "electron-squirrel-startup": "^1.0.0",
+    "lodash.get": "^4.4.2",
+    "lodash.range": "^3.2.0",
+    "lodash.throttle": "^4.1.1",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "sharp": "^0.23.2",
+    "styled-components": "^4.4.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/plugin-transform-runtime": "^7.13.15",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-react": "^7.7.0",
+    "@electron-forge/cli": "^6.0.0-beta.45",
+    "@electron-forge/maker-deb": "^6.0.0-beta.45",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.45",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.45",
+    "@electron-forge/maker-zip": "^6.0.0-beta.45",
+    "@electron-forge/plugin-webpack": "^6.0.0-beta.45",
+    "@marshallofsound/webpack-asset-relocator-loader": "^0.5.0",
+    "babel-loader": "^8.0.6",
+    "copy-webpack-plugin": "^5.0.5",
+    "css-loader": "^3.2.0",
+    "electron": "^7.1.1",
+    "node-loader": "^0.6.0",
+    "style-loader": "^0.23.1"
   }
 }
