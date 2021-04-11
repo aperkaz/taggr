@@ -20,7 +20,7 @@ mobilenet.load().then(async (model) => {
   const img = document.getElementById("img");
 
   // Classify the image.
-  for (let i = 0; i < 1; i++) {
+  for (let i = 0; i < 3; i++) {
     console.time("predict");
     const predictions = await model.classify(img);
     console.timeEnd("predict");

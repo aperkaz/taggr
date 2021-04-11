@@ -1,4 +1,9 @@
 const { app, BrowserWindow } = require("electron");
+const {
+  default: installExtension,
+  REACT_DEVELOPER_TOOLS,
+  REDUX_DEVTOOLS,
+} = require("electron-devtools-installer");
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -70,6 +75,15 @@ app.on("activate", () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
+
+// Add extensions: https://github.com/MarshallOfSound/electron-devtools-installer
+app.whenReady().then(() => {
+  installExtension([REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS])
+    .then((name) => console.log(`Added Extension:  ${name}`))
+    .catch((err) => console.log("An error occurred: ", err));
+});
+
+// Sharp demo
 
 const sharp = require("sharp");
 
