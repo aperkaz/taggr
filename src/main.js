@@ -34,6 +34,7 @@ const createWindow = () => {
   const backendWindow = new BrowserWindow({
     width: 800,
     height: 600,
+    show: true,
     webPreferences: {
       nodeIntegration: true,
       webSecurity: false,
