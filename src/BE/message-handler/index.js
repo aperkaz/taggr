@@ -13,7 +13,6 @@ const Handler = () => {
 
     switch (data.type) {
       case MESSAGES_PASSING.MESSAGE_TYPES.INITIALIZE_PROJECT:
-        console.log("initialize project!");
     }
   };
 

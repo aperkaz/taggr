@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-// import DateFnsUtils from "@date-io/date-fns";
+import DateFnsUtils from "@date-io/date-fns";
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
@@ -231,8 +231,8 @@ const Filters = ({ onFilterChange }) => {
             <FilterTitle>
               <Typography value={"subtitle1"}>when</Typography>
             </FilterTitle>
-            {/* <MuiPickersUtilsProvider utils={DateFnsUtils}> */}
-            <MuiPickersUtilsProvider>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              {/* <MuiPickersUtilsProvider> */}
               <TimeSelectoGrid>
                 <KeyboardDatePicker
                   margin="normal"
