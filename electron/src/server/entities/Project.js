@@ -2,6 +2,7 @@ const services = require("../services");
 const filesystem = require("../filesystem");
 const db = require("../db");
 const { filterImages } = require("./filter");
+const image = require("../image");
 
 // entities
 const Image = require("../entities/Image");
@@ -72,6 +73,54 @@ class Project {
     services.services.setRoute("DASHBOARD_PAGE");
 
     this.isProcessingActive = false;
+
+    this.process();
+  }
+
+  /**
+   * ML the shit out of the images
+   */
+  async process() {
+    // TODONOW: diff to only process the non stored ones
+    const imageHashToProcess = Object.keys(this.imageMap);
+
+    const toProcess = Object.keys(this.imageMap).length;
+
+    for (const hash of imageHashToProcess) {
+      console.log(await image.process(this.imageMap[hash].rawPath));
+    }
+    return;
+    while (this.isProcessingActive && imagePathsToProcess.length) {
+      //   const imagePath = imagePathsToProcess.shift();
+      //   const hash = filesystem.generateMD5HashFromString(imagePath);
+
+      services.services.updateTask({
+        name: `Processing ${toProcess} memories!`,
+        isOngoing: true,
+        percentage: Math.ceil(
+          ((toProcess - imagePathsToProcess.length) * 100) / toProcess
+        ),
+      });
+
+      imageHashMap[hash] = {
+        ...imageHashMap[hash],
+        ...(await image.process(imagePath)),
+      };
+    }
+
+    if (!this.isProcessingActive) return;
+
+    services.services.updateTask({
+      isOngoing: false,
+    });
+
+    // send location pictures
+    services.services.updateImages({
+      images: transformImageMaptoImageList(imageHashMap),
+      imagesWithLocation: transformImageMaptoImageList(
+        store.getImagesWithLocation()
+      ),
+    });
   }
 
   /**
@@ -84,7 +133,9 @@ class Project {
     return filterImages(this.imageMap, filters);
   }
 
-  delete() {}
+  destroy() {
+    // reset project
+  }
 }
 
 module.exports = new Project();

@@ -1,35 +1,26 @@
 /**
  * Filter images
- *
- * @param {FilterType} filters
- * @returns {{images: ImageType[], imagesWithLocation: ImageType[]}} images
  */
 const filterImages = (imageMap, filters) => {
-  // console.log("about to filter images");
   let images = [];
   let imagesWithLocation = [];
-
-  // console.time("searchImages");
 
   // All images
   Object.keys(imageMap).forEach((key) => {
     const image = imageMap[key];
-
     if (filterImage(image, filters)) {
       images.push(image);
     }
   });
 
   // Images with location
-  // Object.keys(allImagesWithLocation).forEach((key) => {
-  //   const imageWithLocation = allImagesWithLocation[key];
+  Object.keys(imageMap).forEach((key) => {
+    const image = imageMap[key];
 
-  //   if (filterImage(imageWithLocation, filters)) {
-  //     imagesWithLocation.push(imageWithLocation);
-  //   }
-  // });
-
-  // console.timeEnd("searchImages");
+    if (filterImage(image, filters)) {
+      imagesWithLocation.push(image);
+    }
+  });
 
   return { images, imagesWithLocation };
 };
