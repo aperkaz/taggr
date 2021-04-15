@@ -2,6 +2,7 @@ const DEFAULT_CHANNEL = "taggr-message-passing";
 
 const MESSAGE_TYPES = {
   INITIALIZE_PROJECT: "INITIALIZE_PROJECT",
+  SET_ROUTE: "SET_ROUTE",
 };
 
 const MESSAGES = {
@@ -11,6 +12,13 @@ const MESSAGES = {
   initializeProject: (path) => ({
     type: MESSAGE_TYPES.INITIALIZE_PROJECT,
     payload: path,
+  }),
+  /**
+   * @param { string} path
+   */
+  setRoute: (route) => ({
+    type: MESSAGE_TYPES.SET_ROUTE,
+    payload: route,
   }),
 };
 

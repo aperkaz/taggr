@@ -1,16 +1,18 @@
-const services = require("../services");
-const filesystem = require("../filesystem");
-const db = require("../db");
-const { filterImages } = require("./filter");
-const image = require("../image");
+import messageHandler from "./message-handler";
+import MESSAGES_PASSING from "../shared/message-passing";
+import ROUTES from "../shared/fe-routes";
+// const filesystem = require("../filesystem");
+// const db = require("../db");
+// const { filterImages } = require("./filter");
+// const image = require("../image");
 
 // entities
-const Image = require("../entities/Image");
+// const Image = require("../entities/Image");
 
-// utils
-const { recursivelyFindImages } = require("../utils/find-image-path-recursive");
-const logFunctionPerf = require("../utils/log-function-perf");
-const generateFileHash = require("../utils/generate-hash");
+// // utils
+// const { recursivelyFindImages } = require("../utils/find-image-path-recursive");
+// const logFunctionPerf = require("../utils/log-function-perf");
+// const generateFileHash = require("../utils/generate-hash");
 
 /**
  * Transfrom the imageHashMap to imageList
@@ -34,8 +36,12 @@ class Project {
   }
 
   async create(path) {
-    services.services.setRoute("PROCESSING_PAGE");
-
+    console.log("BE: create");
+    console.log(MESSAGES_PASSING.MESSAGES.setRoute(ROUTES.PROCESSING_PAGE));
+    messageHandler.postMessage(
+      MESSAGES_PASSING.MESSAGES.setRoute(ROUTES.PROCESSING_PAGE)
+    );
+    return;
     this.isProcessingActive = true;
 
     // 1. Locate image paths in project
@@ -53,16 +59,19 @@ class Project {
       });
     }
 
+    console.log("this.imageMap");
+    console.log(this.imageMap);
+
     // (3). Optimize images - issues!
     // const outputDir = path.join(paths.data, "/images");
     // const outputDir = "/Users/alain/Downloads/output";
     // await resizeImages(imagePathsInProject, outputDir);
 
     // 4. Store images in DB
-    Object.keys(this.imageMap).forEach((key) => {
-      db.saveImage(this.imageMap[key]);
-    });
-    console.log(await db.getImages());
+    // Object.keys(this.imageMap).forEach((key) => {
+    //   db.saveImage(this.imageMap[key]);
+    // });
+    // console.log(await db.getImages());
 
     // populate FE
     services.services.updateImages({
@@ -74,6 +83,7 @@ class Project {
 
     this.isProcessingActive = false;
 
+    // Projecs ML of images
     this.process();
   }
 
@@ -138,4 +148,4 @@ class Project {
   }
 }
 
-module.exports = new Project();
+export default new Project();

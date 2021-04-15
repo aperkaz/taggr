@@ -8,7 +8,7 @@ import ProcessingPage from "./pages/processing";
 import DashboardPage from "./pages/main";
 import SettingsPage from "./pages/settings";
 import UpdateModal from "./molecules/UpdateModal";
-import CONSTANTS from "../store/constants";
+import ROUTES from "../../shared/fe-routes";
 
 const Wrapper = styled.div`
   height: 100%;
@@ -76,14 +76,13 @@ const App = ({ activeRoute }) => {
 
 const renderRoute = (activeRoute) => {
   switch (activeRoute) {
-    case CONSTANTS.ROUTES.START_PAGE:
+    case ROUTES.START_PAGE:
       return <StartPage />;
-    case CONSTANTS.ROUTES.PROCESSING_PAGE:
+    case ROUTES.PROCESSING_PAGE:
       return <ProcessingPage />;
-    case CONSTANTS.ROUTES.DASHBOARD_PAGE:
+    case ROUTES.DASHBOARD_PAGE:
       return <DashboardPage />;
-
-    case CONSTANTS.ROUTES.SETTINGS_PAGE:
+    case ROUTES.SETTINGS_PAGE:
       return <SettingsPage />;
     default:
       return <div>TODO: add placeholder</div>;

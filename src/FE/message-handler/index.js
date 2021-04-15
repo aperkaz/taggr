@@ -1,11 +1,20 @@
-import MESSAGES_PASSING from "../../shared/message-passings";
+import MESSAGES_PASSING from "../../shared/message-passing";
+import store, { ACTIONS } from "../store";
 
 const Handler = () => {
   console.log("[FE]: message handler: ", MESSAGES_PASSING.DEFAULT_CHANNEL);
   const bc = new BroadcastChannel(MESSAGES_PASSING.DEFAULT_CHANNEL);
 
-  bc.onmessage = function (ev) {
-    console.log("[FE]: received", ev);
+  /**
+   * @param {{data: {type: string, payload: any}}} message
+   */
+  bc.onmessage = function ({ data }) {
+    console.log("[FE]: received", data);
+
+    switch (data.type) {
+      case MESSAGES_PASSING.MESSAGE_TYPES.SET_ROUTE:
+        store.dispatch(ACTIONS.setActiveRoute(data.payload));
+    }
   };
 
   /**

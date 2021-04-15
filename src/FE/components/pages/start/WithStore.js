@@ -2,7 +2,7 @@ import React from "react";
 
 import StartPage from "./Page";
 import messageHandler from "../../../message-handler";
-import MESSAGES_PASSING from "../../../../shared/message-passings";
+import MESSAGES_PASSING from "../../../../shared/message-passing";
 
 const WithStore = () => {
   const onSelectRootFolderPath = async () => {
