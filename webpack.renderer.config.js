@@ -10,8 +10,4 @@ module.exports = {
   module: {
     rules,
   },
-  externals: {
-    sharp: "commonjs sharp",
-    "@tensorflow/tfjs-node": "commonjs @tensorflow/tfjs-node",
-  },
 };

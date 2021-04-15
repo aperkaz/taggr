@@ -73,6 +73,30 @@ class Project {
     console.log(this.imageMap);
 
     // 3. Optimize images
+    const sharp = require("sharp");
+
+    for (let i = 0; i < 3; i++) {
+      sharp({
+        create: {
+          width: 480,
+          height: 480,
+          channels: 4,
+          background: { r: 255, g: 0, b: 255, alpha: 0.5 },
+        },
+      })
+        .png()
+        .toFile(`/Users/alain/Downloads/output/hola${i}.png`, (err, info) => {
+          if (err) {
+            console.log("err in test.png: ", err);
+          }
+          if (info) {
+            console.log(i);
+            // console.log("test.png info: ", info);
+          }
+        });
+    }
+
+    return;
     // const outputDir = path.join(paths.data, "/images");
     // const outputDir = "/Users/alain/Downloads/output";
     // await resizeImages(imagePathsInProject, outputDir);

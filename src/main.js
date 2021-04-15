@@ -86,30 +86,3 @@ app.whenReady().then(() => {
     .then((name) => console.log(`Added Extension:  ${name}`))
     .catch((err) => console.log("An error occurred: ", err));
 });
-
-// Sharp demo
-
-const sharp = require("sharp");
-
-new Promise((r) => setTimeout(r, 10000)).then(() => {
-  for (let i = 0; i < 1; i++) {
-    sharp({
-      create: {
-        width: 480,
-        height: 480,
-        channels: 4,
-        background: { r: 255, g: 0, b: 255, alpha: 0.5 },
-      },
-    })
-      .png()
-      .toFile(`/Users/alain/Downloads/output/adios${i}.png`, (err, info) => {
-        if (err) {
-          console.log("err in test.png: ", err);
-        }
-        if (info) {
-          console.log(i);
-          // console.log("test.png info: ", info);
-        }
-      });
-  }
-});
