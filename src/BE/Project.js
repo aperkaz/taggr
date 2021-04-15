@@ -87,20 +87,18 @@ class Project {
     db.set("images", this.imageMap);
     console.timeEnd("db");
 
-    return;
+    messageHandler.postMessage(
+      MESSAGES_PASSING.MESSAGES.updateImages(
+        transformImageMaptoImageList(this.imageMap)
+      )
+    );
 
-    // populate FE
-    services.services.updateImages({
-      images: transformImageMaptoImageList(this.imageMap),
-      imagesWithLocation: [],
-    });
-
-    services.services.setRoute("DASHBOARD_PAGE");
-
-    this.isProcessingActive = false;
+    messageHandler.postMessage(
+      MESSAGES_PASSING.MESSAGES.setRoute(ROUTES.DASHBOARD_PAGE)
+    );
 
     // Projecs ML of images
-    this.process();
+    // this.process();
   }
 
   /**

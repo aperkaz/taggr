@@ -24,8 +24,7 @@ const WithStore = () => {
         onSettingsClick,
         task: useSelector((s) => s.task),
         onSearchTriggered,
-        // images: useSelector((s) => s.images),
-        images: [],
+        images: useSelector((s) => s.images),
         imagesWithLocation: useSelector((s) => s.imagesWithLocation),
       }}
     />

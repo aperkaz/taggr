@@ -25,6 +25,7 @@ const createWindow = () => {
     webPreferences: {
       nodeIntegration: true,
       backgroundThrottling: false,
+      webSecurity: false,
     },
   });
 
