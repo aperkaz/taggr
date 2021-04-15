@@ -30,26 +30,19 @@ async function doesFileExist(filePath) {
  * @param {string} outputPath
  */
 const preProcessImages = async (imageMap, outputPath) => {
-  console.log("outputPath");
-  console.log(outputPath);
-
   const hashes = Object.keys(imageMap);
 
   const resizePromise = [];
 
   for (const hash of hashes) {
     const image = imageMap[hash];
-    console.log(image);
 
     const preProcessedImagePath = path.join(outputPath, `${image.hash}.jpg`);
 
     const fileExists = await doesFileExist(preProcessedImagePath);
 
-    console.log(preProcessedImagePath);
-    console.log("fileExists: ", fileExists);
-
     if (!fileExists) {
-      console.log("about to pre-process: ", image.rawPath);
+      //   console.log("about to pre-process: ", image.rawPath);
 
       try {
         resizePromise.push(resizeImage(image.rawPath, preProcessedImagePath));

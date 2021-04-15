@@ -1,3 +1,5 @@
+import Store from "electron-store";
+
 import MESSAGES_PASSING from "../shared/message-passing";
 import ROUTES from "../shared/fe-routes";
 import { ImageFactory, ImageHashMapFactory } from "../shared/entities";
@@ -6,18 +8,8 @@ import messageHandler from "./message-handler";
 
 import generateFileHash from "./utils/generate-file-hash";
 import normalizePath from "./utils/normalize-path";
-// const filesystem = require("../filesystem");
-// const db = require("../db");
+// import db from "./utils/db";
 // const { filterImages } = require("./filter");
-// const image = require("../image");
-
-// entities
-// const Image = require("../entities/Image");
-
-// // utils
-// const { recursivelyFindImages } = require("../utils/find-image-path-recursive");
-// const logFunctionPerf = require("../utils/log-function-perf");
-// const generateFileHash = require("../utils/generate-hash");
 
 import findImagePaths from "./utils/find-images-in-path";
 import preProcessImages from "./utils/pre-process-images";
@@ -71,20 +63,33 @@ class Project {
       });
     }
 
-    console.log("this.imageMap");
     console.log(this.imageMap);
 
     // 3. Optimize images
-    console.time("preProcessImages");
+    // console.time("preProcessImages");
     await preProcessImages(this.imageMap, envPaths.data);
-    console.timeEnd("preProcessImages");
-    return;
+    // console.timeEnd("preProcessImages");
 
     // 4. Store images in DB
+    console.log("about to init store");
+    try {
+      console.log(envPaths.data);
+
+      const store = new Store({ cwd: envPaths.data });
+      store.set("unicorn", "🦄");
+      console.log(store.get("unicorn"));
+      console.log("ALARM");
+    } catch (err) {
+      console.error(err);
+    }
+
+    //=> 'bar'
     // Object.keys(this.imageMap).forEach((key) => {
     //   db.saveImage(this.imageMap[key]);
     // });
     // console.log(await db.getImages());
+
+    return;
 
     // populate FE
     services.services.updateImages({

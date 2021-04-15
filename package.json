@@ -74,6 +74,7 @@
     "@tensorflow/tfjs-core": "1.7.4",
     "date-fns": "^2.14.0",
     "electron-squirrel-startup": "^1.0.0",
+    "electron-store": "^6.0.0",
     "env-paths": "^2.2.1",
     "fslightbox-react": "^1.4.9",
     "lodash.get": "^4.4.2",
