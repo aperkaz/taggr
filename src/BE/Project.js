@@ -1,3 +1,5 @@
+import path from "path";
+
 import MESSAGES_PASSING from "../shared/message-passing";
 import ROUTES from "../shared/fe-routes";
 import { ImageFactory, ImageHashMapFactory } from "../shared/entities";
@@ -10,6 +12,8 @@ import findImagePaths from "./utils/find-images-in-path";
 import preProcessImages from "./utils/pre-process-images";
 import envPaths from "./utils/env-paths";
 import db from "./utils/db";
+import loadImage from "./utils/load-image";
+import { getClassificationIds } from "./ml/types/classification";
 // const { filterImages } = require("./filter");
 
 /**
@@ -53,7 +57,7 @@ class Project {
       const hash = await generateFileHash(imagePath);
       this.imageMap[hash] = ImageFactory({
         hash,
-        path: normalizePath(imagePath),
+        path: normalizePath(path.join(envPaths.data, `${hash}.jpg`)),
         rawPath: imagePath,
         tags: null,
         location: null,
@@ -87,33 +91,43 @@ class Project {
     db.set("images", this.imageMap);
     console.timeEnd("db");
 
+    // 5. update images in FE
     messageHandler.postMessage(
       MESSAGES_PASSING.MESSAGES.updateImages(
         transformImageMaptoImageList(this.imageMap)
       )
     );
 
+    // 6. update route in FE
     messageHandler.postMessage(
       MESSAGES_PASSING.MESSAGES.setRoute(ROUTES.DASHBOARD_PAGE)
     );
 
-    // Projecs ML of images
-    // this.process();
+    this.process();
   }
 
   /**
-   * ML the shit out of the images
+   * ML the shit out of the images (if needed)
    */
   async process() {
-    // TODONOW: diff to only process the non stored ones
-    const imageHashToProcess = Object.keys(this.imageMap);
+    // only process the un-processed ones
+    const imageHashToProcess = Object.keys(this.imageMap).filter((hash) => {
+      if (this.imageMap[hash].tags && this.imageMap[hash].tags.length > 0)
+        return false;
 
-    const toProcess = Object.keys(this.imageMap).length;
+      return true;
+    });
 
     for (const hash of imageHashToProcess) {
-      console.log(await image.process(this.imageMap[hash].rawPath));
+      const image = await loadImage(this.imageMap[hash].path);
+
+      console.log(await getClassificationIds(image));
+
+      // TODONOW: processs
+      // console.log(await image.process(this.imageMap[hash].rawPath));
     }
     return;
+
     while (this.isProcessingActive && imagePathsToProcess.length) {
       //   const imagePath = imagePathsToProcess.shift();
       //   const hash = filesystem.generateMD5HashFromString(imagePath);

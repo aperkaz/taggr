@@ -42,8 +42,6 @@ const preProcessImages = async (imageMap, outputPath) => {
     const fileExists = await doesFileExist(preProcessedImagePath);
 
     if (!fileExists) {
-      //   console.log("about to pre-process: ", image.rawPath);
-
       try {
         resizePromise.push(resizeImage(image.rawPath, preProcessedImagePath));
       } catch (err) {
