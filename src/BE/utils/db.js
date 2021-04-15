@@ -1,26 +1,30 @@
-// import envPaths from "./env-paths";
+import Store from "electron-store";
 
-// const VERSION = 0;
-
-// const MIGRATIONS = {
-//   0: (db) => db,
+// TODONOW: add schema
+// TODONOW: add migrations
+// const schema = {
+//   images: {
+//     type: "object",
+//     /**
+//      * @type {import("../../shared/entities").ImageType}
+//      */
+//     properties: {
+//         hash: {
+//             type: 'string',
+//         }
+//         path
+//         rawPath
+//         tags
+//         location
+//         creationDate:
+//     },
+//   },
 // };
+const db = () => {
+  // TODONOW: remove cwd, only in dev
+  const store = new Store({ cwd: "/Users/alain/Downloads/output" });
 
-// const db = () => {
-//   // initialize db
-//   makeDir(envPaths.data);
-//   const dbPath = path.join(paths.data, "/db.json");
+  return store;
+};
 
-//   const low = require("lowdb");
-//   const FileSync = require("lowdb/adapters/FileSync");
-
-//   const adapter = new FileSync(dbPath);
-//   const db = low(adapter);
-
-//   // execute migrations if needed
-//   //   if(VERSION > Object.keys(MIGRATIONS).sort((a,b) => a-b))
-
-//   return db;
-// };
-
-// export default db();
+export default db();

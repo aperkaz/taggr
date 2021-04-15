@@ -1,5 +1,3 @@
-import Store from "electron-store";
-
 // Initialize communication handler
 import messageHandler from "./message-handler";
 messageHandler.postMessage({ type: "test", payload: "Hola BE" });
@@ -54,14 +52,6 @@ const onLoad = (i, img) => () => {
 
   console.log(Date.now());
 };
-
-// const Store = require("electron-store");
-
-const store = new Store({ cwd: "/Users/alain/Downloads/output" });
-
-store.set("unicorn", "🦄");
-console.log(store.get("unicorn"));
-//=> '🦄'
 
 // Load the model.
 console.time("loadModel");

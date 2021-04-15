@@ -1,5 +1,3 @@
-import Store from "electron-store";
-
 import MESSAGES_PASSING from "../shared/message-passing";
 import ROUTES from "../shared/fe-routes";
 import { ImageFactory, ImageHashMapFactory } from "../shared/entities";
@@ -8,12 +6,11 @@ import messageHandler from "./message-handler";
 
 import generateFileHash from "./utils/generate-file-hash";
 import normalizePath from "./utils/normalize-path";
-// import db from "./utils/db";
-// const { filterImages } = require("./filter");
-
 import findImagePaths from "./utils/find-images-in-path";
 import preProcessImages from "./utils/pre-process-images";
 import envPaths from "./utils/env-paths";
+import db from "./utils/db";
+// const { filterImages } = require("./filter");
 
 /**
  * Transfrom the imageHashMap to imageList
@@ -66,28 +63,29 @@ class Project {
     console.log(this.imageMap);
 
     // 3. Optimize images
-    // console.time("preProcessImages");
+    console.time("preProcessImages");
     await preProcessImages(this.imageMap, envPaths.data);
-    // console.timeEnd("preProcessImages");
+    console.timeEnd("preProcessImages");
 
-    // 4. Store images in DB
-    console.log("about to init store");
-    try {
-      console.log(envPaths.data);
-
-      const store = new Store({ cwd: envPaths.data });
-      store.set("unicorn", "🦄");
-      console.log(store.get("unicorn"));
-      console.log("ALARM");
-    } catch (err) {
-      console.error(err);
-    }
-
-    //=> 'bar'
-    // Object.keys(this.imageMap).forEach((key) => {
-    //   db.saveImage(this.imageMap[key]);
-    // });
-    // console.log(await db.getImages());
+    // 4. Store images in DB, load results for processed ones
+    console.time("db");
+    const storedImageMap = db.get("images");
+    Object.keys(this.imageMap).map((hash) => {
+      if (
+        storedImageMap[hash] &&
+        storedImageMap[hash].tags &&
+        storedImageMap[hash].tags.length > 0
+      ) {
+        // load data from DB, for the already processed images
+        this.imageMap[hash] = {
+          ...this.imageMap[hash],
+          tags: storedImageMap[hash].tags,
+          location: storedImageMap[hash].location,
+        };
+      }
+    });
+    db.set("images", this.imageMap);
+    console.timeEnd("db");
 
     return;
 
