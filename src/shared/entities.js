@@ -1,35 +1,26 @@
-export class ImageEntity {
-  /**
-   *
-   * @param {{
-   * hash: string,
-   * path: string,
-   * rawPath: string,
-   * tags: string[] | null,
-   * location: {lat: string, lon: string} | null
-   * }} params
-   */
-  constructor({ hash, path, rawPath, tags, location }) {
-    this.hash = hash;
-    this.path = path;
-    this.rawPath = rawPath;
-    this.tags = tags;
-    this.location = location;
-  }
+/**
+ * @typedef {Object} ImageType
+ * @property {string} hash
+ * @property {string} path
+ * @property {string} rawPath
+ * @property {string[]} tags ML tags
+ * @property {{latitude: number,longitude: number}} location
+ * @property {number|null} creationDate
+ */
 
-  /**
-   * Set ML tags
-   * @param {string[]} tags
-   */
-  setTags(tags) {
-    this.tags = tags;
-  }
+/**
+ * @typedef {Object<string,ImageType>} ImageHashMapType
+ */
 
-  /**
-   * Set image location
-   * @param {{lat: string, long: string}} location
-   */
-  setLocation(location) {
-    this.location = location;
-  }
-}
+/**
+ * @argument {ImageType} imageArgs
+ * @returns {ImageType}
+ */
+export const ImageFactory = (imageArgs) => ({ ...imageArgs });
+
+/**
+ * @returns {ImageHashMapType}
+ */
+export const ImageHashMapFactory = () => {
+  return {};
+};

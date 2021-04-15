@@ -1,6 +1,6 @@
 import MESSAGES_PASSING from "../shared/message-passing";
 import ROUTES from "../shared/fe-routes";
-import { ImageEntity } from "../shared/entities";
+import { ImageFactory, ImageHashMapFactory } from "../shared/entities";
 
 import messageHandler from "./message-handler";
 
@@ -20,6 +20,8 @@ import normalizePath from "./utils/normalize-path";
 // const generateFileHash = require("../utils/generate-hash");
 
 import findImagePaths from "./utils/find-images-in-path";
+import preProcessImages from "./utils/pre-process-images";
+import envPaths from "./utils/env-paths";
 
 /**
  * Transfrom the imageHashMap to imageList
@@ -39,7 +41,7 @@ function transformImageMaptoImageList(imageHashMap) {
  */
 class Project {
   constructor() {
-    this.imageMap = {};
+    this.imageMap = ImageHashMapFactory();
   }
 
   /**
@@ -60,7 +62,7 @@ class Project {
     // 2. Generate in memory structure, and calculate the file hashes
     for (const imagePath of imagePathsInProject) {
       const hash = await generateFileHash(imagePath);
-      this.imageMap[hash] = new ImageEntity({
+      this.imageMap[hash] = ImageFactory({
         hash,
         path: normalizePath(imagePath),
         rawPath: imagePath,
@@ -73,33 +75,10 @@ class Project {
     console.log(this.imageMap);
 
     // 3. Optimize images
-    const sharp = require("sharp");
-
-    for (let i = 0; i < 3; i++) {
-      sharp({
-        create: {
-          width: 480,
-          height: 480,
-          channels: 4,
-          background: { r: 255, g: 0, b: 255, alpha: 0.5 },
-        },
-      })
-        .png()
-        .toFile(`/Users/alain/Downloads/output/hola${i}.png`, (err, info) => {
-          if (err) {
-            console.log("err in test.png: ", err);
-          }
-          if (info) {
-            console.log(i);
-            // console.log("test.png info: ", info);
-          }
-        });
-    }
-
+    console.time("preProcessImages");
+    await preProcessImages(this.imageMap, envPaths.data);
+    console.timeEnd("preProcessImages");
     return;
-    // const outputDir = path.join(paths.data, "/images");
-    // const outputDir = "/Users/alain/Downloads/output";
-    // await resizeImages(imagePathsInProject, outputDir);
 
     // 4. Store images in DB
     // Object.keys(this.imageMap).forEach((key) => {
