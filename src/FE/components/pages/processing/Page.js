@@ -7,6 +7,7 @@ import dots from "../../../statics/dots.svg";
 
 const Wrapper = styled.div`
   background: url(${dots}) repeat center/auto;
+  background-color: white;
 
   height: 100vh;
 

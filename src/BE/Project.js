@@ -72,9 +72,7 @@ class Project {
     console.log("this.imageMap");
     console.log(this.imageMap);
 
-    return;
-
-    // (3). Optimize images - issues!
+    // 3. Optimize images
     // const outputDir = path.join(paths.data, "/images");
     // const outputDir = "/Users/alain/Downloads/output";
     // await resizeImages(imagePathsInProject, outputDir);
