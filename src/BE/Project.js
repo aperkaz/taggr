@@ -1,6 +1,11 @@
-import messageHandler from "./message-handler";
 import MESSAGES_PASSING from "../shared/message-passing";
 import ROUTES from "../shared/fe-routes";
+import { ImageEntity } from "../shared/entities";
+
+import messageHandler from "./message-handler";
+
+import generateFileHash from "./utils/generate-file-hash";
+import normalizePath from "./utils/normalize-path";
 // const filesystem = require("../filesystem");
 // const db = require("../db");
 // const { filterImages } = require("./filter");
@@ -13,6 +18,8 @@ import ROUTES from "../shared/fe-routes";
 // const { recursivelyFindImages } = require("../utils/find-image-path-recursive");
 // const logFunctionPerf = require("../utils/log-function-perf");
 // const generateFileHash = require("../utils/generate-hash");
+
+import findImagePaths from "./utils/find-images-in-path";
 
 /**
  * Transfrom the imageHashMap to imageList
@@ -35,24 +42,27 @@ class Project {
     this.imageMap = {};
   }
 
-  async create(path) {
-    console.log("BE: create");
-    console.log(MESSAGES_PASSING.MESSAGES.setRoute(ROUTES.PROCESSING_PAGE));
+  /**
+   * Initialize taggr project
+   * @param {string} rootPath
+   */
+  async create(rootPath) {
+    console.log("[BE] create: ", rootPath);
+
+    // 0. update FE route
     messageHandler.postMessage(
       MESSAGES_PASSING.MESSAGES.setRoute(ROUTES.PROCESSING_PAGE)
     );
-    return;
-    this.isProcessingActive = true;
 
     // 1. Locate image paths in project
-    const imagePathsInProject = await recursivelyFindImages(path);
+    const imagePathsInProject = await findImagePaths(rootPath);
 
     // 2. Generate in memory structure, and calculate the file hashes
     for (const imagePath of imagePathsInProject) {
       const hash = await generateFileHash(imagePath);
-      this.imageMap[hash] = new Image({
+      this.imageMap[hash] = new ImageEntity({
         hash,
-        path: filesystem.normalizeUrl(imagePath),
+        path: normalizePath(imagePath),
         rawPath: imagePath,
         tags: null,
         location: null,
@@ -61,6 +71,8 @@ class Project {
 
     console.log("this.imageMap");
     console.log(this.imageMap);
+
+    return;
 
     // (3). Optimize images - issues!
     // const outputDir = path.join(paths.data, "/images");

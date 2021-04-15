@@ -5,6 +5,7 @@ const MESSAGE_TYPES = {
   SET_ROUTE: "SET_ROUTE",
 };
 
+// FIX: add prefixes
 const MESSAGES = {
   /**
    * @param { string} path

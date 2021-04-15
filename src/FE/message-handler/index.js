@@ -9,7 +9,7 @@ const Handler = () => {
    * @param {{data: {type: string, payload: any}}} message
    */
   bc.onmessage = function ({ data }) {
-    console.log("[FE]: received", data);
+    console.log("[FE] receive: ", data);
 
     switch (data.type) {
       case MESSAGES_PASSING.MESSAGE_TYPES.SET_ROUTE:

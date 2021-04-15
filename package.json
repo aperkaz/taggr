@@ -9,9 +9,7 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "echo \"No linting configured\"",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "lint": "echo \"No linting configured\""
   },
   "keywords": [],
   "license": "MIT",
@@ -80,12 +78,14 @@
     "lodash.get": "^4.4.2",
     "lodash.range": "^3.2.0",
     "lodash.throttle": "^4.1.1",
+    "normalize-path": "^3.0.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-map-gl": "^5.2.7",
     "react-redux": "^7.2.0",
     "react-sizeme": "^2.6.12",
     "react-window": "^1.8.5",
+    "readdirp": "^3.6.0",
     "semver": "^7.3.2",
     "sharp": "^0.23.2",
     "styled-components": "^4.4.1"

@@ -18,10 +18,13 @@ let frontendWindow;
 const createWindow = () => {
   // Create the browser window.
   frontendWindow = new BrowserWindow({
+    x: 0,
+    y: 0,
     width: 800,
     height: 600,
     webPreferences: {
       nodeIntegration: true,
+      backgroundThrottling: false,
     },
   });
 

@@ -9,18 +9,18 @@ const Handler = () => {
    * @param {{data: {type: string, payload: any}}} message
    */
   bc.onmessage = function ({ data }) {
-    console.log("[FE]: received", data);
+    console.log("[BE] receive: ", data);
 
     switch (data.type) {
       case MESSAGES_PASSING.MESSAGE_TYPES.INITIALIZE_PROJECT:
-        Project.create();
+        Project.create(data.payload);
     }
   };
 
   /**
    * @param {{type: string, payload: any}} message
    */
-  const postMessage = ({ type, payload }) => {
+  const postMessage = ({ type, payload = {} }) => {
     console.log(`[BE] send: `, type);
     bc.postMessage({ type, payload });
   };
