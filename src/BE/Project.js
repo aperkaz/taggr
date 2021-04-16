@@ -12,8 +12,10 @@ import findImagePaths from "./utils/find-images-in-path";
 import preProcessImages from "./utils/pre-process-images";
 import envPaths from "./utils/env-paths";
 import db from "./utils/db";
-import loadImage from "./utils/load-image";
+
 import { getClassificationIds } from "./ml/types/classification";
+import { getTags } from "./ml/calculate-tags";
+import loadImage from "./utils/load-image";
 // const { filterImages } = require("./filter");
 
 /**
@@ -75,11 +77,7 @@ class Project {
     console.time("db");
     const storedImageMap = db.get("images");
     Object.keys(this.imageMap).map((hash) => {
-      if (
-        storedImageMap[hash] &&
-        storedImageMap[hash].tags &&
-        storedImageMap[hash].tags.length > 0
-      ) {
+      if (storedImageMap && storedImageMap[hash] && storedImageMap[hash].tags) {
         // load data from DB, for the already processed images
         this.imageMap[hash] = {
           ...this.imageMap[hash],
@@ -112,26 +110,24 @@ class Project {
   async process() {
     // only process the un-processed ones
     const imageHashToProcess = Object.keys(this.imageMap).filter((hash) => {
-      if (this.imageMap[hash].tags && this.imageMap[hash].tags.length > 0)
-        return false;
+      if (this.imageMap[hash].tags) return false;
 
       return true;
     });
 
+    // ML process
     for (const hash of imageHashToProcess) {
       const image = await loadImage(this.imageMap[hash].path);
 
-      console.log(await getClassificationIds(image));
+      const tags = await getTags(image);
+      console.log("tags: ", tags);
 
-      // TODONOW: processs
-      // console.log(await image.process(this.imageMap[hash].rawPath));
+      // store results
+      db.set(`images.${hash}`, { ...this.imageMap[hash], tags });
     }
+    
     return;
-
-    while (this.isProcessingActive && imagePathsToProcess.length) {
-      //   const imagePath = imagePathsToProcess.shift();
-      //   const hash = filesystem.generateMD5HashFromString(imagePath);
-
+    // TODONOW: notify FE of pre-process and process progress
       services.services.updateTask({
         name: `Processing ${toProcess} memories!`,
         isOngoing: true,
