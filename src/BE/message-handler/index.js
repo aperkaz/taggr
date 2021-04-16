@@ -1,27 +1,33 @@
-import MESSAGES_PASSING from "../../shared/message-passing";
+import { CHANNEL, MESSAGE_TYPES } from "../../shared/message-passing";
+import logger from "../../shared/logger";
+
 import Project from "../Project";
 
 const Handler = () => {
-  console.log("[BE]: message handler: ", MESSAGES_PASSING.DEFAULT_CHANNEL);
-  const bc = new BroadcastChannel(MESSAGES_PASSING.DEFAULT_CHANNEL);
+  logger.log("[BE]: message handler: ", CHANNEL);
+  const bc = new BroadcastChannel(CHANNEL);
 
   /**
-   * @param {{data: {type: string, payload: any}}} message
+   * @param {{data: import("../../shared/message-passing").Message}} message
    */
-  bc.onmessage = function ({ data }) {
-    console.log("[BE] receive: ", data);
+  bc.onmessage = ({ data: message }) => {
+    logger.log(`[BE] receive: ${message.type}`);
+    logger.log(message.payload);
 
-    switch (data.type) {
-      case MESSAGES_PASSING.MESSAGE_TYPES.INITIALIZE_PROJECT:
-        Project.create(data.payload);
+    switch (message.type) {
+      case MESSAGE_TYPES.BE_INITIALIZE_PROJECT:
+        Project.create(message.payload);
+        break;
     }
   };
 
   /**
-   * @param {{type: string, payload: any}} message
+   * @param {import("../../shared/message-passing").Message} message
    */
   const postMessage = ({ type, payload = {} }) => {
-    console.log(`[BE] send: `, type);
+    logger.log(`[BE] send: ${type}`);
+    logger.log(payload);
+
     bc.postMessage({ type, payload });
   };
 

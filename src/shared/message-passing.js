@@ -1,53 +1,40 @@
-const DEFAULT_CHANNEL = "taggr-message-passing";
+/**
+ * @typedef {Object} Message
+ * @property {string} type
+ * @property {Object} payload
+ */
 
-const MESSAGE_TYPES = {
-  INITIALIZE_PROJECT: "INITIALIZE_PROJECT",
-  SET_ROUTE: "SET_ROUTE",
-  UPDATE_IMAGES: "UPDATE_IMAGES",
+export const CHANNEL = "taggr-message-passing";
+
+export const MESSAGE_TYPES = {
+  // BE
+  BE_INITIALIZE_PROJECT: "BE_INITIALIZE_PROJECT",
+  // FE
+  FE_SET_ROUTE: "FE_SET_ROUTE",
+  FE_UPDATE_IMAGES: "FE_UPDATE_IMAGES",
 };
 
-// FIX: add prefixes
-const MESSAGES = {
+export const MESSAGE_CREATORS = {
   /**
    * @param {string} path
    */
-  initializeProject: (path) => ({
-    type: MESSAGE_TYPES.INITIALIZE_PROJECT,
+  BE_initializeProject: (path) => ({
+    type: MESSAGE_TYPES.BE_INITIALIZE_PROJECT,
     payload: path,
   }),
   /**
    * @param {string} path
    */
-  setRoute: (route) => ({
-    type: MESSAGE_TYPES.SET_ROUTE,
+  FE_setRoute: (route) => ({
+    type: MESSAGE_TYPES.FE_SET_ROUTE,
     payload: route,
   }),
   /**
    * @param {import("./entities").ImageType[]} imageList
    * @returns
    */
-  updateImages: (imageList) => ({
-    type: MESSAGE_TYPES.UPDATE_IMAGES,
+  FE_updateImages: (imageList) => ({
+    type: MESSAGE_TYPES.FE_UPDATE_IMAGES,
     payload: imageList,
   }),
 };
-
-export default {
-  DEFAULT_CHANNEL,
-  MESSAGE_TYPES,
-  MESSAGES,
-};
-
-export class Message {
-  /**
-   *
-   * @param {{
-   * type: string,
-   * payload: any,
-   * }} params
-   */
-  constructor({ type, payload }) {
-    this.type = type;
-    this.payload = payload;
-  }
-}

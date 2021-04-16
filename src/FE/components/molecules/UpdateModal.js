@@ -8,6 +8,8 @@ import semverCompare from "semver/functions/compare";
 import ButtonFancy from "./ButtonFancy";
 import Typography from "../atoms/Typography";
 
+import logger from "../../../shared/logger";
+
 const useStyles = makeStyles((theme) => ({
   modal: {
     display: "flex",
@@ -37,7 +39,7 @@ const UpdateModal = ({
         setIsOpen(true);
       }
     } catch (e) {
-      console.log("invalid semver");
+      logger.error("invalid semver");
     }
   }, [currentAppVersion, latestAppVersion]);
 

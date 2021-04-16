@@ -1,34 +1,36 @@
-import { BorderAll } from "@material-ui/icons";
-import MESSAGES_PASSING from "../../shared/message-passing";
+import logger from "../../shared/logger";
+import { CHANNEL, MESSAGE_TYPES } from "../../shared/message-passing";
+
 import store, { ACTIONS } from "../store";
 
 const Handler = () => {
-  console.log("[FE]: message handler: ", MESSAGES_PASSING.DEFAULT_CHANNEL);
-  const bc = new BroadcastChannel(MESSAGES_PASSING.DEFAULT_CHANNEL);
+  logger.log("[FE]: message handler: ", CHANNEL);
+  const bc = new BroadcastChannel(CHANNEL);
 
   /**
-   * @param {{data: {type: string, payload: any}}} message
+   * @param {{data: import("../../shared/message-passing").Message}} message
    */
-  bc.onmessage = function ({ data }) {
-    console.log("[FE] receive: ", data);
+  bc.onmessage = function ({ data: message }) {
+    logger.log(`[FE] receive: ${message.type}`);
+    logger.log(message.payload);
 
-    switch (data.type) {
-      // TODONOW: rename events to FE/BE events, to differenciate
-      case MESSAGES_PASSING.MESSAGE_TYPES.SET_ROUTE:
-        store.dispatch(ACTIONS.setActiveRoute(data.payload));
+    switch (message.type) {
+      case MESSAGE_TYPES.FE_SET_ROUTE:
+        store.dispatch(ACTIONS.setActiveRoute(message.payload));
         break;
-      case MESSAGES_PASSING.MESSAGE_TYPES.UPDATE_IMAGES:
-        console.log(data);
-        store.dispatch(ACTIONS.setImages(data.payload));
+      case MESSAGE_TYPES.FE_UPDATE_IMAGES:
+        store.dispatch(ACTIONS.setImages(message.payload));
         break;
     }
   };
 
   /**
-   * @param {{type: string, payload: any}} message
+   * @param {import("../../shared/message-passing").Message} message
    */
   const postMessage = ({ type, payload = {} }) => {
-    console.log(`[FE] send: `, type);
+    logger.log(`[FE] send: ${type}`);
+    logger.log(payload);
+
     bc.postMessage({ type, payload });
   };
 

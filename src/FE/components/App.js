@@ -9,6 +9,7 @@ import DashboardPage from "./pages/main";
 import SettingsPage from "./pages/settings";
 import UpdateModal from "./molecules/UpdateModal";
 import ROUTES from "../../shared/fe-routes";
+import logger from "../../shared/logger";
 
 const Wrapper = styled.div`
   height: 100%;
@@ -49,7 +50,7 @@ const App = ({ activeRoute }) => {
         currentAppVersion,
       }));
 
-      console.log(
+      logger.warn(
         `Current version: ${currentAppVersion} | Latest version: ${latestAppVersion}`
       );
     });

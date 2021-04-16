@@ -1,3 +1,5 @@
+import logger from "../../../shared/logger";
+
 const PROBABILITY_THRESHOLD = 0.75;
 
 let net;
@@ -29,7 +31,7 @@ export const getClassificationIds = async (img) => {
     imageNetClassNumbers = await getTopKImagenetClassNumbers(logits);
   } catch (e) {
     // TODONOW: send sentry error.
-    console.log(e);
+    logger.error(e);
   }
 
   return imageNetClassNumbers;

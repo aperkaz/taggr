@@ -1,4 +1,5 @@
 import get from "lodash.get";
+import logger from "../../shared/logger";
 
 /**
  * Load EXIF data from path.
@@ -55,7 +56,7 @@ export const getLocation = async function (imagePath) {
     // TODO: TODONOW: send error.
     // TODO: create backedn wide helper HOF that reports to SENTRY
     // Error reading gps data
-    console.log(e);
+    logger.error(e);
   }
 
   return { latitude: null, longitude: null };

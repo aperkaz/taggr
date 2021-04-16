@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import sharp from "sharp";
+import logger from "../../shared/logger";
 
 /**
  * @param {string} imagePath
@@ -45,7 +46,7 @@ const preProcessImages = async (imageMap, outputPath) => {
       try {
         resizePromise.push(resizeImage(image.rawPath, preProcessedImagePath));
       } catch (err) {
-        console.log(err);
+        logger.error(err);
       }
     }
   }

@@ -1,4 +1,4 @@
-const cocoSsd = require("@tensorflow-models/coco-ssd");
+import logger from "../../../shared/logger";
 
 const MIN_SCORE = 0.5;
 
@@ -8,9 +8,11 @@ let net;
 loadModel();
 
 async function loadModel() {
-  console.time("loadModel object recognition");
+  const cocoSsd = require("@tensorflow-models/coco-ssd");
+
+  logger.time("loadModel object recognition");
   net = await cocoSsd.load();
-  console.timeEnd("loadModel object recognition");
+  logger.timeEnd("loadModel object recognition");
 }
 
 /**
@@ -35,7 +37,7 @@ export const getObjectRecognitionClassNames = async (img) => {
     });
   } catch (e) {
     // TODONOW: Sentry: send error.
-    console.log(e);
+    logger.log(e);
   }
 
   return cocoSsdClassNames;

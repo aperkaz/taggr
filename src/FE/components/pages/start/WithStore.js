@@ -2,7 +2,7 @@ import React from "react";
 
 import StartPage from "./Page";
 import messageHandler from "../../../message-handler";
-import MESSAGES_PASSING from "../../../../shared/message-passing";
+import { MESSAGE_CREATORS } from "../../../../shared/message-passing";
 
 const WithStore = () => {
   const onSelectRootFolderPath = async () => {
@@ -17,7 +17,7 @@ const WithStore = () => {
     if (!rootFolderPath) return;
 
     messageHandler.postMessage(
-      MESSAGES_PASSING.MESSAGES.initializeProject(rootFolderPath)
+      MESSAGE_CREATORS.BE_initializeProject(rootFolderPath)
     );
   };
 

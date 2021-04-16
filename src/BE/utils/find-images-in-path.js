@@ -1,4 +1,6 @@
 import readdirp from "readdirp";
+
+import logger from "../../shared/logger";
 import logFunctionPerf from "./log-function-perf";
 
 // FIX: add event analytics
@@ -43,8 +45,7 @@ async function recursivelyFindImages(folderPath) {
     // trackCreatedProjectSize(Math.round(projectSize / 1000000));
   } catch (e) {
     // TODONOW: Sentry: send error.
-    // Error reading folders
-    console.log(e);
+    logger.error(e);
   }
 
   //   trackCreatedProjectImages(imagePathsList.length);

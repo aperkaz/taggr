@@ -1,5 +1,6 @@
 import { getTags } from "./calculate-tags";
 import { getFileCreationDate, getLocation } from "../utils/get-file-metadata";
+import logger from "../../shared/logger";
 
 /**
  * Extract all the information form an image
@@ -7,12 +8,12 @@ import { getFileCreationDate, getLocation } from "../utils/get-file-metadata";
  * @returns {{location: {latitude: number, longitude: number}, tags: string[], creationDate: number}}
  */
 const process = async function (imagePath) {
-  console.log("processing image: ", imagePath);
+  logger.log("processing image: ", imagePath);
 
   const tags = await getTags(imagePath);
-  console.log("tags: ", tags);
+  logger.log("tags: ", tags);
   const location = await getLocation(imagePath);
-  console.log("location: ", JSON.stringify(location));
+  logger.log("location: ", JSON.stringify(location));
 
   const creationDate = await getFileCreationDate(imagePath);
 
