@@ -21,7 +21,7 @@ import Store from "electron-store";
 //   },
 // };
 const db = () => {
-  // TODONOW: remove cwd, only in dev
+  // TODONOW: remove cwd, use only in dev
   const store = new Store({ cwd: "/Users/alain/Downloads/output" });
 
   return store;

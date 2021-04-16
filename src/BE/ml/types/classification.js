@@ -30,7 +30,6 @@ export const getClassificationIds = async (img) => {
     let logits = await net.infer(img);
     imageNetClassNumbers = await getTopKImagenetClassNumbers(logits);
   } catch (e) {
-    // TODONOW: send sentry error.
     logger.error(e);
   }
 

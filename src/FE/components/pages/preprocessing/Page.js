@@ -42,7 +42,7 @@ const Footer = styled.div`
   }
 `;
 
-const ProcessingPage = ({
+const PreProcessingPage = ({
   memoryNumber = "",
   handleSelectLogo = () => null,
 }) => (
@@ -72,14 +72,4 @@ const ProcessingPage = ({
   </Wrapper>
 );
 
-/**
- * <Wrapper>
-     <div>
-      <Loading />
-      <Typography variant="h3">{title}</Typography>
-    </div> 
-    <ProgressBar percentage={percentage} />
-   </Wrapper>
- */
-
-export default ProcessingPage;
+export default PreProcessingPage;

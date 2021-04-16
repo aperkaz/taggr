@@ -1,10 +1,10 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
-import CONSTANTS from "./constants";
+import FE_ROUTES from "../../shared/fe-routes";
 
 const initialState = {
-  activeRoute: CONSTANTS.ROUTES.START_PAGE,
+  activeRoute: FE_ROUTES.START_PAGE,
   images: null,
-  imagesWithLocation: [],
+  imagesWithLocation: null,
   task: {
     isOngoing: false,
     name: "",

@@ -4,8 +4,8 @@ import styled from "styled-components";
 import semverCompare from "semver/functions/compare";
 
 import StartPage from "./pages/start";
-import ProcessingPage from "./pages/processing";
-import DashboardPage from "./pages/main";
+import PreProcessingPage from "./pages/preprocessing";
+import DashboardPage from "./pages/dashboard";
 import SettingsPage from "./pages/settings";
 import UpdateModal from "./molecules/UpdateModal";
 import ROUTES from "../../shared/fe-routes";
@@ -22,6 +22,7 @@ const PageWrapper = styled.div`
 `;
 
 const App = ({ activeRoute }) => {
+  // TODONOW: make sure this works
   const [state, setState] = React.useState({
     currentAppVersion: "v0.0.0",
     latestAppVersion: "v0.0.0",
@@ -35,6 +36,8 @@ const App = ({ activeRoute }) => {
       const descendingOrderVersionTags = tagList.sort((v1, v2) => {
         return semverCompare(v2.name, v1.name);
       });
+
+      logger.log(descendingOrderVersionTags);
 
       // TODO: hack to prevent electron to be required from the browser
       if (window.IS_DEV == null) return;
@@ -79,8 +82,8 @@ const renderRoute = (activeRoute) => {
   switch (activeRoute) {
     case ROUTES.START_PAGE:
       return <StartPage />;
-    case ROUTES.PROCESSING_PAGE:
-      return <ProcessingPage />;
+    case ROUTES.PRE_PROCESSING_PAGE:
+      return <PreProcessingPage />;
     case ROUTES.DASHBOARD_PAGE:
       return <DashboardPage />;
     case ROUTES.SETTINGS_PAGE:

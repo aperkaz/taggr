@@ -36,7 +36,6 @@ export const getObjectRecognitionClassNames = async (img) => {
       }
     });
   } catch (e) {
-    // TODONOW: Sentry: send error.
     logger.log(e);
   }
 

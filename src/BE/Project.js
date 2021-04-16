@@ -44,12 +44,11 @@ class Project {
    * @param {string} rootPath
    */
   async create(rootPath) {
-    // TODONOW: review and clean up this
     logger.log("[BE] create(): ", rootPath);
 
     // 0. update FE route
     messageHandler.postMessage(
-      MESSAGE_CREATORS.FE_setRoute(FE_ROUTES.PROCESSING_PAGE)
+      MESSAGE_CREATORS.FE_setRoute(FE_ROUTES.PRE_PROCESSING_PAGE)
     );
 
     // 1. Locate image paths in project

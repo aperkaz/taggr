@@ -2,16 +2,16 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import debounce from "lodash.debounce";
 
-import MainPage from "./Page";
+import FE_ROUTES from "../../../../shared/fe-routes";
+
 import { ACTIONS } from "../../../store";
-import CONSTANTS from "../../../store/constants";
-// import * as services from "../../../services";
+import DashboardPage from "./Page";
 
 const WithStore = () => {
   const dispatch = useDispatch();
 
   const onSettingsClick = () => {
-    dispatch(ACTIONS.setActiveRoute(CONSTANTS.ROUTES.SETTINGS_PAGE));
+    dispatch(ACTIONS.setActiveRoute(FE_ROUTES.SETTINGS_PAGE));
   };
 
   const onSearchTriggered = debounce((filters) => {
@@ -19,7 +19,7 @@ const WithStore = () => {
   }, 200);
 
   return (
-    <MainPage
+    <DashboardPage
       {...{
         onSettingsClick,
         task: useSelector((s) => s.task),

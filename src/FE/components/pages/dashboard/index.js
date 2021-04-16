@@ -1,5 +1,5 @@
-import MainPage from "./Page";
+import DashboardPage from "./Page";
 import WithStore from "./WithStore";
 
-export { MainPage };
+export { DashboardPage };
 export default WithStore;

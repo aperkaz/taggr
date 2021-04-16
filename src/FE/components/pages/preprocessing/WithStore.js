@@ -1,7 +1,6 @@
 import React from "react";
-import useDispatch from "react-redux";
 
-import ProcessPage from "./Page";
+import PreProcessPage from "./Page";
 
 const WithStore = () => {
   const onSelectLogo = () => {
@@ -9,7 +8,7 @@ const WithStore = () => {
     shell.openExternal("https://taggr.ai");
   };
 
-  return <ProcessPage memoryNumber={"1283"} onSelectLogo={onSelectLogo} />;
+  return <PreProcessPage memoryNumber={"1283"} onSelectLogo={onSelectLogo} />;
 };
 
 export default WithStore;

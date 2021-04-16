@@ -41,10 +41,10 @@ async function recursivelyFindImages(folderPath) {
       imagePathsList.push(`${folderPath}/${path}`);
     }
 
+    // TODONOW: add tracking
     // trackCreatedProjectImages(imagePathsList.length);
     // trackCreatedProjectSize(Math.round(projectSize / 1000000));
   } catch (e) {
-    // TODONOW: Sentry: send error.
     logger.error(e);
   }
 

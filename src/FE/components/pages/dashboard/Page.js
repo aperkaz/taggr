@@ -36,7 +36,7 @@ const ContentPanel = styled.div`
   margin: 1rem 1rem 1rem 0;
 `;
 
-const MainPage = ({
+const DashboardPage = ({
   isLoading,
   images,
   imagesWithLocation = [],
@@ -88,4 +88,4 @@ const MainPage = ({
   );
 };
 
-export default MainPage;
+export default DashboardPage;
