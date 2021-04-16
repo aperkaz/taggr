@@ -47,7 +47,7 @@ const calculateTag = (imageNetClassIds, cocoSsdClassNames, tagName) => {
  * @param {string[]} cocoSsdClassNames
  * @returns {string[]}
  */
-const calculateTags = (imageNetClassIds, cocoSsdClassNames) => {
+export const calculateTags = (imageNetClassIds, cocoSsdClassNames) => {
   const tags = [];
 
   Object.keys(CUSTOM_TAGS).forEach((tagName) => {

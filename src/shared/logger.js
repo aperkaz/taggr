@@ -1,3 +1,9 @@
-import logger from "electron-timber";
+let customLogger;
 
-export default logger;
+if (process.env.NODE_ENV === "test") {
+  customLogger = console;
+} else {
+  customLogger = require("electron-timber");
+}
+
+export default customLogger;

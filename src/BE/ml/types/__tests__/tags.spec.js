@@ -1,30 +1,31 @@
-const { calculateTags } = require("../tags");
+import { calculateTags } from "../../calculate-tags";
 
-jest.mock("../machineLearning/classification");
+jest.mock("../classification");
+jest.mock("../objectRecognition");
 
 describe("calculateTags()", () => {
-  test("with imageNetClassIds", () => {
+  it("with imageNetClassIds", () => {
     const tags = calculateTags([397], []);
 
     expect(tags.length).toBe(1);
     expect(tags).toEqual(["animals"]);
   });
 
-  test("with cocoSsdClassNames", () => {
+  it("with cocoSsdClassNames", () => {
     const tags = calculateTags([], ["bird"]);
 
     expect(tags.length).toBe(1);
     expect(tags).toEqual(["animals"]);
   });
 
-  test("with imageNetClassIds and cocoSsdClassNames", () => {
+  it("with imageNetClassIds and cocoSsdClassNames", () => {
     const tags = calculateTags([397], ["bird"]);
 
     expect(tags.length).toBe(1);
     expect(tags).toEqual(["animals"]);
   });
 
-  test("with empty imageNetClassIds and cocoSsdClassNames", () => {
+  it("with empty imageNetClassIds and cocoSsdClassNames", () => {
     const tags = calculateTags([], []);
 
     expect(tags.length).toBe(0);
@@ -42,29 +43,29 @@ describe("custom tag: people", () => {
   const validCocoSsdClassNames = ["person"];
   const invalidCocoSsdClassNames = ["fake class"];
 
-  test("with valid imageNetClassIds", () => {
+  it("with valid imageNetClassIds", () => {
     const tags = calculateTags(validImageNetClassIds, []);
 
     expect(tags).toEqual([]);
   });
-  test("with invalid imageNetClassIds", () => {
+  it("with invalid imageNetClassIds", () => {
     const tags = calculateTags(invalidImageNetClassIds, []);
 
     expect(tags.length).toBe(0);
   });
-  test("with valid cocoSsdClassNames", () => {
+  it("with valid cocoSsdClassNames", () => {
     const tags = calculateTags([], validCocoSsdClassNames);
 
     expect(tags).toEqual([tagName]);
   });
 
-  test("with invalid cocoSsdClassNames", () => {
+  it("with invalid cocoSsdClassNames", () => {
     const tags = calculateTags([], invalidCocoSsdClassNames);
 
     expect(tags).toEqual([]);
   });
 
-  test("with imageNetClassIds and cocoSsdClassNames", () => {
+  it("with imageNetClassIds and cocoSsdClassNames", () => {
     const tags = calculateTags(validImageNetClassIds, validCocoSsdClassNames);
 
     expect(tags).toEqual([tagName]);
@@ -80,29 +81,29 @@ describe("custom tag: animals", () => {
   const validCocoSsdClassNames = ["bird"];
   const invalidCocoSsdClassNames = ["fake class"];
 
-  test("with valid imageNetClassIds", () => {
+  it("with valid imageNetClassIds", () => {
     const tags = calculateTags(validImageNetClassIds, []);
 
     expect(tags).toEqual([tagName]);
   });
-  test("with invalid imageNetClassIds", () => {
+  it("with invalid imageNetClassIds", () => {
     const tags = calculateTags(invalidImageNetClassIds, []);
 
     expect(tags.length).toBe(0);
   });
-  test("with valid cocoSsdClassNames", () => {
+  it("with valid cocoSsdClassNames", () => {
     const tags = calculateTags([], validCocoSsdClassNames);
 
     expect(tags).toEqual([tagName]);
   });
 
-  test("with invalid cocoSsdClassNames", () => {
+  it("with invalid cocoSsdClassNames", () => {
     const tags = calculateTags([], invalidCocoSsdClassNames);
 
     expect(tags).toEqual([]);
   });
 
-  test("with imageNetClassIds and cocoSsdClassNames", () => {
+  it("with imageNetClassIds and cocoSsdClassNames", () => {
     const tags = calculateTags(validImageNetClassIds, validCocoSsdClassNames);
 
     expect(tags).toEqual([tagName]);
@@ -118,29 +119,29 @@ describe("custom tag: vehicles", () => {
   const validCocoSsdClassNames = ["bus"];
   const invalidCocoSsdClassNames = ["fake class"];
 
-  test("with valid imageNetClassIds", () => {
+  it("with valid imageNetClassIds", () => {
     const tags = calculateTags(validImageNetClassIds, []);
 
     expect(tags).toEqual([tagName]);
   });
-  test("with invalid imageNetClassIds", () => {
+  it("with invalid imageNetClassIds", () => {
     const tags = calculateTags(invalidImageNetClassIds, []);
 
     expect(tags.length).toBe(0);
   });
-  test("with valid cocoSsdClassNames", () => {
+  it("with valid cocoSsdClassNames", () => {
     const tags = calculateTags([], validCocoSsdClassNames);
 
     expect(tags).toEqual([tagName]);
   });
 
-  test("with invalid cocoSsdClassNames", () => {
+  it("with invalid cocoSsdClassNames", () => {
     const tags = calculateTags([], invalidCocoSsdClassNames);
 
     expect(tags).toEqual([]);
   });
 
-  test("with imageNetClassIds and cocoSsdClassNames", () => {
+  it("with imageNetClassIds and cocoSsdClassNames", () => {
     const tags = calculateTags(validImageNetClassIds, validCocoSsdClassNames);
 
     expect(tags).toEqual([tagName]);
@@ -156,29 +157,29 @@ describe("custom tag: food", () => {
   const validCocoSsdClassNames = ["pizza"];
   const invalidCocoSsdClassNames = ["fake class"];
 
-  test("with valid imageNetClassIds", () => {
+  it("with valid imageNetClassIds", () => {
     const tags = calculateTags(validImageNetClassIds, []);
 
     expect(tags).toEqual([tagName]);
   });
-  test("with invalid imageNetClassIds", () => {
+  it("with invalid imageNetClassIds", () => {
     const tags = calculateTags(invalidImageNetClassIds, []);
 
     expect(tags.length).toBe(0);
   });
-  test("with valid cocoSsdClassNames", () => {
+  it("with valid cocoSsdClassNames", () => {
     const tags = calculateTags([], validCocoSsdClassNames);
 
     expect(tags).toEqual([tagName]);
   });
 
-  test("with invalid cocoSsdClassNames", () => {
+  it("with invalid cocoSsdClassNames", () => {
     const tags = calculateTags([], invalidCocoSsdClassNames);
 
     expect(tags).toEqual([]);
   });
 
-  test("with imageNetClassIds and cocoSsdClassNames", () => {
+  it("with imageNetClassIds and cocoSsdClassNames", () => {
     const tags = calculateTags(validImageNetClassIds, validCocoSsdClassNames);
 
     expect(tags).toEqual([tagName]);
@@ -194,29 +195,29 @@ describe("custom tag: drinks", () => {
   const validCocoSsdClassNames = ["cup"];
   const invalidCocoSsdClassNames = ["fake class"];
 
-  test("with valid imageNetClassIds", () => {
+  it("with valid imageNetClassIds", () => {
     const tags = calculateTags(validImageNetClassIds, []);
 
     expect(tags).toEqual([tagName]);
   });
-  test("with invalid imageNetClassIds", () => {
+  it("with invalid imageNetClassIds", () => {
     const tags = calculateTags(invalidImageNetClassIds, []);
 
     expect(tags.length).toBe(0);
   });
-  test("with valid cocoSsdClassNames", () => {
+  it("with valid cocoSsdClassNames", () => {
     const tags = calculateTags([], validCocoSsdClassNames);
 
     expect(tags).toEqual([tagName]);
   });
 
-  test("with invalid cocoSsdClassNames", () => {
+  it("with invalid cocoSsdClassNames", () => {
     const tags = calculateTags([], invalidCocoSsdClassNames);
 
     expect(tags).toEqual([]);
   });
 
-  test("with imageNetClassIds and cocoSsdClassNames", () => {
+  it("with imageNetClassIds and cocoSsdClassNames", () => {
     const tags = calculateTags(validImageNetClassIds, validCocoSsdClassNames);
 
     expect(tags).toEqual([tagName]);
@@ -232,29 +233,29 @@ describe("custom tag: sports", () => {
   const validCocoSsdClassNames = ["skis"];
   const invalidCocoSsdClassNames = ["fake class"];
 
-  test("with valid imageNetClassIds", () => {
+  it("with valid imageNetClassIds", () => {
     const tags = calculateTags(validImageNetClassIds, []);
 
     expect(tags).toEqual([tagName]);
   });
-  test("with invalid imageNetClassIds", () => {
+  it("with invalid imageNetClassIds", () => {
     const tags = calculateTags(invalidImageNetClassIds, []);
 
     expect(tags.length).toBe(0);
   });
-  test("with valid cocoSsdClassNames", () => {
+  it("with valid cocoSsdClassNames", () => {
     const tags = calculateTags([], validCocoSsdClassNames);
 
     expect(tags).toEqual([tagName]);
   });
 
-  test("with invalid cocoSsdClassNames", () => {
+  it("with invalid cocoSsdClassNames", () => {
     const tags = calculateTags([], invalidCocoSsdClassNames);
 
     expect(tags).toEqual([]);
   });
 
-  test("with imageNetClassIds and cocoSsdClassNames", () => {
+  it("with imageNetClassIds and cocoSsdClassNames", () => {
     const tags = calculateTags(validImageNetClassIds, validCocoSsdClassNames);
 
     expect(tags).toEqual([tagName]);
