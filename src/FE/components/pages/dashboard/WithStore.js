@@ -6,6 +6,8 @@ import FE_ROUTES from "../../../../shared/fe-routes";
 
 import { ACTIONS } from "../../../store";
 import DashboardPage from "./Page";
+import messageHandler from "../../../message-handler";
+import { MESSAGE_CREATORS } from "../../../../shared/message-passing";
 
 const WithStore = () => {
   const dispatch = useDispatch();
@@ -19,7 +21,7 @@ const WithStore = () => {
   };
 
   const onSearchTriggered = debounce((filters) => {
-    // services.filterImages(filters);
+    messageHandler.postMessage(MESSAGE_CREATORS.BE_filterImages(filters));
   }, 200);
 
   return (

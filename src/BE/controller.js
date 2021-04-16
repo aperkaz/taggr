@@ -18,6 +18,7 @@ import loadImage from "./utils/load-image";
 import transformImageMaptoImageList from "./utils/image-map-to-image-list";
 
 import { getTags } from "./ml/calculate-tags";
+import filterImage from "./utils/filter-image";
 
 /**
  * Init project, preprocess images and populate DB
@@ -163,7 +164,32 @@ const process = async () => {
  * @returns {{images: ImageType[], imagesWithLocation: ImageType[]}} images
  */
 const filterImages = (filters) => {
-  return filterImages(this.imageMap, filters);
+  /**
+   * @type {import("../shared/entities").ImageHashMapType}
+   */
+  const allImageMap = db.get(PROPERTIES.ALL_IMAGES);
+  /**
+   * @type {string[]}
+   */
+  const currentImageHashes = db.get(PROPERTIES.CURRENT_IMAGE_HASES);
+
+  let images = [];
+
+  currentImageHashes.forEach((hash) => {
+    const image = allImageMap[hash];
+    if (filterImage(image, filters)) images.push(image);
+  });
+
+  // Images with location
+  // Object.keys(imageMap).forEach((key) => {
+  //   const image = imageMap[key];
+
+  //   if (filterImage(image, filters)) {
+  //     imagesWithLocation.push(image);
+  //   }
+  // });
+
+  messageHandler.postMessage(MESSAGE_CREATORS.FE_setImages(images));
 };
 
 const reset = () => {

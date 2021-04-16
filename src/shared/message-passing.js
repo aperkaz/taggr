@@ -9,6 +9,7 @@ export const CHANNEL = "taggr-message-passing";
 export const MESSAGE_TYPES = {
   // BE
   BE_INITIALIZE_PROJECT: "BE_INITIALIZE_PROJECT",
+  BE_FILTER_IMAGES: "BE_FILTER_IMAGES",
   BE_RESET: "BE_RESET",
   // FE
   FE_SET_ROUTE: "FE_SET_ROUTE",
@@ -23,6 +24,13 @@ export const MESSAGE_CREATORS = {
   BE_initializeProject: (path) => ({
     type: MESSAGE_TYPES.BE_INITIALIZE_PROJECT,
     payload: path,
+  }),
+  /**
+   * Filter images
+   */
+  BE_filterImages: (payload) => ({
+    type: MESSAGE_TYPES.BE_FILTER_IMAGES,
+    payload,
   }),
   /**
    * Back to initial page
