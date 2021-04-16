@@ -11,6 +11,8 @@ import Map from "../../organisms/Map";
 const Wrapper = styled.div`
   height: 100vh;
 
+  background-color: white;
+
   display: flex;
   flex-direction: column;
 `;

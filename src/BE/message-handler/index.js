@@ -18,6 +18,9 @@ const Handler = () => {
       case MESSAGE_TYPES.BE_INITIALIZE_PROJECT:
         controllers.initializeProject(message.payload);
         break;
+      case MESSAGE_TYPES.BE_RESET:
+        controllers.reset();
+        break;
     }
   };
 

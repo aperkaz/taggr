@@ -65,17 +65,17 @@ const SettingsPage = ({ onSelectReset, onSelectSave, onOpenLink }) => (
         </Typography>
 
         <ButtonRegular
-          text={"Reset app"}
+          text={"New project"}
           onClick={onSelectReset}
           style={{
             fontFamily: "Open Sans",
             fontWeight: 600,
-            color: "white",
+            color: "red",
             marginBottom: "8vh",
           }}
         />
         <br />
-        <FancyButton text="Save" onClick={onSelectSave} />
+        <FancyButton text="Back" onClick={onSelectSave} />
       </Main>
 
       <Footer>
@@ -88,15 +88,6 @@ const SettingsPage = ({ onSelectReset, onSelectSave, onOpenLink }) => (
         >
           {/* Support us ❤️  */}
           <p>Open-beta release: v0.0.1</p>
-          <div>
-            Performance improvements and new features:{" "}
-            <A onClick={() => onOpenLink("https://taggr.ai/#roadmap")}>
-              check progress
-            </A>
-            {/* We are continuously working on preformance improvements and exciting
-            new features (facial recognition, timeline representation of our
-            pictures). */}
-          </div>
           <p>
             Suggestions or improvements? Reach out to: <b>contact@taggr.ai</b>
           </p>

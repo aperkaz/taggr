@@ -167,11 +167,13 @@ const filterImages = (filters) => {
 };
 
 const reset = () => {
-  // TODONOW: reset project
+  db.set(PROPERTIES.CURRENT_IMAGE_HASES, []);
 };
 
+// TODONOW: destroy project
 const destroy = () => {
-  // TODONOW: destroy project
+  db.clear();
+  // remove the pre-processed images
 };
 
-export default { initializeProject, process, filterImages };
+export default { initializeProject, process, filterImages, reset, destroy };
