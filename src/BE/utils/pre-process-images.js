@@ -31,6 +31,8 @@ async function doesFileExist(filePath) {
  * @param {string} outputPath
  */
 const preProcessImages = async (imageMap, outputPath) => {
+  logger.time("preProcessImages");
+
   const hashes = Object.keys(imageMap);
 
   const resizePromise = [];
@@ -52,6 +54,8 @@ const preProcessImages = async (imageMap, outputPath) => {
   }
 
   await Promise.all(resizePromise);
+
+  logger.timeEnd("preProcessImages");
 };
 
 export default preProcessImages;

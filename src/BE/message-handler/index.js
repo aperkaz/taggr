@@ -1,7 +1,7 @@
 import { CHANNEL, MESSAGE_TYPES } from "../../shared/message-passing";
 import logger from "../../shared/logger";
 
-import Project from "../Project";
+import controllers from "../controller";
 
 const Handler = () => {
   logger.log("[BE]: message handler: ", CHANNEL);
@@ -16,7 +16,7 @@ const Handler = () => {
 
     switch (message.type) {
       case MESSAGE_TYPES.BE_INITIALIZE_PROJECT:
-        Project.create(message.payload);
+        controllers.initializeProject(message.payload);
         break;
     }
   };

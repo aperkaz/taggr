@@ -1,18 +1,18 @@
-let customLogger = {};
+let logger = {};
 
 if (process.env.NODE_ENV === "test") {
-  customLogger = console;
+  logger = console;
 } else {
-  const logger = require("electron-timber");
+  const electronLogger = require("electron-timber");
 
-  customLogger = {
-    ...logger,
+  logger = {
+    ...electronLogger,
     error: (e) => {
       // TODONOW: make sure this works!
       console.log("REPORT ERROR TO SENTRY");
-      logger.error(e);
+      electronLogger.error(e);
     },
   };
 }
 
-export default customLogger;
+export default logger;

@@ -3,9 +3,9 @@
  * @property {string} hash
  * @property {string} path
  * @property {string} rawPath
- * @property {string[]} tags ML tags
- * @property {{latitude: number,longitude: number}} location
- * @property {number|null} creationDate
+ * @property {string[] | null} tags ML tags
+ * @property {{latitude: number,longitude: number} | null} location
+ * @property {number | null} creationDate
  */
 
 /**
@@ -16,7 +16,14 @@
  * @argument {ImageType} imageArgs
  * @returns {ImageType}
  */
-export const ImageFactory = (imageArgs) => ({ ...imageArgs });
+export const ImageFactory = ({ hash, path, rawPath }) => ({
+  hash,
+  path,
+  rawPath,
+  tags: null,
+  location: null,
+  creationDate: null,
+});
 
 /**
  * @returns {ImageHashMapType}

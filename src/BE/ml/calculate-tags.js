@@ -3,6 +3,7 @@ import get from "lodash.get";
 import { getClassificationIds } from "./types/classification";
 import { getObjectRecognitionClassNames } from "./types/objectRecognition";
 import { CUSTOM_TAGS } from "./types/custom_tags";
+import logger from "../../shared/logger";
 
 /**
  * Return true is an image classifies as the given tagName.
@@ -66,14 +67,14 @@ export const calculateTags = (imageNetClassIds, cocoSsdClassNames) => {
  */
 export const getTags = async (image) => {
   // ML classification
-  console.time("classify");
+  logger.time("classify");
   const imageNetClassIds = await getClassificationIds(image);
-  console.timeEnd("classify");
+  logger.timeEnd("classify");
 
   // ML object recognition
-  console.time("object");
+  logger.time("object");
   const cocoSsdClassNames = await getObjectRecognitionClassNames(image);
-  console.timeEnd("object");
+  logger.timeEnd("object");
 
   return calculateTags(imageNetClassIds, cocoSsdClassNames);
 };

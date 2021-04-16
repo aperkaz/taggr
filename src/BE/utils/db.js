@@ -1,5 +1,10 @@
 import Store from "electron-store";
 
+export const PROPERTIES = {
+  ALL_IMAGES: "all_images",
+  CURRENT_IMAGE_HASES: "current_image_hases",
+};
+
 // TODONOW: add schema
 // TODONOW: add migrations
 // const schema = {
@@ -20,11 +25,7 @@ import Store from "electron-store";
 //     },
 //   },
 // };
-const db = () => {
-  // TODONOW: remove cwd, use only in dev
-  const store = new Store({ cwd: "/Users/alain/Downloads/output" });
+// TODONOW: remove cwd, use only in dev
+const db = new Store({ cwd: "/Users/alain/Downloads/output" });
 
-  return store;
-};
-
-export default db();
+export default db;
