@@ -63,8 +63,8 @@ const initializeProject = async (rootPath) => {
         creationDate: storedImageMap[hash].creationDate,
       };
     }
-    db.set(`${PROPERTIES.ALL_IMAGES}.${hash}`, imageMap[hash]);
   });
+  db.set(`${PROPERTIES.ALL_IMAGES}`, { ...storedImageMap, imageMap });
 
   // 5. Update DB with current image hashes
   db.set(PROPERTIES.CURRENT_IMAGE_HASES, Object.keys(imageMap));
