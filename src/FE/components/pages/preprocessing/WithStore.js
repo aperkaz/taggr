@@ -1,14 +1,20 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 import PreProcessPage from "./Page";
 
 const WithStore = () => {
-  const onSelectLogo = () => {
-    const { shell } = window.require("electron");
+  const handleSelectLogo = () => {
+    let shell = window.require("electron").shell;
     shell.openExternal("https://taggr.ai");
   };
 
-  return <PreProcessPage memoryNumber={"1283"} onSelectLogo={onSelectLogo} />;
+  return (
+    <PreProcessPage
+      total={useSelector((s) => s.progress.total)}
+      handleSelectLogo={handleSelectLogo}
+    />
+  );
 };
 
 export default WithStore;

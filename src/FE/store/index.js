@@ -5,10 +5,9 @@ const initialState = {
   activeRoute: FE_ROUTES.START_PAGE,
   images: null,
   imagesWithLocation: null,
-  task: {
-    isOngoing: false,
-    name: "",
-    percentage: 0,
+  progress: {
+    current: 0,
+    total: 0,
   },
 };
 
@@ -26,8 +25,8 @@ const stateSlice = createSlice({
     setImagesWithLocation: (state, action) => {
       state.imagesWithLocation = action.payload;
     },
-    setTask: (state, action) => {
-      state.task = { ...state.task, ...action.payload };
+    setProgress: (state, action) => {
+      state.progress = { ...state.task, ...action.payload };
     },
   },
 });

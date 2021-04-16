@@ -37,7 +37,8 @@ const ContentPanel = styled.div`
 `;
 
 const DashboardPage = ({
-  isLoading,
+  isProcessing,
+  progress,
   images,
   imagesWithLocation = [],
   onSettingsClick,
@@ -66,8 +67,11 @@ const DashboardPage = ({
       {activeTab === 1 ? (
         <ContentWrapper>
           <FilterWrapper>
-            {isLoading ? (
-              <FiltersLoading processed={531} total={1382} />
+            {isProcessing ? (
+              <FiltersLoading
+                current={progress.current}
+                total={progress.total}
+              />
             ) : (
               <Filters onFilterChange={onSearchTriggered} />
             )}

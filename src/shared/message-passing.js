@@ -11,7 +11,8 @@ export const MESSAGE_TYPES = {
   BE_INITIALIZE_PROJECT: "BE_INITIALIZE_PROJECT",
   // FE
   FE_SET_ROUTE: "FE_SET_ROUTE",
-  FE_UPDATE_IMAGES: "FE_UPDATE_IMAGES",
+  FE_SET_IMAGES: "FE_SET_IMAGES",
+  FE_SET_PROGRESS: "FE_SET_PROGRESS",
 };
 
 export const MESSAGE_CREATORS = {
@@ -33,8 +34,16 @@ export const MESSAGE_CREATORS = {
    * @param {import("./entities").ImageType[]} imageList
    * @returns
    */
-  FE_updateImages: (imageList) => ({
-    type: MESSAGE_TYPES.FE_UPDATE_IMAGES,
+  FE_setImages: (imageList) => ({
+    type: MESSAGE_TYPES.FE_SET_IMAGES,
     payload: imageList,
+  }),
+  /**
+   * @param {{current: number, total: number}}} progress
+   * @returns
+   */
+  FE_setProgress: ({ current, total }) => ({
+    type: MESSAGE_TYPES.FE_SET_PROGRESS,
+    payload: { current, total },
   }),
 };

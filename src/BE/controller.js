@@ -3,7 +3,7 @@ import get from "lodash.get";
 
 import { MESSAGE_CREATORS } from "../shared/message-passing";
 import FE_ROUTES from "../shared/fe-routes";
-import { ImageFactory, ImageHashMapFactory } from "../shared/entities";
+import { ImageFactory } from "../shared/entities";
 import logger from "../shared/logger";
 
 import messageHandler from "./message-handler";
@@ -31,13 +31,19 @@ const initializeProject = async (rootPath) => {
 
   logger.log("[BE] create(): ", rootPath);
 
-  // 0. update FE route to pre-processing
+  // 0. Locate image paths in project
+  const imagePathsInProject = await findImagePaths(rootPath);
+
+  // 1. update FE route to pre-processing and send progress
+  messageHandler.postMessage(
+    MESSAGE_CREATORS.FE_setProgress({
+      current: 0,
+      total: imagePathsInProject.length,
+    })
+  );
   messageHandler.postMessage(
     MESSAGE_CREATORS.FE_setRoute(FE_ROUTES.PRE_PROCESSING_PAGE)
   );
-
-  // 1. Locate image paths in project
-  const imagePathsInProject = await findImagePaths(rootPath);
 
   // 2. Generate in memory structure, and calculate the file hashes
   for (const imagePath of imagePathsInProject) {
@@ -64,19 +70,27 @@ const initializeProject = async (rootPath) => {
       };
     }
   });
-  db.set(`${PROPERTIES.ALL_IMAGES}`, { ...storedImageMap, imageMap });
+  db.set(`${PROPERTIES.ALL_IMAGES}`, { ...storedImageMap, ...imageMap });
 
   // 5. Update DB with current image hashes
   db.set(PROPERTIES.CURRENT_IMAGE_HASES, Object.keys(imageMap));
 
   // 6. Send images to FE
   messageHandler.postMessage(
-    MESSAGE_CREATORS.FE_updateImages(transformImageMaptoImageList(imageMap))
+    MESSAGE_CREATORS.FE_setImages(transformImageMaptoImageList(imageMap))
   );
 
   // 7. Update FE route
   messageHandler.postMessage(
     MESSAGE_CREATORS.FE_setRoute(FE_ROUTES.DASHBOARD_PAGE)
+  );
+
+  // 8. update progress
+  messageHandler.postMessage(
+    MESSAGE_CREATORS.FE_setProgress({
+      current: 0,
+      total: 0,
+    })
   );
 
   process();
@@ -95,13 +109,23 @@ const process = async () => {
    */
   const currentImageHashes = db.get(PROPERTIES.CURRENT_IMAGE_HASES);
 
-  // 0. Only process the non-processed images
+  // 0. Look for images to process (skip the existing ones)
   const imageHashToProcess = currentImageHashes.filter(
-    (hash) => !allImageMap[hash].tags
+    (hash) => !get(allImageMap, `${hash}.tags`, false)
+  );
+
+  messageHandler.postMessage(
+    MESSAGE_CREATORS.FE_setProgress({
+      current: 0,
+      total: imageHashToProcess.length,
+    })
   );
 
   // 1. ML process images
+  let processed = 0;
   for (const hash of imageHashToProcess) {
+    processed++;
+
     const image = await loadImage(allImageMap[hash].path);
 
     const tags = await getTags(image);
@@ -111,17 +135,18 @@ const process = async () => {
 
     // store results
     db.set(`${PROPERTIES.ALL_IMAGES}.${hash}`, { ...allImageMap[hash], tags });
-
-    // TODONOW: notify FE of pre-process and process progress
-    // 2. Send process progress to FE
-    //   services.services.updateTask({
-    //     name: `Processing ${toProcess} memories!`,
-    //     isOngoing: true,
-    //     percentage: Math.ceil(
-    //       ((toProcess - imagePathsToProcess.length) * 100) / toProcess
-    //     ),
-    //   });
+    messageHandler.postMessage(
+      MESSAGE_CREATORS.FE_setProgress({
+        current: processed,
+        total: imageHashToProcess.length,
+      })
+    );
   }
+
+  MESSAGE_CREATORS.FE_setProgress({
+    current: 0,
+    total: 0,
+  });
 };
 
 /**

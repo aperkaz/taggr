@@ -18,8 +18,11 @@ const Handler = () => {
       case MESSAGE_TYPES.FE_SET_ROUTE:
         store.dispatch(ACTIONS.setActiveRoute(message.payload));
         break;
-      case MESSAGE_TYPES.FE_UPDATE_IMAGES:
+      case MESSAGE_TYPES.FE_SET_IMAGES:
         store.dispatch(ACTIONS.setImages(message.payload));
+        break;
+      case MESSAGE_TYPES.FE_SET_PROGRESS:
+        store.dispatch(ACTIONS.setProgress(message.payload));
         break;
     }
   };

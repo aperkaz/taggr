@@ -10,6 +10,10 @@ import DashboardPage from "./Page";
 const WithStore = () => {
   const dispatch = useDispatch();
 
+  const progress = useSelector((s) => s.progress);
+  const images = useSelector((s) => s.images);
+  const imagesWithLocation = useSelector((s) => s.imagesWithLocation);
+
   const onSettingsClick = () => {
     dispatch(ACTIONS.setActiveRoute(FE_ROUTES.SETTINGS_PAGE));
   };
@@ -22,11 +26,12 @@ const WithStore = () => {
     <DashboardPage
       {...{
         onSettingsClick,
-        task: useSelector((s) => s.task),
+        isProcessing: progress.current < progress.total,
+        progress,
         onSearchTriggered,
-        images: useSelector((s) => s.images),
+        images,
         // images: [],
-        imagesWithLocation: useSelector((s) => s.imagesWithLocation),
+        imagesWithLocation,
       }}
     />
   );

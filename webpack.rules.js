@@ -20,18 +20,7 @@ module.exports = [
     use: [{ loader: "babel-loader" }],
   },
   {
-    test: /\.(jpe?g|png|gif|svg)$/i,
+    test: /\.(jpe?g|png|gif)$/i,
     loader: "url-loader?name=app/images/[name].[ext]",
-  },
-  {
-    test: /\.svg$/,
-    use: [
-      {
-        loader: "svg-url-loader",
-        options: {
-          limit: 10000,
-        },
-      },
-    ],
   },
 ];
