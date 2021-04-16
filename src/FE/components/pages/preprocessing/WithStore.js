@@ -11,6 +11,7 @@ const WithStore = () => {
 
   return (
     <PreProcessPage
+      current={useSelector((s) => s.progress.current)}
       total={useSelector((s) => s.progress.total)}
       handleSelectLogo={handleSelectLogo}
     />

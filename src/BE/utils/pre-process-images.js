@@ -9,7 +9,10 @@ import logger from "../../shared/logger";
  * @returns {Promise<void>}
  */
 const resizeImage = async (imagePath, outputPath) => {
-  await sharp(imagePath, { failOnError: false }) // failOnError: true, fixes Samsung corrupted pictures
+  await sharp(imagePath, {
+    failOnError: false,
+  }) // failOnError: true, fixes Samsung corrupted pictures
+    .jpeg({ quality: 80 })
     .resize(1980, 1080, { fit: sharp.fit.outside, withoutEnlargement: true })
     .toFile(outputPath);
 };
@@ -30,30 +33,34 @@ async function doesFileExist(filePath) {
  * @param {import("../../shared/entities").ImageHashMapType} imageMap
  * @param {string} outputPath
  */
-const preProcessImages = async (imageMap, outputPath) => {
+const preProcessImages = async (imageMap, outputPath, reporter) => {
   logger.time("preProcessImages");
 
   const hashes = Object.keys(imageMap);
 
-  const resizePromise = [];
+  const resizePromises = [];
 
+  let processed = 0;
   for (const hash of hashes) {
+    reporter(processed++);
+
     const image = imageMap[hash];
 
-    const preProcessedImagePath = path.join(outputPath, `${image.hash}.jpg`);
+    const preProcessedImagePath = path.join(outputPath, `${image.hash}.jpeg`);
 
     const fileExists = await doesFileExist(preProcessedImagePath);
 
     if (!fileExists) {
       try {
-        resizePromise.push(resizeImage(image.rawPath, preProcessedImagePath));
+        // await resizeImage(image.rawPath, preProcessedImagePath);
+        resizePromises.push(resizeImage(image.rawPath, preProcessedImagePath));
       } catch (err) {
         logger.error(err);
       }
     }
   }
 
-  await Promise.all(resizePromise);
+  await Promise.all(resizePromises);
 
   logger.timeEnd("preProcessImages");
 };

@@ -34,11 +34,15 @@ const Footer = styled.div`
   }
 `;
 
-const PreProcessingPage = ({ total = 0, handleSelectLogo = () => null }) => (
+const PreProcessingPage = ({
+  current = 0,
+  total = 0,
+  handleSelectLogo = () => null,
+}) => (
   <Wrapper>
     <Center>
       <Typography variant="h3" style={{ textAlign: "center" }}>
-        {`Loading ${total} memories 🚀`}
+        {`Loading ${current} / ${total} memories 🚀`}
       </Typography>
 
       <Typography

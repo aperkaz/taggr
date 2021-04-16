@@ -50,13 +50,20 @@ const initializeProject = async (rootPath) => {
     const hash = await generateFileHash(imagePath);
     imageMap[hash] = ImageFactory({
       hash,
-      path: normalizePath(path.join(envPaths.data, `${hash}.jpg`)),
+      path: normalizePath(path.join(envPaths.data, `${hash}.jpeg`)),
       rawPath: imagePath,
     });
   }
 
   // 3. Pre-process images (sharp small)
-  await preProcessImages(imageMap, envPaths.data);
+  await preProcessImages(imageMap, envPaths.data, (processed) =>
+    messageHandler.postMessage(
+      MESSAGE_CREATORS.FE_setProgress({
+        current: processed,
+        total: imagePathsInProject.length,
+      })
+    )
+  );
 
   // 4. Update DB with all images
   const storedImageMap = db.get(PROPERTIES.ALL_IMAGES);
