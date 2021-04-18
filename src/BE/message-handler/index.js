@@ -14,16 +14,20 @@ const Handler = () => {
     logger.log(`[BE] receive: ${message.type}`);
     logger.log(message.payload);
 
-    switch (message.type) {
-      case MESSAGE_TYPES.BE_INITIALIZE_PROJECT:
-        controllers.initializeProject(message.payload);
-        break;
-      case MESSAGE_TYPES.BE_FILTER_IMAGES:
-        controllers.filterImages(message.payload);
-        break;
-      case MESSAGE_TYPES.BE_RESET:
-        controllers.reset();
-        break;
+    try {
+      switch (message.type) {
+        case MESSAGE_TYPES.BE_INITIALIZE_PROJECT:
+          controllers.initializeProject(message.payload);
+          break;
+        case MESSAGE_TYPES.BE_FILTER_IMAGES:
+          controllers.filterImages(message.payload);
+          break;
+        case MESSAGE_TYPES.BE_RESET:
+          controllers.reset();
+          break;
+      }
+    } catch (err) {
+      // TODONOW: report sentry
     }
   };
 

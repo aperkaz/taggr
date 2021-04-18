@@ -192,14 +192,19 @@ const filterImages = (filters) => {
   messageHandler.postMessage(MESSAGE_CREATORS.FE_setImages(images));
 };
 
+/**
+ * Reset current project
+ */
 const reset = () => {
   db.set(PROPERTIES.CURRENT_IMAGE_HASES, []);
 };
 
-// TODONOW: destroy project
-const destroy = () => {
+/**
+ * Clean DB and remove all pre-processed images
+ */
+const destroy = async () => {
   db.clear();
-  // remove the pre-processed images
+  await fsExtra.emptyDir(envPaths.data);
 };
 
 export default { initializeProject, process, filterImages, reset, destroy };
