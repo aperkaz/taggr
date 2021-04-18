@@ -6,9 +6,10 @@ import store from "./store";
 import App from "./components/App";
 import "./statics/index.css";
 
+// initialize sentry
+import "../shared/sentry";
 // Initialize communication handler
-import messageHandler from "./message-handler";
-messageHandler.postMessage({ type: "test", payload: "Hola FE" });
+import "./message-handler";
 
 export default class Main extends React.Component {
   render() {

@@ -1,7 +1,8 @@
 import readdirp from "readdirp";
 
-import logger from "../../shared/logger";
 import logFunctionPerf from "./log-function-perf";
+
+import logger from "../../shared/logger";
 
 // FIX: add event analytics
 // const {
@@ -47,9 +48,6 @@ async function recursivelyFindImages(folderPath) {
   } catch (e) {
     logger.error(e);
   }
-
-  //   trackCreatedProjectImages(imagePathsList.length);
-  //   trackCreatedProjectSize(Math.round(projectSize / 1000000));
 
   return imagePathsList;
 }

@@ -1,7 +1,8 @@
+import controllers from "../controller";
+
 import { CHANNEL, MESSAGE_TYPES } from "../../shared/message-passing";
 import logger from "../../shared/logger";
-
-import controllers from "../controller";
+import Sentry from "../../shared/sentry";
 
 const Handler = () => {
   logger.log("[BE]: message handler: ", CHANNEL);
@@ -27,7 +28,9 @@ const Handler = () => {
           break;
       }
     } catch (err) {
-      // TODONOW: report sentry
+      logger.error(
+        `[BE] message-handler: onmessage error. ${JSON.stringify(message)}`
+      );
     }
   };
 

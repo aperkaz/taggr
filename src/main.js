@@ -5,6 +5,8 @@ const {
   REDUX_DEVTOOLS,
 } = require("electron-devtools-installer");
 
+import "./shared/sentry";
+
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
   // eslint-disable-line global-require

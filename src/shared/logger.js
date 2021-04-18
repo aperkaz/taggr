@@ -1,18 +1,18 @@
-let logger = {};
+import activeEnv, { ENVS } from "./active-env";
+import Sentry from "./sentry";
 
-if (process.env.NODE_ENV === "test") {
-  logger = console;
-} else {
-  const electronLogger = require("electron-timber");
+let logger = console;
 
-  logger = {
-    ...electronLogger,
-    error: (e) => {
-      // TODONOW: make sure this works!
-      console.log("REPORT ERROR TO SENTRY");
-      electronLogger.error(e);
-    },
-  };
+if (activeEnv === ENVS.BUILD_PROD) {
+  logger = require("electron-timber"); // will hide the console.logs
 }
+
+logger = {
+  ...logger,
+  error: (e) => {
+    console.error(e);
+    Sentry.captureException(e);
+  },
+};
 
 export default logger;

@@ -1,8 +1,9 @@
-// Initialize communication handler
-import messageHandler from "./message-handler";
 import { getClassificationIds } from "./ml/types/classification";
 
-messageHandler.postMessage({ type: "test", payload: "Hola BE" });
+// Initialize sentry
+import "../shared/sentry";
+// Initialize communication handler
+import "./message-handler";
 
 // TEST STUFF
 

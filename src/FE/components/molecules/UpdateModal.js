@@ -39,7 +39,7 @@ const UpdateModal = ({
         setIsOpen(true);
       }
     } catch (e) {
-      logger.error("invalid semver");
+      logger.error(`[FE] Invalid semver in UpdateModal: ${JSON.stringify(e)}`);
     }
   }, [currentAppVersion, latestAppVersion]);
 
