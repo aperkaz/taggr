@@ -1,11 +1,24 @@
 const { app, BrowserWindow, nativeTheme } = require("electron");
+const path = require("path");
 const {
   default: installExtension,
   REACT_DEVELOPER_TOOLS,
   REDUX_DEVTOOLS,
 } = require("electron-devtools-installer");
 
+// Initialize sentry
 import "./shared/sentry";
+
+// Active env
+import activeEnv, { ENVS } from "./shared/active-env";
+console.log("Electron environment: ", activeEnv);
+
+// Set OS variable
+const isWin = process.platform === "win32";
+const isLinux = ["aix", "freebsd", "linux", "openbsd", "sunos"].includes(
+  process.platform
+);
+const isMac = process.platform === "darwin";
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -18,36 +31,40 @@ if (require("electron-squirrel-startup")) {
 let frontendWindow;
 
 const createWindow = () => {
-  // Create the browser window.
+  // Create the FE window
   frontendWindow = new BrowserWindow({
     x: 0,
     y: 0,
-    width: 800,
-    height: 600,
+    icon: isWin
+      ? `${path.join(__dirname, "../resources/iconWindows.ico")}`
+      : `${path.join(__dirname, "../resources/iconLinux.png")}`,
     webPreferences: {
       nodeIntegration: true,
       backgroundThrottling: false,
       webSecurity: false,
     },
   });
-
-  // and load the index.html of the app.
   frontendWindow.loadURL(FE_WINDOW_WEBPACK_ENTRY);
 
-  // Open the DevTools.
-  frontendWindow.webContents.openDevTools();
+  if (activeEnv === ENVS.DEVELOP || activeEnv === ENVS.BUILD_TEST) {
+    frontendWindow.webContents.openDevTools();
+  }
 
+  // Create the BE window
   const backendWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    show: true,
+    show: activeEnv === ENVS.DEVELOP || activeEnv === ENVS.BUILD_TEST,
     webPreferences: {
       nodeIntegration: true,
       webSecurity: false,
     },
   });
   backendWindow.loadURL(BE_WINDOW_WEBPACK_ENTRY);
-  backendWindow.webContents.openDevTools();
+
+  if (activeEnv === ENVS.DEVELOP || activeEnv === ENVS.BUILD_TEST) {
+    backendWindow.webContents.openDevTools();
+  }
 
   // Emitted when the window is closed.
   frontendWindow.on("closed", () => {
@@ -82,9 +99,11 @@ app.on("activate", () => {
 
 // Add extensions: https://github.com/MarshallOfSound/electron-devtools-installer
 app.whenReady().then(() => {
-  installExtension([REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS])
-    .then((name) => console.log(`Added Extension:  ${name}`))
-    .catch((err) => console.log("An error occurred: ", err));
+  if (activeEnv === ENVS.DEVELOP || activeEnv === ENVS.BUILD_TEST) {
+    installExtension([REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS])
+      .then((name) => console.log(`Added Extension:  ${name}`))
+      .catch((err) => console.log("An error occurred: ", err));
+  }
 });
 
 // Set app theme
