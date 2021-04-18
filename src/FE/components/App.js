@@ -22,7 +22,6 @@ const PageWrapper = styled.div`
 `;
 
 const App = ({ activeRoute }) => {
-  // TODONOW: make sure this works
   const [state, setState] = React.useState({
     currentAppVersion: "v0.0.0",
     latestAppVersion: "v0.0.0",

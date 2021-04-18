@@ -21,7 +21,11 @@
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "test_ef6"
+            "name": "taggr",
+            "iconUrl": "C:\\Users\\test\\Desktop\\taggr\\electron\\resources\\iconWindows.ico",
+            "setupIcon": "C:\\Users\\test\\Desktop\\taggr\\electron\\resources\\iconWindows.ico",
+            "certificateFile": "C:\\Users\\test\\Desktop\\taggr\\electron\\resources\\WindowsCodeSigningCertificate.pfx",
+            "certificatePassword": "sa69uphlZOzplSFjNaNw"
           }
         },
         {
@@ -32,7 +36,20 @@
         },
         {
           "name": "@electron-forge/maker-deb",
-          "config": {}
+          "config": {
+            "categories": [
+              "Graphics",
+              "Photography"
+            ],
+            "description": "Rediscover your memories while keeping your privacy.",
+            "genericName": "Enhanced Gallery",
+            "homepage": "https://taggr.ai/",
+            "icon": "resources/iconLinux.png",
+            "maintainer": "Alain Perkaz",
+            "name": "taggr",
+            "productDescription": "Keep your privacy while you rediscover your memories. You own your data, and all the computations by taggr happen locally. \n Easy to set up, ready to plug into your existing file system. \n\n Features: \n -Automatic image tagging using machine learning. \n -Aggregate images system-wide, while curating results. \n -Blazing fast image viewing experience \n -Geolocate your memories \n -And much more! \n\n Check upcoming features and updates in https://taggr.ai/",
+            "section": "graphics"
+          }
         },
         {
           "name": "@electron-forge/maker-rpm",
@@ -85,6 +102,7 @@
     "exif": "^0.6.0",
     "fs-extra": "^9.1.0",
     "fslightbox-react": "^1.4.9",
+    "lodash.debounce": "^4.0.8",
     "lodash.get": "^4.4.2",
     "lodash.range": "^3.2.0",
     "lodash.throttle": "^4.1.1",

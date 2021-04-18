@@ -57,6 +57,7 @@ const createWindow = () => {
     show: activeEnv === ENVS.DEVELOP || activeEnv === ENVS.BUILD_TEST,
     webPreferences: {
       nodeIntegration: true,
+      backgroundThrottling: false,
       webSecurity: false,
     },
   });

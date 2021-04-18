@@ -1,5 +1,6 @@
 import path from "path";
 import get from "lodash.get";
+import throttle from "lodash.throttle";
 
 import { MESSAGE_CREATORS } from "../shared/message-passing";
 import FE_ROUTES from "../shared/fe-routes";
@@ -57,8 +58,9 @@ const initializeProject = async (rootPath) => {
   }
 
   // 3. Pre-process images (sharp small)
+  const throttledPost = throttle(messageHandler.postMessage, 250);
   await preProcessImages(imageMap, envPaths.data, (processed) =>
-    messageHandler.postMessage(
+    throttledPost(
       MESSAGE_CREATORS.FE_setProgress({
         current: processed,
         total: imagePathsInProject.length,
