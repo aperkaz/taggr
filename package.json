@@ -107,6 +107,7 @@
     "lodash.range": "^3.2.0",
     "lodash.throttle": "^4.1.1",
     "normalize-path": "^3.0.0",
+    "parse-dms": "0.0.3",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-map-gl": "^5.2.7",

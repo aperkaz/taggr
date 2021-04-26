@@ -20,6 +20,8 @@ import transformImageMaptoImageList from "./utils/image-map-to-image-list";
 
 import { getTags } from "./ml/calculate-tags";
 import filterImage from "./utils/filter-image";
+import getImageLocation from "./utils/get-image-location";
+import getImageCreationDate from "./utils/get-image-creation-date";
 
 /**
  * Init project, preprocess images and populate DB
@@ -141,10 +143,19 @@ const process = async () => {
     const tags = await getTags(image);
     logger.log("tags: ", tags);
 
-    // TODONOW: look for location here too
+    const location = await getImageLocation(allImageMap[hash].rawPath);
+    logger.log("location: ", JSON.stringify(location));
+
+    const creationDate = await getImageCreationDate(allImageMap[hash].rawPath);
+    logger.log("creationDate: ", JSON.stringify(creationDate));
 
     // store results
-    db.set(`${PROPERTIES.ALL_IMAGES}.${hash}`, { ...allImageMap[hash], tags });
+    db.set(`${PROPERTIES.ALL_IMAGES}.${hash}`, {
+      ...allImageMap[hash],
+      tags,
+      location,
+      creationDate,
+    });
     messageHandler.postMessage(
       MESSAGE_CREATORS.FE_setProgress({
         current: processed,
