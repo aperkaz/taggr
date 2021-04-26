@@ -11,6 +11,7 @@ import "./shared/sentry";
 
 // Active env
 import activeEnv, { ENVS } from "./shared/active-env";
+import envPaths from "./BE/utils/env-paths";
 console.log("Electron environment: ", activeEnv);
 
 // Set OS variable
@@ -105,9 +106,17 @@ app.whenReady().then(() => {
       .then((name) => console.log(`Added Extension:  ${name}`))
       .catch((err) => console.log("An error occurred: ", err));
   }
+
+  const { ipcMain } = require("electron");
+  ipcMain.on("restart", () => {
+    app.relaunch();
+    app.exit();
+  });
+
+  // create folder if it doesnt exist
+  const fs = require("fs");
+
+  if (!fs.existsSync(envPaths.data)) {
+    fs.mkdirSync(envPaths.data);
+  }
 });
-
-// Set app theme
-// nativeTheme.themeSource = "light";
-
-// Initialize DB

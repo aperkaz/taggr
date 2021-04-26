@@ -11,6 +11,7 @@ export const MESSAGE_TYPES = {
   BE_INITIALIZE_PROJECT: "BE_INITIALIZE_PROJECT",
   BE_FILTER_IMAGES: "BE_FILTER_IMAGES",
   BE_RESET: "BE_RESET",
+  BE_DESTROY: "BE_DESTROY",
   // FE
   FE_SET_ROUTE: "FE_SET_ROUTE",
   FE_SET_IMAGES: "FE_SET_IMAGES",
@@ -33,11 +34,19 @@ export const MESSAGE_CREATORS = {
     payload,
   }),
   /**
-   * Back to initial page
+   * Reset BE status (soft)
    * @returns
    */
   BE_reset: () => ({
     type: MESSAGE_TYPES.BE_RESET,
+    payload: {},
+  }),
+  /**
+   * Wipe BE and DB
+   * @returns
+   */
+  BE_destroy: () => ({
+    type: MESSAGE_TYPES.BE_DESTROY,
     payload: {},
   }),
   /**

@@ -87,6 +87,7 @@
     "@material-ui/core": "^4.9.10",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/pickers": "^3.2.10",
+    "@mui-treasury/styles": "^1.13.1",
     "@reduxjs/toolkit": "^1.5.1",
     "@sentry/electron": "^2.4.0",
     "@tensorflow-models/coco-ssd": "^2.2.1",
@@ -100,7 +101,6 @@
     "electron-timber": "^0.5.1",
     "env-paths": "^2.2.1",
     "exif": "^0.6.0",
-    "fs-extra": "^9.1.0",
     "fslightbox-react": "^1.4.9",
     "lodash.debounce": "^4.0.8",
     "lodash.get": "^4.4.2",
@@ -114,6 +114,7 @@
     "react-sizeme": "^2.6.12",
     "react-window": "^1.8.5",
     "readdirp": "^3.6.0",
+    "rimraf": "^3.0.2",
     "semver": "^7.3.2",
     "sharp": "^0.23.2",
     "styled-components": "^4.4.1"

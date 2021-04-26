@@ -26,6 +26,9 @@ const Handler = () => {
         case MESSAGE_TYPES.BE_RESET:
           controllers.reset();
           break;
+        case MESSAGE_TYPES.BE_DESTROY:
+          controllers.destroy();
+          break;
       }
     } catch (err) {
       logger.error(

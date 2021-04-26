@@ -206,7 +206,22 @@ const reset = () => {
  */
 const destroy = async () => {
   db.clear();
-  await fsExtra.emptyDir(envPaths.data);
+
+  const rimraf = require("rimraf");
+
+  rimraf(envPaths.data, { recursive: true }, (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("directory deleted successfully");
+
+      // re-create dir
+      const fs = require("fs");
+      if (!fs.existsSync(envPaths.data)) {
+        fs.mkdirSync(envPaths.data);
+      }
+    }
+  });
 };
 
 export default { initializeProject, process, filterImages, reset, destroy };

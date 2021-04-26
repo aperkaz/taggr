@@ -11,25 +11,38 @@ import SettingsPage from "./Page";
 const WithStore = () => {
   const dispatch = useDispatch();
 
-  const onSelectReset = () => {
+  const onBrowseMore = () => {
     dispatch(ACTIONS.resetState());
-
     messageHandler.postMessage(MESSAGE_CREATORS.BE_reset());
   };
 
-  const onSelectSave = () => {
+  const onSelectDestroy = async () => {
+    // const { ipcRenderer } = window.require("electron");
+    // ipcRenderer.send("restart");
+
+    dispatch(ACTIONS.resetState());
+    messageHandler.postMessage(MESSAGE_CREATORS.BE_destroy());
+  };
+
+  const onSelectBack = () => {
     dispatch(ACTIONS.setActiveRoute(FE_ROUTES.DASHBOARD_PAGE));
   };
 
-  const onOpenLink = (href) => {
-    const { shell } = window.require("electron").remote;
-    shell.openExternal(href);
+  const onOpenLink = () => {
+    let shell = window.require("electron").shell;
+    shell.openExternal("https://taggr.ai");
   };
+
+  // const onBrowseMore = () => console.log("NewImport");
+  // const onSelectReset = () => console.log("reset");
+  // const onSelectBack = () => console.log("back");
+  // const onOpenLink = () => console.log("open link");
 
   return (
     <SettingsPage
-      onSelectReset={onSelectReset}
-      onSelectSave={onSelectSave}
+      onBrowseMore={onBrowseMore}
+      onSelectDestroy={onSelectDestroy}
+      onSelectBack={onSelectBack}
       onOpenLink={onOpenLink}
     />
   );

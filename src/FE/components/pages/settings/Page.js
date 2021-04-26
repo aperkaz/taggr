@@ -1,6 +1,7 @@
 import React from "react";
-import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
+
+import Typography from "../../atoms/Typography";
 
 import FancyButton from "../../molecules/ButtonFancy";
 import ButtonRegular from "../../molecules/ButtonRegular";
@@ -30,33 +31,41 @@ const InnerWrapper = styled.div`
 
 const Main = styled.div`
   margin: auto;
+  min-width: 600px;
+
+  display: flex;
+  flex-direction: column;
+
+  > div {
+    margin-top: 2rem;
+  }
+`;
+
+const Row = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 const Footer = styled.div`
   margin-bottom: 1rem;
-`;
-
-const A = styled.div`
-  display: inline;
-
-  text-decoration: none;
-  color: white;
 
   :hover {
     cursor: pointer;
   }
-
-  font-weight: bold;
 `;
 
-const SettingsPage = ({ onSelectReset, onSelectSave, onOpenLink }) => (
+const SettingsPage = ({
+  onBrowseMore,
+  onSelectDestroy,
+  onSelectBack,
+  onOpenLink,
+}) => (
   <Wrapper>
     <InnerWrapper>
       <Main>
         <Typography
           variant="h3"
           style={{
-            fontFamily: "Poppins, sans-serif",
             color: "white",
             marginBottom: "10vh",
           }}
@@ -64,33 +73,63 @@ const SettingsPage = ({ onSelectReset, onSelectSave, onOpenLink }) => (
           Settings
         </Typography>
 
-        <ButtonRegular
-          text={"New project"}
-          onClick={onSelectReset}
-          style={{
-            fontFamily: "Open Sans",
-            fontWeight: 600,
-            color: "red",
-            marginBottom: "8vh",
-          }}
+        <Row>
+          <Typography
+            variant="h5"
+            style={{
+              color: "white",
+              textAlign: "left",
+              flex: 1,
+            }}
+          >
+            Browse more memories
+          </Typography>
+
+          <ButtonRegular
+            text={"✅ Yes, please!"}
+            onClick={onBrowseMore}
+            style={{
+              background: "#1976d2",
+            }}
+          />
+        </Row>
+
+        <Row>
+          <Typography
+            variant="h5"
+            style={{
+              color: "white",
+              textAlign: "left",
+              flex: 1,
+            }}
+          >
+            Wipe all data
+          </Typography>
+          <ButtonRegular
+            text={"💣 Reset"}
+            onClick={onSelectDestroy}
+            style={{
+              background: "red",
+            }}
+          />
+        </Row>
+
+        <FancyButton
+          text="Save"
+          onClick={onSelectBack}
+          style={{ margin: "3rem auto" }}
         />
-        <br />
-        <FancyButton text="Back" onClick={onSelectSave} />
       </Main>
 
-      <Footer>
+      <Footer onClick={onOpenLink}>
         <Typography
-          variant="h6"
+          variant="h5"
           style={{
-            fontFamily: "Poppins, sans-serif",
             color: "white",
           }}
         >
-          {/* Support us ❤️  */}
-          <p>Open-beta release: v0.0.1</p>
-          <p>
-            Suggestions or improvements? Reach out to: <b>contact@taggr.ai</b>
-          </p>
+          Support us ❤️
+          {/* taggr.ai */}
         </Typography>
       </Footer>
     </InnerWrapper>
