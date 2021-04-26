@@ -1,4 +1,7 @@
+// @ts-nocheck
 import Store from "electron-store";
+
+import { ImageType } from "../../shared/entities";
 import activeEnv, { ENVS } from "../../shared/active-env";
 
 export const PROPERTIES = {
@@ -12,7 +15,7 @@ const SHARED = {
       type: "object",
       required: ["hash", "path", "rawPath"],
       /**
-       * @type {import("../../shared/entities").ImageType}
+       * @type {ImageType}
        */
       properties: {
         hash: {

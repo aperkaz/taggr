@@ -1,5 +1,3 @@
-/* eslint-disable */
-// @ts-nocheck
 import activeEnv, { ENVS } from "./active-env";
 import Sentry from "./sentry";
 

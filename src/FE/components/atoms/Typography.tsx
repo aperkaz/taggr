@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 import React from "react";
 import MaterialTypography from "@material-ui/core/Typography";

@@ -1,14 +1,18 @@
+import { FiltersType, ImageType } from "../../shared/entities";
+
 /**
  * Determine if date is in range
  * Dates in UNIX EPOCH format
- *
- * @param {Object} args
- * @param {number|null} args.date
- * @param {number|null} args.fromDate
- * @param {number|null} args.toDate
- * @returns {boolean}
  */
-const isDateInRange = ({ date, fromDate, toDate }) => {
+const isDateInRange = ({
+  date,
+  fromDate,
+  toDate,
+}: {
+  date?: number;
+  fromDate?: number;
+  toDate?: number;
+}) => {
   if (!date && date !== 0) {
     if (!fromDate && !toDate) {
       return true;
@@ -36,22 +40,14 @@ const isDateInRange = ({ date, fromDate, toDate }) => {
 
 /**
  * Check if array A contains all the elements of array B
- * @param {Object[]} arrayA
- * @param {Object[]} arrayB
- * @returns {boolean}
  */
-const arrayContains = (arrayA, arrayB) => {
+const arrayContains = (arrayA: string[], arrayB: string[]): boolean => {
   if (arrayB.length === 0) return true;
 
   return arrayB.every((bItem) => arrayA.includes(bItem));
 };
 
-/**
- * @param {ImageType} image
- * @param {FilterType} filters
- * @returns {boolean}
- */
-export default (image, filters) => {
+export default (image: ImageType, filters: FiltersType) => {
   const { fromDate, toDate, tags: filterTags } = filters;
   const { creationDate, tags: imageTags } = image;
 

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import semverCompare from "semver/functions/compare";
@@ -42,9 +41,6 @@ const App = () => {
       });
 
       logger.log(descendingOrderVersionTags);
-
-      // TODO: hack to prevent electron to be required from the browser
-      if (window.IS_DEV == null) return;
 
       const { app } = window.require("electron").remote;
 

@@ -4,7 +4,12 @@ import throttle from "lodash.throttle";
 
 import { MESSAGE_CREATORS } from "../shared/message-passing";
 import FE_ROUTES from "../shared/fe-routes";
-import { ImageFactory } from "../shared/entities";
+import {
+  FiltersType,
+  ImageFactory,
+  ImageHashMapType,
+  ImageType,
+} from "../shared/entities";
 import logger from "../shared/logger";
 
 import messageHandler from "./message-handler";
@@ -25,13 +30,9 @@ import getImageCreationDate from "./utils/get-image-creation-date";
 
 /**
  * Init project, preprocess images and populate DB
- * @param {string} rootPath
  */
-const initializeProject = async (rootPath) => {
-  /**
-   * @type {import("../shared/entities").ImageHashMapType}
-   */
-  const imageMap = {};
+const initializeProject = async (rootPath: string) => {
+  const imageMap: ImageHashMapType = {};
 
   logger.log("[BE] create(): ", rootPath);
 
@@ -56,12 +57,13 @@ const initializeProject = async (rootPath) => {
       hash,
       path: normalizePath(path.join(envPaths.data, `${hash}.jpeg`)),
       rawPath: imagePath,
+      location: null,
     });
   }
 
   // 3. Pre-process images (sharp small)
   const throttledPost = throttle(messageHandler.postMessage, 250);
-  await preProcessImages(imageMap, envPaths.data, (processed) =>
+  await preProcessImages(imageMap, envPaths.data, (processed: any) =>
     throttledPost(
       MESSAGE_CREATORS.FE_setProgress({
         current: processed,
@@ -71,7 +73,7 @@ const initializeProject = async (rootPath) => {
   );
 
   // 4. Update DB with all images
-  const storedImageMap = db.get(PROPERTIES.ALL_IMAGES);
+  const storedImageMap: ImageHashMapType = db.get(PROPERTIES.ALL_IMAGES);
   Object.keys(imageMap).map((hash) => {
     if (get(storedImageMap, `${hash}.tags`, false)) {
       imageMap[hash] = {
@@ -112,14 +114,8 @@ const initializeProject = async (rootPath) => {
  * ML processing, update DB entries
  */
 const process = async () => {
-  /**
-   * @type {import("../shared/entities").ImageHashMapType}
-   */
-  const allImageMap = db.get(PROPERTIES.ALL_IMAGES);
-  /**
-   * @type {string[]}
-   */
-  const currentImageHashes = db.get(PROPERTIES.CURRENT_IMAGE_HASES);
+  const allImageMap: ImageHashMapType = db.get(PROPERTIES.ALL_IMAGES);
+  const currentImageHashes: string[] = db.get(PROPERTIES.CURRENT_IMAGE_HASES);
 
   // 0. Look for images to process (skip the existing ones)
   const imageHashToProcess = currentImageHashes.filter(
@@ -172,21 +168,12 @@ const process = async () => {
 
 /**
  * Filter images
- *
- * @param {FilterType} filters
- * @returns {{images: ImageType[], imagesWithLocation: ImageType[]}} images
  */
-const filterImages = (filters) => {
-  /**
-   * @type {import("../shared/entities").ImageHashMapType}
-   */
-  const allImageMap = db.get(PROPERTIES.ALL_IMAGES);
-  /**
-   * @type {string[]}
-   */
-  const currentImageHashes = db.get(PROPERTIES.CURRENT_IMAGE_HASES);
+const filterImages = (filters: FiltersType) => {
+  const allImageMap: ImageHashMapType = db.get(PROPERTIES.ALL_IMAGES);
+  const currentImageHashes: string[] = db.get(PROPERTIES.CURRENT_IMAGE_HASES);
 
-  let images = [];
+  let images: ImageType[] = [];
 
   currentImageHashes.forEach((hash) => {
     const image = allImageMap[hash];
@@ -220,7 +207,7 @@ const destroy = async () => {
 
   const rimraf = require("rimraf");
 
-  rimraf(envPaths.data, { recursive: true }, (err) => {
+  rimraf(envPaths.data, { recursive: true }, (err: any) => {
     if (err) {
       console.log(err);
     } else {

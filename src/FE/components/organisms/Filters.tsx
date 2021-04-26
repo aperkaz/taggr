@@ -133,6 +133,7 @@ const Filters = ({ onFilterChange }) => {
   const [fromDate, setFromDate] = useState(EMPTY_EPOCH_TIME);
   const [toDate, setToDate] = useState(EMPTY_EPOCH_TIME);
 
+  // TODONOW: add filter types
   const [activeTags, setActiveTags] = useState({
     // When - date pickers keep their own state
     // morning: false,

@@ -1,37 +1,33 @@
-/* eslint-disable */
-// @ts-nocheck
-// TODONOW: add types
+export interface LocationType {
+  latitude: number;
+  longiture: number;
+}
 
-/**
- * @typedef {Object} ImageType
- * @property {string} hash
- * @property {string} path
- * @property {string} rawPath
- * @property {string[] | null} tags ML tags
- * @property {{latitude: number,longitude: number} | null} location
- * @property {number | null} creationDate
- */
+export interface ImageType {
+  hash: string;
+  path: string;
+  rawPath: string;
+  tags?: string[];
+  location: LocationType;
+  creationDate?: number;
+}
 
-/**
- * @typedef {Object<string,ImageType>} ImageHashMapType
- */
+export interface ImageHashMapType {
+  [imageHash: string]: ImageType;
+}
 
-/**
- * @argument {ImageType} imageArgs
- * @returns {ImageType}
- */
-export const ImageFactory = ({ hash, path, rawPath }) => ({
-  hash,
-  path,
-  rawPath,
+export interface FiltersType {
+  fromDate?: number;
+  toDate?: number;
+  tags: string[];
+}
+
+export const ImageFactory = (args: Partial<ImageType>): ImageType => ({
+  ...args,
+  hash: "empty-hash",
+  path: "empty-path",
+  rawPath: "empty-rawpath",
   tags: null,
   location: null,
   creationDate: null,
 });
-
-/**
- * @returns {ImageHashMapType}
- */
-export const ImageHashMapFactory = () => {
-  return {};
-};
