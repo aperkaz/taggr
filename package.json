@@ -10,7 +10,8 @@
     "test:watch": "jest --watch",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "publish": "electron-forge publish"
+    "publish": "electron-forge publish",
+    "lint:watch": "tsc -w"
   },
   "keywords": [],
   "license": "MIT",
@@ -65,12 +66,12 @@
               "entryPoints": [
                 {
                   "html": "./src/FE/index.html",
-                  "js": "./src/FE/index.js",
+                  "js": "./src/FE/index.ts",
                   "name": "fe_window"
                 },
                 {
                   "html": "./src/BE/index.html",
-                  "js": "./src/BE/index.js",
+                  "js": "./src/BE/index.ts",
                   "name": "be_window"
                 }
               ]
@@ -144,14 +145,24 @@
     "@electron-forge/plugin-webpack": "^6.0.0-beta.45",
     "@electron-forge/publisher-github": "^6.0.0-beta.51",
     "@marshallofsound/webpack-asset-relocator-loader": "^0.5.0",
+    "@types/react-dom": "^17.0.3",
+    "@types/semver": "^7.3.5",
+    "@types/styled-components": "^5.1.9",
+    "@typescript-eslint/eslint-plugin": "^4.0.1",
+    "@typescript-eslint/parser": "^4.0.1",
     "babel-loader": "^8.0.6",
     "copy-webpack-plugin": "^5.0.5",
     "css-loader": "^3.2.0",
     "electron": "^7.1.1",
     "electron-devtools-installer": "^3.1.1",
+    "eslint": "^7.6.0",
+    "eslint-plugin-import": "^2.20.0",
+    "fork-ts-checker-webpack-plugin": "^5.0.14",
     "jest": "^26.6.3",
     "node-loader": "^0.6.0",
     "style-loader": "^0.23.1",
+    "ts-loader": "^8.0.2",
+    "typescript": "^4.0.2",
     "url-loader": "^4.1.1"
   }
 }
