@@ -6,10 +6,8 @@ const readFile = promisify(fs.read);
 
 /**
  * Generate md5 hash from file. Use the initial 4k only.
- *
- * @param {string} filePath
  */
-async function generateFileHash(filePath) {
+async function generateFileHash(filePath: string) {
   const len = 4096,
     pos = 0,
     offset = 0,

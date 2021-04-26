@@ -1,29 +1,33 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+// @ts-ignore
 import debounce from "lodash.debounce";
 
 import FE_ROUTES from "../../../../shared/fe-routes";
+import { MessageType } from "../../../../shared/message-passing";
+import { FiltersType } from "../../../../shared/entities";
 
 import { ACTIONS } from "../../../store";
-import DashboardPage from "./Page";
+import { useAppSelector } from "../../../store/hooks";
 import messageHandler from "../../../message-handler";
-import { MESSAGE_CREATORS } from "../../../../shared/message-passing";
+import DashboardPage from "./Page";
 
 const WithStore = () => {
   const dispatch = useDispatch();
 
-  const progress = useSelector((s) => s.progress);
-  const images = useSelector((s) => s.images);
-  const imagesWithLocation = useSelector((s) => s.imagesWithLocation);
+  const progress = useAppSelector((s) => s.progress);
+  const images = useAppSelector((s) => s.images);
+  const imagesWithLocation = useAppSelector((s) => s.imagesWithLocation);
 
   const onSettingsClick = () => {
     dispatch(ACTIONS.setActiveRoute(FE_ROUTES.SETTINGS_PAGE));
   };
 
-  const onSearchTriggered = debounce((filters) => {
-    messageHandler.postMessage(MESSAGE_CREATORS.BE_filterImages(filters));
+  const onSearchTriggered = debounce((filters: FiltersType) => {
+    messageHandler.postMessage({
+      type: MessageType.BE_FILTER_IMAGES,
+      payload: filters,
+    });
   }, 200);
 
   return (

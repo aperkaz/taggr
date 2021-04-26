@@ -6,11 +6,10 @@ const ExifImage = require("exif").ExifImage;
 
 /**
  * Load EXIF data from path.
- * @param {string} path
  */
-const loadEXIFData = (path) => {
+const loadEXIFData = (path: string) => {
   return new Promise((resolve) => {
-    new ExifImage(path, (err, data) => {
+    new ExifImage(path, (err: any, data: any) => {
       resolve(data);
     });
   });
@@ -18,10 +17,8 @@ const loadEXIFData = (path) => {
 
 /**
  * Transform string to UTC EPOCH time. Uses local timezone for conversion.
- *
- * @param {string} exifDateString ex. "2013:01:01 01:01:01"
  */
-const exifDateStringToDate = (exifDateString) => {
+const exifDateStringToDate = (exifDateString: string) => {
   if (!exifDateString) return null;
 
   var str = exifDateString.split(" ");
@@ -36,11 +33,8 @@ const exifDateStringToDate = (exifDateString) => {
 
 /**
  * Get file creation date in UNIX EPOCH
- *
- * @param {string} path
- * @returns {Promise<number|null>}
  */
-async function getImageCreationDate(path) {
+async function getImageCreationDate(path: string): Promise<number | null> {
   const exifData = await loadEXIFData(path);
   const exifDateTimeOriginal = get(exifData, "exif.DateTimeOriginal", null);
   const exifCreateDate = get(exifData, "exif.CreateDate", null);

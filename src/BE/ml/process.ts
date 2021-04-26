@@ -1,13 +1,14 @@
 import { getTags } from "./calculate-tags";
 import { getFileCreationDate, getLocation } from "../utils/get-file-metadata";
+
 import logger from "../../shared/logger";
+import { ImageType } from "../../shared/entities";
 
 /**
  * Extract all the information form an image
- * @param {string} imagePath
  * @returns {{location: {latitude: number, longitude: number}, tags: string[], creationDate: number}}
  */
-const process = async function (imagePath) {
+const process = async function (imagePath: string): any {
   logger.log("processing image: ", imagePath);
 
   const tags = await getTags(imagePath);

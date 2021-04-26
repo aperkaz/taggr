@@ -1,13 +1,15 @@
 import get from "lodash.get";
+
+import { LocationType } from "../../shared/entities";
+
 const ExifImage = require("exif").ExifImage;
 
 /**
  * Load EXIF data from path.
- * @param {string} path
  */
-const loadEXIFData = (path) => {
+const loadEXIFData = (path: string) => {
   return new Promise((resolve) => {
-    new ExifImage(path, (err, data) => {
+    new ExifImage(path, (err: any, data: any) => {
       console.log(err);
       console.log(data);
       resolve(data);
@@ -17,12 +19,12 @@ const loadEXIFData = (path) => {
 
 /**
  * Get the location info for an image
- * @param {string} imagePath without file:// prefix
- * @returns {Promise<{latitude: number, longitude: number}>}
  */
-const getImageLocation = async function (imagePath) {
+const getImageLocation = async function (
+  imagePath: string
+): Promise<LocationType> {
   try {
-    let exifData = await loadEXIFData(imagePath);
+    let exifData: any = await loadEXIFData(imagePath);
 
     // check if gps is contained
     const latitude = get(exifData, "gps.GPSLatitude", null);
@@ -54,9 +56,8 @@ const getImageLocation = async function (imagePath) {
 
 /**
  * Translate latlong string to {lat, lon} object
- * @param {string} latLongString
  */
-const toDecimal = (latLongString) => {
+const toDecimal = (latLongString: string) => {
   var parseDMS = require("parse-dms");
 
   return parseDMS(latLongString);

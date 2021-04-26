@@ -1,14 +1,10 @@
 import fs from "fs";
 import path from "path";
 import sharp from "sharp";
+import { ImageHashMapType } from "../../shared/entities";
 import logger from "../../shared/logger";
 
-/**
- * @param {string} imagePath
- * @param {string} outputPath
- * @returns {Promise<void>}
- */
-const resizeImage = async (imagePath, outputPath) => {
+const resizeImage = async (imagePath: string, outputPath: string) => {
   await sharp(imagePath, {
     failOnError: false,
   }) // failOnError: true, fixes Samsung corrupted pictures
@@ -17,11 +13,7 @@ const resizeImage = async (imagePath, outputPath) => {
     .toFile(outputPath);
 };
 
-/**
- * @param {string} filePath
- * @returns {Promise<boolean>}
- */
-async function doesFileExist(filePath) {
+async function doesFileExist(filePath: string) {
   return fs.promises
     .access(filePath, fs.constants.F_OK)
     .then(() => true)
@@ -30,10 +22,12 @@ async function doesFileExist(filePath) {
 
 /**
  * Pre-process only the images that dont exist
- * @param {import("../../shared/entities").ImageHashMapType} imageMap
- * @param {string} outputPath
  */
-const preProcessImages = async (imageMap, outputPath, reporter) => {
+const preProcessImages = async (
+  imageMap: ImageHashMapType,
+  outputPath: string,
+  reporter: any
+) => {
   logger.time("preProcessImages");
 
   const hashes = Object.keys(imageMap);

@@ -1,14 +1,16 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
 import { configureStore, createSlice } from "@reduxjs/toolkit";
+
+import { ImageType } from "../../shared/entities";
 import FE_ROUTES from "../../shared/fe-routes";
 
-// TODONOW: add types
 interface InitialState {
-  activeRoute: string;
-  images: any;
-  imagesWithLocation: any[];
-  progress: any;
+  activeRoute: keyof typeof FE_ROUTES;
+  images: ImageType;
+  imagesWithLocation: ImageType[];
+  progress: {
+    current: number;
+    total: number;
+  };
 }
 
 const initialState: InitialState = {
@@ -36,7 +38,7 @@ const stateSlice = createSlice({
       state.imagesWithLocation = action.payload;
     },
     setProgress: (state, action) => {
-      state.progress = { ...state.task, ...action.payload };
+      state.progress = { ...state.progress, ...action.payload };
     },
   },
 });

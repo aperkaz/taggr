@@ -2,7 +2,7 @@ import path from "path";
 import get from "lodash.get";
 import throttle from "lodash.throttle";
 
-import { MESSAGE_CREATORS } from "../shared/message-passing";
+import { MessageType } from "../shared/message-passing";
 import FE_ROUTES from "../shared/fe-routes";
 import {
   FiltersType,
@@ -40,15 +40,14 @@ const initializeProject = async (rootPath: string) => {
   const imagePathsInProject = await findImagePaths(rootPath);
 
   // 1. update FE route to pre-processing and send progress
-  messageHandler.postMessage(
-    MESSAGE_CREATORS.FE_setProgress({
-      current: 0,
-      total: imagePathsInProject.length,
-    })
-  );
-  messageHandler.postMessage(
-    MESSAGE_CREATORS.FE_setRoute(FE_ROUTES.PRE_PROCESSING_PAGE)
-  );
+  messageHandler.postMessage({
+    type: MessageType.FE_SET_PROGRESS,
+    payload: { current: 0, total: imagePathsInProject.length },
+  });
+  messageHandler.postMessage({
+    type: MessageType.FE_SET_ROUTE,
+    payload: FE_ROUTES.PRE_PROCESSING_PAGE,
+  });
 
   // 2. Generate in memory structure, and calculate the file hashes
   for (const imagePath of imagePathsInProject) {
@@ -64,12 +63,13 @@ const initializeProject = async (rootPath: string) => {
   // 3. Pre-process images (sharp small)
   const throttledPost = throttle(messageHandler.postMessage, 250);
   await preProcessImages(imageMap, envPaths.data, (processed: any) =>
-    throttledPost(
-      MESSAGE_CREATORS.FE_setProgress({
+    throttledPost({
+      type: MessageType.FE_SET_PROGRESS,
+      payload: {
         current: processed,
         total: imagePathsInProject.length,
-      })
-    )
+      },
+    })
   );
 
   // 4. Update DB with all images
@@ -90,22 +90,22 @@ const initializeProject = async (rootPath: string) => {
   db.set(PROPERTIES.CURRENT_IMAGE_HASES, Object.keys(imageMap));
 
   // 6. Send images to FE
-  messageHandler.postMessage(
-    MESSAGE_CREATORS.FE_setImages(transformImageMaptoImageList(imageMap))
-  );
+  messageHandler.postMessage({
+    type: MessageType.FE_SET_IMAGES,
+    payload: transformImageMaptoImageList(imageMap),
+  });
 
   // 7. Update FE route
-  messageHandler.postMessage(
-    MESSAGE_CREATORS.FE_setRoute(FE_ROUTES.DASHBOARD_PAGE)
-  );
+  messageHandler.postMessage({
+    type: MessageType.FE_SET_ROUTE,
+    payload: FE_ROUTES.DASHBOARD_PAGE,
+  });
 
   // 8. update progress
-  messageHandler.postMessage(
-    MESSAGE_CREATORS.FE_setProgress({
-      current: 0,
-      total: 0,
-    })
-  );
+  messageHandler.postMessage({
+    type: MessageType.FE_SET_PROGRESS,
+    payload: { current: 0, total: 0 },
+  });
 
   process();
 };
@@ -122,12 +122,10 @@ const process = async () => {
     (hash) => !get(allImageMap, `${hash}.tags`, false)
   );
 
-  messageHandler.postMessage(
-    MESSAGE_CREATORS.FE_setProgress({
-      current: 0,
-      total: imageHashToProcess.length,
-    })
-  );
+  messageHandler.postMessage({
+    type: MessageType.FE_SET_PROGRESS,
+    payload: { current: 0, total: imageHashToProcess.length },
+  });
 
   // 1. ML process images
   let processed = 0;
@@ -152,17 +150,16 @@ const process = async () => {
       location,
       creationDate,
     });
-    messageHandler.postMessage(
-      MESSAGE_CREATORS.FE_setProgress({
-        current: processed,
-        total: imageHashToProcess.length,
-      })
-    );
+
+    messageHandler.postMessage({
+      type: MessageType.FE_SET_PROGRESS,
+      payload: { current: processed, total: imageHashToProcess.length },
+    });
   }
 
-  MESSAGE_CREATORS.FE_setProgress({
-    current: 0,
-    total: 0,
+  messageHandler.postMessage({
+    type: MessageType.FE_SET_PROGRESS,
+    payload: { current: 0, total: 0 },
   });
 };
 
@@ -189,7 +186,10 @@ const filterImages = (filters: FiltersType) => {
   //   }
   // });
 
-  messageHandler.postMessage(MESSAGE_CREATORS.FE_setImages(images));
+  messageHandler.postMessage({
+    type: MessageType.FE_SET_IMAGES,
+    payload: images,
+  });
 };
 
 /**

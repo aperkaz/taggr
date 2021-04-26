@@ -12,11 +12,8 @@ import logger from "../../shared/logger";
 
 /**
  * Recursively find all the image paths inside the folderPath
- *
- * @param {String} folderPath
- * @returns {Promise<String[]>} image paths list
  */
-async function recursivelyFindImages(folderPath) {
+async function recursivelyFindImages(folderPath: string): Promise<string[]> {
   let imagePathsList = [];
   let projectSize = 0;
 
@@ -52,4 +49,5 @@ async function recursivelyFindImages(folderPath) {
   return imagePathsList;
 }
 
+// @ts-ignore
 export default logFunctionPerf(recursivelyFindImages);

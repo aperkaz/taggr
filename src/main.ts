@@ -1,5 +1,3 @@
-/* eslint-disable */
-// @ts-nocheck
 const { app, BrowserWindow, nativeTheme } = require("electron");
 const path = require("path");
 const {

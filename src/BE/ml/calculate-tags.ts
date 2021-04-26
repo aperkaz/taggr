@@ -1,9 +1,11 @@
+// @ts-nocheck
 import get from "lodash.get";
 
 import { getClassificationIds } from "./types/classification";
 import { getObjectRecognitionClassNames } from "./types/objectRecognition";
 import { CUSTOM_TAGS } from "./types/custom_tags";
 import logger from "../../shared/logger";
+import { ImageType } from "../../shared/entities";
 
 /**
  * Return true is an image classifies as the given tagName.
@@ -41,15 +43,11 @@ const calculateTag = (imageNetClassIds, cocoSsdClassNames, tagName) => {
   return false;
 };
 
-/**
- * Return list of custom tags for image.
- *
- * @param {number[]} imageNetClassIds
- * @param {string[]} cocoSsdClassNames
- * @returns {string[]}
- */
-export const calculateTags = (imageNetClassIds, cocoSsdClassNames) => {
-  const tags = [];
+export const calculateTags = (
+  imageNetClassIds: number[],
+  cocoSsdClassNames: string[]
+) => {
+  const tags: string[] = [];
 
   Object.keys(CUSTOM_TAGS).forEach((tagName) => {
     if (calculateTag(imageNetClassIds, cocoSsdClassNames, tagName)) {
@@ -60,12 +58,7 @@ export const calculateTags = (imageNetClassIds, cocoSsdClassNames) => {
   return tags;
 };
 
-/**
- * Get custom tags for image
- * @param {Image} image
- * @returns {Promise<string[]>}
- */
-export const getTags = async (image) => {
+export const getTags = async (image: any) => {
   // ML classification
   logger.time("classify");
   const imageNetClassIds = await getClassificationIds(image);

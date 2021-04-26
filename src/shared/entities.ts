@@ -1,6 +1,6 @@
 export interface LocationType {
   latitude: number;
-  longiture: number;
+  longitude: number;
 }
 
 export interface ImageType {
@@ -23,11 +23,11 @@ export interface FiltersType {
 }
 
 export const ImageFactory = (args: Partial<ImageType>): ImageType => ({
-  ...args,
   hash: "empty-hash",
   path: "empty-path",
   rawPath: "empty-rawpath",
   tags: null,
   location: null,
   creationDate: null,
+  ...args,
 });

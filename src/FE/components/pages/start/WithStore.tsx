@@ -1,10 +1,8 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
 import React from "react";
 
 import StartPage from "./Page";
 import messageHandler from "../../../message-handler";
-import { MESSAGE_CREATORS } from "../../../../shared/message-passing";
+import { MessageType } from "../../../../shared/message-passing";
 
 const WithStore = () => {
   const onSelectRootFolderPath = async () => {
@@ -18,9 +16,10 @@ const WithStore = () => {
 
     if (!rootFolderPath) return;
 
-    messageHandler.postMessage(
-      MESSAGE_CREATORS.BE_initializeProject(rootFolderPath)
-    );
+    messageHandler.postMessage({
+      type: MessageType.BE_INITIALIZE_PROJECT,
+      payload: rootFolderPath,
+    });
   };
 
   const onSelectLogo = () => {

@@ -42,10 +42,12 @@ const Footer = styled.div`
   }
 `;
 
-const StartPage = ({
-  onSelectRootFolderPath = () => 1,
-  onSelectLogo = () => 1,
-}) => (
+type Props = {
+  onSelectRootFolderPath: (path: string) => any;
+  onSelectLogo: () => any;
+};
+
+const StartPage = ({ onSelectRootFolderPath, onSelectLogo }: Props) => (
   <Wrapper>
     <InnerWrapper>
       <Main>
@@ -72,6 +74,7 @@ const StartPage = ({
         </Typography>
         <FancyButton
           text="Select picture folder"
+          // @ts-ignore
           onClick={onSelectRootFolderPath}
         />
       </Main>

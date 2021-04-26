@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 
 import FE_ROUTES from "../../../../shared/fe-routes";
-import { MESSAGE_CREATORS } from "../../../../shared/message-passing";
+import { MessageType } from "../../../../shared/message-passing";
 
 import { ACTIONS } from "../../../store";
 import messageHandler from "../../../message-handler";
@@ -13,15 +13,12 @@ const WithStore = () => {
 
   const onBrowseMore = () => {
     dispatch(ACTIONS.resetState());
-    messageHandler.postMessage(MESSAGE_CREATORS.BE_reset());
+    messageHandler.postMessage({ type: MessageType.BE_RESET });
   };
 
   const onSelectDestroy = async () => {
-    // const { ipcRenderer } = window.require("electron");
-    // ipcRenderer.send("restart");
-
     dispatch(ACTIONS.resetState());
-    messageHandler.postMessage(MESSAGE_CREATORS.BE_destroy());
+    messageHandler.postMessage({ type: MessageType.BE_DESTROY });
   };
 
   const onSelectBack = () => {

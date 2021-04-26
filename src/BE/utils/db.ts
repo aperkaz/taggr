@@ -1,4 +1,3 @@
-// @ts-nocheck
 import Store from "electron-store";
 
 import { ImageType } from "../../shared/entities";
@@ -60,6 +59,7 @@ const PROD_CONFIG = {
   encryptionKey: 1234,
 };
 
+// @ts-ignore
 const db = new Store(activeEnv === ENVS.BUILD_PROD ? PROD_CONFIG : DEV_CONFIG);
 
 export default db;
