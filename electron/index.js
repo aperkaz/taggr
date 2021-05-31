@@ -1,6 +1,7 @@
 let electron = require('electron');
 let { app, BrowserWindow } = require('electron');
 let { fork } = require('child_process');
+let path = require('path');
 let isDev = require('electron-is-dev');
 
 let findOpenSocket = require('./find-open-socket');
@@ -25,10 +26,9 @@ function createFrontendWindow(socketName) {
     }
   });
 
-  // frontendWindow.loadFile(`${__dirname}/${FE_BUILD_DIR}/client-index.html`);
   frontendWindow.loadURL(
     isDev
-      ? 'http://localhost:3001'
+      ? 'http://localhost:3000'
       : `file://${path.join(__dirname, FE_BUILD_DIR, 'index.html')}`
   );
 
