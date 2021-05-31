@@ -9,8 +9,12 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "package": "electron-forge package",
+    "package:linux": "electron-forge package --platform=linux",
+    "package:mac": "electron-forge package --platform=darwin",
+    "package:windows": "electron-forge package --platform=win32",
     "make": "electron-forge make",
-    "publish": "electron-forge publish"
+    "publish": "electron-forge publish",
+    "lint:watch": "tsc -w"
   },
   "keywords": [],
   "license": "MIT",
@@ -51,6 +55,12 @@
           }
         },
         {
+          "name": "@electron-forge/maker-dmg",
+          "config": {
+            "icon": "resources/iconLinux.png"
+          }
+        },
+        {
           "name": "@electron-forge/maker-rpm",
           "config": {}
         }
@@ -65,12 +75,12 @@
               "entryPoints": [
                 {
                   "html": "./src/FE/index.html",
-                  "js": "./src/FE/index.js",
+                  "js": "./src/FE/index.ts",
                   "name": "fe_window"
                 },
                 {
                   "html": "./src/BE/index.html",
-                  "js": "./src/BE/index.js",
+                  "js": "./src/BE/index.ts",
                   "name": "be_window"
                 }
               ]
@@ -105,7 +115,6 @@
     "@tensorflow-models/mobilenet": "2.0.4",
     "@tensorflow/tfjs-converter": "1.7.4",
     "@tensorflow/tfjs-core": "1.7.4",
-    "@types/jest": "^26.0.22",
     "date-fns": "^2.14.0",
     "electron-squirrel-startup": "^1.0.0",
     "electron-store": "^6.0.0",
@@ -119,11 +128,11 @@
     "lodash.throttle": "^4.1.1",
     "normalize-path": "^3.0.0",
     "parse-dms": "0.0.3",
+    "plausible-tracker": "^0.3.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-map-gl": "^5.2.7",
     "react-redux": "^7.2.0",
-    "react-sizeme": "^2.6.12",
     "react-window": "^1.8.5",
     "readdirp": "^3.6.0",
     "rimraf": "^3.0.2",
@@ -144,14 +153,33 @@
     "@electron-forge/plugin-webpack": "^6.0.0-beta.45",
     "@electron-forge/publisher-github": "^6.0.0-beta.51",
     "@marshallofsound/webpack-asset-relocator-loader": "^0.5.0",
+    "@types/fslightbox-react": "^1.4.0",
+    "@types/jest": "^26.0.23",
+    "@types/lodash.get": "^4.4.6",
+    "@types/lodash.range": "^3.2.6",
+    "@types/lodash.throttle": "^4.1.6",
+    "@types/normalize-path": "^3.0.0",
+    "@types/react-dom": "^17.0.3",
+    "@types/react-window": "^1.8.3",
+    "@types/semver": "^7.3.5",
+    "@types/sharp": "^0.28.0",
+    "@types/styled-components": "^5.1.9",
+    "@typescript-eslint/eslint-plugin": "^4.0.1",
+    "@typescript-eslint/parser": "^4.0.1",
     "babel-loader": "^8.0.6",
     "copy-webpack-plugin": "^5.0.5",
     "css-loader": "^3.2.0",
     "electron": "^7.1.1",
     "electron-devtools-installer": "^3.1.1",
+    "eslint": "^7.6.0",
+    "eslint-plugin-import": "^2.20.0",
+    "fork-ts-checker-webpack-plugin": "^5.0.14",
     "jest": "^26.6.3",
     "node-loader": "^0.6.0",
     "style-loader": "^0.23.1",
+    "ts-jest": "^26.5.6",
+    "ts-loader": "^8.0.2",
+    "typescript": "^4.2.4",
     "url-loader": "^4.1.1"
   }
 }

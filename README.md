@@ -44,22 +44,10 @@ https://github.com/aperkaz/taggr-releases/releases
 
 ## Future Features
 
-- Stripe payments with Netlify functions: https://github.com/aperkaz/test-stripe-nelify-functions
-  https://labs.thisdot.co/blog/build-your-backend-with-netlify-functions-in-20-minutes
-  https://blog.appsignal.com/2014/08/28/handling-vat-with-stripe.html
-  https://stripe.com/docs/payments/accept-a-payment?integration=checkout
 - Layout masonry: https://github.com/bvaughn/react-virtualized/issues/1366
-
-- Future Landing page: https://twizzle.app/
-- Chat for users to report their view: https://small.chat/pricing/
-- Add node_modules migration, to fix the known issues.
 - Certificate trust increase: https://support.ksoftware.net/support/solutions/articles/215894-what-is-this-file-is-not-commonly-downloaded-and-could-harm-your-computer-message-smartscreen-
 - Add github actions build: https://github.com/malept/electron-forge-demo123/actions/runs/116519042/workflow
 - Some images are displayed rotated, example in thailand trip
-- Image editor: https://ui.toast.com/tui-image-editor/
-- Integration with 3rd party image sharing programs.
-- Project information persistence: https://github.com/sindresorhus/electron-store
-
 - Replace gallery view with lazy loading: https://github.com/xiaolin/react-image-gallery
 - Timeline with pictures https://github.com/rmariuzzo/react-chronos
 - Timeline display of images per day http://tany.kim/quantify-your-year/#/
@@ -70,8 +58,11 @@ https://github.com/aperkaz/taggr-releases/releases
   https://share.storewise.tech/upload
   https://safenote.co/upload-file ??
 
-- use stripe + email for key validation. Set a flag in the DB, ask stripe from droplet in digital ocean: https://stripe.com/docs/api/orders/update
+### Not so relevant
+
 - micro animations: https://www.joshwcomeau.com/react/boop/
+- Add node_modules migration, to fix the known issues.
+- Image editor: https://ui.toast.com/tui-image-editor/
 
 ## Known Issues
 
