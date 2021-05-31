@@ -1,9 +1,9 @@
-backend/build
-backend/node_modules
+node_modules
 
 frontend/build
 frontend/node_modules
 
 electron/build-frontend
-electron/build-backend
+electron/backend/build/**
 electron/node_modules
+electron/dist
