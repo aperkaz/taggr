@@ -1,0 +1,19 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.15.4"
+  },
+  "dependencies": {
+    "electron": "^5.0.4",
+    "electron-is-dev": "^1.1.0",
+    "node-ipc": "^9.1.1",
+    "sharp": "^0.28.3",
+    "uuid": "^3.3.2"
+  },
+  "scripts": {
+    "start": "electron ."
+  }
+}
