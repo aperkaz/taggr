@@ -8,8 +8,11 @@
   },
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
-    "start": "electron .",
-    "watch:backend": "sh ./scripts/dev.sh",
+    "watch": "electron .",
+    "watch:backend": "yarn build:backend -w --preserveWatchOutput",
+    "build:backend": "rimraf build-backend; mkdir build-backend; cp ./src/backend/server-dev.html ./build-backend/server-dev.html; tsc",
+    "build:frontend": "rimraf build-frontend; mkdir build-frontend; (cd ../frontend; yarn && yarn build); cp -R ../frontend/build/. ./build-frontend",
+    "build": "yarn build:frontend; yarn build:backend; yarn dist",
     "pack": "electron-builder --dir",
     "dist": "rimraf ./dist && electron-builder"
   },
@@ -26,9 +29,8 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "electron": "^5.0.4",
     "@types/node": "^15.6.1",
-    "cpx": "^1.5.0",
+    "electron": "^5.0.4",
     "electron-builder": "^22.10.5",
     "rimraf": "^3.0.2",
     "typescript": "^4.3.2"

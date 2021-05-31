@@ -5,76 +5,119 @@ let isDev = require('electron-is-dev');
 
 let findOpenSocket = require('./find-open-socket');
 
-let clientWin;
-let serverWin;
-let serverProcess;
+let frontendWindow;
+let backendWindow;
+let backendProcess;
 
-function createWindow(socketName) {
-  clientWin = new BrowserWindow({
-    width: 800,
-    height: 600,
+const FE_BUILD_DIR = `build-frontend`;
+const BE_BUILD_DIR = `build-backend`;
+
+function createFrontendWindow(socketName) {
+  frontendWindow = new BrowserWindow({
+    x: 900,
+    y: 0,
+    width: 1000,
+    height: 1000,
     webPreferences: {
       nodeIntegration: false,
-      preload: __dirname + '/client-preload.js'
+      webSecurity: false,
+      preload: `${__dirname}/${FE_BUILD_DIR}/client-preload.js`
     }
   });
 
-  clientWin.loadFile('client-index.html');
+  // frontendWindow.loadFile(`${__dirname}/${FE_BUILD_DIR}/client-index.html`);
+  frontendWindow.loadURL(
+    isDev
+      ? 'http://localhost:3001'
+      : `file://${path.join(__dirname, FE_BUILD_DIR, 'index.html')}`
+  );
 
-  clientWin.webContents.on('did-finish-load', () => {
-    clientWin.webContents.send('set-socket', {
+  frontendWindow.webContents.on('did-finish-load', () => {
+    frontendWindow.webContents.send('set-socket', {
       name: socketName
     });
   });
+
+  if (!isDev) {
+    frontendWindow.removeMenu();
+  } else {
+    frontendWindow.webContents.openDevTools();
+  }
 }
 
-function createBackgroundWindow(socketName) {
-  const win = new BrowserWindow({
-    x: 500,
-    y: 300,
-    width: 700,
-    height: 500,
+function createBackendWindow(socketName) {
+  const window = new BrowserWindow({
+    x: 0,
+    y: 0,
+    width: 900,
+    height: 600,
     show: true,
     webPreferences: {
       nodeIntegration: true
     }
   });
-  win.loadURL(`file://${__dirname}/backend/build/server-dev.html`);
+  window.loadURL(`file://${__dirname}/${BE_BUILD_DIR}/server-dev.html`);
 
-  win.webContents.on('did-finish-load', () => {
-    win.webContents.send('set-socket', { name: socketName });
+  window.webContents.openDevTools();
+
+  window.webContents.on('did-finish-load', () => {
+    window.webContents.send('set-socket', { name: socketName });
   });
 
-  serverWin = win;
+  backendWindow = window;
 }
 
-function createBackgroundProcess(socketName) {
-  serverProcess = fork(__dirname + '/backend/build/server.js', [
+function createBackendProcess(socketName) {
+  backendProcess = fork(`${__dirname}/${BE_BUILD_DIR}/server.js`, [
     '--subprocess',
     app.getVersion(),
     socketName
   ]);
 
-  serverProcess.on('message', (msg) => {
+  backendProcess.on('message', (msg) => {
     console.log(msg);
   });
 }
 
-app.on('ready', async () => {
-  serverSocket = await findOpenSocket();
+const initializeApp = async () => {
+  let serverSocket = await findOpenSocket();
 
-  createWindow(serverSocket);
+  createFrontendWindow(serverSocket);
 
   if (isDev) {
-    createBackgroundWindow(serverSocket);
+    createBackendWindow(serverSocket);
+    // createBackgroundProcess(serverSocket);
   } else {
-    createBackgroundProcess(serverSocket);
+    createBackendProcess(serverSocket);
+  }
+};
+
+// This method will be called when Electron has finished
+// initialization and is ready to create browser windows.
+// Some APIs can only be used after this event occurs.
+app.on('ready', initializeApp);
+
+// App close handler
+app.on('before-quit', () => {
+  if (backendProcess) {
+    backendProcess.kill();
+    backendProcess = null;
   }
 });
 
-app.on('before-quit', () => {
-  if (serverProcess) {
-    serverProcess.kill();
-    serverProcess = null;
+// Quit when all windows are closed.
+app.on('window-all-closed', () => {
+  // On OS X it is common for applications and their menu bar
+  // to stay active until the user quits explicitly with Cmd + Q
+  if (process.platform !== 'darwin') {
+    app.quit();
+  }
+});
+
+app.on('activate', async () => {
+  // On OS X it's common to re-create a window in the app when the
+  // dock icon is clicked and there are no other windows open.
+  if (BrowserWindow.getAllWindows().length === 0) {
+    initializeApp();
   }
 });

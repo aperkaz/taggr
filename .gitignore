@@ -4,6 +4,9 @@ frontend/build
 frontend/node_modules
 
 electron/build-frontend
-electron/backend/build/**
+electron/build-backend
 electron/node_modules
 electron/dist
+
+.DS_Store
+**/**/.DS_Store

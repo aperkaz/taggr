@@ -1,6 +1,7 @@
 # taggr
 
 <!-- TODONOW: update -->
+
 Rediscover your **memories** while keeping your **privacy**.
 
 Powered by machine learning.
@@ -19,7 +20,6 @@ This allows to perform the long and resource intensive backend operations withou
 
 Since the backend executes long running tasks, sync connections are not an option. The message passing acts as a the communication interfact between modules. Each module implements `services`, which deal with the incomming (`handlers`) and outgoing (`services`) messages for that module.
 
-
 ### Folder structure
 
 ```
@@ -27,7 +27,7 @@ electron
 └───frontend-statics -- copy of create-react-app build command, without source maps
 └───out -- generated executables (win/linux/mac)
 └───resources -- statics for building the app (certificates, icon files)
-└───src 
+└───src
 │   └───client-preload -- scripts injected to the client window, with the environmental variables
 │   └───env -- env
 │   └───obfuscate-server -- script for obfuscating backend code before prod
@@ -42,10 +42,7 @@ scripts -- scripts for dev/building/publishing the app
 
 3 app environments. `dev`, `build-test` and `build-production`.
 
-The frontend gets the env variables (helpers at `./src/env`):
--`WINDOW.IS_DEV`
--`WINDOW.IS_BUILD_TEST`
--`WINDOW.IS_BUILD_PRODUCTION`
+The frontend gets the env variables (helpers at `./src/env`): -`WINDOW.IS_DEV` -`WINDOW.IS_BUILD_TEST` -`WINDOW.IS_BUILD_PRODUCTION`
 
 The backend gets an single environment: `process.env.TAGGR_ENV`, with value: `dev`, `build-test`, `build-production`. Helpers at `./src/env`
 
@@ -89,8 +86,6 @@ Obfuscates the js into v8 bytecode. `src/obfuscate-server/index.js` script.
 
 **IMPORTANT**: make sure the READMEs and JS files are removed before `buid:production` and `publish`.
 
-In order to publish the app, TODONOW: complete
-
 ### Releases
 
 https://github.com/aperkaz/taggr-releases/releases
@@ -99,7 +94,7 @@ https://github.com/aperkaz/taggr-releases/releases
 
 - Certificate trust increase: https://support.ksoftware.net/support/solutions/articles/215894-what-is-this-file-is-not-commonly-downloaded-and-could-harm-your-computer-message-smartscreen-
 - Add github actions build: https://github.com/malept/electron-forge-demo123/actions/runs/116519042/workflow
-- Some images are displayed rotated, example in thailand trip 
+- Some images are displayed rotated, example in thailand trip
 - Image editor: https://ui.toast.com/tui-image-editor/
 - Integration with 3rd party image sharing programs.
 - Project information persistence: https://github.com/sindresorhus/electron-store

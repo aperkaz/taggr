@@ -1,6 +1,8 @@
 let serverHandlers = require('./server-handlers');
 let ipc = require('./server-ipc');
 
+console.log('MY NAME IS ALAIN');
+
 let isDev, version;
 
 if (process.argv[2] === '--subprocess') {
@@ -25,6 +27,7 @@ console.log(version, isDev);
   const sharp = require('sharp');
 
   const imagePath = `/Users/alain/Downloads/test.jpg`;
+
   const outputPath = `/Users/alain/Downloads/output.jpg`;
 
   await sharp(imagePath, {
