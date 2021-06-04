@@ -26,9 +26,8 @@ console.log(version, isDev);
 (async () => {
   const sharp = require('sharp');
 
-  const imagePath = `/Users/alain/Downloads/test.jpg`;
-
-  const outputPath = `/Users/alain/Downloads/output.jpg`;
+  const imagePath = `/Users/alain/src/taggr/frontend/src/statics/background.jpg`;
+  const outputPath = `/Users/alain/Downloads/sharp-test.jpg`;
 
   await sharp(imagePath, {
     failOnError: false

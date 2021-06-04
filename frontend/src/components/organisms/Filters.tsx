@@ -1,20 +1,22 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import DateFnsUtils from "@date-io/date-fns";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-} from "@material-ui/pickers";
+  KeyboardDatePicker
+} from '@material-ui/pickers';
 
 // Test
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import Collapse from "@material-ui/core/Collapse";
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Collapse from '@material-ui/core/Collapse';
 
-import Typography from "../atoms/Typography";
-import ButtonRegular from "../molecules/ButtonRegular";
-import ButtonFilter from "../molecules/ButtonFilter";
+import Typography from '../atoms/Typography';
+import ButtonRegular from '../molecules/ButtonRegular';
+import ButtonFilter from '../molecules/ButtonFilter';
+
+// TODONOW: fix TS issues here
 
 const Wrapper = styled.div`
   padding: 1rem;
@@ -84,7 +86,15 @@ const FooterDivider = styled.div`
 const EMPTY_EPOCH_TIME = null;
 
 type Props = {
-  onFilterChange: () => void;
+  onFilterChange: ({
+    fromDate,
+    toDate,
+    tags
+  }: {
+    fromDate: any;
+    toDate: any;
+    tags: any;
+  }) => void;
 };
 
 const Filters = ({ onFilterChange }: Props) => {
@@ -114,16 +124,16 @@ const Filters = ({ onFilterChange }: Props) => {
     surprise: false,
     fear: false,
     anger: false,
-    disgust: false,
+    disgust: false
   });
 
-  const fromDateChange = (epochDate: Date) => {
+  const fromDateChange = (epochDate: any) => {
     setFromDate(epochDate);
 
     triggerSearch({
       fromDate: epochDate,
       toDate: toDate,
-      tags: activeTags,
+      tags: activeTags
     });
   };
 
@@ -133,14 +143,14 @@ const Filters = ({ onFilterChange }: Props) => {
     triggerSearch({
       fromDate: fromDate,
       toDate: epochDate,
-      tags: activeTags,
+      tags: activeTags
     });
   };
 
-  const tagChange = (name: string) => {
+  const tagChange = (name) => {
     const newTags = {
       ...activeTags,
-      [name]: !activeTags[name],
+      [name]: !activeTags[name]
     };
 
     setActiveTags(newTags);
@@ -149,7 +159,7 @@ const Filters = ({ onFilterChange }: Props) => {
     triggerSearch({
       fromDate: fromDate,
       toDate: toDate,
-      tags: newTags,
+      tags: newTags
     });
   };
 
@@ -164,7 +174,7 @@ const Filters = ({ onFilterChange }: Props) => {
     onFilterChange({
       fromDate,
       toDate,
-      tags: activeTagsAsList,
+      tags: activeTagsAsList
     });
   };
 
@@ -182,13 +192,13 @@ const Filters = ({ onFilterChange }: Props) => {
     triggerSearch({
       fromDate: EMPTY_EPOCH_TIME,
       toDate: EMPTY_EPOCH_TIME,
-      tags: [],
+      tags: []
     });
   };
 
   return (
     <Wrapper>
-      <Typography variant="h5" style={{ marginBottom: "1rem" }}>
+      <Typography variant="h5" style={{ marginBottom: '1rem' }}>
         Filters
       </Typography>
       <Body>
@@ -216,7 +226,7 @@ const Filters = ({ onFilterChange }: Props) => {
                         fromDateChange(epochDate);
                       }}
                       KeyboardButtonProps={{
-                        "aria-label": "change date",
+                        'aria-label': 'change date'
                       }}
                       style={{ marginTop: 0 }}
                     />
@@ -233,7 +243,7 @@ const Filters = ({ onFilterChange }: Props) => {
                         toDateChange(epochDate);
                       }}
                       KeyboardButtonProps={{
-                        "aria-label": "change date",
+                        'aria-label': 'change date'
                       }}
                       style={{ marginTop: 0 }}
                     />
@@ -252,34 +262,34 @@ const Filters = ({ onFilterChange }: Props) => {
               <ListItem>
                 <ButtonGrid>
                   <ButtonFilter
-                    text={"🧑 People"}
+                    text={'🧑 People'}
                     active={activeTags.people}
-                    onClick={() => tagChange("people")}
+                    onClick={() => tagChange('people')}
                   />
                   <ButtonFilter
-                    text={"🐶 Animals"}
+                    text={'🐶 Animals'}
                     active={activeTags.animals}
-                    onClick={() => tagChange("animals")}
+                    onClick={() => tagChange('animals')}
                   />
                   <ButtonFilter
-                    text={"🚗 Vehicles"}
+                    text={'🚗 Vehicles'}
                     active={activeTags.vehicles}
-                    onClick={() => tagChange("vehicles")}
+                    onClick={() => tagChange('vehicles')}
                   />
                   <ButtonFilter
-                    text={"🍔 Food"}
+                    text={'🍔 Food'}
                     active={activeTags.food}
-                    onClick={() => tagChange("food")}
+                    onClick={() => tagChange('food')}
                   />
                   <ButtonFilter
-                    text={"🍺 Drinks"}
+                    text={'🍺 Drinks'}
                     active={activeTags.drinks}
-                    onClick={() => tagChange("drinks")}
+                    onClick={() => tagChange('drinks')}
                   />
                   <ButtonFilter
-                    text={"🏀 Sports"}
+                    text={'🏀 Sports'}
                     active={activeTags.sports}
-                    onClick={() => tagChange("sports")}
+                    onClick={() => tagChange('sports')}
                   />
                 </ButtonGrid>
               </ListItem>
@@ -337,10 +347,10 @@ const Filters = ({ onFilterChange }: Props) => {
       </Body>
       <FooterDivider />
       <ButtonRegular
-        text={"✨ Clear filters"}
+        text={'✨ Clear filters'}
         onClick={resetState}
         style={{
-          background: "#1976d2",
+          background: '#1976d2'
         }}
       />
     </Wrapper>

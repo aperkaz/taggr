@@ -1,14 +1,14 @@
-import React from "react";
-import { Story, Meta } from "@storybook/react";
+import React from 'react';
+import { Story, Meta } from '@storybook/react';
 
-import FiltersComp from "./Filters";
+import FiltersComp from './Filters';
 
 export default {
-  title: "Organisms/Filters",
+  title: 'Organisms/Filters',
   component: FiltersComp,
   argTypes: {
-    onFilterChange: console.log,
-  },
+    onFilterChange: { action: 'filter changed' }
+  }
 } as Meta;
 
 const Template: Story<React.ComponentProps<typeof FiltersComp>> = (args) => (

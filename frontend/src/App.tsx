@@ -1,16 +1,24 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import store from './store';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hi there</p>
-      </header>
-    </div>
-  );
+import App from './components/App';
+import './statics/index.css';
+
+// initialize sentry
+import '../shared/sentry';
+// Initialize communication handler
+import './message-handler';
+
+export default class Main extends React.Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <App />
+      </Provider>
+    );
+  }
 }
 
-export default App;
+ReactDOM.render(<Main />, document.getElementById('root'));

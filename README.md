@@ -1,5 +1,8 @@
 # taggr
 
+<!-- TODONOW: use yarn workspaces -->
+<!-- https://github.com/yarnpkg/yarn/issues/4070 -->
+
 <!-- TODONOW: update -->
 
 Rediscover your **memories** while keeping your **privacy**.
