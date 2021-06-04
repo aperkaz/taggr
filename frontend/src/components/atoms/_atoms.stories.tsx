@@ -62,7 +62,7 @@ const TypographyColors = () => (
 );
 
 export default {
-  title: "Atoms",
+  title: "Atoms/Typography",
 } as Meta;
 
 const TemplateDefault: Story<typeof TypographyDefault> = () => (

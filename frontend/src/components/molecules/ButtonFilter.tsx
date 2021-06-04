@@ -9,17 +9,17 @@ type MaterialUiButtonProps = React.ComponentProps<typeof MaterialUiButton>;
 type Props = {
   text: string;
   active: boolean;
-  disabled: boolean;
+  disabled?: boolean;
+  style?: PropType<MaterialUiButtonProps, "style">;
   onClick: () => void;
-  style: PropType<MaterialUiButtonProps, "style">;
 };
 
 const ButtonFilter = ({
   text = "",
   active = false,
   disabled = false,
-  onClick = () => 1,
   style: styles = {},
+  onClick = () => 1,
 }: Props) => (
   <MaterialUiButton
     variant="outlined"
