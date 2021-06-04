@@ -4,14 +4,17 @@ import { Story, Meta } from "@storybook/react";
 import ButtonFancyComp from "./ButtonFancy";
 import ButtonRegularComp from "./ButtonRegular";
 import ButtonFilterComp from "./ButtonFilter";
-import UpdateModalComp from "./UpdateModal";
 import ImageTileComp from "./ImageTile";
-import TaskProgressComp from "./TaskProgress";
 import LoadingComp from "./Loading";
+import ProgressBarComp from "./ProgressBar";
+import UpdateModalComp from "./UpdateModal";
 
 export default {
   title: "Molecules",
   argTypes: { onClick: { action: "clicked" } },
+  parameters: {
+    layout: "centered",
+  },
 } as Meta;
 
 const TemplateButtonFancy: Story<
@@ -28,46 +31,63 @@ const TemplateButtonRegular: Story<
 export const ButtonRegular = TemplateButtonRegular.bind({});
 ButtonRegular.args = {
   text: "Press me",
+  style: {
+    background: "grey",
+  },
 };
 
-// export const ButtonFilter = () => (
-//   <ButtonFilterComp
-//     icon={<NightsStay />}
-//     text={text("text", "Moon")}
-//     active={boolean("active", false)}
-//     onClick={action("trigger onClick")}
-//   />
-// );
+const TemplateButtonFilter: Story<
+  React.ComponentProps<typeof ButtonFilterComp>
+> = (args) => <ButtonFilterComp {...args} />;
+export const ButtonFilter = TemplateButtonFilter.bind({});
+ButtonFilter.args = {
+  text: "🐶 Animals",
+  active: true,
+};
 
-// export const UpdateModal = () => (
-//   <UpdateModalComp
-//     currentAppVersion={text("currentAppVersion", "v0.0.0")}
-//     latestAppVersion={text("latestAppVersion", "v0.0.1")}
-//     onUpdateSelect={action("trigger update action")}
-//   />
-// );
+const TemplateImageTile: Story<React.ComponentProps<typeof ImageTileComp>> = (
+  args
+) => (
+  <div style={{ height: "200px", width: "200px", padding: "15px" }}>
+    <ImageTileComp {...args} />
+  </div>
+);
+export const ImageTile = TemplateImageTile.bind({});
+ImageTile.args = {
+  imageUrl:
+    "https://images.unsplash.com/photo-1619435127168-3dd7e5bc48fd?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80",
+};
 
-// export const TaskProgress = () => (
-//   <TaskProgressComp
-//     name={text(
-//       "taskName",
-//       "Be patient, the minions are working on your memories!"
-//     )}
-//     percentage={number("taskPercentage", 50)}
-//   ></TaskProgressComp>
-// );
+const TemplateLoading: Story<React.ComponentProps<typeof LoadingComp>> = (
+  args
+) => (
+  <div style={{ height: "300px", width: "300px", padding: "15px" }}>
+    <LoadingComp {...args} />
+  </div>
+);
+export const Loading = TemplateLoading.bind({});
+Loading.args = {
+  animationDuration: 8,
+  text: "No pictures found, try to change the filters.",
+};
 
-// export const ImageTile = () => (
-//   <div style={{ height: "200px", width: "200px", padding: "15px" }}>
-//     <ImageTileComp imageUrl="https://images.unsplash.com/photo-1544627836-822bfe450209?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=7500&q=80"></ImageTileComp>
-//   </div>
-// );
+const TemplateProgressBar: Story<
+  React.ComponentProps<typeof ProgressBarComp>
+> = (args) => (
+  <div style={{ height: "300px", width: "300px", padding: "15px" }}>
+    <ProgressBarComp {...args} />
+  </div>
+);
+export const ProgressBar = TemplateProgressBar.bind({});
+ProgressBar.args = {
+  percentage: 60,
+};
 
-// export const Loading = () => (
-//   <FullHeight>
-//     <LoadingComp
-//       animationDuration={number("animation", 8)}
-//       text={text("text", "No pictures found, try to change the filters.")}
-//     />
-//   </FullHeight>
-// );
+const TemplateUpdateModal: Story<
+  React.ComponentProps<typeof UpdateModalComp>
+> = (args) => <UpdateModalComp {...args} />;
+export const UpdateModal = TemplateUpdateModal.bind({});
+UpdateModal.args = {
+  currentAppVersion: "v0.0.0",
+  latestAppVersion: "v0.0.1",
+};

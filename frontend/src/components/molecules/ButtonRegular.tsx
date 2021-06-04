@@ -8,10 +8,8 @@ const CustomButton = withStyles({
   root: {
     minWidth: 200,
     transition: "0.3s cubic-bezier(.47,1.64,.41,.8)",
-    background:
-      /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-      "linear-gradient(to right, #FFC371, #FF5F6D)",
     "&:hover": {
+      boxShadow: "none",
       transform: "scale(1.05)",
     },
   },
@@ -30,18 +28,20 @@ type Props = {
   text: string;
   style?: Object;
   onClick: () => void;
+  args?: React.ComponentProps<typeof Button>;
 };
 
-const ButtonFancy = ({
+const ButtonRegular = ({
   text = "",
   style = {},
   onClick = () => null,
+  args,
 }: Props) => (
-  <CustomButton onClick={onClick} style={style}>
+  <CustomButton onClick={onClick} style={style} {...args}>
     <Typography variant="h6" style={{ color: "white" }}>
       {text}
     </Typography>
   </CustomButton>
 );
 
-export default ButtonFancy;
+export default ButtonRegular;

@@ -1,6 +1,5 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import Typography from "../atoms/Typography";
 
 const Wrapper = styled.div`
   display: flex;
@@ -40,7 +39,7 @@ const AnimationWrapper = styled.div`
   height: 100px;
 `;
 
-const Hr = styled.hr`
+const Hr = styled.hr<ElementProps>`
   border: 0;
   margin: 0;
   width: 40%;
@@ -50,27 +49,31 @@ const Hr = styled.hr`
   animation: ${spin} ${(props) => props.animationDuration}s ease infinite;
 `;
 
-const Element1 = styled(Hr)`
+const Element1 = styled(Hr)<ElementProps>`
   background: #8731e8;
   animation-delay: ${(props) => props.animationDelay}s;
 `;
 
-const Element2 = styled(Hr)`
+const Element2 = styled(Hr)<ElementProps>`
   background: #4528dc;
   animation-delay: ${(props) => props.animationDelay}s;
 `;
 
-const Element3 = styled(Hr)`
+const Element3 = styled(Hr)<ElementProps>`
   background: #ff8e53;
   animation-delay: ${(props) => props.animationDelay}s;
 `;
 
-const Element4 = styled(Hr)`
+const Element4 = styled(Hr)<ElementProps>`
   background: #fe6b8b;
   animation-delay: ${(props) => props.animationDelay}s;
 `;
 
-const Loading = ({ animationDuration = 6, text = "" }) => {
+type ElementProps = { animationDuration: number; animationDelay: number };
+
+type LoadingProps = { animationDuration: number; text: string };
+
+const Loading = ({ animationDuration = 6, text = "" }: LoadingProps) => {
   const elements = 4;
   const animationUnit = animationDuration / elements;
 
@@ -91,9 +94,6 @@ const Loading = ({ animationDuration = 6, text = "" }) => {
           animationDelay={animationUnit * 3}
         />
       </AnimationWrapper>
-      <Typography variant={"h6"} style={{ marginTop: "2em" }}>
-        {text}
-      </Typography>
     </Wrapper>
   );
 };

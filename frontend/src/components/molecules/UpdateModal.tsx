@@ -3,10 +3,15 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
+// TODONOW: make this MF pure
 import semverCompare from "semver/functions/compare";
 
 import ButtonFancy from "./ButtonFancy";
 import Typography from "../atoms/Typography";
+
+// TODONOW: add logger
+// import logger from "../../../shared/logger";
+const logger = console;
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -22,11 +27,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+type UpdateModalProps = {
+  currentAppVersion: string;
+  latestAppVersion: string;
+  onUpdateSelect: () => void;
+};
+
 const UpdateModal = ({
   currentAppVersion = "v0.0.0",
   latestAppVersion = "v0.0.0",
   onUpdateSelect = () => null,
-}) => {
+}: UpdateModalProps) => {
   const classes = useStyles();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -37,7 +48,7 @@ const UpdateModal = ({
         setIsOpen(true);
       }
     } catch (e) {
-      console.log("invalid semver");
+      logger.error(`[FE] Invalid semver in UpdateModal: ${JSON.stringify(e)}`);
     }
   }, [currentAppVersion, latestAppVersion]);
 
