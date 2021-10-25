@@ -72,6 +72,7 @@ const createFrontendWindow = async () => {
 		width: 600,
 		height: 400,
 		webPreferences: {
+			// TODONOW: review which are needed
 			nodeIntegration: true,
 			contextIsolation: false,
 			enableRemoteModule: true,
@@ -88,7 +89,12 @@ const createFrontendWindow = async () => {
 		backendWindow = undefined;
 	});
 
-	await win.loadFile(path.join(__dirname, "renderer-frontend", "index.html"));
+	// await win.loadFile(path.join(__dirname, "renderer-frontend", "index.html"));
+	await win.loadURL(
+		// isDev
+		// ? "http://localhost:3000"
+		`file://${path.join(__dirname, "renderer-frontend/index.html")}`
+	);
 
 	return win;
 };
