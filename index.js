@@ -9,6 +9,13 @@ const contextMenu = require("electron-context-menu");
 const config = require("./config.js");
 const menu = require("./menu.js");
 
+try {
+	require("electron-reloader")(module, {
+		ignore: ["dist", "render-backend/src", "noise.png"],
+		// debug: true,
+	});
+} catch {}
+
 unhandled();
 debug();
 contextMenu();
@@ -28,9 +35,10 @@ app.setAppUserModelId("com.company.AppName");
 // }
 
 // Prevent window from being garbage collected
-let mainWindow;
+let backendWindow;
+let frontendWindow;
 
-const createMainWindow = async () => {
+const createBackendWindow = async () => {
 	const win = new BrowserWindow({
 		title: app.name,
 		show: false,
@@ -50,10 +58,37 @@ const createMainWindow = async () => {
 	win.on("closed", () => {
 		// Dereference the window
 		// For multiple windows store them in an array
-		mainWindow = undefined;
+		backendWindow = undefined;
 	});
 
-	await win.loadFile(path.join(__dirname, "render", "index.html"));
+	await win.loadFile(path.join(__dirname, "render-backend", "index.html"));
+
+	return win;
+};
+const createFrontendWindow = async () => {
+	const win = new BrowserWindow({
+		title: app.name,
+		show: false,
+		width: 600,
+		height: 400,
+		webPreferences: {
+			nodeIntegration: true,
+			contextIsolation: false,
+			enableRemoteModule: true,
+		},
+	});
+
+	win.on("ready-to-show", () => {
+		win.show();
+	});
+
+	win.on("closed", () => {
+		// Dereference the window
+		// For multiple windows store them in an array
+		backendWindow = undefined;
+	});
+
+	await win.loadFile(path.join(__dirname, "render-frontend", "index.html"));
 
 	return win;
 };
@@ -64,12 +99,12 @@ if (!app.requestSingleInstanceLock()) {
 }
 
 app.on("second-instance", () => {
-	if (mainWindow) {
-		if (mainWindow.isMinimized()) {
-			mainWindow.restore();
+	if (backendWindow) {
+		if (backendWindow.isMinimized()) {
+			backendWindow.restore();
 		}
 
-		mainWindow.show();
+		backendWindow.show();
 	}
 });
 
@@ -80,18 +115,22 @@ app.on("window-all-closed", () => {
 });
 
 app.on("activate", async () => {
-	if (!mainWindow) {
-		mainWindow = await createMainWindow();
+	if (!backendWindow) {
+		backendWindow = await createBackendWindow();
+	}
+	if (!frontendWindow) {
+		frontendWindow = await createFrontendWindow();
 	}
 });
 
 (async () => {
 	await app.whenReady();
 	Menu.setApplicationMenu(menu);
-	mainWindow = await createMainWindow();
+	backendWindow = await createBackendWindow();
+	frontendWindow = await createFrontendWindow();
 
 	const favoriteAnimal = config.get("favoriteAnimal");
-	mainWindow.webContents.executeJavaScript(
+	backendWindow.webContents.executeJavaScript(
 		`document.querySelector('header p').textContent = 'Your favorite animal is ${favoriteAnimal}'`
 	);
 })();

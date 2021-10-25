@@ -14,7 +14,7 @@
 		"postinstall": "electron-builder install-app-deps",
 		"lint": "xo",
 		"test": "npm run lint",
-		"build": "tsc",
+		"tsc": "tsc -w",
 		"start": "electron .",
 		"pack": "electron-builder --dir",
 		"dist": "electron-builder --macos --linux --windows",
