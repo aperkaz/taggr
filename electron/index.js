@@ -11,7 +11,7 @@ const menu = require("./menu.js");
 
 try {
 	require("electron-reloader")(module, {
-		ignore: ["dist", "render-backend/src", "noise.png"],
+		ignore: ["dist", "renderer-backend/src", "noise.png"],
 		// debug: true,
 	});
 } catch {}
@@ -61,7 +61,7 @@ const createBackendWindow = async () => {
 		backendWindow = undefined;
 	});
 
-	await win.loadFile(path.join(__dirname, "render-backend", "index.html"));
+	await win.loadFile(path.join(__dirname, "renderer-backend", "index.html"));
 
 	return win;
 };
@@ -88,7 +88,7 @@ const createFrontendWindow = async () => {
 		backendWindow = undefined;
 	});
 
-	await win.loadFile(path.join(__dirname, "render-frontend", "index.html"));
+	await win.loadFile(path.join(__dirname, "renderer-frontend", "index.html"));
 
 	return win;
 };
