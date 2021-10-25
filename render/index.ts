@@ -12,4 +12,5 @@
 			},
 		},
 	}).toFile("noise.png");
+	console.log("HELLO FROM TS RENDER");
 })();
