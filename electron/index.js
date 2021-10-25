@@ -6,6 +6,7 @@ const { is } = require("electron-util");
 const unhandled = require("electron-unhandled");
 const debug = require("electron-debug");
 const contextMenu = require("electron-context-menu");
+const isDev = require("electron-is-dev");
 const config = require("./config.js");
 const menu = require("./menu.js");
 
@@ -91,9 +92,9 @@ const createFrontendWindow = async () => {
 
 	// await win.loadFile(path.join(__dirname, "renderer-frontend", "index.html"));
 	await win.loadURL(
-		// isDev
-		// ? "http://localhost:3000"
-		`file://${path.join(__dirname, "renderer-frontend/index.html")}`
+		isDev
+			? "http://localhost:3001"
+			: `file://${path.join(__dirname, "renderer-frontend/index.html")}`
 	);
 
 	return win;
