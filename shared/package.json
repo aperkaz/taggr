@@ -1,14 +1,18 @@
 {
-  "name": "shared",
+  "name": "taggr-shared",
   "version": "1.0.0",
   "private": true,
   "main": "dist/index",
   "types": "src/index.ts",
+  "engines": {
+    "node": ">=14.0.0",
+    "yarn": "^1.22.0"
+  },
   "scripts": {
     "prebuild": "rimraf dist/",
     "build": "yarn compile",
-    "compile": "tsc -p tsconfig.build.json",
-    "watch": "yarn compile -w --preserveWatchOutput",
+    "compile": "tsc",
+    "start": "yarn compile -w --preserveWatchOutput",
     "test": "jest --verbose --runInBand",
     "test:ci": "jest --forceExit --ci --runInBand"
   },

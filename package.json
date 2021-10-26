@@ -2,15 +2,21 @@
   "private": true,
   "workspaces": [
     "frontend",
-    "shared"
+    "shared",
+    "electron"
+  ],
+  "nohoist": [
+    "**/electron",
+    "**/electron/**",
+    "**/jest",
+    "**/jest/**"
   ],
   "scripts": {
     "test:ci": "yarn workspaces run test:ci",
-    "watch": "yarn wsrun -p frontend -r watch",
-    "build": "yarn wsrun -x @agoy/web --stages build",
-    "watch:web": "yarn workspace frontend start",
-    "watch:app": "yarn workspace electron watch",
-    "build:modules": "yarn modules --stages build"
+    "start": "yarn wsrun -p 'taggr-{frontend,electron,shared}' -r start",
+    "start:web": "yarn workspace taggr-frontend start",
+    "start:electron": "yarn workspace taggr-electron start",
+    "build": "yarn workspace taggr-shared build; yarn workspace taggr-electron build"
   },
   "devDependencies": {
     "wsrun": "^5.2.4"

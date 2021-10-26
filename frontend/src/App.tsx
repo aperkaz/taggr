@@ -1,5 +1,5 @@
 import React from "react";
-import shared from "shared";
+import shared from "taggr-shared";
 import logo from "./logo.svg";
 import "./App.css";
 
@@ -17,7 +17,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          TS here yo!! {shared}
+          TS here!! {shared}
         </a>
       </header>
     </div>

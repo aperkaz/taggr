@@ -1,3 +1,5 @@
+import shared from "taggr-shared";
+
 (async () => {
 	const sharp = require("sharp");
 	await sharp({
@@ -12,5 +14,5 @@
 			},
 		},
 	}).toFile("noise.png");
-	console.log("HELLO FROM TS-RENDER");
+	console.log("HELLO FROMTS-RENDER PROCESS: ", shared);
 })();

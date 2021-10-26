@@ -1,8 +1,19 @@
 {
-  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "isolatedModules": false,
+    "module": "commonjs",
+    "target": "es2019",
+    "lib": ["es2020"],
+    "jsx": "react",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "strictNullChecks": true,
+    "sourceMap": true,
+    "outDir": "./dist/",
+    "declaration": true,
+    "isolatedModules": false
   },
+  "exclude": ["node_modules", "dist"],
+  "include": ["src/**/*"],
   "typeAcquisition": {
     "include": ["jest"]
   }

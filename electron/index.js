@@ -96,6 +96,7 @@ const createFrontendWindow = async () => {
 			? "http://localhost:3001"
 			: `file://${path.join(__dirname, "renderer-frontend/index.html")}`
 	);
+	console.log("electron internal");
 
 	return win;
 };
