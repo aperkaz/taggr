@@ -1,10 +1,12 @@
 import shared from "taggr-shared";
 import path from "path";
+import os from "os";
 
 (async () => {
+	// eslint-disable-next-line @typescript-eslint/no-var-requires
 	const sharp = require("sharp");
 
-	const homedir = require("os").homedir();
+	const homedir = os.homedir();
 	const desktopDir = `${homedir}/Desktop`;
 
 	await sharp({

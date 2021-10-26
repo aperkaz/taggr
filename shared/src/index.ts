@@ -1,2 +1,2 @@
-const str: string = "HELLO FROM SHARED MODULE, ALAIN";
-export default str;
+const exp = "HELLO FROM SHARED MODULE, ALAIN";
+export default exp;
