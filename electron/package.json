@@ -16,8 +16,8 @@
 	},
 	"scripts": {
 		"postinstall": "electron-builder install-app-deps",
-		"lint": "xo",
-		"test": "yarn lint",
+		"lint": "eslint renderer-backend/src/* ",
+		"test": "jest",
 		"tsc": "tsc",
 		"tsc:watch": "tsc -w --preserveWatchOutput",
 		"start": "concurrently -k -p \"[{name}]\" -n \"electron,tsc\" -c \"cyan.bold,green.bold\"  \"wait-on http://localhost:3001 && electron .\" \"yarn tsc:watch\"",
@@ -46,10 +46,17 @@
 		"wait-on": "^6.0.0"
 	},
 	"devDependencies": {
+		"@babel/preset-typescript": "^7.15.0",
+		"@types/jest": "^27.0.2",
+		"@typescript-eslint/eslint-plugin": "^5.2.0",
+		"@typescript-eslint/parser": "^5.2.0",
 		"electron": "12.2.2",
 		"electron-builder": "^22.10.5",
 		"electron-reloader": "^1.2.1",
+		"eslint": "^8.1.0",
+		"jest": "^27.3.1",
 		"np": "^7.5.0",
+		"ts-jest": "^27.0.7",
 		"xo": "^0.39.1"
 	},
 	"xo": {
