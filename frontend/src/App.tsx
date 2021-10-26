@@ -1,4 +1,5 @@
 import React from "react";
+import shared from "shared";
 import logo from "./logo.svg";
 import "./App.css";
 
@@ -16,7 +17,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          TS here yo!!
+          TS here yo!! {shared}
         </a>
       </header>
     </div>

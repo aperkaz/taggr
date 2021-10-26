@@ -1,0 +1,18 @@
+{
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "shared"
+  ],
+  "scripts": {
+    "test:ci": "yarn workspaces run test:ci",
+    "watch": "yarn wsrun -p frontend -r watch",
+    "build": "yarn wsrun -x @agoy/web --stages build",
+    "watch:web": "yarn workspace frontend start",
+    "watch:app": "yarn workspace electron watch",
+    "build:modules": "yarn modules --stages build"
+  },
+  "devDependencies": {
+    "wsrun": "^5.2.4"
+  }
+}
