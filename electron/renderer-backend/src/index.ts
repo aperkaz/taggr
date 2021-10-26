@@ -1,7 +1,12 @@
 import shared from "taggr-shared";
+import path from "path";
 
 (async () => {
 	const sharp = require("sharp");
+
+	const homedir = require("os").homedir();
+	const desktopDir = `${homedir}/Desktop`;
+
 	await sharp({
 		create: {
 			width: 300,
@@ -13,6 +18,6 @@ import shared from "taggr-shared";
 				sigma: 30,
 			},
 		},
-	}).toFile("noise.png");
+	}).toFile(path.join(desktopDir, "noise.png"));
 	console.log("HELLO FROMTS-RENDER PROCESS: ", shared);
 })();

@@ -68,14 +68,14 @@ Built with [Electron](https://electronjs.org).
 ### Run
 
 ```
-$ npm install
-$ npm start
+$ yarn
+$ yarn start
 ```
 
 ### Publish
 
 ```
-$ npm run release
+$ yarn release
 ```
 
 After Travis finishes building your app, open the release draft it created and click "Publish".
