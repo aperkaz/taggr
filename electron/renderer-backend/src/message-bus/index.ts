@@ -47,7 +47,7 @@ window.ipcRenderer.on(
 export const sendToFrontend = (message: messageBus.FE_MESSAGES): void => {
 	if (!feWebContentId || isNaN(feWebContentId))
 		throw new Error(
-			"[BE] ipc ca not send message, is missing the feWebContentId"
+			"[BE] ipc can not send message, is missing the feWebContentId"
 		);
 
 	console.log(
