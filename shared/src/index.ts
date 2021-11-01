@@ -1,2 +1,3 @@
-const exp = "HELLO FROM SHARED MODULE, ALAIN";
-export default exp;
+export * as messageBus from "./message-bus";
+export * as typeUtils from "./type-utils";
+export * as Types from "./types";

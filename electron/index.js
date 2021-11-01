@@ -9,6 +9,7 @@ const contextMenu = require("electron-context-menu");
 const isDev = require("electron-is-dev");
 const config = require("./config.js");
 const menu = require("./menu.js");
+const { messageBus } = require("taggr-shared");
 
 try {
 	require("electron-reloader")(module, {
@@ -42,13 +43,17 @@ let frontendWindow;
 const createBackendWindow = async () => {
 	const win = new BrowserWindow({
 		title: app.name,
-		show: false,
-		width: 600,
-		height: 400,
+		show: isDev,
+		x: 0,
+		y: 0,
+		width: 800,
+		height: 500,
 		webPreferences: {
 			nodeIntegration: true,
 			contextIsolation: false,
-			enableRemoteModule: true,
+			webSecurity: false,
+			backgroundThrottling: false,
+			preload: path.join(__dirname, "preload.js"),
 		},
 	});
 
@@ -70,13 +75,13 @@ const createFrontendWindow = async () => {
 	const win = new BrowserWindow({
 		title: app.name,
 		show: false,
-		width: 600,
-		height: 400,
+		x: 0,
+		y: 500,
+		width: 800,
+		height: 500,
 		webPreferences: {
-			// TODONOW: review which are needed
-			nodeIntegration: true,
 			contextIsolation: false,
-			enableRemoteModule: true,
+			preload: path.join(__dirname, "preload.js"),
 		},
 	});
 
@@ -87,16 +92,14 @@ const createFrontendWindow = async () => {
 	win.on("closed", () => {
 		// Dereference the window
 		// For multiple windows store them in an array
-		backendWindow = undefined;
+		frontendWindow = undefined;
 	});
 
-	// await win.loadFile(path.join(__dirname, "renderer-frontend", "index.html"));
 	await win.loadURL(
 		isDev
 			? "http://localhost:3001"
 			: `file://${path.join(__dirname, "renderer-frontend/index.html")}`
 	);
-	console.log("electron internal");
 
 	return win;
 };
@@ -107,12 +110,12 @@ if (!app.requestSingleInstanceLock()) {
 }
 
 app.on("second-instance", () => {
-	if (backendWindow) {
-		if (backendWindow.isMinimized()) {
-			backendWindow.restore();
+	if (frontendWindow) {
+		if (frontendWindow.isMinimized()) {
+			frontendWindow.restore();
 		}
 
-		backendWindow.show();
+		frontendWindow.show();
 	}
 });
 
@@ -136,6 +139,16 @@ app.on("activate", async () => {
 	Menu.setApplicationMenu(menu);
 	backendWindow = await createBackendWindow();
 	frontendWindow = await createFrontendWindow();
+
+	// send webContentId, so render-to-render ipc communication can happen
+	frontendWindow.webContents.send(messageBus.CHANNELS.SETUP, {
+		beWebContentId: backendWindow.id,
+		feWebContentId: frontendWindow.id,
+	});
+	backendWindow.webContents.send(messageBus.CHANNELS.SETUP, {
+		beWebContentId: backendWindow.id,
+		feWebContentId: frontendWindow.id,
+	});
 
 	const favoriteAnimal = config.get("favoriteAnimal");
 	backendWindow.webContents.executeJavaScript(

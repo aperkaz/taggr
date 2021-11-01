@@ -16,6 +16,7 @@
     "start": "yarn wsrun -p 'taggr-{frontend,electron,shared}' -r start",
     "start:web": "yarn workspace taggr-frontend start",
     "start:electron": "yarn workspace taggr-electron start",
+    "reinstall": "rm -rf node_modules ; rm -rf electron/node_modules ; rm -rf frontend/node_modules ; rm -rf shared/node_modules ; yarn",
     "build": "yarn workspace taggr-shared build; yarn workspace taggr-electron build"
   },
   "devDependencies": {

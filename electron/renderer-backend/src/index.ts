@@ -1,6 +1,6 @@
-import shared from "taggr-shared";
 import path from "path";
 import os from "os";
+import { sendToFrontend } from "./message-bus"; // initialize the message bus
 
 (async () => {
 	// eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -21,5 +21,8 @@ import os from "os";
 			},
 		},
 	}).toFile(path.join(desktopDir, "noise.png"));
-	console.log("HELLO FROMTS-RENDER PROCESS: ", shared);
+
+	await new Promise((r) => setTimeout(r, 4000));
+
+	sendToFrontend({ type: "frontend-notify", payload: "the BE says HOLA" });
 })();

@@ -20,17 +20,18 @@
 		"test": "jest",
 		"tsc": "tsc",
 		"tsc:watch": "tsc -w --preserveWatchOutput",
-		"start": "concurrently -k -p \"[{name}]\" -n \"electron,tsc\" -c \"cyan.bold,green.bold\"  \"wait-on http://localhost:3001 && electron .\" \"yarn tsc:watch\"",
+		"start": "concurrently -k -p \"[{name}]\" -n \"electron,tsc\" -c \"cyan.bold,green.bold\"  \"wait-on http://localhost:3001 ; electron .\" \"yarn tsc:watch\"",
 		"test:me": "cp -R ../frontend/build/ ./renderer-frontend",
 		"build:frontend": "rimraf renderer-frontend/** ; mkdir renderer-frontend ; yarn --cwd ../frontend build ; cp -R ../frontend/build/ ./renderer-frontend",
 		"build:backend": "rimraf renderer-backend/transpiled/** ; mkdir renderer-backend/transpiled ; yarn tsc",
 		"build": "yarn build:frontend ; yarn build:backend ; rimraf -r dist ; yarn dist",
-		"dist": "electron-builder --macos --linux --windows",
+		"dist": "electron-builder --macos",
 		"pack": "electron-builder --dir",
 		"release": "np"
 	},
 	"dependencies": {
 		"concurrently": "^6.3.0",
+		"electron-better-ipc": "^2.0.1",
 		"electron-context-menu": "^3.0.0",
 		"electron-debug": "^3.2.0",
 		"electron-is-dev": "^2.0.0",
@@ -56,14 +57,7 @@
 		"eslint": "^8.1.0",
 		"jest": "^27.3.1",
 		"np": "^7.5.0",
-		"ts-jest": "^27.0.7",
-		"xo": "^0.39.1"
-	},
-	"xo": {
-		"envs": [
-			"node",
-			"browser"
-		]
+		"ts-jest": "^27.0.7"
 	},
 	"np": {
 		"publish": false,

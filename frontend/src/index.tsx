@@ -1,5 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
+
+import "./message-bus"; // initialize the message bus
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
