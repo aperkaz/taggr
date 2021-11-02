@@ -3,23 +3,23 @@ import styled from "styled-components";
 import { withStyles } from "@mui/styles";
 import LinearProgress from "@mui/material/LinearProgress";
 
-import Typography from "../atoms/Typography";
-
 const FlexWrapper = styled.div`
   display: flex;
   justify-content: center;
 `;
 
 const Progress = styled.div`
+  width: 100%;
+  height: 100%;
   margin: 0 0 1em;
-  min-width: 30%;
+
   text-align: right;
 `;
 
 const BorderLinearProgress = withStyles(() => ({
   root: {
     borderRadius: 4,
-    height: 6,
+    height: 10,
   },
   bar: {
     borderRadius: 5,
@@ -27,28 +27,14 @@ const BorderLinearProgress = withStyles(() => ({
   },
 }))(LinearProgress);
 
-const TaskProgress = ({
-  name,
-  percentage,
-}: {
-  name: string;
-  percentage: number;
-}) => (
+type Props = { percentage: number };
+
+const ProgressBar = ({ percentage }: Props) => (
   <FlexWrapper>
     <Progress>
-      <Typography
-        variant="subtitle1"
-        style={{
-          fontFamily: "Poppins, sans-serif",
-          textAlign: "center",
-          margin: ".75rem 0",
-        }}
-      >
-        {name}
-      </Typography>
       <BorderLinearProgress variant="determinate" value={percentage} />
     </Progress>
   </FlexWrapper>
 );
 
-export default TaskProgress;
+export default ProgressBar;

@@ -5,7 +5,6 @@ import Typography from "../atoms/Typography";
 type Props = {
   text: string;
   styles: React.ComponentProps<typeof Button>;
-  icon?: React.ReactNode;
   disabled?: boolean;
   active?: boolean;
   onClick: () => void;
@@ -14,7 +13,6 @@ type Props = {
 const ButtonFilter = ({
   text,
   styles,
-  icon,
   disabled = false,
   active = false,
   onClick,
@@ -22,14 +20,14 @@ const ButtonFilter = ({
   <Button
     variant="outlined"
     size="small"
-    startIcon={icon}
     disabled={disabled}
     style={{
-      minWidth: "130px",
+      minWidth: "115px",
       textTransform: "capitalize",
       background: active
         ? "linear-gradient(70.98deg, #fe7996 9.38%, #ff9964 91.67%)"
         : "white",
+      margin: "auto",
       ...styles,
     }}
     onClick={onClick}

@@ -5,7 +5,7 @@ import HeaderComp from "./Header";
 import GalleryComp from "./Gallery";
 import MapComp from "./Map";
 import NavBarComp from "./NavBar";
-// import FiltersComp from "./Filters";
+import FiltersComp from "./Filters";
 
 import { images, imagesWithLocation } from "../../stories/mocks/imageList";
 
@@ -63,17 +63,17 @@ export const NavBar = () => {
   );
 };
 
-// export const Filters = () => {
-//   const [isOpen, setIsOpen] = React.useState(false);
+export const Filters = () => {
+  const [isOpen, setIsOpen] = React.useState(false);
 
-//   return (
-//     <div>
-//       <button onClick={() => setIsOpen(true)}>open filters</button>
-//       <FiltersComp
-//         isOpen={isOpen}
-//         triggerFiltersClose={() => setIsOpen(false)}
-//         triggerSearch={(filters) => console.log("searching for: ", filters)}
-//       />
-//     </div>
-//   );
-// };
+  return (
+    <div>
+      <button onClick={() => setIsOpen(true)}>open filters</button>
+      <FiltersComp
+        isOpen={isOpen}
+        triggerFiltersClose={() => setIsOpen(false)}
+        triggerSearch={(filters) => console.log("searching for: ", filters)}
+      />
+    </div>
+  );
+};

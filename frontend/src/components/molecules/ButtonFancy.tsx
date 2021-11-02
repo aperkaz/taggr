@@ -1,31 +1,47 @@
 import React from "react";
-import styled from "@emotion/styled";
+import { withStyles } from "@mui/styles";
 import Button from "@mui/material/Button";
+
 import Typography from "../atoms/Typography";
 
-const CustomButtom = styled(
-  ({ style, ...other }: React.ComponentProps<typeof Button>) => (
-    <Button variant="contained" size="large" {...other} />
-  )
-)`
-  color: white;
-  background: linear-gradient(70.98deg, #fe6b8b 9.38%, #ff8e53 91.67%);
-  :hover {
-    background: linear-gradient(70.98deg, #fe4e74 9.38%, #ff8a4d 91.67%);
-  }
-`;
+const CustomButton = withStyles({
+  root: {
+    minWidth: 200,
+    transition: "0.3s cubic-bezier(.47,1.64,.41,.8)",
+    background:
+      /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      "linear-gradient(to right, #FFC371, #FF5F6D)",
+    "&:hover": {
+      transform: "scale(1.05)",
+    },
+  },
+  label: {
+    color: "white",
+    textTransform: "none",
+    fontSize: 15,
+    fontWeight: 700,
+  },
+  contained: {
+    minHeight: 30,
+  },
+})(Button);
+
 type Props = {
   text: string;
   style?: React.ComponentProps<typeof Button>;
   onClick: () => void;
 };
 
-const ButtonFancy = ({ text, style = {}, onClick }: Props) => (
-  <CustomButtom onClick={onClick} style={style}>
+const ButtonFancy = ({
+  text = "",
+  style = {},
+  onClick = () => null,
+}: Props) => (
+  <CustomButton onClick={onClick} style={style}>
     <Typography variant="h6" style={{ color: "white" }}>
       {text}
     </Typography>
-  </CustomButtom>
+  </CustomButton>
 );
 
 export default ButtonFancy;

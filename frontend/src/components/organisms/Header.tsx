@@ -5,7 +5,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SettingsIcon from "@mui/icons-material/Settings";
 
 import Typography from "../atoms/Typography";
-import TaskProgress from "../molecules/TaskProgress";
+import ProgressBar from "../molecules/ProgressBar";
 
 const Wrapper = styled.div`
   min-height: 40px;
@@ -48,7 +48,7 @@ const Header = ({
   onSettingsClick = () => null,
 }: Props) => {
   return isTaskOngoing ? (
-    <TaskProgress name={taskName} percentage={taskPercentage} />
+    <ProgressBar percentage={taskPercentage} />
   ) : (
     <Wrapper>
       <Link

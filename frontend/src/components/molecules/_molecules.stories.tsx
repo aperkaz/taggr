@@ -6,12 +6,15 @@ import ButtonFilterComp from "./ButtonFilter";
 import ButtonRegularComp from "./ButtonRegular";
 import ImageTileComp from "./ImageTile";
 import LoadingComp from "./Loading";
-import TaskProgressComp from "./TaskProgress";
+import ProgressBarComp from "./ProgressBar";
 
 export default {
   title: "Molecules",
   argTypes: {
     onClick: { action: "onClick press" },
+  },
+  parameters: {
+    layout: "centered",
   },
 };
 
@@ -63,12 +66,14 @@ Loading.args = {
   animationDuration: 6,
 };
 
-const TemplateTaskProgress: Story<
-  React.ComponentProps<typeof TaskProgressComp>
-> = (args) => <TaskProgressComp {...args} />;
+const TemplateProgressBar: Story<React.ComponentProps<typeof ProgressBarComp>> =
+  (args) => (
+    <div style={{ width: "300px" }}>
+      <ProgressBarComp {...args} />
+    </div>
+  );
 
-export const TaskProgress = TemplateTaskProgress.bind({});
-TaskProgress.args = {
+export const ProgressBar = TemplateProgressBar.bind({});
+ProgressBar.args = {
   percentage: 50,
-  name: "A progress bar",
 };
