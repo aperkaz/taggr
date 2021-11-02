@@ -148,3 +148,17 @@ export interface IpcRenderer extends NodeJS.EventEmitter {
    */
   sendToHost(channel: string, ...args: any[]): void;
 }
+
+type BaseImage = {
+  hash: string;
+  path: string;
+  tags: string[];
+};
+
+type LocationType = {
+  latitude: number;
+  longitude: number;
+};
+
+export type ImageType = BaseImage & { location?: LocationType };
+export type ImageWithLocationType = BaseImage & { location: LocationType };

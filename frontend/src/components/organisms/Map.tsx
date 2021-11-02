@@ -5,7 +5,7 @@ import RoomIcon from "@mui/icons-material/Room";
 import Link from "@mui/material/Link";
 import FsLightbox from "fslightbox-react";
 
-import { ImageWithLocationType } from "./Gallery";
+import { ImageWithLocationType } from "taggr-shared/src/types";
 
 const Wrapper = styled.div`
   height: 100%;

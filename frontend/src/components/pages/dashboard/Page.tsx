@@ -6,11 +6,7 @@ import Filters from "../../organisms/Filters";
 import FiltersLoading from "../../organisms/FiltersLoading";
 import Gallery from "../../organisms/Gallery";
 import Map from "../../organisms/Map";
-
-// TODONOW: fix shared entitiens, yarn modules
-// import { ImageType, ProgressType } from "../../../../shared/entities";
-type ImageType = any;
-type ProgressType = any;
+import { ImageType } from "taggr-shared/src/types";
 
 const HEADING_HEIGHT_PX = 106;
 const FILTERS_WIDTH_PX = 332;
@@ -52,11 +48,11 @@ const ContentWrapper = styled.div`
 
 type Props = {
   isProcessing: boolean;
-  progress: ProgressType;
+  progress: React.ComponentProps<typeof FiltersLoading>;
   images: ImageType[];
   imagesWithLocation: ImageType[];
-  onSettingsClick: () => void;
-  onSearchTriggered: (filters: any) => void;
+  onSettingsClick: React.ComponentProps<typeof Header>["onSettingsClick"];
+  onSearchTriggered: React.ComponentProps<typeof Filters>["onFilterChange"];
 };
 
 const DashboardPage = ({

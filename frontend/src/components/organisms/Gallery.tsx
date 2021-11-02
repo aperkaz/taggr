@@ -3,13 +3,9 @@ import { FixedSizeGrid } from "react-window"; // Virtualize list for performance
 import FsLightbox from "fslightbox-react";
 import styled from "styled-components";
 
+import { ImageType } from "taggr-shared/src/types";
 import ImageTile from "../molecules/ImageTile";
-
 import noResults from "../../statics/no-results.png";
-
-// TODONOW: add entities
-// import { ImageType } from "../../../shared/entities";
-type ImageType = { hash: string; path: string };
 
 const GUTTER = 16;
 const ELEMENTS_PER_COLLUMN = 4;
@@ -37,13 +33,6 @@ const Gallery = ({
   const [toggler, setToggler] = useState(false);
 
   const handleCellSelect = async (index: number) => {
-    // send to support page the support images
-    if (imageList[index].hash === "support-placeholder") {
-      let shell = window.require("electron").shell;
-      shell.openExternal("https://taggr.ai/#support");
-      return;
-    }
-
     setSelectedIndex(index);
     // hack to prevent lightbox with isOpen: undefined
     await new Promise((r) => setTimeout(r, 10));
@@ -142,7 +131,11 @@ const Grid = ({
 type CellProps = {
   columnIndex: number;
   rowIndex: number;
-  style: any;
+  style: {
+    height: number;
+    width: number;
+    [key: string]: any;
+  };
   data: ImageType[];
   onClick: (index: number) => void;
 };
