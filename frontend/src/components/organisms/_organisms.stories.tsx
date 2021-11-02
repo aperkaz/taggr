@@ -13,9 +13,10 @@ import { images, imagesWithLocation } from "../../stories/mocks/imageList";
 export default {
   title: "Organisms",
   argTypes: {
-    onFiltersClick: "onFiltersClick press",
-    onSettingsClick: "onSettingsClick press",
-    onFilterChange: { action: "filter changed" },
+    onFiltersClick: "onFiltersClick",
+    onSettingsClick: "onSettingsClick",
+    onFilterChange: { action: "onFilterChange" },
+    onActiveTabChange: { action: "onActiveTabChange" },
   },
 };
 
@@ -48,11 +49,9 @@ const TemplateHeader: Story<React.ComponentProps<typeof HeaderComp>> = (
 
 export const Header = TemplateHeader.bind({});
 Header.args = {
-  task: {
-    isOngoing: false,
-    name: "Be patient, the minions are working on your memories!",
-    percentage: 50,
-  },
+  tabList: ["Timeline", "Gallery", "Map"],
+  activeTab: 1,
+  showSettings: true,
 };
 
 const TemplateGallery: Story<React.ComponentProps<typeof GalleryComp>> = (
@@ -62,6 +61,9 @@ const TemplateGallery: Story<React.ComponentProps<typeof GalleryComp>> = (
 export const Gallery = TemplateGallery.bind({});
 Gallery.args = {
   imageList: images,
+};
+Gallery.parameters = {
+  layout: "fullscreen",
 };
 
 const TemplateMap: Story<React.ComponentProps<typeof MapComp>> = (args) => (

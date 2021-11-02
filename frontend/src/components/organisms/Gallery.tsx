@@ -1,100 +1,103 @@
 import React, { useState } from "react";
-import { SizeMe } from "react-sizeme";
-import { FixedSizeGrid } from "react-window"; // Virtualized list for performance https://github.com/developerdizzle/react-virtual-list
+import { FixedSizeGrid } from "react-window"; // Virtualize list for performance https://github.com/developerdizzle/react-virtual-list
 import FsLightbox from "fslightbox-react";
+import styled from "styled-components";
 
-import Loading from "../molecules/Loading";
 import ImageTile from "../molecules/ImageTile";
 
-const GUTTER = 10;
-const ELEMENTS_PER_COLLUMN = 5;
+import noResults from "../../statics/no-results.png";
 
-// TODONOW: extract to shared types, so they can be used by FE / BE
-// TODONOW: use the typings in the store too
-export type ImageType = {
-  hash: string;
-  path: string;
-  tags: string[];
-  location?: {
-    latitude: number;
-    longitude: number;
-  };
-};
+// TODONOW: add entities
+// import { ImageType } from "../../../shared/entities";
+type ImageType = { hash: string; path: string };
 
-export type ImageWithLocationType = {
-  hash: string;
-  path: string;
-  tags: string[];
-  location: {
-    latitude: number;
-    longitude: number;
-  };
-};
+const GUTTER = 16;
+const ELEMENTS_PER_COLLUMN = 4;
+
+const Wrapper = styled.div`
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 type Props = {
-  imageList: ImageType[] | null;
+  imageList: ImageType[];
+  dimensions: {
+    height: number;
+    width: number;
+  };
 };
 
-// imageList could be null or array
-const Gallery = ({ imageList }: Props) => {
+const Gallery = ({
+  imageList,
+  dimensions = { height: window.innerHeight, width: window.innerWidth },
+}: Props) => {
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [toggler, setToggler] = useState(false);
 
-  const openPreview = async (index: number) => {
+  const handleCellSelect = async (index: number) => {
+    // send to support page the support images
+    if (imageList[index].hash === "support-placeholder") {
+      let shell = window.require("electron").shell;
+      shell.openExternal("https://taggr.ai/#support");
+      return;
+    }
+
     setSelectedIndex(index);
     // hack to prevent lightbox with isOpen: undefined
     await new Promise((r) => setTimeout(r, 10));
     setToggler(!toggler);
   };
 
+  if (imageList.length === 0) {
+    return (
+      <Wrapper>
+        <img
+          src={noResults}
+          height="250px"
+          alt="placeholder"
+          style={{ filter: "hue-rotate(30deg)" }}
+        />
+      </Wrapper>
+    );
+  }
+
   return (
-    <div style={{ height: "100%" }}>
-      {!imageList || imageList.length === 0 ? (
-        <Loading
-          text={`${
-            !imageList
-              ? "Searching for images"
-              : "No pictures found, try to change the filters."
-          }`}
-        ></Loading>
-      ) : (
-        <>
-          <SizeMe monitorHeight>
-            {({ size }) => (
-              <div
-                style={{
-                  height: "100%",
-                  overflow: "hidden",
-                }}
-              >
-                <Grid
-                  size={size}
-                  imageList={imageList}
-                  onCellClick={openPreview}
-                />
-              </div>
-            )}
-          </SizeMe>
-          <FsLightbox
-            toggler={toggler}
-            sources={
-              imageList && imageList[selectedIndex]
-                ? [imageList[selectedIndex].path]
-                : undefined
-            }
-            key={selectedIndex}
-          />
-        </>
-      )}
-    </div>
+    <Wrapper>
+      <div
+        style={{
+          height: "100%",
+          overflow: "hidden",
+          width: "100%",
+        }}
+      >
+        <Grid
+          size={dimensions}
+          imageList={imageList}
+          onCellClick={handleCellSelect}
+        />
+      </div>
+      <FsLightbox
+        toggler={toggler}
+        sources={
+          imageList[selectedIndex] ? [imageList[selectedIndex].path] : undefined
+        }
+        key={selectedIndex}
+      />
+    </Wrapper>
   );
 };
 
 type GridProps = {
-  size: { height: number | null; width: number | null };
+  size: {
+    height: number;
+    width: number;
+  };
   imageList: ImageType[];
   onCellClick: (index: number) => void;
 };
+
 const Grid = ({
   size: { height, width },
   imageList,
@@ -103,7 +106,7 @@ const Grid = ({
   height = height ? height : 0;
   width = width ? width : 0;
 
-  let gridHeight = height - GUTTER * 2;
+  let gridHeight = height;
   let gridWidth = width;
 
   const columnWidth = gridWidth / ELEMENTS_PER_COLLUMN;
@@ -125,9 +128,10 @@ const Grid = ({
       rowHeight={rowHeight}
       width={gridWidth}
       itemData={imageList}
+      // overscanRowCount={10}
+      // overscanColumnCount={10}
       style={{
         overflowX: "hidden",
-        marginTop: ".5em",
       }}
     >
       {(props) => <Cell {...props} onClick={onCellClick} />}
@@ -138,15 +142,10 @@ const Grid = ({
 type CellProps = {
   columnIndex: number;
   rowIndex: number;
-  style: {
-    height?: any;
-    width?: any;
-    [key: string]: any;
-  };
+  style: any;
   data: ImageType[];
   onClick: (index: number) => void;
 };
-
 const Cell = ({ columnIndex, rowIndex, style, data, onClick }: CellProps) => {
   const height = style.height ? style.height - GUTTER : 0;
   const width = style.width ? style.width - GUTTER : 0;
@@ -165,4 +164,4 @@ const Cell = ({ columnIndex, rowIndex, style, data, onClick }: CellProps) => {
   );
 };
 
-export default React.memo(Gallery);
+export default Gallery;

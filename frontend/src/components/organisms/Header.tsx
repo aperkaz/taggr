@@ -1,80 +1,90 @@
 import React from "react";
 import styled from "styled-components";
-import Link from "@mui/icons-material/Link";
-import MenuIcon from "@mui/icons-material/Menu";
+import { withStyles } from "@mui/styles";
+import Paper from "@mui/material/Paper";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 import SettingsIcon from "@mui/icons-material/Settings";
 
 import Typography from "../atoms/Typography";
-import ProgressBar from "../molecules/ProgressBar";
 
 const Wrapper = styled.div`
-  min-height: 40px;
-
-  display: flex;
-  justify-content: space-between;
-`;
-
-const Filters = styled.div`
-  display: flex;
-  align-items: center;
+  position: relative;
 `;
 
 const Settings = styled.div`
-  display: flex;
-  align-items: center;
+  position: absolute;
+  top: 10px;
+  right: 12px;
 
   :hover {
     cursor: pointer;
   }
 `;
 
-type Props = {
-  task: {
-    isOngoing: boolean;
-    name: string;
-    percentage: number;
-  };
-  onFiltersClick: () => null;
-  onSettingsClick: () => null;
+const CustomTabs = withStyles({
+  indicator: {
+    backgroundColor: "white",
+    marginBottom: "5px",
+  },
+})(Tabs);
+
+const CustomTab = withStyles({
+  root: {
+    textTransform: "none",
+  },
+})(Tab);
+
+type HeaderProps = {
+  tabList: string[];
+  activeTab: number;
+  showSettings: boolean;
+  onActiveTabChange: (tab: number) => void;
+  onSettingsClick: () => void;
 };
 
 const Header = ({
-  task: {
-    isOngoing: isTaskOngoing = true,
-    name: taskName = "not defined ",
-    percentage: taskPercentage = 0,
-  },
-  onFiltersClick = () => null,
-  onSettingsClick = () => null,
-}: Props) => {
-  return isTaskOngoing ? (
-    <ProgressBar percentage={taskPercentage} />
-  ) : (
-    <Wrapper>
-      <Link
-        href="#"
-        color="inherit"
-        style={{ margin: "auto 0", textDecoration: "none" }}
-        onClick={(e) => {
-          e.preventDefault();
-          onFiltersClick();
-        }}
+  tabList,
+  activeTab,
+  showSettings,
+  onActiveTabChange,
+  onSettingsClick,
+}: HeaderProps) => (
+  <Wrapper>
+    <Paper
+      style={{
+        background: `linear-gradient(354.71deg, rgba(135, 49, 232, 0.9) 0%, rgba(69, 40, 220, 0.9) 100%)`,
+        boxShadow: `0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12)`,
+        borderRadius: "6px",
+      }}
+    >
+      <CustomTabs
+        value={activeTab}
+        onChange={(event, tab) => onActiveTabChange(tab)}
+        centered
       >
-        <Filters>
-          <MenuIcon />
-          <Typography
-            variant="h6"
-            style={{ fontWeight: "bold", paddingLeft: ".5em" }}
-          >
-            Filters
-          </Typography>
-        </Filters>
-      </Link>
+        {tabList.map((tab, index) => (
+          <CustomTab
+            key={index}
+            label={
+              <Typography variant="h5" style={{ color: "white" }}>
+                {tab}
+              </Typography>
+            }
+          />
+        ))}
+      </CustomTabs>
+    </Paper>
+    {showSettings && (
       <Settings>
-        <SettingsIcon onClick={() => onSettingsClick()} />
+        <SettingsIcon
+          fontSize="large"
+          style={{ color: "white" }}
+          onClick={onSettingsClick}
+        />
       </Settings>
-    </Wrapper>
-  );
-};
+    )}
+  </Wrapper>
+);
 
 export default Header;

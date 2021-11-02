@@ -53,7 +53,7 @@ const WithStore = () => {
       onSelectDestroy={onSelectDestroy}
       onSelectBack={onSelectBack}
       onOpenLink={handleOpenLink("https://taggr.ai")}
-      onSelectSupport={handleSelectSupport}
+      onSelectFollow={handleSelectSupport}
       onCheckIfSupporter={handleCheckIfSupporter}
     />
   );
