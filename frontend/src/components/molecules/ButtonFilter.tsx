@@ -8,7 +8,7 @@ type Props = {
   icon?: React.ReactNode;
   disabled?: boolean;
   active?: boolean;
-  onClick: () => null;
+  onClick: () => void;
 };
 
 const ButtonFilter = ({

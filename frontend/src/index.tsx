@@ -1,5 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
 
 import "./message-bus"; // initialize the message bus
 import App from "./App";
@@ -7,7 +9,9 @@ import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <App />
+    </LocalizationProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

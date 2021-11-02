@@ -6,6 +6,7 @@ import ButtonFilterComp from "./ButtonFilter";
 import ButtonRegularComp from "./ButtonRegular";
 import ImageTileComp from "./ImageTile";
 import LoadingComp from "./Loading";
+import TaskProgressComp from "./TaskProgress";
 
 export default {
   title: "Molecules",
@@ -58,6 +59,16 @@ const TemplateLoading: Story<React.ComponentProps<typeof LoadingComp>> = (
 
 export const Loading = TemplateLoading.bind({});
 Loading.args = {
-  text: "Animation text",
+  text: "A loading animation",
   animationDuration: 6,
+};
+
+const TemplateTaskProgress: Story<
+  React.ComponentProps<typeof TaskProgressComp>
+> = (args) => <TaskProgressComp {...args} />;
+
+export const TaskProgress = TemplateTaskProgress.bind({});
+TaskProgress.args = {
+  percentage: 50,
+  name: "A progress bar",
 };

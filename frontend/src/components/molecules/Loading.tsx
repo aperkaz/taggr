@@ -71,7 +71,7 @@ const Element4 = styled(Hr)<{ animationDelay: number }>`
 `;
 
 type Props = {
-  animationDuration: number;
+  animationDuration?: number;
   text: string;
 };
 
