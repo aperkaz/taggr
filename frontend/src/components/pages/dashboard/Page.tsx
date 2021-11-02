@@ -6,7 +6,7 @@ import Filters from "../../organisms/Filters";
 import FiltersLoading from "../../organisms/FiltersLoading";
 import Gallery from "../../organisms/Gallery";
 import Map from "../../organisms/Map";
-import { ImageType } from "taggr-shared/src/types";
+import { sharedTypes } from "taggr-shared";
 
 const HEADING_HEIGHT_PX = 106;
 const FILTERS_WIDTH_PX = 332;
@@ -49,8 +49,8 @@ const ContentWrapper = styled.div`
 type Props = {
   isProcessing: boolean;
   progress: React.ComponentProps<typeof FiltersLoading>;
-  images: ImageType[];
-  imagesWithLocation: ImageType[];
+  images: sharedTypes.Image[];
+  imagesWithLocation: sharedTypes.Image[];
   onSettingsClick: React.ComponentProps<typeof Header>["onSettingsClick"];
   onSearchTriggered: React.ComponentProps<typeof Filters>["onFilterChange"];
 };

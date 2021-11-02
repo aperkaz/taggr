@@ -3,7 +3,7 @@ import { FixedSizeGrid } from "react-window"; // Virtualize list for performance
 import FsLightbox from "fslightbox-react";
 import styled from "styled-components";
 
-import { ImageType } from "taggr-shared/src/types";
+import { sharedTypes } from "taggr-shared";
 import ImageTile from "../molecules/ImageTile";
 import noResults from "../../statics/no-results.png";
 
@@ -18,7 +18,7 @@ const Wrapper = styled.div`
 `;
 
 type Props = {
-  imageList: ImageType[];
+  imageList: sharedTypes.Image[];
   dimensions: {
     height: number;
     width: number;
@@ -83,7 +83,7 @@ type GridProps = {
     height: number;
     width: number;
   };
-  imageList: ImageType[];
+  imageList: sharedTypes.Image[];
   onCellClick: (index: number) => void;
 };
 
@@ -117,8 +117,6 @@ const Grid = ({
       rowHeight={rowHeight}
       width={gridWidth}
       itemData={imageList}
-      // overscanRowCount={10}
-      // overscanColumnCount={10}
       style={{
         overflowX: "hidden",
       }}
@@ -136,7 +134,7 @@ type CellProps = {
     width: number;
     [key: string]: any;
   };
-  data: ImageType[];
+  data: sharedTypes.Image[];
   onClick: (index: number) => void;
 };
 const Cell = ({ columnIndex, rowIndex, style, data, onClick }: CellProps) => {

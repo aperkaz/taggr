@@ -1,7 +1,7 @@
-import { Types } from "taggr-shared";
+import { sharedTypes } from "taggr-shared";
 
 declare global {
   interface Window {
-    ipcRenderer: Types.IpcRenderer;
+    ipcRenderer: sharedTypes.IpcRenderer;
   }
 }

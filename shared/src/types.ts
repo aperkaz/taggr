@@ -152,7 +152,9 @@ export interface IpcRenderer extends NodeJS.EventEmitter {
 type BaseImage = {
   hash: string;
   path: string;
+  rawPath: string;
   tags: string[];
+  creationDate: number; // Epoch timestamp
 };
 
 type LocationType = {
@@ -160,5 +162,16 @@ type LocationType = {
   longitude: number;
 };
 
-export type ImageType = BaseImage & { location?: LocationType };
-export type ImageWithLocationType = BaseImage & { location: LocationType };
+export type Image = BaseImage & { location?: LocationType };
+export type ImageWithLocation = BaseImage & { location: LocationType };
+
+export interface Progress {
+  current: number;
+  total: number;
+}
+
+export type FrontendRoutes =
+  | "START_PAGE"
+  | "PRE_PROCESSING_PAGE"
+  | "DASHBOARD_PAGE"
+  | "SETTINGS_PAGE";

@@ -5,7 +5,7 @@ import RoomIcon from "@mui/icons-material/Room";
 import Link from "@mui/material/Link";
 import FsLightbox from "fslightbox-react";
 
-import { ImageWithLocationType } from "taggr-shared/src/types";
+import { sharedTypes } from "taggr-shared";
 
 const Wrapper = styled.div`
   height: 100%;
@@ -16,7 +16,11 @@ const Wrapper = styled.div`
   border-radius: 6px;
 `;
 
-const Map = ({ imageList = [] }: { imageList: ImageWithLocationType[] }) => {
+const Map = ({
+  imageList = [],
+}: {
+  imageList: sharedTypes.ImageWithLocation[];
+}) => {
   const [viewport, setViewport] = useState({
     latitude: 45.4211,
     longitude: -75.6903,
