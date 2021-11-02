@@ -2,12 +2,11 @@ import React from "react";
 import { Story } from "@storybook/react";
 
 import HeaderComp from "./Header";
-// import NavBarComp from "./NavBar";
 import GalleryComp from "./Gallery";
 import MapComp from "./Map";
+import NavBarComp from "./NavBar";
 // import FiltersComp from "./Filters";
 
-// import FullHeight from "../../stories/utils";
 import { images, imagesWithLocation } from "../../stories/mocks/imageList";
 
 export default {
@@ -49,20 +48,20 @@ Map.args = {
   imageList: imagesWithLocation,
 };
 
-// export const NavBar = () => {
-//   const [activeTab, setActiveTab] = React.useState(0);
+export const NavBar = () => {
+  const [activeTab, setActiveTab] = React.useState(0);
 
-//   return (
-//     <NavBarComp
-//       tabList={["Timeline", "Gallery", "Map"]}
-//       activeTab={activeTab}
-//       handleChange={(t) => {
-//         console.log(t);
-//         setActiveTab(t);
-//       }}
-//     />
-//   );
-// };
+  return (
+    <NavBarComp
+      tabList={["Timeline", "Gallery", "Map"]}
+      activeTab={activeTab}
+      handleChange={(t) => {
+        console.log(t);
+        setActiveTab(t);
+      }}
+    />
+  );
+};
 
 // export const Filters = () => {
 //   const [isOpen, setIsOpen] = React.useState(false);

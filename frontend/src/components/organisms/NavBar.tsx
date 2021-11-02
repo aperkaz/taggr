@@ -1,8 +1,8 @@
 import React from "react";
-import { withStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
+import { withStyles } from "@mui/styles";
+import Paper from "@mui/material/Paper";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 
 import Typography from "../atoms/Typography";
 
@@ -19,11 +19,13 @@ const CustomTab = withStyles({
   },
 })(Tab);
 
-const NavBar = ({
-  tabList = [],
-  activeTab = 0,
-  handleChange = (i) => null,
-}) => (
+type Props = {
+  tabList: string[];
+  activeTab: number;
+  handleChange: (i: number) => void;
+};
+
+const NavBar = ({ tabList, activeTab, handleChange }: Props) => (
   <Paper
     style={{
       background: `linear-gradient(354.71deg, rgba(135, 49, 232, 0.9) 0%, rgba(69, 40, 220, 0.9) 100%)`,
