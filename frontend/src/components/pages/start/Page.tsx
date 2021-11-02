@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import FancyButton from '../../molecules/ButtonFancy';
-import backgroundImage from '../../../statics/background.jpg';
-import Typography from '../../atoms/Typography';
+import Typography from "../../atoms/Typography";
+import FancyButton from "../../molecules/ButtonFancy";
+import backgroundImage from "../../../statics/background.jpg";
 
 const Background = styled.div`
   background: rgba(0, 0, 0, 0) url(${backgroundImage}) no-repeat scroll center
@@ -65,8 +65,8 @@ const StartPage = ({ onSelectRootFolderPath, onSelectLogo }: Props) => (
             height="65"
             viewBox="0 0 20 18"
             style={{
-              marginTop: '14px',
-              marginRight: '1rem'
+              marginTop: "14px",
+              marginRight: "1rem",
             }}
           >
             <g opacity="1" />
@@ -81,7 +81,7 @@ const StartPage = ({ onSelectRootFolderPath, onSelectLogo }: Props) => (
           <Typography
             variant="h1"
             style={{
-              color: 'white'
+              color: "white",
             }}
           >
             taggr
@@ -92,7 +92,7 @@ const StartPage = ({ onSelectRootFolderPath, onSelectLogo }: Props) => (
           <Typography
             variant="h5"
             style={{
-              color: 'white'
+              color: "white",
             }}
           >
             Rediscover your memories while keeping your privacy
@@ -107,7 +107,7 @@ const StartPage = ({ onSelectRootFolderPath, onSelectLogo }: Props) => (
       </Main>
 
       <Footer onClick={onSelectLogo}>
-        <Typography variant="h5" style={{ color: 'white' }}>
+        <Typography variant="h5" style={{ color: "white" }}>
           taggr.ai
         </Typography>
       </Footer>
