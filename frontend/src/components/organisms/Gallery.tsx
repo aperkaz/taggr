@@ -48,7 +48,7 @@ const Gallery = ({ imageList }: Props) => {
   };
 
   return (
-    <div style={{ height: "100%", marginTop: ".25em" }}>
+    <div style={{ height: "100%" }}>
       {!imageList || imageList.length === 0 ? (
         <Loading
           text={`${

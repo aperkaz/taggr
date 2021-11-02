@@ -4,7 +4,7 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 
 import "./message-bus"; // initialize the message bus
-import App from "./App";
+import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(

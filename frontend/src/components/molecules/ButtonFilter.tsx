@@ -4,7 +4,7 @@ import Typography from "../atoms/Typography";
 
 type Props = {
   text: string;
-  styles: React.ComponentProps<typeof Button>;
+  styles?: React.ComponentProps<typeof Button>;
   disabled?: boolean;
   active?: boolean;
   onClick: () => void;

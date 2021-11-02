@@ -1,83 +1,45 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import DateFnsUtils from "@date-io/date-fns";
+import TextField from "@mui/material/TextField";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
 
-// ICONS
-import CloseIcon from "@mui/icons-material/Close";
-// what
-import PeopleIcon from "@mui/icons-material/AccessibilityNew";
-import AnimalsIcon from "@mui/icons-material/Pets";
-import VehiclesIcon from "@mui/icons-material/DriveEta";
-import FoodIcon from "@mui/icons-material/Fastfood";
-import DrinksIcon from "@mui/icons-material/LocalBar";
-import SportsIcon from "@mui/icons-material/SportsSoccer";
-// emotions
-import HappyIcon from "@mui/icons-material/SentimentSatisfiedAlt";
-import SadIcon from "@mui/icons-material/SentimentVeryDissatisfied";
-import SurpriseIcon from "@mui/icons-material/InsertEmoticon";
-import FearIcon from "@mui/icons-material/NightsStay";
-import AngerIcon from "@mui/icons-material/Whatshot";
-import DisgustIcon from "@mui/icons-material/SportsMma";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
 
 import Typography from "../atoms/Typography";
-import ButtonFancy from "../molecules/ButtonFancy";
 import ButtonRegular from "../molecules/ButtonRegular";
 import ButtonFilter from "../molecules/ButtonFilter";
 
-const Backdrop = styled.div`
-  z-index: 100;
+const Wrapper = styled.div`
+  padding: 1rem;
 
-  position: absolute;
-  top: 0;
-  right: 0;
+  height: calc(100% - 2rem);
+  width: 250px;
 
-  height: 100%;
-  width: 100%;
-
-  background-color: rgba(0, 0, 0, 0.75);
-`;
-
-const Panel = styled.div`
-  z-index: 101;
-
-  position: absolute;
-  top: 0;
-  left: 0;
-
-  margin: 0.5em;
-  height: calc(100vh - 1em);
-  width: 480px;
-
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 6px;
 
-  background-color: white;
+  box-shadow: 0 0 8px #ccc;
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-`;
+  align-items: center;
+  justify-content: center;
 
-const Title = styled.div`
-  margin-top: 0.25em;
-  text-align: center;
-`;
+  background: white;
 
-const Close = styled(CloseIcon)`
-  position: absolute;
-  right: calc(100% - 480px);
+  border-radius: 6px;
 
-  margin-top: 0.15em;
-  margin-right: 0.25em;
-
-  :hover {
-    cursor: pointer;
-  }
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Body = styled.div`
-  flex-grow: 1;
-
   /* Enable scroll-behavior, but hide scroll-bar */
   overflow-y: scroll;
   ::-webkit-scrollbar {
@@ -85,65 +47,28 @@ const Body = styled.div`
   }
 `;
 
-const Filter = styled.div`
-  margin: 1.7em 0.5em;
-
-  border: 2px solid #9f9e9e;
-  box-sizing: border-box;
-  border-radius: 6px;
-
-  display: flex;
-  flex-direction: column;
-`;
-
-const FilterTitle = styled.div`
-  border: 2px solid #9f9e9e;
-  box-sizing: border-box;
-  border-radius: 6px;
-  padding: 0px 2px;
-
-  background-color: white;
-  color: #717171;
-
-  position: relative;
-  top: -14px;
-  margin: 0 auto;
-`;
-
-const TimeSelectoGrid = styled.div`
-  margin: 0 1em 1em;
-
+const ButtonGrid = styled.div`
   display: grid;
-  justify-content: start;
+  justify-content: center;
   grid-auto-flow: row;
 
   grid-template-columns: repeat(2, auto);
-  grid-gap: 1em;
-`;
-
-const ButtonGrid = styled.div`
-  margin: 0 1em 1em;
-
-  display: grid;
-  justify-content: start;
-  grid-auto-flow: row;
-
-  grid-template-columns: repeat(3, auto);
-  grid-gap: 1em;
+  grid-gap: 1rem;
 `;
 
 const FooterDivider = styled.div`
-  margin: 1em auto 0;
-  width: 40%;
-  border-top: 2px solid #9f9e9e;
-`;
+  margin: auto auto 1rem;
 
-const FooterButtons = styled.div`
-  display: flex;
+  height: 4px;
+  width: 80%;
+
+  background: linear-gradient(70.98deg, #ff96ad 9.38%, #feaf85 91.67%);
+
+  border-radius: 4px;
 `;
 
 const EMPTY_EPOCH_TIME = null;
-const ACTIVE_FILTERS = {
+const ACTIVE_TAGS = {
   // What
   people: false,
   animals: false,
@@ -160,37 +85,83 @@ const ACTIVE_FILTERS = {
   disgust: false,
 };
 
-type FilterProps = {
-  isOpen?: boolean;
-  triggerFiltersClose: () => void;
-  triggerSearch: ({
+type EpochDate = number | null;
+
+type Props = {
+  onFilterChange: ({
     fromDate,
     toDate,
     tags,
   }: {
-    fromDate: number | null;
-    toDate: number | null;
+    fromDate: EpochDate;
+    toDate: EpochDate;
     tags: string[];
   }) => void;
 };
 
-const Filters = ({
-  isOpen = false,
-  triggerFiltersClose,
-  triggerSearch,
-}: FilterProps) => {
-  const [fromDate, setFromDate] = useState(EMPTY_EPOCH_TIME);
-  const [toDate, setToDate] = useState(EMPTY_EPOCH_TIME);
+const Filters = ({ onFilterChange }: Props) => {
+  const [fromDate, setFromDate] = useState<EpochDate>(EMPTY_EPOCH_TIME);
+  const [toDate, setToDate] = useState<EpochDate>(EMPTY_EPOCH_TIME);
 
-  const [activeFilters, setActiveFilters] = useState(ACTIVE_FILTERS);
+  const [activeTags, setActiveTags] = useState({ ...ACTIVE_TAGS });
 
-  const triggerFilter = (name: keyof typeof ACTIVE_FILTERS): void => {
-    const newFilter = {
-      ...activeFilters,
-      [name]: !activeFilters[name],
+  const fromDateChange = (epochDate: EpochDate) => {
+    setFromDate(epochDate);
+
+    triggerSearch({
+      fromDate: epochDate,
+      toDate: toDate,
+      tags: activeTags,
+    });
+  };
+
+  const toDateChange = (epochDate: EpochDate) => {
+    setToDate(epochDate);
+
+    triggerSearch({
+      fromDate: fromDate,
+      toDate: epochDate,
+      tags: activeTags,
+    });
+  };
+
+  const tagChange = (name: keyof typeof ACTIVE_TAGS) => {
+    const newTags = {
+      ...activeTags,
+      [name]: !activeTags[name],
     };
 
-    setActiveFilters(newFilter);
+    setActiveTags(newTags);
+
+    // search on each change
+    triggerSearch({
+      fromDate: fromDate,
+      toDate: toDate,
+      tags: newTags,
+    });
+  };
+
+  const triggerSearch = ({
+    fromDate,
+    toDate,
+    tags,
+  }: {
+    fromDate: EpochDate;
+    toDate: EpochDate;
+    tags: typeof ACTIVE_TAGS;
+  }) => {
+    const activeTagsAsList: string[] = [];
+    Object.keys(tags).forEach((key) => {
+      if (tags[key as keyof typeof ACTIVE_TAGS]) {
+        activeTagsAsList.push(key);
+      }
+    });
+
+    onFilterChange({
+      fromDate,
+      toDate,
+      tags: activeTagsAsList,
+    });
   };
 
   const resetState = () => {
@@ -198,186 +169,131 @@ const Filters = ({
     setToDate(EMPTY_EPOCH_TIME);
 
     // toggle false all filter items
-    const resetFilters = { ...activeFilters };
+    const resetFilters = { ...activeTags };
     Object.keys(resetFilters).forEach((key) => {
-      resetFilters[key as keyof typeof ACTIVE_FILTERS] = false;
+      resetFilters[key as keyof typeof ACTIVE_TAGS] = false;
     });
-    setActiveFilters(resetFilters);
+    setActiveTags(resetFilters);
 
     triggerSearch({
       fromDate: EMPTY_EPOCH_TIME,
       toDate: EMPTY_EPOCH_TIME,
-      tags: [],
+      tags: { ...ACTIVE_TAGS },
     });
   };
 
   return (
-    <Backdrop style={{ visibility: isOpen ? "visible" : "hidden" }}>
-      <Panel>
-        <Title>
-          <Close onClick={triggerFiltersClose} />
-          <Typography variant="h5">Filters</Typography>
-        </Title>
-        <Body>
-          <Filter>
-            <FilterTitle>
-              <Typography variant={"subtitle1"}>when</Typography>
-            </FilterTitle>
-            {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <TimeSelectoGrid>
+    <Wrapper>
+      <Typography variant="h5" style={{ marginBottom: "1rem" }}>
+        Filters
+      </Typography>
+      <Body>
+        <List component="nav">
+          {/* WHEN */}
+          <ListItem>
+            <ListItemText primary="⏰ Time Range" />
+          </ListItem>
+          <List component="div">
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <ListItem>
                 <DatePicker
-                  margin="normal"
-                  id="date-picker-dialog"
                   label="From date"
-                  format="dd/MM/yyyy"
                   value={fromDate}
-                  onChange={(date) => {
+                  onChange={(date: Date | null) => {
                     const epochDate = date ? date.getTime() : EMPTY_EPOCH_TIME;
-                    setFromDate(epochDate);
+                    fromDateChange(epochDate);
                   }}
-                  KeyboardButtonProps={{
-                    "aria-label": "change date",
-                  }}
-                  style={{ marginTop: 0 }}
+                  renderInput={(params) => (
+                    <TextField sx={{ width: 250 }} {...params} />
+                  )}
                 />
+              </ListItem>
+              <ListItem>
                 <DatePicker
-                  margin="normal"
-                  id="date-picker-dialog"
                   label="To date"
-                  format="dd/MM/yyyy"
                   value={toDate}
-                  onChange={(date) => {
+                  onChange={(date: Date | null) => {
                     const epochDate = date ? date.getTime() : EMPTY_EPOCH_TIME;
-                    setToDate(epochDate);
+                    toDateChange(epochDate);
                   }}
-                  KeyboardButtonProps={{
-                    "aria-label": "change date",
-                  }}
-                  style={{ marginTop: 0 }}
+                  renderInput={(params) => (
+                    <TextField sx={{ width: 250 }} {...params} />
+                  )}
                 />
-              </TimeSelectoGrid>
-            </MuiPickersUtilsProvider> */}
-          </Filter>
-          {/* <Filter>
-            <FilterTitle>
-              <Typography variant={"subtitle1"}>what</Typography>
-            </FilterTitle>
-            <ButtonGrid>
-              <ButtonFilter
-                icon={<PeopleIcon />}
-                text={"People"}
-                active={activeFilters.people}
-                onClick={() => triggerFilter("people")}
-              />
-              <ButtonFilter
-                icon={<AnimalsIcon />}
-                text={"Animals"}
-                active={activeFilters.animals}
-                onClick={() => triggerFilter("animals")}
-              />
-              <ButtonFilter
-                icon={<VehiclesIcon />}
-                text={"Vehicles"}
-                active={activeFilters.vehicles}
-                onClick={() => triggerFilter("vehicles")}
-              />
-              <ButtonFilter
-                icon={<FoodIcon />}
-                text={"Food"}
-                active={activeFilters.food}
-                onClick={() => triggerFilter("food")}
-              />
-              <ButtonFilter
-                icon={<DrinksIcon />}
-                text={"Drinks"}
-                active={activeFilters.drinks}
-                onClick={() => triggerFilter("drinks")}
-              />
-              <ButtonFilter
-                icon={<SportsIcon />}
-                text={"Sports"}
-                active={activeFilters.sports}
-                onClick={() => triggerFilter("sports")}
-              />
-            </ButtonGrid>
-          </Filter>
-          <Filter>
-            <FilterTitle>
-              <Typography value={"subtitle1"}>
-                emotions [comming soon]
-              </Typography>
-            </FilterTitle>
-            <ButtonGrid>
-              <ButtonFilter
-                icon={<HappyIcon />}
-                text={"Happy"}
-                disabled={true}
-                onClick={() => triggerFilter("happy")}
-              />
-              <ButtonFilter
-                icon={<SadIcon />}
-                text={"Sad"}
-                disabled={true}
-                onClick={() => triggerFilter("sad")}
-              />
-              <ButtonFilter
-                icon={<SurpriseIcon />}
-                text={"Surprise"}
-                disabled={true}
-                onClick={() => triggerFilter("surprise")}
-              />
-              <ButtonFilter
-                icon={<FearIcon />}
-                text={"Fear"}
-                disabled={true}
-                onClick={() => triggerFilter("fear")}
-              />
-              <ButtonFilter
-                icon={<AngerIcon />}
-                text={"Anger"}
-                disabled={true}
-                onClick={() => triggerFilter("anger")}
-              />
-              <ButtonFilter
-                icon={<DisgustIcon />}
-                text={"Disgust"}
-                disabled={true}
-                onClick={() => triggerFilter("disgust")}
-              />
-            </ButtonGrid>
-          </Filter>*/}
-        </Body>
-        {/*<div>
-          <FooterDivider />
-          <FooterButtons>
-            <ButtonRegular
-              text={"Reset"}
-              style={{ width: "100%", margin: "1em .5em 1em 1em" }}
-              onClick={resetState}
-            />
+              </ListItem>
+            </LocalizationProvider>
 
-            <ButtonFancy
-              text={"Apply"}
-              style={{ width: "100%", margin: "1em  1em 1em .5em" }}
-              onClick={() => {
-                const activeTags = [];
-                Object.keys(activeFilters).forEach((key) => {
-                  if (activeFilters[key]) {
-                    activeTags.push(key);
-                  }
-                });
-                triggerSearch({
-                  fromDate: fromDate,
-                  toDate: toDate,
-                  tags: activeTags,
-                });
-                triggerFiltersClose();
-              }}
-            />
-          </FooterButtons>
-        </div> */}
-      </Panel>
-    </Backdrop>
+            {/* <KeyboardDatePicker
+                      margin="normal"
+                      id="date-picker-dialog"
+                      label="To date"
+                      format="dd/MM/yyyy"
+                      value={toDate}
+                      onChange={(date) => {
+                        const epochDate = date
+                          ? date.getTime()
+                          : EMPTY_EPOCH_TIME;
+                        toDateChange(epochDate);
+                      }}
+                      KeyboardButtonProps={{
+                        "aria-label": "change date",
+                      }}
+                      style={{ marginTop: 0 }}
+                    /> */}
+            {/* </TimeSelectoGrid> */}
+            {/* </MuiPickersUtilsProvider> */}
+          </List>
+          {/* WHAT */}
+          <ListItem>
+            <ListItemText primary="🔮 Subjects" />
+          </ListItem>
+          <List component="div" disablePadding>
+            <ListItem>
+              <ButtonGrid>
+                <ButtonFilter
+                  text={"🧑 People"}
+                  active={activeTags.people}
+                  onClick={() => tagChange("people")}
+                />
+                <ButtonFilter
+                  text={"🐶 Animals"}
+                  active={activeTags.animals}
+                  onClick={() => tagChange("animals")}
+                />
+                <ButtonFilter
+                  text={"🚗 Vehicles"}
+                  active={activeTags.vehicles}
+                  onClick={() => tagChange("vehicles")}
+                />
+                <ButtonFilter
+                  text={"🍔 Food"}
+                  active={activeTags.food}
+                  onClick={() => tagChange("food")}
+                />
+                <ButtonFilter
+                  text={"🍺 Drinks"}
+                  active={activeTags.drinks}
+                  onClick={() => tagChange("drinks")}
+                />
+                <ButtonFilter
+                  text={"🏀 Sports"}
+                  active={activeTags.sports}
+                  onClick={() => tagChange("sports")}
+                />
+              </ButtonGrid>
+            </ListItem>
+          </List>
+        </List>
+      </Body>
+      <FooterDivider />
+      <ButtonRegular
+        text={"✨ Clear filters"}
+        onClick={resetState}
+        style={{
+          background: "#1976d2",
+        }}
+      />
+    </Wrapper>
   );
 };
 

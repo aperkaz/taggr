@@ -37,7 +37,7 @@ const ButtonRegular = ({
   args,
 }: Props) => (
   <CustomButton onClick={onClick} style={style} {...args}>
-    <Typography variant="h6" style={{ color: "gray" }}>
+    <Typography variant="h6" style={{ color: "white" }}>
       {text}
     </Typography>
   </CustomButton>
