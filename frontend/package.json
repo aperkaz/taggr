@@ -77,6 +77,7 @@
     "@storybook/preset-create-react-app": "^3.2.0",
     "@storybook/react": "^6.3.12",
     "@types/fslightbox-react": "^1.4.2",
+    "@types/lodash.debounce": "^4.0.6",
     "@types/react-window": "^1.8.5",
     "@types/styled-components": "^5.1.15"
   }

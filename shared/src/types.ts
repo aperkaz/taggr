@@ -149,6 +149,12 @@ export interface IpcRenderer extends NodeJS.EventEmitter {
   sendToHost(channel: string, ...args: any[]): void;
 }
 
+export interface FiltersType {
+  fromDate: number | null;
+  toDate: number | null;
+  tags: string[];
+}
+
 type BaseImage = {
   hash: string;
   path: string;

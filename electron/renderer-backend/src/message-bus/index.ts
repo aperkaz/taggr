@@ -1,4 +1,4 @@
-import { messageBus, typeUtils, Types } from "taggr-shared";
+import { messageBus, sharedUtils, sharedTypes } from "taggr-shared";
 
 const SETUP_CHANNEL = messageBus.CHANNELS.SETUP;
 const MAIN_CHANNEL = messageBus.CHANNELS.MAIN;
@@ -39,7 +39,7 @@ window.ipcRenderer.on(
 				});
 				break;
 			default:
-				throw new typeUtils.UnreachableCaseError(message.type);
+				throw new sharedUtils.UnreachableCaseError(message.type);
 		}
 	}
 );

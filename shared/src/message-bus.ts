@@ -9,6 +9,8 @@
  * https://www.electronjs.org/docs/latest/api/ipc-renderer
  */
 
+import { FrontendRoutes, Image, Progress } from "./types";
+
 export const CHANNELS = {
   SETUP: "tagger-ipc-setup",
   MAIN: "tagger-ipc-main",
@@ -19,14 +21,38 @@ export type SETUP_MESSAGE = {
   beWebContentId: number;
 };
 
-export type FE_MESSAGES = {
-  type: "frontend-notify";
-  payload: string;
-};
+const FE_MESSAGE_NAMESPACE = `frontend_`;
+export type FE_MESSAGES =
+  | {
+      type: `${typeof FE_MESSAGE_NAMESPACE}set-route`;
+      payload: FrontendRoutes;
+    }
+  | {
+      type: `${typeof FE_MESSAGE_NAMESPACE}set-images`;
+      payload: Image[];
+    }
+  | {
+      type: `${typeof FE_MESSAGE_NAMESPACE}set-progress`;
+      payload: Progress;
+    }
+  | {
+      type: `${typeof FE_MESSAGE_NAMESPACE}set-is-processing`;
+      payload: boolean;
+    };
 
+const BE_MESSAGE_NAMESPACE = `backend_`; // TODONOW: use in FE / BE message-bus for filtering
 export type BE_MESSAGES =
   | {
-      type: "backend-notify";
+      type: `${typeof BE_MESSAGE_NAMESPACE}initialize-project`;
       payload: string;
     }
-  | never;
+  | {
+      type: `${typeof BE_MESSAGE_NAMESPACE}filter-images`;
+      payload: any; // TODONOW: add filters type, extract from component
+    }
+  | {
+      type: `${typeof BE_MESSAGE_NAMESPACE}reset`;
+    }
+  | {
+      type: `${typeof BE_MESSAGE_NAMESPACE}destroy`;
+    };

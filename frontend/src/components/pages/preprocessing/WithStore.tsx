@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
 import React from "react";
-import { useSelector } from "react-redux";
 
+import { useAppSelector } from "../../../store/hooks";
 import PreProcessPage from "./Page";
 
 const WithStore = () => {
@@ -13,8 +11,8 @@ const WithStore = () => {
 
   return (
     <PreProcessPage
-      current={useSelector((s) => s.progress.current)}
-      total={useSelector((s) => s.progress.total)}
+      current={useAppSelector((s) => s.progress.current)}
+      total={useAppSelector((s) => s.progress.total)}
       handleSelectLogo={handleSelectLogo}
     />
   );

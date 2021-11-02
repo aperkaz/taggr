@@ -1,4 +1,5 @@
-import { messageBus, typeUtils } from "taggr-shared";
+import { messageBus, sharedUtils } from "taggr-shared";
+import store, { ACTIONS } from "../store";
 
 const SETUP_CHANNEL = messageBus.CHANNELS.SETUP;
 const MAIN_CHANNEL = messageBus.CHANNELS.MAIN;
@@ -31,11 +32,20 @@ window.ipcRenderer.on(
     );
 
     switch (message.type) {
-      case "frontend-notify":
-        console.log("FE frontend-notify: ", message.payload);
+      case "frontend_set-route":
+        store.dispatch(ACTIONS.setActiveRoute(message.payload));
+        break;
+      case "frontend_set-images":
+        store.dispatch(ACTIONS.setImages(message.payload));
+        break;
+      case "frontend_set-progress":
+        store.dispatch(ACTIONS.setProgress(message.payload));
+        break;
+      case "frontend_set-is-processing":
+        store.dispatch(ACTIONS.setIsProcessing(message.payload));
         break;
       default:
-        throw new typeUtils.UnreachableCaseError(message.type);
+        throw new sharedUtils.UnreachableCaseError(message);
     }
   }
 );
@@ -46,6 +56,7 @@ export const sendToBackend = (message: messageBus.BE_MESSAGES): void => {
       "[FE] ipc can not send message, is missing the beWebContentId"
     );
 
+  // TODONOW: fix type rendering
   console.log(
     `[FE] sending, type: ${message.type} \npayload: ${JSON.stringify(
       message.payload

@@ -1,4 +1,4 @@
-import { configureStore, createSlice } from "@reduxjs/toolkit";
+import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { sharedTypes } from "taggr-shared";
 
@@ -249,19 +249,25 @@ const stateSlice = createSlice({
   initialState,
   reducers: {
     resetState: () => initialState,
-    setActiveRoute: (state, action) => {
+    setActiveRoute: (
+      state,
+      action: PayloadAction<sharedTypes.FrontendRoutes>
+    ) => {
       state.activeRoute = action.payload;
     },
-    setImages: (state, action) => {
+    setImages: (state, action: PayloadAction<sharedTypes.Image[]>) => {
       state.images = action.payload;
     },
-    setImagesWithLocation: (state, action) => {
+    setImagesWithLocation: (
+      state,
+      action: PayloadAction<sharedTypes.ImageWithLocation[]>
+    ) => {
       state.imagesWithLocation = action.payload;
     },
-    setIsProcessing: (state, action) => {
+    setIsProcessing: (state, action: PayloadAction<boolean>) => {
       state.isProcessing = action.payload;
     },
-    setProgress: (state, action) => {
+    setProgress: (state, action: PayloadAction<sharedTypes.Progress>) => {
       state.progress = { ...state.progress, ...action.payload };
     },
   },

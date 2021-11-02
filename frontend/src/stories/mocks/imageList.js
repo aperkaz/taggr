@@ -4,6 +4,8 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1578922746465-3a80a228f223?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=564&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 48.856613,
       longitude: 2.352222,
@@ -14,6 +16,8 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1633192142477-17a43b95eb18?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1315&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 18.789277,
       longitude: 98.986074,
@@ -24,6 +28,8 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1544627836-822bfe450209?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 59.93428,
       longitude: 30.335098,
@@ -34,12 +40,16 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "5",
     path:
       "https://images.unsplash.com/photo-1578922746465-3a80a228f223?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=564&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 48.856613,
       longitude: 2.352222,
@@ -50,6 +60,8 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1633192142477-17a43b95eb18?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1315&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 18.789277,
       longitude: 98.986074,
@@ -60,18 +72,24 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1559624989-7b9303bd9792?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "8",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "9",
     path:
       "https://images.unsplash.com/photo-1578922746465-3a80a228f223?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=564&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 48.856613,
       longitude: 2.352222,
@@ -82,6 +100,8 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1633192142477-17a43b95eb18?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1315&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 18.789277,
       longitude: 98.986074,
@@ -92,18 +112,24 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1559624989-7b9303bd9792?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "12",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "13",
     path:
       "https://images.unsplash.com/photo-1578922746465-3a80a228f223?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=564&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 48.856613,
       longitude: 2.352222,
@@ -114,6 +140,8 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1633192142477-17a43b95eb18?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1315&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 18.789277,
       longitude: 98.986074,
@@ -124,72 +152,96 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1544627836-822bfe450209?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=7500&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
 
   {
@@ -197,120 +249,160 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "13",
     path:
       "https://images.unsplash.com/photo-1578922746465-3a80a228f223?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=564&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 48.856613,
       longitude: 2.352222,
@@ -321,6 +413,8 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1633192142477-17a43b95eb18?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1315&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 18.789277,
       longitude: 98.986074,
@@ -331,72 +425,96 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1544627836-822bfe450209?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=7500&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
 
   {
@@ -404,120 +522,160 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "13",
     path:
       "https://images.unsplash.com/photo-1578922746465-3a80a228f223?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=564&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 48.856613,
       longitude: 2.352222,
@@ -528,6 +686,8 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1633192142477-17a43b95eb18?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1315&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 18.789277,
       longitude: 98.986074,
@@ -538,72 +698,96 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1544627836-822bfe450209?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=7500&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
 
   {
@@ -611,120 +795,160 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "13",
     path:
       "https://images.unsplash.com/photo-1578922746465-3a80a228f223?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=564&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 48.856613,
       longitude: 2.352222,
@@ -735,6 +959,8 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1633192142477-17a43b95eb18?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1315&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 18.789277,
       longitude: 98.986074,
@@ -745,72 +971,96 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1544627836-822bfe450209?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=7500&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
 
   {
@@ -818,120 +1068,160 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "13",
     path:
       "https://images.unsplash.com/photo-1578922746465-3a80a228f223?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=564&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 48.856613,
       longitude: 2.352222,
@@ -942,6 +1232,8 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1633192142477-17a43b95eb18?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1315&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 18.789277,
       longitude: 98.986074,
@@ -952,72 +1244,96 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1544627836-822bfe450209?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=7500&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
 
   {
@@ -1025,120 +1341,160 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "13",
     path:
       "https://images.unsplash.com/photo-1578922746465-3a80a228f223?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=564&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 48.856613,
       longitude: 2.352222,
@@ -1149,6 +1505,8 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1633192142477-17a43b95eb18?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1315&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 18.789277,
       longitude: 98.986074,
@@ -1159,72 +1517,96 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1544627836-822bfe450209?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=7500&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
 
   {
@@ -1232,120 +1614,160 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "13",
     path:
       "https://images.unsplash.com/photo-1578922746465-3a80a228f223?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=564&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 48.856613,
       longitude: 2.352222,
@@ -1356,6 +1778,8 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1633192142477-17a43b95eb18?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1315&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 18.789277,
       longitude: 98.986074,
@@ -1366,72 +1790,96 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1544627836-822bfe450209?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=7500&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
 
   {
@@ -1439,120 +1887,160 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "13",
     path:
       "https://images.unsplash.com/photo-1578922746465-3a80a228f223?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=564&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 48.856613,
       longitude: 2.352222,
@@ -1563,6 +2051,8 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1633192142477-17a43b95eb18?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1315&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 18.789277,
       longitude: 98.986074,
@@ -1573,72 +2063,96 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1544627836-822bfe450209?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=7500&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
 
   {
@@ -1646,120 +2160,160 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "13",
     path:
       "https://images.unsplash.com/photo-1578922746465-3a80a228f223?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=564&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 48.856613,
       longitude: 2.352222,
@@ -1770,6 +2324,8 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1633192142477-17a43b95eb18?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1315&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 18.789277,
       longitude: 98.986074,
@@ -1780,72 +2336,96 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1544627836-822bfe450209?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=7500&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
 
   {
@@ -1853,120 +2433,160 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "13",
     path:
       "https://images.unsplash.com/photo-1578922746465-3a80a228f223?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=564&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 48.856613,
       longitude: 2.352222,
@@ -1977,6 +2597,8 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1633192142477-17a43b95eb18?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1315&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 18.789277,
       longitude: 98.986074,
@@ -1987,72 +2609,96 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1544627836-822bfe450209?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=7500&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
 
   {
@@ -2060,120 +2706,160 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "13",
     path:
       "https://images.unsplash.com/photo-1578922746465-3a80a228f223?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=564&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 48.856613,
       longitude: 2.352222,
@@ -2184,6 +2870,8 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1633192142477-17a43b95eb18?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1315&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 18.789277,
       longitude: 98.986074,
@@ -2194,72 +2882,96 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1544627836-822bfe450209?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=7500&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
 
   {
@@ -2267,120 +2979,160 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "13",
     path:
       "https://images.unsplash.com/photo-1578922746465-3a80a228f223?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=564&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 48.856613,
       longitude: 2.352222,
@@ -2391,6 +3143,8 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1633192142477-17a43b95eb18?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1315&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 18.789277,
       longitude: 98.986074,
@@ -2401,72 +3155,96 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1544627836-822bfe450209?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=7500&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
 
   {
@@ -2474,114 +3252,152 @@ export const images = [
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
   {
     hash: "16",
     path:
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
   },
 ];
 
@@ -2591,6 +3407,8 @@ export const imagesWithLocation = [
     path:
       "https://images.unsplash.com/photo-1578922746465-3a80a228f223?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=564&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 48.856613,
       longitude: 2.352222,
@@ -2601,6 +3419,8 @@ export const imagesWithLocation = [
     path:
       "https://images.unsplash.com/photo-1633192142477-17a43b95eb18?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1315&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 18.789277,
       longitude: 98.986074,
@@ -2611,6 +3431,8 @@ export const imagesWithLocation = [
     path:
       "https://images.unsplash.com/photo-1544627836-822bfe450209?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 59.93428,
       longitude: 30.335098,
@@ -2621,6 +3443,8 @@ export const imagesWithLocation = [
     path:
       "https://images.unsplash.com/photo-1578922746465-3a80a228f223?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=564&q=80",
     tags: ["cat", "dog"],
+    rawPath: "./",
+    creationDate: 12345,
     location: {
       latitude: 48.856613,
       longitude: 2.352222,

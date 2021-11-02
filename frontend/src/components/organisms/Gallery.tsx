@@ -129,11 +129,7 @@ const Grid = ({
 type CellProps = {
   columnIndex: number;
   rowIndex: number;
-  style: {
-    height: number;
-    width: number;
-    [key: string]: any;
-  };
+  style: any;
   data: sharedTypes.Image[];
   onClick: (index: number) => void;
 };

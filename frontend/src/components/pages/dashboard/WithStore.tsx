@@ -1,16 +1,11 @@
-import React from 'react';
-// @ts-ignore
-import debounce from 'lodash.debounce';
+import React from "react";
+import debounce from "lodash.debounce";
 
-// TODONOW: add store
-import FE_ROUTES from '../../../../shared/fe-routes';
-import { MessageType } from '../../../../shared/message-passing';
-import { FiltersType } from '../../../../shared/entities';
-
-import { ACTIONS } from '../../../store';
-import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-import messageHandler from '../../../message-handler';
-import DashboardPage from './Page';
+import { ACTIONS } from "../../../store";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { sendToBackend } from "../../../message-bus";
+import DashboardPage from "./Page";
+import { sharedTypes } from "taggr-shared";
 
 const WithStore = () => {
   const dispatch = useAppDispatch();
@@ -22,13 +17,13 @@ const WithStore = () => {
   const imagesWithLocation = useAppSelector((s) => s.imagesWithLocation);
 
   const onSettingsClick = () => {
-    dispatch(ACTIONS.setActiveRoute(FE_ROUTES.SETTINGS_PAGE));
+    dispatch(ACTIONS.setActiveRoute("SETTINGS_PAGE"));
   };
 
-  const onSearchTriggered = debounce((filters: FiltersType) => {
-    messageHandler.postMessage({
-      type: MessageType.BE_FILTER_IMAGES,
-      payload: filters
+  const onSearchTriggered = debounce((filters: sharedTypes.FiltersType) => {
+    sendToBackend({
+      type: "backend_filter-images",
+      payload: filters,
     });
   }, 200);
 

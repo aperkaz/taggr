@@ -2,7 +2,6 @@ import React from "react";
 
 import StartPage from "./Page";
 import { sendToBackend } from "../../../message-bus";
-import { MessageType } from "../../../../shared/message-passing";
 
 const WithStore = () => {
   const onSelectRootFolderPath = async () => {
@@ -17,7 +16,7 @@ const WithStore = () => {
     if (!rootFolderPath) return;
 
     sendToBackend({
-      type: MessageType.BE_INITIALIZE_PROJECT,
+      type: "backend_initialize-project",
       payload: rootFolderPath,
     });
   };
