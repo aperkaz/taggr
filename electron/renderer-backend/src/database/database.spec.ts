@@ -1,5 +1,5 @@
-import dbFactory from "./factory";
-import db from "./factory";
+import dbFactory from "./database";
+import db from "./database";
 
 const IMAGES = [
 	{
@@ -32,13 +32,13 @@ const IMAGES = [
 ];
 
 describe("database module", () => {
+	// clean up dbs
 	beforeEach(() => {
-		// clean up dbs
-
-		// dev db
 		dbFactory(true).clear();
-
-		// non-dev db
+		dbFactory(false).clear();
+	});
+	afterEach(() => {
+		dbFactory(true).clear();
 		dbFactory(false).clear();
 	});
 

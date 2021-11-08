@@ -20,7 +20,7 @@ const WithStore = () => {
     dispatch(ACTIONS.setActiveRoute("SETTINGS_PAGE"));
   };
 
-  const onSearchTriggered = debounce((filters: types.FiltersType) => {
+  const onSearchTriggered = debounce((filters: types.Filters) => {
     sendToBackend({
       type: "backend_filter-images",
       payload: filters,

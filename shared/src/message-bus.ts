@@ -11,9 +11,9 @@
 
 import { Filters, FrontendRoutes, Image, Progress } from "./types";
 
-export const CHANNELS = {
-  SETUP: "tagger-ipc-setup",
-  MAIN: "tagger-ipc-main",
+export type CHANNEL = {
+  SETUP: "taggr-ipc-setup";
+  MAIN: "taggr-ipc-main";
 };
 
 export type SETUP_MESSAGE = {

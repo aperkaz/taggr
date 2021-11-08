@@ -93,7 +93,6 @@ const SettingsPage = ({
             >
               Do you like taggr?
             </Typography>
-            {/* TODONOW: add twitter links */}
             <FancyButton text={"🤩 Stay updated"} onClick={onSelectFollow} />
           </Row>
 

@@ -5,7 +5,6 @@ import { types } from "taggr-shared";
 type InitialState = {
   activeRoute: types.FrontendRoutes;
   images: types.Image[];
-  imagesWithLocation: types.ImageWithLocation[];
   progress: types.Progress;
   isProcessing: boolean;
 };
@@ -22,6 +21,7 @@ const initialState: InitialState = {
         "/Users/alain/temp/pictures/aleksandra-tanasiienko-bV25rEvXBhI-unsplash.jpg",
       tags: ["animals"],
       creationDate: 1616707242202,
+      location: null,
     },
     {
       hash: "9f0fe727c8600712ff1ecc7f5057e4f4",
@@ -31,6 +31,7 @@ const initialState: InitialState = {
         "/Users/alain/temp/pictures/bobby-stevenson-KJtbBUnKRRQ-unsplash.jpg",
       tags: ["people"],
       creationDate: 1616707278277,
+      location: null,
     },
     {
       hash: "9c6227acb6af0200d81fac61f146c6f6",
@@ -39,7 +40,7 @@ const initialState: InitialState = {
       rawPath:
         "/Users/alain/temp/pictures/boris-smokrovic-lyvCvA8sKGc-unsplash.jpg",
       tags: ["animals"],
-
+      location: null,
       creationDate: 1613300779220,
     },
     {
@@ -49,7 +50,7 @@ const initialState: InitialState = {
       rawPath:
         "/Users/alain/temp/pictures/deva-williamson-sjsG1yrwJxY-unsplash.jpg",
       tags: ["food"],
-
+      location: null,
       creationDate: 1613300787047,
     },
     {
@@ -58,7 +59,7 @@ const initialState: InitialState = {
         "file:///Users/alain/Library/Application Support/taggr-nodejs/3d2a0dd303b7a81176d0ec7482ea92e9.jpeg",
       rawPath: "/Users/alain/temp/pictures/docusign-XMQHdgirB0U-unsplash.jpg",
       tags: ["people", "vehicles"],
-
+      location: null,
       creationDate: 1616707227450,
     },
     {
@@ -67,7 +68,7 @@ const initialState: InitialState = {
         "file:///Users/alain/Library/Application Support/taggr-nodejs/beddf4f7bef1f91b9cc1c7784772dbad.jpeg",
       rawPath: "/Users/alain/temp/pictures/docusign-ujkG7mTs7IM-unsplash.jpg",
       tags: ["people"],
-
+      location: null,
       creationDate: 1613300817009,
     },
     {
@@ -77,7 +78,7 @@ const initialState: InitialState = {
       rawPath:
         "/Users/alain/temp/pictures/dominik-lange-BFsm5vldl2I-unsplash.jpg",
       tags: ["animals"],
-
+      location: null,
       creationDate: 1613300796539,
     },
     {
@@ -87,7 +88,7 @@ const initialState: InitialState = {
       rawPath:
         "/Users/alain/temp/pictures/francesco-de-tommaso-ZxNKxnR32Ng-unsplash.jpg",
       tags: ["animals"],
-
+      location: null,
       creationDate: 1613300788109,
     },
     {
@@ -97,7 +98,7 @@ const initialState: InitialState = {
       rawPath:
         "/Users/alain/temp/pictures/franzi-meyer-Fdd0kJtqtSI-unsplash.jpg",
       tags: ["people", "food", "drinks"],
-
+      location: null,
       creationDate: 1616707251203,
     },
     {
@@ -107,7 +108,7 @@ const initialState: InitialState = {
       rawPath:
         "/Users/alain/temp/pictures/frosty-ilze-tfYL1j1jKNo-unsplash.jpg",
       tags: [],
-
+      location: null,
       creationDate: 1613300782856,
     },
     {
@@ -117,7 +118,7 @@ const initialState: InitialState = {
       rawPath:
         "/Users/alain/temp/pictures/harold-wainwright-awHDN3WUCOo-unsplash.jpg",
       tags: [],
-
+      location: null,
       creationDate: 1616707281930,
     },
     {
@@ -127,7 +128,7 @@ const initialState: InitialState = {
       rawPath:
         "/Users/alain/temp/pictures/joshua-mcarthur-KNejiz13lCs-unsplash.jpg",
       tags: ["people"],
-
+      location: null,
       creationDate: 1616707254389,
     },
     {
@@ -136,7 +137,7 @@ const initialState: InitialState = {
         "file:///Users/alain/Library/Application Support/taggr-nodejs/20e900946abfd17613c1659a9108fc1a.jpeg",
       rawPath: "/Users/alain/temp/pictures/junho-4AXPcy361tk-unsplash.jpg",
       tags: ["people"],
-
+      location: null,
       creationDate: 1613300796142,
     },
     {
@@ -146,7 +147,7 @@ const initialState: InitialState = {
       rawPath:
         "/Users/alain/temp/pictures/laura-college-K_Na5gCmh38-unsplash.jpg",
       tags: ["animals"],
-
+      location: null,
       creationDate: 1613300779091,
     },
     {
@@ -156,7 +157,7 @@ const initialState: InitialState = {
       rawPath:
         "/Users/alain/temp/pictures/lilian-velet-X2gQ8xI5PNI-unsplash.jpg",
       tags: [],
-
+      location: null,
       creationDate: 1616707257995,
     },
     {
@@ -166,7 +167,7 @@ const initialState: InitialState = {
       rawPath:
         "/Users/alain/temp/pictures/lisha-riabinina-p-6CXeowTMU-unsplash.jpg",
       tags: ["people"],
-
+      location: null,
       creationDate: 1616707265537,
     },
     {
@@ -176,7 +177,7 @@ const initialState: InitialState = {
       rawPath:
         "/Users/alain/temp/pictures/naraa-in-ub-T_kTdILw9uo-unsplash.jpg",
       tags: ["vehicles"],
-
+      location: null,
       creationDate: 1613300804071,
     },
     {
@@ -185,7 +186,7 @@ const initialState: InitialState = {
         "file:///Users/alain/Library/Application Support/taggr-nodejs/fb77f3e86b2337e6fa6ce62818e7505d.jpeg",
       rawPath: "/Users/alain/temp/pictures/omar-ram-iU1Pu16JN7k-unsplash.jpg",
       tags: ["animals"],
-
+      location: null,
       creationDate: 1613300822396,
     },
     {
@@ -195,7 +196,7 @@ const initialState: InitialState = {
       rawPath:
         "/Users/alain/temp/pictures/rasmus-smedstrup-mortensen-vsWAMgLmo-0-unsplash.jpg",
       tags: [],
-
+      location: null,
       creationDate: 1613300819701,
     },
     {
@@ -204,7 +205,7 @@ const initialState: InitialState = {
         "file:///Users/alain/Library/Application Support/taggr-nodejs/ec898435657a5eb39d35bc730938418b.jpeg",
       rawPath: "/Users/alain/temp/pictures/surface-N--7q6GwL84-unsplash.jpg",
       tags: ["people"],
-
+      location: null,
       creationDate: 1613300802347,
     },
     {
@@ -213,7 +214,7 @@ const initialState: InitialState = {
         "file:///Users/alain/Library/Application Support/taggr-nodejs/10c483cc2ef59dcc2009ae662917e704.jpeg",
       rawPath: "/Users/alain/temp/pictures/surface-aqdPtCtq3dY-unsplash.jpg",
       tags: ["people"],
-
+      location: null,
       creationDate: 1613300791762,
     },
     {
@@ -222,7 +223,7 @@ const initialState: InitialState = {
         "file:///Users/alain/Library/Application Support/taggr-nodejs/1469690b94ff799038735e2813ea607f.jpeg",
       rawPath: "/Users/alain/temp/pictures/wexor-tmg-L-2p8fapOA8-unsplash.jpg",
       tags: ["animals"],
-
+      location: null,
       creationDate: 1613300789393,
     },
     {
@@ -232,11 +233,10 @@ const initialState: InitialState = {
       rawPath:
         "/Users/alain/temp/pictures/will-norbury--aDYQJdETkA-unsplash.jpg",
       tags: [],
-
+      location: null,
       creationDate: 1616707235139,
     },
   ],
-  imagesWithLocation: [],
   isProcessing: true,
   progress: {
     current: 0,
@@ -255,12 +255,6 @@ const stateSlice = createSlice({
     },
     setImages: (state, action: PayloadAction<types.Image[]>) => {
       state.images = action.payload;
-    },
-    setImagesWithLocation: (
-      state,
-      action: PayloadAction<types.ImageWithLocation[]>
-    ) => {
-      state.imagesWithLocation = action.payload;
     },
     setIsProcessing: (state, action: PayloadAction<boolean>) => {
       state.isProcessing = action.payload;

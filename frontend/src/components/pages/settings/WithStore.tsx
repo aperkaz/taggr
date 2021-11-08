@@ -27,9 +27,9 @@ const WithStore = () => {
     shell.openExternal(link);
   };
 
-  const handleSelectSupport = () => {
+  const handleSelectFollow = () => {
     let shell = window.require("electron").shell;
-    shell.openExternal("https://taggr.ai/#support");
+    shell.openExternal("https://twitter.com/aperkaz?ref_src=twsrc%5Etfw");
   };
 
   return (
@@ -38,7 +38,7 @@ const WithStore = () => {
       onSelectDestroy={onSelectDestroy}
       onSelectBack={onSelectBack}
       onOpenLink={handleOpenLink("https://taggr.ai")}
-      onSelectFollow={handleSelectSupport}
+      onSelectFollow={handleSelectFollow}
     />
   );
 };
