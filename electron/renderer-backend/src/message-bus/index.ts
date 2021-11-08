@@ -1,14 +1,16 @@
-import { messageBus, sharedUtils, sharedTypes } from "taggr-shared";
+import { messageBus, utils, types } from "taggr-shared";
 
 const SETUP_CHANNEL = messageBus.CHANNELS.SETUP;
 const MAIN_CHANNEL = messageBus.CHANNELS.MAIN;
 
 let feWebContentId: number | undefined;
 
+// TODONOW: add tests to this
+
 // setup channel callback
 window.ipcRenderer.on(
 	SETUP_CHANNEL,
-	(event, message: messageBus.SETUP_MESSAGE) => {
+	(_event: any, message: messageBus.SETUP_MESSAGE) => {
 		feWebContentId = message.feWebContentId;
 		console.log(`[BE] message bus online, feWebContentId: ${feWebContentId}`);
 	}
@@ -17,29 +19,30 @@ window.ipcRenderer.on(
 // main channel callback
 window.ipcRenderer.on(
 	MAIN_CHANNEL,
-	(event, message?: messageBus.BE_MESSAGES) => {
-		if (!message || !message.type.startsWith("backend")) {
+	(_event: any, message?: messageBus.BE_MESSAGES) => {
+		if (!message || !message.type.startsWith(messageBus.BE_MESSAGE_NAMESPACE)) {
 			return console.error(
 				`[BE] can not process message: ${JSON.stringify(message)}`
 			);
 		}
 
-		console.log(
-			`[BE] receive, type: ${message.type} \npayload: ${JSON.stringify(
-				message.payload
-			)}`
-		);
+		console.log(`[BE] received:${JSON.stringify(message)}}`);
 
 		switch (message.type) {
-			case "backend-notify":
-				console.log("BE backend-notify: ", message.payload);
-				sendToFrontend({
-					type: "frontend-notify",
-					payload: "BE reveived the message",
-				});
+			case "backend_initialize-project":
+				// sendToFrontend({
+				// 	type: "frontend-notify",
+				// 	payload: "BE reveived the message",
+				// });
+				break;
+			case "backend_filter-images":
+				break;
+			case "backend_reset":
+				break;
+			case "backend_destroy":
 				break;
 			default:
-				throw new sharedUtils.UnreachableCaseError(message.type);
+				throw new utils.UnreachableCaseError(message);
 		}
 	}
 );
@@ -50,10 +53,6 @@ export const sendToFrontend = (message: messageBus.FE_MESSAGES): void => {
 			"[BE] ipc can not send message, is missing the feWebContentId"
 		);
 
-	console.log(
-		`[BE] sending, type: ${message.type} \npayload: ${JSON.stringify(
-			message.payload
-		)}`
-	);
+	console.log(`[BE] sending: ${JSON.stringify(message)}`);
 	window.ipcRenderer.sendTo(feWebContentId, MAIN_CHANNEL, message);
 };

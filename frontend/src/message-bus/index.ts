@@ -1,15 +1,16 @@
-import { messageBus, sharedUtils } from "taggr-shared";
+import { messageBus, utils } from "taggr-shared";
 import store, { ACTIONS } from "../store";
 
 const SETUP_CHANNEL = messageBus.CHANNELS.SETUP;
 const MAIN_CHANNEL = messageBus.CHANNELS.MAIN;
 
 let beWebContentId: number | undefined;
+// TODONOW: add tests to this
 
 // setup channel callback
 window.ipcRenderer.on(
   SETUP_CHANNEL,
-  (event, message: messageBus.SETUP_MESSAGE) => {
+  (_event, message: messageBus.SETUP_MESSAGE) => {
     beWebContentId = message.beWebContentId;
     console.log(`[FE] message bus online: beWebContentId: ${beWebContentId}`);
   }
@@ -18,18 +19,14 @@ window.ipcRenderer.on(
 // main channel callback
 window.ipcRenderer.on(
   MAIN_CHANNEL,
-  (event, message?: messageBus.FE_MESSAGES) => {
-    if (!message || !message.type.startsWith("frontend")) {
+  (_event, message?: messageBus.FE_MESSAGES) => {
+    if (!message || !message.type.startsWith(messageBus.FE_MESSAGE_NAMESPACE)) {
       return console.error(
         `[FE] can not process message: ${JSON.stringify(message)}`
       );
     }
 
-    console.log(
-      `[FE] receive, type: ${message.type} \npayload: ${JSON.stringify(
-        message.payload
-      )}`
-    );
+    console.log(`[FE] received: ${JSON.stringify(message)}`);
 
     switch (message.type) {
       case "frontend_set-route":
@@ -45,7 +42,7 @@ window.ipcRenderer.on(
         store.dispatch(ACTIONS.setIsProcessing(message.payload));
         break;
       default:
-        throw new sharedUtils.UnreachableCaseError(message);
+        throw new utils.UnreachableCaseError(message);
     }
   }
 );
@@ -56,11 +53,6 @@ export const sendToBackend = (message: messageBus.BE_MESSAGES): void => {
       "[FE] ipc can not send message, is missing the beWebContentId"
     );
 
-  // TODONOW: fix type rendering
-  console.log(
-    `[FE] sending, type: ${message.type} \npayload: ${JSON.stringify(
-      message.payload
-    )}`
-  );
+  console.log(`[FE] sending: ${JSON.stringify(message)}`);
   window.ipcRenderer.sendTo(beWebContentId, MAIN_CHANNEL, message);
 };

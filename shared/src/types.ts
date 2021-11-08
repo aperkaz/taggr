@@ -152,7 +152,7 @@ export interface IpcRenderer extends NodeJS.EventEmitter {
 export interface FiltersType {
   fromDate: number | null;
   toDate: number | null;
-  tags: string[];
+  tags: string[]; // TODONOW: add list of tags here
 }
 
 type BaseImage = {

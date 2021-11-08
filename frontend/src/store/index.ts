@@ -1,12 +1,12 @@
 import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { sharedTypes } from "taggr-shared";
+import { types } from "taggr-shared";
 
 type InitialState = {
-  activeRoute: sharedTypes.FrontendRoutes;
-  images: sharedTypes.Image[];
-  imagesWithLocation: sharedTypes.ImageWithLocation[];
-  progress: sharedTypes.Progress;
+  activeRoute: types.FrontendRoutes;
+  images: types.Image[];
+  imagesWithLocation: types.ImageWithLocation[];
+  progress: types.Progress;
   isProcessing: boolean;
 };
 
@@ -244,30 +244,28 @@ const initialState: InitialState = {
   },
 };
 
+// TODONOW: add tests to this
 const stateSlice = createSlice({
   name: "uiState",
   initialState,
   reducers: {
     resetState: () => initialState,
-    setActiveRoute: (
-      state,
-      action: PayloadAction<sharedTypes.FrontendRoutes>
-    ) => {
+    setActiveRoute: (state, action: PayloadAction<types.FrontendRoutes>) => {
       state.activeRoute = action.payload;
     },
-    setImages: (state, action: PayloadAction<sharedTypes.Image[]>) => {
+    setImages: (state, action: PayloadAction<types.Image[]>) => {
       state.images = action.payload;
     },
     setImagesWithLocation: (
       state,
-      action: PayloadAction<sharedTypes.ImageWithLocation[]>
+      action: PayloadAction<types.ImageWithLocation[]>
     ) => {
       state.imagesWithLocation = action.payload;
     },
     setIsProcessing: (state, action: PayloadAction<boolean>) => {
       state.isProcessing = action.payload;
     },
-    setProgress: (state, action: PayloadAction<sharedTypes.Progress>) => {
+    setProgress: (state, action: PayloadAction<types.Progress>) => {
       state.progress = { ...state.progress, ...action.payload };
     },
   },

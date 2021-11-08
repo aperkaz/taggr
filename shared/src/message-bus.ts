@@ -9,7 +9,7 @@
  * https://www.electronjs.org/docs/latest/api/ipc-renderer
  */
 
-import { FrontendRoutes, Image, Progress } from "./types";
+import { FiltersType, FrontendRoutes, Image, Progress } from "./types";
 
 export const CHANNELS = {
   SETUP: "tagger-ipc-setup",
@@ -21,7 +21,7 @@ export type SETUP_MESSAGE = {
   beWebContentId: number;
 };
 
-const FE_MESSAGE_NAMESPACE = `frontend_`;
+export const FE_MESSAGE_NAMESPACE = `frontend_`;
 export type FE_MESSAGES =
   | {
       type: `${typeof FE_MESSAGE_NAMESPACE}set-route`;
@@ -40,7 +40,7 @@ export type FE_MESSAGES =
       payload: boolean;
     };
 
-const BE_MESSAGE_NAMESPACE = `backend_`; // TODONOW: use in FE / BE message-bus for filtering
+export const BE_MESSAGE_NAMESPACE = `backend_`;
 export type BE_MESSAGES =
   | {
       type: `${typeof BE_MESSAGE_NAMESPACE}initialize-project`;
@@ -48,7 +48,7 @@ export type BE_MESSAGES =
     }
   | {
       type: `${typeof BE_MESSAGE_NAMESPACE}filter-images`;
-      payload: any; // TODONOW: add filters type, extract from component
+      payload: FiltersType;
     }
   | {
       type: `${typeof BE_MESSAGE_NAMESPACE}reset`;

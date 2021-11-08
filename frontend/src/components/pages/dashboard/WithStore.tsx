@@ -5,7 +5,7 @@ import { ACTIONS } from "../../../store";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { sendToBackend } from "../../../message-bus";
 import DashboardPage from "./Page";
-import { sharedTypes } from "taggr-shared";
+import { types } from "taggr-shared";
 
 const WithStore = () => {
   const dispatch = useAppDispatch();
@@ -20,7 +20,7 @@ const WithStore = () => {
     dispatch(ACTIONS.setActiveRoute("SETTINGS_PAGE"));
   };
 
-  const onSearchTriggered = debounce((filters: sharedTypes.FiltersType) => {
+  const onSearchTriggered = debounce((filters: types.FiltersType) => {
     sendToBackend({
       type: "backend_filter-images",
       payload: filters,

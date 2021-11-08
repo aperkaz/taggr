@@ -7,7 +7,7 @@ import DashboardPage from "./pages/dashboard";
 import SettingsPage from "./pages/settings";
 
 import { useAppSelector } from "../store/hooks";
-import { sharedTypes, sharedUtils } from "taggr-shared";
+import { types, utils } from "taggr-shared";
 
 const Wrapper = styled.div`
   height: 100%;
@@ -29,7 +29,7 @@ const App = () => {
   );
 };
 
-const renderRoute = (activeRoute: sharedTypes.FrontendRoutes) => {
+const renderRoute = (activeRoute: types.FrontendRoutes) => {
   switch (activeRoute) {
     case "START_PAGE":
       return <StartPage />;
@@ -40,7 +40,7 @@ const renderRoute = (activeRoute: sharedTypes.FrontendRoutes) => {
     case "SETTINGS_PAGE":
       return <SettingsPage />;
     default:
-      throw new sharedUtils.UnreachableCaseError(activeRoute);
+      throw new utils.UnreachableCaseError(activeRoute);
   }
 };
 
