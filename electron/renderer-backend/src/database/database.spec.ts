@@ -1,5 +1,4 @@
 import dbFactory from "./database";
-import db from "./database";
 
 const IMAGES = [
 	{
