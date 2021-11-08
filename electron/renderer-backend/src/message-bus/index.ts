@@ -1,4 +1,5 @@
 import { messageBus, utils, types } from "taggr-shared";
+import handlers from "../handlers";
 
 const SETUP_CHANNEL = messageBus.CHANNELS.SETUP;
 const MAIN_CHANNEL = messageBus.CHANNELS.MAIN;
@@ -19,7 +20,7 @@ window.ipcRenderer.on(
 // main channel callback
 window.ipcRenderer.on(
 	MAIN_CHANNEL,
-	(_event: any, message?: messageBus.BE_MESSAGES) => {
+	async (_event: any, message?: messageBus.BE_MESSAGES) => {
 		if (!message || !message.type.startsWith(messageBus.BE_MESSAGE_NAMESPACE)) {
 			return console.error(
 				`[BE] can not process message: ${JSON.stringify(message)}`
@@ -28,18 +29,23 @@ window.ipcRenderer.on(
 
 		console.log(`[BE] received:${JSON.stringify(message)}}`);
 
+		// the structure in ../handlers mimics this switch
 		switch (message.type) {
-			case "backend_initialize-project":
-				// sendToFrontend({
-				// 	type: "frontend-notify",
-				// 	payload: "BE reveived the message",
-				// });
+			case "backend_destroy":
+				await handlers.destroy();
 				break;
 			case "backend_filter-images":
+				const images = await handlers.filterImages();
+				sendToFrontend({
+					type: "frontend_set-images",
+					payload: images,
+				});
+				break;
+			case "backend_initialize-project":
+				await handlers.initializeProject(message.payload);
 				break;
 			case "backend_reset":
-				break;
-			case "backend_destroy":
+				handlers.reset();
 				break;
 			default:
 				throw new utils.UnreachableCaseError(message);

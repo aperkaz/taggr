@@ -149,7 +149,7 @@ export interface IpcRenderer extends NodeJS.EventEmitter {
   sendToHost(channel: string, ...args: any[]): void;
 }
 
-export interface FiltersType {
+export interface Filters {
   fromDate: number | null;
   toDate: number | null;
   tags: string[]; // TODONOW: add list of tags here
@@ -163,13 +163,13 @@ type BaseImage = {
   creationDate: number; // Epoch timestamp
 };
 
-type LocationType = {
+type Location = {
   latitude: number;
   longitude: number;
 };
 
-export type Image = BaseImage & { location?: LocationType };
-export type ImageWithLocation = BaseImage & { location: LocationType };
+export type Image = BaseImage & { location?: Location };
+export type ImageWithLocation = BaseImage & { location: Location };
 
 export interface Progress {
   current: number;

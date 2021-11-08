@@ -9,7 +9,7 @@
  * https://www.electronjs.org/docs/latest/api/ipc-renderer
  */
 
-import { FiltersType, FrontendRoutes, Image, Progress } from "./types";
+import { Filters, FrontendRoutes, Image, Progress } from "./types";
 
 export const CHANNELS = {
   SETUP: "tagger-ipc-setup",
@@ -48,7 +48,7 @@ export type BE_MESSAGES =
     }
   | {
       type: `${typeof BE_MESSAGE_NAMESPACE}filter-images`;
-      payload: FiltersType;
+      payload: Filters;
     }
   | {
       type: `${typeof BE_MESSAGE_NAMESPACE}reset`;
