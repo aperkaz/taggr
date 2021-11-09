@@ -5,22 +5,18 @@ import fs from "fs";
 import envPaths from "env-paths";
 import normalize from "normalize-path";
 import ExifImage from "exif";
+import { types } from "taggr-shared";
 
 const openFile = promisify(fs.open);
 const readFile = promisify(fs.read);
 const closeFile = promisify(fs.close);
 
-// TODONOW: add tests
-
 class FileService {
 	/**
 	 * Checks if a given file exists
 	 */
-	async doesFileExist(filePath: string) {
-		return fs.promises
-			.access(filePath, fs.constants.F_OK)
-			.then(() => true)
-			.catch(() => false);
+	doesFileExist(filePath: string) {
+		return fs.existsSync(filePath);
 	}
 
 	/**
@@ -29,7 +25,7 @@ class FileService {
 	async recursivelyFindImages(folderPath: string): Promise<string[]> {
 		let imagePathsList = [];
 
-		var settings = {
+		const settings = {
 			// Filter files with png and jpeg extension
 			fileFilter: ["*.png", "*.PNG", "*.jpg", "*.JPG", "*.jpeg", "*.JPEG"],
 			// Filter by directory
@@ -88,7 +84,7 @@ class FileService {
 	/**
 	 * Load EXIF data from path.
 	 */
-	loadEXIFData(filePath: string) {
+	loadEXIFData(filePath: string): Promise<types.ExifData | undefined> {
 		return new Promise((resolve) => {
 			ExifImage(filePath, (err: any, data: any) => resolve(data));
 		});
@@ -98,8 +94,8 @@ class FileService {
 	 * Returns the app directory depending on the OS.
 	 * https://github.com/sindresorhus/env-paths
 	 */
-	getDataDirectory() {
-		envPaths("taggr").data;
+	getDataDirectory(): string {
+		return envPaths("taggr").data;
 	}
 }
 
