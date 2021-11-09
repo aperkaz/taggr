@@ -17,15 +17,17 @@ class DateService {
 		fromDate: number | null;
 		toDate: number | null;
 	}): boolean {
-		if (!date) {
+		if (date === null) {
 			return !fromDate && !toDate;
 		}
 
-		if (!fromDate) {
+		if (fromDate === null && toDate === null) return true;
+
+		if (fromDate === null) {
 			return toDate ? date <= toDate : true;
 		}
 
-		if (!toDate) {
+		if (toDate === null) {
 			return fromDate ? fromDate <= date : true;
 		}
 
@@ -48,7 +50,13 @@ class DateService {
 		var properDateStr = dateStr + " " + str[1];
 		//pass to Date
 		var date = new Date(properDateStr);
-		return date.getTime();
+		const epochTime = date.getTime();
+		if (Number.isNaN(epochTime)) {
+			console.error(`${properDateStr} is not a valid date`);
+			return null;
+		}
+
+		return epochTime;
 	}
 }
 
