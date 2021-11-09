@@ -107,7 +107,7 @@ class ImageService {
 
 			return { latitude: lat, longitude: lon };
 		} catch (e) {
-			// logger.error(e);
+			console.error(e);
 		}
 
 		return null;

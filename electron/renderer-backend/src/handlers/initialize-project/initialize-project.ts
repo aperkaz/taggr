@@ -1,5 +1,6 @@
 import path from "path";
 import get from "lodash.get";
+import throttle from "lodash.throttle";
 
 import { types } from "taggr-shared";
 import { sendToFrontendType } from "../../message-bus";
@@ -7,7 +8,10 @@ import { Type as dbType } from "../../database";
 import { Type as fileServiceType } from "../../services/file";
 import { Type as imageServiceType } from "../../services/image";
 // TODONOW: pass w dependence injection
+import process from "../../ml";
 import preProcessImages from "../../services/pre-process-images";
+import { isForInStatement } from "typescript";
+import { getTags } from "../../ml/calculate-tags";
 
 type Deps = {
 	db: dbType;
@@ -38,10 +42,10 @@ const initializeProject = ({
 	const imagePaths = await fileService.recursivelyFindImages(rootPath);
 
 	// 2. Generate in memory structure, and calculate the file hashes
-	const imageMap: types.ImageHashMap = {};
+	const temporaryImageMap: types.ImageHashMap = {};
 	for (const imagePath of imagePaths) {
 		const hash = await fileService.generateFileHash(imagePath);
-		imageMap[hash] = {
+		temporaryImageMap[hash] = {
 			hash,
 			path: fileService.normalizePath(
 				path.join(fileService.getDataDirectory(), `${hash}.jpeg`)
@@ -53,46 +57,51 @@ const initializeProject = ({
 		};
 	}
 
-	// 3. Pre-process images (with sharp)
-	// TODONOW: verify that there is a perf bottleneck here - consider removing to support windows!
-	// const throttledPost = throttle(sendToFrontend, 100);
-	const throttledPost = sendToFrontend;
-	await preProcessImages(
-		imageMap,
-		fileService.getDataDirectory(),
-		(processed: number) =>
-			throttledPost({
-				type: "frontend_set-progress",
-				payload: {
-					current: processed,
-					total: imagePaths.length,
-				},
-			})
-	);
-	await new Promise((r) => setTimeout(r, 150));
+	// 3. Process images (only the new ones, when the hash is not stored in DB)
 
-	// 4. Update DB with all images
 	const storedImageMap = db.get("allImages");
-	Object.keys(imageMap).map((hash) => {
-		if (get(storedImageMap, `${hash}.tags`, false)) {
-			imageMap[hash] = {
-				...imageMap[hash],
-				// preserve the existing processed metadata
+	const newImageHashes = Object.keys(temporaryImageMap);
+
+	// only re-calculate new images (non-existing hashes)
+	let count = 0;
+	for (const hash of newImageHashes) {
+		count++;
+
+		sendToFrontend({
+			type: "frontend_set-progress",
+			payload: {
+				current: count,
+				total: newImageHashes.length,
+			},
+		});
+
+		const image = temporaryImageMap[hash];
+
+		// if exists, preserve the existing metadata and update DB
+		if (storedImageMap[hash]) {
+			db.set(`allImages.${hash}`, {
+				...temporaryImageMap[hash],
 				tags: storedImageMap[hash].tags,
 				location: storedImageMap[hash].location,
 				creationDate: storedImageMap[hash].creationDate,
-			};
+			});
+		} else {
+			db.set(`allImages.${hash}`, {
+				...temporaryImageMap[hash],
+				tags: await getTags(await imageService.loadImageFile(image.rawPath)),
+				location: await imageService.getLocation(image.rawPath),
+				creationDate: await imageService.getCreationDate(image.rawPath),
+			});
 		}
-	});
-	db.set("allImages", { ...storedImageMap, ...imageMap });
+	}
 
 	// 5. Update DB with current image hashes
-	db.set("currentImageHashes", Object.keys(imageMap));
+	db.set("currentImageHashes", Object.keys(temporaryImageMap));
 
 	// 6. Send images to FE
 	sendToFrontend({
 		type: "frontend_set-images",
-		payload: imageService.imageHashMapToImageList(imageMap),
+		payload: imageService.imageHashMapToImageList(temporaryImageMap),
 	});
 
 	// 7. Update FE route

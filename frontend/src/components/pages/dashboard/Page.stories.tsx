@@ -28,7 +28,6 @@ const Template: Story<React.ComponentProps<typeof PageComp>> = (args) => (
 export const Dashboard = Template.bind({});
 Dashboard.args = {
   isProcessing: false,
-  progress: { current: 0, total: 0 },
   images,
   imagesWithLocation,
 };

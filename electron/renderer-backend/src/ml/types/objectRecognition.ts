@@ -1,5 +1,4 @@
 // @ts-nocheck
-import logger from "../../../shared/logger";
 
 const MIN_SCORE = 0.5;
 
@@ -9,11 +8,11 @@ let net;
 loadModel();
 
 async function loadModel() {
-  const cocoSsd = require("@tensorflow-models/coco-ssd");
+	const cocoSsd = require("@tensorflow-models/coco-ssd");
 
-  logger.time("loadModel object recognition");
-  net = await cocoSsd.load();
-  logger.timeEnd("loadModel object recognition");
+	console.time("loadModel object recognition");
+	net = await cocoSsd.load();
+	console.timeEnd("loadModel object recognition");
 }
 
 /**
@@ -22,23 +21,23 @@ async function loadModel() {
  * @returns {Promise<string[]>} array with coco-ssd class names
  */
 export const getObjectRecognitionClassNames = async (img) => {
-  if (!net) await loadModel();
+	if (!net) await loadModel();
 
-  let cocoSsdClassNames = [];
+	let cocoSsdClassNames = [];
 
-  try {
-    let predictions = await net.detect(img);
+	try {
+		let predictions = await net.detect(img);
 
-    predictions.forEach((prediction) => {
-      const score = prediction.score;
-      const predictedClass = prediction.class;
-      if (score > MIN_SCORE) {
-        cocoSsdClassNames.push(predictedClass);
-      }
-    });
-  } catch (e) {
-    logger.error(e);
-  }
+		predictions.forEach((prediction) => {
+			const score = prediction.score;
+			const predictedClass = prediction.class;
+			if (score > MIN_SCORE) {
+				cocoSsdClassNames.push(predictedClass);
+			}
+		});
+	} catch (e) {
+		console.error(e);
+	}
 
-  return cocoSsdClassNames;
+	return cocoSsdClassNames;
 };

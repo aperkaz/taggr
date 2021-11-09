@@ -6,7 +6,6 @@ import GalleryComp from "./Gallery";
 import MapComp from "./Map";
 import NavBarComp from "./NavBar";
 import FiltersComp from "./Filters";
-import FiltersLoadingComp from "./FiltersLoading";
 
 import { images, imagesWithLocation } from "../../stories/mocks/imageList";
 
@@ -27,19 +26,6 @@ const TemplateFilters: Story<React.ComponentProps<typeof FiltersComp>> = (
 export const Filters = TemplateFilters.bind({});
 Filters.args = {};
 Filters.parameters = {
-  layout: "centered",
-};
-
-const TemplateFiltersLoading: Story<
-  React.ComponentProps<typeof FiltersLoadingComp>
-> = (args) => <FiltersLoadingComp {...args} />;
-
-export const FiltersLoading = TemplateFiltersLoading.bind({});
-FiltersLoading.args = {
-  current: 10,
-  total: 37,
-};
-FiltersLoading.parameters = {
   layout: "centered",
 };
 

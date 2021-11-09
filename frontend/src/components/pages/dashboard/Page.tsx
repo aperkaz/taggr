@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 import Header from "../../organisms/Header";
 import Filters from "../../organisms/Filters";
-import FiltersLoading from "../../organisms/FiltersLoading";
 import Gallery from "../../organisms/Gallery";
 import Map from "../../organisms/Map";
 import { types } from "taggr-shared";
@@ -48,7 +47,6 @@ const ContentWrapper = styled.div`
 
 type Props = {
   isProcessing: boolean;
-  progress: React.ComponentProps<typeof FiltersLoading>;
   images: types.Image[];
   imagesWithLocation: types.Image[];
   onSettingsClick: React.ComponentProps<typeof Header>["onSettingsClick"];
@@ -57,7 +55,6 @@ type Props = {
 
 const DashboardPage = ({
   isProcessing,
-  progress,
   images,
   imagesWithLocation = [],
   onSettingsClick,
@@ -89,11 +86,7 @@ const DashboardPage = ({
   return (
     <Wrapper>
       <FilterWrapper>
-        {isProcessing ? (
-          <FiltersLoading current={progress.current} total={progress.total} />
-        ) : (
-          <Filters onFilterChange={onSearchTriggered} />
-        )}
+        <Filters onFilterChange={onSearchTriggered} />
       </FilterWrapper>
 
       <ContentPanel>
