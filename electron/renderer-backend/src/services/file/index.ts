@@ -99,4 +99,6 @@ class FileService {
 	}
 }
 
+export type Type = FileService;
+
 export default new FileService();

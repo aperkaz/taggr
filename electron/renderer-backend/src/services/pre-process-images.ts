@@ -1,19 +1,19 @@
-import fs from "fs";
 import path from "path";
-import { ImageHashMapType } from "../../shared/entities";
-import logger from "../../shared/logger";
+import { types } from "taggr-shared";
+import fileService from "../services/file";
+import imageService from "../services/image";
 
-// TODONOW: move this to the handler level
+// TODONOW: move this to the handler level?
 
 /**
  * Pre-process only the images that dont exist
  */
 const preProcessImages = async (
-	imageMap: ImageHashMapType,
+	imageMap: types.ImageHashMap,
 	outputPath: string,
 	reporter: any
 ) => {
-	logger.time("preProcessImages");
+	console.time("preProcessImages");
 
 	const hashes = Object.keys(imageMap);
 
@@ -27,21 +27,23 @@ const preProcessImages = async (
 
 		const preProcessedImagePath = path.join(outputPath, `${image.hash}.jpeg`);
 
-		const fileExists = await doesFileExist(preProcessedImagePath);
+		const fileExists = await fileService.doesFileExist(preProcessedImagePath);
 
 		if (!fileExists) {
 			try {
 				// await resizeImage(image.rawPath, preProcessedImagePath);
-				resizePromises.push(resizeImage(image.rawPath, preProcessedImagePath));
+				resizePromises.push(
+					imageService.resizeImage(image.rawPath, preProcessedImagePath)
+				);
 			} catch (err) {
-				logger.error(err);
+				console.error(err);
 			}
 		}
 	}
 
 	await Promise.all(resizePromises);
 
-	logger.timeEnd("preProcessImages");
+	console.timeEnd("preProcessImages");
 };
 
 export default preProcessImages;

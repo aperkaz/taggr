@@ -1,5 +1,8 @@
-import database from "../../database";
-import envPaths from "../../env-paths";
 import destroy from "./destroy";
+import database from "../../database";
+import fileService from "../../services/file";
 
-export default destroy({ db: database, preprocessImagesPath: envPaths.data });
+export default destroy({
+	db: database,
+	preprocessImagesPath: fileService.getDataDirectory(),
+});

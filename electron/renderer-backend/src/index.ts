@@ -24,5 +24,5 @@ import { sendToFrontend } from "./message-bus"; // initialize the message bus
 
 	await new Promise((r) => setTimeout(r, 4000));
 
-	sendToFrontend({ type: "frontend-notify", payload: "the BE says HOLA" });
+	// sendToFrontend({ type: "frontend-notify", payload: "the BE says HOLA" });
 })();

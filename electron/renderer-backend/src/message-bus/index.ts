@@ -1,4 +1,4 @@
-import { messageBus, utils, types } from "taggr-shared";
+import { messageBus, utils } from "taggr-shared";
 import handlers from "../handlers";
 
 let feWebContentId: number | undefined;
@@ -32,11 +32,7 @@ window.ipcRenderer.on(
 				await handlers.destroy();
 				break;
 			case "backend_filter-images":
-				const images = await handlers.filterImages();
-				sendToFrontend({
-					type: "frontend_set-images",
-					payload: images,
-				});
+				handlers.filterImages(message.payload);
 				break;
 			case "backend_initialize-project":
 				await handlers.initializeProject(message.payload);
@@ -60,5 +56,7 @@ export const sendToFrontend = (message: messageBus.FE_MESSAGES): void => {
 		);
 
 	console.log(`[BE] sending: ${JSON.stringify(message)}`);
-	window.ipcRenderer.sendTo(feWebContentId, MAIN_CHANNEL, message);
+	window.ipcRenderer.sendTo(feWebContentId, "taggr-ipc-main", message);
 };
+
+export type sendToFrontendType = typeof sendToFrontend;

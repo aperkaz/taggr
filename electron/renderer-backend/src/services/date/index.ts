@@ -60,4 +60,6 @@ class DateService {
 	}
 }
 
+export type Type = DateService;
+
 export default new DateService();

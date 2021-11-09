@@ -113,7 +113,7 @@ describe("services - image", () => {
 
 			const filters: types.Filters = { fromDate: 50, toDate: 150, tags: [] };
 
-			expect(imageService.shouldFilterImage(image, filters)).toEqual(true);
+			expect(imageService.doesImagePassFilter(image, filters)).toEqual(true);
 		});
 
 		it("should return true when the image passes a filter with tags", () => {
@@ -132,7 +132,7 @@ describe("services - image", () => {
 				tags: ["animal"],
 			};
 
-			expect(imageService.shouldFilterImage(image, filters)).toEqual(true);
+			expect(imageService.doesImagePassFilter(image, filters)).toEqual(true);
 		});
 
 		it("should return false when the image does not match the filter tags", () => {
@@ -151,7 +151,7 @@ describe("services - image", () => {
 				tags: ["dog"],
 			};
 
-			expect(imageService.shouldFilterImage(image, filters)).toEqual(false);
+			expect(imageService.doesImagePassFilter(image, filters)).toEqual(false);
 		});
 
 		it("should return false when the image does not match the filter date", () => {
@@ -170,7 +170,7 @@ describe("services - image", () => {
 				tags: ["animal"],
 			};
 
-			expect(imageService.shouldFilterImage(image, filters)).toEqual(false);
+			expect(imageService.doesImagePassFilter(image, filters)).toEqual(false);
 		});
 	});
 

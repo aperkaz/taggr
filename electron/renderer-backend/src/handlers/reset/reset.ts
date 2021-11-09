@@ -1,4 +1,4 @@
-import { DatabaseType } from "../../database";
+import { Type as DatabaseType } from "../../database";
 
 /**
  * Reset current project

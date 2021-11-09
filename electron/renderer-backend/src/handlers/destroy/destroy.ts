@@ -1,6 +1,6 @@
 import { promisify } from "util";
 
-import { DatabaseType } from "../../database";
+import { Type as DatabaseType } from "../../database";
 
 const rimraf = promisify(require("rimraf"));
 

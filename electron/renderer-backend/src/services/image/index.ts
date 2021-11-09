@@ -116,7 +116,7 @@ class ImageService {
 	/**
 	 * Calculates if an image passes a given filter
 	 */
-	shouldFilterImage(image: types.Image, filters: types.Filters): boolean {
+	doesImagePassFilter(image: types.Image, filters: types.Filters): boolean {
 		const { fromDate, toDate, tags: filterTags } = filters;
 		const { creationDate, tags: imageTags } = image;
 
@@ -145,7 +145,7 @@ class ImageService {
 
 		currentImageHashes.forEach((hash) => {
 			const image = imageMap[hash];
-			if (this.shouldFilterImage(image, filters)) images.push(image);
+			if (this.doesImagePassFilter(image, filters)) images.push(image);
 		});
 
 		// TODONOW: look up, when to filter these?
@@ -177,5 +177,7 @@ class ImageService {
 		}
 	}
 }
+
+export type Type = ImageService;
 
 export default new ImageService(dateService, fileService);
