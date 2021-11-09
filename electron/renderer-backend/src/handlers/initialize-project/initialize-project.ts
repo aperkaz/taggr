@@ -7,16 +7,13 @@ import { sendToFrontendType } from "../../message-bus";
 import { Type as dbType } from "../../database";
 import { Type as fileServiceType } from "../../services/file";
 import { Type as imageServiceType } from "../../services/image";
-// TODONOW: pass w dependence injection
-import process from "../../ml";
-import preProcessImages from "../../services/pre-process-images";
-import { isForInStatement } from "typescript";
-import { getTags } from "../../ml/calculate-tags";
+import { Type as machineLearningServiceType } from "../../services/machine-learning";
 
 type Deps = {
 	db: dbType;
 	fileService: fileServiceType;
 	imageService: imageServiceType;
+	machineLearningService: machineLearningServiceType;
 	sendToFrontend: sendToFrontendType;
 };
 
@@ -27,6 +24,7 @@ const initializeProject = ({
 	db,
 	fileService,
 	imageService,
+	machineLearningService,
 	sendToFrontend,
 }: Deps) => async (rootPath: string) => {
 	console.log("[BE] initialized project in: ", rootPath);
@@ -88,7 +86,9 @@ const initializeProject = ({
 		} else {
 			db.set(`allImages.${hash}`, {
 				...temporaryImageMap[hash],
-				tags: await getTags(await imageService.loadImageFile(image.rawPath)),
+				tags: await machineLearningService.calculateImageTags(
+					await imageService.loadImageFile(image.rawPath)
+				),
 				location: await imageService.getLocation(image.rawPath),
 				creationDate: await imageService.getCreationDate(image.rawPath),
 			});
