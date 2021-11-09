@@ -58,15 +58,17 @@ export interface Filters {
   tags: string[]; // TODONOW: add list of tags here
 }
 
+export type ImageLocation = {
+  latitude: number;
+  longitude: number;
+} | null;
+
 export type Image = {
   hash: string;
   path: string;
   rawPath: string;
   tags: string[];
-  location: {
-    latitude: number;
-    longitude: number;
-  } | null;
+  location: ImageLocation;
   creationDate: number; // Epoch timestamp
 };
 

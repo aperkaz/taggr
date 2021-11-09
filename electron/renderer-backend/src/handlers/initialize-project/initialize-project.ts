@@ -4,12 +4,14 @@ import get from "lodash.get";
 import { types } from "taggr-shared";
 import { sendToFrontend } from "../../message-bus";
 import db from "../../database";
-import findImagesInPath from "../../utils/find-images-in-path";
-import generateFileHash from "../../utils/generate-file-hash";
-import envPaths from "../../utils/env-paths";
-import normalizePath from "../../utils/normalize-path";
-import preProcessImages from "../../utils/pre-process-images";
-import { addImagePlaceholders } from "../../utils/supporter-user";
+import findImagesInPath from "../../services/file";
+import generateFileHash from "../../services/generate-file-hash";
+import envPaths from "../../env-paths";
+import normalizePath from "../../services/normalize-path";
+import preProcessImages from "../../services/pre-process-images";
+import transformImageMaptoImageList from "../../services/image-map-to-image-list";
+
+// TODONOW: use dep injection for services
 
 /**
  * Init project, preprocess images and populate DB
@@ -25,7 +27,7 @@ const initializeProject = async (rootPath: string) => {
 	});
 
 	// 1. Locate image paths in project
-	const imagePaths = await findImagesInPath(rootPath);
+	const imagePaths = await fileService.findImagesInPath(rootPath);
 
 	// 2. Generate in memory structure, and calculate the file hashes
 	const imageMap: types.ImageHashMap = {};
@@ -77,7 +79,7 @@ const initializeProject = async (rootPath: string) => {
 	// 6. Send images to FE
 	sendToFrontend({
 		type: "frontend_set-images",
-		payload: addImagePlaceholders(transformImageMaptoImageList(imageMap)),
+		payload: transformImageMaptoImageList(imageMap),
 	});
 
 	// 7. Update FE route
@@ -85,11 +87,6 @@ const initializeProject = async (rootPath: string) => {
 		type: "frontend_set-route",
 		payload: "DASHBOARD_PAGE",
 	});
-
-	process();
 };
 
 export default initializeProject;
-function transformImageMaptoImageList(imageMap: types.ImageHashMap): any[] {
-	throw new Error("Function not implemented.");
-}
