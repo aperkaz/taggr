@@ -26,7 +26,7 @@ class ImageService {
 	}
 
 	/**
-	 * Load HTMLImageELement from src
+	 * Load HTMLImageELement from src. Cant be tested in Jest, as it depends on browser's `Image`.
 	 */
 	loadImageFile(imagePath: string): Promise<HTMLImageElement> {
 		return new Promise((resolve, reject) => {
@@ -129,6 +129,38 @@ class ImageService {
 		);
 	}
 
+	/**
+	 * Filter images
+	 */
+	filterImages({
+		imageMap,
+		currentImageHashes,
+		filters,
+	}: {
+		imageMap: types.ImageHashMap;
+		currentImageHashes: string[];
+		filters: types.Filters;
+	}): types.Image[] {
+		let images: types.Image[] = [];
+
+		currentImageHashes.forEach((hash) => {
+			const image = imageMap[hash];
+			if (this.shouldFilterImage(image, filters)) images.push(image);
+		});
+
+		// TODONOW: look up, when to filter these?
+		// Images with location
+		// Object.keys(imageMap).forEach((key) => {
+		//   const image = imageMap[key];
+
+		//   if (filterImage(image, filters)) {
+		//     imagesWithLocation.push(image);
+		//   }
+		// });
+
+		return images;
+	}
+
 	async resizeImage(imagePath: string, outputPath: string) {
 		try {
 			await sharp(imagePath, {
@@ -146,4 +178,4 @@ class ImageService {
 	}
 }
 
-export default ImageService;
+export default new ImageService(dateService, fileService);
