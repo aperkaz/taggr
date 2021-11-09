@@ -39,6 +39,7 @@
 		"electron-unhandled": "^3.0.2",
 		"electron-updater": "^4.3.8",
 		"electron-util": "^0.15.1",
+		"lodash.get": "^4.4.2",
 		"ncp": "^2.0.0",
 		"rimraf": "^3.0.2",
 		"sharp": "^0.29.2",
@@ -49,6 +50,7 @@
 	"devDependencies": {
 		"@babel/preset-typescript": "^7.15.0",
 		"@types/jest": "^27.0.2",
+		"@types/sharp": "^0.29.3",
 		"@typescript-eslint/eslint-plugin": "^5.2.0",
 		"@typescript-eslint/parser": "^5.2.0",
 		"electron": "12.2.2",
