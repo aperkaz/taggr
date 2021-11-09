@@ -82,7 +82,7 @@ class ImageService {
 	 * Get the location info for an image
 	 * @param imagePath without file:// prefix
 	 */
-	async getLocation(imagePath: string): Promise<types.ImageLocation> {
+	async getLocation(imagePath: string): Promise<types.ImageLocation | null> {
 		try {
 			let exifData: any = await this.fileService.loadEXIFData(imagePath);
 

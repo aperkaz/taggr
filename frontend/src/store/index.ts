@@ -5,6 +5,7 @@ import { types } from "taggr-shared";
 type InitialState = {
   activeRoute: types.FrontendRoutes;
   images: types.Image[];
+  imagesWithLocation: types.ImageWithLocation[];
   progress: types.Progress;
   isProcessing: boolean;
 };
@@ -237,6 +238,7 @@ const initialState: InitialState = {
       creationDate: 1616707235139,
     },
   ],
+  imagesWithLocation: [],
   isProcessing: true,
   progress: {
     current: 0,

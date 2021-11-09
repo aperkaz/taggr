@@ -16,7 +16,7 @@ const Wrapper = styled.div`
   border-radius: 6px;
 `;
 
-const Map = ({ imageList = [] }: { imageList: types.ImageWithLocation[] }) => {
+const Map = ({ imageList = [] }: { imageList: types.Image[] }) => {
   const [viewport, setViewport] = useState({
     latitude: 45.4211,
     longitude: -75.6903,
@@ -24,6 +24,12 @@ const Map = ({ imageList = [] }: { imageList: types.ImageWithLocation[] }) => {
   });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [toggler, setToggler] = useState(false);
+
+  const imagesWithLocation: types.ImageWithLocation[] = imageList.filter(
+    (image) => {
+      return image.location !== null;
+    }
+  ) as types.ImageWithLocation[];
 
   return (
     <Wrapper>
@@ -42,7 +48,7 @@ const Map = ({ imageList = [] }: { imageList: types.ImageWithLocation[] }) => {
           setViewport(etc);
         }}
       >
-        {imageList.map((image, index) => (
+        {imagesWithLocation.map((image, index) => (
           <Marker
             key={image.hash}
             // Given marker dimensions (H x W): 35 x 35 :https://material.io/resources/icons/?search=map&icon=room&style=baseline

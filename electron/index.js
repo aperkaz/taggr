@@ -46,7 +46,7 @@ const createBackendWindow = async () => {
 		show: isDev,
 		x: 0,
 		y: 0,
-		width: 800,
+		width: 900,
 		height: 500,
 		webPreferences: {
 			nodeIntegration: true,
@@ -77,10 +77,13 @@ const createFrontendWindow = async () => {
 		show: false,
 		x: 0,
 		y: 500,
-		width: 800,
+		width: 900,
 		height: 500,
 		webPreferences: {
+			nodeIntegration: true,
+			backgroundThrottling: false,
 			contextIsolation: false,
+			enableRemoteModule: true,
 			preload: path.join(__dirname, "preload.js"),
 		},
 	});
@@ -141,14 +144,28 @@ app.on("activate", async () => {
 	frontendWindow = await createFrontendWindow();
 
 	// send webContentId, so render-to-render ipc communication can happen
-	frontendWindow.webContents.send(messageBus.CHANNELS.SETUP, {
+	frontendWindow.webContents.send("taggr-ipc-setup", {
 		beWebContentId: backendWindow.id,
 		feWebContentId: frontendWindow.id,
 	});
-	backendWindow.webContents.send(messageBus.CHANNELS.SETUP, {
+	backendWindow.webContents.send("taggr-ipc-setup", {
 		beWebContentId: backendWindow.id,
 		feWebContentId: frontendWindow.id,
 	});
+
+	setInterval(() => {
+		frontendWindow.webContents.send("taggr-ipc-setup", {
+			beWebContentId: backendWindow.id,
+			feWebContentId: frontendWindow.id,
+		});
+		backendWindow.webContents.send("taggr-ipc-setup", {
+			beWebContentId: backendWindow.id,
+			feWebContentId: frontendWindow.id,
+		});
+	}, 1000);
+	// TODONOW: fix this hack
+
+	console.log(`${backendWindow.id} = ${frontendWindow.id}`);
 
 	const favoriteAnimal = config.get("favoriteAnimal");
 	backendWindow.webContents.executeJavaScript(

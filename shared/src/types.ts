@@ -187,9 +187,18 @@ export interface Filters {
 export type ImageLocation = {
   latitude: number;
   longitude: number;
-} | null;
+};
 
 export type Image = {
+  hash: string;
+  path: string;
+  rawPath: string;
+  tags: string[];
+  location: ImageLocation | null;
+  creationDate: number; // Epoch timestamp
+};
+
+export type ImageWithLocation = {
   hash: string;
   path: string;
   rawPath: string;

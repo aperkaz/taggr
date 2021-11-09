@@ -1,7 +1,7 @@
 import { messageBus, utils } from "taggr-shared";
 import store, { ACTIONS } from "../store";
 
-let beWebContentId: number | undefined;
+let beWebContentId: number | undefined = 1;
 // TODONOW: add tests to this
 
 // setup channel callback

@@ -1,7 +1,45 @@
 import { messageBus, utils } from "taggr-shared";
-import handlers from "../handlers";
+import handlerFactory from "../handlers";
+import db from "../database";
+import fileService from "../services/file";
+import imageService from "../services/image";
 
-let feWebContentId: number | undefined;
+let feWebContentId: number | undefined = 2;
+
+/**
+ * Send ipc message directly to the BE.
+ */
+export const sendToFrontend = (message: messageBus.FE_MESSAGES): void => {
+	if (!feWebContentId || isNaN(feWebContentId))
+		throw new Error(
+			"[BE] ipc can not send message, is missing the feWebContentId"
+		);
+
+	console.log(`[BE] sending: ${JSON.stringify(message)}`);
+	window.ipcRenderer.sendTo(feWebContentId, "taggr-ipc-main", message);
+};
+
+/**
+ * Handlers are initialized, by passing down the dependencies.
+ */
+const handlers = {
+	destroy: handlerFactory.destroy({
+		db,
+		preprocessImagesPath: fileService.getDataDirectory(),
+	}),
+	filterImages: handlerFactory.filterImages({
+		db,
+		imageService,
+		sendToFrontend,
+	}),
+	initializeProject: handlerFactory.initializeProject({
+		db,
+		fileService,
+		imageService,
+		sendToFrontend,
+	}),
+	reset: handlerFactory.reset({ db }),
+};
 
 // TODONOW: add tests to this
 
@@ -45,18 +83,5 @@ window.ipcRenderer.on(
 		}
 	}
 );
-
-/**
- * Send ipc message directly to the BE.
- */
-export const sendToFrontend = (message: messageBus.FE_MESSAGES): void => {
-	if (!feWebContentId || isNaN(feWebContentId))
-		throw new Error(
-			"[BE] ipc can not send message, is missing the feWebContentId"
-		);
-
-	console.log(`[BE] sending: ${JSON.stringify(message)}`);
-	window.ipcRenderer.sendTo(feWebContentId, "taggr-ipc-main", message);
-};
 
 export type sendToFrontendType = typeof sendToFrontend;
