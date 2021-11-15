@@ -186,7 +186,7 @@ class ImageService {
 		return images;
 	}
 
-	// TODONOW: conside removing for suporting multiple envs, cleanup sharp dep
+	// TODONOW: document limitation, dont remove
 	async resizeImage(imagePath: string, outputPath: string) {
 		try {
 			await sharp(imagePath, {

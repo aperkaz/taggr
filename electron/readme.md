@@ -1,81 +1,63 @@
-# electron-boilerplate
+# taggr
 
-> Boilerplate to kickstart creating an app with [Electron](https://github.com/electron/electron)
+Rediscover your **memories** while keeping your **privacy**.
 
-See [awesome-electron](https://github.com/sindresorhus/awesome-electron) for more useful Electron resources.
+Powered by machine learning.
 
-See [Caprine](https://github.com/sindresorhus/caprine) for a production app based on this boilerplate.
+## Architecture
 
-## Features
+IS_DEV dev / production
 
-- [`electron-builder`](https://www.electron.build) fully set up to create cross-platform builds
-- [Builds the app on CI](https://www.electron.build/multi-platform-build.html)
-- [Silent auto-updates](https://www.electron.build/auto-update.html)
-- App menu that adheres to the system user interface guidelines
-- [Config handling](https://github.com/sindresorhus/electron-store)
-- [Context menu](https://github.com/sindresorhus/electron-context-menu)
-- [User-friendly handling of unhandled errors](https://github.com/sindresorhus/electron-unhandled)
-- Ts support for the render-backend
-- [Auto reload of electron on changes](https://github.com/sindresorhus/electron-reloader)
-- Easily publish new versions to GitHub Releases
+TOODNOW: rewrite
 
-## Getting started
+`frontend` and `backend` are one.
 
-**Click the "Use this template" button.**
+**Modularized structure** for UI and backend, running on separated `BrowserWindow` processes: `renderer` for UI, `background` for backend.
 
-Alternatively, create a new directory and then run:
+This allows to perform the long and resource intensive backend operations without blocking the UI thread (in development only). In production, the backend BrowserWindow is hidden.
 
-```
-$ curl -fsSL https://github.com/sindresorhus/electron-boilerplate/archive/main.tar.gz | tar -xz --strip-components 1
-```
+**Message passing** interconnection betweeen modules, through [Broadcast Channel API](https://developer.mozilla.org/en-US/docs/Web/API/Broadcast_Channel_API).
 
-There's also a [Yeoman generator](https://github.com/sindresorhus/generator-electron).
+Since the backend executes long running tasks, sync connections are not an option. The message passing acts as a the communication interfact between modules. Each module (FE/BE) implements a `message-handler`, which deal with the incomming (`message`) on a given topic.
 
----
+Available messaging topics and action cretors are shared and centralized in `./shared/message-passing`.
 
-**Remove everything from here and above**
+## Environments
 
----
+3 app environments. `DEVELOP`, `BUILD_TEST` and `BUILD_PROD`.
 
-# App Name
+Manually set the value in `src/shared/active-env.js`.
 
-> The best app ever
+## Publishing
 
-## Install
+Run:
 
-_macOS 10.10+, Linux, and Windows 7+ are supported (64-bit only)._
-
-**macOS**
-
-[**Download**](https://github.com/user/repo/releases/latest) the `.dmg` file.
-
-**Linux**
-
-[**Download**](https://github.com/user/repo/releases/latest) the `.AppImage` or `.deb` file.
-
-_The AppImage needs to be [made executable](http://discourse.appimage.org/t/how-to-make-an-appimage-executable/80) after download._
-
-**Windows**
-
-[**Download**](https://github.com/user/repo/releases/latest) the `.exe` file.
-
----
-
-## Dev
-
-Built with [Electron](https://electronjs.org).
-
-### Run
-
-```
-$ yarn
-$ yarn start
+```javascript
+npm run publish
 ```
 
-### Publish
+Generated prod buil and updates the `taggr-releases` repo. Generate build in windows and update it manually. Make sure that the `taggr` version in the package.json is updated.
 
-```
-$ yarn release
-```
+1. Execute `npm run publish`
+2. Increate the version in `electron/package.json`
+3. Build windows and upload manually.
 
-After Travis finishes building your app, open the release draft it created and click "Publish".
+### Releases
+
+https://github.com/aperkaz/taggr-releases/releases
+
+## Future Features
+
+- Layout masonry: https://github.com/bvaughn/react-virtualized/issues/1366
+- Certificate trust increase: https://support.ksoftware.net/support/solutions/articles/215894-what-is-this-file-is-not-commonly-downloaded-and-could-harm-your-computer-message-smartscreen-
+- Add github actions build: https://github.com/malept/electron-forge-demo123/actions/runs/116519042/workflow
+- Some images are displayed rotated, example in thailand trip
+- Replace gallery view with lazy loading: https://github.com/xiaolin/react-image-gallery
+- Timeline with pictures https://github.com/rmariuzzo/react-chronos
+- Timeline display of images per day http://tany.kim/quantify-your-year/#/
+- Add more ML: look into tensorflow alternatives: evaluate performance: with article https://learn.ml5js.org/docs/#/reference/face-api?id=demo
+- Speed up app by paralelization. Example: https://github.com/aperkaz/tensorflow-playground
+- Food classification: https://github.com/stratospark/food-101-keras/issues/14
+- File sharing options:
+  https://share.storewise.tech/upload
+  https://safenote.co/upload-file ??

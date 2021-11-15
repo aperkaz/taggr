@@ -48,7 +48,7 @@ const handlers = {
 	reset: handlerFactory.reset({ db }),
 };
 
-// TODONOW: add tests to this
+// TODONOW:  GITHUB add CI
 
 // setup channel callback
 window.ipcRenderer.on(

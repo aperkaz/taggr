@@ -7,12 +7,8 @@ const unhandled = require("electron-unhandled");
 const debug = require("electron-debug");
 const envPaths = require("env-paths");
 const contextMenu = require("electron-context-menu");
-const isDev = require("electron-is-dev");
-const {
-	default: installExtension,
-	REACT_DEVELOPER_TOOLS,
-	REDUX_DEVTOOLS,
-} = require("electron-devtools-installer");
+const { IS_DEV } = require("taggr-shared");
+
 const menu = require("./menu.js");
 
 try {
@@ -47,7 +43,7 @@ let frontendWindow = { id: 2 };
 const createBackendWindow = async () => {
 	const win = new BrowserWindow({
 		title: app.name,
-		show: isDev,
+		show: IS_DEV,
 		x: 0,
 		y: 0,
 		width: 900,
@@ -73,16 +69,20 @@ const createBackendWindow = async () => {
 
 	await win.loadFile(path.join(__dirname, "renderer-backend", "index.html"));
 
+	if (IS_DEV) {
+		win.webContents.openDevTools();
+	}
+
 	return win;
 };
 const createFrontendWindow = async () => {
 	const win = new BrowserWindow({
 		title: app.name,
-		show: false,
+		show: true,
 		x: 0,
 		y: 500,
 		width: 900,
-		height: 500,
+		height: 600,
 		webPreferences: {
 			nodeIntegration: true,
 			backgroundThrottling: false,
@@ -95,6 +95,7 @@ const createFrontendWindow = async () => {
 
 	win.on("ready-to-show", () => {
 		win.show();
+		if (!IS_DEV) win.maximize();
 	});
 
 	win.on("closed", () => {
@@ -104,10 +105,14 @@ const createFrontendWindow = async () => {
 	});
 
 	await win.loadURL(
-		isDev
+		IS_DEV
 			? "http://localhost:3001"
 			: `file://${path.join(__dirname, "renderer-frontend/index.html")}`
 	);
+
+	if (IS_DEV) {
+		win.webContents.openDevTools();
+	}
 
 	return win;
 };
@@ -144,7 +149,13 @@ app.on("activate", async () => {
 
 // Add extensions: https://github.com/MarshallOfSound/electron-devtools-installer
 app.whenReady().then(async () => {
-	if (isDev) {
+	if (IS_DEV) {
+		const {
+			default: installExtension,
+			REACT_DEVELOPER_TOOLS,
+			REDUX_DEVTOOLS,
+		} = require("electron-devtools-installer");
+
 		installExtension([REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS])
 			.then((name) => console.log(`Added Extension:  ${name}`))
 			.catch((err) => console.log("An error occurred: ", err));

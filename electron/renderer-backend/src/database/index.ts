@@ -1,6 +1,6 @@
+import { IS_DEV } from "taggr-shared";
 import dbFactory from "./database";
-import isDev from "electron-is-dev";
 
 export type Type = ReturnType<typeof dbFactory>;
 
-export default dbFactory(isDev);
+export default dbFactory(IS_DEV);
