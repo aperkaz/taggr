@@ -58,7 +58,7 @@ const TemplateMap: Story<React.ComponentProps<typeof MapComp>> = (args) => (
 
 export const Map = TemplateMap.bind({});
 Map.args = {
-  imageList: imagesWithLocation as types.Image[],
+  imageList: imagesWithLocation,
 };
 
 export const NavBar = () => {
