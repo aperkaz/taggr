@@ -69,8 +69,15 @@ const initializeProject = ({
 
 		const image = temporaryImageMap[hash];
 
-		// if exists, preserve the existing metadata and update DB
+		// if exists, update temp map and update DB
 		if (storedImageMap[hash]) {
+			temporaryImageMap[hash] = {
+				...temporaryImageMap[hash], // update location, as it may have changed
+				tags: storedImageMap[hash].tags,
+				location: storedImageMap[hash].location,
+				creationDate: storedImageMap[hash].creationDate,
+			};
+
 			db.set(`allImages.${hash}`, {
 				...temporaryImageMap[hash], // update location, as it may have changed
 				tags: storedImageMap[hash].tags,
@@ -78,15 +85,27 @@ const initializeProject = ({
 				creationDate: storedImageMap[hash].creationDate,
 			});
 		} else {
-			// if doenst exists, extract tags, location, creation date and persist in DB
+			// if doenst exists, process, update temp map and persist in DB
 			try {
+				const tags = (await machineLearningService.generateImageTags(
+					await imageService.loadImageFile(image.rawPath)
+				)) as any;
+				const location = await imageService.getLocation(image.rawPath);
+				const creationDate =
+					(await imageService.getCreationDate(image.rawPath)) || 0;
+
+				temporaryImageMap[hash] = {
+					...temporaryImageMap[hash], // update location, as it may have changed
+					tags,
+					location,
+					creationDate,
+				};
+
 				db.set(`allImages.${hash}`, {
 					...temporaryImageMap[hash],
-					tags: await machineLearningService.generateImageTags(
-						await imageService.loadImageFile(image.rawPath)
-					),
-					location: await imageService.getLocation(image.rawPath),
-					creationDate: await imageService.getCreationDate(image.rawPath),
+					tags,
+					location,
+					creationDate,
 				});
 			} catch (error) {
 				// Images which cant be processed, are ommitted

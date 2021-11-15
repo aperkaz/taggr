@@ -158,7 +158,7 @@ class ImageService {
 
 		currentImageHashes.forEach((hash) => {
 			const image = imageMap[hash];
-			if (this.doesImagePassFilter(image, filters)) images.push(image);
+			if (image && this.doesImagePassFilter(image, filters)) images.push(image);
 		});
 
 		return images;
@@ -179,7 +179,7 @@ class ImageService {
 
 		currentImageHashes.forEach((hash) => {
 			const image = imageMap[hash];
-			if (image.location && this.doesImagePassFilter(image, filters))
+			if (image && image.location && this.doesImagePassFilter(image, filters))
 				images.push(image as types.ImageWithLocation);
 		});
 
