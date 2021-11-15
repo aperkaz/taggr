@@ -171,7 +171,7 @@ app.whenReady().then(async () => {
 		beWebContentId: backendWindow.id,
 		feWebContentId: frontendWindow.id,
 	});
-	// TODONOW: fix this hack
+	// heartbeat with webContent ids
 	setInterval(() => {
 		frontendWindow.webContents.send("taggr-ipc-setup", {
 			beWebContentId: backendWindow.id,

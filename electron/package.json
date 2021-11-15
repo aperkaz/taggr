@@ -1,18 +1,18 @@
 {
 	"name": "taggr-electron",
-	"productName": "app name",
-	"version": "0.0.0",
-	"description": "The best app ever",
+	"productName": "taggr",
+	"version": "0.0.4",
+	"description": "Rediscover your memories while keeping your privacy",
 	"license": "MIT",
-	"repository": "aperkaz/taggr",
+	"repository": "https://github.com/aperkaz/taggr",
 	"engines": {
 		"node": ">=14.0.0",
 		"yarn": "^1.22.0"
 	},
 	"author": {
-		"name": "Your Name",
-		"email": "user@gmail.com",
-		"url": "https://sindresorhus.com"
+		"name": "Alain Perkaz",
+		"email": "alainperkaz@gmail.com",
+		"url": "https://alainperkaz.com/"
 	},
 	"scripts": {
 		"postinstall": "electron-builder install-app-deps",

@@ -2,7 +2,6 @@ import { messageBus, utils } from "taggr-shared";
 import store, { ACTIONS } from "../store";
 
 let beWebContentId: number | undefined = 1;
-// TODONOW: add tests to this
 
 // setup channel callback
 window.ipcRenderer.on("taggr-ipc-setup", (_event, message) => {
