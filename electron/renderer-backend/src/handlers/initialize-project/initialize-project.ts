@@ -1,6 +1,4 @@
 import path from "path";
-import get from "lodash.get";
-import throttle from "lodash.throttle";
 
 import { types } from "taggr-shared";
 import { sendToFrontendType } from "../../message-bus";
@@ -84,9 +82,10 @@ const initializeProject = ({
 				creationDate: storedImageMap[hash].creationDate,
 			});
 		} else {
+			// if doenst exists, extract tags, location, creation date and persist in DB
 			db.set(`allImages.${hash}`, {
 				...temporaryImageMap[hash],
-				tags: await machineLearningService.calculateImageTags(
+				tags: await machineLearningService.generateImageTags(
 					await imageService.loadImageFile(image.rawPath)
 				),
 				location: await imageService.getLocation(image.rawPath),

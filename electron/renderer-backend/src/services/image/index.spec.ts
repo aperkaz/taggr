@@ -1,10 +1,8 @@
 import imageService from "./index";
 
 import path from "path";
-import fs from "fs";
 import { promisify } from "util";
 import { types } from "taggr-shared";
-const rimraf = promisify(require("rimraf"));
 
 const baseImageProps = {
 	hash: "imageHash",
@@ -16,12 +14,12 @@ const baseImageProps = {
 const IMAGE_MAP: types.ImageHashMap = {
 	image1: {
 		...baseImageProps,
-		tags: ["animal", "vehicle"],
+		tags: ["animals", "vehicles"],
 		creationDate: 100,
 	},
 	image2: {
 		...baseImageProps,
-		tags: ["vehicle"],
+		tags: ["vehicles"],
 		creationDate: 200,
 	},
 	image3: {
@@ -48,7 +46,7 @@ describe("services - image", () => {
 					},
 					path: "./path",
 					rawPath: "./raw-path",
-					tags: ["animal", "vehicle"],
+					tags: ["animals", "vehicles"],
 				},
 				{
 					creationDate: 200,
@@ -59,7 +57,7 @@ describe("services - image", () => {
 					},
 					path: "./path",
 					rawPath: "./raw-path",
-					tags: ["vehicle"],
+					tags: ["vehicles"],
 				},
 				{
 					creationDate: 300,
@@ -107,7 +105,7 @@ describe("services - image", () => {
 				path: "./path",
 				rawPath: "./raw-path",
 				location: { latitude: 1, longitude: 2 },
-				tags: ["animal", "vehicle"],
+				tags: ["animals", "vehicles"],
 				creationDate: 100,
 			};
 
@@ -122,14 +120,14 @@ describe("services - image", () => {
 				path: "./path",
 				rawPath: "./raw-path",
 				location: { latitude: 1, longitude: 2 },
-				tags: ["animal", "vehicle"],
+				tags: ["animals", "vehicles"],
 				creationDate: 100,
 			};
 
 			const filters: types.Filters = {
 				fromDate: 50,
 				toDate: 150,
-				tags: ["animal"],
+				tags: ["animals"],
 			};
 
 			expect(imageService.doesImagePassFilter(image, filters)).toEqual(true);
@@ -141,14 +139,14 @@ describe("services - image", () => {
 				path: "./path",
 				rawPath: "./raw-path",
 				location: { latitude: 1, longitude: 2 },
-				tags: ["animal", "vehicle"],
+				tags: ["animals", "vehicles"],
 				creationDate: 100,
 			};
 
 			const filters: types.Filters = {
 				fromDate: 50,
 				toDate: 150,
-				tags: ["dog"],
+				tags: ["drinks"], // not present in the image list
 			};
 
 			expect(imageService.doesImagePassFilter(image, filters)).toEqual(false);
@@ -160,14 +158,14 @@ describe("services - image", () => {
 				path: "./path",
 				rawPath: "./raw-path",
 				location: { latitude: 1, longitude: 2 },
-				tags: ["animal", "vehicle"],
+				tags: ["animals", "vehicles"],
 				creationDate: 200, // out of range, more than `toDate`
 			};
 
 			const filters: types.Filters = {
 				fromDate: 50,
 				toDate: 150,
-				tags: ["animal"],
+				tags: ["animals"],
 			};
 
 			expect(imageService.doesImagePassFilter(image, filters)).toEqual(false);
@@ -183,7 +181,7 @@ describe("services - image", () => {
 					filters: {
 						fromDate: 50,
 						toDate: 350,
-						tags: ["random-tag"],
+						tags: ["drinks"],
 					},
 				})
 			).toEqual([]);
@@ -237,7 +235,7 @@ describe("services - image", () => {
 					filters: {
 						fromDate: 50,
 						toDate: 150,
-						tags: ["animal"],
+						tags: ["animals"],
 					},
 				}).length
 			).toBe(1);
@@ -249,7 +247,7 @@ describe("services - image", () => {
 					filters: {
 						fromDate: 0,
 						toDate: 1,
-						tags: ["animal"],
+						tags: ["animals"],
 					},
 				}).length
 			).toBe(0); // date changed, leaving image1 out of range

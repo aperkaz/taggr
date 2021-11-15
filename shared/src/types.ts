@@ -1,4 +1,4 @@
-import { messageBus } from ".";
+import { messageBus, types } from ".";
 import { BE_MESSAGES, FE_MESSAGES } from "./message-bus";
 
 type SETUP_CHANNEL = messageBus.CHANNEL["SETUP"];
@@ -181,7 +181,7 @@ export interface IpcRendererBE extends NodeJS.EventEmitter {
 export interface Filters {
   fromDate: number | null;
   toDate: number | null;
-  tags: string[]; // TODONOW: add list of tags here
+  tags: types.Tag[];
 }
 
 export type ImageLocation = {
@@ -193,7 +193,7 @@ export type Image = {
   hash: string;
   path: string;
   rawPath: string;
-  tags: string[];
+  tags: Tag[];
   location: ImageLocation | null;
   creationDate: number; // Epoch timestamp
 };
@@ -221,3 +221,11 @@ export type FrontendRoutes =
   | "PRE_PROCESSING_PAGE"
   | "DASHBOARD_PAGE"
   | "SETTINGS_PAGE";
+
+export type Tag =
+  | "people"
+  | "animals"
+  | "vehicles"
+  | "food"
+  | "drinks"
+  | "sports";

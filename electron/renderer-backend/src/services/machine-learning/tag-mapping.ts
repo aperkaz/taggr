@@ -1,5 +1,6 @@
 import get from "lodash.get";
 import range from "lodash.range";
+import { types } from "taggr-shared";
 
 import { getClassificationIds } from "./methods/classification";
 import { getObjectRecognitionClassNames } from "./methods/objectRecognition";
@@ -7,7 +8,13 @@ import { getObjectRecognitionClassNames } from "./methods/objectRecognition";
 /**
  * Custom mapping from classification ids and object recognition classes, to our own tags.
  */
-const CUSTOM_TAGS = {
+const CUSTOM_TAG_MAPPING: {
+	[key in types.Tag]: {
+		name: string;
+		imageNetClassIds?: number[];
+		cocoSsdClassNames?: string[];
+	};
+} = {
 	// WHAT
 	people: {
 		name: "people",
@@ -190,15 +197,15 @@ const CUSTOM_TAGS = {
 const calculateTag = (
 	imageNetClassIds: number[],
 	cocoSsdClassNames: string[],
-	tagName: keyof typeof CUSTOM_TAGS
+	tagName: types.Tag
 ): boolean => {
 	const tagImageNetClassIds = get(
-		CUSTOM_TAGS[tagName],
+		CUSTOM_TAG_MAPPING[tagName],
 		"imageNetClassIds",
 		null
 	);
 	const tagCocoSsdClassNames = get(
-		CUSTOM_TAGS[tagName],
+		CUSTOM_TAG_MAPPING[tagName],
 		"cocoSsdClassNames",
 		null
 	);
@@ -227,18 +234,14 @@ const calculateTag = (
 export const calculateTags = (
 	imageNetClassIds: number[],
 	cocoSsdClassNames: string[]
-): string[] => {
-	const tags: string[] = [];
+): types.Tag[] => {
+	const tags: types.Tag[] = [];
 
-	Object.keys(CUSTOM_TAGS).forEach((tagName: string) => {
+	Object.keys(CUSTOM_TAG_MAPPING).forEach((tagName) => {
 		if (
-			calculateTag(
-				imageNetClassIds,
-				cocoSsdClassNames,
-				tagName as keyof typeof CUSTOM_TAGS
-			)
+			calculateTag(imageNetClassIds, cocoSsdClassNames, tagName as types.Tag)
 		) {
-			tags.push(tagName);
+			tags.push(tagName as types.Tag);
 		}
 	});
 
