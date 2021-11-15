@@ -10,8 +10,6 @@ import { types } from "taggr-shared";
 const WithStore = () => {
   const dispatch = useAppDispatch();
 
-  const isProcessing = useAppSelector((s) => s.isProcessing);
-
   const images = useAppSelector((s) => s.images);
   const imagesWithLocation = useAppSelector((s) => s.imagesWithLocation);
 
@@ -28,7 +26,6 @@ const WithStore = () => {
 
   return (
     <DashboardPage
-      isProcessing={isProcessing}
       images={images}
       imagesWithLocation={imagesWithLocation}
       onSettingsClick={onSettingsClick}

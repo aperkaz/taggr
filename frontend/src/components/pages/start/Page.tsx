@@ -103,6 +103,9 @@ const StartPage = ({ onSelectRootFolderPath, onSelectLogo }: Props) => (
           text="🔍 Load pictures"
           // @ts-ignore
           onClick={onSelectRootFolderPath}
+          style={{
+            backgroundColor: "4px 4px 8px #1f1f1f",
+          }}
         />
       </Main>
 

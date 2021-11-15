@@ -46,7 +46,6 @@ const ContentWrapper = styled.div`
 `;
 
 type Props = {
-  isProcessing: boolean;
   images: types.Image[];
   imagesWithLocation: types.ImageWithLocation[];
   onSettingsClick: React.ComponentProps<typeof Header>["onSettingsClick"];
@@ -54,7 +53,6 @@ type Props = {
 };
 
 const DashboardPage = ({
-  isProcessing,
   images,
   imagesWithLocation = [],
   onSettingsClick,
@@ -96,7 +94,6 @@ const DashboardPage = ({
             activeTab={activeTab}
             onActiveTabChange={setActiveTab}
             onSettingsClick={onSettingsClick}
-            showSettings={!isProcessing}
           />
         </HeaderWrapper>
         {activeTab === 0 && (

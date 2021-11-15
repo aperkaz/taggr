@@ -27,7 +27,6 @@ const Template: Story<React.ComponentProps<typeof PageComp>> = (args) => (
 
 export const Dashboard = Template.bind({});
 Dashboard.args = {
-  isProcessing: false,
   images,
   imagesWithLocation,
 };
