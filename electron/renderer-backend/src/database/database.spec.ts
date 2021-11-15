@@ -1,6 +1,7 @@
+import { types } from "taggr-shared";
 import dbFactory from "./database";
 
-const IMAGES = [
+const IMAGES: types.Image[] = [
 	{
 		hash: "10c483cc2ef59dcc2009ae662917e704",
 		path:

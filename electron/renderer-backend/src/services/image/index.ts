@@ -11,8 +11,6 @@ const readStats = promisify(fs.stat);
 
 import { isArrayContained, toDecimal } from "../../utils";
 
-// TODONOW: test this
-
 type dateServiceType = typeof dateService;
 type fileServiceType = typeof fileService;
 
@@ -148,19 +146,32 @@ class ImageService {
 			if (this.doesImagePassFilter(image, filters)) images.push(image);
 		});
 
-		// TODONOW: look up, when to filter these?
-		// Images with location
-		// Object.keys(imageMap).forEach((key) => {
-		//   const image = imageMap[key];
+		return images;
+	}
+	/**
+	 * Filter images with location
+	 */
+	filterImagesWithLocation({
+		imageMap,
+		currentImageHashes,
+		filters,
+	}: {
+		imageMap: types.ImageHashMap;
+		currentImageHashes: string[];
+		filters: types.Filters;
+	}): types.ImageWithLocation[] {
+		let images: types.ImageWithLocation[] = [];
 
-		//   if (filterImage(image, filters)) {
-		//     imagesWithLocation.push(image);
-		//   }
-		// });
+		currentImageHashes.forEach((hash) => {
+			const image = imageMap[hash];
+			if (image.location && this.doesImagePassFilter(image, filters))
+				images.push(image as types.ImageWithLocation);
+		});
 
 		return images;
 	}
 
+	// TODONOW: conside removing for suporting multiple envs, cleanup sharp dep
 	async resizeImage(imagePath: string, outputPath: string) {
 		try {
 			await sharp(imagePath, {

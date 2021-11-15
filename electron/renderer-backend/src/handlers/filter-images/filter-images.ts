@@ -15,19 +15,18 @@ type Deps = {
 const filterImages = ({ db, imageService, sendToFrontend }: Deps) => (
 	filters: types.Filters
 ) => {
-	const allImageMap = db.get("allImages");
+	const imageMap = db.get("allImages");
 	const currentImageHashes = db.get("currentImageHashes");
 
-	let images: types.Image[] = [];
-
-	currentImageHashes.forEach((hash) => {
-		const image = allImageMap[hash];
-		if (imageService.doesImagePassFilter(image, filters)) images.push(image);
+	const filtered = imageService.filterImages({
+		imageMap,
+		currentImageHashes,
+		filters,
 	});
 
 	sendToFrontend({
 		type: "frontend_set-images",
-		payload: images,
+		payload: filtered,
 	});
 };
 

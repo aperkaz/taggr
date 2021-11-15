@@ -8,7 +8,6 @@ const baseImageProps = {
 	hash: "imageHash",
 	path: "./path",
 	rawPath: "./raw-path",
-	location: { latitude: 1, longitude: 2 },
 };
 
 const IMAGE_MAP: types.ImageHashMap = {
@@ -16,16 +15,19 @@ const IMAGE_MAP: types.ImageHashMap = {
 		...baseImageProps,
 		tags: ["animals", "vehicles"],
 		creationDate: 100,
+		location: null,
 	},
 	image2: {
 		...baseImageProps,
 		tags: ["vehicles"],
 		creationDate: 200,
+		location: { latitude: 1, longitude: 2 },
 	},
 	image3: {
 		...baseImageProps,
 		tags: [],
 		creationDate: 300,
+		location: { latitude: 1, longitude: 2 },
 	},
 };
 
@@ -98,7 +100,7 @@ describe("services - image", () => {
 		});
 	});
 
-	describe("shouldFilterImage", () => {
+	describe("doesImagePassFilter", () => {
 		it("should return true when the image passes a filter with empty tags", () => {
 			const image: types.Image = {
 				hash: "imageHash",
@@ -204,6 +206,88 @@ describe("services - image", () => {
 		it("should return all images if the filter tag is an empty array, still filtered by date", async () => {
 			expect(
 				imageService.filterImages({
+					imageMap: IMAGE_MAP,
+					currentImageHashes: Object.keys(IMAGE_MAP),
+					filters: {
+						fromDate: 50,
+						toDate: 350,
+						tags: [],
+					},
+				}).length
+			).toBe(3);
+
+			expect(
+				imageService.filterImages({
+					imageMap: IMAGE_MAP,
+					currentImageHashes: Object.keys(IMAGE_MAP),
+					filters: {
+						fromDate: 50,
+						toDate: 250, // image3 is out of the date range
+						tags: [],
+					},
+				}).length
+			).toBe(2);
+		});
+
+		it("should return an array of images matching by tag and date", async () => {
+			expect(
+				imageService.filterImages({
+					imageMap: IMAGE_MAP,
+					currentImageHashes: ["image1", "image2", "image3"],
+					filters: {
+						fromDate: 50,
+						toDate: 150,
+						tags: ["animals"],
+					},
+				}).length
+			).toBe(1);
+
+			expect(
+				imageService.filterImages({
+					imageMap: IMAGE_MAP,
+					currentImageHashes: ["image1", "image2", "image3"],
+					filters: {
+						fromDate: 0,
+						toDate: 1,
+						tags: ["animals"],
+					},
+				}).length
+			).toBe(0); // date changed, leaving image1 out of range
+		});
+	});
+
+	describe("filterImagesWithLocation", () => {
+		it("should return an empty array if no image matches the filters", async () => {
+			expect(
+				imageService.filterImagesWithLocation({
+					imageMap: IMAGE_MAP,
+					currentImageHashes: Object.keys(IMAGE_MAP),
+					filters: {
+						fromDate: 50,
+						toDate: 350,
+						tags: ["drinks"],
+					},
+				})
+			).toEqual([]);
+		});
+
+		it("should return an empty array if no images are provided", async () => {
+			expect(
+				imageService.filterImages({
+					imageMap: {},
+					currentImageHashes: Object.keys({}),
+					filters: {
+						fromDate: 50,
+						toDate: 350,
+						tags: [],
+					},
+				})
+			).toEqual([]);
+		});
+
+		it("should return all images with location if the filter tag is an empty array, still filtered by date", async () => {
+			expect(
+				imageService.filterImagesWithLocation({
 					imageMap: IMAGE_MAP,
 					currentImageHashes: Object.keys(IMAGE_MAP),
 					filters: {
