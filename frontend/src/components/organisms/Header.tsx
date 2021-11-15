@@ -38,7 +38,6 @@ const CustomTab = withStyles({
 type HeaderProps = {
   tabList: string[];
   activeTab: number;
-  showSettings: boolean;
   onActiveTabChange: (tab: number) => void;
   onSettingsClick: () => void;
 };
@@ -46,7 +45,6 @@ type HeaderProps = {
 const Header = ({
   tabList,
   activeTab,
-  showSettings,
   onActiveTabChange,
   onSettingsClick,
 }: HeaderProps) => (
@@ -75,15 +73,13 @@ const Header = ({
         ))}
       </CustomTabs>
     </Paper>
-    {showSettings && (
-      <Settings>
-        <SettingsIcon
-          fontSize="large"
-          style={{ color: "white" }}
-          onClick={onSettingsClick}
-        />
-      </Settings>
-    )}
+    <Settings>
+      <SettingsIcon
+        fontSize="large"
+        style={{ color: "white" }}
+        onClick={onSettingsClick}
+      />
+    </Settings>
   </Wrapper>
 );
 

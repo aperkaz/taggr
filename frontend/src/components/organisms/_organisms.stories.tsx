@@ -38,7 +38,6 @@ export const Header = TemplateHeader.bind({});
 Header.args = {
   tabList: ["Timeline", "Gallery", "Map"],
   activeTab: 1,
-  showSettings: true,
 };
 
 const TemplateGallery: Story<React.ComponentProps<typeof GalleryComp>> = (

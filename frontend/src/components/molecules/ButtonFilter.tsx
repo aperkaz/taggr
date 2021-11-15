@@ -28,6 +28,7 @@ const ButtonFilter = ({
         ? "linear-gradient(70.98deg, #fe7996 9.38%, #ff9964 91.67%)"
         : "white",
       margin: "auto",
+      boxShadow: "4px 4px 8px lightgrey",
       ...styles,
     }}
     onClick={onClick}

@@ -14,6 +14,7 @@ const CustomButton = withStyles({
     "&:hover": {
       transform: "scale(1.05)",
     },
+    boxShadow: "4px 4px 8px #1f1f1f",
   },
   label: {
     color: "white",
@@ -28,7 +29,7 @@ const CustomButton = withStyles({
 
 type Props = {
   text: string;
-  style?: React.ComponentProps<typeof Button>;
+  style?: React.ComponentProps<typeof Button> & React.CSSProperties;
   onClick: () => void;
 };
 

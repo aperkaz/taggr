@@ -42,6 +42,9 @@ const TemplateButtonRegular: Story<
 export const ButtonRegular = TemplateButtonRegular.bind({});
 ButtonRegular.args = {
   text: "Button regular",
+  style: {
+    backgroundColor: "lightblue",
+  },
 };
 
 const TemplateImageTile: Story<React.ComponentProps<typeof ImageTileComp>> = (
