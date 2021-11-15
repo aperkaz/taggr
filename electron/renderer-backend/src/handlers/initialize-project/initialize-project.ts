@@ -28,7 +28,6 @@ const initializeProject = ({
 	console.log("[BE] initialized project in: ", rootPath);
 
 	// 0. update FE route to pre-processing, send progress and supporter status
-	sendToFrontend({ type: "frontend_set-is-processing", payload: true });
 	sendToFrontend({
 		type: "frontend_set-route",
 		payload: "PRE_PROCESSING_PAGE",
@@ -101,6 +100,12 @@ const initializeProject = ({
 	sendToFrontend({
 		type: "frontend_set-images",
 		payload: imageService.imageHashMapToImageList(temporaryImageMap),
+	});
+	sendToFrontend({
+		type: "frontend_set-images-with-location",
+		payload: imageService.imageHashMapToImageListWithLocation(
+			temporaryImageMap
+		),
 	});
 
 	// 7. Update FE route

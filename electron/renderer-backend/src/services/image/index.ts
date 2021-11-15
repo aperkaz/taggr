@@ -45,6 +45,21 @@ class ImageService {
 	}
 
 	/**
+	 * Transfrom the imageHashMap to imageList, for images with location
+	 */
+	imageHashMapToImageListWithLocation(
+		imageHashMap: types.ImageHashMap
+	): types.ImageWithLocation[] {
+		return Object.keys(imageHashMap)
+			.map((key) => ({
+				...imageHashMap[key],
+			}))
+			.filter(
+				(image) => image.location && image.location !== null
+			) as types.ImageWithLocation[];
+	}
+
+	/**
 	 * Get image-file creation date in UNIX EPOCH
 	 */
 	async getCreationDate(imagePath: string): Promise<number | null> {

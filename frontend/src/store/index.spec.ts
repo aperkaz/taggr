@@ -110,7 +110,6 @@ describe("redux store", () => {
       activeRoute: "START_PAGE",
       images: [],
       imagesWithLocation: [],
-      isProcessing: true, // reseted
       progress: { current: 0, total: 0 },
     });
   });

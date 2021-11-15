@@ -46,10 +46,26 @@ describe("services - image", () => {
 		});
 	});
 
-	describe("getCreationDate", () => {
-		const imagePath = path.join(__dirname, "test-data", "image.jpg");
+	describe("imageHashMapToImageListWithLocation", () => {
+		it("should return an empty list of images from an empty imageHashMap", () => {
+			expect(imageService.imageHashMapToImageListWithLocation({})).toEqual([]);
+		});
 
+		it("should return the list of images from the imageHashMap", () => {
+			expect(
+				imageService.imageHashMapToImageListWithLocation(IMAGE_MAP)
+			).toEqual([
+				// IMAGE_MAP.image1, <- has no location, filtered out
+				IMAGE_MAP.image2,
+				IMAGE_MAP.image3,
+			]);
+		});
+	});
+
+	describe("getCreationDate", () => {
 		it("should return the creation date from exif metadata", async () => {
+			const imagePath = path.join(__dirname, "test-data", "image.jpg");
+
 			expect(await imageService.getCreationDate(imagePath)).toBe(1224685789000);
 		});
 	});
