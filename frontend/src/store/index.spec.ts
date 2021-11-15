@@ -19,7 +19,6 @@ describe("redux store", () => {
       activeRoute: "START_PAGE",
       images: [],
       imagesWithLocation: [],
-      isProcessing: true,
       progress: { current: 0, total: 0 },
     });
   });
@@ -73,14 +72,6 @@ describe("redux store", () => {
     expect(store.getState().imagesWithLocation).toEqual(IMAGES_WITH_LOCATION);
   });
 
-  it("should set processing status", () => {
-    store.dispatch(ACTIONS.setIsProcessing(false));
-    expect(store.getState().isProcessing).toEqual(false);
-
-    store.dispatch(ACTIONS.setIsProcessing(true));
-    expect(store.getState().isProcessing).toEqual(true);
-  });
-
   it("should set progress", () => {
     store.dispatch(
       ACTIONS.setProgress({
@@ -106,9 +97,9 @@ describe("redux store", () => {
   });
 
   it("should reset state", () => {
-    store.dispatch(ACTIONS.setIsProcessing(false));
+    store.dispatch(ACTIONS.setActiveRoute("DASHBOARD_PAGE"));
     expect(store.getState()).toEqual({
-      activeRoute: "START_PAGE",
+      activeRoute: "DASHBOARD_PAGE",
       images: [],
       imagesWithLocation: [],
       progress: { current: 0, total: 0 },

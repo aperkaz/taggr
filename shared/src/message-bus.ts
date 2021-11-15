@@ -44,10 +44,6 @@ export type FE_MESSAGES =
   | {
       type: `${typeof FE_MESSAGE_NAMESPACE}set-progress`;
       payload: Progress;
-    }
-  | {
-      type: `${typeof FE_MESSAGE_NAMESPACE}set-is-processing`;
-      payload: boolean;
     };
 
 export const BE_MESSAGE_NAMESPACE = `backend_`;

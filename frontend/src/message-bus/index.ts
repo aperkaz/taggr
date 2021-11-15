@@ -33,9 +33,6 @@ window.ipcRenderer.on("taggr-ipc-main", (_event, message) => {
     case "frontend_set-progress":
       store.dispatch(ACTIONS.setProgress(message.payload));
       break;
-    case "frontend_set-is-processing":
-      store.dispatch(ACTIONS.setIsProcessing(message.payload));
-      break;
     default:
       throw new utils.UnreachableCaseError(message);
   }

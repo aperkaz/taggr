@@ -22,6 +22,10 @@ const WithStore = () => {
       type: "backend_filter-images",
       payload: filters,
     });
+    sendToBackend({
+      type: "backend_filter-images-with-location",
+      payload: filters,
+    });
   }, 200);
 
   return (

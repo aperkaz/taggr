@@ -7,14 +7,12 @@ type InitialState = {
   images: types.Image[];
   imagesWithLocation: types.ImageWithLocation[];
   progress: types.Progress;
-  isProcessing: boolean;
 };
 
 const initialState: InitialState = {
   activeRoute: "START_PAGE",
   images: [],
   imagesWithLocation: [],
-  isProcessing: true,
   progress: {
     current: 0,
     total: 0,
@@ -37,9 +35,6 @@ export const stateSlice = createSlice({
       action: PayloadAction<types.ImageWithLocation[]>
     ) => {
       state.imagesWithLocation = action.payload;
-    },
-    setIsProcessing: (state, action: PayloadAction<boolean>) => {
-      state.isProcessing = action.payload;
     },
     setProgress: (state, action: PayloadAction<types.Progress>) => {
       state.progress = { ...state.progress, ...action.payload };
