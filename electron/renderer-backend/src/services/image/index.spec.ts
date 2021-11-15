@@ -39,39 +39,9 @@ describe("services - image", () => {
 
 		it("should return the list of images from the imageHashMap", () => {
 			expect(imageService.imageHashMapToImageList(IMAGE_MAP)).toEqual([
-				{
-					creationDate: 100,
-					hash: "imageHash",
-					location: {
-						latitude: 1,
-						longitude: 2,
-					},
-					path: "./path",
-					rawPath: "./raw-path",
-					tags: ["animals", "vehicles"],
-				},
-				{
-					creationDate: 200,
-					hash: "imageHash",
-					location: {
-						latitude: 1,
-						longitude: 2,
-					},
-					path: "./path",
-					rawPath: "./raw-path",
-					tags: ["vehicles"],
-				},
-				{
-					creationDate: 300,
-					hash: "imageHash",
-					location: {
-						latitude: 1,
-						longitude: 2,
-					},
-					path: "./path",
-					rawPath: "./raw-path",
-					tags: [],
-				},
+				IMAGE_MAP.image1,
+				IMAGE_MAP.image2,
+				IMAGE_MAP.image3,
 			]);
 		});
 	});
@@ -296,7 +266,7 @@ describe("services - image", () => {
 						tags: [],
 					},
 				}).length
-			).toBe(3);
+			).toBe(2);
 
 			expect(
 				imageService.filterImages({
@@ -304,11 +274,11 @@ describe("services - image", () => {
 					currentImageHashes: Object.keys(IMAGE_MAP),
 					filters: {
 						fromDate: 50,
-						toDate: 250, // image3 is out of the date range
+						toDate: 150, // image3 is out of the date range
 						tags: [],
 					},
 				}).length
-			).toBe(2);
+			).toBe(1);
 		});
 
 		it("should return an array of images matching by tag and date", async () => {
