@@ -25,3 +25,4 @@ yarn-error.log*
 
 shared/dist
 shared/node_modules
+electron/renderer-frontend/
