@@ -27,6 +27,9 @@ window.ipcRenderer.on("taggr-ipc-main", (_event, message) => {
     case "frontend_set-images":
       store.dispatch(ACTIONS.setImages(message.payload));
       break;
+    case "frontend_set-images-with-location":
+      store.dispatch(ACTIONS.setImagesWithLocation(message.payload));
+      break;
     case "frontend_set-progress":
       store.dispatch(ACTIONS.setProgress(message.payload));
       break;

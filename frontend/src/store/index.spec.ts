@@ -12,6 +12,7 @@ describe("redux store", () => {
   beforeEach(() => {
     store = configureStore({ reducer: stateSlice.reducer });
   });
+
   it("should return the initial state", () => {
     const store = configureStore({ reducer: stateSlice.reducer });
     expect(store.getState()).toEqual({

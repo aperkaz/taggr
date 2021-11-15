@@ -33,6 +33,11 @@ const handlers = {
 		imageService,
 		sendToFrontend,
 	}),
+	filterImagesWithLocation: handlerFactory.filterImagesWithLocation({
+		db,
+		imageService,
+		sendToFrontend,
+	}),
 	initializeProject: handlerFactory.initializeProject({
 		db,
 		fileService,
@@ -73,6 +78,9 @@ window.ipcRenderer.on(
 				break;
 			case "backend_filter-images":
 				handlers.filterImages(message.payload);
+				break;
+			case "backend_filter-images-with-location":
+				handlers.filterImagesWithLocation(message.payload);
 				break;
 			case "backend_initialize-project":
 				await handlers.initializeProject(message.payload);

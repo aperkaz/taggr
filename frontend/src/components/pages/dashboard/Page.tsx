@@ -48,7 +48,7 @@ const ContentWrapper = styled.div`
 type Props = {
   isProcessing: boolean;
   images: types.Image[];
-  imagesWithLocation: types.Image[];
+  imagesWithLocation: types.ImageWithLocation[];
   onSettingsClick: React.ComponentProps<typeof Header>["onSettingsClick"];
   onSearchTriggered: React.ComponentProps<typeof Filters>["onFilterChange"];
 };

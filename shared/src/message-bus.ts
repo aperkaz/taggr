@@ -61,6 +61,10 @@ export type BE_MESSAGES =
       payload: Filters;
     }
   | {
+      type: `${typeof BE_MESSAGE_NAMESPACE}filter-images-with-location`;
+      payload: Filters;
+    }
+  | {
       type: `${typeof BE_MESSAGE_NAMESPACE}reset`;
     }
   | {

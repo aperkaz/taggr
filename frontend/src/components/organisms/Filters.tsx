@@ -12,6 +12,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Typography from "../atoms/Typography";
 import ButtonRegular from "../molecules/ButtonRegular";
 import ButtonFilter from "../molecules/ButtonFilter";
+import { types } from "taggr-shared";
 
 const Wrapper = styled.div`
   padding: 1rem;
@@ -88,15 +89,7 @@ const ACTIVE_TAGS = {
 type EpochDate = number | null;
 
 type Props = {
-  onFilterChange: ({
-    fromDate,
-    toDate,
-    tags,
-  }: {
-    fromDate: EpochDate;
-    toDate: EpochDate;
-    tags: string[];
-  }) => void;
+  onFilterChange: ({ fromDate, toDate, tags }: types.Filters) => void;
 };
 
 const Filters = ({ onFilterChange }: Props) => {
@@ -150,10 +143,10 @@ const Filters = ({ onFilterChange }: Props) => {
     toDate: EpochDate;
     tags: typeof ACTIVE_TAGS;
   }) => {
-    const activeTagsAsList: string[] = [];
+    const activeTagsAsList: types.Tag[] = [];
     Object.keys(tags).forEach((key) => {
-      if (tags[key as keyof typeof ACTIVE_TAGS]) {
-        activeTagsAsList.push(key);
+      if (tags[key as types.Tag]) {
+        activeTagsAsList.push(key as types.Tag);
       }
     });
 

@@ -1,5 +1,6 @@
 import destroy from "./destroy";
 import filterImages from "./filter-images";
+import filterImagesWithLocation from "./filter-images-with-location";
 import initializeProject from "./initialize-project";
 import reset from "./reset";
 
@@ -10,6 +11,7 @@ import reset from "./reset";
 export default {
 	destroy,
 	filterImages,
+	filterImagesWithLocation,
 	initializeProject,
 	reset,
 };

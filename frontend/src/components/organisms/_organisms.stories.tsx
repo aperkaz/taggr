@@ -8,6 +8,7 @@ import NavBarComp from "./NavBar";
 import FiltersComp from "./Filters";
 
 import { images, imagesWithLocation } from "../../stories/mocks/imageList";
+import { types } from "taggr-shared";
 
 export default {
   title: "Organisms",
@@ -58,7 +59,7 @@ const TemplateMap: Story<React.ComponentProps<typeof MapComp>> = (args) => (
 
 export const Map = TemplateMap.bind({});
 Map.args = {
-  imageList: imagesWithLocation,
+  imageList: imagesWithLocation as types.Image[],
 };
 
 export const NavBar = () => {
