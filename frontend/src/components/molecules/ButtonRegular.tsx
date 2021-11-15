@@ -8,7 +8,6 @@ const CustomButton = withStyles({
     minWidth: 200,
     transition: "0.3s cubic-bezier(.47,1.64,.41,.8)",
     "&:hover": {
-      boxShadow: "none",
       transform: "scale(1.05)",
     },
     boxShadow: "4px 4px 8px #1f1f1f",
