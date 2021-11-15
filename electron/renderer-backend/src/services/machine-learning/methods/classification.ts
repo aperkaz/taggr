@@ -21,7 +21,7 @@ loadModel();
  * Returns the imagenet class ids.
  */
 export const getClassificationIds = async (
-	img: HTMLImageElement
+	img: ImageData | HTMLImageElement | HTMLCanvasElement | HTMLVideoElement
 ): Promise<number[]> => {
 	if (!net) await loadModel();
 

@@ -3,6 +3,7 @@ import handlerFactory from "../handlers";
 import db from "../database";
 import fileService from "../services/file";
 import imageService from "../services/image";
+import machineLearningService from "../services/machine-learning";
 
 let feWebContentId: number | undefined = 2;
 
@@ -36,6 +37,7 @@ const handlers = {
 		db,
 		fileService,
 		imageService,
+		machineLearningService,
 		sendToFrontend,
 	}),
 	reset: handlerFactory.reset({ db }),

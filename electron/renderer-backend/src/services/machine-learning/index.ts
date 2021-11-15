@@ -1,4 +1,4 @@
-import { generateImageTags } from "./custom-tags";
+import { generateImageTags } from "./tag-mapping";
 
 class MachineLearningService {
 	generateImageTags = generateImageTags;

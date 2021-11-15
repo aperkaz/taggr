@@ -1,3 +1,3 @@
-import initializeProject from "./filter-images";
+import filterImages from "./filter-images";
 
-export default initializeProject;
+export default filterImages;

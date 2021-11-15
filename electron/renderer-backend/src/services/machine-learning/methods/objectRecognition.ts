@@ -17,10 +17,11 @@ async function loadModel() {
 
 /**
  * Get coco-ssd class ids for an image
- * @param {Image} img
- * @returns {Promise<string[]>} array with coco-ssd class names
+ * Returns array with coco-ssd class names
  */
-export const getObjectRecognitionClassNames = async (img) => {
+export const getObjectRecognitionClassNames = async (
+	img: ImageData | HTMLImageElement | HTMLCanvasElement | HTMLVideoElement
+): Promise<string[]> => {
 	if (!net) await loadModel();
 
 	let cocoSsdClassNames = [];

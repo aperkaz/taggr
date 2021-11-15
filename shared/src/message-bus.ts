@@ -9,7 +9,13 @@
  * https://www.electronjs.org/docs/latest/api/ipc-renderer
  */
 
-import { Filters, FrontendRoutes, Image, Progress } from "./types";
+import {
+  Filters,
+  FrontendRoutes,
+  Image,
+  ImageWithLocation,
+  Progress,
+} from "./types";
 
 export type CHANNEL = {
   SETUP: "taggr-ipc-setup";
@@ -30,6 +36,10 @@ export type FE_MESSAGES =
   | {
       type: `${typeof FE_MESSAGE_NAMESPACE}set-images`;
       payload: Image[];
+    }
+  | {
+      type: `${typeof FE_MESSAGE_NAMESPACE}set-images-with-location`;
+      payload: ImageWithLocation[];
     }
   | {
       type: `${typeof FE_MESSAGE_NAMESPACE}set-progress`;

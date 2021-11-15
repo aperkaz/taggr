@@ -250,7 +250,7 @@ export const calculateTags = (
  * Uses machine learning models for classification and object recognition.
  */
 export const generateImageTags = async (
-	image: HTMLImageElement
+	image: ImageData | HTMLImageElement | HTMLCanvasElement | HTMLVideoElement
 ): Promise<string[]> => {
 	// ML classification
 	console.time("classify");
