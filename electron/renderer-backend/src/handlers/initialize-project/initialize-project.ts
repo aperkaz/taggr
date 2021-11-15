@@ -42,9 +42,7 @@ const initializeProject = ({
 		const hash = await fileService.generateFileHash(imagePath);
 		temporaryImageMap[hash] = {
 			hash,
-			path: fileService.normalizePath(
-				path.join(fileService.getDataDirectory(), `${hash}.jpeg`)
-			),
+			path: fileService.normalizePath(imagePath),
 			rawPath: imagePath,
 			location: null,
 			tags: [],
@@ -53,7 +51,6 @@ const initializeProject = ({
 	}
 
 	// 3. Process images (only the new ones, when the hash is not stored in DB)
-
 	const storedImageMap = db.get("allImages");
 	const newImageHashes = Object.keys(temporaryImageMap);
 
@@ -75,21 +72,27 @@ const initializeProject = ({
 		// if exists, preserve the existing metadata and update DB
 		if (storedImageMap[hash]) {
 			db.set(`allImages.${hash}`, {
-				...temporaryImageMap[hash],
+				...temporaryImageMap[hash], // update location, as it may have changed
 				tags: storedImageMap[hash].tags,
 				location: storedImageMap[hash].location,
 				creationDate: storedImageMap[hash].creationDate,
 			});
 		} else {
 			// if doenst exists, extract tags, location, creation date and persist in DB
-			db.set(`allImages.${hash}`, {
-				...temporaryImageMap[hash],
-				tags: await machineLearningService.generateImageTags(
-					await imageService.loadImageFile(image.rawPath)
-				),
-				location: await imageService.getLocation(image.rawPath),
-				creationDate: await imageService.getCreationDate(image.rawPath),
-			});
+			try {
+				db.set(`allImages.${hash}`, {
+					...temporaryImageMap[hash],
+					tags: await machineLearningService.generateImageTags(
+						await imageService.loadImageFile(image.rawPath)
+					),
+					location: await imageService.getLocation(image.rawPath),
+					creationDate: await imageService.getCreationDate(image.rawPath),
+				});
+			} catch (error) {
+				// Images which cant be processed, are ommitted
+				console.log(`Error processing: ${image.path}`);
+				console.error(error);
+			}
 		}
 	}
 
