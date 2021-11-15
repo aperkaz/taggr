@@ -2,6 +2,7 @@ name: CI
 on:
   - push
   - pull_request
+
 jobs:
   test:
     name: Node.js ${{ matrix.node-version }}
@@ -12,9 +13,16 @@ jobs:
         node-version:
           - 14
     steps:
+      # Checkout repo
       - uses: actions/checkout@v2
+
+      # Set node version
       - uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm install
-      - run: npm test
+          node-version: "14.17.0"
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Run tests
+        run: yarn test:ci

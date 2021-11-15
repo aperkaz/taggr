@@ -19,6 +19,7 @@
 		"postinstall": "electron-builder install-app-deps",
 		"lint": "eslint renderer-backend/src/* ",
 		"test": "jest --clearCache ; jest",
+		"test:ci": "jest --clearCache ; jest --forceExit --ci --runInBand",
 		"tsc": "rimraf renderer-backend/transpiled ; tsc",
 		"tsc:watch": "tsc -w --preserveWatchOutput",
 		"start": "ELECTRON_IS_DEV=1 concurrently -k -p \"[{name}]\" -n \"electron,tsc\" -c \"cyan.bold,green.bold\"  \"wait-on http://localhost:3001 ; electron .\" \"yarn tsc:watch\"",

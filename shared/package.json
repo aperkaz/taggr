@@ -14,7 +14,7 @@
     "compile": "tsc",
     "start": "yarn compile -w --preserveWatchOutput",
     "test": "jest --verbose --runInBand",
-    "test:ci": "jest --forceExit --ci --runInBand"
+    "test:ci": "echo \"No tests here, as is only types\""
   },
   "devDependencies": {
     "@types/jest": "^26.0.23",
