@@ -84,6 +84,7 @@ const createFrontendWindow = async () => {
 			backgroundThrottling: false,
 			contextIsolation: false,
 			enableRemoteModule: true,
+			webSecurity: false,
 			preload: path.join(__dirname, "preload.js"),
 		},
 	});
