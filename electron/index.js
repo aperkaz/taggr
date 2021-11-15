@@ -5,11 +5,15 @@ const { app, BrowserWindow, Menu } = require("electron");
 const { is } = require("electron-util");
 const unhandled = require("electron-unhandled");
 const debug = require("electron-debug");
+const envPaths = require("env-paths");
 const contextMenu = require("electron-context-menu");
 const isDev = require("electron-is-dev");
-const config = require("./config.js");
+const {
+	default: installExtension,
+	REACT_DEVELOPER_TOOLS,
+	REDUX_DEVTOOLS,
+} = require("electron-devtools-installer");
 const menu = require("./menu.js");
-const { messageBus } = require("taggr-shared");
 
 try {
 	require("electron-reloader")(module, {
@@ -37,8 +41,8 @@ app.setAppUserModelId("com.company.AppName");
 // }
 
 // Prevent window from being garbage collected
-let backendWindow;
-let frontendWindow;
+let backendWindow = { id: 1 };
+let frontendWindow = { id: 2 };
 
 const createBackendWindow = async () => {
 	const win = new BrowserWindow({
@@ -138,8 +142,22 @@ app.on("activate", async () => {
 	}
 });
 
-(async () => {
-	await app.whenReady();
+// Add extensions: https://github.com/MarshallOfSound/electron-devtools-installer
+app.whenReady().then(async () => {
+	if (isDev) {
+		installExtension([REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS])
+			.then((name) => console.log(`Added Extension:  ${name}`))
+			.catch((err) => console.log("An error occurred: ", err));
+	}
+
+	// create folder if it doesnt exist
+	const fs = require("fs");
+
+	if (!fs.existsSync(envPaths("taggr").data)) {
+		fs.mkdirSync(envPaths("taggr").data);
+	}
+
+	// Add app menus
 	Menu.setApplicationMenu(menu);
 	backendWindow = await createBackendWindow();
 	frontendWindow = await createFrontendWindow();
@@ -153,7 +171,7 @@ app.on("activate", async () => {
 		beWebContentId: backendWindow.id,
 		feWebContentId: frontendWindow.id,
 	});
-
+	// TODONOW: fix this hack
 	setInterval(() => {
 		frontendWindow.webContents.send("taggr-ipc-setup", {
 			beWebContentId: backendWindow.id,
@@ -164,12 +182,4 @@ app.on("activate", async () => {
 			feWebContentId: frontendWindow.id,
 		});
 	}, 1000);
-	// TODONOW: fix this hack
-
-	console.log(`${backendWindow.id} = ${frontendWindow.id}`);
-
-	const favoriteAnimal = config.get("favoriteAnimal");
-	backendWindow.webContents.executeJavaScript(
-		`document.querySelector('header p').textContent = 'Your favorite animal is ${favoriteAnimal}'`
-	);
-})();
+});
