@@ -31,7 +31,7 @@ const IMAGES: types.Image[] = [
 	},
 ];
 
-describe("database module", () => {
+describe.skip("database module", () => {
 	// clean up dbs
 	beforeEach(() => {
 		dbFactory(true).clear();
