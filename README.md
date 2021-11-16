@@ -4,7 +4,9 @@
 
 Powered by [TypeScript](https://www.typescriptlang.org/), [Electron](https://www.electronjs.org/), [React](https://reactjs.org/), [Redux](https://redux-toolkit.js.org/), [Node.js](https://nodejs.org/en/) and [TensorFlow.js](https://www.tensorflow.org/) 🚀
 
-👉 [Keep up to date with my next side-project](https://twitter.com/aperkaz) 👈
+![taggr screenshot](./test-images/screenshot.png "taggr")
+
+<p style="text-align: center;">👉 <a href="https://twitter.com/aperkaz">Keep up to date with my next side-projects</a> 👈</p>
 
 ## Motivation
 
@@ -108,7 +110,7 @@ yarn build
 
 ## Releases
 
-https://github.com/aperkaz/taggr-releases/releases
+<https://github.com/aperkaz/taggr-releases/releases>
 
 ## Future
 
