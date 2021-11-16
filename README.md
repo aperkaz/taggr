@@ -1,76 +1,130 @@
 # taggr
 
-Rediscover your **memories** while keeping your **privacy**.
+> Rediscover your **memories** while keeping your **privacy**.
 
-Powered by machine learning.
+Powered by [TypeScript](https://www.typescriptlang.org/), [Electron](https://www.electronjs.org/), [React](https://reactjs.org/), [Redux](https://redux-toolkit.js.org/), [Node.js](https://nodejs.org/en/) and [TensorFlow.js](https://www.tensorflow.org/) 🚀
 
-## Architecture
+![taggr screenshot](./test-images/screenshot.png "taggr")
 
-`frontend` and `backend` are one.
+<p style="text-align: center;">👉 <a href="https://twitter.com/aperkaz">Keep up to date with my next side-projects</a> 👈</p>
 
-**Modularized structure** for UI and backend, running on separated `BrowserWindow` processes: `renderer` for UI, `background` for backend.
+## Motivation
 
-This allows to perform the long and resource intensive backend operations without blocking the UI thread (in development only). In production, the backend BrowserWindow is hidden.
+There is great software out there that provides image exploration capabilities using machine learning (Google Photos, iCloud), but generally is not build with privacy in mind.
 
-**Message passing** interconnection betweeen modules, through [Broadcast Channel API](https://developer.mozilla.org/en-US/docs/Web/API/Broadcast_Channel_API).
+At the end of the day, you have to upload your pictures to a server (which perform the machine learning operations), so you have to trust a third party with your data.
 
-Since the backend executes long running tasks, sync connections are not an option. The message passing acts as a the communication interfact between modules. Each module (FE/BE) implements a `message-handler`, which deal with the incomming (`message`) on a given topic.
+What if we could run image classification and tagging machine learning operations 100% locally?
+You dont have to trust a server if there is no server 😉
 
-Available messaging topics and action cretors are shared and centralized in `./shared/message-passing`.
+👇 _Under this premise, **taggr** was born_ 👇
 
-## Environments
+A photo explorer, which uses offline machine learning for enriched exploration.
 
-3 app environments. `DEVELOP`, `BUILD_TEST` and `BUILD_PROD`.
+Build with privacy in mind, all the image processing is performed locally, and no data ever leaves you computer 😊
 
-Manually set the value in `src/shared/active-env.js`.
+## High-level architecture
 
-## Publishing
+This is my first electron project, so I iterated multiple times until I settled on a general strucutere I was happy with (at developer experience and performance levels).
 
-Run:
+In my case, I found the sweet spot by keeping as close to the web standard as possible, and leveraging the existing web / Node.js tooling that already exists. That mweant
 
-```javascript
-npm run publish
+**taggr** is composed by two main modules (`frontend`, `backend`), a `shared` module, and a `communication bus`.
+
+The app is split into two distinct and independent processes, the `frontend` and the `backend` (mapping to the main modules), for the sake of separation of concerns. Each process runs in an [independent Electron process](https://blog.logrocket.com/advanced-electron-js-architecture/).
+
+### Message bus
+
+Before we cover the modules, lets discuss the communication layer.
+
+The `frontend` and `backend` modules communicate through an asynchonous and bidirectional message bus.
+Its implemented using Electron's [IPC module](https://www.electronjs.org/docs/latest/api/ipc-main/).
+
+The supported events are defined as types in the `shared` module, so type-safe handlers can be implemented in either side of the bus. For example in `frontend/src/message-bus/index.ts`.
+
+Since the message bus relies on the `BrowserWindow.id`, the Electron main process keeps a heartbeat with the render process ids.
+
+### Frontend → `./frontend`
+
+The 'face' of the app, this module takes care of all things UI.
+
+It does **not** hold business logic. It communicates with the `backend` for performing business logic operations (through the message bus).
+
+**Built with Typescript + React components**, following (loosely) the [Atomic Design Principles](https://bradfrost.com/blog/post/atomic-web-design/). I used [Storybook](https://storybook.js.org/) for that.
+
+The whole UI is **[controlled](https://www.robinwieruch.de/react-controlled-components)**, so it renders determinstically based on props, using [pure componets](https://www.geeksforgeeks.org/reactjs-pure-components/). Note that some state is kept local with Hooks, but thats UI state (ex. input contents before submission).
+
+Uses the **'smart' and 'dumb' component** [pattern](https://jaketrent.com/post/smart-dumb-components-react), only the `Page` component have side effects, passed as props by container components. The whole UI can be tested and migrated form Redux and Electron easily. Check `frontend/src/components/pages/**/WithStore.tsx` for examples.
+
+In order to deploy the app, the `frontend` gets build into static assets and copied over to the `backend` module.
+
+### Backend → `./electron`
+
+The 'brain' of the app, this module focuses on the business logic, processing and persistence of the data.
+
+The module also contains the Electron logic for bootstraping the render processes (one for `frontend` and another for the `backend`) and for packaging the app.
+
+**Written in TypeScript**, it operates as a Node.js backed. Runs withing a [Electron renderer process](https://www.electronjs.org/docs/latest/tutorial/process-model), with the Node.js APIs enabled. Source code available in `./electron/renderer-backend/src`
+
+The message bus handler triggers [transactional scripts](https://martinfowler.com/eaaCatalog/transactionScript.html), which composes the functionality provided by a service layer.
+
+The service layer uses dependency injection through [factory functions](https://www.javascripttutorial.net/javascript-factory-functions/), so it can be easily tested with unit tests.
+
+The machine-learning uses classification and object recognition for extracting searchable tags from images, through [Tensorflow](https://github.com/tensorflow/tfjs).
+
+The storage of extracted tags is managed using [electron-store](https://github.com/sindresorhus/electron-store).
+
+### Shared → `./shared`
+
+A type-only module, helps keep type consistency between `frontend` and `backend`.
+
+It keeps shared data such as the available frontend routes, the supported message bus messages and typed representations of the shared domain entities (such as `Image`).
+
+This enables compile-time checks on the touch points at the message bus level. Also, it helps keep domain entities consistently typed accross the app.
+
+### Environments
+
+The app can be configured to run in `development` and `production` environtments, by setting a variable in the `shared` module.
+
+- `development`: the frontend runs in a separate process and is loaded into electron as a url.
+
+- `production`: the frontend is loaded from static files, and the backend window is hidden. All the debugging tools and extensions are not mounted.
+
+## Run it
+
+Requires `"node": ">=14.0.0"` and `"yarn": "^1.22.0"`.
+
+```bash
+# install dependencies
+yarn
+
+# run unit test
+yarn test:ci
+
+# start app
+yarn app
+
+# build app
+yarn build
 ```
 
-Generated prod buil and updates the `taggr-releases` repo. Generate build in windows and update it manually. Make sure that the `taggr` version in the package.json is updated.
+## Releases
 
-1. Execute `npm run publish`
-2. Increate the version in `electron/package.json`
-3. Build windows and upload manually.
+<https://github.com/aperkaz/taggr-releases/releases>
 
-### Releases
+## Future
 
-https://github.com/aperkaz/taggr-releases/releases
+**taggr** has been a great side project for the past year, I learned plenty about how Electron works internally, how to structure controlled frontends and had lots of fun 🎉
 
-## Future Features
+I have other ideas I want to develop, so I dont plan on working on taggr any time soon.
 
-- Layout masonry: https://github.com/bvaughn/react-virtualized/issues/1366
-- Certificate trust increase: https://support.ksoftware.net/support/solutions/articles/215894-what-is-this-file-is-not-commonly-downloaded-and-could-harm-your-computer-message-smartscreen-
-- Add github actions build: https://github.com/malept/electron-forge-demo123/actions/runs/116519042/workflow
-- Some images are displayed rotated, example in thailand trip
-- Replace gallery view with lazy loading: https://github.com/xiaolin/react-image-gallery
-- Timeline with pictures https://github.com/rmariuzzo/react-chronos
-- Timeline display of images per day http://tany.kim/quantify-your-year/#/
-- Add more ML: look into tensorflow alternatives: evaluate performance: with article https://learn.ml5js.org/docs/#/reference/face-api?id=demo
-- Speed up app by paralelization. Example: https://github.com/aperkaz/tensorflow-playground
-- Food classification: https://github.com/stratospark/food-101-keras/issues/14
-- File sharing options:
-  https://share.storewise.tech/upload
-  https://safenote.co/upload-file ??
+Feel free to **fork** or open PRs!!
 
-### Not so relevant
+## Credit
 
-- micro animations: https://www.joshwcomeau.com/react/boop/
-- Add node_modules migration, to fix the known issues.
-- Image editor: https://ui.toast.com/tui-image-editor/
+Here are some of the great resources I have leveraged to build **taggr**, in no particular order:
 
-## Known Issues
-
-- **Windows / Mac build**: the tfjs bindings for windows are not located properly, they are built into `napi-v6`, it should be renamed to `napi-v5`. In `electron/node_modules/@tensorflow/tfjs-node/lib/napi-v6`, rename.
-
-## Resources of interes
-
-- Modern electron apps: https://github.com/jlongster/electron-with-server-example
-- High-level project structure: https://blog.axosoft.com/electron-things-to-know/
-- Window builds fail randomly due to problems with the cache. Try to clean cache and delete package-lock as in: https://github.com/cncjs/cncjs/issues/172
-- EU vat (local VAT up to 10.000E a year): https://europa.eu/youreurope/business/selling-in-eu/selling-goods-services/provide-services-abroad/index_es.htm#rules-annual-turnovers
+- [Great electron boilerplate](https://github.com/sindresorhus/electron-boilerplate)
+- [Modern electron apps](https://archive.jlongster.com/secret-of-good-electron-apps)
+- [Loading the Frontend from a separate process](https://medium.com/@kitze/%EF%B8%8F-from-react-to-an-electron-app-ready-for-production-a0468ecb1da3?p=a0468ecb1da3)
+- [awesome-electron](https://github.com/sindresorhus/awesome-electron)

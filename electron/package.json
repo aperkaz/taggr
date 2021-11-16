@@ -1,0 +1,108 @@
+{
+	"name": "taggr-electron",
+	"productName": "taggr",
+	"version": "0.0.4",
+	"description": "Rediscover your memories while keeping your privacy",
+	"license": "MIT",
+	"repository": "https://github.com/aperkaz/taggr",
+	"engines": {
+		"node": ">=14.0.0",
+		"yarn": "^1.22.0"
+	},
+	"main": "index.js",
+	"author": {
+		"name": "Alain Perkaz",
+		"email": "alainperkaz@gmail.com",
+		"url": "https://alainperkaz.com/"
+	},
+	"scripts": {
+		"postinstall": "electron-builder install-app-deps",
+		"lint": "eslint renderer-backend/src/* ",
+		"test": "jest --clearCache ; jest",
+		"test:ci": "jest --clearCache ; jest --forceExit --ci --runInBand",
+		"tsc": "rimraf renderer-backend/transpiled ; tsc",
+		"tsc:watch": "tsc -w --preserveWatchOutput",
+		"start": "ELECTRON_IS_DEV=1 concurrently -k -p \"[{name}]\" -n \"electron,tsc\" -c \"cyan.bold,green.bold\"  \"wait-on http://localhost:3001 ; electron .\" \"yarn tsc:watch\"",
+		"build:frontend": "rimraf renderer-frontend/** ; mkdir renderer-frontend ; yarn --cwd ../frontend build ; cp -R ../frontend/build/ ./renderer-frontend",
+		"build:backend": "rimraf renderer-backend/transpiled/** ; mkdir renderer-backend/transpiled ; yarn tsc",
+		"build:pre": "concurrently \"yarn build:frontend\" \"yarn build:backend\"",
+		"build": "yarn build:pre ; rimraf -r dist ; yarn dist",
+		"dist": "electron-builder --macos",
+		"pack": "electron-builder --dir",
+		"release": "np"
+	},
+	"dependencies": {
+		"@tensorflow-models/coco-ssd": "^2.0.2",
+		"@tensorflow-models/mobilenet": "^2.0.4",
+		"@tensorflow/tfjs-node": "^1.7.2",
+		"electron-better-ipc": "^2.0.1",
+		"electron-context-menu": "^3.0.0",
+		"electron-debug": "^3.2.0",
+		"electron-store": "^8.0.0",
+		"electron-unhandled": "^3.0.2",
+		"electron-updater": "^4.3.8",
+		"electron-util": "^0.15.1",
+		"exif": "^0.6.0",
+		"lodash.get": "^4.4.2",
+		"lodash.range": "^3.2.0",
+		"normalize-path": "^3.0.0",
+		"parse-dms": "^0.0.5",
+		"readdirp": "^3.6.0",
+		"rimraf": "^3.0.2",
+		"taggr-shared": "1.0.0",
+		"typescript": "^4.4.4",
+		"wait-on": "^6.0.0"
+	},
+	"devDependencies": {
+		"@babel/preset-typescript": "^7.15.0",
+		"@types/exif": "^0.6.3",
+		"@types/jest": "^27.0.2",
+		"@types/lodash.get": "^4.4.6",
+		"@types/lodash.range": "^3.2.6",
+		"@types/normalize-path": "^3.0.0",
+		"@typescript-eslint/eslint-plugin": "^5.2.0",
+		"@typescript-eslint/parser": "^5.2.0",
+		"concurrently": "^6.3.0",
+		"electron": "12.2.2",
+		"electron-builder": "^22.10.5",
+		"electron-devtools-installer": "^3.2.0",
+		"electron-reloader": "^1.2.1",
+		"eslint": "^8.1.0",
+		"jest": "^27.3.1",
+		"np": "^7.5.0",
+		"ts-jest": "^27.0.7"
+	},
+	"np": {
+		"publish": false,
+		"releaseDraft": false
+	},
+	"build": {
+		"appId": "com.company.AppName",
+		"mac": {
+			"category": "public.app-category.social-networking",
+			"darkModeSupport": true
+		},
+		"dmg": {
+			"iconSize": 160,
+			"contents": [
+				{
+					"x": 180,
+					"y": 170
+				},
+				{
+					"x": 480,
+					"y": 170,
+					"type": "link",
+					"path": "/Applications"
+				}
+			]
+		},
+		"linux": {
+			"target": [
+				"AppImage",
+				"deb"
+			],
+			"category": "Network;Chat"
+		}
+	}
+}

@@ -1,0 +1,26 @@
+{
+  "name": "taggr-shared",
+  "version": "1.0.0",
+  "private": true,
+  "main": "dist/index",
+  "types": "src/index.ts",
+  "engines": {
+    "node": ">=14.0.0",
+    "yarn": "^1.22.0"
+  },
+  "scripts": {
+    "prebuild": "rimraf dist/",
+    "build": "yarn compile",
+    "compile": "tsc",
+    "start": "yarn compile -w --preserveWatchOutput",
+    "test": "jest --verbose --runInBand",
+    "test:ci": "echo \"No tests here, as is only types\""
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.23",
+    "jest": "^27.0.6",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^26.5.6",
+    "typescript": "^4.2.4"
+  }
+}

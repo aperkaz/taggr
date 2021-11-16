@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2019",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "strictNullChecks": true,
+    "sourceMap": true,
+    "outDir": "./dist/",
+    "declaration": true,
+    "isolatedModules": false,
+    "skipLibCheck": true
+  },
+  "exclude": ["node_modules", "dist", "../node_modules"],
+  "include": ["src/**/*"],
+  "typeAcquisition": {
+    "include": ["jest"]
+  }
+}
