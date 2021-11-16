@@ -110,7 +110,7 @@ yarn build
 
 ## Releases
 
-<https://github.com/aperkaz/taggr-releases/releases>
+<https://github.com/aperkaz/taggr/releases>
 
 ## Future of this project
 
