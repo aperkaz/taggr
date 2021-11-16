@@ -10,9 +10,9 @@ Powered by [TypeScript](https://www.typescriptlang.org/), [Electron](https://www
 
 ## Motivation
 
-There is great software out there that provides image exploration capabilities using machine learning (Google Photos, iCloud), but generally is not build with privacy in mind.
+There is great software out there that provides image exploration capabilities using machine learning (Google Photos, iCloud), but generally is not buildt with privacy in mind.
 
-At the end of the day, you have to upload your pictures to a server (which perform the machine learning operations), so you have to trust a third party with your data.
+At the end of the day, your pictures are uploaded to a server (which perform the machine learning operations), so you have to trust a third party with your data.
 
 What if we could run image classification and tagging machine learning operations 100% locally?
 You dont have to trust a server if there is no server 😉
@@ -31,7 +31,7 @@ In my case, I found the sweet spot by keeping as close to the web standard as po
 
 **taggr** is composed by two main modules (`frontend`, `backend`), a `shared` module, and a `communication bus`.
 
-The app is split into two distinct and independent processes, the `frontend` and the `backend` (mapping to the main modules), for the sake of separation of concerns. Each process runs in an [independent Electron process](https://blog.logrocket.com/advanced-electron-js-architecture/).
+The app is split into two distinct and independent processes, the `frontend` and the `backend` (each mapping to a main module), for the sake of separation of concerns. Each process runs in an [independent Electron process](https://blog.logrocket.com/advanced-electron-js-architecture/).
 
 ### Message bus
 
@@ -50,13 +50,13 @@ The 'face' of the app, this module takes care of all things UI.
 
 It does **not** hold business logic. It communicates with the `backend` for performing business logic operations (through the message bus).
 
-**Built with Typescript + React components**, following (loosely) the [Atomic Design Principles](https://bradfrost.com/blog/post/atomic-web-design/). I used [Storybook](https://storybook.js.org/) for that.
+**Built with Typescript + React components**, following the [Atomic Design Principles](https://bradfrost.com/blog/post/atomic-web-design/). I used [Storybook](https://storybook.js.org/) for that.
 
-The whole UI is **[controlled](https://www.robinwieruch.de/react-controlled-components)**, so it renders determinstically based on props, using [pure componets](https://www.geeksforgeeks.org/reactjs-pure-components/). Note that some state is kept local with Hooks, but thats UI state (ex. input contents before submission).
+The whole UI is **[controlled](https://www.robinwieruch.de/react-controlled-components)**, so it renders determinstically based on props, using [pure componets](https://www.geeksforgeeks.org/reactjs-pure-components/). Note that some state is kept locally with Hooks, but thats UI state (ex. input contents before submission).
 
 Uses the **'smart' and 'dumb' component** [pattern](https://jaketrent.com/post/smart-dumb-components-react), only the `Page` component have side effects, passed as props by container components. The whole UI can be tested and migrated form Redux and Electron easily. Check `frontend/src/components/pages/**/WithStore.tsx` for examples.
 
-In order to deploy the app, the `frontend` gets build into static assets and copied over to the `backend` module.
+In order to deploy the app, the `frontend` gets built into static assets and copied over to the `backend` module.
 
 ### Backend → `./electron`
 
@@ -84,7 +84,7 @@ This enables compile-time checks on the touch points at the message bus level. A
 
 ### Environments
 
-The app can be configured to run in `development` and `production` environtments, by setting a variable in the `shared` module.
+The app can be configured to run in `development` and `production` modes, by setting a variable in the `shared` module.
 
 - `development`: the frontend runs in a separate process and is loaded into electron as a url.
 
@@ -98,7 +98,7 @@ Requires `"node": ">=14.0.0"` and `"yarn": "^1.22.0"`.
 # install dependencies
 yarn
 
-# run unit test
+# run unit tests
 yarn test:ci
 
 # start app
@@ -112,13 +112,13 @@ yarn build
 
 <https://github.com/aperkaz/taggr-releases/releases>
 
-## Future
+## Future of this project
 
 **taggr** has been a great side project for the past year, I learned plenty about how Electron works internally, how to structure controlled frontends and had lots of fun 🎉
 
 I have other ideas I want to develop, so I dont plan on working on taggr any time soon.
 
-Feel free to **fork** or open PRs!!
+That said, feel free to **fork** or open PRs!!
 
 ## Credit
 
