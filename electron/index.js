@@ -58,7 +58,7 @@ const createBackendWindow = async () => {
 	});
 
 	win.on("ready-to-show", () => {
-		win.show();
+		if (IS_DEV) win.show();
 	});
 
 	win.on("closed", () => {
