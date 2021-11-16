@@ -4,15 +4,16 @@
   "private": true,
   "homepage": "./",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "npx @craco/craco start",
+    "build": "npx @craco/craco build",
+    "test": "npx @craco/craco test",
     "test:ci": "yarn test --ci --watchAll=false",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
   },
   "dependencies": {
+    "@craco/craco": "^6.4.0",
     "@date-io/date-fns": "^2.11.0",
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
