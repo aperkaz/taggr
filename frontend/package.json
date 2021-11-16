@@ -35,7 +35,7 @@
     "jest-watch-typeahead": "0.6.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-map-gl": "^6.1.17",
+    "react-map-gl": "5.2.11",
     "react-redux": "^7.2.6",
     "react-scripts": "4.0.3",
     "react-window": "^1.8.6",
@@ -81,6 +81,7 @@
     "@storybook/react": "^6.3.12",
     "@types/fslightbox-react": "^1.4.2",
     "@types/lodash.debounce": "^4.0.6",
+    "@types/react-map-gl": "^6.1.1",
     "@types/react-window": "^1.8.5",
     "@types/styled-components": "^5.1.15"
   }
