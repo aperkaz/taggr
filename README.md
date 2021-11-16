@@ -25,11 +25,11 @@ Build with privacy in mind, all the image processing is performed locally, and n
 
 ## High-level architecture
 
-This is my first electron project, so I iterated multiple times until I settled on a general strucutere I was happy with (at developer experience and performance levels).
+This is my first electron project, so I iterated multiple times until I settled on a general structure I was happy with (at developer experience and performance levels).
 
-In my case, I found the sweet spot by keeping as close to the web standard as possible, and leveraging the existing web / Node.js tooling that already exists. That mweant
+In my case, I found the sweet spot by keeping as close to the web standard as possible, and leveraging the existing web / Node.js tooling.
 
-**taggr** is composed by two main modules (`frontend`, `backend`), a `shared` module, and a `communication bus`.
+**taggr** is composed by two main modules (`frontend`, `backend`), a `shared` module, and a `message bus`.
 
 The app is split into two distinct and independent processes, the `frontend` and the `backend` (each mapping to a main module), for the sake of separation of concerns. Each process runs in an [independent Electron process](https://blog.logrocket.com/advanced-electron-js-architecture/).
 
@@ -54,7 +54,7 @@ It does **not** hold business logic. It communicates with the `backend` for perf
 
 The whole UI is **[controlled](https://www.robinwieruch.de/react-controlled-components)**, so it renders determinstically based on props, using [pure componets](https://www.geeksforgeeks.org/reactjs-pure-components/). Note that some state is kept locally with Hooks, but thats UI state (ex. input contents before submission).
 
-Uses the **'smart' and 'dumb' component** [pattern](https://jaketrent.com/post/smart-dumb-components-react), only the `Page` component have side effects, passed as props by container components. The whole UI can be tested and migrated form Redux and Electron easily. Check `frontend/src/components/pages/**/WithStore.tsx` for examples.
+Uses the **'smart' and 'dumb' component** [pattern](https://jaketrent.com/post/smart-dumb-components-react) where only the `Page` components have side effects, passed as props by container components. The whole UI can be tested and migrated form Redux and Electron easily. Check `frontend/src/components/pages/**/WithStore.tsx` for examples.
 
 In order to deploy the app, the `frontend` gets built into static assets and copied over to the `backend` module.
 
@@ -112,7 +112,7 @@ yarn build
 
 <https://github.com/aperkaz/taggr/releases>
 
-## Future of this project
+## Future of the project
 
 **taggr** has been a great side project for the past year, I learned plenty about how Electron works internally, how to structure controlled frontends and had lots of fun 🎉
 
