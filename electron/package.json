@@ -25,7 +25,8 @@
 		"start": "ELECTRON_IS_DEV=1 concurrently -k -p \"[{name}]\" -n \"electron,tsc\" -c \"cyan.bold,green.bold\"  \"wait-on http://localhost:3001 ; electron .\" \"yarn tsc:watch\"",
 		"build:frontend": "rimraf renderer-frontend/** ; mkdir renderer-frontend ; yarn --cwd ../frontend build ; cp -R ../frontend/build/ ./renderer-frontend",
 		"build:backend": "rimraf renderer-backend/transpiled/** ; mkdir renderer-backend/transpiled ; yarn tsc",
-		"build": "yarn build:frontend ; yarn build:backend ; rimraf -r dist ; yarn dist",
+		"build:pre": "concurrently \"yarn build:frontend\" \"yarn build:backend\"",
+		"build": "yarn build:pre ; rimraf -r dist ; yarn dist",
 		"dist": "electron-builder --macos",
 		"pack": "electron-builder --dir",
 		"release": "np"
