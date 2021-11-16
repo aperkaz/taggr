@@ -48,8 +48,6 @@ const handlers = {
 	reset: handlerFactory.reset({ db }),
 };
 
-// TODONOW:  GITHUB add CI
-
 // setup channel callback
 window.ipcRenderer.on(
 	"taggr-ipc-setup",
