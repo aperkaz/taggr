@@ -1,6 +1,5 @@
 import get from "lodash.get";
 import fs from "fs";
-import sharp from "sharp";
 import { promisify } from "util";
 
 import { types } from "taggr-shared";
@@ -184,23 +183,6 @@ class ImageService {
 		});
 
 		return images;
-	}
-
-	// TODONOW: document limitation, dont remove
-	async resizeImage(imagePath: string, outputPath: string) {
-		try {
-			await sharp(imagePath, {
-				failOnError: false,
-			}) // failOnError: true, fixes Samsung corrupted pictures
-				.jpeg({ quality: 80 })
-				.resize(1980, 1080, {
-					fit: sharp.fit.outside,
-					withoutEnlargement: true,
-				})
-				.toFile(outputPath);
-		} catch (err) {
-			console.error(err);
-		}
 	}
 }
 
