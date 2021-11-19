@@ -10,7 +10,7 @@ Powered by [TypeScript](https://www.typescriptlang.org/), [Electron](https://www
 
 ## Motivation
 
-There is great software out there that provides image exploration capabilities using machine learning (Google Photos, iCloud), but generally is not buildt with privacy in mind.
+There is great software out there that provides image exploration capabilities using machine learning (Google Photos, iCloud), but generally is not build with privacy in mind.
 
 At the end of the day, your pictures are uploaded to a server (which perform the machine learning operations), so you have to trust a third party with your data.
 
