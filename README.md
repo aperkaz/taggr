@@ -15,13 +15,13 @@ There is great software out there that provides image exploration capabilities u
 At the end of the day, your pictures are uploaded to a server (which perform the machine learning operations), so you have to trust a third party with your data.
 
 What if we could run image classification and tagging machine learning operations 100% locally?
-You dont have to trust a server if there is no server 😉
+You don't have to trust a server if there is no server 😉
 
 👇 _Under this premise, **taggr** was born_ 👇
 
 A photo explorer, which uses offline machine learning for enriched exploration.
 
-Build with privacy in mind, all the image processing is performed locally, and no data ever leaves you computer 😊
+Build with privacy in mind, all the image processing is performed locally, and no data ever leaves your computer 😊
 
 ## High-level architecture
 
