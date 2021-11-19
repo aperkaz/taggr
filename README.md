@@ -52,7 +52,7 @@ It does **not** hold business logic. It communicates with the `backend` for perf
 
 **Built with Typescript + React components**, following the [Atomic Design Principles](https://bradfrost.com/blog/post/atomic-web-design/). I used [Storybook](https://storybook.js.org/) for that.
 
-The whole UI is **[controlled](https://www.robinwieruch.de/react-controlled-components)**, so it renders determinstically based on props, using [pure componets](https://www.geeksforgeeks.org/reactjs-pure-components/). Note that some state is kept locally with Hooks, but thats UI state (ex. input contents before submission).
+The whole UI is **[controlled](https://www.robinwieruch.de/react-controlled-components)**, so it renders deterministically based on props, using [pure componets](https://www.geeksforgeeks.org/reactjs-pure-components/). Note that some state is kept locally with Hooks, but thats UI state (ex. input contents before submission).
 
 Uses the **'smart' and 'dumb' component** [pattern](https://jaketrent.com/post/smart-dumb-components-react) where only the `Page` components have side effects, passed as props by container components. The whole UI can be tested and migrated form Redux and Electron easily. Check `frontend/src/components/pages/**/WithStore.tsx` for examples.
 
